@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图文消息 - {:C('site_title')}</title>
+    <meta name="keywords" content="图文消息">
+    <meta name="description" content="图文消息">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/plugins/wangEditor/wangEditor.min.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<link href="/Public/admin/css/mp.css" rel="stylesheet" >
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>图文消息</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('/admin/wxpicmsg/index')}"><button class="btn btn-primary btn-sm" type="button">图文消息管理</button></a>
+                <div class="row">
+                    <div class="col-sm-12">
+											<div class="bench">
+														<div class="mp_create_bench">
+														<form id="J_addform">
+															<div class="pull-left">
+																<div class="mp_create_bench_list"> 
+																	<div id="mp_create_bench_list_content" data-count="1" data-saveid="0">
+																		<section class="mp_create_bench_active" data-id='0'>
+																			<div class="mp_create_bench_info">
+																				<div class="mp_create_bench_border">
+																					<div class="mp_create_bench_image"></div>
+																					<div class="mp_create_bench_title"></div>
+																					<input type="hidden" class="mp_create_bench_cover">
+																					<input type="hidden" class="mp_create_bench_thumb_media_id">
+																					<input type="hidden" class="mp_create_bench_author">
+																					<textarea class="mp_create_bench_article"></textarea>
+																					<input type="hidden" class="mp_create_bench_abstract">
+																					<input type="hidden" class="mp_create_bench_link">
+																				</div>
+																			</div>
+																			<div class="mp_create_bench_protect">
+																				<div class="mp_create_bench_up"></div>
+
+																				<div class="mp_create_bench_down"></div>
+
+																				<div class="mp_create_bench_remove"></div>
+																			</div>
+																		</section>
+																	</div>
+																	<div class="mp_create_bench_plus" id="mp_create_bench_plus">
+																		<div class="mp_create_bench_plus_add"></div>
+																	</div>
+																</div>
+																<div class="row m-t-md clearfix">
+																	<div class="col-sm-6"><a class="btn btn-block btn-primary" id="mp_preview" data-toggle="modal" data-target="#previewModal">预览图文</a></div>
+																	<div class="col-sm-6"><a class="btn btn-block btn-primary" id="mp_btn_save">保存图文</a></div>
+																</div>
+															</div>
+														</form>
+															<div id="mp_create_bench_content">
+																<div class="mp_create_bench_content">
+																<form class="form-horizontal">
+																	<div class="form-group">
+						                        <label class="col-sm-12 control-label">标题：<span class="text-muted"><i class="fa fa-info-circle"></i> 64个字符内</span></label>
+						                        <div class="col-sm-12 m-t-sm">
+						                          <input type="text" class="form-control" name="title" id="title" required data-msg-required="请输入标题">
+						                        </div>
+							                    </div>
+
+							                    <div class="form-group">
+						                        <label class="col-sm-12 control-label">作者：<span class="text-muted"><i class="fa fa-info-circle"></i> (选填)</span></label>
+						                        <div class="col-sm-12">
+						                        	<input type="text" class="form-control" placeholder="作者" name="author" id="author">
+						                        </div>
+							                    </div>
+
+																	<div class="form-group">
+						                        <label class="col-sm-12 control-label">封面：<span class="text-muted"><i class="fa fa-info-circle"></i> (大图片建议尺寸：900像素 * 500像素，1M以内)</span></label>
+						                        <div class="col-sm-12 m-t-sm">
+                                      <a class="btn btn-primary" id="matterManag" data-toggle="modal" data-target="#matterModal">选取封面</a>
+                                    </div>
+							                    </div>
+
+																	<div class="form-group">
+						                        <label class="col-sm-12 control-label">正文：<span class="text-muted"><i class="fa fa-info-circle"></i> (选填)</span></label>
+						                        <div class="col-sm-12 m-t-sm">
+						                        	<textarea id="content" name="content" style="width:100%;height:300px;"></textarea>
+						                        </div>
+							                    </div>
+																		
+
+																	<div class="form-group">
+						                        <label class="col-sm-12 control-label">摘要：<span class="text-muted"><i class="fa fa-info-circle"></i> (选填，如果不填写会默认抓取正文前54个字)</span></label>
+						                        <div class="col-sm-12 m-t-sm">
+						                        	<textarea id="digest" name="digest" class="form-control" style="width: 100%; height: 60px; resize: none;"></textarea>
+						                        </div>
+							                    </div>
+																	
+																	<div class="form-group">
+						                        <label class="col-sm-12 control-label">原文链接：<span class="text-muted"><i class="fa fa-info-circle"></i> (选填)</span></label>
+						                        <div class="col-sm-12 m-t-sm">
+						                        	<input type="text" class="form-control" placeholder="原文链接" id="content_source_url" name="content_source_url">
+						                        </div>
+							                    </div>
+																	</form>
+																</div>
+															</div>
+														</div>
+													</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 预览 -->
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div style="width: 354px; margin: auto;">
+			<div style="width: 322px; float: left;">
+				<div><img src="/Public/admin/images/mp/yulan_phone_top.png" width="322" height="42"></div>
+				<div><img src="/Public/admin/images/mp/phonetitle1.gif" width="322" height="20"></div>
+				<div style="padding: 10px; height: 500px; overflow-x:hidden; overflow-y:scroll; background: #fff;" id="preContent"></div>
+				<div><img src="/Public/admin/images/mp/yulan_phone_bottom.png" width="322" height="47"></div>
+			</div>
+			<div data-dismiss="modal" style="width:32px; height:32px; line-height:32px; border:1px solid #dbdbdb; border-radius:16px; text-align: center; color: #fff; cursor: pointer; float: left;"> <i class="glyphicon glyphicon-remove"></i> </div>
+		</div>
+	</div>
+</div>
+
+<!-- 素材管理 -->
+<div class="modal fade" id="matterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">图片素材</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row mymatter" id="mymatter" data-mattercount="{$count}"></div>
+        <div class="page btn-group m-t-sm"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.5"></script> 
+<script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+<script src="__PUBLIC__/js/plugins/layer/layer.min.js"></script>
+<script src="__PUBLIC__/js/plugins/wangEditor/wangEditor.min.js"></script>
+<script src="__PUBLIC__/admin/js/manage.js"></script>
+<script type="text/javascript">
+$(function(){
+	manage.wxpicmsg();	
+});
+</script>
+</body>
+</html>

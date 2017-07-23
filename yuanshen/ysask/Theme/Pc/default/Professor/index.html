@@ -1,0 +1,103 @@
+<include file="Public/header" />
+
+<div class="wraper">
+    <div class="am-g am-padding-top">
+        <div class="am-u-sm-9 am-padding-left-0">
+            <div class="bgfff am-padding classitem">
+                <a href="{:U('professor/index')}" class="am-btn am-btn-<if condition="$cate_id eq ''">success<else/>default</if> am-btn-xs am-radius">全部</a>
+                <volist name="data.cate_list" id="vo">
+                    <a href="{:U('professor/index',array('cate_id'=>$vo['id']))}" class="am-btn am-btn-<if condition="$cate_id eq $vo['id']">success<else/>default</if> am-btn-xs am-radius">{$vo.title}</a>
+                </volist>
+            </div>
+            <div class="nav_son am-margin-top">
+                <ul class="am-avg-sm-8 am-text-center">
+                    <li <if condition="$is_hot eq '0'">class="am-active"</if> ><a href="{:U('professor/index',array('is_hot'=>'0','cate_id'=>$cate_id))}">推荐答主</a> </li>
+                    <li <if condition="$is_hot eq '1'">class="am-active"</if> ><a href="{:U('professor/index',array('is_hot'=>'1','cate_id'=>$cate_id))}">热门答主</a></li>
+                </ul>
+            </div>
+
+            <div class="am-padding bgfff">
+                <ul class="am-list">
+                    <volist name="data.list" id="vo">
+                    <li>
+                        <a href="{:U('user/index',array('id'=>$vo['user_id']))}">
+                            <img class="am-circle am-margin-right" src="{$vo.avatar}" width="40" height="40"/>
+                            <span class="am-text-success">{$vo.username}</span>
+                            <span class="am-text-xs">{$vo.city_name}</span>
+                        </a>
+                        <div class="am-margin-left-xl am-padding-left-lg">
+                            <p class="tags"><i class="am-icon-tags"></i> {$vo.title}</p>
+                            <p>{$vo.description}</p>
+                            <p class="am-text-sm">帮助人数：<span class="am-text-danger am-margin-right">{$vo.adopt}</span> 关注人数：<span class="am-text-success">{$vo.fans}</span></p>
+                            <p>
+                                <a class="am-btn am-btn-danger am-radius" href="{:U('question/ask',array('touserid'=>$vo['user_id']))}"><i class="am-icon-comments-o"></i> 向Ta提问</a>
+                                <a class="am-btn am-btn-success am-radius" href="{:U('question/ask')}"><i class="am-icon-edit"></i> 在线提问</a>
+                            </p>
+                        </div>
+                    </li>
+                    </volist>
+                </ul>
+                <ul class="am-pagination am-pagination-centered">
+                    {$data.page}
+                </ul>
+            </div>
+        </div>
+
+        <div class="am-u-sm-3 am-padding-right-0">
+          <a href="{:U('question/ask')}" class="am-btn am-btn-warning am-btn-block am-radius"><i class="am-icon-question-circle"></i> 我要提问</a>
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+                    <h2 class="am-titlebar-title">
+                        最新问题
+                    </h2>
+                    <nav class="am-titlebar-nav">
+                        <a href="{:U('question/index')}" class="">更多 &raquo;</a>
+                    </nav>
+                </div>
+                <div class="am-padding-sm newslist">
+                    <volist name="data.new_question" id="vo">
+                    <p><a href="{:U('question/detail',array('id'=>$vo['id']))}" class="am-list-item-hd ">{$vo.title}</a></p>
+                    </volist>
+                </div>
+            </div>
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+                    <h2 class="am-titlebar-title">热门作者</h2>
+                </div>
+                <div class="am-cf">
+                    <ul class="am-padding-left-sm am-cf">
+                        <volist name="data.hot_author" id="vo">
+                        <li class="am-margin-vertical-sm">
+                            <div class="am-fl am-margin-right">
+                                <a href="{:U('user/index',array('id'=>$vo['id']))}">
+                                <img class="am-circle" width="46" height="46" src="<if condition="$vo.avatar neq ''">{$vo.avatar}<else/>{$Think.config.site_user_defaultavatar}</if>" />
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{:U('user/index',array('id'=>$vo['id']))}">{$vo.username}</a>
+                                <div class="am-text-xs am-link-muted"><span class="am-margin-right">{$vo.article}篇</span> <span>{$vo.agree}赞</span></div>
+                            </div>
+                        </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+                    <h2 class="am-titlebar-title ">
+                        热议话题
+                    </h2>
+                </div>
+                <div class="am-padding-sm topic-tags">
+                    <volist name="data.hot_tag" id="tag" mod="2">
+                    <a href="{:U('tag/detail',array('id'=>$tag['id']))}" <eq name="mod" value="0"> style="background:#76d499;"</eq><eq name="mod" value="1"> style="background:#93c1f9;"</eq> >{$tag.title}</a>
+                    </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="Public/footer" />
+<include file="Public/end" />

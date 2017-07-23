@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="系统设置">
+    <meta name="description" content="系统设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-22">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>系统设置</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" action="{:U('setting/index_update')}" method="POST">
+                        <input type="hidden" name="data" value="index">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">特殊用户名过滤：</label>
+                            <div class="col-sm-4">
+                                <textarea name="banned_user" style="height:150px" class="form-control">{$Setting_config.banned_user}</textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">开启评论：</label>
+                            <div class="col-sm-2">
+                                <label class="radio-inline"><input type="radio" value="0" name="is_comment" <eq name="Setting_config.is_comment" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="is_comment" <eq name="Setting_config.is_comment" value="1">checked</eq>>开启</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">评论审核：</label>
+                            <div class="col-sm-2">
+                                 <label class="radio-inline"><input type="radio" value="0" name="comment_check" <eq name="Setting_config.comment_check" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="comment_check" <eq name="Setting_config.comment_check" value="1">checked</eq>>开启</label>
+                            </div>
+                        </div>
+                         <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">问题审核：</label>
+                            <div class="col-sm-2">
+                                <label class="radio-inline"><input type="radio" value="0" name="question_check" <eq name="Setting_config.question_check" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="question_check" <eq name="Setting_config.question_check" value="1">checked</eq>>开启</label>
+                            </div>
+                        </div>
+                         <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">回答审核：</label>
+                            <div class="col-sm-2">
+                                 <label class="radio-inline"><input type="radio" value="0" name="answer_check" <eq name="Setting_config.answer_check" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="answer_check" <eq name="Setting_config.answer_check" value="1">checked</eq>>开启</label>
+                            </div>
+                        </div>
+                         <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">文章审核：</label>
+                            <div class="col-sm-2">
+                                 <label class="radio-inline"><input type="radio" value="0" name="article_check" <eq name="Setting_config.article_check" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="article_check" <eq name="Setting_config.article_check" value="1">checked</eq>>开启</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">开启UCenter：</label>
+                            <div class="col-sm-2">
+                                <label class="radio-inline"><input type="radio" value="0" name="ucenter" <eq name="Setting_config.ucenter" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="ucenter" <eq name="Setting_config.ucenter" value="1">checked</eq>>开启</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">评论时间间隔：</label>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" name="site_domain" class="form-control" value="{$Setting_config.site_domain}"> <span class="input-group-btn"> <button type="button" class="btn">秒</button> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">后台最大登录失败次数：</label>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" name="error_count" class="form-control" value="{$Setting_config.error_count}"> <span class="input-group-btn"> <button type="button" class="btn">次</button> </span>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">后台登录失败超次后间隔：</label>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" name="error_interval" class="form-control" value="{$Setting_config.error_interval}"> <span class="input-group-btn"> <button type="button" class="btn">秒</button> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">留言审核：</label>
+                            <div class="col-sm-2">
+                                <label><input type="checkbox" name="guestbook_check" value="1" <eq name="Setting_config.guestbook_check" value="1">checked</eq>> 开启</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">留言间隔：</label>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" name="message_interval" class="form-control" value="{$Setting_config.message_interval}"> <span class="input-group-btn"> <button type="button" class="btn">秒</button> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">会员投稿是否需要审核：</label>
+                            <div class="col-sm-2">
+                                 <label class="radio-inline"><input type="radio" value="0" name="is_publish" <eq name="Setting_config.is_publish" value="0">checked</eq>>需要审核</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="is_publish" <eq name="Setting_config.is_publish" value="1">checked</eq>>直接通过</label>
+                            </div>
+                        </div> -->
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">防浏览器刷新时间间隔：</label>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" name="limit_reflesh_time" class="form-control" value="{$Setting_config.limit_reflesh_time}"> <span class="input-group-btn"> <button type="button" class="btn">秒</button> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">被点赞次多少成为神回复：</label>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" name="god_reply_num" class="form-control" value="{$Setting_config.god_reply_num}"> <span class="input-group-btn"> <button type="button" class="btn">次</button> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">视频播放器APPKey：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="site_appkey" value="{$Setting_config.site_appkey}" class="form-control" placeholder="请输入视频播放器APPKey">
+                            </div>
+                            <span class="help-block m-b-none"><a class="text-navy" href="http://www.videojj.com" target="_blank">马上获取APPKey</a> 调用代码：<literal>{:</literal>C('site_appkey')}</span>
+                        </div> -->
+                       
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">内容发布被赞随机值：</label>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" name="good_start" value="{$Setting_config.good_start}" class="form-control" placeholder="请输入开始值">
+                                    <span class="input-group-addon">-</span>
+                                    <input type="text" name="good_end" value="{$Setting_config.good_end}" class="form-control" placeholder="请输入结束值">
+                                </div>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例如：随机50 - 500</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">内容发布被采随机值：</label>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" name="bad_start" value="{$Setting_config.bad_start}" class="form-control" placeholder="请输入开始值">
+                                    <span class="input-group-addon">-</span>
+                                    <input type="text" name="bad_end" value="{$Setting_config.bad_end}" class="form-control" placeholder="请输入结束值">
+                                </div>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例如：随机10 - 100</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">积分文字配置：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="site_jifen" value="{$Setting_config.site_jifen}" class="form-control" placeholder="请输入积分文字">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例如：金币、积分</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <!-- <div class="form-group">
+                            <label class="col-sm-2 control-label">百度推送接口：</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="site_baidu_api" value="{$Setting_config.site_baidu_api}" class="form-control" placeholder="请输入百度推送网址">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 填写完整路径如：http://data.zz.baidu.com/urls?site=www.buka.com&token=xsMoZCAdGOWYO</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div> -->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">广告文件保存目录：</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="ads_file" value="{$Setting_config.ads_file}" class="form-control" placeholder="广告文件保存目录路径">
+                            </div>
+                          </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <div class="col-sm-22 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

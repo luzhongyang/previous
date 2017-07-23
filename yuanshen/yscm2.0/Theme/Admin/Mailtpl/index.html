@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邮件模板管理 - {:C('site_title')}</title>
+    <meta name="keywords" content="邮件模板管理">
+    <meta name="description" content="邮件模板管理">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>邮件模板</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('Mailtpl/add')}"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus-circle"></i> 添加模板</button></a>
+                <form method="post" action="{:U('Mailtpl/foreverdelete')}" name="form">
+                <table class="table table-striped table-bordered table-hover m-t-md">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="50"><input type="checkbox" name="chkall" onClick="checkallbox(this.form)" title="全选/取消" /></th>
+                            <th class="text-center" width="50">ID</th>
+                            <th>key</th>
+                            <th width="100">名称</th>
+                            <th>邮件标题</th>
+                            <th class="text-center" width="50">启用</th>
+                            <th class="text-center" width="150">创建时间</th>
+                            <th class="text-center"  width="200">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="v">
+                        <tr>
+                            <td class="text-center"><input type="checkbox" name="key" value="{$v.id}"></td>
+                            <td class="text-center">{$v.id}</td>
+                            <td>{$v.key}</td>
+                            <td>{$v.name}</td>
+                            <td>{$v.title}</td>
+                            <td class="text-center"><if condition="$v.status eq 1"><span class="text-navy">正常</span><else/><span class="text-danger">停用</span></if></td>
+                            <td class="text-center">{$v.create_time|date='Y-m-d H:i:s',###}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                     <a href="{:U('Mailtpl/edit',array('id'=>$v['id']))}"><button class="btn btn-primary btn-xs" type="button"><i class="fa fa-paste"></i> 修改</button></a> <if condition="$v.status eq 0">
+                                     <a href="{:U('Mailtpl/resume',array('id'=>$v['id']))}"><button class="btn btn-info btn-xs" type="button"><i class="fa fa-warning"></i> 恢复</button></a> <else/>
+                                     <a href="{:U('Mailtpl/forbid',array('id'=>$v['id']))}"><button class="btn btn-warning btn-xs" type="button"><i class="fa fa-warning"></i> 禁用</button></a></if>
+                                     <a href="{:U('Mailtpl/foreverdelete',array('id'=>$v['id']))}" onclick="return confirm('确定要删除吗')"><button class="btn btn-danger btn-xs" type="button"><i class="fa fa-trash-o"></i> 删除</button></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                   </tbody>
+                </table>
+                <button class="btn btn-primary btn-sm" type="button" onclick="checkall()">全选 / 反选</button>  <button class="btn btn-primary btn-sm" type="button" onclick="forbid()">批量禁用</button> <button class="btn btn-primary btn-sm" type="button" onclick="resume()">批量恢复</button>  <button class="btn btn-danger btn-sm" type="button" onclick="foreverdel()"><i class="fa fa-trash-o"></i> 删除选中</button>
+                </form>
+                <div class="pull-right pagination m-t-no">
+                    <div class="text-center">{$page}</div>
+                <div>
+                </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

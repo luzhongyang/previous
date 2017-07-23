@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="微信设置">
+    <meta name="description" content="微信设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<style type="text/css">
+.js_textArea{height:188px;padding:14px 20px;outline:0;font-size:16px;word-wrap:break-word;overflow-x:hidden;overflow-y:auto;-webkit-user-modify:read-write-plaintext-only;}
+</style>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>自动回复</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="javascript:void(0)" onclick="$('#subscribe_form').show();$('#default_form').hide();"><button class="btn btn-primary btn-sm" type="button">关注自动回复</button></a>
+                <a href="javascript:void(0)" onclick="$('#default_form').show();$('#subscribe_form').hide();"><button class="btn btn-primary btn-sm" type="button">默认回复</button></a>
+                <!-- <a href="javascript:void(0)" link-url="{:U('wx/autoreply')}"><button class="btn btn-primary btn-sm" type="button">消息自动回复</button></a>
+                <a href="javascript:void(0)" link-url="{:U('wx/smartreply')}"><button class="btn btn-danger btn-sm" type="button">关键词自动回复</button></a> -->
+                <form class="form-horizontal" action="{:U('/admin/wxreply/setreply')}" id="subscribe_form" method="POST">
+                    <input type="hidden" value="subscribe" name="type"/>
+                   
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">是否开启：</label>
+                        <div class="col-sm-3">
+                            <label class="radio-inline"><input type="radio" value="1" name="rtype" data-type="text_reply" <if condition="$subscribe['rtype'] eq 1">checked</if>>文本回复</label>
+                            <label class="radio-inline"><input type="radio" value="2" name="rtype" data-type="master_reply" <if condition="$subscribe['rtype'] eq 2">checked</if>>图文回复</label>
+                            <label class="radio-inline"><input type="radio" value="0" name="rtype" data-type="close" <if condition="$subscribe['rtype'] eq 0">checked</if>>关闭</label>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group" id="text_reply" style="display:<if condition="$subscribe['rtype'] eq 1">block<else/>none</if>">
+                        <label class="col-sm-2 control-label">回复内容：</label>
+                        <div class="col-sm-3">
+                            <textarea class="form-control" placeholder="回复内容..." name="content" rows="10" cols="20"><if condition="$subscribe['rtype'] eq 1">{$subscribe.content}</if></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" id="master_reply" style="display:<if condition="$subscribe['rtype'] eq 2">block<else/>none</if>">
+                        <label class="col-sm-2 control-label">指定图文：</label>
+                        <div class="col-sm-3">
+                            <select name="rid" class="form-control">
+                              <option value="0">请选择图片素材</option>
+                              <volist name="resource" id="val">
+                                <if condition="$subscribe['rtype'] eq 2">
+                                <option value="{$val.id}" <if condition="$val['id'] eq $subscribe['rid']">selected</if>>{$val['articles'][0]['title']}</option>
+                                <else/>
+                                <option value="{$val.id}">{$val['articles'][0]['title']}</option>
+                                </if>
+                              </volist>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit" data-form-action="App.submit_form"><i class="fa fa-check"></i> 保存</button>
+                        </div>
+                    </div>
+                </form>
+
+                <form class="form-horizontal" action="{:U('/admin/wxreply/setreply')}" id="default_form" style="display:none" method="POST">
+                    <input type="hidden" value="default" name="type"/>
+                   
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">是否开启：</label>
+                        <div class="col-sm-3">
+                            <label class="radio-inline"><input type="radio" value="1" name="rtype" data-type="text_reply_1" <if condition="$default['rtype'] eq 1">checked</if>>文本回复</label>
+                            <label class="radio-inline"><input type="radio" value="2" name="rtype" data-type="master_reply_1" <if condition="$default['rtype'] eq 2">checked</if>>图文回复</label>
+                            <label class="radio-inline"><input type="radio" value="0" name="rtype" data-type="close" <if condition="$default['rtype'] eq 0">checked</if>>关闭</label>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group" id="text_reply_1" style="display:<if condition="$default['rtype'] eq 1">block<else/>none</if>">
+                        <label class="col-sm-2 control-label">回复内容：</label>
+                        <div class="col-sm-3">
+                            <textarea class="form-control" placeholder="回复内容..." name="content"><if condition="$default['rtype'] eq 1">{$default.content}</if></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" id="master_reply_1" style="display:<if condition="$default['rtype'] eq 2">block<else/>none</if>">
+                        <label class="col-sm-2 control-label">指定图文：</label>
+                        <div class="col-sm-3">
+                            <select name="rid" class="form-control">
+                              <option value="0">请选择图片素材</option>
+                              <volist name="resource" id="val">
+                                <if condition="$default['rtype'] eq 2">
+                                <option value="{$val.id}" <if condition="$val['id'] eq $default['rid']">selected</if>>{$val['articles'][0]['title']}</option>
+                                <else/>
+                                <option value="{$val.id}">{$val['articles'][0]['title']}</option>
+                                </if>
+                              </volist>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit" data-form-action="App.submit_form"><i class="fa fa-check"></i> 保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>    
+
+<script type="text/javascript">
+
+    $('input[type="radio"]').click(function() {
+      var t = $(this).data().type;
+      $('#text_reply').hide();
+      $('#text_reply_1').hide();
+      $('#master_reply').hide();
+      $('#master_reply_1').hide();
+      if(t != 'close') {
+        $('#'+t).show();
+      }
+
+    });
+
+</script>
+</body>
+</html>

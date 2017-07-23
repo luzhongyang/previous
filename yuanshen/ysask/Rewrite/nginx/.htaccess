@@ -1,0 +1,92 @@
+#在需要添加伪静态的虚拟主机的server{}中引入.htaccess文件：
+#include /www/xiaohua/.htaccess; （备注：把路径改成你.htaccess文件的具体位置）
+
+#重写规则
+
+#首页
+rewrite ^home_(\d+).html$ /index/index?p=$1 last;
+#app下载
+rewrite ^app/index.html$ /index/app last;
+
+#用户主页
+rewrite ^user/(\d+)_(\d+).html$ /main/index?id=$1&p=$2 last;
+rewrite ^user/(\d+).html$ /main/index?id=$1 last;
+#用户关注列表页
+rewrite ^user/follows/(\d+)_(\d+).html$ /main/follows?id=$1&p=$2 last;
+rewrite ^user/follows/(\d+).html$ /main/follows?id=$1 last;
+#用户粉丝列表页
+rewrite ^user/fans/(\d+)_(\d+).html$ /main/fans?id=$1&p=$2 last;
+rewrite ^user/fans/(\d+).html$ /main/fans?id=$1 last;
+
+#段子
+rewrite ^text.html$ /index/text last;
+#段子分页
+rewrite ^text_(\d+).html$ /index/text?p=$1 last;
+#笑话内容 多种可选
+#rewrite ^(\d+).html$ /xiaohua/index?id=$1 last;
+#rewrite ^(\w+).html$ /xiaohua/index?listdir=$1 last;
+rewrite ^text/(\w+)/(\d+).html$ /xiaohua/index?listdir=$1&id=$2 last;
+#段子栏目分页
+rewrite ^text/(\w+)_(\d+).html$ /index/subjoke?parentdir=text&listdir=$1&p=$2 last;
+#段子栏目
+rewrite ^text/(\w+).html$ /index/subjoke?parentdir=text&listdir=$1 last;
+
+#图片
+rewrite ^pic.html$ /index/pic last;
+#图片分页
+rewrite ^pic_(\d+).html$ /index/pic?p=$1 last;
+#图片栏目分页
+rewrite ^pic/(\w+)_(\d+).html$ /index/subjoke?parentdir=pic&listdir=$1&p=$2 last;
+#笑话内容
+rewrite ^pic/(\w+)/(\d+).html$ /xiaohua/index?listdir=$1&id=$2 last;
+#图片栏目
+rewrite ^pic/(\w+).html$ /index/subjoke?parentdir=pic&listdir=$1 last;
+
+#动图
+rewrite ^gif.html$ /index/gif last;
+#动图分页
+rewrite ^gif_(\d+).html$ /index/gif?p=$1 last;
+#动图栏目分页
+rewrite ^gif/(\w+)_(\d+).html$ /index/subjoke?parentdir=gif&listdir=$1&p=$2 last;
+#笑话内容
+rewrite ^gif/(\w+)/(\d+).html$ /xiaohua/index?listdir=$1&id=$2 last;
+#动图栏目
+rewrite ^gif/(\w+).html$ /index/subjoke?parentdir=gif&listdir=$1 last;
+
+#视频
+rewrite ^video.html$ /index/video last;
+#视频分页
+rewrite ^video_(\d+).html$ /index/video?p=$1 last;
+#视频栏目分页
+rewrite ^video/(\w+)_(\d+).html$ /index/subjoke?parentdir=video&listdir=$1&p=$2 last;
+#笑话内容
+rewrite ^video/(\w+)/(\d+).html$ /xiaohua/index?listdir=$1&id=$2 last;
+#视频栏目
+rewrite ^video/(\w+).html$ /index/subjoke?parentdir=video&listdir=$1 last;
+
+#热点
+rewrite ^hotjoke.html$ /index/hotjoke last;
+#热点分页
+rewrite ^hotjoke_(\d+).html$ /index/hotjoke?p=$1 last;
+#8小时
+rewrite ^hour.html$ /hot/index last;
+#8小时分页
+rewrite ^hour_(\d+).html$ /hot/index?p=$1 last;
+#7天
+rewrite ^week.html$ /hot/week last;
+#7天分页
+rewrite ^week_(\d+).html$ /hot/week?p=$1 last;
+#30天
+rewrite ^month.html$ /hot/month last;
+#30天分页
+rewrite ^month_(\d+).html$ /hot/month?p=$1 last;
+#神回复
+rewrite ^godreply.html$ /index/godreply last;
+#神回复分页
+rewrite ^godreply_(\d+).html$ /index/godreply?p=$1 last;
+#笑点
+rewrite ^tags.html$ /tags/index last;
+#笑点栏目分页
+rewrite ^tags/(\w+)_(\d+).html$ /tags/info?listdir=$1&p=$2 last;
+#笑点栏目
+rewrite ^tags/(\w+).html$ /tags/info?listdir=$1 last;

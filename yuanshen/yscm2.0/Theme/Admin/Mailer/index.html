@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邮件设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="邮件设置">
+    <meta name="description" content="邮件设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>邮件设置</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="alert alert-warning">
+                    建议使用企业邮箱配置，个人邮箱发送邮件过多时会被屏蔽。
+                </div>
+                <form class="form-horizontal" action="__SELF__" method="POST">
+                    <input type="hidden" name="data" value="mail">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮件发送模式：</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="mail_model">
+                                    <!--<option value="0">系统Mail函数</option>-->
+                                    <option value="1" selected="">SMTP发送</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">SMTP服务器：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="mail_smtp" value="{$Setting_config.mail_smtp}" class="form-control" placeholder="SMTP服务器" required data-msg-required="请输入SMTP服务器">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例如：个人是smtp.qq.com，企业是smtp.exmail.qq.com</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮箱地址：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="mail_address" value="{$Setting_config.mail_address}" class="form-control" placeholder="邮件地址" required data-msg-required="请输入邮件地址">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例如：50042748@qq.com</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮箱帐号：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="mail_loginname" value="{$Setting_config.mail_loginname}" class="form-control" placeholder="邮箱帐号" required data-msg-required="请输入邮箱帐号">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例如：50042748 (企业邮箱填写：yscms@168282.com) </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮箱密码：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="mail_password" value="{$Setting_config.mail_password}" class="form-control" placeholder="邮箱密码" required data-msg-required="请输入邮箱密码">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">SMTP端口：</label>
+                            <div class="col-sm-1">
+                                <input type="text" name="mail_smtp_port" value="{$Setting_config.mail_smtp_port}" class="form-control" placeholder="SMTP端口" required data-msg-required="请输入SMTP端口">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例如：25 （qq企业邮箱是：465）</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">发件人名称：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="mail_fromname" value="{$Setting_config.mail_fromname}" class="form-control" placeholder="发件人" required data-msg-required="请输入发件人">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例如：源神CMS</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                {__TOKEN__}
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="button"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

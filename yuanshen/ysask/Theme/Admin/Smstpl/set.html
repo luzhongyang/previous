@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>短信模板配置 - {:C('site_title')}</title>
+    <meta name="keywords" content="短信模板配置">
+    <meta name="description" content="短信模板配置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+	        <div class="col-sm-12">
+	            <div class="ibox float-e-margins">
+	                <div class="ibox-title">
+	                    <h5>短信模板配置</h5>
+	                </div>
+	                <div class="ibox-content">
+	                	<div class="">
+	                        <a onclick="AddRow();" href="javascript:void(0);" class="btn btn-primary ">添加行</a>
+	                    </div>
+	                    <form class="form-horizontal" action="{:U('admin/smstpl/set')}" method="post">
+	                        <table class="table table-striped table-bordered table-hover m-t-md">
+	                            <thead>
+	                                <tr>
+	                                    <th class="text-center">模板标识</th>
+	                                    <th class="text-center">模板名称</th>
+	                                    <th class="text-center">模板ID</th>
+	                                    <th class="text-center">模板内容</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                            	<volist name="list" id="var"  key="k">
+		                                <tr>
+		                                    <td>
+		                                        <div class="col-sm-6 col-md-offset-4">
+		                                        	<input type="text" name="data_edit[{$k}][key]" class="form-control text-center" value="{$var.key}">
+		                                        </div>
+		                                    </td>
+		                                    <td>
+		                                        <div class="col-sm-6 col-md-offset-4">
+		                                        	<input type="text" name="data_edit[{$k}][title]" class="form-control text-center" value="{$var.title}">
+		                                        </div>
+		                                    </td>
+		                                    <td>
+		                                        <div class="col-sm-6 col-md-offset-4">
+		                                        	<input type="text" name="data_edit[{$k}][smsid]" class="form-control text-center" value="{$var.smsid}">
+		                                        </div>
+		                                    </td>
+		                                    <td>
+		                                        <div class="col-sm-6 col-md-offset-4">
+		                                        	<input type="text" name="data_edit[{$k}][content]" class="form-control text-center" value="{$var.content}">
+		                                        </div>
+		                                    </td>
+		                                </tr>
+	                            	</volist>
+	                            </tbody>
+	                        </table>
+	                        <a href="javascript:;"><button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-check"></i> 提交</button></a>　
+	                        <a href="javascript:;"><button class="btn btn-primary btn-sm" type="reset"><i class="fa fa-repeat"></i> 重置</button></a>
+	                        <div class="clearfix"></div>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script>
+    	function  AddRow() {
+    		var guid = '';
+	        for (var i = 1; i <= 32; i++) {
+	            var n = Math.floor(Math.random() * 16.0).toString(16);
+	            guid += n;
+	        }
+	        guid = guid.toUpperCase();
+	    	var html = '';
+	    	html += '<tr>';
+	    	html += '<td>';
+			html += '<div class="col-sm-4 col-md-offset-4">';
+			html += '<input type="text" name="data_add['+guid+'][key]" class="form-control text-center" value="">';
+			html += '</div>';
+			html += '</td>';
+			html += '<td>';
+			html += '<div class="col-sm-4 col-md-offset-4">';
+			html += '<input type="text" name="data_add['+guid+'][title]" class="form-control text-center" value="">';
+			html += '</div>';
+			html += '</td>';
+			html += '<td>';
+			html += '<div class="col-sm-4 col-md-offset-4">';
+			html += '<input type="text" name="data_add['+guid+'][smsid]" class="form-control text-center" value="">';
+			html += '</div>';
+			html += '</td>';
+			html += '<td>';
+			html += '<div class="col-sm-4 col-md-offset-4">';
+			html += '<input type="text" name="data_add['+guid+'][content]" class="form-control text-center" value="">';
+			html += '</div>';
+			html += '</td>';
+			html += '</tr>';
+			$("tbody").append(html);
+		}
+    </script>
+</body>
+</html>

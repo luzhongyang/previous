@@ -1,0 +1,1 @@
+运行 install.php  进行安装

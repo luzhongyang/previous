@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手机端模板管理 - {:C('site_title')}</title>
+    <meta name="keywords" content="手机端模板风格管理">
+    <meta name="description" content="手机端模板风格管理">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>手机端模板管理</h5>
+            </div>
+            <div class="ibox-content">                
+                    <table class="table table-striped table-bordered table-hover  m-t-md">
+                    <notempty name="dirlast"> 
+                      <thead>  
+                      <tr>
+                      <th colspan="5" class="text-left"><img src="__PUBLIC__/images/file/last.gif"> <a href="{:U('waptpl/index',array('id'=>$dirlast))}">上级目录</a> 当前目录: {$dirpath}</th>
+                      </tr>
+                      </thead>
+                    </notempty>
+                        <thead>
+                            <tr>
+                                <th class="text-center">网站模板管理</span>文件夹名/文件名</th>
+                                <th class="text-center">文件描述</th>
+                                <th class="text-center">文件大小</th>
+                                <th class="text-center">修改时间</th>
+                                <th class="text-center" width="200">相关操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <volist name="list_dir" id="v">
+                            <eq name="v.isDir" value="1">
+                            <tr>
+                                <td class="text-left"><img src="__PUBLIC__/images/file/folder.gif" width="16" height="16"><a href="{:U('waptpl/index',array('id'=>$v['pathfile']))}"> {$v.filename}</a></td>
+                                <td class="text-center">文件夹</td>
+                                <td class="text-center">{:byte_format(getdirsize($v['path'].'/'.$v['filename']))}</td>
+                                <td class="text-center">{$v.mtime|getcolordate='Y-m-d H:i:s',###}</td>
+                                <td class="text-center"><a href="{:U('waptpl/index',array('id'=>$v['pathfile']))}"><button class="btn btn-primary btn-xs" type="button"><em class="fa fa-edit"></em> 下级目录</button></a></td>
+                            </tr>
+
+                            <else />
+
+                            <tr>
+                                <in name="v.ext" value="jpg,gif,js,css,html,htm,php">
+                                    <td  class="text-left"><img src="__PUBLIC__/images/file/{$v.ext}.gif" width="16" height="16"> {$v.filename}</td>
+                                <else />
+                                    <td  class="text-left"><img src="__PUBLIC__/images/file/other.gif" width="16" height="16"> {$v.filename}</td>
+                                </in>
+
+                               <td   class="text-center">{$v.filename|gettplname}</td>
+                                <td  class="text-center">{$v.size|byte_format}</td>
+                                <td  class="text-center">{$v.mtime|getcolordate='Y-m-d H:i:s',###}</td>
+                                <php>if(ereg("\.html|\.htm|\.txt|\.css|\.php|\.js",$v['filename'])){</php>
+                                <td  class="text-center"><a href="/Admin/waptpl/add/id/{$dirpath|url_repalce=desc}|{:str_replace('.'.$v['ext'],'*'.$v['ext'],$v['filename'])}.html"><button class="btn btn-primary btn-xs" type="button"><em class="fa fa-edit"></em> 修改</button></a> <a href="/Admin/waptpl/del/id/{$dirpath|url_repalce=desc}|{:str_replace('.'.$v['ext'],'*'.$v['ext'],$v['filename'])}.html"  onclick="return confirm('确定要删除吗')"><button class="btn btn-danger btn-xs" type="button"><i class="fa fa-trash-o"></i> 删除</button></a></td>
+                                <php>}else{</php>
+                                <td  class="text-center"><a href="{$dirpath}/{$v.filename}" target="_blank">浏览</a> <a href="/Admin/waptpl/del/id/{$dirpath|url_repalce=desc}|{:str_replace('.'.$v['ext'],'*'.$v['ext'],$v['filename'])}.html"  onclick="return confirm('确定要删除吗')"><button class="btn btn-danger btn-xs" type="button"><i class="fa fa-trash-o"></i> 删除</button></a></td>
+                                <php>}</php>
+
+                            </tr>
+                            
+                            </eq>
+                            </volist>
+                            </tbody>
+                    </table>
+
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

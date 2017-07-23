@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>性能优化 - {:C('site_title')}</title>
+    <meta name="keywords" content="采集接口配置">
+    <meta name="description" content="采集接口配置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>性能优化</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" action="{:U('setting/xingneng_update')}" method="POST">
+                        <input type="hidden" name="data" value="index">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">模板编译缓存功能：</label>
+                            <div class="col-sm-2">
+                                <label class="radio-inline"><input type="radio" value="0" name="tmpl_cache_on" <eq name="Setting_config.tmpl_cache_on" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="tmpl_cache_on" <eq name="Setting_config.tmpl_cache_on" value="1">checked</eq>>开启</label>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 开启后模板不再编译，运行时直接加载自动生成对应的PHP缓存文件，更改模块时需要清空缓存</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">网站页面缓存功能：</label>
+                            <div class="col-sm-2">
+                                <label class="radio-inline"><input type="radio" value="0" name="html_cache_on" <eq name="Setting_config.html_cache_on" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="html_cache_on" <eq name="Setting_config.html_cache_on" value="1">checked</eq>>开启</label>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 网站动态模式运行下根据URL自动生成对应的PHP缓存文件</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">首页缓存有效期：</label>
+                            <div class="col-sm-1">
+                                <input type="text" name="html_cache_index" class="form-control" value="{$Setting_config.html_cache_index}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 设为0该模块将不启用缓存,可以为小数,单位小时</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">栏目页缓存有效期：</label>
+                            <div class="col-sm-1">
+                                <input type="text" name="html_cache_list" class="form-control" value="{$Setting_config.html_cache_list}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 设为0该模块将不启用缓存,可以为小数,单位小时</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">内容页缓存有效期：</label>
+                            <div class="col-sm-1">
+                                <input type="text" name="html_cache_content" class="form-control" value="{$Setting_config.html_cache_content}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 设为0该模块将不启用缓存,可以为小数,单位小时</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">其它缓存有效期：</label>
+                            <div class="col-sm-1">
+                                <input type="text" name="html_cache_other" value="{$Setting_config.html_cache_other}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>设为0该模块将不启用缓存,可以为小数,单位小时</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                {__TOKEN__}
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

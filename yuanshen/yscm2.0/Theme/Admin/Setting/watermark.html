@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水印设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="水印设置">
+    <meta name="description" content="水印设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>水印设置</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" action="{:U('setting/watermark_update')}" method="POST" name="form_Website_config">
+                        <input type="hidden" name="data" value="water">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">启用水印：</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="water_status" onChange="setclose(this.value)">
+                                    <option value="0" <eq name="Setting_config.water_status" value="0">selected="selected"</eq>>关闭</option>
+                                    <option value="1" <eq name="Setting_config.water_status" value="1">selected="selected"</eq>>启用</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group water_type" style="display:<if condition="$Setting_config['water_status'] eq 1">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">水印类型：</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline switch" data-switch="text_water"><input type="radio" id="t1_1" value="1" name="water_type" <eq name="Setting_config.water_type" value="1">checked</eq>>文字水印</label>
+                                <label class="radio-inline switch" data-switch="pic_water"><input type="radio" id="t1_2" value="2" name="water_type" <eq name="Setting_config.water_type" value="2">checked</eq>>图片水印</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group text" style="display:<if condition="$Setting_config['water_type'] eq 1">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">水印文字：</label>
+                            <div class="col-sm-2">
+                                <input type="text" value="{$Setting_config.water_font}" name="water_font" class="form-control" value="yicmssssss">
+                            </div>
+                        </div>
+                        <div class="form-group text" style="display:<if condition="$Setting_config['water_type'] eq 1">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">文本颜色：</label>
+                            <div class="col-sm-2">
+                                <div class="minicolors minicolors-theme-bootstrap minicolors-position-bottom minicolors-position-left"><input type="text" name="water_font_color" value="{$Setting_config.water_font_color}" class="form-control minicolors-input" id="water-text-color" value="#000000" data-color-format="hex" size="7"><span class="minicolors-swatch"><span class="minicolors-swatch-color" style="background-color: rgb(0, 0, 0);"></span></span><div class="minicolors-panel minicolors-slider-hue"><div class="minicolors-slider"><div class="minicolors-picker" style="top: 0px;"></div></div><div class="minicolors-opacity-slider"><div class="minicolors-picker"></div></div><div class="minicolors-grid" style="background-color: rgb(255, 0, 0);"><div class="minicolors-grid-inner"></div><div class="minicolors-picker" style="top: 150px; left: 0px;"><div></div></div></div></div></div>
+                            </div>
+                        </div>
+                        <div class="form-group text" style="display:<if condition="$Setting_config['water_type'] eq 1">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">字体选择：</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="water_font_path">
+                                    <option value="./Public/font/arial.ttf" <eq name="Setting_config.water_font_path" value="./Public/font/arial.ttf">selected="selected"</eq>>Arial</option>
+                                    <option value="./Public/font/yahei.ttf" <eq name="Setting_config.water_font_path" value="./Public/font/yahei.ttf">selected="selected"</eq>>微软雅黑</option>
+                                    <option value="./Public/font/youyuan.ttf" <eq name="Setting_config.water_font_path" value="./Public/font/youyuan.ttf">selected="selected"</eq>>幼圆</option>
+                                    <option value="./Public/font/hei.ttf" <eq name="Setting_config.water_font_path" value="./Public/font/hei.ttf">selected="selected"</eq>>黑体</option>
+                                    <option value="./Public/font/heij.ttf" <eq name="Setting_config.water_font_path" value="./Public/font/heij.ttf">selected="selected"</eq>>腾祥智黑简</option>
+                                    <option value="./Public/font/songti.ttf" <eq name="Setting_config.water_font_path" value="./Public/font/songti.ttf">selected="selected"</eq>>宋体</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group text" style="display:<if condition="$Setting_config['water_type'] eq 1">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">字体大小：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="water_font_size" value="{$Setting_config.water_font_size}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 单位：px</span>
+                        </div>
+                       <!--  <div class="form-group text" style="display:<if condition="$Setting_config['water_type'] eq 1">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">是否加粗：</label>
+                            <div class="col-sm-10">
+                                 <label class="radio-inline"><input type="radio" value="0" name="water_font_weight" <eq name="Setting_config.water_font_weight" value="0">checked</eq>>否</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="water_font_weight" <eq name="Setting_config.water_font_weight" value="1">checked</eq>>是</label>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group no pic" style="display:<if condition="$Setting_config['water_type'] eq 2">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">水印图片：</label>
+                            <div class="col-sm-2">
+                                <input type="hidden" name='water_img' id="water_img" value="{$Setting_config.water_img}"/>
+                                <div id="view_logo"><img src="{$Setting_config.water_img}"></div>
+                                <button type="button" class="btn btn-primary" id="upwater">上传</button>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="form-group no pic">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">图片宽 / 高：</label>
+                            <div class="col-sm-3">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input type="text" name="water_img_width" value="{$Setting_config.water_img_width}" class="form-control">
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="text" name="water_img_height" value="{$Setting_config.water_img_height}" class="form-control">
+                                </div> 
+                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 单位：px</span>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group no pic" style="display:<if condition="$Setting_config['water_type'] eq 2">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">水印透明度：</label>
+                            <div class="col-sm-2">
+                                <input type="text" value="{$Setting_config.water_alpha}" name="water_alpha" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 0-100之间的数字</span>
+                        </div>
+                      <!--   <div class="form-group no pic" style="display:<if condition="$Setting_config['water_type'] eq 2">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">水印质量：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="water_quality" value="{$Setting_config.water_quality}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 0-100 数值越大，质量越高</span>
+                        </div> -->
+                        <div class="form-group" style="display:<if condition="$Setting_config['water_status'] eq 1">block<else />none</if>;">
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <label class="col-sm-2 control-label">水印位置：</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="water_pos">
+                                    <option value="0" <eq name="Setting_config.water_pos" value="0">selected="selected"</eq>>随机</option>
+                                    <option value="1" <eq name="Setting_config.water_pos" value="1">selected="selected"</eq>>左上角</option>
+                                    <option value="2" <eq name="Setting_config.water_pos" value="2">selected="selected"</eq>>上居中</option>
+                                    <option value="3" <eq name="Setting_config.water_pos" value="3">selected="selected"</eq>>右上角</option>
+                                    <option value="4" <eq name="Setting_config.water_pos" value="4">selected="selected"</eq>>左居中</option>
+                                    <option value="5" <eq name="Setting_config.water_pos" value="5">selected="selected"</eq>>居中</option>
+                                    <option value="6" <eq name="Setting_config.water_pos" value="6">selected="selected"</eq>>右居中</option>
+                                    <option value="7" <eq name="Setting_config.water_pos" value="7">selected="selected"</eq>>左下角</option>
+                                    <option value="8" <eq name="Setting_config.water_pos" value="8">selected="selected"</eq>>下居中</option>
+                                    <option value="9" <eq name="Setting_config.water_pos" value="9">selected="selected"</eq>>右下角</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit" data-form-action="App.submit_form"><i class="fa fa-check"></i> 保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+    <script src="__PUBLIC__/js/jquery.uploadfile.min.js"></script>
+    <script src="__PUBLIC__/js/upload.js"></script>
+    <script type="text/javascript">
+        var Obwater = Object.create(Upload);
+        Obwater.static('#upwater',false,upwater);
+        function upwater(images){
+            for(var i in images){
+                $('#view_logo').html('<img src="'+ images[i].url +'">');
+                $('#site_water').val(images[i].url);
+                $('#water_img').val(images[i].url);
+            }
+        }
+
+        function setclose(t0)
+        {
+            if(t0==0){
+                $(".no").css("display","none");
+                $(".text").css("display","none");
+                $(".pic").css("display","none");
+                $(".water_type").css("display","none");
+            }else{
+                $(".no").css("display","block");
+                $(".water_type").css("display","block");
+                if($("#t1_1").attr("checked")){
+                    $(".text").css("display","block");
+                    $(".pic").css("display","none");
+                }else{
+                    $(".text").css("display","none");
+                    $(".pic").css("display","block");
+                }
+            }
+        }
+
+        $(".pic").css("display","<if condition="($Setting_config['water_status'] eq 1) AND ($Setting_config['water_type'] eq 2) ">block<else />none</if>");
+        //$(".no").css("display","none");
+        $(".text").css("display","<if condition="($Setting_config['water_status'] eq 1) AND ($Setting_config['water_type'] eq 1) ">block<else />none</if>");
+        $("#t1_1").click(function(){$(".text").css("display","block");$(".pic").css("display","none");})
+        $("#t1_2").click(function(){$(".text").css("display","none");$(".pic").css("display","block");})
+    </script>
+</body>
+</html>

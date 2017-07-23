@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改搜索词 - {:C('site_title')}</title>
+    <meta name="keywords" content="修改搜索词">
+    <meta name="description" content="修改搜索词">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>修改搜索词</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('Search/index')}" link-url="javascript:void(0)"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus-circle"></i> 搜索词管理</button></a>
+                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                <form class="form-horizontal m-t-md" action="{:U('Search/update')}" method="POST">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">关键词：</label>
+                        <div class="col-sm-2">
+                            <input type="text" name="search" value="{$vo.search}" class="form-control" required data-msg-required="请输入关键词">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">搜索量：</label>
+                        <div class="col-sm-1">
+                            <input type="text" name="hits" value="{$vo.hits}" class="form-control" data-msg-required="请输入搜索量">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态：</label>
+                        <div class="col-sm-2">
+                            <select name="status" class="form-control">
+                                <option value="1" <if condition="$vo.status eq 1">selected</if>>显示</option>
+                                <option value="0" <if condition="$vo.status eq 0">selected</if>>不显示</option>                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <input type="hidden" name="id" value="{$vo.id}" />
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    {__TOKEN__}
+                </form>
+            </div>
+        </div>
+    </div>    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

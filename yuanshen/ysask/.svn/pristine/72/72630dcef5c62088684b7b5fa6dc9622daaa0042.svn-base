@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>后台管理中心 - {:C('site_title')}</title>
+    <meta name="keywords" content="后台管理中心">
+    <meta name="description" content="后台管理中心">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header text-center">
+                        <div class="dropdown profile-element">
+                            <span><img alt="image" class="img-circle" src="__PUBLIC__/admin/images/profile_small.jpg" /></span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                               <span class="block m-t-xs"><strong class="font-bold">{$adminuser}</strong></span>
+                                <span class="text-muted text-xs block">{$authgroup}<b class="caret"></b></span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <!-- <li><a class="J_menuItem" href="form_avatar.html">修改头像</a></li>
+                                <li><a class="J_menuItem" href="form_avatar.html">修改密码</a></li>
+                                <li class="divider"></li> -->
+                                <li><a href="{:U('/admin/login/loginout')}">安全退出</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">YS+</div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cogs"></i>
+                            <span class="nav-label">设置</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/site')}">站点设置</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting')}">系统设置</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/xingneng')}">性能优化</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/rewrite')}">URL伪静态</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/upload')}">上传设置</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/file')}">存储方式</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/watermark')}">水印设置</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/caiji')}">采集接口</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/checkcode')}">验证设置</a></li>
+                            <!-- <li><a class="J_menuItem" href="{:U('/admin/setting/access')}">访问设置</a></li> -->
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/xunsearch')}">搜索设置</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/ucenter')}">Ucenter整合</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/clearcache')}">清除缓存</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-label">
+                            <i class="fa fa-user"></i>
+                            <span class="nav-label">管理员</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('/admin/admin')}">管理员管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/authGroup')}">角色管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/authRule')}">权限管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/log')}">管理员日志</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users"></i>
+                            <span class="nav-label">会员</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/usersetting')}">会员设置</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/user')}">会员管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/user/level')}">等级管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/professor')}">答主管理</a></li>
+                            <!--<li><a class="J_menuItem" href="{:U('/admin/oauth')}">第三方会员管理</a></li>-->
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/userstrategy')}">积分策略</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/UserMsg')}">私信管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/oauth')}">第三方登录</a></li>
+                            <li>
+                                <a href="#">支付设置<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a class="J_menuItem" href="{:U('/admin/payment')}">支付接口</a></li>
+                                    <li><a class="J_menuItem" href="{:U('/admin/paymentlog')}">支付流水</a></li>
+                                    <li><a class="J_menuItem" href="{:U('/admin/paymentlog')}">转账记录</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">充值提现<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <!-- <li><a class="J_menuItem" href="{:U('/admin/payment')}">充值设置</a></li> -->
+                                    <li><a class="J_menuItem" href="{:U('/admin/setting/tixian')}">提现设置</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">通知设置<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a class="J_menuItem" href="{:U('/admin/mailer')}">邮件设置</a></li>
+                                    <li><a class="J_menuItem" href="{:U('/admin/mailtpl')}">邮件模板</a></li>
+                                    <li><a class="J_menuItem" href="{:U('/admin/sms/index')}">短信设置</a></li>
+                                    <li><a class="J_menuItem" href="{:U('/admin/smstpl/set')}">短信模板</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th-large"></i>
+                            <span class="nav-label">内容</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('/admin/category')}">分类管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/question')}">问题管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/answer')}">回答管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/article')}">文章管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/discuss')}">讨论管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/notice')}">公告管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/page/index')}">单页管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/professorForm')}">自定义表单</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-university"></i>
+                            <span class="nav-label">商城</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('/admin/shop/goods')}">商品管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/shop/order')}">订单管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/shop/category')}">商品分类</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('/admin/count')}">
+                            <i class="fa fa-bar-chart"></i>
+                            <span class="nav-label"> 站点统计</span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="javascript:;">
+                            <i class="fa fa-cube"></i>
+                            <span class="nav-label">风格设置</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('/admin/webtpl')}">电脑端风格管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/waptpl')}">手机端风格管理</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">扩展</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('/admin/link')}">友情链接</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/guestbook')}">留言管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/claim')}">举报管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/comment')}">评论管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/search')}">搜索关键词</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/tag')}">Tag管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/chain')}">内链管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/badword')}">敏感词管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/ad')}">广告管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/slide')}">幻灯片管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/pushbaidu')}">百度推送</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/setting/pushqihoo')}">360推送</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-comments"></i> <span class="nav-label">微信公众号</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('/admin/wxsetting')}">接口配置</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/wxmenu')}">自定义菜单</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/wxreply')}">自动回复</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/wxkeyword')}">关键词回复</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/wximg')}">图片管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/wxpicmsg')}">图文消息</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/wxmass')}">群发消息</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-database"></i> <span class="nav-label">数据库</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:U('/admin/database')}">数据库备份</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/database/restore')}">数据库恢复</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/database/sql')}">执行SQL语句</a></li>
+                            <li><a class="J_menuItem" href="{:U('/admin/database/replace')}">数据批量替换</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <!--<form role="search" class="navbar-form-custom" method="post" action="http://www.zi-han.net/theme/hplus/search_results.html">
+                            <div class="form-group">
+                                <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
+                            </div>
+                        </form>-->
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown hidden-xs">
+                            <a href="/" target="_blank"><i class="fa fa-home"></i> 站点主页</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row content-tabs">
+                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+                </button>
+                <div class="btn-group roll-nav roll-right">
+                    <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+
+                    </button>
+                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                        <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                        </li>
+                        <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="{:U('/admin/login/loginout')}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            </div>
+            <div class="row J_mainContent" id="content-main">
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="{:U('/admin/index/main')}" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            </div>
+            <div class="footer">
+                <div class="pull-right">&copy; 2015-2017 <a href="http://www.168282.com/" target="_blank">源神CMS</a>
+                </div>
+            </div>
+        </div>
+        <!--右侧部分结束-->
+    </div>
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__PUBLIC__/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="__PUBLIC__/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/layer/layer.min.js"></script>
+    <script src="__PUBLIC__/admin/js/plugins/pace/pace.min.js"></script>
+    <script src="__PUBLIC__/admin/js/content.min.js"></script>
+    <script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+    <script>
+	$(function(){$("#side-menu").metisMenu();})
+	</script>
+</body>
+</html>

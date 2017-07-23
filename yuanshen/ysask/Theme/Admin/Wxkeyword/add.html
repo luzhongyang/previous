@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关键词回复 - {:C('site_title')}</title>
+    <meta name="keywords" content="关键词回复">
+    <meta name="description" content="关键词回复">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>添加关键词</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('/admin/wxkeyword')}"><button class="btn btn-primary btn-sm" type="button">关键词</button></a>
+                <form class="form-horizontal" action="{:U('wxkeyword/insert')}" method="POST">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">关键词：</label>
+                        <div class="col-sm-3">
+                            <input class="form-control"  name="keyword" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">消息类型：</label>
+                        <div class="col-sm-3">
+                            <label class="radio-inline"><input type="radio" value="1" name="rtype" checked>文本消息</label>
+                            <label class="radio-inline"><input type="radio" value="2" name="rtype">图文消息</label>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group" id="text_reply">
+                        <label class="col-sm-2 control-label">消息内容：</label>
+                        <div class="col-sm-3">
+                            <textarea class="form-control" placeholder="消息内容..." name="content"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" id="master_reply" style="display:none">
+                        <label class="col-sm-2 control-label">指定图文：</label>
+                        <div class="col-sm-3">
+                            <select name="rid" id="rid" class="form-control">
+                              <option value="0">请选择图片素材</option>
+                              <volist name="resource" id="val">
+                                <option value="{$val.id}">{$val['articles'][0]['title']}</option>
+                              </volist>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态：</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="status">
+                                <option value="1">正常</option>
+                                <option value="0">禁用</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit" data-form-action="App.submit_form"><i class="fa fa-check"></i> 保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script type="text/javascript">
+    $('input[type="radio"]').click(function() {
+      var v = $(this).val();
+      if(v == '1') {
+        $('#text_reply').show();
+        $('#master_reply').hide();
+      }else {
+        $('#text_reply').hide();
+        $('#master_reply').show();
+      }
+    });
+
+</script>
+</body>
+</html>

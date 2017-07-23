@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的消息</title>
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/amazeui.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/member.css" />
+</head>
+<body>
+<!--登录-->
+<header id="header">
+    <div class="wraper am-cf">
+        <div id="logo" class="logo"><a href="/" target="_self" class="hide-text" title="首页">易答</a></div>
+        <ul class="nav-list">
+            <li><a href="javascript:;">首页</a></li>
+            <li><a href="javascript:;">文章</a></li>
+            <li><a href="javascript:;">问答</a></li>
+            <li><a href="javascript:;">话题</a></li>
+            <li><a href="javascript:;">讨论</a></li>
+            <li><a href="javascript:;">找答主</a></li>
+            <li><a href="javascript:;">商城</a></li>
+        </ul>
+        <div class="am-topbar-right">
+            <div class="am-dropdown usernav" data-am-dropdown>
+                <a class="am-dropdown-toggle" href="javascript:;" data-am-dropdown-toggle>
+                    <img class="am-circle" src="img/544b6f5500013a0b01000100-200-200.jpg" width="36" height="36">
+                </a>
+                <ul class="am-dropdown-content">
+                    <li><a href="#">我的主页</a></li>
+                    <li class="am-active"><a href="#">我的提问</a></li>
+                    <li><a href="#">我的问答</a></li>
+                    <li><a href="#">我的文章</a></li>
+                    <li><a href="#">账号设置</a></li>
+                    <li class="am-divider"></li>
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="am-topbar-right">
+            <form class="am-topbar-form am-form-inline" role="search" method="get" action="" target="_blank">
+                <input type="text" name="q" class="am-form-field am-input-sm" placeholder="请输入关键字"><button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+            </form>
+        </div>
+    </div>
+</header>
+<div class="member-main">
+    <div class="am-cf">
+        <div class="member-sidebar">
+            <div class="avator-wapper">
+                <div class="avator-mode">
+                    <img class="am-circle" src="{$user.avatar}" width="92" height="92">
+                    <div class="update-avator" style="bottom: -30px;">
+                        <p><a href="javascript:void(0);" class="js-avator-link">更换头像</a></p>
+                    </div>
+                </div>
+                <div class="des-mode">
+                    <p>{$user.username}</p>
+                    <dl class="auth-list">
+                        <dd><i class="am-icon-user"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未实名认证</div></dd>
+                        <dd><i class="am-icon-phone"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未绑定手机</div></dd>
+                        <dd class="active"><i class="am-icon-comments-o"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>你已绑定邮箱</div></dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="list-wapper">
+                <h2>我的消息 </h2>
+                <div class="line"></div>
+                <ul class="menu">
+                    <li><a href="{:UU('user/message')}" class="on">系统消息<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/message',array('type'=>2))}">我的私信<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="member-right">
+            <div class="common-title">
+                系统消息 <span class="title-tips"><b class="am-text-danger">{$count}</b></span>
+            </div>
+            <hr class="am-margin-top-0" />
+            <div class="am-btn-group">
+                <a class="am-btn am-btn-secondary am-radius am-text-sm"><span class="am-icon-files-o am-margin-right-sm"></span>批量操作</a>
+                <div class="am-dropdown" data-am-dropdown="">
+                    <button class="am-btn am-btn-secondary am-dropdown-toggle am-text-sm" data-am-dropdown-toggle=""> <span class="am-icon-caret-down"></span></button>
+                    <ul class="am-dropdown-content">
+                        <li><a href="javascript:;" class="btach" type="1">设为已读</a></li>
+                        <li><a href="javascript:;" class="btach" type="2">设为未读</a></li>
+                        <li class="am-divider"></li>
+                        <li><a href="javascript:;" class="btach" type="3">批量删除</a></li>
+                        <li class="am-divider"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="am-btn-group am-btn-group-sm am-btn-toolbar am-margin-left-xs">
+                <a class="am-btn am-btn-warning am-radius" href="">全部</a>
+                <a class="am-btn am-btn-default am-radius" href="">已读</a>
+                <a class="am-btn am-btn-default am-radius" href="">未读</a>
+            </div>
+
+
+            <div class="ask-list am-margin-top">
+                <ul class="am-list">
+                    <volist name='list' id='vo'>
+                        <li>
+                            <div class="title">
+                                <a href="javascript:;">{$vo.content}<time class="am-fr am-margin-right">{:date('Y-m-d h:i',$vo['created_time'])}</time></a>
+                            </div>
+                            <a href="{:UU('message/delete',array('id'=>$vo['id']))}" class="del" title="删除" style="display: none;">×</a>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="page-line">{$page_control}</div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="flinks">
+        <ul class="">
+            <li><a href="" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">文章</a></li>
+            <li><a href="" target="_blank">问答</a></li>
+            <li><a href="" target="_blank">话题</a></li>
+            <li><a href="" target="_blank">讨论</a></li>
+            <li><a href="" target="_blank">找答主</a></li>
+            <li><a href="" target="_blank">商城</a></li>
+        </ul>
+    </div>
+    Copyright © 2015-2016 168282.com. All Rights Reserved.  皖ICP备16011406号
+</footer>
+<script src="__PUBLIC__/pc/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/pc/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/pc/js/common.js"></script>
+</body>
+</html>

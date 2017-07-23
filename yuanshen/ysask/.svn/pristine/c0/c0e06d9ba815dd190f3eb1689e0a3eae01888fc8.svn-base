@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>个人关注粉丝</title>
+<link rel="stylesheet" href="__PUBLIC__/pc/css/amazeui.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/pc/css/member.css" />
+</head>
+<body>
+<header id="header">
+    <div class="wraper am-cf">
+        <div id="logo" class="logo"><a href="/" target="_self" class="hide-text" title="首页">易答</a></div>
+        <ul class="nav-list">
+            <li><a href="/">首页</a></li>
+            <li><a href="{:UU('article/index')}">文章</a></li>
+            <li><a href="{:UU('question/index')}">问答</a></li>
+            <li><a href="{:UU('tag/index')}">话题</a></li>
+            <li><a href="{:UU('discussion/index')}">讨论</a></li>
+            <li><a href="{:UU('professor/index')}">找答主</a></li>
+            <li><a href="{:UU('shop/index')}">商城</a></li>
+        </ul>
+        <div class="am-topbar-right">
+            <div class="am-dropdown usernav" data-am-dropdown>
+              <a class="am-dropdown-toggle" href="javascript:;" data-am-dropdown-toggle>
+                <img class="am-circle" src="{$user['avatar']}" width="36" height="36">
+              </a>
+              <ul class="am-dropdown-content">
+                <li><a href="{:UU('user/index')}">我的主页</a></li>
+                <li><a href="{:UU('user/setting')}">账号设置</a></li>
+                <li class="am-divider"></li>
+                <li><a href="{:UU('login/loginout')}">退出</a></li>
+              </ul>
+            </div>
+        </div>
+        <div class="am-topbar-right">
+            <form class="am-topbar-form am-form-inline" role="search" method="get" action="" target="_blank">
+                <input type="text" name="query" class="am-form-field am-input-sm" placeholder="请输入关键字"><button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+            </form>
+        </div>
+    </div>
+</header>
+<div class="member-main">
+    <div class="am-cf">
+        <div class="member-sidebar">
+            <div class="avator-wapper">
+                <div class="avator-mode">
+                    <img class="am-circle" src="{$user['avatar']}" width="92" height="92">
+                    <div class="update-avator" style="bottom: -30px;">
+                        <p><a href="javascript:void(0);" class="js-avator-link">更换头像</a></p>
+                    </div>
+                </div>
+                <div class="des-mode">
+                    <p>{$user['username']}</p>
+                    <dl class="auth-list">
+                        <dd><i class="am-icon-user"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未实名认证</div></dd>
+                        <dd><i class="am-icon-phone"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未绑定手机</div></dd>
+                        <dd class="active"><i class="am-icon-comments-o"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>你已绑定邮箱</div></dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="list-wapper">
+                <h2>粉丝管理</h2>
+                <div class="line"></div>
+                <ul class="menu">
+                    <li  <if condition="$type eq 'watch'">class="on"</if>><a href="{:UU('user/fans',array('type'=>'watch'))}">我的关注<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li <if condition="$type neq 'watch'">class="on"</if>><a href="{:UU('user/fans')}">我的粉丝<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="member-right">
+            <div class="common-title">
+                {$title} <span class="title-tips"><b class="am-text-danger">{$count}</b></span>
+            </div>
+            <hr class="am-margin-top-0" />
+            <if condition="$count gt 0">
+                <div class="member-list">
+                    <volist name='list' id='vo'>
+                        <ul class="am-avg-sm-4">
+                            <li>
+                                <div class="block">
+                                    <p><a href="javascript:;"><img class="am-circle" src="{$vo.avatar}" width="50" height="50" /></a></p>
+                                    <p><a class="am-text-success" href="javascript:;">{$vo.username}</a></p>
+                                    <table class="am-table am-table-bordered am-table-striped am-table-compact am-radius">
+                                        <tr>
+                                            <th>回答数</th>
+                                            <td>{$vo.answer}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>粉丝数</th>
+                                            <td>{$vo.fans}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>文章数</th>
+                                            <td>{$vo.article}</td>
+                                        </tr>
+                                    </table>
+                                    <div class="am-btn-group">
+                                        <a href="javascript:;" class="am-btn am-btn-default am-btn-sm am-radius"><span>已关注</span></a>
+                                        <a href="javascript:;" class="am-btn am-btn-success am-btn-sm am-radius">发私信</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </volist>
+                </div>
+                <ul class="am-pagination am-pagination-centered">
+                   <li><a href="page_up()">上一页</a></li>
+                    <for start="1" end="$num">
+                        <li><a href="{:UU('user/fans',array('p'=>$i,'type'=>$type))}">{$i}</a></li>
+                    </for>
+                    <li><a href="page_down()">下一页</a></li>
+                </ul>
+            </if>
+        </div>
+    </div>
+</div>
+
+
+<!--底部-->
+<footer class="footer">
+    <div class="flinks">
+        <ul class="">
+            <li><a href="" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">文章</a></li>
+            <li><a href="" target="_blank">问答</a></li>
+            <li><a href="" target="_blank">话题</a></li>
+            <li><a href="" target="_blank">讨论</a></li>
+            <li><a href="" target="_blank">找答主</a></li>
+            <li><a href="" target="_blank">商城</a></li>
+        </ul>
+    </div>
+    Copyright © 2015-2016 168282.com. All Rights Reserved.  皖ICP备16011406号
+</footer>
+<script src="__PUBLIC__/pc/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/pc/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/pc/js/common.js"></script>
+</body>
+</html>

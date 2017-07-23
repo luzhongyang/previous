@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访问设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="访问设置">
+    <meta name="description" content="访问设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>访问设置</h5>
+                </div>
+                <div class="ibox-content">
+               <!--  <div class="alert alert-warning">
+                    修改以下伪静态规则以后，请修改对应的伪静态规则配置文件才能生效！
+                </div> -->
+                    <form class="form-horizontal" action="{:U('setting/access_update')}" method="POST">
+                        <!-- <div class="form-group">
+                            <label class="col-sm-2 control-label">注册限制：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="signup_count" value="{$Setting_config.signup_count}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 同一IP24小时可以注册的帐户数, 0:不限制</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">注册间隔：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="signup_time" value="{$Setting_config.signup_time}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 同一IP注册帐户的时间隔(分钟), 0:不限制 </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">限制访问IP：</label>
+                            <div class="col-sm-3">
+                                <textarea name="denyip" class="form-control">{$Setting_config.denyip}</textarea>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 限制访问IP，一行一个，支持通配符(*) </span>
+                        </div> -->
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">短信限制：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="mobile_count" value="{$Setting_config.mobile_count}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 同一IP24小时可以接收短信数，0:不限制 </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">短信间隔：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="mobile_time" class="form-control" value="{$Setting_config.mobile_time}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>同一IP接收短信的时间隔(分钟), 0:不限制 </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                       <!--  <div class="form-group">
+                            <label class="col-sm-2 control-label">关闭站点：</label>
+                            <div class="col-sm-3">
+                                <label><input type="radio" name="config[closed]" <{if $config.closed}>checked="checked"<{/if}> value="1" >是</label>
+                                <label style="margin-left:30px;"><input type="radio" name="config[closed]" <{if !$config.closed}>checked="checked"<{/if}> value="0" >否</label>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>英文命名，如 gif </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div> -->
+                        <!-- <div class="form-group">
+                            <label class="col-sm-2 control-label">关闭原因：</label>
+                            <div class="col-sm-3">
+                                <tr id="tr_closed_reason"<{if !$config.closed}>style="display:none;"<{/if}>>
+                                    <th>关闭原因：</th>
+                                    <td><textarea name="config[closed_reason]" class="textarea"><{$config.closed_reason}></textarea></td>
+                                </tr>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>英文命名，如 video </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>-->
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                {__TOKEN__}
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script>
+    $(function(){
+     //类型切换
+        $('.switch').click(function(){
+            var s = $(this).data('switch');
+            if(s == 1){
+                $('.sw').show();
+            }else{
+                $('.sw').hide();
+            }
+        });
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片管理 - {:C('site_title')}</title>
+    <meta name="keywords" content="图片管理">
+    <meta name="description" content="图片管理">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>上传图片</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('/admin/wximg/index')}"><button class="btn btn-primary btn-sm" type="button">图片管理</button></a>
+                <form class="form-horizontal m-t-xl" action="{:U('wximg/insert')}" method="post">
+                    <div class="form-group">
+                        <div class="col-sm-10 col-md-3 col-lg-2">
+                            <input type="hidden" name='path' id="path_img"/>
+                            <div id="view_logo"><img src="/Public/admin/images/image.png"></div>
+                            <button type="button" class="btn btn-primary" id="upimage">上传</button>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="col-sm-10 col-md-3 col-lg-2">
+                            <button class="btn btn-primary" type="submit" data-form-action="App.submit_form"><i class="fa fa-check"></i> 保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+    <script src="__PUBLIC__/js/jquery.uploadfile.min.js"></script>
+    <script src="__PUBLIC__/js/upload.js"></script>
+    <script type="text/javascript">
+        var Obimage = Object.create(Upload);
+        Obimage.static('#upimage',false,upimage);
+        function upimage(images){
+            for(var i in images){
+                $('#view_logo').html('<img src="'+ images[i].url +'">');
+                $('#path_img').val(images[i].url);
+            }
+        }
+    </script>
+</body>
+</html>

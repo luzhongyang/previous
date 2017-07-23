@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付记录</title>
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/amazeui.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/member.css" />
+</head>
+<body>
+<header id="header">
+    <div class="wraper am-cf">
+        <div id="logo" class="logo"><a href="/" target="_self" class="hide-text" title="首页">易答</a></div>
+        <ul class="nav-list">
+            <li><a href="javascript:;">首页</a></li>
+            <li><a href="javascript:;">文章</a></li>
+            <li><a href="javascript:;">问答</a></li>
+            <li><a href="javascript:;">话题</a></li>
+            <li><a href="javascript:;">讨论</a></li>
+            <li><a href="javascript:;">找答主</a></li>
+            <li><a href="javascript:;">商城</a></li>
+        </ul>
+        <div class="am-topbar-right">
+            <div class="am-dropdown usernav" data-am-dropdown>
+                <a class="am-dropdown-toggle" href="javascript:;" data-am-dropdown-toggle>
+                    <img class="am-circle" src="img/544b6f5500013a0b01000100-200-200.jpg" width="36" height="36">
+                </a>
+                <ul class="am-dropdown-content">
+                    <li><a href="#">我的主页</a></li>
+                    <li class="am-active"><a href="#">我的提问</a></li>
+                    <li><a href="#">我的问答</a></li>
+                    <li><a href="#">我的文章</a></li>
+                    <li><a href="#">账号设置</a></li>
+                    <li class="am-divider"></li>
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="am-topbar-right">
+            <form class="am-topbar-form am-form-inline" role="search" method="get" action="" target="_blank">
+                <input type="text" name="q" class="am-form-field am-input-sm" placeholder="请输入关键字"><button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+            </form>
+        </div>
+    </div>
+</header>
+<div class="member-main">
+    <div class="am-cf">
+        <div class="member-sidebar">
+            <div class="avator-wapper">
+                <div class="avator-mode">
+                    <img class="am-circle" src="{$user.avatar}" width="92" height="92">
+                    <div class="update-avator" style="bottom: -30px;">
+                        <p><a href="javascript:void(0);" class="js-avator-link">更换头像</a></p>
+                    </div>
+                </div>
+                <div class="des-mode">
+                    <p>{$user.username}</p>
+                    <dl class="auth-list">
+                        <dd><i class="am-icon-user"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未实名认证</div></dd>
+                        <dd><i class="am-icon-phone"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未绑定手机</div></dd>
+                        <dd class="active"><i class="am-icon-comments-o"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>你已绑定邮箱</div></dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="list-wapper">
+                <h2>账户设置 </h2>
+                <div class="line"></div>
+                <ul class="menu">
+                    <li><a href="{:UU('user/personal_data')}" class="on">基本信息<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/payment')}">支付记录<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/personal_data')}">银行帐号<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/personal_data')}">提醒设置<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/personal_data')}">安全设置<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/personal_data')}">修改头像<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="member-right">
+            <div class="common-title">
+                <a href="javascript:;" class="am-text-success"><span>支付记录</span></a>
+            </div>
+            <hr class="am-margin-0"/>
+            <div class="am-panel am-panel-default am-margin-top">
+                <table class="am-table am-table-hover">
+                    <tbody >
+                    <tr>
+                        <th class="am-text-center">金额&nbsp;（元）</th>
+                        <th class="am-text-center">支付方式</th>
+                        <th class="am-text-center">时间</th>
+                    </tr>
+                    <volist name='list' id='vo'>
+                        <tr>
+                            <td class="am-text-center">{$vo.amount}</td>
+                            <td class="am-text-center">{$pay_type[$vo['payment']]}</td>
+                            <td class="am-text-center">{:date('Y-m-d H:m',$vo['created_time'])}</td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+            {$page_control}
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="flinks">
+        <ul class="">
+            <li><a href="" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">文章</a></li>
+            <li><a href="" target="_blank">问答</a></li>
+            <li><a href="" target="_blank">话题</a></li>
+            <li><a href="" target="_blank">讨论</a></li>
+            <li><a href="" target="_blank">找答主</a></li>
+            <li><a href="" target="_blank">商城</a></li>
+        </ul>
+    </div>
+    Copyright © 2015-2016 168282.com. All Rights Reserved.  皖ICP备16011406号
+</footer>
+<script src="__PUBLIC__/pc/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/pc/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/pc/js/common.js"></script>
+</body>
+</html>

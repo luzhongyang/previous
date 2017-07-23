@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片管理 - {:C('site_title')}</title>
+    <meta name="keywords" content="图片管理">
+    <meta name="description" content="图片管理">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>图片管理</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('/admin/wximg/add')}"><button class="btn btn-primary btn-sm" type="button">上传图片</button></a>
+                <form class="form-horizontal m-t-md" action="{:U('/admin/wximg/delete')}" method="POST">
+                <div><label><input type="checkbox" name="chkall" onClick="checkallbox(this.form)" title="全选/取消" /> 全选 / 反选</label></div>
+                <div class="clearfix m-t-sm">
+                    <empty name="img">
+                    <div class="alert alert-warning">无数据！</div>
+                    </empty>
+                <volist name="img" id="val">
+                <div class="file-box">
+                    <div class="file">
+                    <label>
+                        <span class="corner"></span>
+                        <div class="image">
+                            <img alt="image" class="img-responsive" src="{$val.path}">
+                        </div>
+                        <div class="file-name">
+                            <div>
+                                <input type="checkbox" name="key" value="{$val.id}">
+                                <div class="pull-right"><a href="{:U('wximg/foreverdelete',array('id' => $val['id']))}" onclick="return confirm('确定要删除吗')"><i class="fa fa-trash-o"></i> 删除</a></div>
+                            </div>
+                            <small>添加时间：{$val.created_time|date="Y-m-d H:i",###}</small>
+                        </div>
+                    </label>
+                    </div>
+                </div>
+                </volist>
+                </div>           
+                <button class="btn btn-primary btn-sm" type="button" onclick="foreverdel()"><i class="fa fa-trash"></i> 删除选中</button>
+                <div class="pull-right pagination m-t-no">
+                    {$page}
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

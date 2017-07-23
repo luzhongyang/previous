@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配置接口 - {:C('site_title')}</title>
+    <meta name="keywords" content="配置接口">
+    <meta name="description" content="配置接口">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>配置接口</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('Payment/index')}" link-url="javascript:void(0)"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus-circle"></i> 支付接口</button></a>
+
+                <form class="form-horizontal m-t-md" action="{:U('Payment/config',array('payment_id'=>$detail['id']))}" method="post">
+                    <input type="hidden" name="id" value="{$detail.id}"/>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">接口介绍：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static">{$payment_config.content}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">接口名称：</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="title" value="{$detail.title|default=$payment_config.name}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">接口标识：</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static">{$detail.payment|default=$payment_config.code}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">接口logo：</label>
+                        <div class="input-group col-sm-2">
+                            <input type="hidden" name='logo' id="logo"  value="{$detail.logo}"/>
+                            <div id="view_logo"><img src="{$detail.logo}" width="100" height="100"></div>
+                            <button type="button" class="btn btn-primary" id="upavatar">上传</button>
+                        </div>
+                    </div>
+
+                    <foreach name="payment_config.config" item="v" key="k">
+                        <if condition="$v['type'] eq 'password'">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{$v.text}：</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="config[{$k}]" value="{$config[$k]}">
+                                </div>
+                                <p class="form-control-static">{$v.desc}</p>
+                            </div>
+                        <elseif condition="$v['type'] eq 'select'"/>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{$v.text}：</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="config[{$k}]">
+                                        <foreach name="v.items" item="vv" key="kk">
+                                        <option value="{$kk}" <if condition="$kk eq $config[$k]">selected</if>>{$vv}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                                <p class="form-control-static">{$v.desc}</p>
+                            </div>
+                        <elseif condition="$v['type'] eq 'radio'"/>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{$v.text}：</label>
+                                <div class="col-sm-4">
+                                    <foreach name="v.items" item="vv" key="kk">
+                                        <label class="radio-inline"><input type="radio" value="{$kk}" name="config[{$k}]" <eq name="config[$k]">checked</eq>>{$vv}</label>
+                                    </foreach>
+                                </div>
+                                <p class="form-control-static">{$v.desc}</p>
+                            </div>
+                        <elseif condition="$v['type'] eq 'text'"/>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{$v.text}：</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="config[{$k}]" value="{$config[$k]}">
+                                </div>
+                                <p class="form-control-static">{$v.desc}</p>
+                            </div>
+                        <else />
+                        </if>
+                    </foreach>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态：</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="status">
+                                <option value="1" <if condition="$detail['status'] eq 1">selected</if>>开启</option>
+                                <option value="0" <if condition="$detail['status'] eq 0">selected</if>>关闭</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    {__TOKEN__}
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+    <script src="__PUBLIC__/js/jquery.uploadfile.min.js"></script>
+    <script src="__PUBLIC__/js/upload.js"></script>
+    <script type="text/javascript">
+        var Obavatar = Object.create(Upload);
+        Obavatar.static('#upavatar',false,upavatar);
+        function upavatar(images){
+            for(var i in images){
+                $('#view_logo').html('<img src="'+ images[i].url +'">');
+                $('#logo').val(images[i].url);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+
+列表</br>
+<volist name="list" id="var">
+</br></br>头像：{$var.avatar}</br>
+名称：{$var.username}</br><a href="{:U('user/index',array('id'=>$var['id']))}" title="{$var.username}">{$var.username}</a><br/>
+金币：{$var.coin}</br>
+赞同：{$var.support}</br>
+关注：{$var.watch}</br>
+回答：{$var.answer}</br>
+<volist name="var.tag" id="v">
+<a href="{:U('tag/detail',array('id'=>$v['id']))}" title="{$var.name}">话题{$v.name}</a><br/>
+</volist>
+</volist>

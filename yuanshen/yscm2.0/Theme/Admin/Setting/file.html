@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>存储方式设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="存储方式设置">
+    <meta name="description" content="存储方式设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>存储方式设置</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" action="{:U('setting/file_update')}" method="POST">
+                        <input type="hidden" name="data" value="index">                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">存储方式：</label>
+                            <div class="col-sm-4">
+                                <label class="radio-inline switch"  data-switch="local"><input type="radio" value="1" name="file_type" <eq name="Setting_config.file_type" value="1">checked</eq>>本地存储</label>
+                                <label class="radio-inline switch" data-switch="qiniu"><input type="radio" value="2" name="file_type" <eq name="Setting_config.file_type" value="2">checked</eq>>七牛云存储</label>
+                                <!-- <label class="radio-inline switch" data-switch="ftp"><input type="radio" value="3" name="file_type" <eq name="Setting_config.file_type" value="3">checked</eq>>FTP存储</label> -->
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu"></div>
+                        <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">AccessKey：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="qiniu_access_key" class="form-control" value="{$Setting_config.qiniu_access_key}" required>
+                            </div>
+                            <span class="help-block m-b-none"> *</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+                        <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">SecretKey：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="qiniu_secret_key" class="form-control" value="{$Setting_config.qiniu_secret_key}" required>
+                            </div>
+                            <span class="help-block m-b-none"> *</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+                        <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">空间域名：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="qiniu_siteurl" class="form-control" value="{$Setting_config.qiniu_siteurl}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 以http:// 开始，以/结束 例：http://img.168282.com/</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+                        <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">空间名称：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="qiniu_sitename" class="form-control" value="{$Setting_config.qiniu_sitename}" required>
+                            </div>
+                            <span class="help-block m-b-none"> *</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+                        <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">图片处理样式(原图+水印)：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="qiniu_imgstyle1" class="form-control" value="{$Setting_config.qiniu_imgstyle1}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例：_y.png</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+                         <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">图片处理样式(GIF原图+水印)：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="qiniu_imgstyle2" class="form-control" value="{$Setting_config.qiniu_imgstyle2}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例：_g.gif</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+                         <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">图片处理样式(缩略图+水印)：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="qiniu_imgstyle3" class="form-control" value="{$Setting_config.qiniu_imgstyle3}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例：_m.jpg</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+                         <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">图片处理样式(视频封面+水印)：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="qiniu_imgstyle4" class="form-control" value="{$Setting_config.qiniu_imgstyle4}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 例：_v.jpg</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+                        <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">获取AccessKey：</label>
+                            <div class="col-sm-2">
+                                <span class="help-block m-b-none"><a class="text-navy" href="http://www.qiniu.com/" title="获取AccessKey">马上获取</a></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+
+                        <div class="form-group sw qiniu" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>>
+                            <label class="col-sm-2 control-label">七牛专享优惠码：</label>
+                            <div class="col-sm-2">
+                                <span class="help-block m-b-none text-navy">522e656</span>
+                            </div>
+                        </div>                        
+                       <!--  <div class="hr-line-dashed m-t-sm m-b-sm sw ftp" <neq name="Setting_config.file_type" value="2">style="display:none"</neq>></div>
+                       
+                       <div class="form-group sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>>
+                           <label class="col-sm-2 control-label">服务器IP：</label>
+                           <div class="col-sm-2">
+                               <input type="text" name="ftp_host" class="form-control" value="{$Setting_config.ftp_host}">
+                           </div>
+                           <span class="help-block m-b-none"> *</span>
+                       </div>
+                       <div class="hr-line-dashed m-t-sm m-b-sm sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>></div>
+                       <div class="form-group sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>>
+                           <label class="col-sm-2 control-label">端口：</label>
+                           <div class="col-sm-1">
+                               <input type="text" name="ftp_port" class="form-control" value="{$Setting_config.ftp_port}">
+                           </div>
+                           <span class="help-block m-b-none"> *</span>
+                       </div>
+                       <div class="hr-line-dashed m-t-sm m-b-sm sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>></div>
+                       <div class="form-group sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>>
+                           <label class="col-sm-2 control-label">超时时间：</label>
+                           <div class="col-sm-1">
+                               <input type="text" name="ftp_time" class="form-control" value="{$Setting_config.ftp_time}">
+                           </div>
+                           <span class="help-block m-b-none"> *</span>
+                       </div>
+                       <div class="hr-line-dashed m-t-sm m-b-sm sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>></div>
+                       <div class="form-group sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>>
+                           <label class="col-sm-2 control-label">FTP账号：</label>
+                           <div class="col-sm-2">
+                               <input type="text" name="ftp_user" class="form-control" value="{$Setting_config.ftp_user}">
+                           </div>
+                           <span class="help-block m-b-none"> *</span>
+                       </div>
+                       <div class="hr-line-dashed m-t-sm m-b-sm sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>></div>
+                       <div class="form-group sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>>
+                           <label class="col-sm-2 control-label">FTP密码：</label>
+                           <div class="col-sm-2">
+                               <input type="password" name="ftp_pass" class="form-control" value="{$Setting_config.ftp_pass}">
+                           </div>
+                           <span class="help-block m-b-none"> *</span>
+                       </div>
+                       <div class="hr-line-dashed m-t-sm m-b-sm sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>></div>
+                       <div class="form-group sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>>
+                           <label class="col-sm-2 control-label">远程附件保存文件夹：</label>
+                           <div class="col-sm-2">
+                               <input type="text" name="ftp_dir" class="form-control" value="{$Setting_config.ftp_dir}">
+                           </div>
+                           <span class="help-block m-b-none"> *</span>
+                       </div>
+                       <div class="hr-line-dashed m-t-sm m-b-sm sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>></div>
+                       <div class="form-group sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>>
+                           <label class="col-sm-2 control-label">是否删除本地图片：</label>
+                           <div class="col-sm-1">
+                               <label class="radio-inline"><input type="radio" value="0" name="ftp_imgdel" <eq name="Setting_config.ftp_imgdel" value="0">checked</eq>>是</label>
+                               <label class="radio-inline"><input type="radio" value="1" name="ftp_imgdel" <eq name="Setting_config.ftp_imgdel" value="1">checked</eq>>否</label>
+                           </div>
+                           <span class="help-block m-b-none"> *</span>
+                       </div>
+                       <div class="hr-line-dashed m-t-sm m-b-sm sw ftp" <neq name="Setting_config.file_type" value="3">style="display:none"</neq>></div> -->
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                {__TOKEN__}
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script>
+$(function(){
+ //类型切换
+    //$('.sw').hide();
+    $('.switch').click(function(){
+        $('.sw').hide();
+        var s = $(this).data('switch');
+        $('.'+s).show();
+    });
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+/*  问答系统*/
+.head{height:100px; background:#fff;}
+.head .header{height:100px;}
+.head .header .login{padding:17px 108px 0 6px; }
+.head .header .search-con{padding:33px 0 31px 0; height:36px; line-height:36px; position:relative; z-index: 10;}
+.head .header .search-bar{height:36px; margin-right:20px; position:relative; overflow: hidden;  }
+.head .header .search-bar .search-input{width:362px; height:20px; border-radius:5px 0 0 5px; padding:7px 18px; border:1px solid #ccc;  border-right:none;}
+.head .header .search-bar a{color:#fff;line-height:14px}
+.head .header .search-bar a .icon{display:inline-block; width:15px; height:16px; background:url("../img/index/search.png") no-repeat; margin-right:10px;}
+.head .header .search-bar a .icon-search{ vertical-align: middle; font-size: 14px; color:#fff; }
+.head .header .link-header{width:90px; height:36px; display:block; float:right; background-color:#19b955; vertical-align: middle; font-size: 14px; color:#fff;  text-align: center; line-height:36px; border-radius:5px;}
+.header .two-d-barcode{width:151px; height:83px; overflow: hidden; margin:8px 15px 0 0;}
+.header .two-d-barcode img{float:left; width:83px; height:83px;}
+.header .two-d-barcode .two-d-barcode-search{margin-top:34px; width:60px; height:34px;}
+.header .two-d-barcode .two-d-barcode-search span, .header .two-d-barcode .two-d-barcode-search a{display:inline-block; font-size:1px; color:#999;}
+
+.ys-login{height: 520px;background-color: #1aa1ff;}
+.ys-login .wraper{position: relative;z-index: 1;}
+.ys-login .am-slider .am-control-nav{display:none;}
+.ys-login-form{position:absolute;top:80px;right:0;width:330px;height:330px;background:#fff;}
+.ys-login-form .am-tabs-nav li{width:50%;text-align:center;}
+.ys-login-form .am-nav-tabs>li.am-active>a{color:#19b955;margin:0;}
+.am-nav>li>a:focus, .am-nav>li>a:hover{background:transparent;}
+.ys-login-form .am-tabs-bd{border:none;overflow:inherit;}
+
+#form_reg{width:400px;margin:0 auto;}
+.ys-code .code_btn{position:absolute;top:0;right:1.5rem;}

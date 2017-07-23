@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改用户 - {:C('site_title')}</title>
+    <meta name="keywords" content="修改用户">
+    <meta name="description" content="修改用户">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>修改用户</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('user/index')}" link-url="javascript:void(0)"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus-circle"></i> 用户管理</button></a>
+                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                <form class="form-horizontal m-t-md" action="{:U('user/update_user')}" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">头像：</label>
+                        <div class="input-group col-sm-2">
+                            <input type="hidden" name='avatar' id="avatar_img"  value="{$vo.avatar}"/>
+                            <div id="view_logo"><img src="{$vo.avatar}"></div>
+                            <button type="button" class="btn btn-primary" id="upavatar">上传</button>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名：</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="username" value="{$vo.username}" required data-msg-required="请输入用户名">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">密码：</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="password" value="******" data-msg-required="请输入密码">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">邮箱：</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="email" value="{$vo.email}">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">性别：</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="sex">
+                                <option value="1" <if condition="$vo['sex'] eq 1">selected</if>>男</option>
+                                <option value="0" <if condition="$vo['sex'] eq 0">selected</if>>女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">QQ：</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="qq" value="{$vo.qq}">
+                        </div>
+                    </div> -->
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">手机号：</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="phone" value="{$vo.phone}">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">等级：</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="level" value="{$vo.level}">
+                        </div>
+                    </div>
+                    <!-- <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">余额：</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="money" value="{$vo.money}">
+                        </div>
+                    </div> -->
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态：</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="status">
+                                <option value="1" <if condition="$vo['status'] eq 1">selected</if>>正常</option>
+                                <option value="0" <if condition="$vo['status'] eq 0">selected</if>>冻结</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <input type="hidden" name="id" value="{$vo.id}" />
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    {__TOKEN__}
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+    <script src="__PUBLIC__/js/jquery.uploadfile.min.js"></script>
+    <script src="__PUBLIC__/js/upload.js"></script>
+    <script type="text/javascript">
+        var Obavatar = Object.create(Upload);
+        Obavatar.static('#upavatar',false,upavatar);
+        function upavatar(images){
+            for(var i in images){
+                $('#view_logo').html('<img src="'+ images[i].url +'">');
+                $('#avatar_img').val(images[i].url);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<extend name="Common:layout" />
+<block name="main">
+    <fieldset class="step" id="default-step-3" >
+        <div class="steping">
+            <div class="stepprocess" id="stepprocess" style="height:280px; overflow:auto;">
+                <ul id="installmsg">
+                    <li>初始化中...</li>
+                </ul>
+            </div>
+        </div>
+    </fieldset>
+</block>
+<block name="footer">
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <script>
+        var start = 1;
+        var url = '{:U('index/index', array('step' => 4))}';
+        $(function() {
+            setTimeout(function () {
+                /** 步骤一 */
+                $.post(url, {start: 1}, function (data) {
+                    append(data.info);
+                    if (data.status == 1) {
+                        /** 步骤二 */
+                        $.post(url, {start: 2}, function (data) {
+                            append(data.info);
+                            if (data.status == 1) {
+                                /** 步骤三 */
+                                $.post(url, {start: 3}, function (data) {
+                                    append(data.info);
+                                    if (data.status == 1) {
+                                        /** 步骤四 */
+                                        $.post(url, {start: 4}, function (data) {
+                                            append('安装完成,正在跳转...');
+                                            setTimeout(function () {
+                                                location.href = data.info;
+                                            }, 1500);
+                                        }, 'json');
+                                    }
+                                }, 'json');
+                            }
+                        }, 'json');
+                    }
+                }, 'json');
+            }, 2000);
+        });
+        /** append */
+        function append(text)
+        {
+            document.getElementById('stepprocess').scrollTop = document.getElementById('stepprocess').scrollHeight;
+            $('#installmsg').append("<li>"+ text +"</li>");
+        }
+    </script>
+</block>

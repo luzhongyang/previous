@@ -1,0 +1,8 @@
+
+列表</br>
+<volist name="list" id="var">
+</br></br>头像：{$var.avatar}</br>
+名称：{$var.username}</br><a href="{:U('user/index',array('id'=>$var['id']))}" title="{$var.username}">{$var.username}</a><br/>
+金币：{$var.coin}</br>
+赞同：{$var.support}</br>
+</volist>

@@ -1,0 +1,126 @@
+<include file="Public/header" />
+<link rel="stylesheet" href="__PUBLIC__/pc/css/wangEditor.min.css" />
+<div class="main- wraper">
+    <div class="common-title">
+        <a href="javascript:;" class="am-text-success"><span>发布文章</span></a>
+    </div>
+    <hr class="am-margin-top-0" />
+    <form class="am-form am-form-horizontal" method="post" action="{:U(article/publish)}" enctype="multipart/form-data">
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-text-right">文章题图:</label>
+            <div class="am-u-sm-10">
+                <div class="am-upfile">
+                    <input type="hidden" name='logo' id="image_small"/>
+                    <span id="view_s" style="width:400px;height:300px;"></span>
+                    <button type="button" class="am-btn am-btn-success am-btn-sm am-radius" id="upimage_small">上传</button>
+                </div>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-text-right">标题:</label>
+            <div class="am-u-sm-10">
+                <input type="text"  name="title" placeholder=""  style="width:800px;" />
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-text-right">文章概述:</label>
+            <div class="am-u-sm-10">
+                <textarea style="width:800px; height:160px;" name="summary"></textarea>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-text-right">文章内容:</label>
+            <div class="am-u-sm-10">
+                <div class="editor" style="text-align:left; width:800px;">
+                </div>
+                <div id="divDemo" style="height: 269px;" class="wangEditor-txt" contenteditable="true"></div>
+                <textarea name="content" style="display:none;"></textarea>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-text-right">选择分类:</label>
+            <div class="am-u-sm-10">
+                <select  class="" style="width:300px;" name="category_id">
+                    <option value="-1">选择分类</option>
+                    <volist name="data.cate_list" id="vo">
+                    <option value="{$vo.id}">{$vo.title}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-text-right">提问服务:</label>
+            <div class="am-u-sm-10">
+                <div>
+                    <label class="am-radio-inline"><input type="radio" name="user_hide" value="1" checked="checked">收到短信时，短信提醒我。（{$data.userinfo.phone}<a href="javascript:;"  class="am-text-success">修改</a>)</label>
+                    </div>
+                <div>
+                    <label class="am-radio-inline"><input type="radio" name="user_hide" value="0"> 匿名</label>
+                </div>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-text-right">付费阅读:</label>
+            <div class="am-u-sm-10">
+                <select style="width:300px;" name="money">
+                    <volist name="money_pack" id="vo">
+                        <option value="{$vo}">{$vo}元</option>
+                    </volist>
+                </select>
+                <span class="am-form-caret"></span>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-u-sm-offset-2  am-u-sm-10">
+                <button type="submit" class="am-btn am-btn-success am-radius">提交问题</button>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="Public/footer" />
+<script src="__PUBLIC__/pc/js/wangEditor.min.js"></script>
+<script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+<script src="__PUBLIC__/js/jquery.uploadfile.min.js"></script>
+<script src="__PUBLIC__/js/home_upload.js"></script>
+
+<include file="Public/end" />
+<script type="text/javascript">
+var editor = '';
+$(function(){
+    editor = new wangEditor('divDemo');
+    editor.config.menus = ['|','bold','underline','italic','|','quote','source','orderlist','unorderlist','|','img','video','|','eraser'];
+    editor.config.uploadImgUrl = '/api/uploads/upload';
+    editor.config.uploadImgFileName = 'file';
+    // 自定义load事件
+    editor.config.uploadImgFns.onload = function (resultText, xhr) {
+        var originalName = editor.uploadImgOriginalName || '';
+        var srcUrl = JSON.parse(resultText);
+        editor.command(null, 'insertHtml', '<img src="' + srcUrl.url + '" alt="' + originalName + '" style="max-width:100%;"/>');
+    };
+    editor.config.uploadImgFns.ontimeout = function (xhr) {
+        alert('上传超时');
+    };
+    editor.config.uploadImgFns.onerror = function (xhr) {
+        alert('上传错误');
+    };
+    editor.config.emotions = {
+        'default': {
+            title: '默认',
+            data: './wangEditor/test/emotions.data'
+        },
+    };
+    editor.create();
+    editor.onchange = function () {
+        $("textarea[name='description']").html(editor.$txt.html());
+    };
+
+    var Obimage_small = Object.create(Upload);
+    Obimage_small.static('#upimage_small',false,upimage_small);
+    function upimage_small(images){
+        for(var i in images){
+            $('#view_s').html('<img src="'+ images[i].url +'" class="am-radius" style="width:100px;height:100px;">');
+            $('#image_small').val(images[i].url);
+        }
+    }
+})
+</script>

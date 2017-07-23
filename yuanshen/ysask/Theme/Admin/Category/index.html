@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分类管理 - {:C('site_title')}</title>
+    <meta name="keywords" content="分类管理">
+    <meta name="description" content="分类管理">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>分类管理</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('Category/add')}"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus-circle"></i> 添加分类</button></a>
+                <form method="post" action="{:U('Category/index')}" class="pull-right form-inline m-b-md">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="name" placeholder="分类名称" <if condition="$name neq ''">value="{$name}"</if>>
+                        <div class="input-group-btn">
+                            <select class="form-control m-b" name="type">
+                                <option value="no" <if condition="$type eq 'no'">selected</if>>分类类型...</option>
+                                <option value="ask" <if condition="$type eq 'ask'">selected</if>>问答</option>
+                                <option value="article" <if condition="$type eq 'article'">selected</if>>文章</option>
+                                <option value="discuss" <if condition="$type eq 'discuss'">selected</if>>讨论</option>
+                                <option value="professor" <if condition="$type eq 'professor'">selected</if>>答主</option>
+                            </select>
+                            <button class="btn btn-md btn-primary" type="submit">搜索</button>
+                        </div>
+                    </div>
+                </form>
+                <form method="post" action="" name="form">
+                    <table class="table table-striped table-bordered table-hover  m-t-md">
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="50"><input type="checkbox" name="chkall" onClick="checkallbox(this.form)" title="全选/取消" /></th>
+                                <th class="text-center" width="100">ID</th>
+                                <th class="text-center" width="100">名称</th>
+                                <th class="text-center" width="100">类型</th>
+                                <th class="text-center" width="100">排序</th>
+                                <th class="text-center" width="100">状态</th>
+                                <th class="text-center" width="150">创建时间</th>
+                                <th class="text-center" width="250">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <volist name='list' id='v'>
+                            <tr>
+                                <td class="text-center"><input type="checkbox" name="key" value="{$v.id}"></td>
+                                <td class="text-center">{$v.id}</td>
+                                <td class="text-center">{$v.title}</td>
+                                <td class="text-center">
+                                    <if condition="$v.type eq 'ask'">问答
+                                    <elseif condition="$v.type eq 'article'"/>文章
+                                    <elseif condition="$v.type eq 'discuss'"/>讨论
+                                    <else />答主
+                                    </if>
+                                </td>
+                                <td class="text-center">{$v.sort}</td>
+                                <td class="text-center">
+                                    <if condition="$v.status eq 1"><span class="text-navy">启用</span>
+                                    <else/><span class="text-warning">禁用</span>
+                                    </if>
+                                </td>
+                                <td class="text-center">{$v.created_time|date="Y-m-d H:i:s",###}</td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                         <a href="{:U('Category/edit',array('id'=>$v['id']))}"><button class="btn btn-primary btn-xs" type="button"><em class="fa fa-edit"></em> 修改</button></a> <if condition="$v.status eq 0">
+                                         <a href="{:U('Category/foreverdelete',array('id'=>$v['id']))}" onclick="return confirm('确定要删除吗')"><button class="btn btn-danger btn-xs" type="button"><i class="fa fa-trash-o"></i> 删除</button></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </volist>
+                            </tbody>
+                    </table>
+                    <button class="btn btn-primary btn-sm" type="button" onclick="checkall()">全选 / 反选</button>  <button class="btn btn-danger btn-sm" type="button" onclick="foreverdel()"><i class="fa fa-trash-o"></i> 删除选中</button>
+                    </form>
+                    <div class="pull-right pagination m-t-no">
+                        <div class="text-center">{$page}</div>
+                    <div>
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+                {__TOKEN__}
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

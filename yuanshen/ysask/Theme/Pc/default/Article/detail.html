@@ -1,0 +1,409 @@
+<include file="Public/header" />
+<div class="am-g">
+    <div class="wraper am-padding-top">
+        <div class="am-u-sm-9">
+            <div class="article bgfff am-padding">
+                <article class="am-article">
+                    <div class="am-article-hd am-text-center">
+                        <h1 class="am-article-title">{$data.detail.title}</h1>
+                        <p class="am-article-meta am-cf">
+                            <if condition="$data['detail']['user_name'] neq ''">
+                            <a href="{:U('user/index',array('id'=>$data['detail']['user_id']))}" class="am-fl"><img class="am-circle" src="{$data.detail.user_avatar}"  width="26" height="26" /> {$data.detail.user_name}</a>
+                            </if>
+                            <span class="am-fr">
+                                <time><i class="am-icon-clock-o"></i> {$data.detail.created_time|date="Y-m-d H:i:s",###}</time>
+                                <span><i class="am-icon-eye"></i> {$data.detail.view}</span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="am-article-bd">
+                        <p class="am-article-lead">{$data.detail.summary}</p>
+                        <p>{$data.detail.content}</p>
+                    </div>
+                </article>
+                <div class="am-cf">
+                    <span id="agree"><i class="am-icon-thumbs-o-up"></i>&nbsp<em>{$data.detail.agree}</em></span>
+                    <span id="collect" class=" am-margin-horizontal"><i class="am-icon-heart"></i>&nbsp<em>{$data.detail.collect}</em></span>
+                    <span
+                            data-am-modal="{target: '#modal_report', closeViaDimmer: 0, width: 350}"><i class="am-icon-bell" ></i> 举报</span>
+                    <div class="bdsharebuttonbox am-fr"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+                </div>
+                <div class="article-footer">
+                    <!--上一篇，下一篇-->
+                    <div class="am-avg-sm-1 am-avg-md-2 am-avg-lg-3 sxp">
+                        <if condition="$data['detail']['pre_art'] neq ''">
+                        <span> 上一篇：<a href="{:U('article/detail',array('id'=>$data['detail']['pre_art_id']))}">{$data.detail.pre_art.title}</a> </span>
+                        </if>
+                        <if condition="$data['detail']['next_art'] neq ''">
+                        <span> 下一篇：<a href="{:U('article/detail',array('id'=>$data['detail']['next_art_id']))}">{$data.detail.next_art.title}</a> </span>
+                        </if>
+                    </div>
+                </div>
+                <div class="article-related am-margin-top">
+                    <div class="title">
+                        <h2>相关阅读</h2>
+                    </div>
+                    <div class="article-read">
+                        <ul class="am-list am-text-truncate">
+                            <volist name="data.relate_list" id="vo">
+                                <li>
+                                    <a href="{:U('article/detail',array('id'=>$vo['id']))}">{$vo.title}
+                                        <span class="am-fr am-hide-sm-only">
+                                            <span class="am-margin-right"><i class="am-icon-eye"></i> {$vo.view}</span>
+                                            <span><i class="am-icon-thumbs-o-up"></i><em>{$vo.agree}</em> </span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 评论区 -->
+                <div class="am-margin-top-xl">
+                    <div class="title">
+                        <h2>评论</h2> <span class="am-text-xs">({$data.detail.comment}条评论)</span>
+                    </div>
+                    <form method="post" class="am-form am-margin-top">
+                        <div class="am-form-group">
+                            <textarea class="am-radius" name="content" rows="5" placeholder="评论内容"></textarea>
+                        </div>
+                        <p class="am-text-right"><button type="button" class="am-btn am-btn-success am-radius" id="ajax_comment">评论</button></p>
+                    </form>
+                </div>
+
+                <!-- 评论列表 -->
+                <div class="">
+                    <ul class="am-comments-list">
+                        <volist name="data.comment_list" id="vo">
+                        <li class="am-comment">
+                            <a href="#link-to-user-home">
+                                <img class="am-comment-avatar" width="48" height="48" src="<if condition="$vo.user_avatar neq ''">{$vo.user_avatar}<else/>{$Think.config.site_user_defaultavatar}</if>" >
+                            </a>
+                            <div class="am-comment-main">
+                                <header class="am-comment-hd">
+                                    <div class="am-comment-meta">
+                                        <a href="#link-to-user" class="am-comment-author">{$vo.user_name}</a> 评论于 <time>{$vo.created_time|date="Y-m-d H:i",###}</time>
+                                    </div>
+                                </header>
+                                <div class="am-comment-bd">
+                                    <p>{$vo.content|htmlspecialchars_decode=###}</p>
+                                </div>
+                                <footer class="am-comment-footer">
+                                    <if condition="$vo['user_id'] neq $data['userinfo']['id']">
+                                        <div class="am-comment-actions">
+                                            <a class="clike" source_id="{$vo.id}" type="agree">赞(<i>{$vo.agree}</i>)</a>
+                                            <a class="clike" source_id="{$vo.id}" type="disagree">踩(<i>{$vo.disagree}</i>)</a>
+                                            <a id="reply_user" source_id="{$vo.id}" class="reply reply_user">回复</a>
+                                        </div>
+                                        <if condition="$vo['comments'] neq ''">
+                                            <volist name="vo['comments']" id="zvo">
+                                                <header class="am-comment-hd">
+                                                    <div class="am-comment-meta">
+                                                        <a href="#link-to-user" class="am-comment-author">{$zvo.user_name}&nbsp回复&nbsp{$vo.user_name}</a>
+                                                    </div>
+                                                </header>
+                                                <div class="am-comment-bd">
+                                                    <p>{$zvo.content|htmlspecialchars_decode=###}</p>
+                                                </div>
+                                            </volist>
+                                        </if>
+                                        <div class="contents">
+                                            <form action="" enctype="multipart/form-data" method="post" class="am-form am-margin-top">
+                                                <div class="am-form-group">
+                                                    <textarea class="am-radius" name="user_comment" rows="5" placeholder="回复 {$vo.user_name}"></textarea>
+                                                </div>
+                                                <p class="am-text-right">
+                                                <button type="button" source_id={$vo.id} class="am-btn am-btn-success am-radius" id="answer_comment">提交评论</button></p>
+                                            </form>
+                                        </div>
+                                    </if>
+                                </footer>
+                            </div>
+                        </li>
+                        </volist>
+                    </ul>
+                    <ul class="am-pagination am-pagination-centered">
+                        {$data.page}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-sm-3 am-margin-top">
+            <div class="bgfff">
+                <a href="{:U('question/ask')}" class="am-btn am-btn-warning am-btn-block am-radius"><i class="am-icon-question-circle"></i>
+                我要提问</a>
+            </div>
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default am-margin-top-0" >
+                    <h2 class="am-titlebar-title">
+                        热门文章
+                    </h2>
+                    <nav class="am-titlebar-nav">
+                        <a href="{:U('article/index')}" class="">更多 &raquo;</a>
+                    </nav>
+                </div>
+                <div class="am-padding-sm newslist">
+                    <volist name="data.hot_art_list" id="vo">
+                    <p><a href="{:U('article/detail',array('id'=>$vo['id']))}" class="am-list-item-hd ">{$vo.title}</a></p>
+                    </volist>
+                </div>
+            </div>
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+                    <h2 class="am-titlebar-title">热门作者</h2>
+                </div>
+                <div class="am-cf">
+                    <ul class="am-padding-left-sm am-cf">
+                        <volist name="data.hot_author" id="vo">
+                        <li class="am-margin-vertical-sm">
+                            <div class="am-fl am-margin-right">
+                                <a href="{:U('user/index',array('id'=>$vo['id']))}">
+                                    <img class="am-circle" width="46" height="46" src="<if condition="$vo.avatar neq ''">{$vo.avatar}<else/>{$Think.config.site_user_defaultavatar}</if>" />
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{:U('user/index',array('id'=>$vo['id']))}">{$vo.username}</a>
+                                <div class="am-text-xs am-link-muted"><span class="am-margin-right">{$vo.article}篇</span> <span>{$vo.agree}赞</span></div>
+                            </div>
+                        </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+                    <h2 class="am-titlebar-title ">
+                        热议话题
+                    </h2>
+                </div>
+                <div class="am-padding-sm topic-tags">
+                    <volist name="data.hot_tag_list" id="tag" mod="2">
+                    <a href="{:U('tag/detail',array('id'=>$tag['id']))}" <eq name="mod" value="0"> style="background:#76d499;"</eq><eq name="mod" value="1"> style="background:#93c1f9;"</eq> >{$tag.title}</a>
+                  </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 举报 -->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal_report">
+  <div class="am-modal-dialog bgfff">
+    <div class="am-modal-hd">举报
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <div class="am-margin-top am-text-left">
+        <form class="am-form" method="post">
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="泄露了我的隐私、诽谤我" data-am-ucheck/> 泄露了我的隐私、诽谤我</label>
+            </div>
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="侵犯了我的权力或抄袭了我的内容" data-am-ucheck/> 侵犯了我的权力或抄袭了我的内容</label>
+            </div>
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="垃圾广告信息" data-am-ucheck/>垃圾广告信息</label>
+            </div>
+            <div class="am-radio">
+               <label><input type="radio" name="report" value="色情、暴力、血腥等违反法律法规的内容" data-am-ucheck/> 色情、暴力、血腥等违反法律法规的内容</label>
+            </div>
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="政治敏感" data-am-ucheck/> 政治敏感</label>
+            </div>
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="辱骂、挑衅、歧视、泄露他人隐私" data-am-ucheck/> 辱骂、挑衅、歧视、泄露他人隐私</label>
+            </div>
+            <div class="am-radio">
+               <label><input type="radio" name="report" value="看相、算命、星盘等迷信" data-am-ucheck/> 看相、算命、星盘等迷信</label>
+            </div>
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="其他" data-am-ucheck/> 其他</label>
+            </div>
+            <div class="am-form-group">
+                <textarea placeholder="请输入内容" name="intro"></textarea>
+            </div>
+            <p><button type="button" class="am-btn am-btn-default am-btn-block" id="ajax_report">提交</button></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<include file="Public/footer" />
+<script type="text/javascript">
+//  举报
+sourceId = parseInt("{$data.detail.id}");
+sourceType = "article";
+
+$(document).off('click','#ajax_report').on('click','#ajax_report',function(){
+    var reason = $("input[name='report']:checked").val();
+    var intro = $("textarea[name='intro']").val();
+    $.ajax({
+        url: "{:U('ajax/report')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":sourceId,"source_type":sourceType,"reason":reason,"intro":intro},
+        type: 'POST',
+        success: function (ret) {
+            layer.msg(ret.message);
+            if(ret.status == 1) {
+                $('.am-close-spin').click();
+            }else {
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//  点赞
+$(document).off('click','#agree').on('click','#agree',function(){
+
+    $.ajax({
+        url: "{:U('ajax/agree')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":sourceId,"source_type":sourceType,'type':"agree"},
+        type: 'POST',
+        success: function (ret) {
+            layer.msg(ret.message);
+            if(ret.status == 1) {
+                $('#agree').find('em').html(ret.count);
+            }else {
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//  收藏
+$(document).off('click','#collect').on('click','#collect',function(){
+    $.ajax({
+        url: "{:U('ajax/collect')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":sourceId,"source_type":sourceType},
+        type: 'POST',
+        success: function (ret) {
+            layer.msg(ret.message);
+            if(ret.status == 1) {
+                $('#collect').find('em').html(ret.count);
+            }else {
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//  评论
+$(document).off('click','#ajax_comment').on('click','#ajax_comment',function(){
+    var content = $("textarea[name='content']").val();
+    $.ajax({
+        url: "{:U('ajax/comment')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":sourceId,"source_type":sourceType,"content":content},
+        type: 'POST',
+        success: function (ret) {
+            layer.msg(ret.message);
+            if(ret.status == 1) {
+                location.reload();
+            }else {
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+
+$(document).off('click','.clike').on('click','.clike',function(){
+    var commentId = parseInt($(this).attr('source_id'));
+    var type = $(this).attr('type');
+    $.ajax({
+        url: "{:U('ajax/agree')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":commentId,"source_type":'comment',"type":type},
+        type: 'POST',
+        success: function (ret) {
+            layer.msg(ret.message);
+            if(ret.status == 1) {
+                location.reload();
+            }else {
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//  回复点击展示回复文本框
+$(document).off('click','.reply_user').on('click','.reply_user',function(){
+    $('.contents').hide();
+    $(this).parent().parent().find('.contents').show();
+})
+
+//  回复-提交评论
+$(document).off('click','#answer_comment').on('click','#answer_comment',function(){
+    var sourceId = parseInt($(this).attr('source_id'));
+    var sourceType = 'comment';
+    var content = $(this).parent().parent().find("textarea[name='user_comment']").val();
+    var touserid =
+    $.ajax({
+        url: "{:U('ajax/comment')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":sourceId,"source_type":sourceType,"content":content},
+        type: 'POST',
+        success: function (ret) {
+            layer.msg(ret.message);
+            if(ret.status == 1) {
+                location.reload();
+            }else {
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+</script>
+<include file="Public/end" />

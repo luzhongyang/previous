@@ -1,0 +1,140 @@
+<include file="Public/header" />
+
+<div class="am-g">
+    <div class="wraper am-padding-top">
+        <div class="am-u-sm-9">
+            <div class="bgfff am-padding am-margin-bottom">
+                <a href="javascript:;"><img class="am-circle" src="img/detail-page/theme/first.png" width="40" height="40"  title="{$data.detail.title}" /> {$data.detail.title}</a>
+                 <if condition="$vo.is_followed eq 1">
+                <a href="javascript:;" class="am-btn am-btn-danger am-btn-xs am-radius" source_id={$data.detail.id}>已关注</a>
+                <else/>
+                <a href="javascript:;" class="am-btn am-btn-danger am-btn-xs am-radius" source_id={$data.detail.id}>关注</a>
+                </if>
+                <p>{$data.detail.description}</p>
+
+            </div>
+			<div class="nav_son am-margin-top">
+                <ul class="am-avg-sm-8 am-text-center">
+                	<li class="<if condition="$type eq ''">am-active</if>"><a href="{:U('tag/detail',array('id'=>$data['detail']['id'],'type'=>''))}">问答</a> </li>
+                    <li class="<if condition="$type eq 'article'">am-active</if>"><a href="{:U('tag/detail',array('id'=>$data['detail']['id'],'type'=>'article'))}">文章</a></li>
+                </ul>
+            </div>
+            <div class="partner bgfff am-padding am-margin-bottom">
+                <ul class="am-list">
+					<volist name="data.list" id="vo">
+					<if condition="$vo.type neq ''">
+						<!--关联文章列表'id,title,summary,description,view,agree,created_time'-->
+						<li>
+	                        <div class="partner_text">
+	                            <h3><a href="{:U('article/detail',array('id'=>$vo['id']))}" class="" title="" alt=""><font color="#19b955">{$vo.title}</font></a></h3>
+	                            <p class="am-show-lg-only">{$vo.description}</p>
+	                        </div>
+	                        <p class="foottools">
+	                        	<if condition="$vo.user_name neq ''">
+	                        		<a href="{:U('user/index',array('id'=>$vo['user_id']))}"><img class="am-circle" src="{$vo.user_avatar}" width="36" /> {$vo.user_name}</a>
+		                            <time><i class="am-icon-clock-o"></i> {$vo.created_time|date="Y-m-d H:i:s",###}</time>
+		                            <span><i class="am-icon-eye"></i> {$vo.view}</span>
+	                        	</if>
+	                            <span class="am-fr">
+	                                <span><i class="am-icon-thumbs-o-up"></i> {$vo.agree}</span>
+	                                <!-- <span class="am-margin-horizontal"><i class="am-icon-heart"></i> 254</span> -->
+	                                <span><i class="am-icon-bell" source_id="{$vo.id}" souce_type="article"></i> 举报</span>
+	                            </span>
+	                        </p>
+	                    </li>
+					<else/>
+						<!--关联问答列表'id,title,description,view,collect,created_time'-->
+						<li>
+	                        <div class="partner_text">
+	                            <h3><a href="{:U('question/detail',array('id'=>$vo['id']))}" class="" title="" alt=""><font color="#19b955">{$vo.title}</font></a></h3>
+	                            <p class="am-show-lg-only">{$vo.description}</p>
+	                        </div>
+	                        <p class="foottools">
+	                            <a href="{:U('user/index',array('id'=>$vo['user_id']))}"><img class="am-circle" src="{$vo.user_avatar}" width="36" /> {$vo.user_name}</a>
+	                            <time><i class="am-icon-clock-o"></i> {$vo.created_time|date="Y-m-d H:i:s",###}</time>
+	                            <span><i class="am-icon-eye"></i> {$vo.view}</span>
+
+	                            <span class="am-fr">
+	                                <!-- <span><i class="am-icon-thumbs-o-up"></i> 122</span> -->
+	                                <span class="am-margin-horizontal"><i class="am-icon-heart"></i> {$vo.collect}</span>
+	                                <span><i class="am-icon-bell" source_id="{$vo.id}" source_type="question"></i> 举报</span>
+	                            </span>
+	                        </p>
+	                    </li>
+					</if>
+
+                	</volist>
+                </ul>
+                <ul class="am-pagination am-pagination-centered">
+                    {$data.page}
+                </ul>
+            </div>
+        </div>
+        <div class="am-u-sm-3">
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default am-margin-top-0">
+                    <h2 class="am-titlebar-title ">
+                        热议话题
+                    </h2>
+                </div>
+                <div class="am-padding-sm topic-tags">
+                    <volist name="data.hot_tag_list" id="tag" mod="2">
+                    <a href="{:U('tag/detail',array('id'=>$tag['id']))}" <eq name="mod" value="0"> style="background:#76d499;"</eq><eq name="mod" value="1"> style="background:#93c1f9;"</eq> >{$tag.title}</a>
+                    </volist>
+                </div>
+            </div>
+
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+                    <h2 class="am-titlebar-title">推荐答主</h2>
+                </div>
+                <div class="am-cf">
+                    <ul class="am-padding-left-sm am-cf">
+                        <volist name="data.hot_pro_list" id="vo">
+                            <li class="am-margin-vertical-sm">
+                                <div class="am-fl am-margin-right">
+                                    <a href="{:U('user/index',array('id'=>$vo['id']))}">
+                                        <img class="am-circle" width="46" height="46" src="{$vo.avatar}" />
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="{:U('user/index',array('id'=>$vo['id']))}">{$vo.username}</a>
+                                    <div class="am-text-xs am-link-muted"><span class="am-margin-right">好评数 {$vo.agree}</span></div>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="Public/footer" />
+<script type="text/javascript">
+$(document).off('click','.am-btn-danger').on('click','.am-btn-danger',function(){
+    var this_obj = $(this);
+    $.ajax({
+        url: "{:U('ajax/follow')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":parseInt($(this).attr('source_id')),"source_type":'tag'},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.status == 1) {
+                if(ret.followed == 'followed') {
+                    this_obj.html('已关注');
+                }else {
+                    this_obj.html('关注问题');
+                }
+            }else {
+                alert(ret.message);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        }
+    });
+})
+</script>
+<include file="Public/end" />

@@ -1,0 +1,30 @@
+[ 2017-07-07T13:21:30+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001845s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.014139s ]
+INFO: Run Behavior\GetcodingBehavior [ RunTime:0.006592s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.020843s ]
+ERR: 无法加载控制器:Index
+
+[ 2017-07-07T13:22:05+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000549s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001427s ]
+INFO: Run Behavior\GetcodingBehavior [ RunTime:0.001250s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002729s ]
+ERR: 无法加载控制器:Index
+
+[ 2017-07-07T13:22:33+08:00 ] 127.0.0.1 HTTP://www.yscm2.com/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000577s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001659s ]
+INFO: Run Behavior\GetcodingBehavior [ RunTime:0.001366s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003084s ]
+ERR: 无法加载控制器:Index
+

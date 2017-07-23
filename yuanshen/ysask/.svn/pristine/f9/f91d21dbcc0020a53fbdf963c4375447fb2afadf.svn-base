@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全文检索 - {:C('site_title')}</title>
+    <meta name="keywords" content="全文检索">
+    <meta name="description" content="全文检索">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>全文检索</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal" action="{:U('setting/xunsearch_update')}" method="POST">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">XunSearch全文检索启闭：</label>
+                                <div class="col-sm-4">
+                                    <label class="radio-inline"><input type="radio" value="1" name="xunsearch_open" <eq name="Setting_config.xunsearch_open" value="1">checked</eq>>开启</label>
+                                    <label class="radio-inline"><input type="radio" value="0" name="xunsearch_open" <eq name="Setting_config.xunsearch_open" value="0">checked</eq>>关闭</label>
+                                </div>
+                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 开启前一定要确认xunsearch安装好并且已开启服务</span>
+                            </div>
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">搜索框提示语：</label>
+                                <div class="col-sm-4">
+                                    <input name="search_placeholder" class="form-control" placeholder="输入关键词" value="{$Setting_config.search_placeholder}">
+                                </div>
+                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 前台首页搜索框提示语</span>
+                            </div>
+                            <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                            <div class="form-group">
+                                <div class="col-sm-12 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>XunSearch索引管理</h5>
+                    </div>
+                    <div class="ibox-content">
+                         <div class="form-group">
+                            <div class="col-sm-4">
+                                <a href="{:U('search/rebuild_index')}" class="btn btn-primary btn-block">重建索引</a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="{:U('search/clean_index')}" class="btn btn-warning btn-block">清除索引</a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

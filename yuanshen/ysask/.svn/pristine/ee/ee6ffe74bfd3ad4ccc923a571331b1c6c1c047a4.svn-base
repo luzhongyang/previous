@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="微信设置">
+    <meta name="description" content="微信设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>微信设置</h5>
+                </div>
+                <div class="ibox-content">
+                <div class="alert alert-warning">
+                    URL(服务器地址) ：{:C('site_url')}/api/wxapi/index<br>
+                    Token(令牌) ：随便写一个，后台的和公众号配置里面一至就行，尽量复杂点
+                </div>
+                    <form class="form-horizontal" action="{:U('wxsetting/update')}" method="POST">
+                        <input type="hidden" name="data" value="index">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否开启：</label>
+                            <div class="col-sm-3">
+                                <label class="radio-inline"><input type="radio" value="0" name="wx_turn" <if condition="$Setting_config['wx_turn'] eq 0">checked</if>>否</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="wx_turn" <if condition="$Setting_config['wx_turn'] eq 1">checked</if>>是</label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Appid：</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="wx_appid" class="form-control" value="{$Setting_config.wx_appid}" required data-msg-required="请输入Appid">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 在公众号后台，开发-》基本配置里 Appid</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Appsecret：</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="wx_appsecret" class="form-control" value="{$Setting_config.wx_appsecret}" required data-msg-required="请输入Appsecret">
+                            </div>
+                           <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 在公众号后台，开发-》基本配置里 获取Appsecret</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Token(令牌)：</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="wx_token" class="form-control" value="{$Setting_config.wx_token}" required data-msg-required="请输入Token">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 随便写一个，后台的和公众号配置里面一至就行，尽量复杂点</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Encodingaeskey：</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="wx_encodingaeskey" class="form-control" value="{$Setting_config.wx_encodingaeskey}" required data-msg-required="请输入Encodingaeskey">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 在公众号后台，开发-》基本配置里 Encodingaeskey</span>
+                        </div>
+                        
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

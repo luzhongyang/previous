@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图文消息 - {:C('site_title')}</title>
+    <meta name="keywords" content="图文消息">
+    <meta name="description" content="图文消息">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<style type="text/css">
+.js_textArea{height:188px;padding:14px 20px;outline:0;font-size:16px;word-wrap:break-word;overflow-x:hidden;overflow-y:auto;-webkit-user-modify:read-write-plaintext-only;}
+</style>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>图文消息</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('/admin/wxpicmsg/add')}"><button class="btn btn-primary btn-sm" type="button">新建图文消息</button></a>
+                <empty name="resource">
+                <div class="alert alert-warning">无数据！</div>
+                </empty>
+                <ul class="material_list js-masonry">
+                    <!-- 多图文 -->
+                    <volist name="resource" id="item">
+                    <li class="appmsg_li">
+                        <volist name="item['articles']" id="vo" key="i">
+                        <if condition="($i eq 1)">
+                        <div class="appmsg_item">
+                            <p>{$item['created_time']|date='Y-m-d H:i:s',###}</p>
+                            <div class="main_img">
+                                <img src="{$vo['image']['path']}">
+                                <h6>{$vo.title}</h6>
+                            </div>
+                        </div>
+                        <else/>
+                        <div class="appmsg_sub_item">
+                            <p class="title">{$vo.title}</p>
+                            <div class="main_img">
+                                <img src="{$vo['image']['path']}">
+                            </div>
+                        </div>
+                        </if>
+                        </volist>
+
+                        <div class="appmsg_action">
+                            <a href="{:U('/admin/wxpicmsg/edit',array('id' => $item['id']))}">编辑</a>
+                            <a href="{:U('/admin/wxpicmsg/foreverdelete',array('id' => $item['id']))}" onclick="return confirm('确定要删除吗')">删除</a>
+                        </div>
+                    </li>
+                    </volist>
+                </ul>
+                <div class="btn-group">
+                   <div class="text-center">{$page}</div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script type="text/javascript">
+$(function(){
+
+    var fg = [],
+        minhei,
+        maxhei,
+        m = $(".appmsg_li").width() + 20,
+        n = $(".appmsg_li").length;
+    for(i = 0; i < 5; i++) {
+        fg[i] = $(".appmsg_li").eq(i).height() + 40;
+    }
+    minhei = Math.min.apply(null, fg);
+    for(h = 0; h < n - 5; h++) {
+        for(i = 0; i < 5; i++) {
+            if(fg[i] == minhei) {
+                $(".appmsg_li").eq(5 + h).css({
+                    "top": fg[i] + "px",
+                    "left": m * i + "px",
+                    "position": "absolute"
+                });
+                fg[i] = minhei + $(".appmsg_li").eq(5 + h).height() + 40;
+                break;
+            }
+        }
+        minhei = Math.min.apply(null, fg);
+    }
+    maxhei = Math.max.apply(null, fg);
+    $(".js-masonry").css({
+        "height": maxhei + "px",
+        "width": m * 5 + 20 + "px"
+    });
+});
+</script>
+</body>
+</html>

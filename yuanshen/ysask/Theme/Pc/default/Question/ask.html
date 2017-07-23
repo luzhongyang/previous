@@ -1,0 +1,230 @@
+<include file="Public/header" />
+<link rel="stylesheet" href="__PUBLIC__/pc/css/wangEditor.min.css" />
+<div class="main-z">
+    <div class="main-zu wraper">
+        <div class="common-title">
+            <a href="javascript:;"><span><if condition="$data.to_userinfo neq ''">向Ta提问<else/>提问</if></span></a>
+        </div>
+        <hr class="am-margin-top-0" />
+        <form class="am-form  am-form-horizontal" method="post" action="{:U('question/ask',array('touserid'=>$data['touserid']))}">
+            <if condition="$data.to_userinfo neq ''">
+                <div class="ask-her ">
+                    <div class="her-content am-cf">
+                        <div class="her-pic am-fl">
+                            <img src="{$data.to_userinfo.avatar}" width="120" height="120"/>
+                            <div class="ying"><a class="am-badge am-badge-warning am-round">LV{$data.to_userinfo.level}</a></div>
+                        </div>
+                        <div class="her-things am-fl">
+                            <h4>{$data.to_userinfo.username}
+                                <if condition="$data['to_userinfo']['sex'] eq 1"><span class="am-icon-mars"></span>
+                                <elseif condition="$data['to_userinfo']['sex'] eq 2"/><span class="am-icon-mercury"></span>
+                                <else /><span class="am-icon-netuer"></span>
+                                </if>
+                            </h4>
+                            <div class="tags">
+                                <i class="am-icon-tags"></i> <a href="javascript:;">{$data.to_userinfo.tag}</a>
+                            </div>
+                            <p class="font_grey am-margin-top-0">
+                                <span>帮助的人:<em>{$data.to_userinfo.adopt}</em></span>
+                                <span>回答数：<em>{$data.to_userinfo.answer}</em></span>
+                                <span>关注人数：<em>{$data.to_userinfo.fans}</em></span>
+                            </p>
+                            <span>付费咨询:<em>{$data.to_userinfo.pay_money}</em>元/每次</span>
+                        </div>
+                    </div>
+                </div>
+            </if>
+                <div class="am-margin-top-lg">
+                    <div class="am-form-group">
+                        <label class="am-u-sm-2 am-text-right">标题:</label>
+                        <div class="am-u-sm-10">
+                            <input type="text" name="title" style="width:800px;" autocomplete="OFF" maxlength="50" placeholder="标题简短，言简意赅，问号结尾"/>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-2 am-text-right">提问补充说明:</label>
+                        <div class="am-u-sm-10">
+                            <div class="editor" style="text-align:left; width:800px;">
+                            </div>
+                            <div id="divDemo" style="height: 269px;" class="wangEditor-txt" contenteditable="true"></div>
+                            <textarea name="description" style="display:none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-2 am-text-right">选择分类:</label>
+                        <div class="am-u-sm-10">
+                            <select  class="" style="width:300px;" name="category_id">
+                                <option value="-1">选择分类</option>
+                                <volist name="data.cate_list" id="vo">
+                                <option value="{$vo.id}">{$vo.title}</option>
+                                </volist>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-2 am-text-right">提问服务:</label>
+                        <div class="am-u-sm-10">
+                            <div>
+                                <label class="am-radio-inline"><input type="radio" name="user_hide" value="1" checked="checked">收到短信时，短信提醒我。（{$data.userinfo.phone}<a href="javascript:;"  class="am-text-success">修改</a>)</label>
+                                </div>
+                            <div>
+                                <label class="am-radio-inline"><input type="radio" name="user_hide" value="0"> 匿名</label>
+                            </div>
+                        </div>
+                    </div>
+                    <if condition="$data.to_userinfo neq ''">
+                        <div class="am-form-group">
+                            <label class=" am-u-sm-2 am-text-right"> 付费咨询:</label>
+                            <div class="am-u-sm-10">
+                                <div class="checkbox">
+                                    <label class="">
+                                        <input type="hidden" name="money" value="{$data.to_userinfo.pay_money}">
+                                        <input type="checkbox" checked>  {$data.to_userinfo.pay_money}元/每次
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    <else/>
+                        <div class="am-form-group">
+                            <label class="am-u-sm-2 am-text-right">答题悬赏:</label>
+                            <div class="am-u-sm-10">
+                                <select style="width:300px;" name="money">
+                                    <volist name="data.moneypack" id="vo">
+                                    <option value="{$vo}">{$vo}元</option>
+                                    </volist>
+                                </select>
+                                <span class="am-form-caret"></span>
+                            </div>
+                        </div>
+                    </if>
+                    <div class="am-form-group">
+                        <div class="am-u-sm-offset-2  am-u-sm-10">
+                            <button type="submit" class="am-btn am-btn-success am-radius">提交</button>
+                        </div>
+                    </div>
+                </div>
+                {__TOKEN__}
+        </form>
+    </div>
+</div>
+<include file="Public/footer" />
+<script src="__PUBLIC__/pc/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+var editor = '';
+$(document).ready(function(){
+    editor = new wangEditor('divDemo');
+    editor.config.menus = [
+        '|',
+        'bold',
+        'underline',
+        'italic',
+        '|',
+        'quote',
+        'source',
+        'orderlist',
+        'unorderlist',
+        '|',
+        'img',
+        'video',
+        '|',
+        'eraser'
+    ];
+    editor.config.uploadImgUrl = '/api/uploads/upload';
+    editor.config.uploadImgFileName = 'file';
+    // 自定义load事件
+    editor.config.uploadImgFns.onload = function (resultText, xhr) {
+        // resultText 服务器端返回的text
+        // 上传图片时，已经将图片的名字存在 editor.uploadImgOriginalName
+        var originalName = editor.uploadImgOriginalName || '';
+        var srcUrl = JSON.parse(resultText);
+
+        // 如果 resultText 是图片的url地址，可以这样插入图片：
+        editor.command(null, 'insertHtml', '<img src="' + srcUrl.url + '" alt="' + originalName + '" style="max-width:100%;"/>');
+        // 如果不想要 img 的 max-width 样式，也可以这样插入：
+        // editor.command(null, 'InsertImage', resultText);
+    };
+
+    editor.config.uploadImgFns.ontimeout = function (xhr) {
+        alert('上传超时');
+    };
+
+    editor.config.uploadImgFns.onerror = function (xhr) {
+        alert('上传错误');
+    };
+    // 表情
+    editor.config.emotions = {
+        'default': {
+            title: '默认',
+            data: './wangEditor/test/emotions.data'
+        },
+        'weibo': {
+            title: '微博表情',
+            data: [
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
+                    value: '[草泥马]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
+                    value: '[神马]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
+                    value: '[浮云]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
+                    value: '[给力]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
+                    value: '[围观]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
+                    value: '[威武]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif',
+                    value: '[熊猫]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif',
+                    value: '[兔子]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif',
+                    value: '[奥特曼]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif',
+                    value: '[囧]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/hufen_thumb.gif',
+                    value: '[互粉]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c4/liwu_thumb.gif',
+                    value: '[礼物]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif',
+                    value: '[呵呵]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif',
+                    value: '[哈哈]'
+                }
+            ]
+        }
+    };
+
+    editor.create();
+    editor.onchange = function () {
+        $("textarea[name='description']").html(editor.$txt.html());
+    };
+})
+
+</script>
+<include file="Public/end" />

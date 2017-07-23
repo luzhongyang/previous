@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库恢复 - {:C('site_title')}</title>
+    <meta name="keywords" content="数据库恢复">
+    <meta name="description" content="数据库恢复">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>数据库恢复</h5>
+            </div>
+            <div class="ibox-content">
+            <form action="{:U('Database/Delall')}" method="post" id="myform" name="myform">
+                <table class="table table-striped table-bordered table-hover m-t-md">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="50"><input type="checkbox" name="chkall" onClick="checkallbox(this.form)" title="全选/取消" /></th>
+                            <th>文件名</th>
+                            <th width="100">卷号</th>
+                            <th width="100">大小</th>
+                            <th width="150">备份时间</th>
+                            <th width="200">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <volist name='list_restore' id='v'>
+                        <tr>
+                            <td class="text-center"><input type="checkbox" name="key[]" value="{$v.filename}"></td>
+                            <td>{$v.filename}</td>
+                            <td>{$v.number}</td> 
+                            <td>{$v.filesize} M</td> 
+                            <td>{$v.maketime}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                     <a href="{:U('Database/Back',array('id'=>$v[pre]))}"  onclick="return confirm('确定要导入吗')"><button class="btn btn-primary btn-xs" type="button"><i class="fa fa-cloud-upload"></i> 导入</button></a>
+                                     <a href="{:U('Database/Down',array('id'=>$v[filename]))}" link-url=""><button class="btn btn-primary btn-xs" type="button"><i class="fa fa-cloud-download"></i> 下载</button></a>
+                                     <a href="{:U('Database/Del',array('id'=>$v[filename]))}"  onclick="return confirm('确定要删除吗')"><button class="btn btn-danger btn-xs" type="button"><i class="fa fa-trash-o"></i> 删除</button></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary btn-sm" type="button" onclick="checkall()">全选 / 反选</button> <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-o"></i> 删除选中</button>　<label>只需要点击任意一个文件的导入链接，程序会自动导入剩余文件!</label>
+                </form>
+                </div>
+                </div>
+                <div class="clearfix"></div>
+                {__TOKEN__}
+            </div>
+        </div>
+    </div>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

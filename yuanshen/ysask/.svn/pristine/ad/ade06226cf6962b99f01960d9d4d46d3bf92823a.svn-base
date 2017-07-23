@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广告管理 - {:C('site_title')}</title>
+    <meta name="keywords" content="广告管理">
+    <meta name="description" content="广告管理">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>广告管理</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('Ad/add')}" link-url="javascript:void(0)"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus-circle"></i> 添加广告</button></a>
+                <form method="post" action="{:U('Ad/index')}" class="pull-right mail-search m-b-md">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="name" placeholder="搜索广告">
+                        <div class="input-group-btn">
+                            <button class="btn btn-md btn-primary" type="submit">搜索</button>
+                        </div>
+                    </div>
+                </form>
+                <form method="post" action="{:U('Ad/foreverdelete')}" name="form">
+                <table class="table table-striped table-bordered table-hover m-t-md">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="50"><input type="checkbox" name="chkall" onClick="checkallbox(this.form)" title="全选/取消" /></th>
+                            <th width="400">广告标识</th>
+                            <th>广告内容</th>
+                            <th class="text-center" width="100">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <volist name='list' id='v'>
+                        <tr>
+                            <td class="text-center"><input type="checkbox" name="key" value="{$v.id}"></td>
+                            <td>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-4 control-label">标识：</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="name" class="form-control" value="{$v.name}" required data-msg-required="请输入广告标识">
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix m-t-xs">
+                                    <label class="col-sm-4 control-label">调用代码：</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="name" class="form-control" value="<literal>{:</literal>getadsurl('{$v.name}')}" required data-msg-required="请输入广告标识">
+                                    </div>
+                                </div>
+                            </td>
+                            <td><textarea name="content" class="form-control" rows="5" cols="20" required>{$v.content}</textarea></td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                     <p><a href="{:U('Ad/edit',array('id'=>$v['id']))}"><button class="btn btn-info btn-xs" type="button"><i class="fa fa-eye"></i> 预览</button></a></p>
+                                     <p><a href="{:U('Ad/edit',array('id'=>$v['id']))}"><button class="btn btn-primary btn-xs" type="button"><i class="fa fa-paste"></i> 编辑</button></a></p>
+                                     <p><a href="{:U('Ad/foreverdelete',array('id'=>$v['id']))}" onclick="return confirm('确定要删除吗')"><button class="btn btn-danger btn-xs" type="button"><i class="fa fa-trash-o"></i> 删除</button></a></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary btn-sm" type="button" onclick="checkall()">全选 / 反选</button> <button class="btn btn-danger btn-sm" type="button" onclick="foreverdel()"><i class="fa fa-trash-o"></i> 删除选中</button>
+                </form>
+                </div>
+                </div>
+                <div class="clearfix"></div>
+                {__TOKEN__}
+            </div>
+        </div>
+    </div>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

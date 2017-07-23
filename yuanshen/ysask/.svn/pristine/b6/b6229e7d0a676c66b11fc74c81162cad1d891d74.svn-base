@@ -1,0 +1,38 @@
+<!--底部-->
+<footer class="footer">
+    <div class="flinks">
+        <ul class="xoxo blogroll">
+            <li <if condition="$data.nav eq index">class="change"</if>><a href="/" >首页</a></li>
+            <li <if condition="$data.nav eq article">class="change"</if>><a href="{:UU('article/index')}">文章</a></li>
+            <li <if condition="$data.nav eq question">class="change"</if>><a href="{:UU('question/index')}">问答</a></li>
+            <li <if condition="$data.nav eq tag">class="change"</if>><a href="{:UU('tag/index')}">话题</a></li>
+            <li <if condition="$data.nav eq discuss">class="change"</if>><a href="{:UU('discussion/index')}">讨论</a></li>
+            <li <if condition="$data.nav eq professor">class="change"</if>><a href="{:UU('professor/index')}">找答主</a></li>
+            <li <if condition="$data.nav eq shop">class="change"</if>><a href="{:UU('shop/index')}">商城</a></li>
+        </ul>
+    </div>
+    {$Think.config.site_copyright}
+</footer>
+
+<div class="rollbar" style="display: block;"><div class="rollbar-item" etap="to_comments">反馈</div><div class="rollbar-item" etap="to_top"><i class="fa">顶部</i></div></div>
+
+<!--&lt;!&ndash;固定定位&ndash;&gt;
+<div class="fix">
+    <a href="#" class="fix-top"><img src="img/index/fix-top.jpg" width="60" height="60
+    " /></a>
+    <a href="#" class="fix-bottom"><img src="img/index/fix-bottom.jpg" width="60" height="60
+    " /></a>
+</div>-->
+
+<script src="__PUBLIC__/pc/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/pc/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/pc/js/common.js"></script>
+<script src="__PUBLIC__/pc/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/pc/js/highlight.min.js"></script>
+<script src="__PUBLIC__/pc/js/layer/layer.js"></script>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+

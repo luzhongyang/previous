@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL伪静态配置 - {:C('site_title')}</title>
+    <meta name="keywords" content="URL伪静态配置">
+    <meta name="description" content="URL伪静态配置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>URL伪静态配置</h5>
+                </div>
+                <div class="ibox-content">
+                <div class="alert alert-warning">
+                    修改以下伪静态规则以后，请修改对应的伪静态规则配置文件才能生效！
+                </div>
+                    <form class="form-horizontal" action="{:U('setting/rewrite_update')}" method="POST">
+                        <input type="hidden" name="data" value="index">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">伪静态重写功能：</label>
+                            <div class="col-sm-3">
+                                <label class="radio-inline switch" data-switch="0"><input type="radio" value="0" name="rewrite_type" <eq name="Setting_config.rewrite_type" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline switch" data-switch="1"><input type="radio" value="1" name="rewrite_type" <eq name="Setting_config.rewrite_type" value="1">checked</eq>>开启</label>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 建议只有使用时开启，以防出现安全问题</span>
+                        </div>
+                        <div class="sw" <eq name="Setting_config.rewrite_type" value="0">sytle="display:none"</eq>>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">重写Url后缀：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="html_suffix" value="{$Setting_config.html_suffix}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 英文命名，如 .htm .html </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">首页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="home_page" value="{$Setting_config.home_page}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 英文命名，如 home index main </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">段子页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_text" value="{$Setting_config.joke_text}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 英文命名，如 text </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">图片页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_pic" class="form-control" value="{$Setting_config.joke_pic}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>英文命名，如 pic </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">动图页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_gif" class="form-control" value="{$Setting_config.joke_gif}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>英文命名，如 gif </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">视频页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_video" class="form-control" value="{$Setting_config.joke_video}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>英文命名，如 video </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">热门笑话页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_hotjoke" value="{$Setting_config.joke_hotjoke}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>英文命名，如 hotjoke </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">8小时热门页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_hot_hour" value="{$Setting_config.joke_hot_hour}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>英文命名，如 hour</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">7天热门页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_hot_week" value="{$Setting_config.joke_hot_week}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>英文命名，如 week</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">30天热门页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_hot_month" value="{$Setting_config.joke_hot_month}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>英文命名，如 month </span>
+                        </div>
+                         <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">神回复页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_godreply" value="{$Setting_config.joke_godreply}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 英文命名，如 godreply </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">笑话子栏目页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_cate" class="form-control" value="{$Setting_config.joke_cate}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>变量: $id，$parentdir(父栏目 text|pic|gif|video)，$listdir(栏目拼音) </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">笑话列表分页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_page" class="form-control" value="{$Setting_config.joke_page}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>变量: $currpath(当前页面路径)，$page</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">笑话内容页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_content" value="{$Setting_config.joke_content}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 变量: $id，$cid(栏目ID)，$parentdir(父栏目 text|pic|gif|video)，$listdir(栏目拼音) </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">笑点页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_tags" value="{$Setting_config.joke_tags}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 英文命名，如 tags </span>
+                        </div>
+                         <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">笑点栏目页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_tags_cate" value="{$Setting_config.joke_tags_cate}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 变量: $id，$parentdir(父栏目 tags)，$listdir(栏目拼音) </span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户主页规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_user" value="{$Setting_config.joke_user}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 变量: $id</span>
+                        </div>
+                         <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户关注规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_user_follows" value="{$Setting_config.joke_user_follows}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 变量: $id</span>
+                        </div>
+                         <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户粉丝规则：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="joke_user_fans" value="{$Setting_config.joke_user_fans}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 变量: $id</span>
+                        </div>
+                       </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>                       
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                {__TOKEN__}
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script>
+    $(function(){
+     //类型切换
+        $('.switch').click(function(){
+            var s = $(this).data('switch');
+            if(s == 1){
+                $('.sw').show();
+            }else{
+                $('.sw').hide();
+            }            
+        });
+    })
+    </script>
+</body>
+</html>

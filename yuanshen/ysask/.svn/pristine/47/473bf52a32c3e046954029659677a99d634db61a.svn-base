@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>安全设置</title>
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/amazeui.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/member.css" />
+</head>
+<body>
+<header id="header">
+    <div class="wraper am-cf">
+        <div id="logo" class="logo"><a href="/" target="_self" class="hide-text" title="首页">易答</a></div>
+        <ul class="nav-list">
+            <li><a href="javascript:;">首页</a></li>
+            <li><a href="javascript:;">文章</a></li>
+            <li><a href="javascript:;">问答</a></li>
+            <li><a href="javascript:;">话题</a></li>
+            <li><a href="javascript:;">讨论</a></li>
+            <li><a href="javascript:;">找答主</a></li>
+            <li><a href="javascript:;">商城</a></li>
+        </ul>
+        <div class="am-topbar-right">
+            <div class="am-dropdown usernav" data-am-dropdown>
+                <a class="am-dropdown-toggle" href="javascript:;" data-am-dropdown-toggle>
+                    <img class="am-circle" src="img/544b6f5500013a0b01000100-200-200.jpg" width="36" height="36">
+                </a>
+                <ul class="am-dropdown-content">
+                    <li><a href="#">我的主页</a></li>
+                    <li><a href="#">账号设置</a></li>
+                    <li><a href="#">我的消息</a></li>
+                    <li class="am-divider"></li>
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="am-topbar-right">
+            <form class="am-topbar-form am-form-inline" role="search" method="get" action="" target="_blank">
+                <input type="text" name="q" class="am-form-field am-input-sm" placeholder="请输入关键字"><button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+            </form>
+        </div>
+    </div>
+</header>
+<div class="member-main">
+    <div class="am-cf">
+        <div class="member-sidebar">
+            <div class="avator-wapper">
+                <div class="avator-mode">
+                    <img class="am-circle" src="{$user.avatar}" width="92" height="92">
+                    <div class="update-avator" style="bottom: -30px;">
+                        <p><a href="javascript:void(0);" class="js-avator-link">更换头像</a></p>
+                    </div>
+                </div>
+                <div class="des-mode">
+                    <p>{$user.username}</p>
+                    <dl class="auth-list">
+                        <dd><i class="am-icon-user"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未实名认证</div></dd>
+                        <dd><i class="am-icon-phone"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未绑定手机</div></dd>
+                        <dd class="active"><i class="am-icon-comments-o"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>你已绑定邮箱</div></dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="list-wapper">
+                <h2>账户设置 </h2>
+                <div class="line"></div>
+                <ul class="menu">
+                    <li><a href="{:UU('user/personal_data')}" class="on">基本信息<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/payment')}">支付记录<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/bank')}">银行帐号<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/msg_setting')}">提醒设置<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/security')}">安全设置<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/avatar')}">修改头像<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="member-right">
+            <div class="common-title">
+                <a href="javascript:;"><span>提醒设置</span></a>
+            </div>
+            <hr class="am-margin-top-0" />
+            <form class="am-form  am-form-horizontal" method="post">
+                <div class="b">
+                    <div class="setting-box">
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-2 am-text-right">安全等级:</div>
+                                        <div class="am-u-sm-10 am-cf">
+                                            <div class="am-progress am-margin-top-sm am-fl" style="width:300px;
+                                            height:10px; background:#eee;">
+                                                <div class="am-progress-bar am-progress-bar-secondary" style="width: {$security_lv}%;  height:10px; background:#ff6700;"></div>
+                                            </div>
+                                            <span class=" am-margin-left am-fl">{$security}</span>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-2 am-text-right">邮箱地址:</div>
+                                        <div class="am-u-sm-10" >
+                                            {$user['email']?$user['email']:'尚未绑定'}
+                                            <a href="javascript:;" class="am-text-success am-margin-left-sm email"
+                                               data-am-modal="{target: '#email_modal', closeViaDimmer: 0, width: 700, height: 220}">{$user['email']?'修改':'绑定'}</a>
+                                            <div class="am-modal am-modal-no-btn" tabindex="-1" id="email_modal">
+                                                <div class="am-modal-dialog">
+                                                    <div class="am-modal-hd">绑定邮箱
+                                                        <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                                                    </div>
+                                                    <div class="am-modal-bd">
+                                                        <form class="am-form am-form-horizontal" method="post"  action="bind_email">
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-text-right">邮箱地址:</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="text"  placeholder="常用邮箱" name="email">
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-text-right">验证码:</label>
+                                                                <div class="am-u-sm-10  ys-code">
+                                                                    <input type="text"  name="code" class="form-control" placeholder="请输入验证码" data-rule="验证码:required;length(4)">
+                                                                    <a href="javascript:;" class="am-btn am-radius am-btn-success code_btn">获取验证码</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <div class="am-u-sm-offset-2 am-u-sm-10">
+                                                                    <div class="am-inline-block">
+                                                                        <button type="submit" class="am-btn am-btn-success am-radius">确认绑定</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-2 am-text-right">手机号码:</div>
+                                        <div class="am-u-sm-10" >
+                                            {$user.phone}
+                                            <a href="javascript:;"
+                                             class="am-text-success am-margin-left-sm phone "
+                                               data-am-modal="{target: '#phone-modal', closeViaDimmer: 0, width: 700, height: 250}">修改</a>
+                                            <div class="am-modal am-modal-no-btn" tabindex="-1" id="phone-modal">
+                                                <div class="am-modal-dialog">
+                                                    <div class="am-modal-hd">修改手机号
+                                                        <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                                                    </div>
+                                                    <div class="am-modal-bd">
+                                                        <form class="am-form am-form-horizontal" method="post">
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-text-right">验证手机:</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="text" class="" name="mobile" placeholder="常用手机号码" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-form-label">验证码:</label>
+                                                                <div class="am-u-sm-10 ys-code">
+                                                                    <input type="text" name="code" class="form-control" placeholder="请输入验证码" data-rule="验证码:required;length(4)"/>
+                                                                    <a href="javascript:;" class="am-btn am-btn-success am-radius code_btn"><span>发送验证码</span></a>
+                                                                    <p class="am-form-help am-text-left">
+                                                                        手机用于登录及找回密码
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <div class="am-u-sm-offset-2 am-u-sm-10">
+                                                                    <div class="am-inline-block">
+                                                                        <button type="submit" class="am-btn am-btn-success am-radius">确认绑定</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-2 am-text-right">微博绑定:</div>
+                                        <div class="am-u-sm-10" >
+                                            尚未绑定<a href="javascript:;" class="am-text-success am-margin-left-sm"
+                                                   data-am-modal="{target: '#weibo-modal', closeViaDimmer: 0, width: 700, height: 250}">绑定</a>
+                                            <div class="am-modal am-modal-no-btn am-radius" tabindex="-1"
+                                                 id="weibo-modal">
+                                                <div class="am-modal-dialog">
+                                                    <div class="am-modal-hd">微博绑定
+                                                        <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                                                    </div>
+                                                    <div class="am-modal-bd">
+                                                        <form class="am-form am-form-horizontal" method="post">
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-text-right">微博账号
+                                                                    :</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="text" class="" name="weibo"
+                                                                           placeholder="邮箱/会员账号/手机号" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-form-label">账号密码:</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="password" class="form-control"
+                                                                           placeholder="请输入密码"
+                                                                           data-rule=""/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <div class="am-u-sm-offset-2 am-u-sm-10">
+                                                                    <div class="am-inline-block">
+                                                                        <button type="submit" class="am-btn am-btn-success am-radius">确认绑定</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-2 am-text-right">QQ绑定:</div>
+                                        <div class="am-u-sm-10" >
+                                            尚未绑定<a href="javascript:;" class="am-text-success am-margin-left-sm"
+                                                   data-am-modal="{target: '#qq-modal', closeViaDimmer: 0, width: 700, height: 250}">绑定</a>
+                                            <div class="am-modal am-modal-no-btn" tabindex="-1" id="qq-modal">
+                                                <div class="am-modal-dialog">
+                                                    <div class="am-modal-hd">QQ绑定
+                                                        <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                                                    </div>
+                                                    <div class="am-modal-bd">
+                                                        <form class="am-form am-form-horizontal" method="post">
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-text-right">QQ账号
+                                                                    :</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="text" class="" name="weibo"
+                                                                           placeholder="QQ号" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-form-label">账号密码:</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="password" class="form-control"
+                                                                           placeholder="请输入密码"
+                                                                           data-rule=""/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <div class="am-u-sm-offset-2 am-u-sm-10">
+                                                                    <div class="am-inline-block">
+                                                                        <button type="submit" class="am-btn am-btn-success am-radius">确认绑定</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-2 am-text-right">微信绑定:</div>
+                                        <div class="am-u-sm-10" >
+                                            尚未绑定<a href="javascript:;" class="am-text-success am-margin-left-sm"
+                                                   data-am-modal="{target: '#weixin-modal', closeViaDimmer: 0, width: 700, height: 250}">绑定</a>
+                                            <div class="am-modal am-modal-no-btn" tabindex="-1" id="weixin-modal">
+                                                <div class="am-modal-dialog">
+                                                    <div class="am-modal-hd">微信绑定
+                                                        <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                                                    </div>
+                                                    <div class="am-modal-bd">
+                                                        <form class="am-form am-form-horizontal" method="post">
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-text-right">微信账号:</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="text" class="" name="weixin"
+                                                                           placeholder="微信号" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-form-label">账号密码:</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="password" class="form-control"
+                                                                           placeholder="请输入密码"
+                                                                           data-rule=""/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <div class="am-u-sm-offset-2 am-u-sm-10">
+                                                                    <div class="am-inline-block">
+                                                                        <button type="submit" class="am-btn am-btn-success am-radius">确认绑定</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-2 am-text-right">修改密码:</div>
+                                        <div class="am-u-sm-10" >
+                                            ******<a href="javascript:;"
+                                                     class="am-text-success am-margin-left-sm password"
+                                                     data-am-modal="{target: '#password', closeViaDimmer: 0, width: 700, height: 270}">修改</a>
+                                            <div class="am-modal am-modal-no-btn" tabindex="-1" id="password">
+                                                <div class="am-modal-dialog">
+                                                    <div class="am-modal-hd">修改密码
+                                                        <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                                                    </div>
+                                                    <div class="am-modal-bd">
+                                                        <form class="am-form am-form-horizontal" method="post" style="width:700px;" action="reset_password">
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-text-right">旧密码:</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="text" class="" name="old_pwd" placeholder="请输入旧密码"  >
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-text-right">新密码:</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="password" class="" name="password"
+                                                                           placeholder="请输入新密码" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <label class="am-u-sm-2 am-text-right">确认密码:</label>
+                                                                <div class="am-u-sm-10">
+                                                                    <input type="password" class="" name="repassword" placeholder="请再次输入密码">
+                                                                </div>
+                                                            </div>
+                                                            <div class="am-form-group">
+                                                                <div class="am-u-sm-offset-2 am-u-sm-10">
+                                                                    <button type="submit" class="am-btn am-btn-success am-radius">确认</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                </div>
+            </form>
+    </div>
+</div>
+</div>
+<footer class="footer">
+    <div class="flinks">
+        <ul class="">
+            <li><a href="" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">文章</a></li>
+            <li><a href="" target="_blank">问答</a></li>
+            <li><a href="" target="_blank">话题</a></li>
+            <li><a href="" target="_blank">讨论</a></li>
+            <li><a href="" target="_blank">找答主</a></li>
+            <li><a href="" target="_blank">商城</a></li>
+        </ul>
+    </div>
+    Copyright © 2015-2016 168282.com. All Rights Reserved.  皖ICP备16011406号
+</footer>
+<script src="__PUBLIC__/pc/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/pc/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/pc/js/common.js"></script>
+<script src="__PUBLIC__/pc/js/user/security.js"></script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<include file="Public/header" />
+
+<div class="index_focus">
+    <div class="wraper">
+        <div class="am-g">
+            <div class="am-u-sm-9 am-cf">
+                <div class="focus-d/aily">
+                    <span class="focus-daily-info">
+                        <span class="focus-title"><a href="{$recom[0]['url']}">{$recom[0]['title']}</a></span>
+                        <span class="focus-author">来自：文章推荐</span>
+                    </span>
+                    <div class="focus-daily-item">
+                        <ul class="am-avg-sm-3">
+                            <li>
+                                <a class="am-fl" href="{$recom[1]['url']}" target="_blank">
+                                    <img src="{$recom[1]['picture']}">
+                                </a>
+                                <span>
+                                    <a href="{$recom[1]['url']}" target="_blank">{$recom[1]['title']}</a>
+                                </span>
+                            </li>
+                            <li>
+                                <a class="am-fl" href="{$recom[2]['url']}" target="_blank">
+                                    <img src="{$recom[2]['picture']}">
+                                </a>
+                                <span>
+                                    <a href="{$recom[2]['url']}" target="_blank">{$recom[2]['title']}</a>
+                                </span>
+                            </li>
+                            <li>
+                                <a class="am-fl" href="{$recom[3]['url']}" target="_blank">
+                                    <img src="{$recom[3]['picture']}">
+                                </a>
+                                <span>
+                                    <a href="{$recom[3]['url']}" target="_blank">{$recom[3]['title']}</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-sm-3">
+                <div class="slogan-widget am-text-center am-margin-top am-radius">
+                    <div class="am-padding-top-xs"><img src="__PUBLIC__/pc/img/lighter.png"> <span class="am-text-xl">问答</span></div>
+                    <div class="get-title">
+                        <span>已解决</span>
+                        <span class="get_font_center" id="banner_num">{$question_count}</span>
+                        <span>个问题</span>
+                    </div>
+                    <span>登录一下，成为分享知识的一员！</span>
+                    <div class="am-padding">
+                        <a class="am-btn am-btn-danger am-btn-block am-radius" href="{:UU('login/login')}">登录吧月球</a>
+                        <a class="am-btn am-btn-success am-btn-block am-btn-outline am-radius" href="{:UU('login/register')}">注册吧英雄</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wraper">
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-9">
+            <div class="am-g">
+                <div class="am-u-sm-4">
+                    <div class="category-con">
+                        <h2 class="h2-item"><span>问题分类</span></h2>
+                        <div class="list">
+                            <div class="category-list mt10" id="J_category">
+                                <ul>
+                                    <volist name='question_category' id='vo'>
+                                        <li class="show-more">
+                                            <p>
+                                                <a href="{:UU('question/index',array('category'=>$vo['id']))}" target="_blank">{$vo.title}</a>
+                                                <i class="icon icon-arrow"></i><span class="more-li"></span>
+                                            </p>
+                                            <div class="category-more">
+                                                <dl class="am-cf">
+                                                    <dt><a href="{:UU('question/index',array('category'=>$vo['id']))}"  target="_blank">
+                                                        {$vo.title}</a><i class="icon icon-arrow"></i></dt>
+                                                    <dd class="am-cf">
+                                                        <volist name="vo.children" id='ch'>
+                                                            <span class="line"></span>
+                                                            <a href="{:UU('question/index',array('category'=>$ch['id']))}" target="_blank">{$ch.title}</a>
+                                                        </volist>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </li>
+                                    </volist>  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-sm-8">
+                    <div class="index_asklist">
+                        <div class="am-tabs" data-am-tabs="{noSwipe: 1}">
+                            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                                <li class="am-active"><a href="javascript: void(0)">等我回答</a></li>
+                                <li><a href="javascript: void(0)">大家在问</a></li>
+                            </ul>
+
+                            <div class="am-tabs-bd">
+                                <div class="am-tab-panel am-active">
+                                    <ul class="am-list am-list-border">
+                                        <volist name='question' id='vo'>
+                                            <li>
+                                                <a class="am-text-truncate" href="{:UU('question/detail',array('id'=>$vo['id']))}" title="{$vo.title}">
+                                                    <img class="am-circle am-fl am-margin-right" src="{:get_user_avatar($vo['user_id'])}" width="36" height="36">
+                                                    {$vo.title}
+                                                    <time class="am-fr">{:date('Y-m-d h:i',$vo['created_time'])}</time>
+                                                </a>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                    <p class="am-text-center"><a class="am-btn am-btn-success am-btn-outline am-radius" href="{:UU('question/index')}">查看更多>></a></p>
+                                </div>
+                                <div class="am-tab-panel">
+                                    <div class="am-slider am-slider-default" data-am-flexslider="{controlNav: false,directionNav: true,slideshow: false}">
+                                        <ul class="am-slides">
+                                            <li>
+                                                <div class="block">
+                                                    <for start="0" end="9">
+                                                        <a class="am-text-truncate am-cf" href="{:UU('question/detail',array('id'=>$new_question[$i]['id']))}" target="_blank">
+                                                        {$new_question[$i]['title']}<time class="am-fr">{:date('Y-m-d h:i',$new_question[$i]['created_time'])}</time></a>
+                                                    </for>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="block">
+                                                    <for start="10" end="19">
+                                                        <a class="am-text-truncate am-cf" href="{:UU('question/detail',array('id'=>$new_question[$i]['id']))}" target="_blank">
+                                                        {$new_question[$i]['title']}<time class="am-fr">{:date('Y-m-d h:i',$new_question[$i]['created_time'])}</time></a>
+                                                    </for>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="am-text-center"><a class="am-btn am-btn-success am-btn-outline am-radius" href="">查看更多>></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="index_new_news am-margin-top-xl">
+                <div class="am-g">
+                    <div class="am-u-sm-5">
+                        <div class="focus">
+                            <a href="{:UU('article/detail',array('id'=>$article[0]['id']))}">
+                                <img src="{$article[0]['logo']}" alt="middle.jpg"  width="336" height="234"/>
+                                <div class="text">{$article[0]['title']}</div>
+                                <div class="mask"></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="am-u-sm-7">
+                        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi">
+                            <h1 class="am-titlebar-title am-margin-bottom-0">最新文章</h1>
+                            <nav class="am-titlebar-nav">
+                                <a href="{:UU('article/index')}" class="">更多</a>
+                            </nav>
+                        </div>
+
+                        <ul class="am-list">
+                            <for start="1" end="$count_article">
+                                <li>
+                                    <a class="am-text-truncate" href="{:UU('article/detail',array('id'=>$article[$i]['id']))}" title="" target="_blank">{$article[$i]['title']}
+                                        <span class="am-fr am-text-default am-margin-right-xs font_grey">{$article[$i
+                                            ]['view']}</span>
+                                        <b class="am-icon-eye am-fr am-margin-top-xs am-margin-right-xs font_grey"></b>
+                                    </a>
+                                </li>
+                            </for>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-sm-3">
+            <p><a class="am-btn am-btn-warning am-btn-block am-radius" href="{:UU('question/ask')}" title="我要提问">我要提问</a></p>
+            <p><a class="am-btn am-btn-success am-btn-block am-radius" href="" title="我要分享">我要分享</a></p>
+
+            <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi titlebar-custom">
+                <h1 class="am-titlebar-title am-margin-bottom-0"><em></em>最新公告</h1>
+            </div>
+            <ul class="am-list am-margin-0 Notice">
+                <volist name="annou" id='vo'>
+                    <li><a href="{$vo.url}">{$vo.title}</a></li>
+                </volist>
+            </ul>
+
+            <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi titlebar-custom">
+                <h1 class="am-titlebar-title am-margin-bottom-0"><em></em>热议话题</h1>
+            </div>
+            <div class="topic-tags">
+                <volist name='hot_tag' id='vo' key='k'>
+                    <a href="{:UU('tag/detail',array('id'=>$k))}" class='hot-tag'>{$vo}</a>
+                </volist>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="recMaster">
+    <div class="wraper">
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-9">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi titlebar-custom">
+                    <h1 class="am-titlebar-title am-margin-bottom-0"><em></em>推荐答主</h1>
+                    <nav class="am-titlebar-nav">
+                        <span><i class="am-icon-refresh"></i> 换一换</span>
+                    </nav>
+                </div>
+                <ul class="am-avg-sm-3 masterlist">
+                <volist name='professor' id='vo'>
+                    <li>
+                        <div class="block am-padding-vertical">
+                            <p><a href=""><img class="am-circle" src="{$vo.avatar}" /></a></p>
+                            <p><a class="am-text-warning" href="">{$vo.real_name}</a></p>
+                            <p class="am-text-left am-text-sm am-margin-left-xl">
+                                <span class="special"><span class="font_grey">擅长领域：</span>{$vo.skill}</span><br />
+                                <span><span class="font_grey">好评数量：</span>{$vo.agree}</span>
+                            </p>
+                            <p>
+                                <a class="am-btn am-btn-warning am-round am-btn-xs" href="#">已解决{$vo.adopt}个问题</a>
+                            </p>
+                        </div>
+                    </li>
+                </volist>
+                </ul>
+            </div>
+            <div class="am-u-sm-3">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi titlebar-custom">
+                    <h1 class="am-titlebar-title am-margin-bottom-0"><em></em>财富榜</h1>
+                </div>
+                <div class="richeslist">
+                    <ul>
+                 
+                    <volist name='rich_list' id='vo' key='k'>
+                        <li><span class="num num{$k}">{$k}</span>{$vo.username}
+                        <b class="am-icon-database am-text-warning am-font-sm am-fr">{$vo.money}</b></li>
+                    </volist>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wraper">
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3">
+            <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi titlebar-custom am-margin-top-0">
+                <h1 class="am-titlebar-title am-margin-bottom-0"><em></em>最新回答</h1>
+            </div>
+            <div class="new-ask">
+                <ul class="am-comments-list">
+                <volist name='new_adopt' id='vo'>
+                    <li class="am-comment">
+                        <a href="{:UU('user/index',array('id'=>$vo['user']['user_id']))}">
+                            <img src="{$vo.user.avatar}" alt="" class="am-comment-avatar" width="48" height="48">
+                        </a>
+                        <div class="am-comment-main">
+                            <header class="am-comment-hd">
+                                <div class="am-comment-meta">
+                                    <a href="{:UU('user/index',array('id'=>$vo['user_id']))}" class="am-comment-author">{$vo['user']['username']}</a> <time>{$vo['adopted_time']}</time>
+                                </div>
+                            </header>
+                            <div class="am-comment-bd">
+                                <a href="{:UU('question/detail',array('id'=>$vo['id']))}">
+                                    <p><span class="icon-text ask">问</span>{$vo.title}</p>
+                                    <p><span class="icon-text answer">答</span>{:mb_substr($vo['answer']['content'],0,100,'utf-8')}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </volist>
+                </ul>
+            </div>
+        </div>
+        <div class="am-u-sm-4 am-padding-top-xl am-margin-top-sm new-answer-list">
+            <volist name='new_adopt' id='vo'>
+                <p><a href="{:UU('user/index',array('id'=>$vo['id']))}" target="_blank">{$vo.title}</a></p>
+            </volist>
+        </div>
+        <div class="am-u-sm-5">
+            <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi titlebar-custom am-margin-top-0">
+                <h1 class="am-titlebar-title am-margin-bottom-0"><em></em>悬赏问题</h1>
+            </div>
+            <div class="new-answer-list am-avg-sm-2">
+                <volist name='reward_question' id='vo'>
+                    <p><a href="{:UU('user/index',array('id'=>$vo['id']))}" class="am-text-default" target="_blank">{$vo.title}
+                    <b class="am-icon-database am-text-warning am-font-default am-fr">{$vo.money}</b></a></p>
+                </volist>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wraper">
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-12">
+            <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi titlebar-custom am-margin-top-0">
+                <h1 class="am-titlebar-title am-margin-bottom-0"><em></em>热点检索</h1>
+            </div>
+
+            <div class="retrieval-nav cf">
+                <a class="current" href="javascript:void(0)">A</a><a href="javascript:void(0)">B</a><a href="javascript:void(0)">C</a><a href="javascript:void(0)">D</a><a href="javascript:void(0)">E</a><a href="javascript:void(0)">F</a><a href="javascript:void(0)">G</a><a href="javascript:void(0)">H</a><a href="javascript:void(0)">I</a><a href="javascript:void(0)">J</a><a href="javascript:void(0)">K</a><a href="javascript:void(0)">L</a><a href="javascript:void(0)">M</a><a href="javascript:void(0)">N</a><a href="javascript:void(0)">O</a><a href="javascript:void(0)">P</a><a href="javascript:void(0)">Q</a><a href="javascript:void(0)">R</a><a href="javascript:void(0)">S</a><a href="javascript:void(0)">T</a><a href="javascript:void(0)">U</a><a href="javascript:void(0)">V</a><a href="javascript:void(0)">W</a><a href="javascript:void(0)">X</a>
+                <a href="javascript:void(0)">Y</a><a href="javascript:void(0)">Z</a>
+            </div>
+            <volist name='hot_search' id='vo'>
+                <ul class="am-avg-sm-5 retrieval-list am-cf" id="{$key}" style="display:none;">
+                    <volist name='vo' id='ch'>
+                        <li><a href="{:UU('index/search',array('query'=>$ch))}" target="_blank">{$ch}</a></li>
+                    </volist>
+                </ul>
+            </volist>
+        </div>
+    </div>
+</div>
+
+<div class="wraper">
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-12">
+            <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi titlebar-custom am-margin-top-0">
+                <h1 class="am-titlebar-title am-margin-bottom-0"><em></em>友情链接</h1>
+            </div>
+            <div class="link-list">
+                <a href="">源神CMS</a>
+                <a href="">问答系统</a>
+                <a href="">语音系统</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer am-margin-top">
+    <div class="flinks">
+        <ul class="">
+            <li><a href="" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">文章</a></li>
+            <li><a href="" target="_blank">问答</a></li>
+            <li><a href="" target="_blank">话题</a></li>
+            <li><a href="" target="_blank">讨论</a></li>
+            <li><a href="" target="_blank">找答主</a></li>
+            <li><a href="" target="_blank">商城</a></li>
+        </ul>
+    </div>
+    Copyright © 2015-2016 168282.com. All Rights Reserved.  皖ICP备16011406号
+</footer>
+<script src="__PUBLIC__/pc/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/pc/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/pc/js/countUp.min.js"></script>
+<script src="__PUBLIC__/pc/js/common.js"></script>
+<script src="__PUBLIC__/pc/js/scroll.js"></script>
+<script src="__PUBLIC__/pc/js/index.js"></script>
+<script >
+$(function(){
+
+    //数字效果
+    var options = {
+        useEasing : true,
+        useGrouping : true,
+        separator : '',
+        decimal : '.',
+        prefix : '',
+        suffix : ''
+    };
+    var banner_num = new CountUp("banner_num", 447890-500, 447890, 0, 5, options);
+    banner_num.start();
+
+    //细分类导航
+    //细分类导航
+    $('.category-list li').mouseover(function(){
+        $('.category-list li').removeClass('hover');
+        $('.category-list li div.category-more').css('display','none');
+        $(this).addClass('hover');
+        $('.category-list li div.category-more').eq($(this).index()).css('display','block');
+    }).mouseout(function(){
+        $('.category-list li').removeClass('hover');
+        $('.category-list li div.category-more').css('display','none');
+    });
+
+    //无缝滚动代码
+    $(".new-ask").Scroll({line:1,speed:500,timer:3000,up:"but_up",down:"but_down"});
+    var marquee = function(ele,sp){
+        try{document.execCommand("BackgroundImageCache", false, true);}catch(e){};
+        var container = $(ele);
+        var defaultList = container.find(".default");
+        var cloneList = container.find(".clone");
+        //将defalutList的条目数复制到copyList中
+        cloneList.append(defaultList.html());
+        var speed = sp || 10;
+        function roll(){
+            if(container.scrollTop() == cloneList.offset().top){
+                container.scrollTop(0);
+            }else{
+                var scrollTop = container.scrollTop();
+                container.scrollTop(++scrollTop);
+            }
+        }
+        var timer = setInterval(roll,speed);
+        container.on("mouseover",function(){
+            clearInterval(timer);
+        }).on("mouseleave",function(){
+            timer = setInterval(roll,speed);
+        });
+    };
+})
+</script>
+</body>
+</html>

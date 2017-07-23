@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>短信设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="短信设置">
+    <meta name="description" content="短信设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>短信设置</h5>
+            </div>
+            <div class="ibox-content">
+                <!-- <div class="alert alert-warning"></div> -->
+                <form class="form-horizontal" action="__SELF__" method="POST">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Appkey：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sms_appkey" value="{$Setting_config.sms_appkey}" class="form-control" placeholder="" required data-msg-required="请输入Appkey">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>平台APP证书的App Key</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Appsecret：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sms_appsecret" value="{$Setting_config.sms_appsecret}" class="form-control" placeholder="" required data-msg-required="请输入APPsecret">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>平台APP证书的App Secret</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">短信签名：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sms_signname" value="{$Setting_config.sms_signname}" class="form-control" placeholder="" required data-msg-required="请输入短信签名">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>平台短信签名</span>
+                        </div>
+                        <!-- <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">短信模板：</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="sms_tmpl" value="{$Setting_config.sms_tmpl}" class="form-control" placeholder="" required data-msg-required="请输入短信模板">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>平台短信模板ID</span>
+                        </div> -->
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                {__TOKEN__}
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="button"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

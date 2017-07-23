@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/amazeui.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/base.css" />
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/login.css" />    
+</head>
+<body>
+<div class="topbar">
+    <div class="wraper am-cf">
+        <div class="am-fl am-padding-xs">
+            你好，&nbsp欢迎来到源神软件问答系统
+        </div>
+        <div class="am-fr am-padding-xs">
+            您好！请&nbsp<a href="javascript:;">登录</a>
+        </div>
+    </div>
+</div>
+<div class="head">
+    <div class="header wraper am-cf">
+        <div class="login am-fl">
+            <a href="https://www.ask.com/">
+                <img src="__PUBLIC__/pc/img/index/login.png">
+            </a>
+        </div>
+        <form class="am-form-inline am-margin-top-lg am-fl" role="form" action="{:UU('index/search')}" method="post">
+          <div class="am-form-group">
+            <input type="text" size="60" class="am-form-field" placeholder="搜索关键词" name="query">
+          </div>
+          <button type="submit" class="am-btn am-btn-success am-radius">搜索</button>
+          <a href="{:UU('question/ask')}" class="am-btn am-btn-success am-radius">我要提问</a>
+        </form>
+
+        <div class="qrcode am-fr">
+            <img src="__PUBLIC__/pc/img/index/2D-barcode.png"/>
+            <p class="am-fr">
+                <span>扫描二维码</span>
+                <a href="javascript:;">打开手机版</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!--导航条-->
+<div class="nav">
+    <div class="list wraper">
+        <ul class="nav-list fl cf">
+            <li  <if condition="$data.nav eq index">class="change"</if>><a href="/" >首页</a></li>
+            <li <if condition="$data.nav eq article">class="change"</if>><a href="{:UU('article/index')}">文章</a></li>
+            <li <if condition="$data.nav eq question">class="change"</if>><a href="{:UU('question/index')}">问答</a></li>
+            <li <if condition="$data.nav eq tag">class="change"</if>><a href="{:UU('tag/index')}">话题</a></li>
+            <li <if condition="$data.nav eq discuss">class="change"</if>><a href="{:UU('discussion/index')}">讨论</a></li>
+            <li <if condition="$data.nav eq professor">class="change"</if>><a href="{:UU('professor/index')}">找答主</a></li>
+            <li <if condition="$data.nav eq shop">class="change"</if>><a href="{:UU('shop/index')}">商城</a></li>
+        </ul>
+    </div>
+</div>
+<!--修改密码-->
+<div class="wraper am-container am-padding am-radius">
+    <div class="am-text-center am-margin-top">
+        <h2>注册新用户</h2>
+    </div>
+    <div class="enroll-middle">
+        <form id="form_reg" class="am-form am-form-horizontal"  method="post" action="{:UU('login/register')}">
+            <div class="am-form-group">
+                <label class="am-u-sm-3 am-form-label">用户名</label>
+                <div class="am-u-sm-9">
+                    <input type="text" name="username" class="form-control" placeholder="请输入用户名" data-rule="用户名:required;length(6~16)"/>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label class="am-u-sm-3 am-form-label">手机号</label>
+                <div class="am-u-sm-9">
+                    <input type="text" name="phone" class="form-control" placeholder="请输入手机号" data-rule="用户名:required;mobile;"/>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label class="am-u-sm-3 am-form-label">密码</label>
+                <div class="am-u-sm-9">
+                    <input type="text" name="password" class="form-control" placeholder="请输入密码" data-rule="密码:required;length(8~16)"/>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label class="am-u-sm-3 am-form-label">确认密码</label>
+                <div class="am-u-sm-9">
+                    <input type="text" name="repassword" class="form-control" placeholder="请再次输入密码" data-rule="重复密码:required;match(password)"/>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label class="am-u-sm-3 am-form-label">验证码</label>
+                <div class="am-u-sm-9 ys-code">
+                    <input type="text" name="code" class="form-control" placeholder="请输入验证码" data-rule="验证码:required;length(4)"/>
+                    <a href="javascript:;" class="am-btn am-btn-success am-radius code_btn"><span>发送验证码</span></a>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <div class="am-u-sm-9 am-u-sm-offset-3">
+                    <label><input type="checkbox" name="agree" class="pass-checkbox-isAgree" data-rule="checked" checked /> 我已阅读并接收用户协议</label>
+                    <a href="javascript:;"><span>已有账户</span></a>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <div class="am-u-sm-9 am-u-sm-offset-3">
+                    <input type="submit" value="注册" class="am-btn am-btn-success am-btn-block am-radius" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--底部-->
+<footer class="footer">
+    <div class="flinks">
+        <ul class="">
+            <li><a href="" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">文章</a></li>
+            <li><a href="" target="_blank">问答</a></li>
+            <li><a href="" target="_blank">话题</a></li>
+            <li><a href="" target="_blank">讨论</a></li>
+            <li><a href="" target="_blank">找答主</a></li>
+            <li><a href="" target="_blank">商城</a></li>
+        </ul>
+    </div>
+    Copyright © 2015-2016 168282.com. All Rights Reserved.  皖ICP备16011406号
+</footer>
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/amazeui.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/validator/jquery.validator.min.js?local=zh-CN"></script>
+<script>
+$(function(){
+    $('#form_reg').validator({
+        timely:2,
+        stopOnError:true,
+        focusCleanup:true,
+        ignore:':hidden',
+        theme:'yellow_right_effect',
+        valid:function(form)
+        {
+            $.ajax({
+                type:'post',
+                cache:false,
+                dataType:'json',
+                url:'/admin-index-check.html',
+                data:$(form).serialize(),
+                error:function(e){alert('服务器错误');},
+                success:function(d)
+                {
+                    if(d.state=='success')
+                    {
+                        toastr.success(d.msg);
+                        setTimeout(function(){location.href='/admin.html';},1500);
+                    }
+                    else
+                    {
+                        toastr.error(d.msg);
+                    }
+                }
+            })
+        }
+    });
+})
+</script>
+</body>
+</html>

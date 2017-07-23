@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改礼品 - {:C('site_title')}</title>
+    <meta name="keywords" content="修改礼品">
+    <meta name="description" content="修改礼品">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+    <link href="__PUBLIC__/js/plugins/wangEditor/wangEditor.min.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>修改礼品</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('shop/goods')}"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus-circle"></i> 礼品管理</button></a>
+                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                <form class="form-horizontal m-t-md" action="{:U('shop/edit')}" method="POST">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分类：</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="category">
+                                <volist name="category" id="val">
+                                    <option value="{$val.id}" <if condition="$vo['category_id'] eq $val['id']">selected</if>>{$val.title}</option>
+                                </volist>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">是否虚拟：</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="is_virtual">
+                                <option value="0" <if condition="$vo['is_virtual'] eq 0">selected</if>>实体商品</option>
+                                <option value="1" <if condition="$vo['is_virtual'] eq 1">selected</if>>虚拟商品</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名称：</label>
+                        <div class="col-sm-2">
+                            <input type="text" name="title" class="form-control" required data-msg-required="请输入名称"  value="{$vo.title}">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">图片：</label>
+                        <div class="col-sm-2">
+                            <input type="hidden" name='image' id="shop_image" value="{$vo.image}" />
+                            <div id="view_logo"><img src="{$vo.image}"></div>
+                            <button type="button" class="btn btn-primary" id="upshop_image">上传</button>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">金币：</label>
+                        <div class="col-sm-1">
+                            <input type="text" name="price" class="form-control" required data-msg-required="请输入兑换该商品所需要的金币" value="{$vo.coin}">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">描述：</label>
+                        <div class="col-sm-8">
+                            <textarea name="description" id="description" style="height:300px" class="form-control">{$vo.description|stripcslashes|htmlspecialchars_decode}</textarea>
+                          </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态：</label>
+                        <div class="col-sm-2">
+                            <label class="radio-inline">
+                                <input type="radio" value="1" name="status" <if condition="$vo.status eq 1">   checked</if>>上架
+                                </label>
+                            <label class="radio-inline">
+                                <input type="radio" value="0" name="status" <if condition="$vo.status eq 0">   checked</if>>下架
+                                </label>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <input type="hidden" name="id" value="{$vo.id}" />
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    {__TOKEN__}
+                </form>
+            </div>
+        </div>
+    </div>    </div>
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+<script src="__PUBLIC__/js/jquery.uploadfile.min.js"></script>
+<script src="__PUBLIC__/js/upload.js"></script>
+<script src="__PUBLIC__/js/plugins/wangEditor/wangEditor.min.js"></script>
+<script type="text/javascript">
+var Obshop_image = Object.create(Upload);
+Obshop_image.static('#upshop_image',false,upshop_image);
+function upshop_image(images){
+    for(var i in images){
+        $('#view_logo').html('<img src="'+ images[i].url +'">');
+        $('#shop_image').val(images[i].url);
+    }
+}
+// 生成编辑器
+if($('#description').length>0){
+wangEditor.config.printLog = false;
+var textarea = document.getElementById('description');
+var editor = new wangEditor(textarea);
+editor.config.menus = $.map(wangEditor.config.menus, function(item, key) {
+ if (item === 'img') {
+     return null;
+ }
+ return item;
+});
+editor.create();
+}
+</script>
+</body>
+</html>

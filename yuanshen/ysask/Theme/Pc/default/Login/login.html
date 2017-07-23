@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/amazeui.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/base.css" />
+    <link rel="stylesheet" href="__PUBLIC__/pc/css/login.css" />
+</head>
+<body>
+<div class="topbar">
+    <div class="wraper am-cf">
+        <div class="am-fl am-padding-xs">
+            你好，&nbsp欢迎来到源神软件问答系统
+        </div>
+        <div class="am-fr am-padding-xs">
+            您好！请&nbsp<a href="javascript:;">登录</a>
+        </div>
+    </div>
+</div>
+<div class="head">
+    <div class="header wraper am-cf">
+        <div class="login am-fl">
+            <a href="https://www.ask.com/">
+                <img src="__PUBLIC__/pc/img/index/login.png">
+            </a>
+        </div>
+        <form class="am-form-inline am-margin-top-lg am-fl" role="form" action="{:UU('index/search')}" method="post">
+          <div class="am-form-group">
+            <input type="text" size="60" class="am-form-field" placeholder="搜索关键词" name="query">
+          </div>
+          <button type="submit" class="am-btn am-btn-success am-radius">搜索</button>
+          <a href="{:UU('question/ask')}" class="am-btn am-btn-success am-radius">我要提问</a>
+        </form>
+
+        <div class="qrcode am-fr">
+            <img src="__PUBLIC__/pc/img/index/2D-barcode.png"/>
+            <p class="am-fr">
+                <span>扫描二维码</span>
+                <a href="javascript:;">打开手机版</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!--导航条-->
+<div class="nav">
+    <div class="list wraper">
+        <ul class="nav-list fl cf">
+            <li  <if condition="$data.nav eq index">class="change"</if>><a href="/" >首页</a></li>
+            <li <if condition="$data.nav eq article">class="change"</if>><a href="{:UU('article/index')}">文章</a></li>
+            <li <if condition="$data.nav eq question">class="change"</if>><a href="{:UU('question/index')}">问答</a></li>
+            <li <if condition="$data.nav eq tag">class="change"</if>><a href="{:UU('tag/index')}">话题</a></li>
+            <li <if condition="$data.nav eq discuss">class="change"</if>><a href="{:UU('discussion/index')}">讨论</a></li>
+            <li <if condition="$data.nav eq professor">class="change"</if>><a href="{:UU('professor/index')}">找答主</a></li>
+            <li <if condition="$data.nav eq shop">class="change"</if>><a href="{:UU('shop/index')}">商城</a></li>
+        </ul>
+    </div>
+</div>
+<div class="ys-login">
+    <div class="wraper am-g">
+        <div class="am-container am-container-collapse">
+            <div data-am-widget="slider" class="am-hide-sm-only am-slider" data-am-slider="{animation:'slide',directionNav:false,pauseOnHover: false}">
+                <ul class="am-slides">
+                    <li><img src="__PUBLIC__/pc/img/netdisk-slider-p1.png"/></li>
+                    <li><img src="__PUBLIC__/pc/img/netdisk-slider-p2.png"/></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="ys-login-form">
+            <div class="am-tabs" data-am-tabs="{noSwipe: 1}" id="doc-tab-demo-1">
+              <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="javascript: void(0)">帐号登录</a></li>
+                <li><a href="javascript: void(0)">快捷登录</a></li>
+              </ul>
+
+              <div class="am-tabs-bd am-margin-top">
+                <div class="am-tab-panel am-active">
+                    <form class="am-form" id="form_login" action="{:UU('Login/login')}" method="post">
+                        <div class="am-form-group am-form-icon">
+                            <i class="am-icon-user"></i>
+                            <input type="text" class="am-form-field" name="username" placeholder="手机号/邮箱/用户名" required/>
+                        </div>
+                        <div class="am-form-group am-form-icon">
+                            <i class="am-icon-key"></i>
+                            <input type="password" class="am-form-field" name="password"  placeholder="密码"
+                                   data-rule="密码:required;length(6~16)" required/>
+                        </div>
+                        <div class="am-form-group am-cf">
+                            <div class="checkbox am-fl">
+                                <label><input type="checkbox" name="memberPass"/>下次自动登录</label>
+                            </div>
+                            <a class="am-fr" href="{:UU('forget')}">忘记密码</a>
+                        </div>
+                        <p><input type="submit" class="am-btn am-btn-success am-btn-block" value="登录"/></p>
+                    </form>
+                    <p class="am-text-center">
+                        <a class="am-text-success" href="register">注册新用户</a>
+                    </p>
+                </div>
+                <div class="am-tab-panel am-text-center">
+                    <h3>第三方账号登录</h3>
+                    <p><a class="am-btn am-btn-secondary am-radius" href="login?type=qq"><i class="am-icon-qq"></i> Q Q登录</a></p>
+                    <p><a class="am-btn am-btn-success am-radius" href="login?type=wechat"><i class="am-icon-weixin"></i> 微信登录</a></p>
+                    <p><a class="am-btn am-btn-danger am-radius" href="login?type=sina"><i class="am-icon-weibo"></i> 微博登录</a></p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部-->
+<footer class="footer">
+    <div class="flinks">
+        <ul class="">
+            <li><a href="" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">文章</a></li>
+            <li><a href="" target="_blank">问答</a></li>
+            <li><a href="" target="_blank">话题</a></li>
+            <li><a href="" target="_blank">讨论</a></li>
+            <li><a href="" target="_blank">找答主</a></li>
+            <li><a href="" target="_blank">商城</a></li>
+        </ul>
+    </div>
+    Copyright © 2015-2016 168282.com. All Rights Reserved.  皖ICP备16011406号
+</footer>
+<script src="__PUBLIC__/pc/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/pc/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/pc/js/common.js"></script>
+<script src="__PUBLIC__/pc/js/validator/jquery.validator.min.js?local=zh-CN"></script>
+<script src="__PUBLIC__/pc/js/login.js"></script>
+</body>
+</html>

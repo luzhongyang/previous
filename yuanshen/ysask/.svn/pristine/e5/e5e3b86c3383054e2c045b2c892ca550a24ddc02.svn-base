@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加TAG标签 - {:C('site_title')}</title>
+    <meta name="keywords" content="添加TAG标签">
+    <meta name="description" content="添加TAG标签">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>添加TAG标签</h5>
+            </div>
+            <div class="ibox-content">
+                <a href="{:U('tag/index')}"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus-circle"></i> TAG标签管理</button></a>
+                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                <form class="form-horizontal m-t-md" action="{:U('tag/insert')}" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名称：</label>
+                        <div class="col-sm-2">
+                            <input type="text" name="name" class="form-control" required data-msg-required="请输入名称">
+                        </div>
+                        <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 不可重复。</span>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分类：</label>
+                        <div class="col-sm-2">
+                            <select name="category_id" class="form-control">
+                                <volist name="cates" id="var">
+                                    <option value="{$var.id}">{$var.title}</option>}
+                                </volist>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">图片：</label>
+                        <div class="col-sm-2">
+                            <input type="hidden" name='image' id="image_img"/>
+                            <div id="view_logo"></div>
+                            <button type="button" class="btn btn-primary" id="upimage">上传</button>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">排序：</label>
+                        <div class="col-sm-2">
+                            <input type="text" name="sort" class="form-control" required data-msg-required="请输入排序">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">简介：</label>
+                        <div class="col-sm-4">
+                            <textarea name="description" class="form-control" style=" height:150px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    {__TOKEN__}
+                </form>
+            </div>
+        </div>
+    </div>    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+    <script src="__PUBLIC__/js/jquery.uploadfile.min.js"></script>
+    <script src="__PUBLIC__/js/upload.js"></script>
+    <script type="text/javascript">
+        var Obimage = Object.create(Upload);
+        Obimage.static('#upimage',false,upimage);
+        function upimage(images){
+            for(var i in images){
+                $('#view_logo').html('<img src="'+ images[i].url +'">');
+                $('#image_img').val(images[i].url);
+            }
+        }
+    </script>
+</body>
+</html>

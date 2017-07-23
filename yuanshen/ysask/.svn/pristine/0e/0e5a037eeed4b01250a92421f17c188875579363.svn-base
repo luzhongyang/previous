@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付流水 - {:C('site_title')}</title>
+    <meta name="keywords" content="支付流水">
+    <meta name="description" content="支付流水">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>支付流水</h5>
+            </div>
+            <div class="ibox-content">
+                <form method="post" action="{:U('paymentlog/index')}" class="pull-right form-inline m-b-md">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <select class="form-control m-b" name="payed">
+                                <option value="payed" <if condition="$payed eq 'payed'">selected</if> >已支付</option>
+                                <option value="nopay" <if condition="$payed eq 'nopay'">selected</if> >未支付</option>
+                            </select>
+                            <button class="btn btn-md btn-primary" type="submit">搜索</button>
+                        </div>
+                    </div>
+                </form>
+               <form method="post"  name="form">
+                    <table class="table table-striped table-bordered table-hover  m-t-md">
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="50"><input type="checkbox" name="chkall" onClick="checkallbox(this.form)" title="全选/取消" /></th>
+                                <th class="text-center" width="100">ID</th>
+                                <th class="text-center" width="200">接口</th>
+                                <th class="text-center" width="100">金币</th>
+                                <th class="text-center" width="100">流水号</th>
+                                <th class="text-center" width="50">支付状态</th>
+                                <th class="text-center" width="150">支付时间</th>
+                                <th class="text-center" width="150">创建时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <volist name='list' id='v'>
+                            <tr>
+                                <td class="text-center"><input type="checkbox" name="key" value="{$v.id}"></td>
+                                <td class="text-center">{$v.id}</td>
+                                <td class="text-center">{$v.payment}</td>
+                                <td class="text-center">{$v.coin}</td>
+                                <td class="text-center">{$v.trade_no}</td>
+                                <td class="text-center"><if condition="$v.payed eq 1"><span class="text-navy">已支付</span><else/><span class="text-danger">未支付</span></if></td>
+                                <td class="text-center">{$v.payedtime|date="Y-m-d H:i:s",###}</td>
+                                <td class="text-center">{$v.created_time|date="Y-m-d H:i:s",###}</td>
+                            </tr>
+                            </volist>
+                            </tbody>
+                    </table>
+                    <!--<button class="btn btn-primary btn-sm" type="button" onclick="checkall()">全选 / 反选</button>  <button class="btn btn-danger btn-sm" type="button" onclick="foreverdel()"><i class="fa fa-trash-o"></i> 删除选中</button> -->
+                    </form>
+                    <div class="pull-right pagination m-t-no">
+                        <div class="text-center">{$page}</div>
+                    <div>
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+                {__TOKEN__}
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__PUBLIC__/js/dialog/artdialog.js"></script>
+    <script src="__PUBLIC__/js/jquery.uploadfile.min.js"></script>
+    <script src="__PUBLIC__/js/upload.js"></script>
+</body>
+</html>

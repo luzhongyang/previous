@@ -1,0 +1,165 @@
+<include file="Public/header" />
+
+<div class="main">
+    <div class="news-answer am-cf wraper">
+        <div class="news-answer-left am-fl am-margin-top ">
+            <div class="news-answer-left-top">
+                <h1>{$data.detail.title}
+                    <i></i>
+                    <div class="share">
+                        <div class="bdsharebuttonbox am-fr bdshare-button-style0-24" data-bd-bind="1492546841815"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+                    </div>
+                </h1>
+                <p>{$data.detail.content}</p>
+                <div class="am-cf am-margin-bottom">
+                    <!-- <div class="am-fl"><a href="javascript:;"><img
+                            src="img/personal-homepage/personal-homepage-mycollect/picture-one.png"></a></div> -->
+                    <div class="am-fl am-margin-top-xs am-margin-left am-text-sm font_grey">
+                        <!-- <div class="am-fl"><a href="jacascript:;" >湾湾溪流</a></div> -->
+                        <time class="am-fl am-margin-left am-padding-right">{$data.detail.created_time|date="Y-m-d H:i:s",###}</time>
+                        <a class="font_grey" href="javascript:;">共&nbsp<span>{$data.detail.comment}</span>&nbsp回答</a>
+                    </div>
+                </div>
+            </div>
+            <!--评论和列表-->
+            <div class="news-answer-left-bottom">
+                <!-- 评论区 -->
+                <div class="am-margin-top-xl">
+                    <div class="title">
+                        <h2>参与讨论</h2> <span class="am-text-xs">({$data.detail.comment}条评论)</span>
+                    </div>
+                    <form action="{:U('discuss/reply')}" enctype="multipart/form-data" method="post" class="am-form am-margin-top">
+                        <div class="am-form-group">
+                        	<input type="hidden" name="source_id" value="{$data.detail.id}">
+                        	<input type="hidden" name="source_type" value="Discuss">
+                            <textarea class="am-radius" name="content" rows="5" placeholder="输入内容..."></textarea>
+                        </div>
+                        <p class="am-text-right"><button type="submit" class="am-btn am-btn-success am-radius">回复</button></p>
+                    </form>
+                </div>
+                <!--评论列表-->
+                <div class="bottom">
+                    <div class="bottom-name"><h6>全部讨论</h6></div>
+                    <hr/>
+                    <div class="bottom-content">
+                        <ul>
+                        	<volist name="data.list" id="vo">
+                            <li>
+                                <div class="content-img am-fl">
+                                    <img src="{$vo.user_avatar}" width="36" height="36" style="border-radius:20px;"/>
+                                </div>
+                                <div class="content-words am-fl">
+                                    <h6>{$vo.user_name}</h6>
+                                    <div class="time am-cf">
+                                        <div class="time-left am-fl"><span>{$vo.created_time|date="Y-m-d H:i:s",###}</span></div>
+                                        <div class="select-right am-fr">
+                                            <!-- <a href="javascript:;" ><i class="am-icon-commenting"></i>&nbsp<span>评论</span></a> -->
+                                            <a href="javascript:;" type="agree" source_id="{$vo.id}"><i class="am-icon-thumbs-o-up"></i>&nbsp<span>{$vo.agree}</span></a>
+                                            <a href="javascript:;" type="disagree" source_id="{$vo.id}"><i class="am-icon-thumbs-o-down"></i>&nbsp<span>{$vo.disagree}</span></a>
+                                        </div>
+                                    </div>
+                                    <p>{$vo.content}</p>
+                                </div>
+                            </li>
+                        	</volist>
+                        </ul>
+                    </div>
+                    <ul class="am-pagination am-pagination-centered">
+                        {$data.page}
+                    </ul>
+                </div>
+            </div>
+            <!--讨论-->
+            <div class="bgfff am-margin-top am-padding">
+                <div class="recommend">
+                    <div class="common-title">
+                        值得一看 <span class="am-fr"><a href="javascript:;" id="changing"><i class="am-icon-circle-o-notch"></i> 换一换</a></span>
+                    </div>
+                    <hr class="am-margin-top-0" />
+                    <ul class="am-list">
+                        <volist name="data.worth_list" id="vo">
+                            <li><a target="_blank" href="{:U('question/detail',array('id'=>$vo['id']))}">{$vo.title}<time>{$vo.created_time|date='Y-m-d',###}</time></a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="news-answer-right am-fr am-margin-top-lg">
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default am-margin-top-0" >
+                    <h2 class="am-titlebar-title">
+                        热门讨论
+                    </h2>
+                    <nav class="am-titlebar-nav">
+                        <a href="{:U('discuss/index')}" class="">更多 &raquo;</a>
+                    </nav>
+                </div>
+                <div class="am-padding-sm newslist">
+                    <volist name="data.hot_list" id="vo">
+                    <p><a href="{:U('discuss/detail',array('id'=>$vo['id']))}" class="am-list-item-hd ">{$vo.title}</a></p>
+                    </volist>
+                </div>
+            </div>
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+                    <h2 class="am-titlebar-title">热议话题</h2>
+                </div>
+                <div class="am-padding-sm topic-tags">
+                    <volist name="data.hot_tag_list" id="tag" mod="2">
+                    <a href="{:U('tag/detail',array('id'=>$tag['id']))}" <eq name="mod" value="0"> style="background:#76d499;"</eq><eq name="mod" value="1"> style="background:#93c1f9;"</eq> >{$tag.title}</a>
+                    </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />
+<script type="text/javascript">
+//  换一换
+$(document).off('click','#changing').on('click','#changing',function(){
+    $.ajax({
+        url: "{:U('question/changing')}",
+        async: true,
+        dataType: 'json',
+        data: {},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.status == 1) {
+                $('.am-list').html();
+                var sHtml = '';
+                $.each(ret.data, function(idx, obj){
+                    var sLink = "{:U('question/detail',array('id'=>"+obj.id+"))}";
+                    sHtml += '<li>';
+                    sHtml += '<a target="_blank" href="'+sLink+'">'+obj.title+'<time>'+obj.created_time+'</time></a>';
+                    sHtml += '</li>';
+                })
+                $('.am-list').html(sHtml);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//	赞和踩
+$(document).off('click',".select-right a").on('click',".select-right a",function(){
+	var this_obj = $(this);
+	$.ajax({
+        url: "{:U('ajax/agree')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":parseInt($(this).attr('source_id')),"source_type":'comment','type':$(this).attr('type')},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.status == 1) {
+                this_obj.find('span').html(ret.count);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+</script>
+<include file="Public/end" />

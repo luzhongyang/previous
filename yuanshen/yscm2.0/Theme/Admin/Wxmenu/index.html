@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义菜单 - {:C('site_title')}</title>
+    <meta name="keywords" content="自定义菜单">
+    <meta name="description" content="自定义菜单">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__PUBLIC__/js/dialog/ui-dialog.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-title">
+                <h5>微信自定义菜单</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="alert alert-success">
+                    <!-- <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> -->
+                    注意：一级菜单最多只能开启3个，二级子菜单最多开启5个！<br>
+                    只有保存主菜单后才可以添加子菜单<br>
+                    生成自定义菜单，必须在已经保存的基础上进行，临时勾选启用点击生成是无效的！第一步必须先修改保存状态！第二步点击生成！<br>
+                    当您为自定义菜单填写链接地址时请填写以“http://”开头，这样可以保证手机浏览的兼容性更好<br>
+                    撤销自定义菜单：撤销后，您的微信公众帐号上的自定义菜单将不存在；如果您想继续在微信公众帐号上使用自定义菜单，请点击“生成自定义菜单”按钮，将重新启用！
+                </div>
+                <a href="{:U('/admin/wxmenu/add')}"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus-circle"></i> 添加菜单</button></a>
+                <a href="{:U('/admin/wxmenu/createmenu')}"><button class="btn btn-primary btn-sm" type="button"><i class="fa fa-send-o"></i> 生成自定义菜单</button></a>
+                <a href="{:U('/admin/wxmenu/cancelmenu')}"><button class="btn btn-danger btn-sm" type="button"><i class="fa fa-send"></i> 撤消自定义菜单</button></a>
+                <table class="table table-striped table-bordered table-hover m-t-md" id="tablelist">
+                    <thead>
+                        <tr>
+                            <th>菜单名称</th>
+                            <th>事件类型</th>
+                            <th class="text-center" width="80">排序</th>
+                            <th class="text-center" width="80">状态</th>
+                            <th class="text-center" width="170">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <empty name="menu">
+                        <tr>
+                            <td colspan="5"><div class="alert alert-warning">无菜单数据！</div></td>
+                        </tr>
+                        </empty>
+                    <volist name="menu" id="val">
+                        <tr>
+                            <td>|--{$val.html}{$val.name}</td>
+                            <td>
+                                <if condition="$val['event_type'] eq 1">
+                               URL跳转
+                                <else/>
+                                关键字
+                                </if>
+                            </td>
+                            <td class="text-center">
+                               {$val.list_sort}
+                            </td>
+                            <td class="text-center">
+                                <if condition="$val['status'] eq 1">
+                                <span class="text-navy">启用</span>
+                                <else/>
+                                <span class="text-danger">禁用</span>
+                                </if>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a href="{:U('/admin/wxmenu/edit',array('id' => $val['id']))}"><button class="btn btn-white btn-sm" type="button"><em class="fa fa-edit"></em> 修改</button></a>
+                                    <a href="{:U('/admin/wxmenu/foreverdelete',array('id' => $val['id']))}" onclick="return confirm('确定要删除吗')"><button class="btn btn-white btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除</button></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

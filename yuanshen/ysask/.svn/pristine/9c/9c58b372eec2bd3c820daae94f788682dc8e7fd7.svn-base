@@ -1,0 +1,79 @@
+<?php
+/**
+ * 前台找答主栏目
+ */
+namespace Home\Controller;
+use Home\Controller\EmptyController;
+
+class ProfessorController extends EmptyController{
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->pagesize = 10;
+	}
+
+	public function index()
+	{
+		$userinfo = check_login();
+		$map = $list = array();
+		$db_pre = C('DB_PREFIX');
+		$is_hot = (int)I('request.is_hot');
+		$cate_id = (int)I('request.cate_id');
+		if($cate_id) {
+			$map['category_id'] = $cate_id;
+			$this->assign('cate_id',$cate_id);
+			$where_filter = " AND `{$db_pre}professor`.`category_id`='{$cate_id}' ";
+		}
+		if($is_hot) {
+			//	热门
+			$this->assign('is_hot','1');
+			$orderby_filter = " `{$db_pre}user`.`article` DESC,`{$db_pre}user`.`answer` DESC,`{$db_pre}user`.`updated_time` DESC ";
+		}else {
+			//	推荐
+			$this->assign('is_hot','0');
+			$orderby_filter = " `{$db_pre}user`.`answer` DESC,`{$db_pre}user`.`article` DESC,`{$db_pre}user`.`updated_time` DESC ";
+		}
+
+		$map['status'] = 1;
+		$count = M('Professor')->where($map)->count('id');
+		$Page = new \Think\Page($count,$this->pagesize);
+		$show = $Page->show();
+		$Model = new \Think\Model();
+
+		$list_sql =	"SELECT `{$db_pre}professor`.`user_id`,`{$db_pre}professor`.`skill`,`{$db_pre}user`.`avatar`,`{$db_pre}user`.`username`,`{$db_pre}user`.`description`,`{$db_pre}user`.`adopt`,`{$db_pre}user`.`city`,`{$db_pre}user`.`fans` FROM `{$db_pre}professor` LEFT JOIN `{$db_pre}user` ON `{$db_pre}professor`.`user_id`=`{$db_pre}user`.`id` WHERE `{$db_pre}user`.`status`>'0' AND `{$db_pre}professor`.`status`='1'".$where_filter." ORDER BY ".$orderby_filter." LIMIT "." $Page->firstRow,$Page->listRows";
+		//	推荐答主/热门答主
+		$list = $Model->query($list_sql);
+		foreach($list as $k=>$v) {
+			$list[$k]['title'] = isset($v['title']) ? $v['title'] : $v['skill'];
+			$list[$k]['city_name'] = D('Area')->getNameByid($v['city']);
+			$watch = M('Watch')->where(array('user_id'=>$userinfo['id'],'source_id'=>$v['user_id'],'source_type'=>'user'))->count('id');
+			if(!$watch) {
+				$list[$k]['is_followed'] = 0;
+			}else {
+				$list[$k]['is_followed'] = 1;
+			}
+		}
+		$cate_list = M('Category')->where(array('type'=>'professor'))->getField('id,title,created_time');
+		$question_fields = 'id,user_id,tag_ids,answer,view,money,title,created_time';
+		$new_question = M('Question')->where(array('status'=>1,'closed'=>0))->order(array('created_time'=>'desc'))->limit(10)->getField($question_fields);
+		$hot_author = D('User')->top('article',10);
+  		$tag_fields = 'id,title,watch';
+  		if($hot_tag = M('Tag')->order(array('watch'=>'desc'))->limit(25)->getField($tag_fields)) {
+  			foreach($hot_tag as $k=>$v) {
+  				$tag_list[$k]['tag_detail_url'] = U('tag/detail',array('id'=>$v['id']));
+  			}
+  		}
+        $assign = array(
+        	'nav'			=>	'professor',
+        	'page'			=>	$show,
+        	'list'			=>	$list,
+        	'cate_list'		=>	$cate_list,
+        	'new_question'	=>	$new_question,
+        	'hot_author'	=>	$hot_author,
+        	'hot_tag'		=>	$hot_tag,
+    	);
+    	$this->assign('data',$assign);
+        $this->display();
+	}
+}

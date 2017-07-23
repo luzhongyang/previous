@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>采集接口配置 - {:C('site_title')}</title>
+    <meta name="keywords" content="采集接口配置">
+    <meta name="description" content="采集接口配置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>采集接口设置</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" action="{:U('setting/caiji_update')}" method="POST">
+                        <input type="hidden" name="data" value="index">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">通信密钥：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="caiji_authorize" class="form-control" value="{$Setting_config.caiji_authorize}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 在WEB发布模块中填写此密钥</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">关联的用户ID：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="caiji_userid" value="{$Setting_config.caiji_userid}" class="form-control">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 后台添加内容、采集内容时所关联的用户ID,以英文下的逗号隔开</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">开启接口：</label>
+                            <div class="col-sm-2">
+                                <label class="radio-inline"><input type="radio" value="0" name="caiji_open" <eq name="Setting_config.caiji_open" value="0">checked</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="caiji_open" <eq name="Setting_config.caiji_open" value="1">checked</eq>>开启</label>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 建议只有使用时开启，以防出现安全问题</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <!--<div class="form-group">
+                            <label class="col-sm-2 control-label">自动缩略图：</label>
+                            <div class="col-sm-2">
+                                <label class="radio-inline"><input type="radio" value="0" name="caiji_autopic" <eq name="Setting_config.caiji_autopic" value="0">checked="checked"</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="caiji_autopic" <eq name="Setting_config.caiji_autopic" value="1">checked</eq>>开启</label>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 会自动提取内容中的第一张图为缩略图</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">保存远程图片：</label>
+                            <div class="col-sm-2">
+                                <label class="radio-inline"><input type="radio" value="0" name="caiji_autoimg" <eq name="Setting_config.caiji_autoimg" value="0">checked="checked"</eq>>关闭</label>
+                                <label class="radio-inline"><input type="radio" value="1" name="caiji_autoimg" <eq name="Setting_config.caiji_autoimg" value="1">checked</eq>>开启</label>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 自动保存远程图片到本地</span>
+                        </div>                       
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>-->
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                {__TOKEN__}
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

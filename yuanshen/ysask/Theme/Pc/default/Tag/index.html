@@ -1,0 +1,64 @@
+<include file="Public/header" />
+
+<div class="wraper">
+    <div class="bgfff am-padding classitem am-margin-top">
+        <a href="{:U('tag/index')}" class="am-btn am-btn-<if condition="$cate_id eq ''">success<else/>default</if> am-btn-xs am-radius">全部</a>
+        <volist name="data.cate_list" id="vo">
+            <a href="{:U('tag/index',array('cate_id'=>$vo['id']))}" class="am-btn am-btn-<if condition="$cate_id eq $vo['id']">success<else/>default</if> am-btn-xs am-radius">{$vo.title}</a>
+        </volist>
+    </div>
+    <div class="am-g">
+        <ul class="am-avg-sm-4 am-margin-top classtheme">
+            <volist name="data.list" id="vo">
+            <li>
+                <div>
+                    <a href="{:U('tag/detail',array('id'=>$vo['id']))}">
+                        <img class="am-circle" src="{$vo.logo}" width="40" height="40" />
+                        <strong class="am-text-success am-text-sm">{$vo.title}</strong>
+                    </a>
+                    <p class="am-text-left">{$vo.description}</p>
+                    <p>
+                        <span><strong class="am-text-danger">{$vo.watch}</strong><b>人关注</b></span>
+                    </p>
+                    <if condition="$vo.is_followed eq 1">
+                    <p><button type="button" class="am-btn am-btn-danger am-btn-xs am-radius" source_id="{$vo.id}">已关注</button></p>
+                    <else/>
+                    <p><button type="button" class="am-btn am-btn-danger am-btn-xs am-radius" source_id="{$vo.id}">关注</button></p>
+                    </if>
+                </div>
+            </li>
+            </volist>
+        </ul>
+        <ul class="am-pagination am-pagination-centered">
+           {$data.page}
+        </ul>
+    </div>
+</div>
+<include file="Public/footer" />
+<script type="text/javascript">
+$(document).off('click','.am-btn-danger').on('click','.am-btn-danger',function(){
+    var this_obj = $(this);
+    $.ajax({
+        url: "{:U('ajax/follow')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":parseInt($(this).attr('source_id')),"source_type":'tag'},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.status == 1) {
+                if(ret.followed == 'followed') {
+                    this_obj.html('已关注');
+                }else {
+                    this_obj.html('关注问题');
+                }
+            }else {
+                alert(ret.message);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        }
+    });
+})
+</script>
+<include file="Public/end" />

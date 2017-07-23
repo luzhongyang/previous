@@ -1,0 +1,556 @@
+<include file="Public/header" />
+<link rel="stylesheet" href="__PUBLIC__/pc/css/wangEditor.min.css" />
+<div class="main">
+    <div class="news-answer wraper">
+        <div class="am-u-sm-9 am-cf bgfff am-margin-top am-padding-bottom am-padding-top-lg">
+            <div class="news-answer-left-top">
+                <h1>{$data.detail.title}
+                    <strong>&nbsp</strong>
+                    <div class="worth-share am-cf">
+                        <div class="worth">
+                            <b>（
+                            <if condition="$data['detail']['status'] eq 0"> 待审核
+                            <elseif condition="$data['detail']['status'] eq 1"/>待解决
+                            <else /> 已解决
+                            </if>
+                            ）</b>
+                        </div>
+                        <div class="share">
+                            <div class="bdsharebuttonbox am-fr bdshare-button-style0-24" data-bd-bind="1492546841815"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+                        </div>
+                    </div>
+                </h1>
+                <div class="personal-f am-cf">
+                    <div class="y-self am-fl">
+                        <a href="{:U('user/index',array('id'=>$data[$detail['user_id']]))}"><img class="am-circle" width="36" height="36" src="<if condition="$data['detail']['user_avatar'] neq ''">{$data.detail.user_avatar}<else/>{$Think.config.site_user_defaultavatar}</if>"></a>
+                    </div>
+                    <div class="am-fl am-margin-top-xs am-margin-left">
+                        <div class="am-fl"><a href="{:U('user/index',array('id'=>$data[$detail['user_id']]))}" >{$data.detail.user_name}</a></div>
+                        <time class="am-fl am-margin-left am-padding-right">{$data.detail.created_time|date="Y-m-d H:i:s",###}</time>
+                        <div class="tags am-fl am-padding-left am-margin-right" style="border-left:1px solid #ccc;">
+                            <i class="am-icon-tags"></i>
+                            <volist name="data.detail.tag_list" id="vo">
+                            <a href="{:U('tag/detail',array('id'=>$vo['id']))}">{$vo.title}</a>
+                            </volist>
+                        </div>
+                        <a class="font_grey" href="javascript:;">共&nbsp<span>{$data.detail.answer}</span>&nbsp回答</a>
+                    </div>
+                    <div class="am-fr">
+                        <a href="javascript:;" class="am-btn am-btn-success am-radius" id="follow" source_id="{$data.detail.id}">关注问题</a>
+                    </div>
+                </div>
+                <div class="am-article-bd">
+                    <p>{$data.detail.description|htmlspecialchars_decode=###}</p>
+                </div>
+                <!--<div class="b-tools">
+                    <a href="javascript:;"><span class="am-icon-thumbs-up"><i>9000</i></span></a>
+                    <a href="javascript:;"><span class="am-icon-thumbs-down"><i>23</i></span></span></a>
+                </div>-->
+            </div>
+            <hr/>
+            <if condition="$data.type neq 0">
+                <!--偷偷看/对答-->
+                <div class="news-answer-left-middle">
+                    <div class="talkanswer-top am-cf">
+                        <div class="name-title am-fl">
+                            <b>summersummer</b><span>理工科专家</span>
+                        </div>
+                        <div class="see-others am-fr ">
+                            <span><em>{$data.peep|default="0"}</em>人偷偷看</span>
+                        </div>
+                    </div>
+                    <div class="am-margin-top-xl" style="height:380px;">
+                        <div class="title">
+                            <h2>参与回答</h2> <span class="am-text-xs">({$data.detail.answer}条答案)</span>
+                        </div>
+                        <div class="am-form-group am-margin-top-sm" style="height:280px;">
+                            <div class="am-u-sm-10">
+                                <div class="editor" style="text-align:left; width:800px;">
+                                </div>
+                                <div id="divDemo" style="height: 269px;" class="wangEditor-txt" contenteditable="true"></div>
+                                <textarea id="answer_content" style="display:none;"></textarea>
+                                <p class="am-text-right" style="width:800px;"><button type="button" class="am-btn am-btn-success am-radius" id="ask_answer">发表</button></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="our-talk">
+                        <ul class="am-comments-list am-comments-list-flip">
+                            <volist name="data.answers_list" id="vo" mod="2">
+                                <if condition="$vo.peep eq 1">
+                                    <li class="am-comment am-cf">
+                                        <a href="#link-to-user-home ">
+                                            <img src="<if condition="$vo.user_avatar neq ''">{$vo.user_avatar}<else/>{$Think.config.site_user_defaultavatar}</if>" alt=""
+                                                 class="am-comment-avatar" width="48" height="48"/>
+                                        </a>
+                                        <div class="sese am-fl"
+                                             data-am-modal="{target: '#modal_pay', closeViaDimmer: 0, width: 300}">
+                                            <a href="javascript:;">
+                                                <div class="ssee am-text-middle" >
+                                                    <div class="am-vertical-align-middle am-icon-eye eses">
+                                                        <span>一元偷偷看</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                <else />
+                                    <li class="am-comment am-fl <eq name="mod" value="1">am-comment-flip</eq>">
+                                        <a class="am-fl" href="{:U('user/index',array('id'=>$vo['user_id']))}">
+                                            <img src="<if condition="$vo.user_avatar neq ''">{$vo.user_avatar}<else/>{$Think.config.site_user_defaultavatar}</if>" alt="" class="am-comment-avatar" width="48" height="48"></a>
+                                        <div class="am-comment-main am-fl">
+                                            <div class="am-comment-bd am-text-sm" >
+                                                <p>{$vo.content|htmlspecialchars_decode=###}</p>
+                                            </div>
+                                            <footer class="am-comment-footer font_grey am-text-sm">
+                                                <time>{$vo.created_time|date="Y-m-d H:i:s",###}</time>
+                                            </footer>
+                                        </div>
+                                    </li>
+                                </if>
+                            </volist>
+                        </ul>
+                        <div class="btn-s">
+                            <a class="am-fr jubao am-btn am-btn-danger am-btn-xs am-radius" href="javascipt:;" data-am-modal="{target: '#modal_report', closeViaDimmer: 0, width: 350}"><i class="am-icon-bell-o"></i> 举报</a>
+                            <button type="submit" class="am-btn am-btn-success am-btn-xs am-radius" data-am-modal="{target: '#modal_rewards', closeViaDimmer: 0, width: 500}"><span>赏</span></button>
+                        </div>
+                    </div>
+                </div>
+            <else/>
+                <div class="">
+                    <div>
+                        <a href="{:U('user/index',array('id'=>$data[$detail['user_id']]))}">{$data.detail.user_name}</a>
+                        <span class="font_grey"> | {$data.detail.user_title}</span>
+                    </div>
+                    <div class="am-margin-top-xl" style="height:380px;">
+                        <div class="title">
+                            <h2>参与回答</h2> <span class="am-text-xs">({$data.detail.answer}条答案)</span>
+                        </div>
+                        <div class="am-form-group am-margin-top-sm" style="height:280px;">
+                            <div class="am-u-sm-10">
+                                <div class="editor" style="text-align:left; width:800px;">
+                                </div>
+                                <div id="divDemo" style="height: 269px;" class="wangEditor-txt" contenteditable="true"></div>
+                                <textarea id="answer_content" style="display:none;"></textarea>
+                                <p class="am-text-right" style="width:800px;"><button type="button" class="am-btn am-btn-success am-radius" id="ask_answer">发表</button></p>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="am-comments-list am-comments-list-flip am-margin-left-xs am-cf ">
+                        <volist name="data.answers_list" id="vo" mod="2">
+                            <li class="am-comment am-fl <eq name="mod" value="1">am-comment-flip</eq>">
+                                <a class="am-fl" href="{:U('user/index',array('id'=>$vo['user_id']))}">
+                                    <img src="<if condition="$vo.user_avatar neq ''">{$vo.user_avatar}<else/>{$Think.config.site_user_defaultavatar}</if>" alt="" class="am-comment-avatar" width="48" height="48"></a>
+                                <div class="am-comment-main am-fl">
+                                    <div class="am-comment-bd am-text-sm" >
+                                        <p>{$vo.content|htmlspecialchars_decode=###}</p>
+                                    </div>
+                                    <footer class="am-comment-footer font_grey am-text-sm">
+                                        <time>{$vo.created_time|date="Y-m-d H:i:s",###}</time>
+                                    </footer>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                    <div class="am-cf">
+                        <div class="am-fl shares"></div>
+                        <div class="am-fr">
+                            <a class="am-btn am-btn-success am-btn-xs am-radius" href="javascipt:;" data-am-modal="{target: '#modal_rewards', closeViaDimmer: 0, width: 500}"><i class="am-icon-jpy"></i> 打赏</a>
+                            <a class="am-btn am-btn-warning am-btn-xs am-radius" href="javascipt:;" id="agree" source_id="{$data.detail.id}"><i class="am-icon-thumbs-o-up"></i> 赞(<span>{$data.detail.agree|default="0"}</span>)</a>
+                            <a class="am-btn am-btn-danger am-btn-xs am-radius" href="javascipt:;" data-am-modal="{target: '#modal_report', closeViaDimmer: 0, width: 350}"><i class="am-icon-bell-o"></i> 举报</a>
+                        </div>
+                    </div>
+                    <ul class="am-pagination am-pagination-centered">
+                        {$data.page}
+                    </ul>
+                </div>
+            </if>
+            <div class="bgfff am-margin-top am-padding">
+                <div class="recommend">
+                    <div class="common-title">
+                        值得一看 <span class="am-fr"><a href="javascript:;" id="changing"><i class="am-icon-circle-o-notch"></i> 换一换</a></span>
+                    </div>
+                    <hr class="am-margin-top-0" />
+                    <ul class="am-list">
+                        <volist name="data.worth_list" id="vo">
+                            <li><a target="_blank" href="{:U('question/detail',array('id'=>$vo['id']))}">{$vo.title}<time>{$vo.created_time|date='Y-m-d',###}</time></a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-sm-3 am-margin-top">
+            <a href="{:U('question/ask')}" class="am-btn am-btn-warning am-btn-block am-radius"><i class="am-icon-question-circle"></i>
+                我要提问</a>
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+                    <h2 class="am-titlebar-title">推荐答主</h2>
+                </div>
+                <div class="am-cf">
+                    <ul class="am-padding-left-sm am-cf">
+                        <volist name="data.hot_pro_list" id="vo">
+                            <li class="am-margin-vertical-sm">
+                                <div class="am-fl am-margin-right">
+                                    <a href="{:U('user/index',array('id'=>$vo['id']))}">
+                                        <img class="am-circle" width="46" height="46" src="<if condition="$vo.avatar neq ''">{$vo.avatar}<else/>{$Think.config.site_user_defaultavatar}</if>" />
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="{:U('user/index',array('id'=>$vo['id']))}">{$vo.username}</a>
+                                    <div class="am-text-xs am-link-muted"><span class="am-margin-right">好评数 {$vo.agree}</span></div>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+                    <h2 class="am-titlebar-title">
+                        热门问题
+                    </h2>
+                    <nav class="am-titlebar-nav">
+                        <a href="{:U('question/index')}" class="">更多 &raquo;</a>
+                    </nav>
+                </div>
+                <div class="am-padding-sm newslist">
+                    <volist name="data.hot_q_list" id="vo">
+                    <p><a href="{:U('question/detail',array('id'=>$vo['id']))}" class="am-list-item-hd ">{$vo.title}<span class="am-fr font_grey">{$vo.answer} 回答</span></a></p>
+                    </volist>
+                </div>
+            </div>
+            <div class="bgfff">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+                    <h2 class="am-titlebar-title ">
+                        热议话题
+                    </h2>
+                </div>
+                <div class="am-padding-sm topic-tags">
+                    <volist name="data.hot_tag_list" id="tag" mod="2">
+                    <a href="{:U('tag/detail',array('id'=>$tag['id']))}" <eq name="mod" value="0"> style="background:#76d499;"</eq><eq name="mod" value="1"> style="background:#93c1f9;"</eq> >{$tag.title}</a>
+                  </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 举报 -->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal_report">
+  <div class="am-modal-dialog bgfff">
+    <div class="am-modal-hd">举报
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <div class="am-margin-top am-text-left">
+        <form class="am-form" method="post">
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="泄露了我的隐私、诽谤我" data-am-ucheck/> 泄露了我的隐私、诽谤我</label>
+            </div>
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="侵犯了我的权力或抄袭了我的内容" data-am-ucheck/> 侵犯了我的权力或抄袭了我的内容</label>
+            </div>
+            <div class="am-radio">
+                <input type="radio" name="report" value="垃圾广告信息" data-am-ucheck/>
+                <label>垃圾广告信息</label>
+            </div>
+            <div class="am-radio">
+               <label><input type="radio" name="report" value="色情、暴力、血腥等违反法律法规的内容" data-am-ucheck/> 色情、暴力、血腥等违反法律法规的内容</label>
+            </div>
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="政治敏感" data-am-ucheck/> 政治敏感</label>
+            </div>
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="辱骂、挑衅、歧视、泄露他人隐私" data-am-ucheck/> 辱骂、挑衅、歧视、泄露他人隐私</label>
+            </div>
+            <div class="am-radio">
+               <label><input type="radio" name="report" value="看相、算命、星盘等迷信" data-am-ucheck/> 看相、算命、星盘等迷信</label>
+            </div>
+            <div class="am-radio">
+                <label><input type="radio" name="report" value="其他" data-am-ucheck/> 其他</label>
+            </div>
+            <div class="am-form-group">
+                <textarea placeholder="请输入内容" name="intro"></textarea>
+            </div>
+            <p><button type="button" class="am-btn am-btn-default am-btn-block" id="ajax_report">提交</button></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<include file="Public/footer" />
+<script src="__PUBLIC__/pc/js/wangEditor.min.js"></script>
+<script  type="text/javascript">
+
+var editor = '';
+$(document).ready(function(){
+    editor = new wangEditor('divDemo');
+    editor.config.menus = [
+        '|',
+        'bold',
+        'underline',
+        'italic',
+        '|',
+        'quote',
+        'source',
+        'orderlist',
+        'unorderlist',
+        '|',
+        'img',
+        'video',
+        '|',
+        'eraser'
+    ];
+    editor.config.uploadImgUrl = '/api/uploads/upload';
+    editor.config.uploadImgFileName = 'file';
+
+    editor.config.uploadImgFns.onload = function (resultText, xhr) {
+        var originalName = editor.uploadImgOriginalName || '';
+        var srcUrl = JSON.parse(resultText);
+        editor.command(null, 'insertHtml', '<img src="' + srcUrl.url + '" alt="' + originalName + '" style="max-width:100%;"/>');
+    };
+
+    editor.config.uploadImgFns.ontimeout = function (xhr) {
+        alert('上传超时');
+    };
+
+    editor.config.uploadImgFns.onerror = function (xhr) {
+        alert('上传错误');
+    };
+    // 表情
+    editor.config.emotions = {
+        'default': {
+            title: '默认',
+            data: './wangEditor/test/emotions.data'
+        },
+        'weibo': {
+            title: '微博表情',
+            data: [
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
+                    value: '[草泥马]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
+                    value: '[神马]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
+                    value: '[浮云]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
+                    value: '[给力]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
+                    value: '[围观]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
+                    value: '[威武]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif',
+                    value: '[熊猫]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif',
+                    value: '[兔子]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif',
+                    value: '[奥特曼]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif',
+                    value: '[囧]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/hufen_thumb.gif',
+                    value: '[互粉]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c4/liwu_thumb.gif',
+                    value: '[礼物]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif',
+                    value: '[呵呵]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif',
+                    value: '[哈哈]'
+                }
+            ]
+        }
+    };
+
+    editor.create();
+    editor.onchange = function () {
+        $("#answer_content").html(editor.$txt.html());
+    };
+})
+
+//  关注和取关问题
+$(document).off('click','#follow').on('click','#follow',function(){
+    $.ajax({
+        url: "{:U('ajax/follow')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":parseInt($(this).attr('source_id')),"source_type":'question'},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.status == 1) {
+                if(ret.followed == 'followed') {
+                    $('#follow').html('已关注');
+                }else {
+                    $('#follow').html('关注问题');
+                }
+            }else {
+                layer.msg(ret.message);
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//  赞
+$(document).off('click','#agree').on('click','#agree',function(){
+    var this_obj = $(this);
+    $.ajax({
+        url: "{:U('ajax/agree')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":parseInt($(this).attr('source_id')),"source_type":'question','type':'agree'},
+        type: 'POST',
+        success: function (ret) {
+            layer.msg(ret.message);
+            if(ret.status == 1) {
+                this_obj.find('span').html(ret.count);
+            }else {
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//  打赏
+$(document).off('click','#dashang').on('click','#dashang',function(){
+    check_login();
+	$.ajax({
+        url: "{:U('ajax/getPayUrl')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_type":'answer',"souce_id":8,"touser":18,"coin":10},
+        type: 'POST',
+        success: function (ret) {
+    		var url = "/ajax/getQrcode/data/"+ret.data;
+    		console.log(url);
+			// $(".dasahngqrcode").attr("src",url).css({"display":"block"});
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//  换一换
+$(document).off('click','#changing').on('click','#changing',function(){
+    $.ajax({
+        url: "{:U('question/changing')}",
+        async: true,
+        dataType: 'json',
+        data: {},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.status == 1) {
+                $('.am-list').html();
+                var sHtml = '';
+                $.each(ret.data, function(idx, obj){
+                    var sLink = "{:U('question/detail',array('id'=>"+obj.id+"))}";
+                    sHtml += '<li>';
+                    sHtml += '<a target="_blank" href="'+sLink+'">'+obj.title+'<time>'+obj.created_time+'</time></a>';
+                    sHtml += '</li>';
+                })
+                $('.am-list').html(sHtml);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//  举报
+$(document).off('click','#ajax_report').on('click','#ajax_report',function(){
+    var source_id = parseInt("{$data.detail.id}");
+    var source_type = "question";
+    var reason = $("input[name='report']:checked").val();
+    var intro = $("textarea[name='intro']").val();
+    $.ajax({
+        url: "{:U('ajax/report')}",
+        async: true,
+        dataType: 'json',
+        data: {"source_id":source_id,"source_type":source_type,"reason":reason,"intro":intro},
+        type: 'POST',
+        success: function (ret) {
+            layer.msg(ret.message);
+            if(ret.status == 1) {
+                $('.am-close-spin').click();
+            }else {
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+
+//  发表答案
+$(document).off('click','#ask_answer').on('click','#ask_answer',function(){
+    var question_id = parseInt("{$data.detail.id}");
+    var answer_content = $('#answer_content').val();
+    $.ajax({
+        url: "{:U('ajax/askAnswer')}",
+        async: true,
+        dataType: 'json',
+        data: {"question_id":question_id,"content":answer_content},
+        type: 'POST',
+        success: function (ret) {
+            layer.msg(ret.message);
+            if(ret.status == 1) {
+                location.reload();
+            }else {
+                setTimeout(function(){
+                    if(ret.error == 101) {
+                        location.href = '/login/login';
+                    }
+                },1500);
+            }
+        },
+        error: function (xhr, status, err) {
+            alert(err);
+        },
+    });
+})
+</script>
+<include file="Public/end" />

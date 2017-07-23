@@ -1,0 +1,107 @@
+<extend name="Common:layout" />
+<block name="main">
+    <form name="myform" action="/index.php?m=install&c=index&a=index&step=3" method="post" id="myform" onsubmit="return check();" class="form-horizontal" >
+        <fieldset class="step" id="default-step-2" >
+            <div class="row">
+                <div class="col-lg-6">
+                    <section class="panel">
+                        <header class="panel-heading">填写数据库信息</header>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">数据库主机：</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="db_host" id="db_host" class="form-control" value="localhost">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">数据库帐号：</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="db_user" id="db_user" value="root" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">数据库密码：</label>
+                                <div class="col-sm-5">
+                                    <input type="password" name="db_pass" id="db_pass" value="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">数据库名称：</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="db_name" id="db_name" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">数据库前缀：</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="db_prefix" id="db_prefix" class="form-control" value="ys_">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-lg-6">
+                    <section class="panel admin">
+                        <header class="panel-heading">填写管理员信息</header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">管理员帐号：</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="admin_username" id="admin_username" class="form-control" value="admin" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">管理员密码：</label>
+                                <div class="col-sm-5">
+                                    <input type="password" name="admin_password" id="admin_password" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">重复密码：</label>
+                                <div class="col-sm-5">
+                                    <input type="password" name="repassword" id="repassword" class="form-control" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="text-center stepbtn">
+                <input type="submit" name="submit" class="btn btn-info btn-shadow btn-step" value="开始安装" >
+            </div>
+        </fieldset>
+    </form>
+</block>
+<block name="footer">
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <script>
+        function check() {
+            if (
+                    $('#db_host').val() == '' ||
+                    $('#db_user').val() == '' ||
+                    //$('#db_pass').val() == '' ||
+                    $('#db_name') == ''
+            ) {
+                alert('请填写完整数据库信息');
+                return false;
+            }
+
+            if ($('#admin_username').val() == '') {
+                alert('请输入管理员账号');
+                return false;
+            }
+
+            if ($('#admin_password').val() == '') {
+                alert('请输入管理员密码');
+                return false;
+            }
+
+            if ($('#admin_password').val() != $('#repassword').val()) {
+                alert('两次输入密码不一致');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</block>

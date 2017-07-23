@@ -1,0 +1,34 @@
+<form id="questionForm" method="POST" role="form" action="{:U('question/addtoedit')}">
+    <input type="hidden" name="data[id]" value="{$detail.id}">
+    <div class="form-group  ">
+        <label for="title"> 问题概述  :</label>
+        <input id="title" type="text" name="data[title]" class="form-control input-lg" placeholder="请在这里概述您的问题" value="{$detail.title}" readonly="readonly">
+    </div>
+
+    <div class="form-group  ">
+        <label for="question_editor">问题描述(选填)</label><br/>
+        <textarea name="data[description]">{$detail.description}</textarea>
+   </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <select name="data[category_id]" id="category_id" class="form-control">
+                    <option value="0">{$detail.category_id}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <select name="data[tag_id]" id="tag_id" class="form-control">
+                    <option value="0">{$detail.tag_id}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-20">
+        <div class="col-xs-12 col-md-1">
+            <button type="submit" class="btn btn-primary pull-right">确认编辑</button>
+        </div>
+    </div>
+</form>

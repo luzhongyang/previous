@@ -1,0 +1,130 @@
+<include file="Public/header" />
+<div class="member-main">
+    <div class="am-cf">
+        <div class="member-sidebar">
+            <div class="avator-wapper">
+                <div class="avator-mode">
+                    <img class="am-circle" src="{$user.avatar}" width="92" height="92">
+                    <div class="update-avator" style="bottom: -30px;">
+                        <p><a href="javascript:void(0);" class="js-avator-link">更换头像</a></p>
+                    </div>
+                </div>
+                <div class="des-mode">
+                    <p>{$user.username}</p>
+                    <dl class="auth-list">
+                        <dd><i class="am-icon-user"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未实名认证</div></dd>
+                        <dd><i class="am-icon-phone"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>还未绑定手机</div></dd>
+                        <dd class="active"><i class="am-icon-comments-o"></i><div class="icon-tips hide"><div class="triangle_border_up"><span></span></div>你已绑定邮箱</div></dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="list-wapper">
+                <h2>账户设置 </h2>
+                <div class="line"></div>
+                <ul class="menu">
+                    <li><a href="{:UU('user/personal_data')}" class="on">基本信息<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/payment')}">支付记录<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/bank')}">银行帐号<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/msg_setting')}">提醒设置<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/security')}">安全设置<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                    <li><a href="{:UU('user/avatar')}">修改头像<span class="arr"><i class="am-icon-angle-right"></i></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="member-right">
+            <div class="common-title">
+                <a href="javascript:;"><span>基本信息</span></a>
+            </div>
+            <hr class="am-margin-top-0" />
+            <form class="am-form am-form-horizontal" style="width:500px;" method="post">
+                    <div class="am-form-group">
+                        <label class="am-u-sm-3 am-text-right">ID:</label>
+                        <div class="am-u-sm-9">
+                            {$user.id}<span class="am-text-sm am-margin-left">ID由系统自动生成</span>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-3 am-text-right">用户名:</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" name="username" placeholder="可由汉字、字母、数字、下划线组成，且不超过20个字" value="{$user.username}"/>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-3 am-text-right" >个性签名:</label>
+                        <div class="am-u-sm-9">
+                            <textarea name='description' placeholder="请输入50字以内文字形容自己">{$user.description}</textarea>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-3 am-text-right">性别:</label>
+                        <div class="am-u-sm-9">
+                            <label class="am-radio-inline"><input type="radio" name="sex" value="1" <if condition="$user['sex'] eq 1">checked</if> /> 男</label>
+                            <label class="am-radio-inline"><input type="radio" name="sex" value="2" <if condition="$user['sex'] eq 2">checked</if> /> 女</label>
+                            <label class="am-radio-inline"><input type="radio" name="sex" value="3" <if condition="$user['sex'] eq 0">checked</if>/> 保密</label>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-3 am-text-right">生日:</label>
+                        <div class="am-u-sm-9 am-form-icon">
+                            <i class="am-icon-calendar" style="left: 1.5em;"></i>
+                            <input type="text" name="birthday" class="am-form-field" value="{:date('Y-m-d',$user['birthday'])}" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" readonly/>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-3 am-text-right">所在地区:</label>
+                        <div class="am-u-sm-9">
+                            <div class="am-g">
+                                <div class="am-u-sm-4 am-padding-left-0">
+                                    <select name="province" required><option value="">---请选择--</option></select>
+                                </div>
+                                <div class="am-u-sm-4 am-padding-left-0 am-padding-right-0">
+                                    <select name="city" required><option value="">---请选择--</option></select>
+                                </div>
+                                <div class="am-u-sm-4 am-padding-right-0">
+                                    <select name="area" required><option value="">---请选择--</option></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-3 am-text-right">身份介绍:</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" name="title" placeholder="身份" value="{$user.title}" />
+                        </div>
+                    </div>
+                <div class="am-form-group">
+                    <div class="am-u-sm-offset-3  am-u-sm-9">
+                        <button type="submit" class="am-btn am-btn-success am-radius">确认</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="flinks">
+        <ul class="">
+            <li><a href="" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">文章</a></li>
+            <li><a href="" target="_blank">问答</a></li>
+            <li><a href="" target="_blank">话题</a></li>
+            <li><a href="" target="_blank">讨论</a></li>
+            <li><a href="" target="_blank">找答主</a></li>
+            <li><a href="" target="_blank">商城</a></li>
+        </ul>
+    </div>
+    Copyright © 2015-2016 168282.com. All Rights Reserved.  皖ICP备16011406号
+</footer>
+<script src="__PUBLIC__/pc/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/pc/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/pc/js/common.js"></script>
+<script src="__PUBLIC__/pc/js/district.js"></script>
+<script src="__PUBLIC__/pc/js/laydate/laydate.js"></script>
+<script>
+$(function(){
+    new PCAS("province","city","area");
+});
+</script>
+</body>
+</html>

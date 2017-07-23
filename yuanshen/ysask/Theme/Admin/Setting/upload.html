@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上传参数设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="上传参数设置">
+    <meta name="description" content="上传参数设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>上传参数设置</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" action="{:U('setting/upload_update')}" method="POST">
+                        <input type="hidden" name="data" value="index">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">大小限制：</label>
+                            <div class="col-sm-1">
+                                <input type="text" name="upload_size" class="form-control" value="{$Setting_config.upload_size}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 单位MB，0代表不限制</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">图片文件类型：</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="upload_img" class="form-control" value="{$Setting_config.upload_img}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 格式：gif|jpg|png</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">视频文件类型：</label>
+                            <div class="col-sm-2">
+                               <input type="text" name="upload_video" class="form-control" value="{$Setting_config.upload_video}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 格式：swf|flv</span>
+                        </div>
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">附件文件类型：</label>
+                            <div class="col-sm-3">
+                               <input type="text" name="upload_file" class="form-control" value="{$Setting_config.upload_file}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 格式：rar|zip</span>
+                        </div>                       
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">保存路径：</label>
+                            <div class="col-sm-2">
+                               <input type="text" name="upload_path" class="form-control" value="{$Setting_config.upload_path}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 如：Uploads</span>
+                        </div>                       
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">路径保存风格：</label>
+                            <div class="col-sm-2">
+                               <input type="text" name="upload_style" class="form-control" value="{$Setting_config.upload_style}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 如：Y-m-d</span>
+                        </div>                       
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">远程访问地址：</label>
+                            <div class="col-sm-3">
+                               <input type="text" name="upload_http" class="form-control" value="{$Setting_config.upload_http}" required>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 必须/结尾,留空则不使用,如http://www.168282.com/upload/</span>
+                        </div>                       
+                        <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                {__TOKEN__}
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

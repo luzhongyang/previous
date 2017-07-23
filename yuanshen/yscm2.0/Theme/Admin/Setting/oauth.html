@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第三方登录设置 - {:C('site_title')}</title>
+    <meta name="keywords" content="第三方登录设置">
+    <meta name="description" content="第三方登录设置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>第三方登录设置</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="tabbable" id="tabs-361789">
+                            <form class="form-horizontal" action="{:U('setting/oauth_update')}" method="POST">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#panel-1" data-toggle="tab">QQ登录设置</a></li>
+                                    <li><a href="#panel-2" data-toggle="tab">手机端QQ登录</a></li>
+                                    <li><a href="#panel-3" data-toggle="tab">微博登录</a></li>
+                                    <li><a href="#panel-4" data-toggle="tab">手机端微博登录</a></li>
+                                </ul>
+                                <div class="tab-content">
+                               
+                                    <div class="tab-pane active" id="panel-1">
+                                        <div class="ibox-content">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">APPkey：</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" name='qq_key' value="{$Setting_config.THINK_SDK_QQ.APP_KEY}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">APPsecret：</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" name='qq_secret' value="{$Setting_config.THINK_SDK_QQ.APP_SEC}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">授权回调页：</label>
+                                                    <div class="col-sm-3"><span class="help-block m-b-none">http://www.你的域名/account/qqcallback</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"><a href="http://connect.qq.com" target="_blank">点击此处</a></label>
+                                                    <div class="col-sm-3"><span class="help-block m-b-none">获取QQ互联APPKey及APPsecret</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12 col-sm-offset-2">
+                                                        <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="button"><i class="fa fa-repeat"></i> 重 置</button>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>                                         
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane" id="panel-2">
+                                        <div class="ibox-content">                                            
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">APPkey：</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" name='qqm_key' value="{$Setting_config.THINK_SDK_QQM.APP_KEY}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">APPsecret：</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" name='qqm_secret' value="{$Setting_config.THINK_SDK_QQM.APP_SEC}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">授权回调页：</label>
+                                                    <div class="col-sm-3"><span class="help-block m-b-none">http://m.你的域名/account/qqcallback</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"><a href="http://connect.qq.com" target="_blank">点击此处</a></label>
+                                                    <div class="col-sm-3"><span class="help-block m-b-none">获取QQ互联APPKey及APPsecret</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12 col-sm-offset-2">
+                                                        <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="button"><i class="fa fa-repeat"></i> 重 置</button>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>                                         
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-pane" id="panel-3">
+                                        <div class="ibox-content">                                            
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">APPkey：</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" name='sina_key' value="{$Setting_config.THINK_SDK_SINA.APP_KEY}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">APPsecret：</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" name='sina_secret' value="{$Setting_config.THINK_SDK_SINA.APP_SEC}" class="form-control">
+                                                    </div>
+                                                </div>
+                                               <!--  <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">验证代码：</label>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" name='sina_code' value="{$Setting_config.sina_code}" class="form-control" required data-msg-required="请输入验证代码">
+                                                    </div>
+                                                </div> -->
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">授权回调页：</label>
+                                                    <div class="col-sm-5"><span class="help-block m-b-none">http://www.你的域名/account/wbcallback</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">取消授权回调页</label>
+                                                    <div class="col-sm-3"><span class="help-block m-b-none">例：http://www.168282.com</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"><a href="http://open.weibo.com" target="_blank">点击此处</a></label>
+                                                    <div class="col-sm-3"><span class="help-block m-b-none">获取新浪微博APPKey及APPsecret</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12 col-sm-offset-2">
+                                                        <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="button"><i class="fa fa-repeat"></i> 重 置</button>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane" id="panel-4">
+                                        <div class="ibox-content">                                            
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">APPkey：</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" name='sinam_key' value="{$Setting_config.THINK_SDK_SINAM.APP_KEY}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">APPsecret：</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" name='sinam_secret' value="{$Setting_config.THINK_SDK_SINAM.APP_SEC}" class="form-control">
+                                                    </div>
+                                                </div>
+                                               <!--  <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">验证代码：</label>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" name='msina_code' value="{$Setting_config.msina_code}" class="form-control" required data-msg-required="请输入验证代码">
+                                                    </div>
+                                                </div> -->
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">授权回调页：</label>
+                                                    <div class="col-sm-5"><span class="help-block m-b-none">http://m.你的域名/account/wbcallback</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">取消授权回调页</label>
+                                                    <div class="col-sm-3"><span class="help-block m-b-none">例：http://m.168282.com</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label"><a href="http://open.weibo.com" target="_blank">点击此处</a></label>
+                                                    <div class="col-sm-3"><span class="help-block m-b-none">获取新浪微博APPKey及APPsecret</span></div>
+                                                </div>
+                                                <div class="hr-line-dashed m-t-sm m-b-sm"></div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12 col-sm-offset-2">
+                                                        <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="button"><i class="fa fa-repeat"></i> 重 置</button>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            
+                                        </div>
+                                    </div>                                
+                                </div>
+                                {__TOKEN__}</form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

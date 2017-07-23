@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>源神CMS笑话系统安装</title>
+</head>
+<body>
+    <h1>第{$step}步</h1>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>验证码配置 - {:C('site_title')}</title>
+    <meta name="keywords" content="验证码配置">
+    <meta name="description" content="验证码配置">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>验证配置</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" action="{:U('setting/checkcode_update')}" method="POST">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">开启验证码</label>
+                            <div class="col-sm-2">
+                                 <select class="form-control" name="is_checkcode" onChange="setclose(this.value)">
+                                    <option value="0" <eq name="Setting_config.is_checkcode" value="0">selected="selected"</eq>>关闭</option>
+                                    <option value="1" <eq name="Setting_config.is_checkcode" value="1">selected="selected"</eq>>开启</option>
+                                </select>
+                            </div>
+                        </div>            
+                        <div class="form-group checktype" style="display:<if condition="$Setting_config['is_checkcode'] eq 1">block<else />none</if>;">
+                            <label class="col-sm-2 control-label">验证码展示方式：</label>
+                            <div class="col-sm-4">
+                                <label class="radio-inline"><input id="t1_1" type="radio" value="1" name="checkcode_type" <eq name="Setting_config.checkcode_type" value="1">checked</eq>>普通验证</label>
+                                <label class="radio-inline"><input id="t1_2" type="radio" value="2" name="checkcode_type" <eq name="Setting_config.checkcode_type" value="2">checked</eq>>极验证</label>
+                            </div>
+                        </div>
+                        <div class="form-group ji <neq name="Setting_config.checkcode_type" value="2">no</neq>">
+                            <label class="col-sm-2 control-label">极验证ID：</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="GEETEST_ID" class="form-control" value="{$Setting_config.GEETEST_ID}" required>
+                            </div>
+                            <span class="help-block m-b-none"> *</span>
+                        </div>
+                        <div class="form-group ji <neq name="Setting_config.checkcode_type" value="2">no</neq>">
+                            <label class="col-sm-2 control-label">极验证KEY：</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="GEETEST_KEY" class="form-control" value="{$Setting_config.GEETEST_KEY}" required>
+                            </div>
+                            <span class="help-block m-b-none"> *</span>
+                        </div>
+                        <div class="form-group ji <neq name="Setting_config.checkcode_type" value="2">no</neq>">
+                            <label class="col-sm-2 control-label">极验证ID、KEY：</label>
+                            <div class="col-sm-4">
+                                <span class="help-block m-b-none"><a class="text-navy" href="http://www.geetest.com" title="获取极验证ID、KEY">马上获取</a> 请先到极验官方注册账号获取ID和KEY.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-2">
+                                {__TOKEN__}
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;保 存</button>　<button class="btn btn-white" type="reset"><i class="fa fa-repeat"></i> 重 置</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script>
+function setclose(t0)
+{
+    if(t0==0){
+        $(".no").css("display","none");
+        $(".pt").css("display","none");
+        $(".ji").css("display","none");
+        $(".checktype").css("display","none");
+    }else{
+        $(".no").css("display","block");
+        $(".checktype").css("display","block");
+        if($("#t1_1").attr("checked")){
+            $(".pt").css("display","block");
+            $(".ji").css("display","none");
+        }else{
+            $(".pt").css("display","none");
+            $(".ji").css("display","block");
+        }
+    }
+}
+$(".ji").css("display","<if condition="($Setting_config['is_checkcode'] eq 1) AND ($Setting_config['checkcode_type'] eq 2) ">block<else />none</if>");
+$(".no").css("display","none");
+$(".pt").css("display","<if condition="($Setting_config['is_checkcode'] eq 1) AND ($Setting_config['checkcode_type'] eq 1) ">block<else />none</if>");
+$("#t1_1").click(function(){$(".pt").css("display","block");$(".ji").css("display","none");})
+$("#t1_2").click(function(){$(".pt").css("display","none");$(".ji").css("display","block");})
+</script>
+</body>
+</html>
