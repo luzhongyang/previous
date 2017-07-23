@@ -1,0 +1,154 @@
+<{assign var='tpl_title' value='我的消息中心'}>
+<{include file="block/header.html"}>
+<header>
+	<i class="left"><a href="<{link ctl='ucenter'}>" link-load="" link-type="right" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	消息中心
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+    <div id="wrapper">
+        <ul class="message_list_box" id="msg_list">
+            <{if $msgnums == 0}>
+                <div class="nonePage txt_center">
+                        <div class="nonePage_img"><img src="/themes/default/static/images/none/none3.png" width="25%"></div>
+                        <h2 class="black3">暂无消息</h2>
+                </div>
+            <{/if}>
+        </ul>
+    </div>
+</section>
+<{include file="block/sfooter.html"}>
+
+<script id="msg_items" type="text/x-jquery-tmpl">
+    <li class="message_list">
+        <a href="${url}" onclick="isread(${message_id});">
+       {{if type==1}}
+           {{if is_read==0}}   <!--红包消息未读-->
+              <div class="fl"><em class="ico ico_2"></em></div>
+           {{else}}
+              {{if is_read==1}}  <!--红包消息已读-->
+                 <div class="fl"><em class="no ico ico_2"></em></div>
+              {{/if}}
+            </div>
+           {{/if}}
+       {{else}}
+           {{if type==2}}
+               {{if is_read==0}}  <!--订单消息未读-->
+                  <div class="fl"><em class="ico ico_1"></em></div>
+               {{else}}
+                  {{if is_read==1}}  <!--订单消息已读-->
+                     <div class="fl"><em class="no  ico ico_1"></em></div>
+                  {{/if}}
+                </div>
+               {{/if}}
+           {{/if}}
+       {{/if}}
+            <div class="wz">
+                <p class="black3"><span class="bt">${title}</span><span class="fr black9 date">${time}</span></p>
+                <p class="black6">${content}。(点击查看详情)</p>
+            </div>
+        </a>
+        <div class="clear"></div>
+    </li>
+</script>
+
+<script>
+
+$(document).ready(function() {
+    loadPageItem();
+    localStorage['linktips'] = 'msg';
+});
+
+
+function loadPageItem(params){
+    if(LoadData.LOCK || LoadData.LOAD_END){
+        return false;
+    }
+    LoadData.LOCK = true;
+    params = params || {};
+    LoadData.params = $.extend(LoadData.params, params);
+    Widget.MsgBox.load("加载中...");
+    $.post("<{link ctl='ucenter/msg:msglist'}>", LoadData.params, function(ret){
+        if(ret.error){
+            Widget.MsgBox.error(ret.message);
+        }else{
+            if(ret.data.items.length > 0){
+                $('#msg_items').tmpl(ret.data.items).appendTo($("#wrapper ul"));
+            }else if(LoadData.params.page > 1){
+                if(! $(".loading_end").length) {
+                    $('#wrapper ul').append('<div class="loading_end">没有更多了...</div>');
+                }
+                LoadData.LOAD_END = true;
+            }else{
+                //给一个没有数据的提示信息
+                LoadData.LOAD_END = true;
+            }
+        }
+        LoadData.params.page ++;
+        Widget.MsgBox.hide();
+        LoadData.LOCK = false;
+    },"json");
+}
+
+$(window).scroll(function () {//监听滚动条改变
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {//滚动条是否滚到底部
+        loadPageItem();
+    }
+});
+
+
+/*
+function check_msg() {
+    var msg = "<{$msgnums}>";
+    msg = parseInt(msg);
+    if(msg != 0) {
+        var page = 1;
+        var wapper = document.querySelector("#msg_list");
+        build_refresher_items("<{link ctl='ucenter/msg:msglist'}>",{page:1},"#demo",wapper);
+        refresher.init({
+            id: "wrapper",
+
+            pullDownAction: function () {
+                var url = "<{link ctl='ucenter/msg:msglist'}>";
+                post_json = {page: 1};
+                $("#msg_list").html("");
+                build_refresher_items(url, post_json, '#demo',wapper);
+                page = 1;
+                myScroll.refresh();
+            },
+
+            pullUpAction: function () {
+                page++;
+                var url = "<{link ctl='ucenter/msg:msglist'}>";
+                post_json = {page: page};
+                build_refresher_items(url, post_json, '#demo', wapper);
+                myScroll.refresh();
+            },
+        });
+
+        function build_refresher_items(url, json, tmpl, wapper) {
+            $.post(url, json, function (ret) {
+                if (ret.error != 0) {
+                    layer.open({
+                        'content':ret.message
+                    });
+                } else if (ret.data.items.length == 0) {
+                    $("#pullUp .pullUpLabel").html('没有更多了');
+                } else {
+                    $(tmpl).tmpl(ret.data.items).appendTo(wapper);
+                }
+            },'json')
+        }
+    }
+}
+*/
+function isread(msg_id) {
+    if(window.localStorage){
+        localStorage['message_id'] = msg_id;
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="xiaoqu/wuye:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>ID：</th><td><{$detail.wuye_id}></td></tr>
+<tr><th>手机号：</th><td><{$detail.mobile}></td></tr>
+<tr><th>密码：</th><td><{$detail.passwd}></td></tr>
+<tr><th>余额：</th><td><{$detail.money}></td></tr>
+<tr><th>总收入：</th><td><{$detail.total_money}></td></tr>
+<tr><th>体现比例：</th><td><{$detail.tixian_percent}></td></tr>
+<tr><th>提现金额：</th><td><{$detail.tixian_money}></td></tr>
+<tr><th>联系人：</th><td><{$detail.contact}></td></tr>
+<tr><th>联系电话：</th><td><{$detail.phone}></td></tr>
+<tr><th>审核：</th><td><{$detail.aidit}></td></tr>
+<tr><th>closed：</th><td><{$detail.closed}></td></tr>
+<tr><th>clienip：</th><td><{$detail.clienip}></td></tr>
+<tr><th>dateline：</th><td><{$detail.dateline|format}></td></tr>
+</table></div>
+<{include file="admin:common/footer.html"}>

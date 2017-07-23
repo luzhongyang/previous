@@ -1,0 +1,76 @@
+<{assign var='tpl_title' value='我的分享'}>
+<{include file="block/header.html"}>
+<style>
+    .jiathis_style .list{height:0.84rem; }
+    .jiathis_style .jtico{background: none !important; overflow:visible !important;  height: 0.84rem !important; padding-left: 0.2rem;}
+</style>
+<header>
+    <i class="left"><a href="<{link ctl='ucenter'}>" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+        邀请好友使用江湖社区
+    </div>
+    <i class="right"><a href="javascript:;" class=""></a></i>
+</header>
+<section class="page_center_box">
+    <div class="share_mask" style="display:block; background:none; position:relative; padding:0.2rem 0 0.1rem; top:0;">
+
+        <ul <{if !$request['IN_WEIXIN']}>class="jiathis_style"<{/if}> >
+            <li class="list">
+                <a <{if $request['IN_WEIXIN']}>class="in_weixin_label"<{else}>class="jiathis_button_weixin"<{/if}> href="javascript:void(0);">
+            	<img src="%THEME%/static/images/shareImg/WeChat_Friends.png">
+                <p>微信好友</p>
+                </a>
+            </li>
+            <li class="list">
+            	<a <{if $request['IN_WEIXIN']}>class="in_weixin_label"<{else}>class="jiathis_button_tsina"<{/if}>  href="javascript:void(0);">
+            	<img src="%THEME%/static/images/shareImg/SinaWB.png">
+                <p>新浪微博</p>
+                </a>
+            </li>
+            <li class="list">
+            	<a <{if $request['IN_WEIXIN']}>class="in_weixin_label"<{else}>class="jiathis_button_cqq"<{/if}> href="javascript:void(0);">
+            	<img src="%THEME%/static/images/shareImg/TencentQQ.png">
+                <p>QQ好友</p>
+                </a>
+            </li>
+            <li class="list">
+            	<a <{if $request['IN_WEIXIN']}>class="in_weixin_label"<{else}>class="jiathis_button_weixin"<{/if}> href="javascript:void(0);">
+            	<img src="%THEME%/static/images/shareImg/WeChat_Circle.png">
+                <p>微信朋友圈</p>
+                </a>
+            </li>
+            <li class="list">
+                <a <{if $request['IN_WEIXIN']}>class="in_weixin_label"<{else}>class="jiathis_button_qzone"<{/if}> href="javascript:void(0);">
+            	<img src="%THEME%/static/images/shareImg/QQZone.png">
+                <p>QQ空间</p>
+                </a>
+            </li>
+            <li class="list">
+                <a <{if $request['IN_WEIXIN']}>class="in_weixin_label"<{else}>class="jiathis_button_renren"<{/if}>  href="javascript:void(0);">
+            	<img src="%THEME%/static/images/shareImg/Renren.png">
+                <p>人人网</p>
+                </a>
+            </li>
+        </ul>
+        <{if !$request['IN_WEIXIN']}><script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script><{/if}>
+    </div>
+    <div class="pressCode_mask">
+        <div class="cont">
+            <div id="qrcodeTable" ><{$share_img}></div></br>
+            <p>邀请好友扫描二维码使用江湖社区</p>
+        </div>
+    </div>
+</section>
+    <div class="mask_bg" style="display: none; z-index: 9999; top: 0; bottom: 0; height: auto; padding-top: 0.5rem; filter:alpha(opacity=80); opacity: 0.8; text-align: center; color: #fff;"><img src="%THEME%/static/images/sharePic.png" width="100%"></div>
+<script>
+$(document).ready(function() {
+    $(".in_weixin_label").click(function(){
+        $(".mask_bg").show();
+    })
+    $(".mask_bg").click(function(){
+        $(this).hide();
+    })
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true" > 功能开通</a>
+                </li> 
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="alert alert-success"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;小提示：勾选保存为开通，不勾选保存为关闭</div>
+                    	<form action="<{link ctl='merchant/shop/open:save'}>" mini-form="shop_open" method="post" class="form-horizontal" ENCTYPE="multipart/form-data">
+                        <div class="hr-line-dashed"></div>
+							<div class="form-group">
+		                        <label class="col-sm-2 control-label">团购：</label>
+		                        <div class="col-sm-10">
+		                            <div class="col-sm-4">
+		                                <label ><input type="checkbox" class="i-checks" name="data[have_tuan]" value="<{$shop.have_tuan}>" <{if $shop.have_tuan == 1}>checked="checked"<{/if}>>&nbsp;勾选开通团购功能</label>
+		                            </div>
+		                        </div>
+		                    </div><div class="hr-line-dashed"></div>
+		                    <div class="form-group">
+		                        <label class="col-sm-2 control-label">代金券：</label>
+		                        <div class="col-sm-10">
+		                            <div class="col-sm-4">
+		                                <label ><input type="checkbox" class="i-checks" name="data[have_quan]" value="<{$shop.have_quan}>" <{if $shop.have_quan == 1}>checked="checked"<{/if}>>&nbsp;在开通了团购之后再开通代金券才能管理代金券</label>
+		                            </div>
+		                        </div>
+		                    </div><div class="hr-line-dashed"></div>
+		                    <div class="form-group">
+		                        <label class="col-sm-2 control-label">优惠买单：</label>
+		                        <div class="col-sm-10">
+		                            <div class="col-sm-4">
+		                                <label ><input type="checkbox" class="i-checks" name="data[have_maidan]" value="<{$shop.have_maidan}>" <{if $shop.have_maidan == 1}>checked="checked"<{/if}>>&nbsp;在开通了团购之后再开通优惠买单才能管理优惠买单</label>
+		                            </div>
+		                        </div>
+		                    </div><div class="hr-line-dashed"></div>
+		                    <div class="form-group">
+		                        <label class="col-sm-2 control-label">排号：</label>
+		                        <div class="col-sm-10">
+		                            <div class="col-sm-4">
+		                                <label ><input type="checkbox" class="i-checks" name="data[have_paidui]" value="<{$shop.have_paidui}>" <{if $shop.have_paidui == 1}>checked="checked"<{/if}>>&nbsp;勾选开通排号功能</label>
+		                            </div>
+		                        </div>
+		                    </div><div class="hr-line-dashed"></div>
+		                    <div class="form-group">
+		                        <label class="col-sm-2 control-label">订座：</label>
+		                        <div class="col-sm-10">
+		                            <div class="col-sm-4">
+		                                <label ><input type="checkbox" class="i-checks" name="data[have_dingzuo]" value="<{$shop.have_dingzuo}>" <{if $shop.have_dingzuo == 1}>checked="checked"<{/if}>>&nbsp;勾选开通订座功能</label>
+		                            </div>
+		                        </div>
+		                    </div><div class="hr-line-dashed"></div>
+		                    <div class="form-group">
+		                        <label class="col-sm-2 control-label">点餐：</label>
+		                        <div class="col-sm-10">
+		                            <div class="col-sm-4">
+		                                <label ><input type="checkbox" class="i-checks" name="data[have_diancan]" value="<{$shop.have_diancan}>" <{if $shop.have_diancan == 1}>checked="checked"<{/if}>>&nbsp;勾选开通点餐功能</label>
+		                            </div>
+		                        </div>
+		                    </div>
+                            <div class="hr-line-dashed"></div>
+		                    <div class="form-group">
+                                <label class="col-sm-2 control-label">&nbsp;&nbsp;&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-primary" type="submit">保存数据</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>
+
+<script type="text/javascript" charset="utf-8" async defer>
+$(document).ready(function () {
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+});
+$("input[name='data[have_tuan]']").on('ifChanged', function(event){
+	if($(this).parent().hasClass('checked') == true) {
+		$(this).val(0);
+	}else {
+		$(this).val(1);
+	}
+});
+
+$("input[name='data[have_quan]']").on('ifChanged', function(event){
+	if($(this).parent().hasClass('checked') == true) {
+		$(this).val(0);
+	}else {
+		$(this).val(1);
+	}
+});
+
+$("input[name='data[have_maidan]']").on('ifChanged', function(event){
+    if($(this).parent().hasClass('checked') == true) {
+		$(this).val(0);
+	}else {
+		$(this).val(1);
+	}
+});
+
+$("input[name='data[have_paidui]']").on('ifChanged', function(event){
+    if($(this).parent().hasClass('checked') == true) {
+		$(this).val(0);
+	}else {
+		$(this).val(1);
+	}
+});
+$("input[name='data[have_dingzuo]']").on('ifChanged', function(event){
+    if($(this).parent().hasClass('checked') == true) {
+		$(this).val(0);
+	}else {
+		$(this).val(1);
+	}
+});
+$("input[name='data[have_diancan]']").on('ifChanged', function(event){
+    if($(this).parent().hasClass('checked') == true) {
+		$(this).val(0);
+	}else {
+		$(this).val(1);
+	}
+});
+
+$('#save').click(function(){
+    jQuery.ajax({
+        url: "<{link ctl='merchant/shop/open:save'}>",
+        async: true,
+        dataType: 'json',
+        data: {"have_tuan":$("input[name='data[have_tuan]']").val(),"have_quan":$("input[name='data[have_quan]']").val(),"have_maidan":$("input[name='data[have_maidan]']").val(),"have_paidui":$("input[name='data[have_paidui]']").val(),"have_dingzuo":$("input[name='data[have_dingzuo]']").val(),"have_diancan":$("input[name='data[have_diancan]']").val()},
+        type: 'POST',
+        success: function (ret) {
+            if (ret.error > 0) {
+                parent.layer.msg(ret.message);
+            } else {
+                parent.layer.msg(ret.message);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown);
+        },
+    });
+
+})
+
+</script>

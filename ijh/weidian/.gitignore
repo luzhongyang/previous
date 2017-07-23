@@ -1,0 +1,11 @@
+/system/data/logs
+/system/data/cache
+/system/data/tplcache
+/system/data/tpladmin
+/system/data/tplmerchant
+/attachs/photo
+.nbproject
+.settings
+.idea
+/nbproject
+/system/config.php

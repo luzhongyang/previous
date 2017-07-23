@@ -1,0 +1,206 @@
+<{include file="merchant:block/header.html"}>
+<link rel="stylesheet" href="/merchant/style/css/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="/merchant/script/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/merchant/script/js/jquery.ztree.excheck.js"></script>
+<style>
+    div.content_wrap {width:auto;height:auto;}
+    div.zTreeDemoBackground {width:auto;height:auto;text-align:left;}
+    ul.ztree {margin-top: 10px;border:0;background:none;width:auto;height:auto; overflow:auto;}
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a  href="javascript:;" >修改运费模板</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <form action="<{link ctl='merchant/shop/trade:deliveryedit' args=$detail.tpl_id}>" mini-form="deliveryadd" method="post" class="form-horizontal" ENCTYPE="multipart/form-data">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">模板名称：</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-4">
+                                        <input type="hidden" name="data[shop_id]" value="<{$shop.shop_id}>" class="form-control">
+                                        <input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group draggable">
+                                <label class="col-sm-2 control-label">配送区域：</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-10">
+                                        <table class="table table-striped table-bordered table-hover" id="pei_area_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>可配送区域</th>
+                                                    <th>首件(个)</th>
+                                                    <th>运费(元)</th>
+                                                    <th>续件(个)</th>
+                                                    <th>续费(元)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <{foreach $items as $item}>
+                                                <tr>
+                                                    <td>
+                                                        <{$item.region_names}>
+                                                        <input type="hidden" value="<{$item.region_names}>" name="data1[<{$item.item_id}>][region_names]">
+                                                        <input type="hidden" value="<{$item.region_ids}>" class="regionids" name="data1[<{$item.item_id}>][region_ids]">
+                                                        <a href="javascript:;" id="setting" style="color: #38f;cursor: pointer;">修改</a>
+                                                        <a href="<{link ctl='merchant/shop/trade:areadel' arg0=$item.item_id arg1=$item.tpl_id }>" style="color: #38f;cursor: pointer;" mini-act="del" mini-confirm="确定要删除吗？" title="删除">删除</a>
+                                                    </td>
+                                                    <td><input type="text" value="<{$item.first}>" name="data1[<{$item.item_id}>][first]" /></td>
+                                                    <td><input type="text" value="<{$item.first_price}>" name="data1[<{$item.item_id}>][first_price]" /></td>
+                                                    <td><input type="text" value="<{$item.renew}>" name="data1[<{$item.item_id}>][renew]" /></td>
+                                                    <td><input type="text" value="<{$item.renew_price}>" name="data1[<{$item.item_id}>][renew_price]" /></td>
+                                                </tr>
+                                                <{/foreach}>
+                                            </tbody>
+                                             <tfoot>
+                                                <tr>
+                                                    <td><a href="javascript:;" id="setting" style="color: #38f;cursor: pointer;">指定可配送区域和运费</a></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-primary" type="submit">保存数据</button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="<{link ctl='merchant/shop/trade:delivery'}>" class="btn btn-default" type="submit">返回</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">选择可配送区域</h4>
+            </div>
+            <div class="modal-body">
+                <div class="content_wrap" style="text-align:center;">
+                    <div class="zTreeDemoBackground">
+                        <ul id="treeDemo" class="ztree"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="choose_tree">确定</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript'>
+
+var zNodes = [];
+ var setting = {check: {enable: true},data: {simpleData: {enable: true}}};
+
+ // ajax请求省市区Json Tree
+ function init_tree(param1, param2) {
+     $.ajax({
+         url: "?shop/trade/ajaxregion",
+         async: true,
+         type: "POST",
+         dataType:'json',
+         data:{'tree':param1,'tree_ids':param2},
+         success: function(ret) {
+             if(ret.data.items) {
+                 $.each(ret.data.items, function(k, v) {
+                     zNodes.push({ id:parseInt(v.region_id), pId:parseInt(v.parent_id), name:v.region_name});
+                 })
+                 $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                 zNodes = [];
+             }
+         }
+     });
+ }
+
+// 指定可配送区域和运费
+$(document).on('click', '#setting', function() {
+    var fixNodes = [];
+    $.each($("input[class='regionids']"), function(k, v) {
+        if($(v).val() && k < $("input[class='regionids']").length-1) {
+            fixNodes += $(v).val() + ',';
+        }else {
+            fixNodes += $(v).val();
+        }
+    })
+    if(fixNodes != '') {
+        init_tree('tree_ids',fixNodes);
+    }else {
+        init_tree('tree_all',null);
+    }
+    setTimeout(function(){
+        $('#myModal5').modal();
+    },1000);
+})
+
+
+$(document).ready(function(){
+
+});
+
+
+function GUID(){
+    var guid = '';
+    for (var i = 1; i <= 32; i++) {
+        var n = Math.floor(Math.random() * 16.0).toString(16);
+        guid += n;
+    }
+    return guid.toUpperCase();
+};
+
+// 选定区域确定事件
+$(document).on('click', '#choose_tree', function() {
+    var selectNodes = [];
+    var select_ids = '';
+    var select_name = '';
+    var nodes = $.fn.zTree.getZTreeObj("treeDemo").getChangeCheckedNodes();
+    if(nodes) {
+        $.each(nodes, function(k, v){
+            selectNodes.push({ id:v.id, pId:v.pId ? v.pId : 0, name:v.name});
+            if(k == nodes.length-1) {
+                select_ids += v.id ;
+                select_name += v.name;
+            }else {
+                select_ids += v.id + ',';
+                select_name += v.name + ',';
+            }
+        })
+    }
+    var guid = GUID();
+    var html = '';
+    html += '<tr>';
+        html += '<td>'+select_name+'<input type="hidden" value="'+select_name+'" name="data2['+guid+'][region_names]"/><input type="hidden" value="'+select_ids+'" name="data2['+guid+'][region_ids]" class="regionids"/><input type="hidden" value="<{$shop.shop_id}>" name="data2['+guid+'][shop_id]"/></td>';
+        html += '<td><input type="text" value="1" name="data2['+guid+'][first]"/></td>';
+        html += '<td><input type="text" value="0.00" name="data2['+guid+'][first_price]"/></td>';
+        html += '<td><input type="text" value="0" name="data2['+guid+'][renew]"/></td>';
+        html += '<td><input type="text" value="0.00" name="data2['+guid+'][renew_price]"/></td>';
+    html += '</tr>';
+    $('#pei_area_table tbody').append(html);
+    $('#myModal5').modal('hide');
+})
+
+</script>
+
+<{include file="merchant:block/footer.html"}>

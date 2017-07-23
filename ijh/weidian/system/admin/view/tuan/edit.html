@@ -1,0 +1,56 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="tuan/tuan:shop" arg0=$detail.shop_id priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?tuan/tuan-edit.html" mini-form="Tuan-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+    <input type="hidden" name="tuan_id" value="<{$detail.tuan_id}>"/>
+    <input type="hidden" name="data[shop_id]" value="<{$detail.shop_id}>"/>
+    <tr><th>商家：</th><td><b class="blue"><{$shop.title}></b></td></tr>
+    <tr><th>标题：</th><td><input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="input w-400"/></td></tr>
+    <tr><th>描述：</th><td><input name="data[desc]" value="<{$detail.desc}>" class="input w-400"/><span class="tip-comment">描述,副标题用</span></td></tr>
+    <tr><th>图片：</th><td><input type="text" name="data[photo]" value="<{$detail.photo}>" <{if $detail.photo}>photo="<{$pager.img}>/<{$detail.photo}>"<{/if}> class="input w-200" />&nbsp;&nbsp;&nbsp;<input type="file" name="data[photo]" class="input w-100" /><span class="tip-comment">图片</span></td></tr>
+    <tr><th>开始时间：</th>
+        <td>
+            <input type="text" name="data[stime]" value="<{if $detail.stime}><{$detail.stime|format:'Y-m-d'}><{/if}>" datetime="ltime" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});" class="input w-150"/>
+            <span class="tip-comment">团购开始时间</span>
+        </td>
+    </tr>
+    <tr><th>过期时间：</th>
+        <td>
+            <input type="text" name="data[ltime]" value="<{if $detail.ltime}><{$detail.ltime|format:'Y-m-d'}><{/if}>" datetime="ltime" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});" class="input w-150"/>
+            <span class="tip-comment">团购过期时间</span>
+        </td>
+    </tr>
+    <tr>
+        <th>团购价：</th>
+        <td><input type="text" name="data[price]" value="<{$detail.price|default:'0.00'}>" class="input w-100"/></td>
+    </tr>
+    <tr>
+        <th>市场价：</th>
+        <td><input type="text" name="data[market_price]" value="<{$detail.market_price|default:'0.00'}>" class="input w-100"/></td>
+    </tr>
+    <tr><th>库存：</th><td><input type="text" name="data[stock_num]" value="<{$detail.stock_num|default:''}>" class="input w-100"/></td></tr>
+    <tr><th>销量：</th><td><input type="text" name="data[sales]" value="<{$detail.sales|default:''}>" class="input w-100"/><span class="tip-comment">销量</span></td></tr>
+    <tr><th>虚拟销量：</th><td><input type="text" name="data[virtual_sales]" value="<{$detail.virtual_sales|default:''}>" class="input w-100"/><span class="tip-comment">虚拟销量</span></td></tr>
+    <tr><th>浏览次数：</th><td><input type="text" name="data[views]" value="<{$detail.views|default:''}>" class="input w-100"/><span class="tip-comment">浏览次数</span></td></tr>
+    <tr><th>使用规则：</th><td><textarea name="data[notice]" class="textarea"><{$detail.notice}></textarea><br /></td></tr>
+    <tr><th>图文详情：</th><td><textarea name="data[detail]" kindeditor="full" style="width:600px;height:350px;"><{$detail.detail}></textarea><br /></td></tr>
+    <tr><th>排序：</th><td><input type="text" name="data[orderby]" value="<{$detail.orderby|default:''}>" class="input w-100"/></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<script type="text/javascript" src="<{$pager.res}>/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+(function(K, $){
+var editor = KindEditor.create('textarea[kindeditor]', {uploadJson : '?magic/upload-editor.html', extraFileUploadParams:{OATOKEN:"<{$OATOKEN}>"}});
+})(window.KT, window.jQuery);        
+</script>
+<{include file="admin:common/footer.html"}>

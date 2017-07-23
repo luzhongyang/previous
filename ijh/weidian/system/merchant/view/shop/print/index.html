@@ -1,0 +1,129 @@
+<{include file="merchant:block/header.html"}>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a  href="javascript:;" >打印设置</a></li>
+                    <li class="list_btn_right">
+                    <button onclick="location_addr('<{link ctl='merchant/shop/print:create'}>')" class="btn btn-primary ">添加分类</button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="">
+                                <table class="table table-striped table-hover" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th width="8%">ID</th>
+                                            <th width="10%">平台名称</th>
+                                            <th width="10%">用户ID</th>
+                                            <th width="12%">API密钥</th>
+                                            <th width="10%">终端号</th>
+                                            <th width="10%">终端密钥</th>
+                                            <th width="6%">是否启用</th>
+                                            <th width="15%">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       <{foreach $items as $v}>
+                                        <tr>
+                                            <td><{$v.plat_id}></td>
+                                            <td><{$v.title}></td>
+                                            <td><{$v.partner}></td>  
+                                            <td><{$v.apikey}></td>   
+                                            <td><{$v.machine_code}></td> 
+                                            <td><{$v.mkey}></td>   
+                                            <td><{if $v.status == 1}><font style="color: green;">已启用</font><{else}><font style="color: red;">已停用</font><{/if}></td> 
+                                            <td>
+                                                <a href="javascript:change(<{$v.plat_id}>, <{$v.status}>);" class="btn btn-<{if $v.status == 1}>warning<{else}>success<{/if}> btn-sm btn-outline"><{if $v.status == 1}>停用<{else}>启用<{/if}></a>&nbsp;&nbsp;
+                                                <a href="<{link ctl='merchant/shop/print/edit' args=$v.plat_id}>" class="btn btn-primary btn-sm btn-outline">修改</a>&nbsp;&nbsp;
+                                                <a href="javascript:delModal(<{$v.plat_id}>);" mini-act="confirm:确认要删除该设置吗?" class="btn btn-danger btn-sm btn-outline">删除</a>
+                                            </td>
+                                        </tr>     
+                                        <{foreachelse}>
+                                        <tr><td colspan="20"><div class="alert alert-info">没有数据</div></td></tr>
+                                        <{/foreach}>
+                                    </tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<{include file="merchant:block/footer.html"}>
+
+
+<script>
+var table = null;
+
+// 启用、停用设置
+function change(plat_id, status) {
+    if(status) {
+        status = 0;
+    }else {
+        status = 1;
+    }
+    jQuery.ajax({  
+        url: "<{link ctl='merchant/shop/print:change'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"plat_id": plat_id, "status": status},
+        type: 'POST',   
+        success: function (ret) { 
+            parent.layer.msg(ret.message);
+            if(ret.error == 0){
+                setTimeout(function(){window.location.reload();},1000);
+            }
+        }, 
+    });
+}
+
+// 删除提示框
+function delModal(id) {
+    swal({
+        title: "确定要删除吗?",
+        text: "",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        closeOnConfirm: true, //点击了确认按钮后模态窗口自动关闭
+    }, function (isConfirm) {
+        if (isConfirm) {
+            del(id);
+        }
+    });
+}
+
+// 删除外卖商品
+function del(id) {
+    var link = "<{link ctl='merchant/shop/print/delete' args='temp'}>";
+    jQuery.ajax({
+        url: link.replace('temp', id),
+        async: true,
+        dataType: 'json',
+        type: 'POST',
+        success: function (ret) {
+            if (ret.error > 0) {
+                parent.layer.msg(ret.message);
+            } else {
+                parent.layer.msg(ret.message);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown);
+      },
+    });
+}
+</script>

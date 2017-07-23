@@ -1,0 +1,25 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="pintuan/group:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>团单号：</th><td><{$detail.group_id}></td></tr>
+<tr><th>城市：</th><td><{$detail.city_id}></td></tr>
+<tr><th>商户：</th><td><{$detail.shop_id}></td></tr>
+<tr><th>团长id：</th><td><{$detail.master_id}></td></tr>
+<tr><th>开团时间：</th><td><{$detail.start_time|format:"Y-m-d H:i:s"}></td></tr>
+<tr><th>结束时间：</th><td><{$detail.end_time|format:"Y-m-d H:i:s"}></td></tr>
+<tr><th>订单数量：</th><td><{$detail.order_count}></td></tr>
+<tr><th>成功订单数量：</th><td><{$detail.order_success_count}></td></tr>
+<tr><th>拼团产品id：</th><td><{$detail.product_id}></td></tr>
+<tr><th>组团状态：</th><td><{$detail.status}></td></tr>
+<tr><th>创建时间：</th><td><{$detail.dateline|format}></td></tr>
+</table></div>
+<{include file="admin:common/footer.html"}>

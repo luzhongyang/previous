@@ -1,0 +1,71 @@
+<{include file="merchant:block/header.html"}>
+
+ <div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class=""><a  href="<{link ctl='merchant/weixin/shake:goods' arg0=$detail.shake_id}>" >奖品列表</a></li>
+                <li class="active"><a  href="javascript:;" >编辑奖品</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="ibox-content">
+                            <form action="<{link ctl='merchant/weixin/shake:goodsedit'}>" method="post" mini-form="jhcms" class="form-horizontal" ENCTYPE="multipart/form-data">
+                                <input type="hidden" name="id" value="<{$detail.id}>"/>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">奖项标题：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[title]" value="<{$detail.title}>" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">奖项：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[name]" value="<{$detail.name}>" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group draggable">
+                                    <label class="col-sm-2 control-label">奖品图片：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4"><input type="text" name="data[photo]" class="form-control" id="file_photo" value="<{$detail.photo}>"photo="<{$pager.img}>/<{$detail.photo}>" readonly="readonly" /></div>
+                                        <div class="col-sm-8"><input type="button" uploadbtn="#file_photo" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview="#file_photo" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span> 预览</a></div>
+                                    </div>
+                                </div>                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">名额数量：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[num]" value="<{$detail.num}>" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">排序号：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[sort]" value="<{$detail.sort}>" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">&nbsp;</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-primary" type="submit">保存数据</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>

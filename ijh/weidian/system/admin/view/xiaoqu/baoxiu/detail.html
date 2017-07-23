@@ -1,0 +1,50 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="xiaoqu/baoxiu:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data">
+    <form action="?xiaoqu/baoxiu-reply-<{$detail.baoxiu_id}>.html" mini-form="comment-form" method="post" >
+    <input type="hidden" name="baoxiu_id" value="<{$detail.baoxiu_id}>" />
+    <table width="100%" border="0" cellspacing="0" class="table-data form">
+        <tr>
+            <th>报修ID：</th><td class="w-300"><{$detail.baoxiu_id}></td>
+            <th>会员：</th><td><{$member.nickname}>，<{$member.mobile}></td>
+        </tr>
+        <tr>
+            <th>小区：</th><td><b class="blue"><{$xiaoqu.title}>(ID:<{$detail.xiaoqu_id}>)</b></td>
+            <th>业主：</th><td><{$yezhu.house}>(<{$yezhu.contact}>, <{$yezhu.mobile}>)</td>
+        </tr>
+		<tr>
+            <th>联系人：</th><td><{$detail.contact}>，<{$detail.mobile}></td>
+            <th>状态：</th><td><{if $detail.status < 0}><b class="gray">已撤销</b><{elseif $detail.status > 0}><b class="green">已处理</b><{else}><b class="red">待处理</b><{/if}></td>
+        </tr>
+        <tr><th>报修内容：</th><td colspan="3"><p class="tip-notice"><{$detail.content|nl2br}></p></td></tr>
+        <{if $photo_list}>
+        <tr><th>报修图片：</th></tr>
+            <tr>
+                <th>&nbsp;</th>
+                <td colspan="3">
+                    <{foreach $photo_list as $v}>
+                        <img src="<{$pager.img}>/<{$v.photo}>" width="100" height="100"/>
+                    <{/foreach}>
+                </td>
+            </tr>
+        <{/if}>
+        <{if $detail.reply_time}>
+        <tr>
+            <th>回复时间：</th><td colspan="3"><{$detail.reply_time|format}></td>
+        </tr>
+        <{/if}>
+        <tr><th>回复：</th><td colspan="3"><textarea name="reply_content" class="textarea w-400"><{$detail.reply}></textarea><br /></td></tr>
+        <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+    </table>
+    </form>
+</div>
+<{include file="admin:common/footer.html"}>

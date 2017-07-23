@@ -1,0 +1,111 @@
+<{include file="merchant:block/header.html"}>
+<link href="/merchant/style/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<style type="text/css" media="screen">
+.input-form{
+    display: block;
+    width: 15%;
+    height: 34px;
+    padding: 2px 4px;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    
+} 
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a  href="javascript:;" >外卖优惠设置</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <!-- <div class="ibox-title">
+                                        <div class="ibox-tools">
+                                            <a class="collapse-link">
+                                                <i class="fa fa-chevron-up"></i>
+                                            </a>
+                                        </div>
+                                    </div> -->
+                                    <div class="">
+                                    <form action="<{link ctl='merchant/waimai/shop:youhui'}>" mini-form="ucenter" method="post" ENCTYPE="multipart/form-data">
+                                        <table class="table table-striped table-bordered table-hover" >
+                                            <tr>
+                                            <th width="15%">新用户首次下单立减：</th>
+                                                <td>
+                                                    <input type="text" class="" name="data[first_amount]" value="<{$detail.first_amount}>" style="width:100px;"/> &nbsp;元
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-hover" id="jq_table">
+                                            <tr><td colspan="5" style="text-align:right;"><a href="javascript:void(0);"  class="btn btn-success jq_add">+新增一行</a></td></tr>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>订单最小金额</th>
+                                                <th>优惠金额</th>
+                                                <th>排序</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            <{foreach $items as $item}>
+                                            <tr class="jq_tr">
+                                                <td><{$item.youhui_id}><input type="hidden" name="data1[youhui_id][]" value="<{$item.youhui_id}>"></td>
+                                                <td><input type="text" class="input-form" name="data1[order_amount][]" value="<{$item.order_amount}>" /></td>
+                                                <td><input type="text" class="input-form" name="data1[youhui_amount][]" value="<{$item.youhui_amount}>" /></td>
+                                                <td><input type="text" class="input-form" name="data1[orderby][]" value="<{$item.orderby}>" /></td>
+                                                <td><a href="<{link ctl='biz/waimai/shop/yhdelete' youhui_id=$item.youhui_id}>" mini-act="remove:youhui_<{$item.youhui_id}>" mini-confirm="确认要移除吗？" class="btn btn-warning">移除</a></td>
+                                            </tr>
+                                            <{foreachelse}>
+                                            <tr class="jq_tr nodata"><td colspan="20"><div class="alert alert-info">没有数据</div></td></tr>
+                                            <{/foreach}>
+                                        </table>
+                                        <div><div class="jq_bottom"><input type="submit" class="btn btn-primary jq_save" value="保存数据"/></div></div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<{include file="merchant:block/footer.html"}>
+
+<script>
+$(document).ready(function(){
+    $(".jq_add").click(function(){
+        var html = '<tr class="jq_tr tr222">';
+        html+='<td>New</td>';
+        html+='<td><input type="text" class="input-form" name="data2[order_amount][]" value="" /></td>';
+        html+='<td><input type="text" class="input-form" name="data2[youhui_amount][]" value="" /></td>';
+        html+='<td><input type="text" class="input-form" name="data2[orderby][]" value="" /></td>';
+        html+='<td><a href="javascript:void(0);" class="btn btn-warning jq_delete">移除</a></td></tr>';
+        $("#jq_table").append(html);
+        $(".nodata").html("");
+        $('.jq_bottom').show();
+    })
+    $(".table").on('click','.jq_delete', function () {
+        $(this).parent().parent().remove();
+        if($('.tr222').html() == undefined) {
+            $('.jq_bottom').hide();
+        }
+    })
+    <{if $items}>
+    $('.jq_bottom').show();
+    <{else}>
+    $('.jq_bottom').hide();
+    <{/if}>
+})  
+
+</script>

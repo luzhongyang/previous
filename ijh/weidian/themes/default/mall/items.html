@@ -1,0 +1,92 @@
+<{assign var='tpl_title' value=L("积分商品列表")}>
+<{include file="block/header.html"}>
+<header>
+    <i class="left"><a href="<{link ctl='mall/index'}>" link-load="" link-type="right"
+                       class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+        积分商品列表
+    </div>
+    <i class="right"><a class="menuIco" href="javascript:;" id="header_menu"></a></i>
+</header>
+<style type="text/css">
+    .tuan_no {
+        margin: 0.3rem 0;
+        text-align: center;
+        line-height: 0.3rem;
+    }
+
+    .tuan_no h2 {
+        font-weight: normal;
+        font-size: 0.18rem;
+    }
+
+    .tuan_no .iconBg {
+        width: 0.8rem;
+        height: 0.8rem;
+        margin: 0.1rem 0;
+        background: #F7F7F7;
+        border: 0.02rem solid #F7F7F7;
+        display: inline-block;
+        border-radius: 0.8rem;
+        text-align: center;
+    }
+</style>
+<div class="mineIntegral_pull">
+    <div class="list_box">
+        <ul>
+            <li
+            <{if empty($cate_id)}>class="on"<{/if}> ><a href="<{link ctl='mall/items'}>">全部</a></li>
+            <{foreach $cates as $val}>
+            <li
+            <{if $val['cate_id'] == $cate_id}>class="on"<{/if}> ><a
+                href="<{link ctl='mall/items' cate_id=$val['cate_id']}>"><{$val['title']}></a></li>
+            <{/foreach}>
+        </ul>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<section class="page_center_box" style="top: 0.6rem;">
+    <div class="mineIntegral_list_box">
+        <ul>
+            <{foreach $product as $k => $v}>
+            <li class="mineIntegral_list">
+                <div class="nr">
+                    <a href="<{link ctl='mall/detail' args=$v.product_id}>">
+                        <img src="<{$pager.img}>/<{$v.photo}>" width="280" height="200"/>
+                        <p class="bt"><{$v.title}></p>
+                    </a>
+                    <p class="black9"><span class="pointcl1"><{$v.jifen}></span>积分<a
+                            href="<{link ctl='mall/detail' args=$v.product_id}>" class="pub_btn fr">兑换</a></p>
+                </div>
+            </li>
+            <{foreachelse}>
+            <div class="tuan_no">
+                <div class="iconBg"></div>
+                <h2>该分类暂无商品，看看其他的吧</h2></div>
+            <{/foreach}>
+
+        </ul>
+        <div class="clear"></div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#l4').addClass('on');
+        /*头部下来分类开始*/
+        $("#header_menu").click(function () {
+            $(".mineIntegral_pull").find(".list_box").toggle();
+            $(".mineIntegral_pull").find(".mask_bg").toggle();
+        });
+        $(".mineIntegral_pull .list_box li").click(function () {
+            $(this).parent().find("li").removeClass("on");
+            $(this).addClass("on");
+            $(".mineIntegral_pull").find(".list_box").hide();
+            $(".mineIntegral_pull").find(".mask_bg").hide();
+        });
+        /*头部下来分类开始*/
+    });
+</script>
+
+<{include file="block/sfooter.html"}>
+<{include file="block/footer.html"}>

@@ -1,0 +1,113 @@
+<{include file="merchant:block/header.html"}>
+
+<link href="/merchant/style/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+<link href="/merchant/style/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+<!-- <div class="wrapper wrapper-content animated fadeInRight"> -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class=""><a  href="<{link ctl='merchant/weixin/index:welcome'}>" >单次关注</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/weixin/index:auto'}>" >自动回复</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/weixin/keyword:index'}>" >关键字回复</a></li>
+                    <li class="active"><a  href="<{link ctl='merchant/weixin/menu:index'}>" >自定义菜单</a></li>
+                    <li class="list_btn_right">
+                    <button onclick="location_addr('<{link ctl='merchant/weixin/menu:create'}>')" class="btn btn-primary ">添加菜单</button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                           <!--  <div class="ibox-content"> -->
+                                <p class="font-bold  alert alert-success m-b-sm" style="display: block;">
+                                    <i class="fa fa-info-circle" style="font-size: 18px;"></i>  可创建最多 3 个一级菜单，每个一级菜单下可创建最多 5 个二级菜单。编辑中的菜单不会马上被用户看到，请放心调试。
+                                </p>
+                                <!-- <a href="<{link ctl='merchant/weixin/menu:create'}>"><button class="btn btn-primary" type="button"><i class="fa fa-plus"></i>&nbsp;添加菜单</button></a></br></br> -->
+                                <table class="table table-striped  table-hover" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th width="20%">ID</th>
+                                            <th width="20%">菜单名称</th>
+                                            <th width="20%">响应类型</th>
+                                            <th width="20%">排序</th>
+                                            <th width="20%">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <{foreach $items as $item}>
+                                        <tr>
+                                            <td class="left"><label><{$item.menu_id}><label></td>
+                                            <td><{if $item.parent_id}>&nbsp;&nbsp;|---&nbsp;&nbsp;<{/if}><{$item.title}></td>
+                                            <td><{if $item.type == 'link'}>链接<{elseif $item.type=='reply'}>图文<{else}>文本<{/if}></td>
+                                            <td><{$item.orderby}></td>
+                                            <td>
+                                                <a href="<{link ctl='merchant/weixin/menu:edit' arg0=$item.menu_id}>"  class="btn btn-success">修改</a>
+                                                <a href="<{link ctl='merchant/weixin/menu:delete' arg0=$item.menu_id}>" mini-act="删除" mini-confirm="确定要删除菜单吗？" class="btn btn-success">删除</a>
+                                            </td>
+                                        </tr>
+                                        <{foreachelse}>
+                                         <tr><td colspan="20"><div class="alert alert-info">您还没有添加微信菜单</div></td></tr>
+                                        <{/foreach}>
+                                    </tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                                <{if $items}>
+                                <a href="<{link ctl='merchant/weixin/menu:towechat'}>" mini-act="towechat"><button class="btn btn-primary" type="button"><i class="fa fa-check-square"></i>&nbsp;发布菜单到微信</button></a></br></br>
+                                <{/if}>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+<{include file="merchant:block/footer.html"}>
+
+<script src="/merchant/script/js/plugins/dataTables/datatables.min.js"></script>
+<script src="/merchant/script/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<script  type="text/javascript" charset="utf-8" async defer>
+    // 删除提示框
+    function delModal(id) {
+        swal({
+            title: "确定要删除吗?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            closeOnConfirm: true, //点击了确认按钮后模态窗口自动关闭
+        }, function (isConfirm) {
+            if (isConfirm) {
+                del(id);
+            }
+        });
+    }
+
+    // ajax删除
+    function del(id) {
+        var link = "<{link ctl='merchant/weixin/menu:delete' args='temp'}>";
+        jQuery.ajax({
+            url: link.replace('temp', id),
+            async: true,
+            dataType: 'json',
+            type: 'POST',
+            success: function (ret) {
+                if (ret.error > 0) {
+                    parent.layer.msg(ret.message);
+                } else {
+                    parent.layer.msg(ret.message);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+          },
+        });
+    }
+</script>

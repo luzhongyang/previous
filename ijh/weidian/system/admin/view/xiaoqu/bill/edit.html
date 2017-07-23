@@ -1,0 +1,32 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="xiaoqu/bill:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?xiaoqu/bill-edit.html" mini-form="bill-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<input type="hidden" name="bill_id" value="<{$detail.bill_id}>"/>
+<tr><th>小区业主：</th><td><b class="blue"><{$xiaoqu.title}>，<{$yezhu.house}>(<{$yezhu.contact}>, <{$yezhu.mobile}>)</b></td></tr>
+<tr><th>订单编号：</th><td><input type="text" name="data[bill_sn]" value="<{$detail.bill_sn|default:date('Ym')}>" class="input w-200"/><span class="tip-comment">账单编号 (如：201608)</span></td></tr>
+<tr><th>物业费：</th><td><input type="text" name="data[wuye_price]" value="<{$detail.wuye_price|default:''}>" class="input w-100"/></td></tr>
+<tr><th>车位费：</th><td><input type="text" name="data[chewei_price]" value="<{$detail.chewei_price|default:''}>" class="input w-100"/></td></tr>
+<tr><th>水费：</th><td><input type="text" name="data[shui_price]" value="<{$detail.shui_price|default:''}>" class="input w-100"/></td></tr>
+<tr><th>电费：</th><td><input type="text" name="data[dian_price]" value="<{$detail.dian_price|default:''}>" class="input w-100"/></td></tr>
+<tr><th>燃气费：</th><td><input type="text" name="data[ranqi_price]" value="<{$detail.ranqi_price|default:''}>" class="input w-100"/></td></tr>
+<tr>
+	<th>支付状态：</th>
+	<td>
+		<label><input type="radio" name="data[pay_status]" <{if $detail.pay_status}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[pay_status]" <{if isset($detail.pay_status) && empty($detail.pay_status)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+<tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

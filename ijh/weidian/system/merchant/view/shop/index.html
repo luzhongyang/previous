@@ -1,0 +1,227 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="javascript:;">基本资料</a></li>
+                <li class=""><a href="<{link ctl='merchant/shop:passwd'}>">安全设置</a></li>
+                <li class=""><a href="<{link ctl='merchant/shop:mobile'}>">更换手机</a></li>
+                <li class=""><a href="<{link ctl='merchant/shop:account'}>">提现帐号</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="">
+                            <form action="<{link ctl='merchant/shop:index'}>" mini-form="index"  method="post" class="form-horizontal"
+                                  ENCTYPE="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">店铺名称：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[title]" value="<{$shop.title|default:''}>"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">区县：<br/></label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <select name="data[area_id]" id="area" class="form-control">
+                                                <{foreach $areas as $v}>
+                                                <option value="<{$v.area_id}>"
+                                                <{if
+                                                $shop.area_id==$v.area_id}>selected="selected"<{/if}>><{$v.area_name}></option>
+                                                <{/foreach}>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">商圈：<br/></label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <select name="data[business_id]" id="business" class="form-control">
+                                                <{foreach $busis as $v}>
+                                                <option value="<{$v.business_id}>"
+                                                <{if
+                                                $shop.business_id==$v.business_id}>selected="selected"<{/if}>><{$v.business_name}></option>
+                                                <{/foreach}></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">分类：<br/></label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <select name="data[cate_id]" class="form-control">
+                                                <{foreach $cate_tree as $k => $v}>
+                                                <option value="<{$v.cate_id}>"
+                                                <{if $shop.cate_id == $v.cate_id}>selected<{/if}> ><{$v.title}></option>
+                                                <{foreach $v.childrens as $kk => $vv}>
+                                                <option value="<{$vv.cate_id}>"
+                                                <{if $shop.cate_id == $vv.cate_id}>selected<{/if}> >&nbsp;┗━<{$vv.title}></option>
+                                                <{/foreach}>
+                                                <{/foreach}>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+<!--                                 <div class="form-group draggable">
+                                    <label class="col-sm-2 control-label">图标：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4"><input type="text" name="data[logo]" class="form-control" id="file_photo" value="<{$shop.logo}>"<{if $shop.logo}> photo="<{$pager.img}>/<{$shop.logo}>"<{/if}> readonly="readonly"/></div>
+                                        <div class="col-sm-8"><input type="button" uploadbtn="#file_photo" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview="#file_photo" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span> 预览</a></div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group draggable">
+                                    <label class="col-sm-2 control-label">Banner：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4"><input type="text" name="data[banner]" class="form-control" id="file_photo1" value="<{$shop.banner}>" <{if $shop.banner}> photo="<{$pager.img}>/<{$shop.banner}>"<{/if}> readonly="readonly"/></div>
+                                        <div class="col-sm-8"><input type="button" uploadbtn1="#file_photo1" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview1="#file_photo1" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span> 预览</a></div>
+                                    </div>
+                                </div> -->
+
+                                <div class="form-group draggable">
+                                    <label class="col-sm-2 control-label">图标：</label>
+                                    <div class="col-sm-10" >
+                                        <div class="col-sm-4"><input type="text" name="data[logo]" class="form-control" id="file_photo" value="<{$shop.logo|default:''}>" photo="<{$pager.img}>/<{$shop.logo}>" readonly="readonly"/></div>
+                                        <div class="col-sm-8"><input type="button" uploadbtn="#file_photo" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview="#file_photo" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span>预览</a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group draggable">
+                                    <label class="col-sm-2 control-label">Banner：</label>
+                                    <div class="col-sm-10" >
+                                        <div class="col-sm-4"><input type="text" name="data[banner]" class="form-control" id="file_photo1" value="<{$shop.banner|default:''}>" photo="<{$pager.img}>/<{$shop.banner}>" readonly="readonly"/></div>
+                                        <div class="col-sm-8"><input type="button" uploadbtn="#file_photo1" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview="#file_photo1" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span>预览</a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">联系人：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[contact]" value="<{$shop.contact|default:''}>"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">联系电话：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[phone]" value="<{$shop.phone|default:''}>"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">地址：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[addr]" value="<{$shop.addr|default:''}>"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label">地图坐标：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-md-3">
+                                            <div class="input-group m-b"><span class="input-group-btn">
+                                                    <button type="button" class="btn "
+                                                            style="background-color: :#e6e6e6;">经度：</button> </span>
+                                                <input type="text" class="form-control" name="data[lng]"
+                                                       value="<{$shop.lng}>" id="Bmap_marker_lng">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group m-b"><span class="input-group-btn">
+                                                    <button type="button" class="btn "
+                                                            style="background-color: :#e6e6e6;">纬度：</button> </span>
+                                                <input type="text" class="form-control" name="data[lat]"
+                                                       value="<{$shop.lat}>" id="Bmap_marker_lat">
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary" type="button"
+                                                map-marker="#Bmap_marker_lng,#Bmap_marker_lat">拾取工具
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">&nbsp;</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-primary" type="submit">保存数据</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>
+<script type="text/javascript">
+    $(document).on("change", "#area", function () {
+        var area_id = $(this).val();
+        jQuery.ajax({
+            url: "<{link ctl='merchant/shop/get_business-" + area_id + "'}>",
+            async: true,
+            dataType: 'json',
+            type: 'POST',
+            success: function (ret) {
+                if (ret.error > 0) {
+                    parent.layer.msg(ret.message);
+                } else {
+                    var html = '';
+                    for (var i in ret.options) {
+                        html += "<option value=" + i + ">" + ret.options[i] + "</option>";
+                    }
+                    $("#business").html(html);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+        });
+    });
+
+    $("[map-marker]").off("click").on("click", function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var input = $(this).attr("map-marker").split(",");
+        var point = {lng: "", lat: ""};
+        if (input.length < 2) {
+            var d = $(input[0]).val().split(",");
+            point.lng = d[0];
+            point.lat = d[1];
+        } else {
+            point.lng = $(input[0]).val();
+            point.lat = $(input[1]).val();
+        }
+        Widget.BMap.Marker(point, function (ret) {
+            if (input.length < 2) {
+                $(input[0]).val(ret.lng + "," + ret.lat);
+            } else {
+                $(input[0]).val(ret.lng);
+                $(input[1]).val(ret.lat);
+            }
+        });
+    });
+</script>

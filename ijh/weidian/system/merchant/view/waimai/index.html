@@ -1,0 +1,236 @@
+<{include file="merchant:block/header.html"}>
+<link href="/merchant/style/css/plugins/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a  href="<{link ctl='merchant/waimai:index'}>" >外卖店铺资料</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                    <{if !$waimai.shop_id}>
+                    <div class="alert alert-danger"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;小提示：您需要提交资料申请开通外送店铺功能，才可以继续操作</div>
+                    <{elseif !$waimai.audit}>
+                    <div class="alert alert-danger"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;小提示：您的外卖店铺正在审核中，请耐心等待</div>
+                    <{/if}>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <form action="<{link ctl='merchant/waimai:index'}>" method="post" mini-form="waimai_index" class="form-horizontal"  ENCTYPE="multipart/form-data">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">店铺名称：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="data[title]" value="<{$waimai.title|default:''}>" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group draggable">
+                                            <label class="col-sm-2 control-label">店铺LOGO：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4"><input type="text" name="data[logo]" class="form-control" id="file_photo" value="<{$waimai.logo|default:''}>" photo="<{$pager.img}>/<{$waimai.logo}>" readonly="readonly"/></div>
+                                                <div class="col-sm-8"><input type="button" uploadbtn="#file_photo" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview="#file_photo" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span> 预览</a></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">外卖分类：<br/></label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <select name="data[cate_id]" class="form-control ">
+                                                        <{foreach $cate_tree as $k => $v}>
+                                                        <option value="<{$v.cate_id}>" <{if $waimai.cate_id == $v.cate_id}>selected<{/if}> ><{$v.title}></option>
+                                                        <{foreach $v.childrens as $kk => $vv}>
+                                                            <option value="<{$vv.cate_id}>" <{if $waimai.cate_id == $vv.cate_id}>selected<{/if}> >&nbsp;┗━<{$vv.title}></option>
+                                                        <{/foreach}>
+                                                        <{/foreach}>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">客服电话：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="data[phone]"  value="<{$waimai.phone|default:''}>" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">选择显示模板：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-2">
+                                                    <div class="radio radio-success radio-inline">
+                                                        <input type="radio" id="tmpl_type_waimai" name="data[tmpl_type]" value="waimai" <{if $waimai.tmpl_type == 'waimai'}>checked="checked"<{/if}> >
+                                                        <label for="tmpl_type_waimai">外卖模板</label>
+                                                    </div>
+                                                    <div class="radio radio-inline">
+                                                        <input type="radio" id="tmpl_type_market" name="data[tmpl_type]" value="market" <{if $waimai.tmpl_type == 'market'}>checked="checked"<{/if}> >
+                                                        <label for="tmpl_type_market">商超模板</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <span class="help-block -none">小提示：当店铺商品较多时选择商超模板更合适</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">到店自提：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <div class="radio radio-success radio-inline">
+                                                        <input type="radio" id="is_ziti_1" name="data[is_ziti]" value="1" <{if $waimai.is_ziti == 1}>checked="checked"<{/if}>/> 
+                                                        <label for="is_ziti_1">支持</label>
+                                                    </div>
+                                                    <div class="radio radio-inline">
+                                                        <input type="radio" id="is_ziti_0" name="data[is_ziti]" value="0" <{if $waimai.is_ziti == 0}>checked="checked"<{/if}>/>
+                                                        <label for="is_ziti_0">不支持</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">付款方式：<br/></label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <select id="pay_type_select" class="form-control ">
+                                                            <option value="all" <{if $waimai.is_daofu==1 && $waimai.online_pay==1}>selected="selected"<{/if}> >全部支持</option> 
+                                                            <option value="is_daofu" <{if $waimai.is_daofu==1 && $waimai.online_pay==0}>selected="selected"<{/if}>>仅支持货到付款</option> 
+                                                            <option value="online_pay" <{if $waimai.is_daofu==0 && $waimai.online_pay==1}>selected="selected"<{/if}>>仅支持在线支付</option> 
+                                                    </select>
+                                                    <input type="hidden" name="data[online_pay]" value="1">
+                                                    <input type="hidden" name="data[is_daofu]" value="1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">营业状态：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <div class="radio radio-success radio-inline">
+                                                        <input type="radio" id="yy_status_1" name="data[yy_status]" value="1" <{if $waimai.yy_status == 1}>checked="checked"<{/if}>/>
+                                                        <label for="yy_status_1">营业</label>
+                                                    </div>
+                                                    <div class="radio radio-inline">
+                                                        <input type="radio" id="yy_status_0" name="data[yy_status]" value="0" <{if $waimai.yy_status == 0}>checked="checked"<{/if}>/>
+                                                        <label for="yy_status_0">打烊</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">营业开始时间：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="text" name="data[yy_stime]" id="yy_stime" value="<{$waimai.yy_stime}>" class="form-control" onFocus="WdatePicker({dateFmt:'HH:mm'})" readonly="readonly" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">营业结束时间：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="text" name="data[yy_ltime]" id="yy_ltime" value="<{$waimai.yy_ltime}>" class="form-control" onFocus="WdatePicker({dateFmt:'HH:mm'})" readonly="readonly" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">店铺简介：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <textarea name="data[info]"  class="form-control border-left m-t" style="height: 150px"><{$waimai.info}></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">店铺公告：</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <textarea name="data[delcare]" class="form-control border-left m-t" style="height:150px;"><{$waimai.delcare}></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">&nbsp;</label>
+                                            <div class="col-sm-10">
+                                                <div class="col-sm-4">
+                                                    <button class="btn btn-primary" type="submit"><{if $waimai}>保存修改<{else}>提交申请<{/if}></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<{include file="merchant:block/footer.html"}>
+<script src="/merchant/script/js/plugins/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="/merchant/script/js/plugins/datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+<script  type="text/javascript" charset="utf-8" async defer>
+$("#pay_type_select").change(function(){
+    if($(this).val() == 'is_daofu') {
+        $("input[name='data[is_daofu]']").val(1);
+        $("input[name='data[online_pay]']").val(0);
+    }else if($(this).val() == 'online_pay') {
+        $("input[name='data[is_daofu]']").val(0);
+        $("input[name='data[online_pay]']").val(1);
+    }else {
+        $("input[name='data[is_daofu]']").val(1);
+        $("input[name='data[online_pay]']").val(1);
+    }
+});
+
+$('.start_time').datetimepicker({
+    format:'hh:ii',
+    language:  'zh-CN',
+    //weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 1,
+    minView: 0,
+    maxView: 1,
+    forceParse: 0,
+    showMeridian:false,
+});
+
+$('.end_time').datetimepicker({
+    format:'hh:ii',
+    language:  'zh-CN',
+    //weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 1,
+    minView: 0,
+    maxView: 1,
+    forceParse: 0,
+    showMeridian:false,
+});
+</script>

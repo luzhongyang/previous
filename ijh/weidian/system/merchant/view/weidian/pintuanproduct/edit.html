@@ -1,0 +1,886 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>编辑拼团商品</h5>
+            </div>
+            <div class="ibox-content">
+
+                <form action="<{link ctl='merchant/weidian/pintuanproduct:edit' args=$detail.product_id }>" mini-form="merchant" method="post" ENCTYPE="multipart/form-data" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="red">*</span>商品标题：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group draggable">
+                            <label class="col-sm-2 control-label">图片：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4"><input type="text" name="data[photo]" class="form-control" id="file_photo" value="<{$detail.photo}>" photo="<{$pager.img}>/<{$detail.photo}>" readonly="readonly"/></div>
+                                <div class="col-sm-8"><input type="button" uploadbtn="#file_photo" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview="#file_photo" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span> 预览</a></div>
+                            </div>
+                        </div>
+                        <div class="form-group draggable">
+                            <label class="col-sm-2 control-label"><span class="red">*</span>分类：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                <select class="form-control" name="data[cate_id]">
+                                    <{widget id="weidian/cate" shop_id=$detail.shop_id value=$detail.cate_id type="类型"}>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="red">*</span>单买价：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[price]" value="<{$detail.price|default:'0.00'}>" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="red">*</span>库存：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" id="product_stock" name="data[stock]" value="<{$detail.stock|default:'0'}>" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="red">*</span>销量：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[sales]" value="<{$detail.sales|default:''}>" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">限购数：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[item_limit]|default:'999'" value="<{$detail.item_limit|default:''}>" class="form-control">
+                                    <span class="tip-comment">仅限制单人购买, 默认:999, 0:不限购,其他数字: 限购份数上限</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">团类型：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="inlineCheckbox1" name="data[tuan_type]" value="0" <{if 0 == $detail.tuan_type}>checked="checked"<{/if}> />
+                                        <label for="inlineCheckbox1">普通团</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="inlineCheckbox2" name="data[tuan_type]" value="1" <{if 1 == $detail.tuan_type}>checked="checked"<{/if}> />
+                                        <label for="inlineCheckbox2">阶梯团</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group putongtuan" style="display:block;">
+                            <label class="col-sm-2 control-label">普通团：</label>
+                            <div class="col-sm-10">
+                                <div class="form-group col-sm-12">
+                                    <label class="pull-left control-label"><span class="red">*</span>成团人数：</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" id="product_stock" name="data[user_num]" value="<{$detail.user_num|default:''}>" class="form-control">
+                                    </div>
+                                    <label class="pull-left control-label"><span class="red">*</span>拼团价格(低于单买价)：</label>
+                                    <div class="col-sm-2">
+                                      <input type="text" id="product_stock" name="data[wei_price]" value="<{$detail.wei_price|default:''}>" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group jietituan" style="display:none;">
+                           <div class="control-label">
+                               <div class="">
+                                   <label class="col-sm-2 control-label groupTypeBox groupTypeMulti">阶梯团：</label>
+                                   <div class="groupTypeBox groupTypeMulti col-sm-10">
+                                       <div  class="form-group list-table">
+                                           <div class="col-sm-4 newSet_jietiTab">
+                                               <table border="0" cellpadding="6" cellspacing="1">
+                                                   <thead class="list-thead">
+                                                       <tr>
+                                                           <td style="white-space:nowrap;" width="50">
+                                                               <span>级数</span>
+                                                           </td>
+                                                           <td style="white-space:nowrap;" width="80">
+                                                               <span><span class="red">*</span>成团人数</span>
+                                                           </td>
+                                                           <td style="white-space:nowrap;" width="80">
+                                                               <span><span class="red">*</span>拼团价格</span>
+                                                           </td>
+                                                           <td style="white-space:nowrap;" width="50">
+                                                               <span>操作</span>
+                                                           </td>
+                                                       </tr>
+                                                   </thead>
+                                                   <tbody class="list-tbody" id="multi_G_price">
+                                                   <{$detail.level_html}>
+                                                   </tbody>
+                                                   <tfoot class="list-tfoot">
+                                                       <tr>
+                                                           <td colspan="4">
+                                                               <a class="btn btn-primary btn-sm" href="javascript:;" id="addGroupPrice">添加价格阶梯</a>
+                                                           </td>
+                                                       </tr>
+                                                   </tfoot>
+                                               </table>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="red">*</span>团长佣金：</label>
+                            <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" id="product_stock" name="data[money_master]" value="<{$detail.money_master|default:'0'}>" class="form-control">
+                                <span class="tip-comment">例如: 佣金设置5元, 3人团, 组团成功后后, 团长获取佣金为: 3x5=15元 </span>
+                            </div></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="red">*</span>预付定金：</label>
+                            <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" id="product_stock" name="data[money_pre]" value="<{$detail.money_pre|default:'0'}>" class="form-control">
+                                <span class="tip-comment">0:表示全款购买, 预付定金需要大于团长佣金; 阶梯团, 只能设置预付定金, 不能全款购买 </span>
+                            </div></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class="red">*</span>成团有效期：</label>
+                            <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" id="product_stock" name="data[tuan_time]" value="<{$detail.tuan_time|default:'2'}>" class="form-control">
+                                <span class="tip-comment">单位:天, 过期团购失败</span></td>
+                            </div></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">团限购：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="tuan_limit_0" name="data[tuan_limit]" value="0" <{if 0 == $detail.tuan_limit}>checked="checked"<{/if}> />
+                                        <label for="tuan_limit_0"><{$params.tuan_limit.select.0}></label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="tuan_limit_1" name="data[tuan_limit]" value="1" <{if 1 == $detail.tuan_limit}>checked="checked"<{/if}>/>
+                                        <label for="tuan_limit_1"><{$params.tuan_limit.select.1}></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">购买开团：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="master_need_buy_0" name="data[master_need_buy]" value="0" <{if 0 == $detail.master_need_buy}>checked="checked"<{/if}> />
+                                        <label for="master_need_buy_0"><{$params.master_need_buy.select.0}></label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="master_need_buy_1" name="data[master_need_buy]" value="1" <{if 1 == $detail.master_need_buy}>checked="checked"<{/if}> />
+                                        <label for="master_need_buy_1"><{$params.master_need_buy.select.1}></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">配送类型：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="address_type_0" class="address_type" name="data[address_type]" value="0" <{if 0 == $detail.address_type}>checked="checked"<{/if}> />
+                                        <label for="address_type_0"><{$params.address_type.select.0}></label>
+                                    </div>
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="address_type_1" class="address_type" name="data[address_type]" value="1" <{if 1 == $detail.address_type}>checked="checked"<{/if}> />
+                                        <label for="address_type_1"><{$params.address_type.select.1}></label>
+                                    </div>
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="address_type_2" class="address_type" name="data[address_type]" value="2" <{if 2 == $detail.address_type}>checked="checked"<{/if}> />
+                                        <label for="address_type_2"><{$params.address_type.select.2}></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="ship_fee">
+                            <label class="col-sm-2 control-label">配送费用：</label>
+                            <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" name="data[ship_fee]" value="<{$detail.ship_fee|default:'0'}>" class="form-control">
+                                <span class="tip-comment">配送费用,默认 0</span>
+                            </div></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">上架：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" id="is_onsale_1" name="data[is_onsale]" value="1" <{if 1 == $detail.is_onsale}>checked="checked"<{/if}> />
+                                        <label for="is_onsale_1">上架</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="is_onsale_0" name="data[is_onsale]" value="0" <{if 0 == $detail.is_onsale}>checked="checked"<{/if}> />
+                                        <label for="is_onsale_0">下架</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                <input type="text" name="data[orderby]" value="<{$detail.orderby|default:'50'}>" class="form-control">
+                            </div></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-12">
+                                <textarea name="data[intro]" kindeditor="full" style="width:800px;height:350px;"><{$detail.intro}></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group"> <label class="col-sm-2 control-label">运费设置：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-1">
+                                    <div class="radio radio-success tongyi_fee">
+                                        <input type="radio" id="price_type_3" name="data[delivery_type]" value="0" <{if $detail.delivery_type==0}>checked="checked"<{/if}>>
+                                        <label for="price_type_3">统一邮费</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class=" input-group"> <span class="input-group-addon">¥</span>
+                                        <input type="text" name="data[delivery_price]" <{if $detail.delivery_type==0}>value="<{$detail.delivery_price}>"<{/if}> class="form-control">
+                                    </div>
+                                </div>
+                            </div> </div>
+                        <div class="form-group"> <label class="col-sm-2 control-label">&nbsp;</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-1">
+                                    <div class="radio tpl_fee">
+                                        <input type="radio" id="price_type_4" name="data[delivery_type]" value="1" <{if $detail.delivery_type==1}>checked="checked"<{/if}>/>
+                                        <label for="price_type_4">运费模板</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <select data-placeholder="请选择运费模板" class="chosen-select form-control" tabindex="2">
+                                        <option value=""></option>
+                                        <{foreach $tpl_items as $v}>
+                                        <option value="<{$v.tpl_id}>" <{if $detail.delivery_tpl_id==$v.tpl_id}>selected="selected"<{/if}>><{$v.title}></option>
+                                        <{/foreach}>selected
+                                    </select>
+                                    <input type="hidden" name="data[delivery_tpl_id]" value="">
+                                </div>
+                                <div class="col-sm-1 newSet_wxtables newSet_wxtables_btn_box">
+                                    <a href="<{link ctl='merchant/shop/trade/deliveryadd'}>" class="btn-success" style="margin-top:0px;" target="view_window">新建模板</a>
+                                </div>
+                            </div>
+                        </div>
+                            <!--批量库存设置-->
+                            <div class="form-group m-b-20">
+                                <div class="col-sm-2"><!--勿删--></div>
+                                <div class="formitems newSet_btn_box col-sm-10 control-label" style="margin: 20px 0px">
+                                  <div class="col-sm-4">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <!--  <button class="btn btn-white" type="submit">取消</button> -->
+                                  </div>
+                                
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var tuantype = "<{$detail.tuan_type}>";
+        if(tuantype==1){
+          $(".putongtuan").hide();
+          $(".jietituan").show();
+        }
+        
+        $('.kucun_btn').click(function () {
+            $('.jbox_kucun').show();
+            $('.jbox-overlay').show();
+        });
+        $('.jbox-close, .jbox-buttons-cancel').click(function () {
+            $('.jbox_kucun').hide();
+            $('.jbox_price').hide();
+            $('.jbox_huiyuan').hide();
+            $('.jbox-overlay').hide();
+        });
+
+        $('.price_btn').click(function () {
+            $('.jbox_price').show();
+            $('.jbox-overlay').show();
+        });
+
+        $('.huiyuan_btn').click(function () {
+            $('.jbox_huiyuan').show();
+            $('.jbox-overlay').show();
+        });
+
+        $('.setfxs-pic .J-options-slideToggle').click(function () {
+            $(this).parent().find('.setfxs-box').show();
+            $('.jbox-overlay').show();
+            $('.jbox-overlay').css('z-index', '9');
+        });
+        $('.jbox-overlay').click(function () {
+            $('.setfxs-pic .setfxs-box').hide();
+            $(this).hide();
+        });
+        // chose初始化
+        $('.chosen-select').chosen({
+            width: "100%",
+            no_results_text: "没有找到",
+        });
+    });
+
+    // 运费设置
+    $(document).off('click', '.tpl_fee').on('click', '.tpl_fee', function() {
+        $('.chosen-select').trigger('chosen:open');
+        $("input[name='data[delivery_type]']").val(1);
+    })
+    $("label[for='price_type_4']").click(function() {
+        $('.chosen-select').trigger('chosen:open');
+        $("input[name='data[delivery_type]']").val(1);
+    })
+    $(document).off('click', '.tongyi_fee').on('click', '.tongyi_fee', function() {
+        $('.chosen-container-single a span').text('请选择运费模板');
+        $("input[name='data[delivery_type]']").val(0);
+        $("input[name='data[delivery_tpl_id]']").val("");
+    })
+    $("label[for='price_type_3']").click(function() {
+        $('.chosen-container-single a span').text('请选择运费模板');
+        $("input[name='data[delivery_type]']").val(0);
+        $("input[name='data[delivery_tpl_id]']").val("");
+    })
+    $(".chosen-select").chosen().change(function(){
+        $('#price_type_4').click();
+        $("input[name='data[delivery_tpl_id]']").val($(this).val());
+        $("input[name='data[delivery_type]']").val(1);
+        $("input[name='data[delivery_price]']").val("");
+    });
+    $("input[name='data[delivery_price]']").click(function(){
+        $('#price_type_3').click();
+        $("input[name='data[delivery_type]']").val(0);
+        $("input[name='data[delivery_tpl_id]']").val("");
+    })
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        
+        $("#jq_set_stock").click(function(){//批量设置库存
+            var stock = $("#set_stock").val();
+            $(".jq_stock").val(stock);
+            now_attr_values();
+            $('.jbox_kucun').hide();
+            $('.jbox_price').hide();
+            $('.jbox_huiyuan').hide();
+            $('.jbox-overlay').hide();
+        })
+        
+        $("#jq_sure").click(function(){ //批量设置价格
+            var price = $("#set_price").val();
+            var wei_price = $("#set_wei_price").val();
+            $(".jq_price").val(price);
+            $(".jq_wei_price").val(wei_price);
+            now_attr_values();
+            $('.jbox_kucun').hide();
+            $('.jbox_price').hide();
+            $('.jbox_huiyuan').hide();
+            $('.jbox-overlay').hide();
+        })
+        
+        
+        
+        attr_edit_tr();
+        attr_click_delete();
+        attr_click_add();
+        attr_area_remove();
+        attr_input_change();
+        change_stock();
+        
+        $('.sku-add').click(function () {
+            var obj = $(this);
+            set_name(obj,'规格名称');
+            //attr_click_add();
+        });
+        
+        
+        function set_name(obj,title){
+            /*if(!title){
+               title = "规格名称";
+            }*/
+            var link = "<{link ctl='merchant/weidian/product/set_name'}>";
+            $.post(link,{"title":title},function(ret){
+                if(ret.error == 0){
+                    var item = ret.name;
+                    var html =  "<dl class='normslist control-label'><dt><input type='text' rel='"+item.key+"' class='jq_attr_name jq_name_"+item.key+"' value='"+item.title+"'><a href='javascript:void(0);' rel="+item.key+" class='j-delNorms' title='移除'><i class='gicon-trash'></i>移除</a></dt><dd class='skuitemPanel'><ul class='labelList'></ul><input type='text' class='input'><a href='javascript:void(0);' class='btn-primary' rel='"+item.key+"'>添加</a></dd></dl>";
+                    obj.before(html);
+                    attr_add_tr(item.key,title);
+                    //now_attr();
+                }
+            },'json')
+
+        }
+        
+        //console.log(params);
+        function attr_edit_tr(){
+            $(".spGuigekuc").on("input",".jq_attr_name",function(){
+                var obj = $(this);
+                var title = $(this).val();
+                var key = $(this).attr('rel');
+                //alert(title);return false;
+                var link = "<{link ctl='merchant/weidian/product/set_name'}>";
+                $.post(link,{"title":title},function(ret){
+                    if(ret.error == 0){
+                        var item = ret.name;
+                        obj.attr('rel',item.key);
+                        obj.val(item.title);
+                        obj.parent().find(".j-delNorms").attr("rel",item.key);
+                        obj.parent().parent().find(".skuitemPanel .btn-primary").attr("rel",item.key);
+                        obj.removeClass("jq_name_"+key);
+                        obj.attr("class","jq_attr_name jq_name_"+item.key);
+                        attr_change_tr(key,item.key,item.title);
+                        now_attr();
+                    }
+                },'json')
+            })
+        }
+           
+        function attr_input_change(){
+            $(".wxtables").on("change",".j-price-modify",function(){
+                now_attr_values();
+            })
+        }
+        
+        function change_stock(){
+            $(".wxtables").on("change",".jq_stock",function(){
+                var len = $(".wxtables tr").length-1;
+                if(len){
+                    var stock = 0;
+                    for(var i=1; i<=len;i++){
+                        stock += parseInt($(".wxtables tr").eq(i).find("td .jq_stock").val());
+                    }
+                }
+                $("#product_stock").val(stock);
+            })
+        }
+        
+           
+        function now_attr(){
+            var params = [];
+            var len = $(".normslist").length;
+            if(len){
+                for(var i=0; i<len;i++){
+                    var _len = $(".normslist").eq(i).find(".labelList li").length;
+                    var props = "";
+                    for(var j=0; j<_len;j++){
+                        if(j==0){
+                           props +=  $(".normslist").eq(i).find(".labelList li").eq(j).attr("rel");
+                        }else{
+                            props += ","+$(".normslist").eq(i).find(".labelList li").eq(j).attr("rel"); 
+                        }
+                    } 
+                    var title = $(".normslist").eq(i).find(".jq_attr_name").val();
+                    var id = $(".normslist").eq(i).find(".jq_attr_name").attr("rel");
+
+                    //防止误删所有tab
+                    if(props.length>0){
+                        params.push({"name":title ,"props":props,"id":id});
+                    }
+
+                    
+                }
+            }
+            var _params = JSON.stringify(params);
+            $("#attr_value").val(_params);
+            attr_table_change(_params);
+//            console.log(_params);
+            //alert($(".wxtables tr").length);return false;
+        }
+        
+        
+        
+        function now_attr_values(flag){
+            var params = [];
+            var _params = [];
+            var len = $(".wxtables tr").length-1;
+            var stock_num = 0;
+            //alert(len);
+            if(len){
+                for(var i=1; i<=len;i++){
+                    var _len = $(".wxtables tr").eq(i).find("td.has_attr").length;
+                    //alert(_len);
+                    var join_ids  = "";
+                    var attr_ids = [];
+                    for(var j=0; j<_len;j++){
+                        attr_ids.push($(".wxtables tr").eq(i).find("td.has_attr").eq(j).attr("rel"));
+                        if(j==0){
+                           join_ids +=  $(".wxtables tr").eq(i).find("td.has_attr").eq(j).attr("rel");
+                        }else{
+                           join_ids += "-"+$(".wxtables tr").eq(i).find("td.has_attr").eq(j).attr("rel"); 
+                        }
+                    }
+                    var price = $(".wxtables tr").eq(i).find("td .jq_price").val();
+                    var wei_price = $(".wxtables tr").eq(i).find("td .jq_wei_price").val();
+                    var stock =  $(".wxtables tr").eq(i).find("td .jq_stock").val();
+                    var sku =  $(".wxtables tr").eq(i).find("td .jq_sku").val();
+                    var sales = $(".wxtables tr").eq(i).find("td.jq_sales").html();
+                    stock_num += parseInt($(".wxtables tr").eq(i).find("td .jq_stock").val());
+//                    console.log(join_ids);
+                    var tr_params = [];
+                    tr_params[join_ids] = {"price":price,"wei_price":wei_price,"stock":stock,"sku":sku,"sales":sales,"attr_ids":attr_ids};
+                    //console.log(tr_params);
+//                    params.push(tr_params);
+                    params[join_ids] = tr_params[join_ids];
+                    _params.push({"price":price,"wei_price":wei_price,"stock":stock,"sku":sku,"sales":sales});
+                }
+            }
+            //console.log(params);
+            $("#product_stock").val(stock_num);
+            $("#attr_stock").val(JSON.stringify(_params));
+            if(flag){
+                return params;
+            }
+        }
+        
+        
+        function attr_add_tr(key,title){  //添加tr
+            /*if(!title){
+               title = "规格名称";
+            }*/
+            var len = $("tr th.jq_name").length;
+            if(len==0){
+                var html = "<th class='jq_name jq_name_"+key+"'>"+title+"</th>"+$(".jq_tr").html();
+                $(".jq_tr").html(html);
+            }else{
+                var html = "<th class='jq_name jq_name_"+key+"'>"+title+"</th>";
+                $("tr th.jq_name").eq(len-1).after(html);
+            }
+        }
+        
+        function attr_change_tr(old,key,title){  //改变tr
+            $(".jq_name_"+old).html(title);
+            $(".jq_name_"+old).attr("class","jq_name jq_name_"+key);
+        }
+
+        function attr_click_delete(){
+            $(document).on('click','.normslist .j-delNorms',function () {
+                $("th.jq_name_"+$(this).attr('rel')).remove();
+                $(this).parents('.normslist').remove();
+                now_attr();
+            })
+        }
+
+        function attr_click_add(){  //添加属性值，编辑不做
+            
+            $(document).on('click','.skuitemPanel .btn-primary',function () {
+                
+                var attr_add_value = $(this).parent().find('.input').val();
+                var name_id = $(this).attr("rel");
+                var obj = $(this);
+                //alert(attr_add_value);return false;
+                if (attr_add_value.length == 0||attr_add_value==""||attr_add_value==undefined) {
+                    layer.msg("请设置属性值");
+                } else {
+                   var num = $(this).parents().find(".labelList li").length;
+                   //alert(num);return false;
+                   var not_in = "";
+                   if(num){
+                       for(var i=0; i<num;i++){
+                           if(i==0){
+                               not_in += $(this).parent().find(".labelList li").eq(i).find("i").attr("rel");
+                           }else{
+                               not_in += "_"+$(this).parent().find(".labelList li").eq(i).find("i").attr("rel");
+                           }
+                       }
+                   }
+                   set_value(obj,attr_add_value,not_in);
+                }
+            });
+        }
+
+        function set_value(obj,title,not_in){
+            var link = "<{link ctl='merchant/weidian/product/set_value'}>";
+            $.post(link,{"title":title,"not_in":not_in},function(ret){
+                //console.log(ret);
+                if(ret.error == 0){
+                    var item = ret.value;
+                    var html =  "<li rel='"+item.key+"'><span>" + item.title + "</span><i class='gicon-remove' rel='"+item.key+"'></i></li>";
+                    obj.parent().find('.labelList').append(html);
+                    obj.parent().find('.input').val('');
+                    now_attr();
+                    //attr_add_tr(item.key,title);
+                }else{
+                    layer.msg(ret.message);
+                }
+            },'json')
+        }
+        
+        
+        function attr_area_remove(){ //删除属性值
+            $(document).on('click','.labelList li .gicon-remove',function () {
+                $(this).parent('li').remove();
+                now_attr();
+            });
+        }
+
+        function attr_table_change(params){  //主要方法。监测属性值及属性的变化，相应改变table的结构内容
+            var link = "<{link ctl='merchant/weidian/product/get_attr'}>";
+            $.post(link,{"params":params},function(ret){
+                if(ret.error==0){
+                    var items = ret.items;
+//                    console.log(items);
+                    var product_spec_list = [];
+                    var value_right = [];
+                    var index = 0;                    
+                    var attr_values = now_attr_values(true);
+                    //console.log(attr_values);
+                    for(var i in items){
+                        var value_loop_name = '';
+                        if(product_spec_list.length > 0){
+                            var tmp = [];
+                            var tmp_key = [];
+                            for(var k = 0; k< product_spec_list.length; k++){
+                                var value_loop_name = '';
+                                for(var j=0; j < items[i].attr_value.length; j++){
+                                    if(items[i].attr_value.length>0){
+                                        tmp.push(product_spec_list[k]+"<td class='has_attr' rel="+items[i]["attr_value"][j]["key"]+">"+items[i]["attr_value"][j]["title"]+"</td>");
+                                        tmp_key.push(value_right[k]+'-'+items[i]["attr_value"][j]["key"]);
+                                    }
+                                }
+                                
+                            }
+                            product_spec_list = tmp;
+                            value_right = tmp_key;
+                    }else{
+                            var value_loop_name = '';
+                            for(var j=0; j < items[i].attr_value.length; j++){
+                                if(items[i].attr_value.length>0){
+                                    product_spec_list.push("<td class='has_attr' rel="+items[i]["attr_value"][j]["key"]+">"+items[i]["attr_value"][j]["title"]+"</td>");
+                                    value_right.push(items[i]["attr_value"][j]["key"]);
+                                }
+                            }
+                        }
+                    }
+                    
+//                   console.warn(attr_values);//debug useful
+                    var html =  "<tr class='jq_tr'>"+$(".wxtables .jq_tr").html()+"</tr>";
+//                    console.log(value_right);//debug useful
+                    
+                    $.each(product_spec_list,function(i,item){
+                        //获取数组和值
+                        var _prict = 0;
+                        var _sku = 0;
+                        var _stock = 0;
+                        var _wei_price = 0;
+//                        alert(attr_values);
+//                        if(attr_values[value_right[i]]){
+//                            console.error(attr_values[value_right[i]]);
+//                        }
+//                        var obj = {name:'jack'};
+//                        obj.hasOwnProperty('name'); // --> true
+//                        obj.hasOwnProperty('toString'); // --> false
+                        //有二种方式,  加属性值 和属性组 alert(delete_extra_id('12-11-88'));
+//                        console.info(i+'---'+value_right[i]);//debug useful
+                        if(attr_values )
+                        {
+                            if(attr_values[value_right[i]])
+                            {
+                                _prict = attr_values[value_right[i]].price;
+                                _sku = attr_values[value_right[i]].sku;
+                                _stock = attr_values[value_right[i]].stock;
+                                _wei_price = attr_values[value_right[i]].wei_price;
+                            }
+                            else
+                            {
+                                value_right[i] = delete_extra_id(value_right[i]);
+                                if(attr_values[value_right[i]])
+                                {
+                                    _prict = attr_values[value_right[i]].price;
+                                    _sku = attr_values[value_right[i]].sku;
+                                    _stock = attr_values[value_right[i]].stock;
+                                    _wei_price = attr_values[value_right[i]].wei_price;
+                                }
+                            }
+
+                        }
+
+                        //alert(item);
+//                        console.log(i+item);
+                        //$.each(attt_values,function(k,value){
+                            //if(){
+                                html += "<tr>" + item +"<td><input type='text' class='input moreMini jq_price j-price-modify' value='"+_prict+"'>元<br></td><td><input type='text' class='input moreMini jq_wei_price j-price-modify' value='"+_wei_price+"'>元<br></td><td><input type='text' class='input moreMini jq_stock j-price-modify' value='"+_stock+"'></td><td><input type='text' class='input moreMini jq_sku j-price-modify' value='"+_sku+"'></td><td class='jq_sales'>0</td></tr>";
+                           // }
+                       // })
+                    })
+                    $('table.wxtables').html(html);
+                    
+                    
+                    now_attr_values();
+                }else{
+                    layer.msg(ret.message);
+                }
+            },'json')
+        }
+
+        //init
+
+    });
+
+    function delete_extra_id(url){
+        url = url.split("-");
+        url.pop();
+        url = url.join("-");
+        return url;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '#money_pre, #money_master', function () {
+        }).on('blur', '#money_pre, #money_master, #wei_price, #price', function (e) {
+            var tipBox = $("#multi_G_price_area");
+            var element;
+            if ( 0!= parseFloat($("#money_master").val()) && 0!= parseFloat($("#money_pre").val()) && parseFloat($("#money_master").val()) >= parseFloat($("#money_pre").val())) {
+                element = $("#money_pre");
+                $.showTooltip(element, '预付定金需要大于团长佣金', tipBox);
+                return false;
+            }
+            if ( parseFloat($("#wei_price").val()) >= parseFloat($("#price").val())) {
+                element = $("#price");
+                $.showTooltip(element, '单买价要大于拼团价', tipBox);
+                return false;
+            }
+        });
+
+
+//ship_fee   address_type
+        $(".address_type").change(function () {
+            var bln = $(".address_type:checked").val();
+            $("#ship_fee").show();
+            if (bln == 2) {
+                $("#ship_fee").hide();
+            } else {
+                $("#ship_fee").show();
+            }
+        }).trigger("change");
+        $(".groupType").change(function () {
+            var bln = $(".groupType:checked").val();
+            $(".groupTypeBox").hide();
+            if (bln == 1) {
+                $(".groupTypeMulti").show();
+            } else {
+                $(".groupTypeSingle").show();
+            }
+        }).trigger("change");
+        $("#addGroupPrice").click(function () {
+            var data = new Object();
+            data.index = $("#multi_G_price tr").length + 1;
+//                        alert(data.index);
+            $("#multi_G_price").append('<tr><td>' + data.index + '</td><td><input type="text" class="form-control" name="data[muti_num][' + data.index + ']" value=""></td><td><input type="text" class="form-control" name="data[muti_price][' + data.index + ']" value=""></td><td><a href="javascript:;" class="text-danger remove-price">删除</a></td></tr>');
+        });
+        $("#addGroupAttr").click(function () {
+            var data = new Object();
+            data.index = $("#multi_G_attr tr").length + 1;
+//                        alert(data.index);
+//            $("#multi_G_attr").append('<tr><td><input type="text" class="form-control" name="data[muti_num][' + data.index + ']" value=""></td><td><input type="text" class="form-control" name="data[muti_price][' + data.index + ']" value=""></td><td><a href="javascript:;" class="text-danger remove-price">删除</a></td></tr>');
+            $("#multi_G_attr").append('<tr><td><input type="text" name="data[attr_name][' + data.index + ']" value="" class="input w-100"/></td><td width="200"><input id="tags_' + data.index + '" name="data[attr_value][' + data.index + ']" type="text" class="tags" value="" /></td><td class="center"><a href="javascript:;" class="text-danger remove-price">删除</a></td></tr>');
+            $('#tags_' + data.index).tagsInput({width: 'auto', height: '27px', defaultText: ''});
+        });
+        $(document).on('click', '#multi_G_attr .remove-price', function () {
+            $(this).parent().parent().remove();
+        })
+        $(document).on('click', '#multi_G_price .remove-price', function () {
+            $(this).parent().parent().remove();
+        }).on('blur', '#multi_G_price .M_num, #multi_G_price .M_price', function (e) {
+            var tipBox = $("#multi_G_price_area");
+            var element;
+            var num, price = 0;
+            var PN_price = new Object();
+            PN_price.num = 1;
+            element = $("#price");
+            PN_price.price = parseFloat(element.val());
+            if (isNaN(PN_price.price) || PN_price.price < 0) {
+                $.showTooltip(element, '请输入销售价格', tipBox);
+                return false;
+            }
+            $("#multi_G_price tr").each(function (i) {
+                element = $('.M_num', this);
+                num = parseInt(element.val());
+
+                if (isNaN(num)) {
+                    $.showTooltip(element, '请输入成团人数', tipBox);
+                    return false;
+                }
+                if (PN_price.num >= num) {
+                    $.showTooltip(element, "需要大于上一级成团人数,起步2人团", tipBox);
+//                                alert('需要大于上一级成团人数');
+                    return false;
+                }
+                PN_price.num = num;
+                element = $('.M_price', this);
+                price = parseFloat(element.val());
+                if (isNaN(price)) {
+                    $.showTooltip(element, '请输入拼团价格', tipBox);
+                    return false;
+                }
+                if (price > PN_price.price) {
+                    $.showTooltip(element, '需要小于上一级拼团价格', tipBox);
+                    return false;
+                }
+                PN_price.price = price;
+            })
+        });
+    });
+</script>
+
+<script type="text/javascript">
+        $("[name='data[sale_type]']").click(function () {
+            if ($(this).val() == 1) {
+                $("#tr_sale_sku1").show();
+                $("#tr_sale_sku2").show();
+            } else {
+                $("#tr_sale_sku2").hide();
+                $("#tr_sale_sku1").hide();
+            }
+        });
+        $("[name='data[sale_type]']:checked").trigger("click");
+</script>
+<script type="text/javascript" src="<{$pager.res}>/script/widget.bmap.js"></script>
+<script type="text/javascript">
+    (function (K, $) {
+        var editor = KindEditor.create('textarea[kindeditor]', {
+            uploadJson: '<{link ctl="merchant/upload:editor" http="base"}>',
+            extraFileUploadParams: {OTOKEN: "<{$OTOKEN}>"}
+        });
+    })(window.KT, window.jQuery);
+</script>
+<script>
+    $(function(){ 
+        $("#inlineCheckbox1").change(function() { 
+            $(".putongtuan").show();
+            $(".jietituan").hide();
+        }); 
+        $("#inlineCheckbox2").change(function() {
+            $(".putongtuan").hide();
+            $(".jietituan").show();
+        }); 
+    }); 
+</script>
+<{include file="merchant:block/footer.html"}>

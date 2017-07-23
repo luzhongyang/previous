@@ -1,0 +1,35 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="mall/product:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?mall/product-index.html" id="SO-form" method="post">
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+    <tr><th>商品ID：</th><td><input type="text" name="SO[product_id]" value="" class="input w-100"/></td></tr>
+    <tr><th class="w-100">分类：</th>
+        <td>
+            <select name="SO[cate_id]" class="select w-200">
+            <option value="">全部分类</option>
+            <{foreach $cate_tree as $v}>   
+            <option value="<{$v.cate_id}>" <{if ($detail.cate_id==$v.cate_id)}> selected="selected"<{/if}>><{$v.title}></option>
+            <{foreach $v.childrens as $vv}>
+            <option value="<{$vv.cate_id}>" <{if ($detail.cate_id==$vv.cate_id)}> selected="selected"<{/if}>>
+            &nbsp;&nbsp;└─  <{$vv.title}>
+            </option>    
+            <{/foreach}>  
+            <{/foreach}>  
+            </select>
+        </td>
+    </tr>
+    <tr><th>名称：</th><td><input type="text" name="SO[title]" value="" class="input w-200"/></td></tr>    
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="搜 索" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

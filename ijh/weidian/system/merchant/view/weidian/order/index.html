@@ -1,0 +1,176 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <{if $fenxiao == 'fenxiao'}>
+                <li class="active"><a href="<{link ctl='merchant/weidian/fenxiao:orders' arg0=1 arg1='fenxiao'}>">待确认</a><li>
+                <li><a href="<{link ctl='merchant/weidian/fenxiao:f_fahuo' arg0=1 arg1='fenxiao'}>">待发货</a><li>
+                <li><a href="<{link ctl='merchant/weidian/fenxiao:f_shouhuo' arg0=1 arg1='fenxiao'}>">待收货</a><li>
+                <li><a href="<{link ctl='merchant/weidian/fenxiao:f_confirm' arg0=1 arg1='fenxiao'}>">已收货</a><li>
+                <li><a href="<{link ctl='merchant/weidian/fenxiao:f_complete' arg0=1 arg1='fenxiao'}>">已完成</a><li>
+                <li><a href="<{link ctl='merchant/weidian/fenxiao:f_cancellist' arg0=1 arg1='fenxiao'}>">已取消</a><li>
+                <li><a href="<{link ctl='merchant/weidian/fenxiao:f_ziti' arg0=1 arg1='fenxiao'}>">自提单</a><li>
+                <{else}>
+                <li class="active"><a href="<{link ctl='merchant/weidian/order:index'}>">待确认</a><li>
+                <li><a href="<{link ctl='merchant/weidian/order:fahuo'}>">待发货</a><li>
+                <li><a href="<{link ctl='merchant/weidian/order:shouhuo'}>">待收货</a><li>
+                <li><a href="<{link ctl='merchant/weidian/order:confirm'}>">已收货</a><li>
+                <li><a href="<{link ctl='merchant/weidian/order:complete'}>">已完成</a><li>
+                <li><a href="<{link ctl='merchant/weidian/order:cancellist'}>">已取消</a><li>
+                <li><a href="<{link ctl='merchant/weidian/order:ziti'}>">自提单</a><li>
+                <{/if}>
+            </ul>
+
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="ibox">
+                            <div class="">
+                                <table class=" table table-hover" id="myTable">
+                                    <thead>
+                                    <tr>
+                                        <th>订单编号</th>
+                                        <th>下单时间</th>
+                                        <th>地址</th>
+                                        <th style="width:220px">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <{foreach $items as $item}>
+
+                                    <tr>
+                                        <td>
+                                            <{$item.order_id}>
+                                        </td>
+                                        <td><{$item.dateline|format:'Y-m-d H:i'}></td>
+                                        <td><{if $item.pei_type==2}><b class="blue">客户自提</b><{else}><{$item.addr}><{$item.house}><{/if}>(<b
+                                                class="blue"><{$item.contact}>,<{$item.mobile}></b>)
+                                        </td>
+                                        <td>
+                                            <a href="<{link ctl='merchant/weidian/order:accept' arg0=$item.order_id}>"
+                                               mini-act="确认" class="btn btn-success btn-sm btn-outline" title="确认">确认(<{if
+                                                $item.pei_type==2}>自提<{else}>配送<{/if}>)</a>
+                                            <a href="<{link ctl='merchant/weidian/order:cancel' arg0=$item.order_id}>"
+                                               mini-act="confirm:您确定要取消订单吗" class="btn btn-warning btn-sm btn-outline"
+                                               title="取消订单">取消订单</a>
+                                            <a rel="<{$item.order_id}>" class="btn btn-primary btn-sm btn-outline"
+                                               title="查看" onclick="view(<{$item.order_id}>)">查看</a>
+                                        </td>
+                                    </tr>
+                                    <tr class="table_child tr_<{$item.order_id}>" style="display:none;">
+                                        <td class="border_none" colspan="9">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                                   class="table table-striped table-hover table_detail"
+                                                   data-page-size="1" data-filter=#filter>
+                                                <tr>
+                                                <tr>
+                                                    <th>订单号:<{$item.order_id}></th>
+                                                    <th>联系人：<{$item.contact}></th>
+                                                    <th>手机号：<{$item.mobile}></th>
+                                                    <th>下单时间：<{$item.dateline|format:'Y-m-d H:i'}></th>
+                                                    <th>状态：待确认</th>
+                                                    <th>在线支付：<{if $item.online_pay==1}>是<{else}>否<{/if}></th>
+                                                    <th>支付状态：<{if $item.pay_status==1}>已支付<{else}>未支付<{/if}></th>
+                                                    <{if $item.pei_type == 2}>
+                                                    <li class="list">自提时间：<{if $item.pei_time ==0}>立即自提<{else}><{$item.pei_time|format:'Y-m-d H:i'}><{/if}></li>
+                                                    <{/if}>
+                                                </tr>
+
+                                                </tr>
+                                                <{foreach $item.products as $var}>
+                                                <{if $item.order_id == $var.order_id}>
+                                                <tr>
+                                                    <td colspan="4"><{$var.product_name}></td>
+                                                    <td>×<{$var.stock_real_name}><span class="num">数量×<{$var.product_number}></span>
+                                                    </td>
+                                                    <td colspan="5" class="txt_r">单价：<span class="price">￥<{$var.product_price}></span>
+                                                    </td>
+                                                </tr>
+                                                <{/if}>
+                                                <{/foreach}>
+                                                <tr>
+                                                    <td colspan="9"><{L('运费')}> ：￥<{$item.freight}></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="9"><{L('合计')}>：<span class="price_zong mr30">￥<{$item.product_price}></span><{L('结算价')}>：<span class="price">￥<{$item.amount}></span><{if $item.coupon>0}>优惠抵扣：-￥<{$item.coupon}><{/if}>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="9"><{L('备注')}>：<{$item.intro|default:"<{L('无')}>"}>
+                                                    </td>
+                                                </tr>
+                                                <tr class="bottom">
+                                                    <td colspan="9"><a href="javascript:printorder(<{$item.order_id}>);"
+                                                                       target="_self"><{L('打印小票')}></a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <{foreachelse}>
+                                    <tr>
+                                        <td colspan="20">
+                                            <div class="alert alert-info"><{L('没有数据')}></div>
+                                        </td>
+                                    </tr>
+                                    <{/foreach}>
+                                    </tbody>
+                                    <tfoot>
+                                    <!-- <tr>
+                                        <td colspan="5">
+                                            <ul class="pagination pull-right"></ul>
+                                        </td>
+                                    </tr> -->
+                                    </tfoot>
+                                </table>
+                                <div class="btn-group pull-right pagination_box">
+                                    <div class="page"><{$pager.pagebar}></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".view_btn").click(function () {
+            $('.tr_' + $(this).attr('rel')).slideToggle();
+        })
+
+        $(".stamp .mask_bg").click(function () {
+            $(".stamp").hide();
+        })
+    });
+    function printorder(order_id) {
+        $(".stamp_list_" + order_id).show();
+        $(".print_" + order_id).click(function () {
+            var link = "<{link ctl='merchant/weidian/order:porder' args='__order_id'}>";
+            $.get(link.replace('__order_id', order_id), function (ret) {
+                $('#abc').html(ret);
+                $('#abc').printArea();
+            }, 'html')
+        });
+    }
+</script>
+<span id='abc'></span>
+<script>
+    function view(order_id) {
+
+        var childtr = "tr_" + order_id;
+        var view = $("." + childtr).css('display');
+        if (view == "none") {
+            $("." + childtr).show();
+        } else {
+            $("." + childtr).hide();
+        }
+
+    }
+</script>  

@@ -1,0 +1,105 @@
+<{include file="merchant:block/header.html"}>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>修改优惠券</h5>
+            </div>
+            <div class="ibox-content">
+
+                <form action="<{link ctl='merchant/shop/coupon:edit' arg0=$detail.coupon_id}>" mini-form="merchant" method="post" ENCTYPE="multipart/form-data" role="form" class="form-horizontal m-t" >
+                    <{if !$member_coupon}>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">订单金额：</label>
+                        <div class="col-sm-4">
+                            <{if $detail.picked>0}>
+                            <{$detail.order_amount|default:''}>
+                            <{else}>
+                            <input type="text" <{if $detail.picked>0}>    readonly    <{/if}> name="data[order_amount]" value="<{$detail.order_amount|default:''}>" class="form-control" placeholder="请输入订单金额">
+                            <{/if}>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">优惠金额：</label>
+                        <div class="col-sm-4">
+                            <{if $detail.picked>0}>
+                            <{$detail.coupon_amount|default:''}>
+                            <{else}>
+                            <input type="text" <{if $detail.picked>0}>    readonly    <{/if}> name="data[coupon_amount]" value="<{$detail.coupon_amount|default:''}>" class="form-control" placeholder="请输入优惠金额">
+                            <{/if}>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">开始时间：</label>
+                        <div class="col-sm-4">
+                            <{if $detail.picked>0}>
+                            <{$detail.stime|default:''}>
+                            <{else}>
+                            <input type="text" <{if $detail.picked>0}>    readonly    <{/if}> name="data[stime]" id="stime" value="<{$detail.stime}>" class="form-control"   onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'stime\',{d:-1})}'})"/>
+                            <!-- <input type="data" name="data[link]" class="form-control">  -->
+                            <{/if}>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">结束时间：</label>
+                        <div class="col-sm-4">
+                            <{if $detail.picked>0}>
+                            <{$detail.ltime|default:''}>
+                            <{else}>
+                            <input type="text" name="data[ltime]" id="ltime" value="<{$detail.ltime}>" class="form-control"   onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'ltime\',{d:-1})}'})"/>
+                            <{/if}>
+                        </div>
+                    </div>
+                    <{else}>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">订单金额：</label>
+                        <div class="col-sm-4">
+                            <td><{$detail.order_amount|default:''}></td>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">优惠金额：</label>
+                        <div class="col-sm-4">
+                            <td><{$detail.coupon_amount|default:''}></td>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">开始时间：</label>
+                        <div class="col-sm-4">
+                            <td><{$detail.stime|default:''}></td>
+                            <!-- <input type="data" name="data[link]" class="form-control">  -->
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">结束时间：</label>
+                        <div class="col-sm-4">
+                            <td><{$detail.ltime|default:''}></td>
+                        </div>
+                    </div>
+                    <{/if}>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">库存：</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="data[sku]" value="<{$detail.sku}>" class="form-control" placeholder="请输入库存">
+                        </div>
+                    </div>
+
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group draggable">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit">保存修改</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<{link ctl='merchant/shop/coupon'}>" class="btn btn-default" type="submit">返回</a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<{include file="merchant:block/footer.html"}>

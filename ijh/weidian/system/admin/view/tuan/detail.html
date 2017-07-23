@@ -1,0 +1,27 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="tuan/Tuan:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>团购ID：</th><td><{$detail.tuan_id}></td><th>商家：</th><td><{$detail.shop.title}>(ID:<{$detail.shop_id}>)</td></tr>
+<tr><th>类型：</th><td><{if $detail.type == 'tuan'}>团购券<{else}>代金券<{/if}></td><th>浏览量：</th><td><{$detail.views}></td></tr>
+<tr><th>标题：</th><td><{$detail.title}></td><th>描述：</th><td><{$detail.desc}></td></tr>
+<tr><th>团购价：</th><td><{$detail.price}></td><th>门店价：</th><td><{$detail.market_price}></td></tr>
+<tr><th>图片：</th><td><img src="<{$pager.img}>/<{$detail.photo}>" width="80" height="80"/></td><th>销量：</th><td><{$detail.sales}></td></tr>
+<tr><th>开始时间：</th><td><{$detail.stime|format}></td><th>结束时间：</th><td><{$detail.ltime|format}></td></tr>
+<tr><th>虚拟销量：</th><td><{$detail.virtual_sales}></td><th>是否限购：</th><td><{if $detail.stock_type == 1}><b class="red">限购</b><{else}>不限购<{/if}></td></tr>
+<{if $detail.stock_type == 1}>
+<tr><th>库存：</th><td><{$detail.stock_num}></td><th>已购数：</th><td><{$detail.sale_count}></td></tr>
+<{/if}>
+<tr><th>简介：</th><td><{$detail.info}></td><th>排序：</th><td><{$detail.orderby}></td></tr>
+<tr><th>是否审核：</th><td><{if $detail.audit ==1}><b class="green">正常</b><{else}>未审核<{/if}></td><th>是否删除：</th><td><{if $detail.closed ==0}><b class="green">正常</b><{else}>已删除<{/if}></td></tr>
+<tr><th>创建时间：</th><td><{$detail.dateline|format}></td><th>客户IP：</th><td><{$detail.clientip}></td></tr>
+</table></div>
+<{include file="admin:common/footer.html"}>

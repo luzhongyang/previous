@@ -1,0 +1,183 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a  href="javascript:;" >修改自提点</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <form id="form_selffetch" action="<{link ctl='merchant/shop/trade:selffetchedit' args=$detail.addr_id}>" mini-form="form_selffetch" method="post" class="form-horizontal" ENCTYPE="multipart/form-data">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">自提点名称：</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-4">
+                                        <input type="text" name="data[title]" value="<{$detail.title}>"  placeholder="请填写自提点名称便于买家理解和管理" class="form-control">
+                                    </div>
+                                </div>   
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">自提点地址：</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-2">
+                                        <select class="form-control m-b" name="data[province_id]">
+                                            <option value="-1">选择省份</option>
+                                            <{foreach $regions as $v}>
+                                            <{if $v.level==1}>
+                                            <option value="<{$v.region_id}>" <{if $detail.province_id==$v.region_id}>selected="selected"<{/if}>><{$v.region_name}></option>
+                                            <{/if}>
+                                            <{/foreach}>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select class="form-control m-b" name="data[city_id]">
+                                            <{foreach $regions as $v}>
+                                            <{if $v.level==2 && $v.parent_id==$detail.province_id}>
+                                            <option value="<{$v.region_id}>" <{if $detail.city_id==$v.region_id}>selected="selected"<{/if}>><{$v.region_name}></option>
+                                            <{/if}>
+                                            <{/foreach}>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select class="form-control m-b" name="data[area_id]">
+                                            <{foreach $regions as $v}>
+                                            <{if $v.level==3 && $v.parent_id==$detail.city_id}>
+                                            <option value="<{$v.region_id}>" <{if $detail.area_id==$v.region_id}>selected="selected"<{/if}>><{$v.region_name}></option>
+                                            <{/if}>
+                                            <{/foreach}>
+                                        </select>
+                                    </div>
+                                </div>  
+                                <label class="col-sm-2 control-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-4">
+                                        <input type="text" name="data[address_detail]" value="<{$detail.address_detail}>" placeholder="请填写自提点的具体地址，最短5个字符，最长120字。" class="form-control">
+                                    </div>
+                                    <!-- <button class="btn btn-primary" type="button"
+                                            map-marker="#Bmap_marker_lng,#Bmap_marker_lat">搜索地图
+                                    </button> -->
+                                </div>    
+                            </div>
+                            <!-- <div class="form-group">
+                                <label class="col-sm-2 control-label">地图定位：</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-9">
+                                        <input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="form-control">
+                                    </div>
+                                </div>   
+                            </div> -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">联系电话：</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-4">
+                                        <input type="text" name="data[phone]" value="<{$detail.phone}>" placeholder="填写准确的联系电话，便于买家联系" class="form-control">
+                                    </div>
+                                </div>   
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">接待开始时间：</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-2">
+                                        <div class="input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="data[fuwu_stime]" id="yy_stime" value="<{$detail.fuwu_stime}>" class="form-control" onFocus="WdatePicker({dateFmt:'HH:mm'})" readonly="readonly" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="data[fuwu_ltime]" id="yy_ltime" value="<{$detail.fuwu_ltime}>" class="form-control" onFocus="WdatePicker({dateFmt:'HH:mm'})" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">自提点照片：</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-4">
+                                        <input type="text" name="data[photo1]" class="form-control" id="file_photo" value="<{$detail.photo1}>" photo="<{$pager.img}>/<{$detail.photo1}>" readonly="readonly"/>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="button" uploadbtn="#file_photo" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview="#file_photo" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span> 预览</a>
+                                    </div>
+                                </div>   
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">商家推荐：</label>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-4">
+                                        <textarea name="data[description]"  class="form-control border-left m-t" style="height: 150px" placeholder="可以描述自提点的活动或相关备注信息（最多200个字）" maxlength="200"><{$detail.description}></textarea>
+                                    </div>
+                                </div>   
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                <div class="col-sm-4 ">
+                                        <button class="btn btn-primary" type="submit">保存自提点</button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="<{link ctl='merchant/shop/trade/selffetch'}>" class="btn btn-default" type="submit">返回</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    // 选择省份change事件
+    $(document).on('change', "select[name='data[province_id]']", function() {
+        var province_id = parseInt($(this).val());
+        $.ajax({  
+            type: "POST",  
+            url: "?shop/trade/ajaxregion",
+            dataType:'json',  
+            data:{"province_id":province_id},
+            success: function(ret) {
+                if(ret.data.items) {
+                    var city_html = ''; var area_html = '';
+                    $.each(ret.data.items, function(k, v) {
+                        city_html += '<option value="'+v.region_id+'">'+v.region_name+'</option>';
+                        if(v.children) {
+                            $.each(v.children, function(k1, v1) {
+                                area_html += '<option value="'+v1.region_id+'">'+v1.region_name+'</option>';
+                            })
+                        }
+                    })
+                    $("select[name='data[city_id]']").html(city_html);
+                    $("select[name='data[area_id]']").html(area_html);
+                }
+            }  
+        });  
+    })
+
+    // 选择城市change事件
+    $(document).on('change', "select[name='data[city_id]']", function() {
+        var city_id = parseInt($(this).val());
+        $.ajax({  
+            type: "POST",  
+            url: "?shop/trade/ajaxregion",
+            dataType:'json',  
+            data:{"city_id":city_id},
+            success: function(ret) {
+                if(ret.data.items) {
+                    var area_html = '';
+                    $.each(ret.data.items, function(k, v) {
+                        area_html += '<option value="'+v.region_id+'">'+v.region_name+'</option>';
+                    })
+                    $("select[name='data[area_id]']").html(area_html);
+                }
+            }  
+        });  
+    })
+</script>
+
+<{include file="merchant:block/footer.html"}>
+
+

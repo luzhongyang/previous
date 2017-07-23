@@ -1,0 +1,139 @@
+<{include file="merchant:block/header.html"}>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class=""><a href="<{link ctl='merchant/shop:index'}>">基本资料</a></li>
+                <li class=""><a href="<{link ctl='merchant/shop:passwd'}>">安全设置</a></li>
+                <li class="active"><a href="javascript:;">更换手机</a></li>
+                <li class=""><a href="<{link ctl='merchant/shop:account'}>">提现帐号</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="">
+                            <form id="form_post" method="post" class="form-horizontal" ENCTYPE="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">旧手机号：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" disabled="disabled" value="<{$mobile}>"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">登录密码：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="password" name="data[passwd]" value="" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+
+
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label">新手机：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-md-4">
+                                            <div class="input-group m-b">
+                                                <input type="text" class="form-control" name="data[mobile]" value=""
+                                                       id="mobile">
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary get_yzm"
+                                                                login="sendsms">获取验证码</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">验证码：<br/></label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[code]" value="" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">&nbsp;</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-primary" id="btn_mobile" type="button">保存数据</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#pass-verify').click(function () {
+            var time = new Date();
+            $('#pass-verify').attr('src', '<{link ctl="magic:verify" http="ajax"}>' + '?' + time);
+        })
+        var minute = 60;
+        var mobile_timeout;
+        var mobile_count = minute;
+        var mobile_lock = 0;
+        BtnCount = function () {
+            if (mobile_count == 0) {
+                $(".get_yzm").addClass("on");
+                $('.get_yzm').removeAttr("disabled");
+                $('.get_yzm').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+                $('.get_yzm').removeClass("on");
+            } else {
+                mobile_count--;
+                $('.get_yzm').text(+mobile_count.toString() + "秒...");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+            }
+        };
+        $("[login]").click(function () {
+            if (mobile_lock == 0) {
+                var mobile = $('#mobile').val();
+                var link = "<{link ctl='passport/sendsms'}>";
+                $.post(link, {mobile: mobile}, function (ret) {
+                    if (ret.error == 0) {
+                        BtnCount();
+                        mobile_lock = 1;
+                        $(".get_yzm").addClass("on");
+                        $('.get_yzm').attr("disabled", "disabled");
+                    } else {
+                        layer.msg(ret.message);
+                        mobile_lock = 0;
+                    }
+                }, 'json');
+                mobile_count = minute;
+            }
+        });
+        $('#btn_mobile').click(function () {
+            var link = "<{link ctl='merchant/shop:mobile'}>";
+            $.post(link, $("#form_post").serialize(), function (ret) {
+                if (ret.error == 0) {
+                    layer.msg(ret.message);
+                    setTimeout(function () {
+                        window.location.reload(true);
+                    }, 1000)
+                    BtnCount();
+                } else {
+                    layer.msg(ret.message);
+                }
+            }, 'json');
+        })
+    })
+
+</script>
+

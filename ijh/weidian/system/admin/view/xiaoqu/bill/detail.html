@@ -1,0 +1,27 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="xiaoqu/bill:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>ID：</th><td><{$detail.bill_id}></td></tr>
+<tr><th>业主：</th><td><{$detail.yezhu_id}></td></tr>
+<tr><th>订单编号：</th><td><{$detail.bill_sn}></td></tr>
+<tr><th>总金额：</th><td><{$detail.total_price}></td></tr>
+<tr><th>物业费：</th><td><{$detail.wuye_price}></td></tr>
+<tr><th>车位费：</th><td><{$detail.chewei_price}></td></tr>
+<tr><th>水费：</th><td><{$detail.shui_price}></td></tr>
+<tr><th>电费：</th><td><{$detail.dian_price}></td></tr>
+<tr><th>燃气费：</th><td><{$detail.ranqi_price}></td></tr>
+<tr><th>支付状态：</th><td><{$detail.pay_status}></td></tr>
+<tr><th>pay_code：</th><td><{$detail.pay_code}></td></tr>
+<tr><th>pay_time：</th><td><{$detail.pay_time}></td></tr>
+<tr><th>创建时间：</th><td><{$detail.dateline|format}></td></tr>
+</table></div>
+<{include file="admin:common/footer.html"}>

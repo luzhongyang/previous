@@ -1,0 +1,36 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="tuan/Order:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data">
+    <table width="100%" border="0" cellspacing="0" class="table-data form">
+        <tr><th>订单ID：</th><td><{$detail.order_id}></td><th>团购ID：</th><td><{$detail.tuan_id}></td></tr>
+        <tr><th>标题：</th><td><{$detail.tuan_title}></td><th>简介：</th><td><{$detail.tuan.desc}></td></tr>
+        <tr><th>类型：</th><td><{if $detail.type == 'tuan'}>团购券<{else}>代金券<{/if}></td><th>在线支付：</th><td><{if $detail.online_pay ==1}>是<{else}>否<{/if}></td></tr>
+        <tr><th>商家：</th><td><{$detail.shop.title}></td><th>用户：</th><td><{$detail.user.nickname}>(ID:<{$detail.uid}>)</td></tr>
+        <tr><th>团购价：</th><td><{$detail.tuan_price}></td><th>团购数量：</th><td><{$detail.tuan_number}></td></tr>
+        <tr><th>开始时间：</th><td><{$detail.tuan.stime|format}></td><th>结束时间：</th><td><{$detail.tuan.ltime|format}></td></tr>
+        <tr><th>订单金额：</th><td><{$detail.total_price}></td><th>联系人：</th><td><{$detail.contact}>(手机：<{$detail.mobile}>)</td></tr>
+        <tr><th>订单来源：</th><td><{$froms}></td><th>订单状态：</th><td><{$detail.order_status_label}></td></tr>
+        <tr><th>支付状态：</th><td><{if $detail.pay_status == 1}>已支付<{else}>未支付<{/if}></td><th>支付方式：</th><td><{$pay_method|default:'无'}></td></tr>
+        <tr><th>支付时间：</th><td><{if $detail.pay_time}><{$detail.pay_time|format}><{else}>无<{/if}></td><th>评论状态：</th><td><{if $detail.comment_status==1}>已评论<{else}>未评论<{/if}></td></tr>
+        <tr><th>下单时间：</th><td><{$detail.dateline|format}></td><th>客户IP：</th><td><{$detail.clientip}></td></tr>
+        <tr><th>备注：</th><td><{$detail.intro}></td><th>是否删除：</th><td><{if $detail.closed == 1}>已删除<{else}>正常<{/if}></td></tr>
+        <tr>
+            <th>团购密码：</th>
+            <td>
+                <{foreach $detail['tickets'] as $k=>$val}>
+                <{$val.number}>&nbsp;&nbsp;
+                <{/foreach}>
+            </td>
+        </tr>
+    </table>
+</div>
+<{include file="admin:common/footer.html"}>

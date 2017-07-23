@@ -1,0 +1,97 @@
+<{assign var='tpl_title' value='我的家政订单'}>
+<{include file="block/header.html"}>
+<header>
+	<i class="left"><a href="<{link ctl='ucenter/order'}>" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	我的家政订单
+    </div>
+    <i class="right"><a href="#" class=""></a></i>
+</header>
+<div class="changeTab_box">
+    <div class="changeTab">
+        <a href="<{link ctl='ucenter/order/items' arg1='house' arg2='1'}>" class="link <{if $type <= 1}>on<{/if}>">待处理</a>
+        <a href="<{link ctl='ucenter/order/items' arg1='house' arg2='2'}>" class="link <{if $type == 2}>on<{/if}>">已完成</a>
+    </div>
+</div>
+<section class="page_center_box">
+    <ul class="order_list_box mt10">
+        <{foreach $orders as $k => $v}>
+        <li class="order_list border_t border_b mb10">
+            <p class="state border_b"><{$v.order.cate_title}><small class="black9">(<{$v.order_status_warning}>)</small><span class="fr fontcl1"><{$v.order_status_label}> <{if $v.order_status == -1 || $v.order_status == 8 || ($v.order_status == 0 && $v.pay_status == 0)}><a href="<{link ctl='ucenter/order/del' arg1=$v.order_id}>" onClick="return confirm('你确定要删除吗？')"><em class="ico delIco"></em></a><{/if}></span></p>
+            <a href="<{link ctl='ucenter/order/detail' arg1=$v.order_id}>">
+            <div class="nr">
+                <div class="img fl"><img src="<{$pager.img}>/<{$v.order.cate_icon}>" /></div>
+                <div class="wz">
+                    <p class="black9"><em class="ico ico_1"></em><{$v.dateline|format}></p>
+                    <p class="black9"><em class="ico ico_2"></em><{$v.addr}><{if $v.house}>（<{$v.house}>）<{/if}></p>
+                </div>
+            </div>
+            </a>
+            <div class="clear_both bottom border_t txt_right">
+                <{if $v.order_status == 0}><a href="javascript:void(0);" class="pub_btn xk cancel_order" val="<{$v.order_id}>">取消订单</a><{/if}>
+                <{if $v.order_status == 0 && $v.pay_status == 0}><a href="javascript:toPay(<{$v.order_id}>, '<{$v.from}>', 0);" class="pub_btn bgcl1 ml10">去支付</a><{/if}>
+                <{if $v.order_status == 5}><a href="<{link ctl='ucenter/order/detail' arg1=$v.order_id}>" class="pub_btn bgcl1 ml10">补差价</a><{/if}>
+                <{if $v.order_status == 8 && $v.comment_status == 0}><a href="<{link ctl='ucenter/order/comment' arg1=$v.order_id}>" class="pub_btn bgcl1 ml10">去评价</a><{/if}>
+            </div>
+        </li>
+        <{foreachelse}>
+        <div class="nonePage txt_center">
+            <div class="nonePage_img"><img src="%THEME%/static/images/none/none2.png" width="25%"></div>
+            <h2 class="black3">居然还没有订单</h2>
+	</div>
+        <{/foreach}>
+    </ul>
+
+    <div class="page_div">
+        <a href="/ucenter/order/items-<{$arr_page.from}>-<{$arr_page.type}>-<{$arr_page.pre}>.html"><span class="maincl"><<[上一页]</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <{if $arr_page.no_next > 0}>
+        没有更多了
+        <{else}>
+        <a href="/ucenter/order/items-<{$arr_page.from}>-<{$arr_page.type}>-<{$arr_page.next}>.html"><span class="maincl">[下一页]>></span></a>
+        <{/if}>
+    </div>
+    <style>.page_div{background: #fff; text-align: center; padding: 10px; height: 20px; display: block;font-size: 0.16rem;}</style>
+
+</section>
+<{include file="block/sfooter.html"}>
+</body>
+</html>
+
+<script>
+$('.cancel_order').click(function(){
+    var order_id = $(this).attr('val');
+    var link = "<{link ctl='ucenter/order:chargeback' arg1='__order_id'}>";
+    if(confirm("确定要取消吗？")){
+        $.post(link.replace("__order_id", order_id), {}, function(ret) {
+            if (ret.error == 0) {
+                layer.open({
+                    content: ret.message,
+                    time: 2
+                });
+                location.reload(true);
+            } else {
+                layer.open({
+                    content: ret.message,
+                    time: 2
+                });
+            }
+        }, 'json');
+    }
+})
+
+
+/*去支付*/
+function toPay(order_id, from, type) {
+    var link_storage = "<{link ctl='ucenter/order:items' arg0='temp0' arg1='temp1'}>";
+    localStorage['order_pay'] = link_storage.replace('temp0', from).replace('temp1', type);
+
+    var order_id = parseInt(order_id);
+    var link = "<{link ctl='ucenter/order:pay' args='temp1'}>";
+    setTimeout(function () {
+        window.location.href = link.replace('temp1', order_id);
+    }, 1000);
+}
+$(document).ready(function(){
+    $('#l3').addClass('on');
+})
+</script>

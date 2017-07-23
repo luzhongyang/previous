@@ -1,0 +1,136 @@
+<{assign var='tpl_title' value=L("积分兑换")}>
+<{include file="block/header.html"}>
+<header>
+    <i class="left">
+        <a href="<{link ctl='mall/detail' args=$exchange.product_id}>" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+        积分兑换
+    </div>
+    <i class="right"></i>
+</header>
+<section class="page_center_box">
+    <div class="order_confirm_infor mb10">
+        <div class="ico fl"></div>
+        <{if empty($maddr)}>
+        <a href="<{link ctl='ucenter/addr/create'}>">
+            <div class="wz">
+                <p class="bt">您还没有设置地址</p>
+                <p>点击立即添加地址</p>
+            </div>
+        </a>
+        <{else}>
+        <a href="javascript:selectAddr();">
+            <div class="wz" id="addr_info">
+                <input type="hidden" id="addr_id" name="params[addr_id]" value="<{$maddr.addr_id}>"/>
+                <input type="hidden" id="addr_lng" value="<{$maddr.lng}>"/>
+                <input type="hidden" id="addr_lat" value="<{$maddr.lat}>"/>
+                <p class="bt"><span class="contact"><{$maddr.contact}></span> <span
+                        class="mobile"><{$maddr.mobile}></span></p>
+                <p class="house"><{$maddr.addr}><{$maddr.house}></p>
+            </div>
+        </a>
+        <{/if}>
+    </div>
+    <div class="mineIntegral_record mb10">
+        <ul>
+            <li class="list">
+                <div class="fl img"><img src="<{$pager.img}>/<{$exchange.photo}>" width="280" height="200"/></div>
+                <div class="wz">
+                    <p class="bt"><{$exchange.title}></p>
+                    <p class="black9"><{$exchange.jifen}>积分</p>
+                    <p class="black9">剩余数量：<{$exchange.sku}></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="dianpu_list" style="border-top:0.01rem solid #e6e6e6;">
+        <div class="wz" style="margin-left:0;">
+            <h3>兑换数量</h3>
+            <div class="num_operate dianpu_num">
+                <span class="reduce" quantity="-">-</span>
+                <input readonly="true" type="text" value="1" class="text_box">
+                <span class="add" quantity="+">+</span>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="btn_box">
+        <p class="fl font_size14">需要积分：<span class="pointcl1"><{$exchange.jifen}></span></p>
+        <a href="javascript:void(0);" class="fr pub_btn footer_btn">提交</a>
+    </div>
+</footer>
+<script>
+
+    $(document).ready(function () {
+
+        var jifen = '<{$exchange.jifen}>';
+        $('.pointcl1').text(jifen * parseInt($('.text_box').val()));
+        $('.reduce').click(function () {
+            var val = parseInt($('.text_box').val());
+            var jf = parseInt($('.pointcl1').text());
+            if (val > 1) {
+                $('.text_box').val(val - 1);
+                if (jf > 0) {
+                    $('.pointcl1').text(jf - jifen);
+                }
+            } else {
+                layer.open({content: "不能再少了", time: 2});
+            }
+        })
+        $('.add').click(function () {
+            var val = parseInt($('.text_box').val());
+            var jf = parseInt($('.pointcl1').text());
+            var sku = "<{$exchange.sku}>";
+            if (val + 1 > sku) {
+                layer.open({content: "库存不足", time: 2});
+            } else {
+                $('.text_box').val(val + 1);
+                $('.pointcl1').text(jf + parseInt(jifen));
+            }
+        })
+
+        localStorage.setItem('addr_product_id', '<{$exchange.product_id}>');
+
+
+        $('.pub_btn').click(function () {
+            var product_id = '<{$exchange.product_id}>';
+            var product_number = parseInt($('.text_box').val());
+            var addr_id = $('#addr_id').val();
+            jQuery.ajax({
+                url: "<{link ctl='mall:handle'}>",
+                async: true,
+                dataType: 'json',
+                data: {"product_id": product_id, "product_number": product_number, "addr_id": addr_id},
+                type: 'POST',
+                success: function (ret) {
+                    if (ret.error == 0) {
+                        layer.open({content: ret.message, time: 2});
+                        setTimeout(function () {
+                            window.location.href = "<{link ctl='ucenter:integral'}>";
+                        }, 1500)
+                    } else {
+                        layer.open({content: ret.message, time: 2});
+                    }
+                }
+            });
+        })
+
+        if (localStorage['select_address']) {
+            var addr = JSON.parse(localStorage['select_address']);
+            $("#addr_id").val(addr.addr_id);
+            $(".contact").text(addr.contact);
+            $(".mobile").text(addr.mobile);
+            $(".house").text(addr.address);
+            $('#addr_lng').val(addr.lng);
+            $('#addr_lat').val(addr.lat);
+            localStorage.removeItem('select_address');
+        }
+    })
+
+    function selectAddr() {
+        localStorage['select_address'] = JSON.stringify({"backurl": window.location.href});
+        window.location.href = "<{link ctl='ucenter/addr:index'}>";
+    }
+</script>
+<{include file="block/footer.html"}>

@@ -1,0 +1,82 @@
+<{assign var='tpl_title' value=L("提交订单")}>
+<{include file="weidian/block/header.html"}>
+
+<section class="page_center_box"> 
+	<!-- 主要内容部分 --> 
+	<div class="newAdd_address">
+		<div class="addr_list">
+		</div>
+	</div>
+
+</section>
+
+<script>
+$(document).on('click', '.newAdd_address .label_box', function(){
+	$('.newAdd_address .label_box .radioInt').removeClass('on');
+	$(this).find('.radioInt').addClass('on');
+	if(localStorage['ziti_addr']) {
+		var json = JSON.parse(localStorage['ziti_addr']);
+		if(json.backurl) {
+			var backurl = json.backurl;
+		}
+		if($(this).attr('address')) {
+			var address = $(this).attr('address');
+		}
+		if(json.ziti_contact) {
+			var ziti_contact = json.ziti_contact;
+		}
+		if(json.ziti_mobile) {
+			var ziti_mobile = json.ziti_mobile;
+		}
+		if(json.ziti_times) {
+			var ziti_times = json.ziti_times;
+		}
+	}
+	localStorage['ziti_addr'] = JSON.stringify({"address":address,"ziti_contact":ziti_contact,"ziti_mobile":ziti_mobile,"ziti_times":ziti_times});
+	window.location.href = backurl;
+})
+
+
+$(document).ready(function() {
+	init_addrlist();
+})
+
+function init_addrlist(){
+	$.ajax({  
+        type: "POST",  
+        url: "<{link ctl='product/ajaxpoint'}>",
+        dataType:'json',  
+        data:{},
+        success: function(ret) {
+            if(ret.data.items) {
+            	console.log(ret.data.items);
+            	var html = '';
+            	$.each(ret.data.items, function(k, v){
+					html +='<div class="border_b label_box" address="'+v.title+v.city_name+v.area_name+v.address_detail+'">';
+					html +='<label>';
+					html +='<span class="ico radioInt">';
+					html +='<input type="radio">';
+					html +='</span>';
+					html +='<div class="address black3">';
+					html +='<p class="wz1">'+v.title+' '+v.phone +'</p>';
+					html +='<p class="wz2">收货地址：'+v.city_name+' '+v.area_name+' '+v.address_detail+'</p>';
+					html +='</div>';
+					html +='</label>';
+					html +='</div>';
+            	})
+            }
+            if(html != '') {
+	        	$('.addr_list').html(html);
+	        	$('.addr_list').show();
+        	}else {
+        		html +='<div class="loadding" style="display: block;margin-top:1rem;"><div class="preloader txt_center"><img src="/themes/default/weidian/static/images/home_logo@2x.png" width="28"><p class="black9 font_size14 font_line30 mt10">该城市暂无相关的自提点</p></div></div>';
+        		$('.addr_list').html(html);
+	        	$('.addr_list').show();
+        	}
+        }  
+    });  
+}
+
+</script>
+</body>
+<{include file="weidian/block/footer.html"}>

@@ -1,0 +1,179 @@
+<{include file="merchant:block/header.html"}>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class=""><a  href="<{link ctl='merchant/tongji:w_order'}>" >外卖</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/tongji:t_order'}>" >团购</a></li>
+                    <li class="active"><a  href="<{link ctl='merchant/tongji:m_order'}>" >优惠买单</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class=" ">
+                                <div class="col-lg-3">
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <i class="fa fa-rmb fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-8 text-left">
+                                                <span> 今日订单量 </span>
+                                                <h2 class="font-bold"> <{if $today_orders}><{$today_orders}><{else}>0<{/if}></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <i class="fa fa-rmb fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-8 text-left">
+                                                <span> 本周订单量 </span>
+                                                <h2 class="font-bold"> <{if $seven_orders}><{$seven_orders}><{else}>0<{/if}></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <i class="fa fa-rmb fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-8 text-left">
+                                                <span> 本月订单量 </span>
+                                                <h2 class="font-bold"> <{if $month_orders}><{$month_orders}><{else}>0<{/if}></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <i class="fa fa-rmb fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-8 text-left">
+                                                <span> 累计总订单量 </span>
+                                                <h2 class="font-bold"> <{if $all_orders}><{$all_orders}><{else}>0<{/if}></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>近一周订单量曲线
+                                                <!-- <small>With custom colors.</small> -->
+                                            </h5>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div>
+                                                <canvas id="lineChart_week" height="140"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>近一月订单量曲线
+                                                <!-- <small>With custom colors.</small> -->
+                                            </h5>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div>
+                                                <canvas id="lineChart_month" height="140"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<{include file="merchant:block/footer.html"}>
+
+<script  type="text/javascript" charset="utf-8" async defer>
+$(function(){
+    var lineData_week = {
+        labels: [
+            <{foreach $week_data as $v1}>
+            <{$v1.date}>,
+            <{/foreach}>
+        ],
+        datasets: [
+            {
+                label: "订单量 (个)",
+                backgroundColor: 'rgba(26,179,148,0.5)',
+                borderColor: "rgba(26,179,148,0.7)",
+                pointBackgroundColor: "rgba(26,179,148,1)",
+                pointBorderColor: "#fff",
+                data: [
+                    <{foreach $week_data as $v1}>
+                    <{if empty($v1.day_order)}>0<{else}><{$v1.day_order}><{/if}>,
+                    <{/foreach}>
+                ]
+            }
+        ]
+    };
+
+    var lineOptions_week = {
+        responsive: true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    };
+    var ctx_week = document.getElementById("lineChart_week").getContext("2d");
+    new Chart(ctx_week, {type: 'line', data: lineData_week, options:lineOptions_week});
+})
+
+$(function(){
+    var lineData_month = {
+        labels: [
+            <{foreach $month_data as $v2}>
+            <{$v2.date}>,
+            <{/foreach}>
+        ],
+        datasets: [
+            {
+                label: "订单量 (个)",
+                backgroundColor: 'rgba(26,179,148,0.5)',
+                borderColor: "rgba(26,179,148,0.7)",
+                pointBackgroundColor: "rgba(26,179,148,1)",
+                pointBorderColor: "#fff",
+                data: [
+                    <{foreach $month_data as $v2}>
+                    <{if empty($v2.day_order)}>0<{else}><{$v2.day_order}><{/if}>,
+                    <{/foreach}>
+                ]
+            }
+        ]
+    };
+
+    var lineOptions_month = {
+        responsive: true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    };
+    var ctx_month = document.getElementById("lineChart_month").getContext("2d");
+    new Chart(ctx_month, {type: 'line', data: lineData_month, options:lineOptions_month});
+})
+</script>

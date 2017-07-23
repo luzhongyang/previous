@@ -1,0 +1,78 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class=""><a  href="<{link ctl='merchant/waimai/cate:index'}>" >商品分类</a></li>
+                <li class="active"><a  href="javascript:;" >添加分类</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="">
+                            <form action="<{link ctl='merchant/waimai/cate:create'}>" mini-form="waimai_cate_create" method="post" class="form-horizontal" ENCTYPE="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">类型：<br/></label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <select name="data[parent_id]" class="form-control ">
+                                                <option value="0">一级分类</option>
+                                                <{foreach $cates as $v}>
+                                                    <option value="<{$v.cate_id}>"<{if $v.cate_id==$parent_id}>selected="selected"<{/if}>>|--<{$v.title}></option>
+                                                <{/foreach}>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">名称：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[title]" value="" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="form-group">
+                                    <label class="col-sm-2 control-label">图标：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="data[icon]" value=""> 
+                                                <span class="input-group-btn"> 
+                                                    <input type="file" class="form-control" name="data[icon]"  style="width:200px;"/> 
+                                                 
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">排序：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[orderby]" value="50" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">&nbsp;</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-primary" type="submit">保存数据</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>
+

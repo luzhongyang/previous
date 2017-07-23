@@ -1,0 +1,21 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?paotui/cate-savecfg.html" mini-form="config-form" method="post" >
+<input type="hidden" name="K" value="paotui" />
+<table width="100%" border="0" cellspacing="0" class="table-data form"><tr><th>起步价格：</th><td><input type="text" name="config[paidui_start_price]" value="<{$detail.config.paidui_start_price|default:'8'}>" class="input w-100"/>
+<span class="tip-comment">元</span></td></tr>
+    <th>介绍：</th><td><textarea name="config[info]" class="textarea"><{$detail.info|default:'填写介绍'}></textarea><br /></td></tr>
+    <tr><td class="clear-td-bottom" colspan="10"><input type="hidden" name="config[type]"  value="<{$type}>" /></td></tr>
+     <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

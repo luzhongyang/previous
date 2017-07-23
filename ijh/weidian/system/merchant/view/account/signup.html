@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>申请入驻</title>
+<link href="/merchant/style/css/bootstrap.min.css" rel="stylesheet">
+<link href="/merchant/style/font-awesome/css/font-awesome.css" rel="stylesheet">
+<link href="/merchant/style/css/animate.css" rel="stylesheet">
+<link href="/merchant/style/css/style.css" rel="stylesheet">
+<link href="/merchant/style/css/mine.css" rel="stylesheet">
+<link href="/merchant/style/css/layer.css" rel="stylesheet">
+<script src="/merchant/script/js/jquery-2.1.1.js"></script>
+<script src="/merchant/script/js/bootstrap.min.js"></script>
+<script src="/merchant/script/js/layer.js"></script>
+<script type="text/javascript" src="/static/script/kt.js"></script>
+<script type="text/javascript" src="/static/script/jBox/jBox.min.js"></script>
+<script type="text/javascript" src="/static/script/layer/layer.js"></script>
+<!--<script type="text/javascript" src="/static/script/kt.j.js"></script>-->
+<script type="text/javascript" src="/static/script/widget.msgbox.js"></script>
+<script type="text/javascript" src="/static/script/My97DatePicker/WdatePicker.js"></script>
+
+<script src="/themes/default/biz/static/script/printArea.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="<{$pager.res}>/script/widget.bmap.js"></script>
+</head>
+
+<body class="gray-bg">
+<iframe id="miniframe" name="miniframe" style="display:none;"></iframe>
+<div class="login_box" style="background: url(/merchant/images/bgBig.png) no-repeat center top;">
+    <div class="login_box_wd animated fadeInDown">
+        <div class="login_tit">
+            <h1>商户管理中心</h1>
+            <small>Business Management System</small>
+            <h2><span>申请入驻</span></h2>
+        </div>
+        <div class="login_form">
+            <form  role="form" action="<{link ctl='merchant/account:signup'}>"  mini-form="merchant"  method="post">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="data[mobile]" id="mobile" placeholder="联系电话" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="data[code]" placeholder="请输入验证码">
+                            <a class="hqyzm" href="javascript:void(0);" login="sendsms">获取验证码</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="data[passwd]" placeholder="登录密码" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="data[title]" placeholder="店铺名称" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="data[phone]" placeholder="服务电话" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group select_box" style="background: #fff url(/merchant/images/slctIco.png) no-repeat 300px center;">
+                            <div class="box">
+                                <select class="form-control"  name="data[city_id]">
+                                    <option>请选择城市</option>
+                                    <{foreach $citys as $k=>$val}>
+                                    <option value="<{$val.city_id}>"><{$val.city_name}></option>
+                                    <{/foreach}>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group select_box" style="background: #fff url(/merchant/images/slctIco.png) no-repeat 300px center;">
+                            <div class="box">
+                                <select class="form-control"  name="data[cate_id]">
+                                    <option>请选择店铺类型</option>
+                                    <{foreach $cates as $val}>
+                                    <{if $val.childrens}>
+                                        <{foreach $val.childrens as $v}>
+                                            <option value="<{$v.cate_id}>"><{$val.title}>--><{$v.title}></option>
+                                        <{/foreach}>
+                                    <{else}>
+                                        <option value="<{$val.cate_id}>"><{$val.title}></option>
+                                    <{/if}>
+                                    
+                                    <{/foreach}>
+                                </select> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="data[addr]" placeholder="店铺地址" >
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group textarea_box">
+                    <textarea name="data[info]" placeholder="店铺简介"  class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">立即申请</button>
+                <div class="bottom_link">
+                    <a href="<{link ctl='merchant/account/login'}>">已有账号？立即登录</a>
+                </div>
+            </form>
+            
+        </div>
+        <p class="copyt">Copyright © 2013-2016 江湖科技出品, All rights reserved. ICP备案：皖ICP备13010842号</p>
+    </div>
+</div>
+<!-- Mainly scripts -->
+<script>
+
+var unSelected = "#999";
+var selected = "#333";
+$(function () {
+    $("select").css("color", unSelected);
+    $("option").css("color", selected);
+    $("select").change(function () {
+    var selItem = $(this).val();
+    if (selItem == $(this).find('option:first').val()) {
+        $(this).css("color", unSelected);
+    } else {
+        $(this).css("color", selected);
+    }
+    });
+})
+
+$(document).ready(function () {
+    var minute = 60;
+    var mobile_timeout;
+    var mobile_count = minute;
+    var mobile_lock = 0;
+    BtnCount = function () {
+        if (mobile_count == 0) {
+            $(".hqyzm").addClass("on");
+            $('.hqyzm').removeAttr("disabled");
+            $('.hqyzm').text("重新获取");
+            mobile_lock = 0;
+            clearTimeout(mobile_timeout);
+            $('.hqyzm').removeClass("on");
+        } else {
+            mobile_count--;
+            $('.hqyzm').text(+mobile_count.toString() + "秒...");
+            mobile_timeout = setTimeout(BtnCount, 1000);
+        }
+    };
+    $("[login]").click(function () {
+        if (mobile_lock == 0) {
+            var mobile = $('#mobile').val();
+            var link = "<{link ctl='passport/sendsms'}>";
+            $.post(link, {mobile: mobile}, function (ret) {
+                if (ret.error == 0) {
+                    BtnCount();
+                    mobile_lock = 1;
+                    $(".hqyzm").addClass("on");
+                    $('.hqyzm').attr("disabled", "disabled");
+                } else {
+                    parent.layer.msg(ret.message);
+                    mobile_lock = 0;
+                }
+            }, 'json');
+            mobile_count = minute;
+        }
+    });
+    $('#btn_mobile').click(function () {
+        var link = "<{link ctl='merchant/shop:mobile'}>";
+        $.post(link,$("#form_post").serialize(), function (ret) {
+            if (ret.error == 0) {
+                parent.layer.msg(ret.message);
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 1000)
+                BtnCount();
+            } else {
+                parent.layer.msg(ret.message);
+            }
+        }, 'json');
+    })
+})
+
+</script>
+</body>
+</html>
