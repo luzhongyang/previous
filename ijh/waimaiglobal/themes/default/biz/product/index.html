@@ -1,0 +1,48 @@
+<{include file="biz/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li><a href="<{link ctl='biz/cate:index'}>"><{L('商品分类')}></a></li>
+        <li class="on"><a href="<{link ctl='biz/product:index'}>"><{L('商品管理')}></a></li>
+    </ul>
+    <span class="r"><a href="<{link ctl='biz/product:create'}>" class="btn btn-success"><{L('添加商品')}></a></span>
+</div>
+<div class="ucenter_c">
+    <table cellspacing="0" cellpadding="0" class="table">
+        <tr><th class="w-50"><{L('商品')}>ID</th>
+            <th class="w-80"><{L('分类')}></th>
+            <th class="w-100"><{L('标题')}></th>
+            <th><{L('图片')}></th>
+            <th class="w-50"><{L('价格')}></th>
+            <th><{L('打包费')}></th>
+            <th class="w-50"><{L('销量')}></th>
+            <th><{L('类型')}></th>
+            <th><{L('限购数')}></th>
+            <th><{L('已购数')}></th>
+            <th class="w-50"><{L('排序')}></th>
+            <th class="w-150"><{L('操作')}></th>
+        </tr>
+        <{foreach $items as $item}>
+        <tr>
+            <td><{$item.product_id}></td>
+            <td><{$cates[$item['cate_id']].title}></td>
+            <td><{$item.title}></td>
+            <td><img src="<{$pager.img}>/<{$item.photo}>" class="wh-50" /></td>
+            <td><{$item.price}></td>
+            <td><{$item.package_price}></td>
+            <td><{$item.sales}></td>
+            <td><{if $item['sale_type'] == 1}><{L('限量')}><{else}><{L('普通')}><{/if}></td>
+            <td><{$item.sale_sku}></td>
+            <td><{$item.sale_count}></td>
+            <td><{$item.orderby}></td>
+            <td><a href="<{link ctl='biz/product/edit' args=$item.product_id}>" class="btn btn-success"><{L('修改')}></a>&nbsp;&nbsp;
+            <a href="<{link ctl='biz/product/delete' args=$item.product_id}>"  mini-act="confirm:<{L('确认要删除该商品吗')}>?"  class="btn btn-success"><{L('删除')}></a>
+            </td>
+        </tr>
+        <{foreachelse}>
+        <tr><td colspan="20"><div class="alert alert-info"><{L('没有数据')}></div></td></tr>
+        <{/foreach}>
+        <tr>
+    </table>
+    <div class="page"><{$pager.pagebar}></div>
+</div>
+<{include file="biz/block/footer.html"}>

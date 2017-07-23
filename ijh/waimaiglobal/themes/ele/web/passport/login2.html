@@ -1,0 +1,99 @@
+<{include file="web/block/head.html"}>
+<script type="text/javascript" language="javascript">
+    function enterPress(e){ 
+        if(e.keyCode == 13) { 
+            $('#psw_btn').click();
+        }
+    }
+</script>
+<!--内容开始-->
+<div class="login_bg">
+    <div class="login_top">
+        <div class="login_wd">
+            <div class="fl logo"><a href="<{link ctl='web/shop/index'}>"><img src="<{$pager.img}>/<{$site.logo}>"></a></div>
+            <div class="fr linkA_box"><a class="member"  href="<{link ctl='web/index'}>">首页</a><span class="xian"></span><a class="btn" href="<{link ctl='web/passport/register'}>">注册</a></div>
+            <div class="cl"></div>
+        </div>
+    </div>
+    <div class="login_wd">
+        <div class="login_nr">
+            <div class="login_form">
+                <h2>登录<a href="<{link ctl='web/passport/login'}>" class="app fr">手机验证登录<em class="ico"></em></a></h2>
+                <form>
+                    <div class="int_box"><em class="ico ico_1"></em><input type="text" onKeyDown="javascript:enterPress(event);" id="mobile" placeholder="手机号/用户名"></div>
+                    <div class="int_box"><em class="ico ico_2"></em><input type="password" onKeyDown="javascript:enterPress(event);" id="password" placeholder="密码"></div>
+                    <{if $reg_yzm == 'on'}>
+                    <div class="yzm_box"><input type="number" maxlength="6" onKeyDown="javascript:enterPress(event);" id="verifycode" placeholder="验证码"><img style="border-radius: 5px; margin-left: 10px;" verify="#pass-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>"  width="90" height="38"></a><a href="javascript:void(0);" id="pass-verify" class="change">看不清换一张</a></div>
+                    <{/if}>
+                    <!--<div class="selct_int"><span class="box on"><input type="checkbox" checked></span>下次自动登录</div>-->
+                    <script>
+                        function focusInput(focusClass, normalClass) {
+                            var elements = document.getElementsByTagName("input");
+                            for (var i = 0; i < elements.length; i++) {
+                                if (elements[i].type != "button" && elements[i].type != "submit" && elements[i].type != "reset") {
+                                    //if(elements[i].type=="text"){
+                                    elements[i].onfocus = function () {
+                                        $(this).parent(".login_form .int_box").addClass("on")
+                                    };
+                                    elements[i].onblur = function () {
+                                        $(this).parent(".login_form .int_box").removeClass("on")
+                                    };
+                                }
+                            }
+                        }
+                        window.onload = function () {
+                            focusInput('focusInput', 'normalInput');
+                        }//input状态
+                        $(document).ready(function () {
+                            $(".login_form .selct_int .box").click(function () {
+                                if ($(this).hasClass("on")) {
+                                    $(this).removeClass("on");
+                                }
+                                else {
+                                    $(this).addClass("on");
+                                }
+                            });
+                        });
+                    </script>
+                    <input type="button" id="psw_btn" class="long_btn" value="登录">
+                </form>
+                <div class="linkA_box"><a href="<{link ctl='web/passport/register'}>">新用户注册</a><a href="<{link ctl='web/passport/passwd'}>" class="fr">忘记密码</a></div>
+                <!--<div class="other_way">
+                    <div class="title">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="border"><hr style="border:0; border-bottom:1px solid #bcbcbc; height:0; width:100%;"></td>
+                                <td class="wz">可以使用以下账号登录</td>
+                                <td class="border"><hr style="border:0; border-bottom:1px solid #bcbcbc; height:0; width:100%;"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="way"><a href="javascript:void(0);" class="ico_1"></a><a href="javascript:void(0);" class="ico_2"></a></div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--内容结束-->
+<script>
+    $(document).ready(function(){
+        $('#psw_btn').click(function(){
+            var mobile = $('#mobile').val(); 
+            var password = $('#password').val();
+            var link = "<{link ctl='passport/handle2' }>";
+            $.post(link,{mobile:mobile,password:password},function(ret){
+                if(ret.error != 0){
+                    layer.msg(ret.message);
+                    return ;
+                }else{
+                    layer.msg(ret.message);
+                    setTimeout(function(){
+                       window.location.href='<{$backurl}>';
+                    },1000)
+                    BtnCount();
+                }
+            },'json');
+        })
+    })
+</script>
+<{include file="web/block/foot.html"}>

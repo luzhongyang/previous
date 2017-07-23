@@ -1,0 +1,349 @@
+<{include file="block/header.html"}>
+<script>
+    $(document).ready(function () {
+        $('#l1').addClass('on');
+        $('.saixuan_fenlei_list_box').hide();        
+        /*头部下拉开始*/
+        if ($('.saixuan_pull').length > 0){/*判断是否存在这个html代码*/
+            $('.saixuan_pull .saixuan_pull_list').width(100 / $('.saixuan_pull .saixuan_pull_list').length + '%');
+            $('.page_center_box').css('top', '0.91rem');
+        }
+
+        $(".saixuan_pull_list .click").click(function () {         
+            if ($(this).hasClass("on")) {
+                $(".saixuan_pull_list .click").removeClass("on");
+                $(".saixuan_pull_list .saixuan_pull_child_box").hide();
+                $(".saixuan_pull_box .mask").hide();
+            }else {
+
+                $(".saixuan_pull_list .click").removeClass("on");
+                $(".saixuan_pull_list .saixuan_pull_child_box").hide();
+
+                $(this).addClass("on");
+                $(this).parent().find(".saixuan_pull_child_box").show();
+                $(".saixuan_pull_box .mask").show();
+            }
+        });
+
+        $('.saixuan_fenlei .saixuan_pull_child').click(function () {
+            $('.saixuan_fenlei_list_box').show();
+            var rel = $(this).attr('rel');
+            $(this).parent().find(".saixuan_pull_child").removeClass("on");
+            $(this).addClass("on");
+            $('.saixuan_fenlei_list_nr').hide();
+            
+            if($('#a' + rel).length == 0) {
+                // 没有子分类 直接加载列表
+                $('.saixuan_pull_child_box').hide();
+                $('.mask').hide();
+                LoadData.params['page'] = 1;
+                LoadData.params['cate_id'] = rel;
+                loadPageItems();
+            }else {
+                // 有子分类显示子分类列表
+                $('#a' + rel).show();
+            }
+            if($(".saixuan_fenlei_list_box").css("display")=='block'){
+                $(".saixuan_pull_child .after").css("left","50%");
+            }else{
+                $(".saixuan_pull_child .after").css("left","100%")
+            }
+        });
+
+        $('.saixuan_fenlei .select_all').click(function(){
+            $(".saixuan_fenlei_list_box").hide();
+            if($(".saixuan_fenlei_list_box").css("display")=='block'){
+                $(".saixuan_pull_child .after").css("left","50%");
+            }else{
+                $(".saixuan_pull_child .after").css("left","100%")
+            }
+        });
+
+        
+
+        /*头部下拉结束*/
+    });
+</script>
+<header>
+    <i class="left"><a href="<{link ctl='index'}>" link-load="" link-type="right" class="gobackIco"></a></i>
+    <div class="title">
+        <a href="<{link ctl='position'}>" link-load=""class="shangquan"><em class="addrIco"></em><span id="position"><{L('定位中')}>...</span><em class="downIco"></em></a>
+    </div>
+    <i class="right"><a class="searchIco" href="<{link ctl='search'}>" link-load="" ></a></i>
+</header>
+<section class="page_center_box">
+    <div class="saixuan_pull_box" id="downOption">
+        <div class="saixuan_pull">
+            <ul>
+                <li class="saixuan_pull_list"><div class="click"><a href="javascript:;" filter="cate"><{$pager.title|default:L("分类")}><em></em></a></div>
+                    <div class="saixuan_pull_child_box saixuan_fenlei" style="display:none;">
+
+                        <ul>
+                            <li class="saixuan_pull_child select_all" ><a href="javascript:;" cate_id="0" cat="0"><{L('全部分类')}></a></li>
+                            <{foreach $cate_tree as $v}>  
+                                <{if !$v.parent_id &&  $v.children}>
+                                 <li class="saixuan_pull_child" <{if $pager.cate_id==$v.cate_id || $pager.cate.parent_id==$v.cate_id}>class="on" <{/if}> rel="<{$v.cate_id}>"><a href="javascript:;"><{$v.title}></a><span class="after"></span></li>
+                                <{elseif !$v.parent_id}>
+                                 <li class="saixuan_pull_child" <{if $pager.cate_id==$v.cate_id || $pager.cate.parent_id==$v.cate_id}>class="on" <{/if}> rel="<{$v.cate_id}>"><a href="javascript:;"><{$v.title}></a></li>
+                                <{/if}>
+                            <{/foreach}>
+                        </ul>
+                        <div class="saixuan_fenlei_list_box">
+                            <{foreach $cate_tree as $item}>
+                            <{if $item.children}>         
+                            <ul class="saixuan_fenlei_list_nr" id="a<{$item.cate_id}>">
+                                <li class="saixuan_fenlei_list"><a href="javascript:;" <{if !$pager.cate_id}>class="on" <{/if}>cate_id="0" cat_id="0" data="" ><{L('全部')}></a></li>  
+                                <{foreach $item.children as $child}>
+                                    <{if $child.parent_id == $item.cate_id}>
+                                    <li class="saixuan_fenlei_list">
+                                        <a href="javascript:;" <{if $pager.cate_id==$item.cate_id}>class="on" <{/if}>cate_id="<{$child.cate_id}>" cat_id="<{$child.parent_id}>" >
+                                            <{$child.title}>
+                                        </a>
+                                    </li>
+                                    <{/if}>
+                                <{/foreach}>
+                            </ul>
+                            <{/if}>
+                            <{/foreach}>
+                        </div>
+                    </div>
+                </li>
+                <li class="saixuan_pull_list">
+                <div class="click">
+                    <a href="javascript:;" filter="orderby"><{L('排序')}><em></em></a>
+                </div>
+                    <div class="saixuan_pull_child_box" style="display:none;">
+                        <ul id='filter_order'>
+                            <li <{if !$pager.order}>class="on" <{/if}>order=""><a href="javascript:;"><{L('默认排序')}></a></li>
+                            <li <{if $pager.order=='time'}>class="on" <{/if}>order="time"><a href="javascript:;"><{L('送餐速度最快')}></a></li>
+                            <li <{if $pager.order=='juli'}>class="on" <{/if}>order="juli"><a href="javascript:;"><{L('距离最近')}></a></li>
+                            <li <{if $pager.order=='sales'}>class="on" <{/if}>order="sales"><a href="javascript:;"><{L('销量最好')}></a></li>
+                            <li <{if $pager.order=='price'}>class="on" <{/if}>order="price"><a href="javascript:;"><{L('起送价最低')}></a></li>
+                            <li <{if $pager.order=='score'}>class="on" <{/if}>order="score"><a href="javascript:;"><{L('按评价排')}></a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="saixuan_pull_list"><div class="click"><a href="javascript:;" filter="filter"><{L('筛选')}><em></em></a></div>
+                    <div class="saixuan_pull_child_box" style="display:none;">
+                        <form action="<{link ctl='shop/index'}>" method="get">
+                            <ul class="shaixuan_pull">
+                                <li><{L('配送方式')}><div class="fr peisong_way"><label <{if $pager['pei_type'] == 0}>class="on"<{/if}> rel='0'><{L('不限')}></label> <label <{if $pager['pei_type'] == 1}>class="on"<{/if}> rel='1'><{L('平台送')}></label> <label <{if $pager['pei_type'] == 2}>class="on"<{/if}> rel='2'><{L('商家送')}></label></div></li>
+                                <li><{L('在线支付')}><div class="fr"><label class="tab_int <{if $pager['online_pay'] == 1}>on<{/if}>" id='tb1'><input type="button" name='online_pay' id='online_pay' ></label></div></li>
+                                <li><{L('新店开业')}><div class="fr"><label class="tab_int <{if $pager['is_new'] == 1}>on<{/if}>" id='tb2'><input type="button" name='is_new' id='is_new' ></label></div></li>
+                                <li><{L('首单优惠')}><div class="fr"><label class="tab_int <{if $pager['youhui_first'] == 1}>on<{/if}>" id='tb3'><input type="button" name='youhui_first' id='youhui_first' ></label></div></li>
+                                <li><{L('下单立减')}><div class="fr"><label class="tab_int <{if $pager['youhui_order'] == 1}>on<{/if}>" id='tb4'><input type="button" name='youhui_order' id='youhui_order' ></label></div></li>
+                                <input type='hidden' name='pei_type' id='pei_type'>
+                                <{if $pager['cate_id']}><input type='hidden' name='cate_id' id='cate_id' value='<{$pager.cate_id}>'><{/if}>
+                                <{if $pager['order']}><input type='button' name='order' id='order' value='<{$pager.order}>'><{/if}>
+                                <li class="btn_box"><input type="button" class="btn cancel" value="<{L('取消')}>"><input type="submit" class="btn confirm" value="<{L('确定')}>"></li>
+                            </ul>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="mask" style="z-index:98; display:none;"></div>
+    </div>
+    <div class="waimaiList"  id="wrapper">
+        <ul> </ul>
+    </div>
+</section>
+<{include file="block/sfooter.html"}>
+<script id="tmpl_shop_item" type="text/x-jquery-tmpl">
+    <li class="list">
+    <div class="img fl"><a href="${url}" link-load=""><img src="<{$pager.img}>/${logo}" width="100" height="100" /></a></div>
+    <div class="wz">
+    <div class="nr1">
+    <div class="fl">
+    <a href="${url}" link-load="">
+    <p class="bt overflow_clear">${title}</p>
+    <div><span class="starBg"><span class="star" style="width:${score*20}%;"></span></span></div>
+    <p class="black6"><{L('已售')}>${orders}<{L('份')}></p>
+    </a>
+    </div>
+    <div class="fr">
+    <p class="black3"><span class="fontcl1">￥<b>${min_amount}</b></span><{L('起送')}></p>
+    <p class="black3">{{if freight == 0}}<{L('免配送费')}>{{else}}<span class="fontcl1">￥${freight}</span><{L('配送费')}>{{/if}}</p>
+    <p class="black6">${formatDistance(juli)}</p>
+    </div>
+    </div>
+    <div class="nr2">
+    {{if first_amount>0}}
+    <p class="black9"><em style="background:#46c3ff;"><{L('首')}></em><{L('新用户首次下单立减')}>${first_amount}元</p>
+    {{/if}}
+    {{if youhui_title}}
+    <p class="black9"><em style="background:#ff6900;"><{L('减')}></em>${youhui_title}</p>
+    {{/if}}
+    {{if online_pay == 1}}
+    <p class="black9"><em style="background:#f57f8c;"><{L('付')}></em><{L('商家支持在线支付')}></p>
+    {{/if}}
+    </div>
+    </div>
+    </li>
+</script>
+<script type="text/javascript">
+    var arr = "<{$pager.cate_id}>";
+    function loadPageItems(params) {
+        if (LoadData.LOCK) {
+            return false;
+        }
+        LoadData.LOCK = true;
+        params = params || {};
+        LoadData.params = $.extend(LoadData.params, params);
+        Widget.MsgBox.load("<{L('加载中')}>...");
+        $.post("<{link ctl='shop:loaditems'}>", LoadData.params, function (ret) {
+            if (ret.error) {
+                Widget.MsgBox.error(ret.message);
+            } else {
+                if (ret.data.items.length > 0) {
+                    if (parseInt(LoadData.params['page'], 10) < 2) {
+                        $("#wrapper ul").html($('#tmpl_shop_item').tmpl(ret.data.items));
+                    } else {
+                        $('#tmpl_shop_item').tmpl(ret.data.items).appendTo($("#wrapper ul"));
+                    }
+                } else if (LoadData.params.page > 1) {
+                    if(! $(".loading_end").length) {
+                        $('#wrapper ul').append('<div class="loading_end"><{L("没有更多了")}>...</div>');
+                    }
+                    LoadData.LOAD_END = true;
+                } else {
+                    //给一个没有数据的提示信息
+                    $("#wrapper ul").html('<div class="youhui_no"><div class="iconBg"><i class="ico8"></i> </div><h2><{L("商户进驻中")}>,<{L("敬请期待")}></h2></div>');
+                    LoadData.LOAD_END = true;  
+                }
+            }
+            LoadData.params.page++;
+            Widget.MsgBox.hide();
+            LoadData.LOCK = false;
+        }, "json");
+    }
+    $(document).ready(function () {
+        $(".peisong_way label").click(function () {
+            $(this).parent().find("label").removeClass("on");
+            $(this).addClass("on");
+            var rel = $(this).attr('rel');
+            $('#pei_type').val(rel);
+        });
+
+        $("#tb1").click(function () {
+            if ($(this).hasClass("on")) {
+                $('#online_pay').val(0);
+                $(this).removeClass("on");
+            }
+            else {
+                $('#online_pay').val(1);
+                $(this).addClass("on");
+            }
+        });
+        $("#tb2").click(function () {
+            if ($(this).hasClass("on")) {
+                $('#is_new').val(0);
+                $(this).removeClass("on");
+            }
+            else {
+                $('#is_new').val(1);
+                $(this).addClass("on");
+            }
+        });
+        $("#tb3").click(function () {
+            if ($(this).hasClass("on")) {
+                $('#youhui_first').val(0);
+                $(this).removeClass("on");
+            }
+            else {
+                $('#youhui_first').val(1);
+                $(this).addClass("on");
+            }
+        });
+        $("#tb4").click(function () {
+            if ($(this).hasClass("on")) {
+                $('#youhui_order').val(0);
+                $(this).removeClass("on");
+            }
+            else {
+                $('#youhui_order').val(1);
+                $(this).addClass("on");
+            }
+        });
+        /*头部下来分类开始*/
+        $('.cancel').click(function () {
+            $('.saixuan_pull_child_box').hide();
+            $('.mask').hide();
+            $(this).parent().parent().parent().parent().parent().find(".click").removeClass("on");
+        })
+        /*头部下来分类开始*/
+
+        $('#position').text() == '<{L("定位中")}>...';
+        window.LoadData.params = {"cate_id": "<{$pager.cate_id}>","cat_id": "<{$pager.cat_id}>","title": "<{$pager.title}>", "orderby": "<{$pager.orderby}>","is_new": "<{$pager.is_new}>", "online_pay": "<{$pager.online_pay}>","first_youhui": "<{$pager.first_youhui}>", "youhui_order": "<{$pager.youhui_order}>", "pei_type": "<{$pager.pei_type}>", "page": 1};
+        getUxLocation(function (ret) {
+            if (ret.error) {
+                alert(ret.message);
+                window.location.href = "<{link ctl='position'}>";
+            } else {
+                $('#position').text(ret.addr);
+                loadPageItems();
+            }
+        });
+        
+        $(".saixuan_pull_child").click(function () {
+            $(".saixuan_pull_list [filter='cate']").html($(this).text() + "<em></em>");
+            $(".saixuan_pull_child_box li").removeClass("on");
+            if(!$(this).hasClass('select_all')) {
+                $(this).addClass("on");
+            }   
+            $(this).parent().parent().parent().parent().find(".click").removeClass("on");
+        });
+        
+        
+        $(".select_all a").click(function () {
+            LoadData.params['page'] = 1;
+            LoadData.params['cate_id'] = $(this).attr('cate_id');
+            $('.saixuan_pull_child_box').hide();
+            $('.mask').hide();
+            $(this).parent().parent().parent().parent().find(".click").removeClass("on");
+            loadPageItems();
+        });
+        
+        
+        $(".saixuan_fenlei_list a,saixuan_fenlei_list_nr a").click(function () {
+            LoadData.params['page'] = 1;
+            LoadData.params['cate_id'] = $(this).attr('cate_id');
+            if($(this).text() == '<{L("全部")}>'){
+                $(".saixuan_pull_list [filter='cate']").html($(this).attr('data') + "<em></em>");
+                LoadData.params['title'] = $(this).attr('data');
+            }else{
+                $(".saixuan_pull_list [filter='cate']").html($(this).text() + "<em></em>");
+                LoadData.params['title'] = $(this).text();
+            }
+            $('.saixuan_pull_child_box').hide();
+            $('.mask').hide();
+            
+            $(this).parent().parent().parent().parent().parent().find(".click").removeClass("on");
+            $(".saixuan_fenlei_list").removeClass("on");
+            $(this).addClass("on");
+            loadPageItems();
+        });
+        
+        $("#filter_order li").click(function () {
+            LoadData.params['page'] = 1;
+            LoadData.params['order'] = $(this).attr('order');
+            $('.saixuan_pull_child_box').hide();
+            $('.mask').hide();
+            $(".saixuan_pull_list [filter='orderby']").html($(this).text() + "<em></em>");
+            $(".saixuan_pull_list .click").removeClass("on");
+            $("#filter_order li").removeClass("on");
+            $(this).addClass("on");
+            loadPageItems();
+        });
+        
+    });
+    
+    $(window).scroll(function () {//监听滚动条改变
+        if ($(window).scrollTop() == $(document).height() - $(window).height()) {//滚动条是否滚到底部
+            loadPageItems();
+        }
+    });
+    
+</script>
+<{include file="block/footer.html"}>

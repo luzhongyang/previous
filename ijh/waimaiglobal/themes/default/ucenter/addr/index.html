@@ -1,0 +1,161 @@
+<{assign var='tpl_title' value=L("收货地址")}>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+
+    <body>
+        <header>
+            <i class="left"><a href="<{link ctl='ucenter'}>"  link-load="" link-type="right" class="gobackIco"></a></i>
+            <div class="title">
+                <{L('收货地址')}>
+            </div>
+            <i class="right"><a class="" href="#"></a></i>
+        </header>
+        <section class="page_center_box">
+            <div class="goodsAddr_list_box">
+                <ul>
+                    <{foreach $addrs as $addr}>
+                    <li class="goodsAddr_list">
+
+                        <div class="fl addr_order" addr_id='<{$addr.addr_id}>'>
+
+                            <label class="radioLabel">
+                                <span class="radioInt fl"><input type="radio" name="addr"/></span>
+                                <div class="addr">
+                                    <p class="user black3"><span class="contact"><{$addr.contact}></span> <span class="mobile"><{$addr.mobile}></span></p>
+                                    <p class="black6"><{if !$order}><{$addr.addr}><{/if}><{$addr.house}></p>
+                                    <input id="house" type="hidden" value="<{$addr.house}>">
+                                    <input id="addr" type="hidden" value="<{$addr.addr}>">
+                                    <input id="lng" type="hidden" value="<{$addr.lng}>">
+                                    <input id="lat" type="hidden" value="<{$addr.lat}>">
+                                </div>
+                            </label>
+
+                        </div>
+
+                        <{if !$check && !$order}>
+                        <div class="fr">
+                            <a href="<{link ctl='ucenter/addr:edit' args=<{$addr.addr_id}>}>" class="modiy_link"><em></em><{L('修改')}></a> 
+                        </div>
+                        <{/if}>
+                        <div class="clear"></div>
+                    </li>
+                    <{foreachelse}>
+                    <div class="youhui_no">
+                        <div class="iconBg"><i class="ico7"></i> </div>
+                        <h2><{L('没有收货地址')}></h2>
+                        <h3><{L('快去添加一个地址吧')}></h3>
+                    </div>
+                    <{/foreach}>
+                </ul>
+            </div>
+
+        </section>
+        <footer>
+            <div class="txt_center" style="margin-top:0.08rem;"><a href="<{link ctl='ucenter/addr:create'}>" class="goodsAddr_add_link"><em>+</em><{L('新增地址')}></a></div>
+        </footer>
+
+        <script>
+            $(document).ready(function () {
+                $('.radioLabel').click(function () {
+                    $('.radioInt').removeClass('on');
+                    $(this).find('.radioInt').addClass('on');
+                });
+
+
+                var check = '<{$check}>';
+                var addr_product_id = localStorage.getItem('addr_product_id');
+
+                if (check) {
+                    $('.fl').click(function () {
+                        var addr_id = $(this).attr('addr_id');
+                        var link = "<{link ctl='mall/exchange' addr_id='__addr_id' product_id='__product_id' }>";
+                        setTimeout(function () {
+                            window.location.href = link.replace('__product_id', addr_product_id).replace('__addr_id', addr_id);
+                        }, 1000);
+                    })
+                }
+
+                var order = '<{$order}>';
+                var shop_id = localStorage.getItem('shop_id');
+                if (order) {
+                    $('.addr_order').click(function () {
+                        var addr_id = $(this).attr('addr_id');
+                        var contact = $(this).find('.contact').html();
+                        var mobile = $(this).find('.mobile').html();
+                        var house = $(this).find('.black6').html();
+                        localStorage.setItem('addr_id', addr_id);
+                        localStorage.setItem('contact', contact);
+                        localStorage.setItem('mobile', mobile);
+                        localStorage.setItem('house', house);
+                        var link = "<{link ctl='order/order' args='oooo'}>";
+                        var url = link.replace('oooo', shop_id);
+                        setTimeout(function () {
+                            window.location.href = url;
+                        }, 500);
+                    })
+                }
+
+                // 跑腿帮我送地址
+                if(localStorage.getItem('paotuisong') == 'paotuisong') {
+                    localStorage.removeItem('paotuisong');
+                    $('.addr_order').click(function () {
+                        var addr_id = $(this).attr('addr_id');
+                        var contact = $(this).find('.contact').html();
+                        var mobile = $(this).find('.mobile').html();
+                        var house = $(this).find('#house').val();
+                        var addr = $(this).find('#addr').val();
+                        var lng = $(this).find('#lng').val();
+                        var lat = $(this).find('#lat').val();
+                        localStorage.setItem('paotuisong_addr_id', addr_id);
+                        localStorage.setItem('paotuisong_contact', contact);
+                        localStorage.setItem('paotuisong_mobile', mobile);
+                        localStorage.setItem('paotuisong_house', house);
+                        localStorage.setItem('paotuisong_addr', addr);
+                        localStorage.setItem('paotuisong_lng', lng);
+                        localStorage.setItem('paotuisong_lat', lat);
+                        var url = "<{link ctl='paotui/song'}>";
+                        setTimeout(function () {
+                            window.location.href = url;
+                        }, 500);
+                    })
+                }
+
+                // 跑腿帮我买地址
+                if(localStorage.getItem('paotuibuy') == 'paotuibuy') {
+                    localStorage.removeItem('paotuibuy');
+                    $('.addr_order').click(function () {
+                        var addr_id = $(this).attr('addr_id');
+                        var contact = $(this).find('.contact').html();
+                        var mobile = $(this).find('.mobile').html();
+                        var house = $(this).find('#house').val();
+                        var addr = $(this).find('#addr').val();
+                        var lng = $(this).find('#lng').val();
+                        var lat = $(this).find('#lat').val();
+                        localStorage.setItem('paotuibuy_addr_id', addr_id);
+                        localStorage.setItem('paotuibuy_contact', contact);
+                        localStorage.setItem('paotuibuy_mobile', mobile);
+                        localStorage.setItem('paotuibuy_house', house);
+                        localStorage.setItem('paotuibuy_addr', addr);
+                        localStorage.setItem('paotuibuy_lng', lng);
+                        localStorage.setItem('paotuibuy_lat', lat);
+                        var url = "<{link ctl='paotui/buy'}>";
+                        setTimeout(function () {
+                            window.location.href = url;
+                        }, 500);
+                    })
+                }
+
+
+                // 初始化
+                localStorage.removeItem('addr_product_id');
+                localStorage.removeItem('contact22');
+                localStorage.removeItem('mobile22');
+                localStorage.removeItem('addr_num');
+                localStorage.removeItem('addr_info');
+            });
+        </script>
+    </body>
+</html>

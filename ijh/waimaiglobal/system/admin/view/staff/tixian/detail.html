@@ -1,0 +1,85 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="member/member:index" priv="hidden" class="button"}></td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data">
+    <form action="?staff/tixian-detail.html" mini-form="money-form" method="post">
+        <input type="hidden" name="tixian_id" value="<{$detail.tixian_id}>" />
+        <table width="100%" border="0" cellspacing="0" class="table-data form">
+            <tr>
+                <th>服务人员：</th>
+                <td><{$staff.name}></td>
+            </tr>
+            <tr>
+                <th>提现金额：</th>
+                <td><b class="red">￥<{$detail.money}></b></td>
+            </tr>
+            <tr>
+                <th>提现帐号：</th>
+                <td><b class="red"><{$detail.account_info}></b></td>
+            </tr>
+            <tr>
+                <th>提现时间：</th>
+                <td><{$detail.dateline|format}>,<{$detail.clientip|iplocal}></td>
+            </tr>
+            <{if $detail.updatetime}>
+            <tr>
+                <th>更新时间：</th>
+                <td><{$detail.updatetime|format}></td>
+            </tr>
+            <{/if}>
+            <tr>
+                <th>状态：</th><td><{if $detail.status==1}><b class="green">已审核</b><{elseif $detail.status==2}><b class="red">已退回</b><{else}><b class="blue">待审核</b><{/if}></td>
+            </tr> 
+            <{if !$detail.status}>
+            <tr>
+                <th>提现状态：</th>
+                <td>
+                    <label><input type="radio" name="data[status]" checked="checked" value="0"/>待审</label>
+                    <label><input type="radio" name="data[status]" value="1"/>通过</label>                    
+                    <label><input type="radio" name="data[status]" id="status_reason" value="2"/>拒绝</label>
+                </td>
+            </tr>
+            <tbody id="tr_reason" style="display:none;">           
+            <tr>
+                <th>拒绝原因：</th>
+                <td><textarea name="data[reason]" class="textarea" style="width:300px;height:80px;"><{$detail.reason}></textarea></td>
+            </tr>
+            </tbody>             
+            <{elseif $detail.status==2}>
+            <tr>
+                <th>拒绝原因：</th><td><{$detail.reason}></td>
+            </tr>                   
+            <{/if}>
+            <!--
+            <tr>
+                <th>备注信息：</th>
+                <td><textarea name="data[intro]" class="textarea" style="width:300px;height:80px;"><{$detail.intro}></textarea></td>
+            </tr>
+            -->
+            <tr>
+                <th class="clear-th-bottom"></th>
+                <td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="保存数据" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+(function($){
+    $(":radio[name='data[status]']").on("click", function(){
+        if($(this).val() == 2){
+            $("#tr_reason").show();
+        }else{
+            $("#tr_reason").hide();
+        }
+    });
+})(window.jQuery);
+</script>
+<{include file="admin:common/footer.html"}>

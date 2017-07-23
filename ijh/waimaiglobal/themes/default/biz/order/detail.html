@@ -1,0 +1,148 @@
+<{include file="biz/block/header.html"}>
+<div class="ucenter_c">
+
+<table cellspacing="0" cellpadding="0" class="table">
+    <tr>
+        <td width="20%" align="right"><h3><{L('订单详情')}></h3></td>
+        <td width="20%" ><a href="<{link ctl='biz/order:index'}>"  class="btn btn-success"><{L('订单列表')}></a></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+     </tr>
+    <tr>
+	    <td width="20%"><{L('订单号')}>：</td>
+	    <td width="20%" ><{$order.order_id}></td>
+	    <td width="20%">
+	    <{if $order.order_status==0 && $order.pay_status==1}>
+	    <{L('等待接单')}><{/if}>
+	    <{if $order.order_status==1 && $order.pay_status==1}>
+	    <{L('已接单')}><{/if}>
+	    <{if $order.order_status==3 && $order.pay_status==1}>
+	    <{L('配送中')}><{/if}>
+	    <{if $order.order_status==8 && $order.pay_status==1}>
+	    <{L('订单已完成')}><{/if}>
+	    <{if $order.order_status==-1 && $order.pay_status==0}>
+        <{L('订单已取消')}>
+	    <{/if}>
+	    </td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+    </tr>
+    <{foreach $goods as $good}>
+    <tr>
+	    <td width="20%" style="width:200px;margin-right:50px;"><{$good.product_name}></td>
+	    <td width="20%">x<{$good.product_number}></td>
+	    <td width="20%"><{$good.product_price}></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+    </tr>
+    <{/foreach}>
+    <tr>
+        <td width="20%"><{L('送达时间')}>：</td>
+	    <td width="20%"><{$order.pei_time}></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+    </tr>
+    <tr>
+	    <td width="20%"><{L('备注')}>：</td>
+	    <td width="20%"><{$order.note}></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+    </tr>
+    <tr>
+	    <td width="20%"><{L('合计')}>：</td>
+	    <td width="20%"><{$order.product_price}></td>
+	    <td width="20%"><{if $order.order_youhui>0}>
+        <{sprintf(L('满减优惠%s元'),$order.order_youhui)}>
+        <{/if}></td>
+	    <td width="20%"><{if $order.first_youhui>0}>
+        
+        <{sprintf(L('首单优惠%s元'),$order.first_youhui)}>
+        <{/if}></td>
+	    <td width="20%"><{if $order.hongbao>0}>
+        <{sprintf(L('红包抵扣%s元'),$order.hongbao)}>
+        <{/if}>
+        
+        </td>
+    </tr>
+    <tr>
+	    <td width="20%"><{L('结算价')}>：</td>
+	    <td width="20%"><{$order.amount}></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+    </tr>
+    <tr>
+	    <td width="20%"><{L('订餐者')}>：</td>
+	    <td width="20%"><{$order.contact}></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+    </tr>
+    <tr>
+	    <td width="20%"><{L('手机号')}>：</td>
+	    <td width="20%"><{$order.mobile}></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+        <td width="20%"></td>
+    </tr>
+    
+</table>
+ <table cellspacing="0" cellpadding="0" class="table" style="margin-top:35px;">
+    <tr>
+        <td width="100%" style="border-bottom:none"><textarea id="reply" class="textarea"><{$comment.reply}></textarea><br><br><a href="javascript:reply(<{$order.order_id}>);" class="btn btn-success" title="<{L('立即回复')}>"><{L('立即回复')}></a><br></td>
+    </tr>
+</table>
+</div>
+<{include file="biz/block/footer.html"}>
+<script>
+$(document).ready(function() {
+	var shop_msg_id = localStorage['shop_msg_id'];
+    setread(shop_msg_id);
+});
+
+function setread(shop_msg_id) {
+	var link = "<{link ctl='biz/msg:setread' arg0='temp'}>";
+	jQuery.ajax({
+        url: link.replace('temp', shop_msg_id),
+        async: true,
+        dataType: 'json',
+        type: 'POST',
+        success: function (ret) {
+            if (ret.error > 0) {
+                //Widget.MsgBox.success(ret.message);
+            } else {
+                //Widget.MsgBox.success(ret.message);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown);
+      },
+    });
+}
+
+function reply(order_id) {
+    var reply = $('#reply').val();
+    jQuery.ajax({
+        url: "<{link ctl='biz/order:reply'}>",
+        async: true,
+        dataType: 'json',
+        type: 'POST',
+        data: {"order_id":order_id, "reply":reply},
+        success: function (ret) {
+            if (ret.error > 0) {
+                Widget.MsgBox.success(ret.message);
+                setTimeout(function () {window.location.reload();}, 1000);   
+            } else {
+                Widget.MsgBox.success(ret.message);
+                setTimeout(function () {window.location.reload();}, 1000);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown);
+      },
+    });
+}
+</script>

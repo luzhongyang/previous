@@ -1,0 +1,237 @@
+<{include file="web/block/header.html"}>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8"></script>
+<style type="text/css">
+    #l-map{height:300px;width:100%;display:none;}
+    #r-result{width:100%;}
+    .tangram-suggestion table tr td{height: 50px !important;line-height: 50px !important; border-bottom: 1px solid #ededed;}
+    #tangram-suggestion--TANGRAM__1c-main{ z-index: 200 !important;}
+</style>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <div class="prslCenter_recharge">
+        	<h2>地址管理<span class="fr prslCenter_addr_add add_addr_show">新增收货地址</span></h2>
+            <div class="cl"></div>
+        </div>
+        <!--收货地址-->
+        <div class="prslCenter_addr_box">
+            <ul>
+                <{foreach $items as $item}>
+                    <li class="prslCenter_addr_list">
+                        <div class="top">
+                            <div class="fl"><{$item.contact}> <{if $item.is_default}><span class="deftl">默认地址</span><{/if}></div>
+                            <div class="fr"><{if !$item['is_default']}><a href="javascript:void(0);" onclick="set_default(<{$item.addr_id}>);" class="caozuo">设为默认</a><{/if}><a class="caozuo edit_addr"  addr_id="<{$item.addr_id}>" contact="<{$item.contact}>" lat="<{$item.lat}>" lng="<{$item.lng}>" addr="<{$item.addr}>" house="<{$item.house}>" mobile="<{$item.mobile}>" href="javascript:void(0);" >编辑</a></div>
+                        </div>
+                        <div>
+                            <p class="mb10"><{$item.mobile}></p>
+                            <p style="height:20px;overflow: hidden; cursor: pointer;" title="<{$item.addr}>" ><{$item.addr}></p>
+                            <p style="height:20px;overflow: hidden; cursor: pointer;" title="<{$item.house}>" ><{$item.house}></p>
+                        </div>
+                        <div class="close del_addr_show" onclick="delete_addr(<{$item.addr_id}>);" ></div>
+                    </li>
+                <{/foreach}>
+    	    </ul>
+        </div>
+        <!--收货地址结束-->
+    </div>
+    <div class="cl"></div>
+</div>
+<!--新增地址弹出层-->
+<div class="mask_box add_addr_mask" style="display:none;">
+    <div class="maskOne">
+        <form id="addr_add" method="post">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>姓&nbsp;&nbsp;名</th>
+                    <td><input type="text" class="int" id="addr_contact" name="params[contact]" placeholder="您的姓名"></td>
+                </tr>
+                <tr>
+                    <th>手&nbsp;&nbsp;机</th>
+                    <td><input type="text" class="int" id="addr_mobile" name="params[mobile]" placeholder="11位手机号码"></td>
+                </tr>
+                <tr>
+                    <th>位&nbsp;&nbsp;置</th>
+                    <td>
+                        <input type="hidden" class="pos_lng" name="params[lng]" value="">
+                        <input type="hidden" class="pos_lat" name="params[lat]" value="">
+                        <div id="r-result"><input type="text" id="suggestId" class="int" name="params[addr]" placeholder="请输入小区、大厦或学校"></div>
+                        <div id="l-map" style="display: none; width: 100px; height: 50px;"></div>
+                        <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none; margin-top: 10px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>详细地址</th>
+                    <td><input type="text" class="int" id="addr_house" name="params[house]" placeholder="请输入门牌号等详细信息"></td>
+                </tr>
+
+            </table>
+            <div class="btn_box">
+                <input type="hidden" name="params[addr_id]" value="" id="addr_id"/>
+                <input type="button" id="addr_btn" class="pub_btn" value="确定">
+                <a href="javascript:void(0);" class="pub_btn cancel">取消</a>
+            </div>
+        </form>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<script>
+    function set_default(addr_id){
+        layer.confirm('<{L("您确定要设置为默认地址吗")}>？', {
+            btn: ['<{L("确认")}>', '<{L("取消")}>']
+        }, function () {
+            var url = "<{link ctl='web/ucenter/addr/set_default' args=oooo}>";
+            $.post(url.replace('oooo', addr_id),{},function(ret){
+                if(ret.error == 0){
+                    layer.msg(ret.message);
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },'1000')
+                }else{
+                    layer.msg(ret.message);
+                }
+            },'json')
+        });
+    }
+    
+    
+    
+    function delete_addr(addr_id){
+        layer.confirm('<{L("您确定要删除地址吗")}>？', {
+            btn: ['<{L("确认")}>', '<{L("取消")}>']
+        }, function () {
+            var url = "<{link ctl='web/ucenter/addr/delete' args=oooo}>";
+            $.post(url.replace('oooo', addr_id),{},function(ret){
+                if(ret.error == 0){
+                    layer.msg(ret.message);
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },'1000')
+                }else{
+                    layer.msg(ret.message);
+                }
+            },'json')
+        });
+    }
+    
+    function clear_info(){
+        $("#addr_contact").val("");
+        $("#addr_mobile").val("");
+        $("#suggestId").val("");
+        $("#addr_house").val("");
+        $("#addr_id").val("");
+        $(".pos_lat").val("");
+        $(".pos_lng").val("");
+    }
+    
+    
+    
+    $(document).ready(function () {
+        $(".add_addr_show").click(function () {
+            clear_info();
+            $(".add_addr_mask").show();
+        });
+        $(".add_addr_mask .cancel").click(function () {
+            $(".add_addr_mask").hide();
+        });
+
+        $(".edit_addr").click(function(){
+            $("#addr_contact").val($(this).attr('contact'));
+            $("#addr_mobile").val($(this).attr('mobile'));
+            $("#suggestId").val($(this).attr('addr'));
+            $("#addr_house").val($(this).attr('house'));
+            $("#addr_id").val($(this).attr('addr_id'));
+            $(".pos_lat").val($(this).attr('lat'));
+            $(".pos_lng").val($(this).attr('lng'));
+            $(".add_addr_mask").show();
+        })
+
+
+        /*
+        $(".add_addr_mask .sex_box").click(function () {
+            $(".add_addr_mask .sex_box").removeClass("on");
+            $(this).addClass("on");
+        });*/
+
+        var map = new BMap.Map("l-map");
+        var city = Cookie.get('UxCity');
+        map.centerAndZoom(city, 15);   // 初始化地图,设置城市和地图级别。
+        map.clearOverlays();
+
+        function G(id) {
+            return document.getElementById(id);
+        }
+        var ac = new BMap.Autocomplete(//建立一个自动完成的对象
+                {"input": "suggestId", "location": map});
+
+        ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+            var str = "";
+            var _value = e.fromitem.value;
+            var value = "";
+            if (e.fromitem.index > -1) {
+                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+            }
+            str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+            value = "";
+            if (e.toitem.index > -1) {
+                _value = e.toitem.value;
+                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+            }
+            str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+            G("searchResultPanel").innerHTML = str;
+        });
+
+        var myValue;
+        ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+            var _value = e.item.value;
+            myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+            G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+            setPoint();
+        });
+
+
+
+        function setPoint() {
+            var myGeo = new BMap.Geocoder();
+
+            myGeo.getPoint(myValue, function (point) {
+                if (point) {
+                    $(".pos_lng").val(point.lng);
+                    $(".pos_lat").val(point.lat);
+                }
+            }, city);
+        }
+
+        $("#addr_btn").click(function () {
+            var addr_id = $("#addr_id").val();
+            if(addr_id){
+                var link = "<{link ctl='web/ucenter/addr/edit' args=oooo}>"
+                var url = link.replace('oooo',addr_id);
+            }else{
+                var url = "<{link ctl='web/ucenter/addr/create'}>";
+            }
+            $.post(url, $("#addr_add").serialize(), function (data) {
+                if (data.error == 101) {
+                    layer.msg(data.message);
+                    setTimeout(function () {
+                        window.location.href = "<{link ctl='web/passport/login'}>";
+                    }, 1000);
+                } else if (data.error == 0) {
+                    layer.msg(data.message);
+                    $(".add_addr_mask").hide();
+                    setTimeout(function () {
+                        window.location.reload(true);
+                    }, 1000);
+                } else {
+                    layer.msg(data.message);
+                }
+            }, 'json')
+        })
+    });
+</script>
+<!--新增地址弹出层end-->
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

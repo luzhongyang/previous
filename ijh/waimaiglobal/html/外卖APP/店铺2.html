@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>店铺</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a><a href="#">五里香馄饨（芜湖路店）</a></i>
+    <div class="title">
+    </div>
+    <i class="right"><a class="searchIco" href="#"></a></i>
+</header>
+<!--提示内容开始-->
+<div class="dianpuPrompt"><p>商家温馨提示:本店最新优惠，满20元立送饮料一瓶！</p></div>
+<!--提示内容结束-->
+<!--头部切换开始-->
+<ul id="shangjia_tab">
+    <li><a href="#" class="on">菜单</a></li>
+    <li><a href="#">评价</a></li>
+    <li><a href="#">商家</a></li>
+</ul>
+<!--头部切换结束-->
+<section class="page_center_box">
+	<div class="dianpu_cont mt10">
+		<div class="dianpu_left fl">
+			<ul>
+				<li class="on"> <a href="#">菜品一</a> </li>
+				<li> <a href="#">菜品二</a> </li>
+				<li> <a href="#">菜品三</a> </li>
+				<li> <a href="#">菜品三</a> </li>
+				<li> <a href="#">菜品三</a> </li>
+				<li> <a href="#">菜品三</a> </li>
+			</ul>
+		</div>
+		<div class="dianpu_right fr">
+			<div class="dianpu_list">
+            	<div class="img fl"><a href="#"><img src="" width="100" height="100" /></a></div>
+                <div class="wz">
+                    <h3>菜名一</h3>
+                    <p class="black9">月售：200份</p>
+                    <p class="pointcl1">￥10</p>
+                    <div class="num_operate dianpu_num">
+                        <span class="reduce" quantity="-">-</span>
+                        <input type="text" value="1" class="text_box">
+                        <span class="add" quantity="+">+</span>
+                    </div>
+                </div>
+			</div>
+			<div class="dianpu_list">
+            	<div class="img fl"><a href="#"><img src="" width="100" height="100" /></a></div>
+                <div class="wz">
+                    <h3>菜名一</h3>
+                    <p class="black9">月售：200份</p>
+                    <p class="pointcl1">￥10</p>
+                    <div class="num_operate dianpu_num">
+                        <span class="reduce" quantity="-">-</span>
+                        <input type="text" value="1" class="text_box">
+                        <span class="add" quantity="+">+</span>
+                    </div>
+                </div>
+			</div>
+			<div class="dianpu_list">
+            	<div class="img fl"><a href="#"><img src="" width="100" height="100" /></a></div>
+                <div class="wz">
+                    <h3>菜名一</h3>
+                    <p class="black9">月售：200份</p>
+                    <p class="pointcl1">￥10</p>
+                    <div class="num_operate dianpu_num">
+                        <span class="reduce" quantity="-">-</span>
+                        <input type="text" value="1" class="text_box">
+                        <span class="add" quantity="+">+</span>
+                    </div>
+                </div>
+			</div>
+			<div class="dianpu_list">
+            	<div class="img fl"><a href="#"><img src="" width="100" height="100" /></a></div>
+                <div class="wz">
+                    <h3>菜名一</h3>
+                    <p class="black9">月售：200份</p>
+                    <p class="pointcl1">￥10</p>
+                    <div class="num_operate dianpu_num">
+                        <span class="reduce" quantity="-">-</span>
+                        <input type="text" value="1" class="text_box">
+                        <span class="add" quantity="+">+</span>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</section>
+<section class="dianpu_footer">
+	<div class="dianpu_fot_shop">
+		<div class="fl"><div class="fl spcart"><!--<i>1</i>--></div><div class="fl zjia" >合计：<span class="black9 big"><small>￥</small>28</span></div></div>
+		<div class="fr"><p class="black9" style="margin-top:0.15rem;">20元起送</p></div>
+		<div class="clear"></div>
+	</div>
+	<div class="dianpu_spin none">
+    	<h2><a href="#" class="empty black9"><em></em>清空所有</a></h2>
+		<div class="dianpu_list dianpu_list_bt">
+			<h3>菜名一<span class="pointcl1">￥28</span></h3>
+			
+			<div class="num_operate dianpu_num"><span class="reduce" quantity="-">-</span>
+					<input type="text" value="1"  class="text_box">
+					<span class="add" quantity="+">+</span></div>
+		</div>
+		<div class="dianpu_list dianpu_list_bt">
+			<h3>菜名一<span class="pointcl1">￥28</span></h3>
+			<div class="num_operate dianpu_num">
+					<span class="reduce" quantity="-">-</span>
+					<input type="text" value="1"  class="text_box">
+					<span class="add" quantity="+">+</span>
+			</div>
+		</div>
+	</div>
+	<div class="dianpu_shop_zzc"></div>
+	
+</section>
+<script type="text/javascript">
+	$('.dianpu_fot_shop .spcart').click(function(){
+		$('.dianpu_footer .dianpu_spin').slideToggle();
+		if($('.dianpu_footer .dianpu_shop_zzc').css('display')=='none'){
+			$('.dianpu_shop_zzc').show();
+		}
+		else{
+			$('.dianpu_shop_zzc').hide();
+		}
+	});
+	//商量数量加减
+	$(function(){
+		
+		$(".add").click(function(){ 
+			var t=$(this).parent().find('input[class*=text_box]');
+			t.val(parseInt(t.val())+1);
+			$(this).parent().find(".reduce").show();
+			$(this).parent().find('input[class*=text_box]').css("color","#1ec0be");
+			setTotal(); 
+		}) 
+		$(".reduce").click(function(){ 
+			var t=$(this).parent().find('input[class*=text_box]'); 
+			t.val(parseInt(t.val())-1) 
+			if(parseInt(t.val())<=0){
+				$(this).parent().find('input[class*=text_box]').val(0);
+				$(this).parent().find('input[class*=text_box]').css("color","#fff");
+				$(this).parent().find(".reduce").hide();
+			}
+			setTotal(); 
+		}) 
+	
+		setTotal(); 
+	}) 
+</script> 
+</body>
+</html>

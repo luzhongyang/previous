@@ -1,0 +1,137 @@
+<{assign var='tpl_title' value=L("订单列表")-L("待处理")}>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+        <script>
+            $(document).ready(function(){
+                $('#cancel').click(function(){
+                    var paotui_id = '<{$paotui.paotui_id}>';
+                    var link = "<{link ctl='paotui/cancel' arg0='args'}>";
+                    $.post(link.replace('args',paotui_id), {}, function (ret) {
+                        if (ret.error == 0) {
+                            alert(ret.message);
+                            setTimeout(function(){
+                                location.reload(true);
+                            },3000);
+                        } else {
+                            alert(ret.message);
+                        }
+                    },'json');
+
+                    
+                })
+            })
+        </script>
+    </head>
+
+    <body>
+     <header>
+	<i class="left"><a href="<{link ctl='paotui/paotui' args='1'}>" class="gobackIco"></a></i>
+    <div class="title">
+    	<{L("订单详情")}>
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<!--头部切换开始-->
+<ul id="shangjia_tab">
+    <li><a href="<{link ctl='paotui/log' args=$paotui.paotui_id}>"><{L("订单进度")}></a></li>
+    <li><a href="<{link ctl='paotui/detail' args=$paotui.paotui_id}>" class="on"><{L("订单详情")}></a></li>
+</ul>
+<!--头部切换结束-->
+<section class="page_center_box">
+	<div class="order_progress_infor mb10">
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{$paotui.order_status_label}></span>(<{$paotui.dateline|format}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单逾期未支付')}>1<{L('小时自动取消')}></p>
+        </div>
+        <{if $paotui.order_status == 0}><a href="javascript:void(0);" id='cancel' class="btn fr"><{L('申请退单')}></a><{/if}>
+        <div class="clear"></div>
+    </div>
+	<div class="order_details_nr waimaiRun_details">
+        <ul class="form_list_box">
+            <li class="list">
+                <div class="fl"><p><{L('跑腿明细')}><span style='color:#ff0000;'>(<{L('帮我')}><{if $paotui.type == 'song'}><{L('送')}><{/if}><{if $paotui.type == 'buy'}><{L('买')}><{/if}>)</span></p></div>
+                <div class="fr"><p class="black9"><{L('订单号')}>：<{$paotui.paotui_id}></p></div>
+            </li>
+
+            <{if $paotui.staff}>
+                <li class="list">
+                    <p class="black9"><span class="black6"><{L('跑腿人信息')}>：</span><{$paotui.staff['name']}>，<{L('电话')}>：<{$paotui.staff['mobile']}></p>
+                </li>
+            <{/if}>
+
+            <{if $paotui.type == 'buy'}>
+                <{if $paotui.o_addr}>
+                <li class="list">
+                    <p class="black9"><span class="black6"><{L('购买信息')}>：</span></p>
+                    <p class="black9"><span style="display:block;"><span class="black6"><{L('购买地址')}>：</span><{$paotui.o_addr}></span></p>
+                </li>
+                <{/if}>
+            <{/if}>
+            
+            <{if $paotui.type == 'song'}>
+                <li class="list">
+                    <p class="black9"><span class="black6"><{L('取货信息')}>：</span></p>
+                    <p class="black9"><span class="black6"><{L('联系人')}>：</span><{$paotui.o_contact}></p>
+                    <p class="black9"><span class="black6"><{L('电')}> <{L('话')}>：</span><{$paotui.o_mobile}></p>
+                    <p class="black9"><span style="display:block;"><span class="black6"><{L('取货地址')}>：</span><{$paotui.o_addr}><{$paotui.o_house}></span></p>
+                </li>
+            <{/if}>
+            
+            <li class="list">
+                <p class="black9"><span class="black6"><{L('收货信息')}>：</span></p>
+                <p class="black9"><span class="black6"><{L('联系人')}>：</span><{$paotui.contact}></p>
+                <p class="black9"><span class="black6"><{L('电')}> <{L('话')}>：</span><{$paotui.mobile}></p>
+                <p class="black9"><span style="display:block;"><span class="black6"><{L('收货地址')}>：</span><{$paotui.addr}><{$paotui.house}></span></p>
+            </li>
+            
+            <li class="list">
+            	<p class="black9"><span class="black6"><{L('跑腿内容')}>：</span></p>
+                <div class="waimaiRun_details_nr">
+                	<{$paotui.intro}>
+                    <div class="img_list mt10">
+                        <ul>
+                            <li class="list"><img src="<{$pager.img}>/<{$paotui.photo}>" width="100" height="100"></li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </li>
+            <!--<li class="list">
+            	<div class="fl"><p class="black9">语音内容：</p></div>
+                <div class="fl"><span class="waimaiRun_voice"></span><span class="black9 ml10">36s</span></div>
+            </li>-->
+            <li class="list">
+            	<div class="fl"><p class="black6"><{L('跑腿费用')}>：</p></div>
+                <div class="fr"><p class="black9">￥<{$paotui.paotui_amount}></p></div>
+            </li>
+            <{if $paotui.danbao_amount}>
+            <li class="list">
+            	<div class="fl"><p class="black6"><{L('担保费用')}>：</p></div>
+                <div class="fr"><p class="black9">￥<{$paotui.danbao_amount}></p></div>
+            </li>
+            <{/if}>
+            <li class="list last">
+            	<div class="fl"><p class="pointcl1 total"><{L('合计')}></p></div>
+                <div class="fr"><p class="pointcl1">￥<{$paotui.paotui_amount+$paotui.danbao_amount}></p></div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+<{if $paotui.pay_status == 0}>
+    <{if $paotui.order_status == 5}>
+    <footer>
+        <div class="long_btn_box" style="padding:0.1rem;"><a href="<{link ctl='paotui/pay' args=$paotui.paotui_id}>" class="long_btn" style="display:inline-block;background:#e15f5f;"><{L('补差价')}></a></div>
+    </footer>
+        <{else}>
+    <footer>
+        <div class="long_btn_box" style="padding:0.1rem;"><a href="<{link ctl='paotui/pay' args=$paotui.paotui_id}>" class="long_btn" style="display:inline-block;background:#e15f5f;"><{L('去支付')}></a></div>
+    </footer>
+    <{/if}>
+<{/if}>
+
+    </body>
+</html>

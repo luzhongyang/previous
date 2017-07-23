@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+    <body>
+        <header>
+            <i class="left">
+                <a class="bell_prompt" href="javascript:void(0);"><{if $msgnum > 0}><span class="num"><{$msgnum}></span><{/if}></a>
+            </i>
+            <div class="title"> 404 <{L('页面不存在')}></div>
+            <i class="right"></i>
+        </header>
+        <div class="error_box">
+            <div style="text-align:center;"><img src="/themes/default/static/images/404error.png" style="margin:0px auto;" /></div>
+            <p class="error_p">
+
+                <span style="color:red;"><{L('页面不存在')}>！</span>                
+                <br>
+                <{L('如果您不做出选择')}>，<br><{L('将在')}> <strong id="notice-timer" style="color:red;">5</strong> <{L('秒后跳转到第一个链接地址')}>。<br>             
+                <img src="<{$pager.res}>/images/icon/link.gif" align="absmiddle" style="margin-right:5px;"/><a href="<{if $pager.link}><{$pager.link}><{else}><{link ctl='index'}><{/if}>" style="color: #006699"><{L('点击立即跳转')}></a>
+
+            </p>
+
+
+
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            var timer = "<{$pager.timer}>" ;
+                    var timer = 5000;
+                    var link = "<{if $pager.link}><{$pager.link}><{else}><{link ctl='index'}><{/if}>";
+                    window.onload = function(){
+                    if (link == 'javascript:history.go(-1)' && window.history.length == 0){
+                    document.getElementById('notice-msg').innerHTML = '';
+                            return;
+                    }
+                    window.setInterval(function(){
+                    if (timer < 1){window.clearInterval();
+                            window.location.href = link;
+                            return;
+                    }
+                    timer --;
+                            document.getElementById("notice-timer").inserHTML = timer;
+                    }, 1000);
+                    }
+            })
+        </script>
+
+
+    </body>
+</html>
+
+
+
+
+
+
