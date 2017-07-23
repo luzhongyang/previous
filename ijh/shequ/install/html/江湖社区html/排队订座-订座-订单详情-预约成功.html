@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>排队订座-订座-订单详情-预约成功</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	订单详情
+    </div>
+    <i class="right"><a href="#" class="ico headerIco headerIco_8 mr5"></a> <a href="#" class="ico headerIco headerIco_4"></a></i>
+</header>
+
+<section class="page_center_box">
+	<div class="lineBook_ordDelt_state mb10"><i class="ico"></i>预约成功</div>
+	<div class="lineBook_ordlist lineBook_ordDelt mb10">
+        <div class="top border_b linkico">
+            <p class="fl">风波庄（摩尔街店）</p>
+        </div>
+        <div class="cont mt10">
+            <div class="left">
+                <p><span class="black9">到店时间</span>  9-21周三14:00</p>
+                <p><span class="black9">就餐人数</span>  4人 大厅</p>
+                <p>元子先生  13515608638</p>
+            </div>
+        </div>
+        <div class="bottom border_t black9"><span class="tag" style="background:#7ED321;">订座</span></div>
+    </div>
+    <div class="lineBook_quhao mb10">
+    	<div class="list linkico">
+        	<div class="fl"><i class="ico ico2"></i>包河区芜湖路与宿州路交口摩尔大街22号</div>
+        </div>
+    </div>
+</section>
+<footer>
+	<div class="lineBook_footer_btn">
+    	<a href="javascript:;" class="long_btn lineBook_quxiao_show">取消订单</a>
+    </div>
+</footer>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<!--取消是否弹出-->
+<div class="lineBook_quxiao_mask">
+	<div class="tit">请选择取消理由</div>
+	<div class="cont">
+    	<div class="liyou_box">
+        	<span><a href="javascript:;">点错了</a></span>
+            <span><a href="javascript:;">改去其他商户</a></span>
+            <span><a href="javascript:;">信息填错了</a></span>
+            <span><a href="javascript:;">任性走了</a></span>
+        </div>
+    </div>
+    <div class="btn_box">
+    	<a href="javascript:;" class="btn black6 cancel">放弃取消</a>
+        <a href="#" class="btn fontcl1">确定取消</a>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+	$('.lineBook_quxiao_show').click(function(){
+		$('.lineBook_quxiao_mask').show();
+		$('.mask_bg').show();
+		
+	});
+	$('.lineBook_quxiao_mask .cancel').click(function(){
+		$('.lineBook_quxiao_mask').hide();
+		$('.mask_bg').hide();
+		
+	});
+	$('.lineBook_quxiao_mask .liyou_box span').click(function(){
+		$('.lineBook_quxiao_mask .liyou_box span').removeClass('on');
+		$(this).addClass('on');
+		
+	});
+	
+});
+</script>
+<!--取消是否弹出结束-->
+
+
+</html>

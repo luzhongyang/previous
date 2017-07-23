@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>申请入驻</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="statics/css/pub.css" rel="stylesheet">
+<link href="statics/css/animate.css" rel="stylesheet">
+<link href="statics/css/style.css" rel="stylesheet">
+<script src="statics/js/jquery.js"></script>
+</head>
+<body>
+	<div class="topOne">
+    	<div class="pagewd">
+        	<div class="phone fl maincl"><i class="ico"></i>手机版</div>
+            <a href="#" class="user fl maincl">元升franckever<i class="arrow_ico"></i></a>
+            <a href="#" class="message fl black6"><i class="ico"></i>消息<span class="fontcl1">1</span><i class="arrow_ico"></i></a>
+            <div class="fr link_box"><a href="#">我的订单</a> <span>|</span> <a href="#">我的收藏</a> <span>|</span> <a href="#">申请入驻</a></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="headerTop_one green">
+        <div class="pagewd">
+            <div class="logo fl">
+                <img src="statics/images/logo_white.png">
+            </div>
+            <div class="tit fl">申请入驻</div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="applyEnter pagewd">
+    	<div class="applyEnter_tit">请选择您的服务项目</div>
+        <div class="applyEnter_item">
+        	<div class="list">
+            	<div class="img"><span class="ico1"></span>
+                	<p>申请跑腿哥</p>
+                </div>
+                <p>按照个人情况，自由选择工作时间、工作地段，多劳多得，按单结算，<a href="#">点击合作</a></p>
+            </div>
+            <div class="list">
+            	<div class="img"><span class="ico2"></span>
+                	<p>申请商家</p>
+                </div>
+                <p>高品质的网络订餐平台、帮您解决问题的好伙伴、更懂餐饮的行业专家，<a href="#">点击合作</a></p>
+            </div>
+        </div>
+       	<div class="text_c applyEnter_btn_box none"><a href="#" class="applyEnter_btn">确&nbsp;&nbsp;&nbsp;定</a></div>
+    </div>
+    <div class="footer_one">
+    	<div class="smallpage">
+        	<div class="footer_nav"><a href="#">网站首页</a> / <a href="#">加入我们</a> / <a href="#">关于我们</a> / <a href="#">下载APP</a> / <a href="#">帮助中心</a> / <a href="#">申请入驻</a></div>
+            <div class="footer_link"><a href="#">O2O解决方案</a> <a href="#">O2O网站系统</a> <a href="#">一团网</a> <a href="#">软件商城</a> <a href="#">江湖网站</a> <a href="#">baocms系统</a> <a href="#">江湖家居系统</a></div>
+            <div class="footer_copy">
+            	<P>All Rights Reserved ICP备案：皖ICP备13010842号</P>
+            	<P>合肥江湖信息科技有限公司</P>
+            </div>
+        </div>
+    </div>
+    <script>
+		$(document).ready(function() {
+			$(".applyEnter_item .list .img").click(function(){
+				$(".applyEnter_item .list .img").removeClass("on");
+				$(this).addClass("on");
+				if($(".applyEnter_item .list .img").hasClass("on")){
+					$(".applyEnter_btn_box").removeClass("none");
+				}
+			});
+        });
+    </script>
+</body>
+</html>

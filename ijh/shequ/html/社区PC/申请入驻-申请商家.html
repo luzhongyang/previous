@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>申请入驻</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="statics/css/pub.css" rel="stylesheet">
+<link href="statics/css/animate.css" rel="stylesheet">
+<link href="statics/css/style.css" rel="stylesheet">
+<script src="statics/js/jquery.js"></script>
+</head>
+<body>
+	<div class="topOne">
+    	<div class="pagewd">
+        	<div class="phone fl maincl"><i class="ico"></i>手机版</div>
+            <a href="#" class="user fl maincl">元升franckever<i class="arrow_ico"></i></a>
+            <a href="#" class="message fl black6"><i class="ico"></i>消息<span class="fontcl1">1</span><i class="arrow_ico"></i></a>
+            <div class="fr link_box"><a href="#">我的订单</a> <span>|</span> <a href="#">我的收藏</a> <span>|</span> <a href="#">申请入驻</a></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="headerTop_one green">
+        <div class="pagewd">
+            <div class="logo fl">
+                <img src="statics/images/logo_white.png">
+            </div>
+            <div class="tit fl">申请入驻 > 申请商家</div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="applyEnter pagewd">
+    	<div class="applyEnter_tit">如何申请商家？</div>
+        <div class="applyEnter_delt">
+        	<div class="list_box">
+            	<ul>
+                	<li data-sr="move 100px, over 1s,wait 0s, enter left">
+                    	<img src="statics/images/apply_img5.png" class="animated">
+                        <p>1.提交开店申请</p>
+                    </li>
+                    <li data-sr="move 100px, over 1s,wait .2s, enter left">
+                    	<img src="statics/images/apply_img6.png" class="animated">
+                        <p>2.客服初审</p>
+                    </li>
+                    <li data-sr="move 100px, over 1s,wait .4s, enter left">
+                    	<img src="statics/images/apply_img7.png" class="animated">
+                        <p>3.实体店审核</p>
+                    </li>
+                    <li data-sr="move 100px, over 1s,wait .6s, enter left">
+                    	<img src="statics/images/apply_img8.png" class="animated">
+                        <p>4.入驻上线</p>
+                    </li>
+                </ul>
+            </div>
+        	<div class="text_c" data-sr="move 100px, over 1s,wait 0s, enter bottom"><a href="javascript:;" class="applyEnter_btn">立即加入</a></div>
+        </div>       	
+    </div>
+    
+    <div class="applyEnter bg_grey">
+    	<div class="pagewd">
+        	<div class="applyEnter_tit">平台优势</div>
+            <div class="applyEnter_delt" data-sr="move 200px, over 1s,wait 0s, enter left">
+            	<div class="wz_box">
+                	<ul>
+                    	<li>
+                        	<p>1.采用无线小型打印机，在餐厅里放一台这样的打印机，当网上餐厅有人下单的时候，打印机自动打印订单</p>
+                        </li>
+                       	<li>
+                        	<p>2.采用无线小型打印机，在餐厅里放一台这样的打印机，当网上餐厅有人下单的时候，打印机自动打印订单</p>
+                        </li> 
+                        <li>
+                        	<p>3.采用无线小型打印机，在餐厅里放一台这样的打印机，当网上餐厅有人下单的时候，打印机自动打印订单</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="footer_one">
+    	<div class="smallpage">
+        	<div class="footer_nav"><a href="#">网站首页</a> / <a href="#">加入我们</a> / <a href="#">关于我们</a> / <a href="#">下载APP</a> / <a href="#">帮助中心</a> / <a href="#">申请入驻</a></div>
+            <div class="footer_link"><a href="#">O2O解决方案</a> <a href="#">O2O网站系统</a> <a href="#">一团网</a> <a href="#">软件商城</a> <a href="#">江湖网站</a> <a href="#">baocms系统</a> <a href="#">江湖家居系统</a></div>
+            <div class="footer_copy">
+            	<P>All Rights Reserved ICP备案：皖ICP备13010842号</P>
+            	<P>合肥江湖信息科技有限公司</P>
+            </div>
+        </div>
+    </div>
+    <!--立即加入弹出层-->
+    <div class="applyEnter_mask">
+    	<div class="text_r"><a href="javascript:;" class="close"></a></div>
+        <div class="cont">
+        	<div class="img"><img src="statics/pic/pic1.png"></div>
+            <P>快速扫码，立即加入</P>
+        </div>
+    </div>
+    <div class="mask_bg"></div>
+    <script>
+		$(document).ready(function() {
+            $(".applyEnter_btn").click(function(){
+				$(".applyEnter_mask").fadeIn(100);
+				$(".mask_bg").fadeIn(100);
+			});
+			$(".applyEnter_mask .close,.mask_bg").click(function(){
+				$(".applyEnter_mask").fadeOut(100);
+				$(".mask_bg").fadeOut(100);
+			});
+        });
+    </script>
+    <!--立即加入弹出层-->
+    <script src="statics/js/scrollReveal.min.js"></script> 
+	<script type="text/javascript">
+		window.sr = new scrollReveal({
+			//reset: true,
+			move: '200px',
+			mobile: true
+		});
+    </script> 
+</body>
+</html>

@@ -1,0 +1,38 @@
+<div class="wrapper wrapper-content animated fadeInLeft">
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <form id="SO-form" action="/merchant/?yuyue/zhuohao/items.html" method="post" role="form" class="form-horizontal m-t">
+                  
+                <div class="form-group draggable">
+                    <label class="col-sm-3 control-label">分类名称：</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="SO[cate_id]">
+                            <option value="0">不限</option>
+                            <{foreach $cate_items as $v}>
+                            <option value="<{$v.cate_id}>"><{$v.title}></option>
+                            <{/foreach}>
+                        </select>
+                    </div>
+                </div>   
+                <div class="form-group draggable">
+                    <label class="col-sm-3 control-label">桌号名称：</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="SO[title]" value="" class="form-control">
+                    </div>
+                </div> 
+                <div class="form-group draggable">
+                    <label class="col-sm-3 control-label">就餐人数：</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="SO[number]" value="" class="form-control">
+                    </div>
+                </div>   
+                <div class="form-group draggable">
+                <label class="col-sm-3 control-label">&nbsp;</label>
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary btn-w-m" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

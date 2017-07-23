@@ -1,0 +1,283 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li
+                <{if in_array('0',$arr_status_key)}> class="active" <{/if}>><a
+                    href="<{link ctl='merchant/weidian/pintuanorder:index'}>" aria-expanded="true">客户订单</a>
+                </li>
+                <li
+                <{if in_array('1',$arr_status_key)}> class="active" <{/if}>><a
+                    href="<{link ctl='merchant/weidian/pintuanorder:pei'}>" aria-expanded="true">配送订单</a>
+                </li>
+                <li
+                <{if in_array('3',$arr_status_key)}> class="active" <{/if}>><a
+                    href="<{link ctl='merchant/weidian/pintuanorder:delivered'}>" aria-expanded="true">配送完成</a>
+                </li>
+                <li
+                <{if in_array('8',$arr_status_key)}> class="active" <{/if}>><a
+                    href="<{link ctl='merchant/weidian/pintuanorder:complete'}>" aria-expanded="true">完成订单</a>
+                </li>
+                <li
+                <{if in_array('-1',$arr_status_key)}> class="active" <{/if}>><a
+                    href="<{link ctl='merchant/weidian/pintuanorder:cancellist'}>" aria-expanded="true">取消订单</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <table class="table  table-hover" id="myTable">
+                            <thead>
+                            <tr>
+                                <th>订单编号</th>
+                                <th>联系人</th>
+                                <th>手机号</th>
+                                <th>下单时间</th>
+                                <th>下单地址</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <{foreach $items as $item}>
+
+                            <tr>
+                                <td>
+                                    <{$item.order_id}>
+                                </td>
+                                <td><{$item.contact}></td>
+                                <td><{$item.mobile}></td>
+                                <td><{$item.dateline|format:'Y-m-d H:i'}></td>
+                                <td><{$item.house}></td>
+                                <td>
+
+                                    <{if in_array('0',$arr_status_key)}> <{/if}>
+                                    <{if in_array('1',$arr_status_key)}>
+
+                                    <a href="<{link ctl='merchant/weidian/order:sendgoods' arg0=$item.order_id}>"
+                                       mini-act="发货" class="btn btn-success btn-sm btn-outline" title="发货">发货</a>
+                                    <{/if}>
+                                    <{if in_array('3',$arr_status_key) || in_array('4',$arr_status_key) }>
+                                    <{if 3 ==$item.order_status}>
+                                    <a href="<{link ctl='merchant/weidian/order:service' arg0=$item.order_id}>"
+                                       mini-act="确认送达" class="btn btn-success btn-sm btn-outline" title="确认送达">确认送达(<{if
+                                        $item.pei_type==2}>自提<{else}>配送<{/if}>)</a>
+
+                                    <{else}>
+                                    <a href="javascript://" class="btn btn-success btn-sm"><{L('等待客户收货')}></a>
+                                    <{/if}>
+                                    <{/if}>
+                                    <{if in_array('8',$arr_status_key)}> <{/if}>
+                                    <{if in_array('-1',$arr_status_key)}> <{/if}>
+
+                                    <a href="javascript:void(0);" rel="<{$item.order_id}>"
+                                       class="btn btn-primary btn-sm btn-outline view_btn" title="<{L('查看')}>"><{L('查看')}></a>
+                                </td>
+                            </tr>
+
+                            <tr class="table_child tr_<{$item.order_id}>" style="display:none;">
+                                <td colspan="9">
+                                    <table width="100%" class="table table-striped  table-hover">
+                                        <tr>
+                                        <tr>
+                                            <th>订单号:<{$item.order_id}></th>
+                                            <th>联系人：<{$item.contact}></th>
+                                            <th>手机号：<{$item.mobile}></th>
+                                            <th>下单时间：<{$item.dateline|format:'Y-m-d H:i'}></th>
+
+                                        </tr>
+                                        <tr>
+                                            <th>状态：<{$arr_status[$item.order_status]}></th>
+                                            <th>在线支付：<{if $item.online_pay==1}>是<{else}>否<{/if}></th>
+                                            <th>支付状态：<{if $item.pay_status==1}>已支付<{else}>未支付<{/if}></th>
+                                            <th>送达时间：<{if $item.pei_time==0}>立即送达<{else}><{$item.dateline|format:'m-d'}>&nbsp;&nbsp;<{$item.pei_time}><{/if}></th>
+                                        </tr>
+                                        </tr>
+                                        <{foreach $item.products as $var}>
+                                        <tr>
+                                            <td colspan="2"><{$var.product_name}></td>
+                                            <td>×<{$item.arr_order.product_number}></td>
+                                            <td colspan="2" class="txt_r"><{L('单价')}>：<span class="price">￥<{$var.product_price}></span>
+                                            </td>
+                                        </tr>
+                                        <{/foreach}>
+                                        <tr>
+                                            <td colspan="4">
+                                                <{L('打包费')}>：￥<{if $item.package_price< 0.01}> 0 <{else}>
+                                                <{$item.package_price}> <{/if}>
+                                                <{L('运费')}>：￥<{if $item.freight< 0.01}> 0 <{else}> <{$item.freight}>
+                                                <{/if}>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><{L('合计')}>：<span class="price_zong">￥ <{$item.product_price}></span><{L('结算价')}>：￥
+                                                <{$item.js_price}><{if
+                                                $item.first_youhui>0}><{L('首单优惠')}>：-￥<{$item.first_youhui}><{/if}><{if
+                                                $item.order_youhui>0}><{L('下单立减')}>：-￥<{$item.order_youhui}><{/if}><{if
+                                                $item.hongbao>0}><{L('红包抵扣')}>：-￥<{$item.hongbao}><{/if}>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><{L('备注')}>：<{$item.note|default:"<{L('无')}>"}></td>
+                                        </tr>
+                                        <!--<tr class="bottom">-->
+                                        <!--<td colspan="4"><a href="javascript:printorder(<{$item.order_id}>);" target="_self"><{L('打印小票')}></a></td>-->
+                                        <!--</tr>-->
+                                    </table>
+                                </td>
+                            </tr>
+                            <{foreachelse}>
+                            <tr>
+                                <td colspan="20">
+                                    <div class="alert alert-info"><{L('没有数据')}></div>
+                                </td>
+                            </tr>
+                            <{/foreach}>
+                            </tbody>
+                        </table>
+                        <div class="btn-group pull-right pagination_box">
+                            <div class="page"><{$pager.pagebar}></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>
+<script>
+    $(document).ready(function () {
+        $(".view_btn").click(function () {
+            $('.tr_' + $(this).attr('rel')).slideToggle();
+        })
+
+        $(".stamp .mask_bg").click(function () {
+            $(".stamp").hide();
+        })
+
+    })
+
+    function cancel(id) {
+        var link = "<{link ctl='merchant/order:cancel' arg0='temp'}>";
+        jQuery.ajax({
+            url: link.replace('temp', id),
+            async: true,
+            dataType: 'json',
+            type: 'POST',
+            success: function (ret) {
+                if (ret.error > 0) {
+                    layer.msg(ret.message);
+                } else {
+                    layer.msg(ret.message);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+        });
+    }
+
+
+    function accept(id, type) {
+        var link = "<{link ctl='merchant/pintuangroup:status_ok' arg0='temp' arg1='oooo'}>";
+        jQuery.ajax({
+            url: link.replace('temp', id).replace('oooo', type),
+            async: true,
+            dataType: 'json',
+            type: 'POST',
+            success: function (ret) {
+                if (ret.error > 0) {
+                    layer.msg(ret.message);
+                } else {
+                    layer.msg(ret.message);
+                    localStorage['is_one'] = ret.is_one;
+                    setTimeout(function () {
+                        layer.open({
+                            title: '<{L("温馨提示")}>',
+                            content: '<{L("您是否要自动打印小票")}>？',
+                            btn: ['<{L("确认")}>', '<{L("取消")}>'],
+                            shadeClose: false,
+                            yes: function () {
+                                check_print(id);
+                                layer.closeAll();
+                            },
+                            cancel: function () {
+                                if (ret.is_one == 1) {
+                                    setTimeout(function () {
+                                        window.location.href = "<{link ctl='merchant/order:pei'}>";
+                                    }, 1000);
+                                } else {
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1000);
+                                }
+                                layer.closeAll();
+                            }
+                        });
+
+                    }, 1000);
+                    //是否自动打印订单小票
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+        });
+    }
+
+    function check_print(order_id) {
+        var link1 = "<{link ctl='merchant/order:check_print'}>";
+        var link2 = "<{link ctl='merchant/order:porder' args='temp1'}>";
+        link2 = link2.replace('temp1', order_id);
+        jQuery.ajax({
+            url: link1,
+            async: true,
+            dataType: 'json',
+            type: 'POST',
+            success: function (ret) {
+                if (ret.error > 0) {
+                    Widget.MsgBox.error(ret.message);
+                } else {
+                    layer.open({
+                        type: 2,
+                        title: "<{L('打印小票')}>",
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['350px', '60%'],
+                        content: link2
+                    });
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+        });
+    }
+
+    function printorder(order_id) {
+
+        $(".stamp_list_" + order_id).show();
+        $(".print_" + order_id).click(function () {
+            var link = "<{link ctl='merchant/order:porder' args='__order_id'}>";
+            $.get(link.replace('__order_id', order_id), function (ret) {
+                $('#abc').html(ret);
+                $('#abc').printArea();
+            }, 'html')
+        })
+
+    }
+</script>
+<script>
+    function view(order_id) {
+        var childtr = "tr_" + order_id;
+        var view = $("." + childtr).css('display');
+        if (view == "none") {
+            $("." + childtr).show();
+        } else {
+            $("." + childtr).hide();
+        }
+
+    }
+</script>

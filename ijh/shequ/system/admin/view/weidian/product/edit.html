@@ -1,0 +1,431 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt=""/></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="pintuan/product:index" priv="hidden" class="button"}></td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data" id="multi_G_price_area">
+    <form action="?pintuan/product-edit.html" mini-form="product-form" method="post" ENCTYPE="multipart/form-data">
+        <table width="100%" border="0" cellspacing="0" class="table-data form">
+            <input type="hidden" name="pintuan_product_id" value="<{$detail.pintuan_product_id}>"/>
+            <tr>
+                <th>商家：</th>
+                <td>
+                    <input type="text" name="" readonly="readonly" value="<{$shop.title|default:''}>" class="input w-200"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="w-100">分类：</th>
+                <td>
+                    <select name="data[cate_id]">
+                        <{foreach $cates as $k => $v}>
+                        <option value="<{$k}>"
+                        <{if $k==$detail.cate_id}>selected="selected"<{/if}>><{$v}></option>
+                        <{/foreach}>
+                    </select>
+                    <span class="tip-comment">分类ID</span></td>
+            </tr>
+            <tr>
+                <th>商品名称：</th>
+                <td><input type="text" name="data[title]" value="<{$detail.title|default:''}>"
+                           class="input w-300"/><span class="tip-comment">商品名称</span></td>
+            </tr>
+            <tr>
+                <th>图片：</th>
+                <td><input type="text" name="data[photo]" value="<{$detail.photo}>" <{if
+                    $detail.photo}>photo="<{$pager.img}>/<{$detail.photo}>"<{/if}> class="input w-300" />&nbsp;&nbsp;&nbsp;<input
+                            type="file" name="data[photo]" class="input w-100"/><span class="tip-comment">图片</span></td>
+            </tr>
+            <tr>
+                <th>单买价：</th>
+                <td><input type="text" id="price" name="data[price]" value="<{$detail.price|default:''}>"
+                           class="input w-100"/><span class="tip-comment"></span></td>
+            </tr>
+            <tr>
+                <th>销量：</th>
+                <td>
+                    <!--<input type="text" name="data[sales]" readonly value="<{$detail.sales|default:''}>"-->
+                    <!--class="input w-100"/>-->
+                    <{$detail.sales|default:''}>
+                    <span class="tip-comment">历史总销量</span></td>
+            </tr>
+            <tr>
+                <th>限购数：</th>
+                <td><input type="text" name="data[item_limit]" value="<{$detail.item_limit|default:'999'}>"
+                           class="input w-100"/><span class="tip-comment">仅限制单人购买, 默认:999, 0:不限购,其他数字: 限购份数上限</span></td>
+            </tr>
+            <tr>
+                <th>团类型</th>
+                <td>
+                    <ul class="group-list">
+                        <li><label><input type="radio" <{if 0 == $detail.tuan_type}>checked="checked"<{/if}>
+                            name="data[tuan_type]" class="groupType" value="0">普通团</label></li>
+                        <li><label><input type="radio" <{if 1 == $detail.tuan_type}>checked="checked"<{/if}>
+                            name="data[tuan_type]" class="groupType" value="1">阶梯团</label></li>
+                        <div class="clear-both"></div>
+                        <!--test-->
+                        <!--<input name="data[pintuan][5]" />-->
+                        <!--<input name="data[pintuan][6]" />-->
+                        <!--test-->
+                    </ul>
+                </td>
+            </tr>
+            <tr class="groupTypeBox groupTypeSingle" style="display: ;">
+                <th>普通团：</th>
+                <td>
+                    <table border="0" cellpadding="6" cellspacing="1" class="table table-bordered "
+                           style="width:400px;float:left;">
+                        <thead class="list-thead">
+                        <tr>
+                            <td style="text-align:center;white-space:nowrap;" width="80">
+                                <span>成团人数</span>
+                            </td>
+                            <td style="text-align:center;white-space:nowrap;" width="80">
+                                <span>拼团价格(低于单买价)</span>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody class="list-tbody">
+                        <tr>
+                            <td>
+                                <input type="text" name="data[user_num]" value="<{$detail.user_num|default:''}>"
+                                       class="input w-100"/>
+                            </td>
+                            <td width="200">
+                                <input type="text" id="tuan_price" name="data[tuan_price]" value="<{$detail.tuan_price|default:''}>"
+                                       class="input w-100"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="groupTypeBox groupTypeMulti" style="display: ;">
+                <th>阶梯团：</th>
+                <td>
+
+                    <div  class="form-group list-table" style="">
+                        <div>
+                            <table border="0" cellpadding="6" cellspacing="1" class="table table-bordered "
+                                   style="width:400px;float:left;">
+                                <thead class="list-thead">
+                                <tr>
+                                    <td style="text-align:center;white-space:nowrap;" width="50">
+                                        <span>级数</span>
+                                    </td>
+                                    <td style="text-align:center;white-space:nowrap;" width="80">
+                                        <span>成团人数</span>
+                                    </td>
+                                    <td style="text-align:center;white-space:nowrap;" width="80">
+                                        <span>拼团价格</span>
+                                    </td>
+                                    <td style="text-align:center;white-space:nowrap;" width="50">
+                                        <span>操作</span>
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody class="list-tbody" id="multi_G_price">
+                                <{$detail.level_html}>
+                                </tbody>
+                                <tfoot class="list-tfoot">
+                                <tr>
+                                    <td colspan="4" style="text-align:left;">
+                                        <a class="btn btn-primary btn-sm" href="javascript:;"
+                                           id="addGroupPrice">添加价格阶梯</a>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr>
+                <th>团长佣金：</th>
+                <td><input type="text" id="money_master" name="data[money_master]"
+                           value="<{$detail.money_master|default:'0'}>"
+                           class="input w-100"/><span
+                        class="tip-comment">例如: 佣金设置5元, 3人团, 组团成功后后, 团长获取佣金为: 3x5=15元</span></td>
+            </tr>
+            <tr>
+                <th>预付定金：</th>
+                <td><input type="text" id="money_pre" name="data[money_pre]" value="<{$detail.money_pre|default:'0'}>"
+                           class="input w-100"/><span class="tip-comment">0:表示全款购买, 预付定金需要大于团长佣金; 阶梯团, 只能设置预付定金, 不能全款购买 </span>
+                    <div class="clear-both"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>成团有效期：</th>
+                <td><input type="text" name="data[tuan_time]" value="<{$detail.tuan_time|default:'2'}>"
+                           class="input w-100" maxlength="2"/>
+                    <span class="tip-comment">单位:天, 过期团购失败</span></td>
+            </tr>
+            <tr>
+                <th>团限购：</th>
+                <td>
+                    <ul class="group-list">
+                        <li><label><input type="radio" <{if 0 == $detail.tuan_limit}>checked="checked"<{/if}>
+                            name="data[tuan_limit]" value="0"><{$view_params.tuan_limit.select.0}></label></li>
+                        <li><label><input type="radio" <{if 1 == $detail.tuan_limit}>checked="checked"<{/if}>
+                            name="data[tuan_limit]" value="1"><{$view_params.tuan_limit.select.1}></label></li>
+                        <div class="clear-both"></div>
+                        <span class="tip-comment">团是否限购: 建议阶梯团选择"否"</span>
+                    </ul>
+                </td>
+            </tr>
+            <!--<tr>-->
+                <!--<th>团长免单</th>-->
+                <!--<td>-->
+                    <!--<ul class="group-list">-->
+                        <!--<li><label><input type="radio" <{if 0 == $detail.master_is_free}>checked="checked"<{/if}>-->
+                            <!--name="data[master_is_free]" value="0"><{$view_params.master_is_free.select.0}></label></li>-->
+                        <!--<li><label><input type="radio" <{if 1 == $detail.master_is_free}>checked="checked"<{/if}>-->
+                            <!--name="data[master_is_free]" value="1"><{$view_params.master_is_free.select.1}></label></li>-->
+                        <!--<div class="clear-both"></div>-->
+                        <!--<span class="tip-comment">选择<{$view_params.master_is_free.select.1}>, 组团成功后, 将返还团长购买所耗资金.</span>-->
+                    <!--</ul>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <tr>
+                <th>购买开团</th>
+                <td>
+                    <ul class="group-list">
+                        <li><label><input type="radio" <{if 0 == $detail.master_need_buy}>checked="checked"<{/if}>
+                            name="data[master_need_buy]" value="0"><{$view_params.master_need_buy.select.0}></label>
+                        </li>
+                        <li><label><input type="radio" <{if 1 == $detail.master_need_buy}>checked="checked"<{/if}>
+                            name="data[master_need_buy]" value="1"><{$view_params.master_need_buy.select.1}></label>
+                        </li>
+                        <div class="clear-both"></div>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <th>配送类型</th>
+                <td>
+                    <ul class="group-list">
+                        <li><label><input class="address_type" type="radio" <{if 0 == $detail.address_type}>checked="checked"<{/if}>
+                            name="data[address_type]" value="0"><{$view_params.address_type.select.0}></label></li>
+                        <li><label><input class="address_type" type="radio" <{if 1 == $detail.address_type}>checked="checked"<{/if}>
+                            name="data[address_type]" value="1"><{$view_params.address_type.select.1}></label></li>
+                        <li><label><input class="address_type" type="radio" <{if 2 == $detail.address_type}>checked="checked"<{/if}>
+                            name="data[address_type]" value="2"><{$view_params.address_type.select.2}></label></li>
+                        <div class="clear-both"></div>
+                    </ul>
+                </td>
+            </tr>
+            <tr id="ship_fee">
+                <th>配送费用：</th>
+                <td><input type="text" name="data[ship_fee]" value="<{$detail.ship_fee|default:'0'}>"
+                           class="input w-100"/><span class="tip-comment">配送费用,默认 0</span></td>
+            </tr>
+            <tr>
+                <th>库存：</th>
+                <td><input type="text" name="data[stock]" value="<{$detail.stock|default:'99999'}>"
+                           class="input w-300"/><span class="tip-comment">库存</span></td>
+            </tr>
+            <link href="//cdn.bootcss.com/jquery-tagsinput/1.3.6/jquery.tagsinput.min.css" rel="stylesheet">
+            <script src="//cdn.bootcss.com/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
+            <script>
+                $(function () {
+                    $('#tags_1').tagsInput({width: 'auto', height: '27px', defaultText: ''});
+                    $('#tags_2').tagsInput({width: 'auto', height: '27px', defaultText: ''});
+                    $('#tags_3').tagsInput({width: 'auto', height: '27px', defaultText: ''});
+                    $('#tags_4').tagsInput({width: 'auto', height: '27px', defaultText: ''});
+                    $('#tags_5').tagsInput({width: 'auto', height: '27px', defaultText: ''});
+                });
+            </script>
+            <tr>
+                <th>商品属性：</th>
+                <td>
+                    <table border="0" cellpadding="6" cellspacing="1" class=""
+                           style="width:600px;float:left;">
+                        <thead class="list-thead">
+                        <tr>
+                            <td style="white-space:nowrap;" width="40">
+                                属性名称
+                            </td>
+                            <td style="white-space:nowrap;width:500px;" width="80">
+                                属性值(输入后按回车输入多个)
+                            </td>
+                            <td style="white-space:nowrap;text-align:center" width="50">
+                                <span>操作</span>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody class="list-tbody" id="multi_G_attr">
+                        <{$detail.attr_html}>
+                        </tbody>
+                        <tfoot class="list-tfoot">
+                        <tr>
+                            <td colspan="2" style="text-align:left;">
+                                <a class="btn btn-primary btn-sm" href="javascript:;" id="addGroupAttr">添加一组属性</a>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <th>描述：</th>
+                <td><textarea name="data[intro]" kindeditor="full"
+                              style="width:800px;height:350px;"><{$detail.intro}></textarea><br/><span
+                        class="tip-comment">描述</span></td>
+            </tr>
+            <tr>
+                <th>排序：</th>
+                <td><input type="text" name="data[orderby]" value="<{$detail.orderby|default:'50'}>" class="input w-300"/><span
+                        class="tip-comment">排序</span></td>
+            </tr>
+            <tr>
+                <th><{L('是否上架')}>：</th>
+                <td>
+                    <ul class="group-list">
+                        <label><input type="radio" name="data[is_onsale]" value="0" <{if $detail.is_onsale==0}>checked="checked"<{/if}>><{L('下架')}></label>
+                        <label><input type="radio" name="data[is_onsale]" value="1" <{if $detail.is_onsale==1}>checked="checked"<{/if}>><{L('上架')}></label>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th class="clear-th-bottom"></th>
+                <td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/themes/default/pintuan/static/css/boot-tooltip.css"/>
+
+<style>
+    table.form td {
+        line-height: 22px;
+    }
+    div.tagsinput span.tag {
+        padding: 2px 5px;
+    }
+    .center {
+        text-align: center !important;
+    }
+</style>
+<script type="text/javascript" src="/static/script/pintuan/pintuan_tip.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.2.0/js/tooltip.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $(document).on('click', '#money_pre, #money_master', function () {
+        }).on('blur', '#money_pre, #money_master, #tuan_price, #price', function (e) {
+            var tipBox = $("#multi_G_price_area");
+            var element;
+            if (0 != parseFloat($("#money_master").val()) && 0 != parseFloat($("#money_pre").val()) && parseFloat($("#money_master").val()) >= parseFloat($("#money_pre").val())) {
+                element = $("#money_pre");
+                $.showTooltip(element, '预付定金需要大于团长佣金', tipBox);
+                return false;
+            }
+
+            if ( parseFloat($("#tuan_price").val()) >= parseFloat($("#price").val())) {
+                element = $("#price");
+                $.showTooltip(element, '单买价要大于拼团价', tipBox);
+                return false;
+            }
+        });
+//ship_fee   address_type
+        $(".address_type").change(function () {
+            var bln = $(".address_type:checked").val();
+            $("#ship_fee").show();
+            if (bln == 2) {
+                $("#ship_fee").hide();
+            } else {
+                $("#ship_fee").show();
+            }
+        }).trigger("change");
+        $(".groupType").change(function () {
+            var bln = $(".groupType:checked").val();
+            $(".groupTypeBox").hide();
+            if (bln == 1) {
+                $(".groupTypeMulti").show();
+            } else {
+                $(".groupTypeSingle").show();
+            }
+        }).trigger("change");
+        $("#addGroupPrice").click(function () {
+            var data = new Object();
+            data.index = $("#multi_G_price tr").length + 1;
+//                        alert(data.index);
+            $("#multi_G_price").append('<tr><td>' + data.index + '</td><td><input type="text" class="input w-100 M_num" name="data[muti_num][' + data.index + ']" value=""></td><td><input type="text" class="input w-100 M_price" name="data[muti_price][' + data.index + ']" value=""></td><td><a href="javascript:;" class="text-danger remove-price">删除</a></td></tr>');
+        });
+        $("#addGroupAttr").click(function () {
+            var data = new Object();
+            data.index = $("#multi_G_attr tr").length + 1;
+//                        alert(data.index);
+//            $("#multi_G_attr").append('<tr><td><input type="text" class="input w-100 M_num" name="data[muti_num][' + data.index + ']" value=""></td><td><input type="text" class="input w-100 M_price" name="data[muti_price][' + data.index + ']" value=""></td><td><a href="javascript:;" class="text-danger remove-price">删除</a></td></tr>');
+            $("#multi_G_attr").append('<tr><td><input type="text" name="data[attr_name][' + data.index + ']" value="" class="input w-100"/></td><td width="200"><input id="tags_' + data.index + '" name="data[attr_value][' + data.index + ']" type="text" class="tags" value="" /></td><td class="center"><a href="javascript:;" class="text-danger remove-price">删除</a></td></tr>');
+            $('#tags_' + data.index).tagsInput({width: 'auto', height: '27px', defaultText: ''});
+        });
+        $(document).on('click', '#multi_G_attr .remove-price', function () {
+            $(this).parent().parent().remove();
+        })
+        $(document).on('click', '#multi_G_price .remove-price', function () {
+            $(this).parent().parent().remove();
+        }).on('blur', '#multi_G_price .M_num, #multi_G_price .M_price', function (e) {
+            var tipBox = $("#multi_G_price_area");
+            var element;
+            var num, price = 0;
+            var PN_price = new Object();
+            PN_price.num = 1;
+            element = $("#price");
+            PN_price.price = parseFloat(element.val());
+
+            if (isNaN(PN_price.price) || PN_price.price < 0) {
+                $.showTooltip(element, '请输入销售价格', tipBox);
+                return false;
+            }
+            $("#multi_G_price tr").each(function (i) {
+                element = $('.M_num', this);
+                num = parseInt(element.val());
+                if (isNaN(num)) {
+                    $.showTooltip(element, '请输入成团人数', tipBox);
+                    return false;
+                }
+                if (PN_price.num >= num) {
+                    $.showTooltip(element, "需要大于上一级成团人数,起步2人团", tipBox);
+//                                alert('需要大于上一级成团人数');
+                    return false;
+                }
+                PN_price.num = num;
+                element = $('.M_price', this);
+                price = parseFloat(element.val());
+                if (isNaN(price)) {
+                    $.showTooltip(element, '请输入拼团价格', tipBox);
+                    return false;
+                }
+                if (price > PN_price.price) {
+                    $.showTooltip(element, '需要小于上一级拼团价格', tipBox);
+                    return false;
+                }
+                PN_price.price = price;
+            })
+        });
+
+    });
+</script>
+
+<script type="text/javascript" src="<{$pager.res}>/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+    (function (K, $) {
+        var editor = KindEditor.create('textarea[kindeditor]', {
+            uploadJson: '?magic/upload-editor.html',
+            extraFileUploadParams: {OATOKEN: "<{$OATOKEN}>"}
+        });
+    })(window.KT, window.jQuery);
+</script>
+<{include file="admin:common/footer.html"}>

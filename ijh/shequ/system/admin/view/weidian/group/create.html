@@ -1,0 +1,85 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt=""/></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="pintuan/group:index" priv="hidden" class="button"}></td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data">
+    <form action="?pintuan/group-create.html" mini-form="group-form" method="post">
+        <table width="100%" border="0" cellspacing="0" class="table-data form">
+            <tr>
+                <th class="w-100">城市：</th>
+                <td><{widget id="data/region" city_id=$detail.city_id level=2}></td>
+            </tr>
+            <tr>
+                <th>商户：</th>
+                <td>
+                    <input type="hidden" name="data[shop_id]" value="<{$detail.shop_id}>" id="select_shop_shop_id_id"/>
+                    <input type="text" value="<{$shop.title}>" id="select_shop_shop_id_title" class="input w-300"
+                           readonly/>
+                    <{link ctl="shop/shop:dialog"
+                    select="mini:#select_shop_shop_id_id,#select_shop_shop_id_title/N/选择商户" title="选择商户"
+                    class="button"}>
+                </td>
+            </tr>
+            <tr><th>成团人数：</th><td><input type="text" name="data[user_num]" value="<{$detail.user_num|default:'3'}>" class="input w-100"/><span class="tip-comment">成团人数</span></td></tr>
+            <tr>
+                <th>团长id：</th>
+                <td><input type="text" name="data[master_id]" value="<{$detail.master_id|default:''}>"
+                           class="input w-100"/><span class="tip-comment">团长用户id</span></td>
+            </tr>
+            <tr>
+                <th>开团时间：</th>
+                <td><input type="text" name="data[start_time]" value="<{$detail.start_time|default:''}>"
+                           class="input w-100" date="start_time" readonly/><span class="tip-comment">开团时间</span></td>
+            </tr>
+            <tr>
+                <th>结束时间：</th>
+                <td><input type="text" name="data[end_time]" value="<{$detail.end_time|default:''}>" class="input w-100"
+                           date="end_time" readonly/><span class="tip-comment">结束时间</span></td>
+            </tr>
+            <tr>
+                <th>订单数量：</th>
+                <td><input type="text" name="data[order_count]" value="<{$detail.order_count|default:''}>"
+                           class="input w-100"/><span class="tip-comment">订单数量</span></td>
+            </tr>
+            <tr>
+                <th>成功订单数量：</th>
+                <td><input type="text" name="data[order_success_count]"
+                           value="<{$detail.order_success_count|default:''}>" class="input w-100"/><span
+                           class="tip-comment">成功订单数量</span></td>
+            </tr>
+            <tr>
+                <th>拼团产品id：</th>
+                <td><input type="text" name="data[pintuan_product_id]" value="<{$detail.pintuan_product_id|default:''}>"
+                           class="input w-100"/><span class="tip-comment">团产品id</span></td>
+            </tr>
+            <tr>
+                <th>组团状态</th>
+                <td>
+                    <ul class="group-list">
+                        <li><label><input type="radio" name="data[status]" <{if 0 ==
+                                          $detail.status}>checked="checked"<{/if}> value="0">组团中</label></li>
+                        <li><label><input type="radio" name="data[status]" <{if 1 ==
+                                          $detail.status}>checked="checked"<{/if}> value="1">组团成功</label></li>
+                        <li><label><input type="radio" name="data[status]" <{if 2 ==
+                                          $detail.status}>checked="checked"<{/if}> value="2">组团失败</label></li>
+                        <div class="clear-both"></div>
+                    </ul>
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <th class="clear-th-bottom"></th>
+                <td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<{include file="admin:common/footer.html"}>

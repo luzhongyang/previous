@@ -1,0 +1,21 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="pintuan/productlevel:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?pintuan/productlevel-edit.html" mini-form="productlevel-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<input type="hidden" name="pintuan_level_id" value="<{$detail.pintuan_level_id}>"/>
+<tr><th>团级别：</th><td><input type="text" name="data[level]" value="<{$detail.level|default:'0.00'}>" class="input w-100"/><span class="tip-comment">团级别</span></td></tr>
+<tr><th>成团人数：</th><td><input type="text" name="data[user_num]" value="<{$detail.user_num|default:'0.00'}>" class="input w-100"/><span class="tip-comment">成团人数   3表示 达到3人的价格,  10表示达到10人的价格, 如果是7人,则调用3人的价格</span></td></tr>
+<tr><th>团购价：</th><td><input type="text" name="data[price]" value="<{$detail.price|default:'0.00'}>" class="input w-100"/><span class="tip-comment">团购价</span></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

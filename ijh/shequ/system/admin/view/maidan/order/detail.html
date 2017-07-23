@@ -1,0 +1,21 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="maidan/order:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>订单ID：</th><td><{$detail.order_id}></td><th>商家：</th><td><{$detail.shop.title}>(ID:<{$detail.shop_id}>)</td></tr>
+<tr><th>订单状态：</th><td><{$detail.order_status_label}></td><th>支付状态：</th><td><{if $detail.pay_status == 1}>已支付<{else}>未支付<{/if}></td></tr>
+<tr><th>用户：</th><td><{$detail['user']['nickname']}>(ID:<{$detail.uid}>)</td><th>支付方式：</th><td><{$detail['payments'][$detail['pay_code']]}></td></tr>
+<tr><th>买单金额：</th><td><{$detail.maidan_amount}></td><th>不优惠金额：</th><td><{$detail.unyouhui}></td></tr>
+<tr><th>支付时间：</th><td><{if $detail.pay_time}><{$detail.pay_time|format}><{else}>无<{/if}></td><th>订单金额：</th><td><{$detail.order_status_label}></td></tr>
+<tr><th>下单时间：</th><td><{$detail.dateline|format}></td><th>客户IP：</th><td><{$detail.clientip}></td></tr>
+<tr><th>订单来源：</th><td><{$detail.order_from}></td><th>评论状态：</th><td><{if $detail.comment_status == 1}>已点评<{else}>未点评<{/if}></td></tr>
+</table></div>
+<{include file="admin:common/footer.html"}>

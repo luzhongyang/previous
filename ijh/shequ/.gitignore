@@ -1,0 +1,11 @@
+/system/data/logs
+/system/data/cache
+/system/data/tplcache
+/system/data/tpladmin
+/system/data/tplmerchant
+.nbproject
+.settings
+.idea
+/nbproject
+/system/config.php
+/admin/%SystemDrive%

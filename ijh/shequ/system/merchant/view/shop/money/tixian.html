@@ -1,0 +1,143 @@
+<{include file="merchant:block/header.html"}>
+<!-- <div class="ucenter_t">
+    <ul class="nav nav-tabs">
+        <li ><a  href="<{link ctl='merchant/shop/money:index'}>" aria-expanded="true"> 资金管理</a>
+        </li>
+        <li ><a  href="<{link ctl='merchant/shop/money:txlog'}>" aria-expanded="true"> 提现日志</a>
+        </li>
+    </ul>
+</div>
+<div class="ucenter_c tab-pane col-sm-12">
+    <form action="<{link ctl='merchant/shop/money:tixian'}>" mini-form="merchant" method="post" ENCTYPE="multipart/form-data" role="form" class="form-horizontal m-t" >
+        <div class="form-group draggable">
+            <label class="col-sm-1 control-label">当前余额：</label>
+            <div class="col-sm-2">
+                <input type="text" name="" value=" <{$shop.money}>" class="form-control" disabled="true">
+               
+            </div>
+        </div>
+        <div class="form-group draggable">
+            <label class="col-sm-1 control-label">提现金额：</label>
+            <div class="col-sm-2">
+                <input type="text" name="data[money]" value="" class="form-control" placeholder="请输入标题">
+            </div>
+        </div>
+        <div class="form-group draggable">
+            <label class="col-sm-1 control-label">提现比例：</label>
+            <div class="col-sm-2">
+                <input type="text" name="" value="<{$shop.tixian_percent}>%" class="form-control" disabled="true">
+            </div>
+        </div>
+        <div class="form-group draggable">
+            <label class="col-sm-1 control-label">提现账户：</label>
+            <div class="col-sm-2">
+                <input type="text" name="" value="<{$acc.account_number}>" class="form-control" disabled="true" >
+            </div>
+        </div>
+        <div class="form-group draggable">
+            <label class="col-sm-1 control-label">提现描述：</label>
+            <div class="col-sm-2">
+                <input type="text" name="data[intro]" value="" class="form-control" placeholder="请输入标题">
+            </div>
+        </div>
+        <div class="formitems col-sm-1 col-sm-offset-1 control-label" >
+            <button class="btn btn-primary " type="submit">确认提现</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="<{$pager.res}>/script/widget.bmap.js"></script>
+<script type="text/javascript" src="<{$pager.res}>/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+(function(K, $){
+var editor = KindEditor.create('textarea[kindeditor]',{uploadJson : '<{link ctl="biz/upload:editor" http="base"}>', extraFileUploadParams:{OTOKEN:"<{$OTOKEN}>"}});
+
+$("[name='data[stock_type]']").click(function () {
+if ($(this).val() == 1) {
+    $("#tr_sale_sku1").show();
+} else {
+    $("#tr_sale_sku1").hide();
+}
+});
+$("[name='data[stock_type]']:checked").trigger("click");
+})(window.KT, window.jQuery);
+
+</script>   -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class=""><a  href="<{link ctl='merchant/shop/money:index'}>" >资金管理</a>
+                </li>
+                <li class=""><a  href="<{link ctl='merchant/shop/money:txlog'}>" >提现日志</a>
+                </li>
+                <li class="active"><a  href="javascript:;" >申请提现</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="">
+                                        <form action="<{link ctl='merchant/shop/money:tixian'}>" method="post" class="form-horizontal"  ENCTYPE="multipart/form-data">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">当前余额：</label>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        <input type="text" name="" disabled="true" value="<{$shop.money}>" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">提现金额：</label>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        <input type="text" name="data[money]" value="" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">提现比例：</label>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        <input type="text" name="" disabled="true" value="<{$shop.tixian_percent}>%" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">提现账户：</label>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        <input type="text" name="" disabled="true" value="<{$acc.account_number}>" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">提现描述：</label>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        <input type="text" name="data[intro]" value="" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">&nbsp;</label>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        <button class="btn btn-primary" type="submit">保存数据</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>

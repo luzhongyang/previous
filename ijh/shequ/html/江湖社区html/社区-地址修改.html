@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>地址修改</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	修改地址
+    </div>
+    <i class="right"><a href="#" class="ico headerIco headerIco_2"></a></i>
+</header>
+<section class="page_center_box">
+ 	<div>
+    	<form>
+        <table class="serveAddr_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="74"><p class="bt ml10">姓名</p></td>
+                <td class="pad_r10"><input type="text" placeholder="请输入姓名"></td>
+            </tr>
+            <tr>
+                <td width="74"><p class="bt ml10">手机号</p></td>
+                <td class="pad_r10"><input type="text" placeholder="请输入手机号"></td>
+            </tr>
+            <tr>
+                <td width="74"><p class="bt ml10">地址</p></td>
+                <td class="pad_r10"><div class="serveAddr_link_box"><input type="text" placeholder="请输入小区，大厦"><a href="#" class="serveAddr_link"></a></div></td>
+            </tr>
+            <tr>
+                <td width="74"><p class="bt ml10">具体地址</p></td>
+                <td class="pad_r10"><input type="text" placeholder="请输入具体楼栋门牌号"></td>
+            </tr> 
+        </table>
+        <div>
+            <p class="black9 pad_l10 pad_r10 font_line24 mt10">非必填选项</p>
+            <ul class="serveAddr_posit clear_both">
+                <li class="list"><label class="radioLabel"><span class="radioInt"><input type="radio"></span></label>公司</li>
+                <li class="list"><label class="radioLabel"><span class="radioInt"><input type="radio"></span></label>家</li>
+                <li class="list"><label class="radioLabel"><span class="radioInt"><input type="radio"></span></label>学校</li>
+                <li class="list"><label class="radioLabel"><span class="radioInt"><input type="radio"></span></label>其他</li>
+            </ul>
+        </div>
+        <div class="btn_box mt10"><input type="button" class="long_btn" value="确认修改"></div>
+        </form>
+    </div>
+</section>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(document).ready(function() {
+    /*单选项选择开始*/
+	$('.radioLabel').click(function(){
+		$('.radioInt').removeClass('on');
+		$(this).find('.radioInt').addClass('on');
+	});
+	/*单选项选择结束*/
+});
+</script>
+</body>
+</html>

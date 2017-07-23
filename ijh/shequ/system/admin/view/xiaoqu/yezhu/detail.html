@@ -1,0 +1,30 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="xiaoqu/yezhu:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>ID：</th><td><{$detail.yezhu_id}></td></tr>
+<tr><th>小区：</th><td><{$detail.xiaoqu_id}></td></tr>
+<tr><th>用户：</th><td><{$detail.uid}></td></tr>
+<tr><th>联系人：</th><td><{$detail.contact}></td></tr>
+<tr><th>联系电话：</th><td><{$detail.mobile}></td></tr>
+<tr><th>楼号：</th><td><{$detail.house_louhao}></td></tr>
+<tr><th>单元：</th><td><{$detail.house_danyuan}></td></tr>
+<tr><th>户号：</th><td><{$detail.house_huhao}></td></tr>
+<tr><th>面积：</th><td><{$detail.house_mianji}></td></tr>
+<tr><th>车位：</th><td><{$detail.have_chewei}></td></tr>
+<tr><th>车位号：</th><td><{$detail.chewei_hao}></td></tr>
+<tr><th>车牌号：</th><td><{$detail.chepai_hao}></td></tr>
+<tr><th>排序：</th><td><{$detail.orderby}></td></tr>
+<tr><th>审核：</th><td><{$detail.audit}></td></tr>
+<tr><th>clientip：</th><td><{$detail.clientip}></td></tr>
+<tr><th>dateline：</th><td><{$detail.dateline|format}></td></tr>
+</table></div>
+<{include file="admin:common/footer.html"}>

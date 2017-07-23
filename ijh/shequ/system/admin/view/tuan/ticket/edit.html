@@ -1,0 +1,27 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="tuan/Ticket:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?tuan/Ticket-edit.html" mini-form="Ticket-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<input type="hidden" name="ticket_id" value="<{$detail.ticket_id}>"/>
+<tr><th><span class="red">*</span>用户UID：</th><td><input type="text" name="data[uid]" value="<{$detail.uid|default:''}>" class="input w-300"/><span class="tip-comment">用户UID</span></td></tr>
+<tr><th><span class="red">*</span>商户ID：</th><td><input type="text" name="data[shop_id]" value="<{$detail.shop_id|default:''}>" class="input w-300"/><span class="tip-comment">商户ID</span></td></tr>
+<tr><th><span class="red">*</span>团购ID：</th><td><input type="text" name="data[tuan_id]" value="<{$detail.tuan_id|default:''}>" class="input w-300"/><span class="tip-comment">团购ID</span></td></tr>
+<tr><th><span class="red">*</span>订单ID：</th><td><input type="text" name="data[order_id]" value="<{$detail.order_id|default:''}>" class="input w-300"/><span class="tip-comment">订单ID</span></td></tr>
+<tr><th><span class="red">*</span>密码：</th><td><input type="text" name="data[number]" value="<{$detail.number|default:''}>" class="input w-300"/><span class="tip-comment">密码</span></td></tr>
+<tr><th><span class="red">*</span>份数：</th><td><input type="text" name="data[count]" value="<{$detail.count|default:''}>" class="input w-300"/><span class="tip-comment">份数</span></td></tr>
+<tr><th><span class="red">*</span>过期时间：</th><td><input type="text" name="data[ltime]" value="<{$detail.ltime|default:''}>" class="input w-300"/><span class="tip-comment">过期时间</span></td></tr>
+<tr><th><span class="red">*</span>使用时间：</th><td><input type="text" name="data[use_time]" value="<{$detail.use_time|default:''}>" class="input w-300"/><span class="tip-comment">使用时间</span></td></tr>
+<tr><th><span class="red">*</span>状态：</th><td><input type="text" name="data[status]" value="<{$detail.status|default:''}>" class="input w-300"/><span class="tip-comment">0:未使用，1:已使用,-1:已退款</span></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

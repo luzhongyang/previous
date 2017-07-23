@@ -1,0 +1,37 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="yuyue/dingzuo:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?yuyue/dingzuo-edit.html" mini-form="dingzuo-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<input type="hidden" name="dingzuo_id" value="<{$detail.dingzuo_id}>"/>
+<tr><th>订单状态：</th><td><input type="text" name="data[order_status]" value="<{$detail.order_status|default:'#default#'}>" class="input w-100"/></td></tr>
+<tr><th><span class="red">*</span>联系人：</th><td><input type="text" name="data[contact]" value="<{$detail.contact|default:'#default#'}>" class="input w-300"/><span class="tip-comment">联系人</span></td></tr>
+<tr><th><span class="red">*</span>手机号：</th><td><input type="text" name="data[mobile]" value="<{$detail.mobile|default:'#default#'}>" class="input w-300"/><span class="tip-comment">手机号</span></td></tr>
+<tr><th>桌号：</th><td><input type="text" name="data[zhuohao_id]" value="<{$detail.zhuohao_id|default:'#default#'}>" class="input w-100"/><span class="tip-comment">桌号</span></td></tr>
+<tr><th><span class="red">*</span>预约时间：</th><td><input type="text" name="data[yuyue_time]" value="<{$detail.yuyue_time|default:'#default#'}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>就餐人数：</th><td><input type="text" name="data[yuyue_number]" value="<{$detail.yuyue_number|default:'#default#'}>" class="input w-100"/><span class="tip-comment">就餐人数</span></td></tr>
+<tr>
+	<th>是否需要包厢：</th>
+	<td>
+		<label><input type="radio" name="data[is_baoxiang]" <{if $detail.is_baoxiang}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[is_baoxiang]" <{if isset($detail.is_baoxiang) && empty($detail.is_baoxiang)}>checked="checked"<{/if}> value="0"/>否</label><span class="tip-comment">0:随意,1:订包厢</span>
+	</td>
+</tr>
+<tr><th>订单来源：</th><td><input type="text" name="data[order_from]" value="<{$detail.order_from|default:'#default#'}>" class="input w-300"/></td></tr>
+<tr><th>wxopenid：</th><td><input type="text" name="data[wx_openid]" value="<{$detail.wx_openid|default:'#default#'}>" class="input w-300"/></td></tr>
+<tr><th>接单时间：</th><td><input type="text" name="data[jd_time]" value="<{$detail.jd_time|default:'#default#'}>" class="input w-300"/></td></tr>
+<tr><th>更新时间：</th><td><input type="text" name="data[lasttime]" value="<{$detail.lasttime|default:'#default#'}>" class="input w-300"/></td></tr>
+<tr><th>催单时间：</th><td><input type="text" name="data[cui_time]" value="<{$detail.cui_time|default:'#default#'}>" class="input w-300"/></td></tr>
+<tr><th>退订原因：</th><td><textarea name="data[reason]" class="textarea"><{$detail.reason}></textarea><br /></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

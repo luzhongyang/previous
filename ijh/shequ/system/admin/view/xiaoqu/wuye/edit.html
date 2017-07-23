@@ -1,0 +1,34 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="xiaoqu/wuye:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?xiaoqu/wuye-edit.html" mini-form="wuye-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<input type="hidden" name="wuye_id" value="<{$detail.wuye_id}>"/>
+<tr><th><span class="red">*</span>物业名称：</th><td><input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="input w-300"/><span class="tip-comment">物业名称</span></td></tr>
+<tr><th><span class="red">*</span>手机号：</th><td><input type="text" name="data[mobile]" value="<{$detail.mobile|default:''}>" class="input w-300"/><span class="tip-comment">手机号(帐号)</span></td></tr>
+<tr><th><span class="red">*</span>密码：</th><td><input type="text" name="data[passwd]" value="<{$detail.passwd|default:''}>" class="input w-300"/></td></tr>
+<tr><th>余额：</th><td><input type="text" name="data[money]" value="<{$detail.money|default:''}>" class="input w-100"/></td></tr>
+<tr><th>总收入：</th><td><input type="text" name="data[total_money]" value="<{$detail.total_money|default:''}>" class="input w-100"/></td></tr>
+<tr><th>体现比例：</th><td><input type="text" name="data[tixian_percent]" value="<{$detail.tixian_percent|default:''}>" class="input w-100"/></td></tr>
+<tr><th>提现金额：</th><td><input type="text" name="data[tixian_money]" value="<{$detail.tixian_money|default:''}>" class="input w-100"/></td></tr>
+<tr><th>联系人：</th><td><input type="text" name="data[contact]" value="<{$detail.contact|default:''}>" class="input w-300"/></td></tr>
+<tr><th>联系电话：</th><td><input type="text" name="data[phone]" value="<{$detail.phone|default:''}>" class="input w-300"/></td></tr>
+<tr>
+	<th>审核：</th>
+	<td>
+		<label><input type="radio" name="data[aidit]" <{if $detail.aidit}>checked="checked"<{/if}> value="1"/>发布</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[aidit]" <{if empty($detail.aidit)}>checked="checked"<{/if}> value="0"/>待审</label>
+	</td>
+</tr>
+<tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

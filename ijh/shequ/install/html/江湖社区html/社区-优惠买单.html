@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>优惠买单</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	湘炉小厨
+    </div>
+    <i class="right"><a href="#" class=""></a></i>
+</header>
+
+<section class="page_center_box">
+    <div class="bgcolor_white border mar10 pad10 font_size14">
+    	<p class="fl">消费金额：</p>
+        <P class="fr pointcl1">￥62</P>
+        <div class="clear"></div>
+    </div>
+    <p class="couponMoney_show maincl mar10 font_size14"><span class="add" style="display:inline-block; width:0.18rem; height:0.18rem; text-align:center; line-height:0.18rem; border-radius:100%; border:0.01rem solid #59c181; font-size:0.16rem; margin-right:0.05rem; vertical-align:middle;">+</span>输入不享优惠金额</p>
+    <div class="bgcolor_white border_t border_b pad10">
+    	<div class="fl">
+        	<p class="font_size14">每满49减2元</p>
+            <p class="black9">除晚餐需要到店铺另付5元</p>
+        </div>
+        <P class="fr pointcl1 mt10">-￥10</P>
+        <div class="clear"></div>
+    </div>
+    <div class="bgcolor_white border_b pad10 mb10">
+    	<p class="font_size14">限时折扣：消费满49再减2元，最高减50，限1次</p>
+    </div>
+    <div class="pad10 font_size14 txt_center">实付金额：<span class="pointcl1">￥52</span></div>
+    <div class="btn_box"><input type="button" class="long_btn" value="立即提交"></div>
+</section>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<div class="mask_box">
+    <div class="couponMoney_mask maskOne txt_center">
+        <div class="cont mt10">
+        	<p class="font_line24 font_size14">请确认输入不享受金额</p>
+            <div class="border_b">
+                <input type="text" class="long_int" placeholder="￥请与服务员确认">
+            </div>
+        </div>
+        <div class="btn_box mb10">
+        	<input type="button" class="pub_btn cancel" style="background:#dddddd;" value="取消" />
+        	<input type="button" class="pub_btn" style="background:#ff5959;" value="确定" />
+        </div>
+    </div>
+	<div class="mask_bg"></div>
+</div>
+<style>
+.couponMoney_mask .pub_btn {
+    width: 0.6rem;
+    margin: 0 0.1rem;
+}
+</style>
+<script>
+$(document).ready(function() {
+		
+	$(".couponMoney_show").click(function(){
+		$(".couponMoney_mask").show();
+		$(".couponMoney_mask").parent().find(".mask_bg").show();
+	});
+	$(".couponMoney_mask").parent(".mask_box").find(".cancel").click(function(){
+		$(".couponMoney_mask").hide();
+		$(".couponMoney_mask").parent().find(".mask_bg").hide();
+	});//弹出层结束
+	
+});
+</script>
+</body>
+</html>

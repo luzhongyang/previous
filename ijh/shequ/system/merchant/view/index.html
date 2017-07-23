@@ -1,0 +1,281 @@
+<{include file="merchant:block/header.html"}>
+
+<!--内容开始-->
+<div class="row">
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">订单</span>
+                <h5>今日总收入</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><{$todaymoney}></h1>
+                <div class="stat-percent font-bold text-success">元</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">订单</span>
+                <h5>今日总销量</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><{$today_order}></h1>
+                <div class="stat-percent font-bold text-success">个</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">总数</span>
+                <h5>收到点评</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><{$shopcomtnum}></h1>
+                <div class="stat-percent font-bold text-success">条</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">总数</span>
+                <h5>我的粉丝</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><{$fans}></h1>
+                <div class="stat-percent font-bold text-success">个</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-bell fa-3x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> 待接单数 </span>
+                    <h2 class="font-bold"><{$wait_accept}></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-send-o fa-3x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> 待配送数 </span>
+                    <h2 class="font-bold"><{$wait_peisong}></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-space-shuttle fa-3x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> 配送中数 </span>
+                    <h2 class="font-bold"><{$is_peiing}></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-rmb fa-3x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> 已完成数 </span>
+                    <h2 class="font-bold"><{$orderall}></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-reply fa-3x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> 已取消数 </span>
+                    <h2 class="font-bold"><{$cansle}></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-user fa-3x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> 自提单数 </span>
+                    <h2 class="font-bold"><{$ziti}></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-3 m-b-md">
+        <div class="idx_enter">
+            <div class="ibox-title">
+                <h5>快捷入口</h5>
+            </div>
+            <div class="ibox-content">
+                <a class="btn btn-block btn-outline btn-primary" href="<{link ctl='merchant/shop/money'}>">
+                    资金管理
+                </a>
+                <a class="btn btn-block btn-outline btn-primary"  href="<{link ctl='merchant/shop/coupon'}>">
+                    优惠券管理
+                </a>
+                <a class="btn btn-block btn-outline btn-primary" href="<{link ctl='merchant/waimai/order'}>">
+                    订单管理
+                </a>
+                <a class="btn btn-block btn-outline btn-primary" href="<{link ctl='merchant/shop/comment'}>">
+                    评价管理
+                </a>
+                <a class="btn btn-block btn-outline btn-primary" href="<{link ctl='merchant/shop/member'}>">
+                    客户管理
+                </a>
+                <a class="btn btn-block btn-outline btn-primary" href="<{link ctl='merchant/weidian/info'}>">
+                    微店设置
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 店铺未回复的评论</a>
+                </li>
+                <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">外送未回复的评论</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+
+                                <th>评价ID</th>
+                                <th>客户</th>
+                                <th>订单号</th>
+                                <th >综合评分</th>
+                                <th>状态</th>
+                                <th>评价时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <{foreach $unshopcom as $item}>
+                            <tr>
+                                <td><{$item.comment_id}></td>
+                                <td><{$dianusers[$item['uid']]['nickname']}></td>
+                                <td><{$item.order_id}></td>
+                                 <td><{$item.score}></td>
+                                <td>未回复</td>
+                                <td><{$item.dateline|format}></td>
+                                <td>
+                                    <a href="<{link ctl='merchant/shop/comment/reply_dialog' args=$item.comment_id}>" mini-load="店铺评论回复" mini-width="500" mini-height="300"><button type="button" class="btn btn-outline btn-primary btn-sm">回复评论</button>
+                                    </a>
+                                    <a href="<{link ctl='merchant/shop/comment/detail' args=$item.comment_id}>">
+                                        <button type="button" class="btn btn-outline btn-info btn-sm">详情</button>
+                                    </a>
+                                </td>
+                            </tr>
+                            <{foreachelse}>
+                                <tr><td colspan="20"><div class="alert alert-info">暂无数据</div></td></tr>
+                            <{/foreach}>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="tab-2" class="tab-pane">
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                        <thead>
+                        <tr>
+
+                            <th>评价ID</th>
+                            <th>客户</th>
+                            <th>订单号</th>
+                            <th >综合评分</th>
+                            <th >服务评分</th>
+                            <th >口味评分</th>
+                            <th>状态</th>
+                            <th>评价时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <{foreach $unwaicom as $item}>
+                        <tr>
+                            <td><!-- <input type="checkbox"  checked class="i-checks" name="input[]"><span class="m-l"> --><{$item.comment_id}></span></td>
+                            <td><{$waiusers[$item['uid']]['nickname']}></td>
+                            <td><{$item.order_id}></td>
+                            <td><{$item.score}></td>
+                                <td><{$item.score_fuwu}></td>
+                                <td><{$item.score_kouwei}></td>
+                            <td>未回复</td>
+                            <td><{$item.dateline|format}></td>
+                            <td>
+                                <a href="<{link ctl='merchant/waimai/comment/reply_dialog' args=$item.comment_id}>" mini-load="外卖评论回复" mini-width="500" mini-height="300"><button type="button" class="btn btn-outline btn-primary btn-sm">回复评论</button>
+                                </a>
+                                <a href="<{link ctl='merchant/waimai/comment/detail' args=$item.comment_id}>">
+                                    <button type="button" class="btn btn-outline btn-info btn-sm">详情</button>
+                                </a>
+                            </td>
+                        </tr>
+                        <{foreachelse}>
+                            <tr><td colspan="20"><div class="alert alert-info">暂无数据</div></td></tr>
+                        <{/foreach}>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!--内容结束-->
+<{include file="merchant:block/footer.html"}>
+
+<script>
+function location_addr(address) {
+    if(address) {
+        window.location.href = address;
+    }
+}
+</script>
+

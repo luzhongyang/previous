@@ -1,0 +1,29 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?system/config-adv_app.html" mini-form="config-form" method="post" ENCTYPE="multipart/form-data">
+<input type="hidden" name="K" value="adv_app" />
+<table width="100%" border="0" cellspacing="0" class="table-data form"><tr><th>图片一名称：</th><td><input type="text" name="config[title1]" value="<{$config.title1|default:''}>" class="input w-300"/><span class="tip-comment">图片一名称</span></td></tr>
+<tr><th>图片一文件：</th><td><input type="text" name="config[title1_pic]" value="<{$config.title1_pic}>" <{if $config.title1_pic}>photo="<{$pager.img}>/<{$config.title1_pic}>"<{/if}> class="input w-300" />&nbsp;&nbsp;&nbsp;<input type="file" name="config[title1_pic]" class="input w-100" /><span class="tip-comment">图片一文件</span></td></tr>
+<tr><th>图片一链接：</th><td><input type="text" name="config[title1_link]" value="<{$config.title1_link|default:''}>" class="input w-300"/><span class="tip-comment">图片一链接</span></td></tr>
+<tr><th>图片二名称：</th><td><input type="text" name="config[title2]" value="<{$config.title2|default:''}>" class="input w-300"/><span class="tip-comment">图片二名称</span></td></tr>
+<tr><th>图片二文件：</th><td><input type="text" name="config[title2_pic]" value="<{$config.title2_pic}>" <{if $config.title2_pic}>photo="<{$pager.img}>/<{$config.title2_pic}>"<{/if}> class="input w-300" />&nbsp;&nbsp;&nbsp;<input type="file" name="config[title2_pic]" class="input w-100" /><span class="tip-comment">图片二文件</span></td></tr>
+<tr><th>图片二链接：</th><td><input type="text" name="config[title2_link]" value="<{$config.title2_link|default:''}>" class="input w-300"/><span class="tip-comment">图片二链接</span></td></tr>
+<tr><th>图片三名称：</th><td><input type="text" name="config[title3]" value="<{$config.title3|default:''}>" class="input w-300"/><span class="tip-comment">图片三名称</span></td></tr>
+<tr><th>图片三文件：</th><td><input type="text" name="config[title3_pic]" value="<{$config.title3_pic}>" <{if $config.title3_pic}>photo="<{$pager.img}>/<{$config.title3_pic}>"<{/if}> class="input w-300" />&nbsp;&nbsp;&nbsp;<input type="file" name="config[title3_pic]" class="input w-100" /><span class="tip-comment">图片三文件</span></td></tr>
+<tr><th>图片三链接：</th><td><input type="text" name="config[title3_link]" value="<{$config.title3_link|default:''}>" class="input w-300"/><span class="tip-comment">图片三链接</span></td></tr>
+<tr><th>图片四名称：</th><td><input type="text" name="config[title4]" value="<{$config.title4|default:''}>" class="input w-300"/><span class="tip-comment">图片四名称</span></td></tr>
+<tr><th>图片四文件：</th><td><input type="text" name="config[title4_pic]" value="<{$config.title4_pic}>" <{if $config.title4_pic}>photo="<{$pager.img}>/<{$config.title4_pic}>"<{/if}> class="input w-300" />&nbsp;&nbsp;&nbsp;<input type="file" name="config[title4_pic]" class="input w-100" /><span class="tip-comment">图片四文件</span></td></tr>
+<tr><th>图片四链接：</th><td><input type="text" name="config[title4_link]" value="<{$config.title4_link|default:''}>" class="input w-300"/><span class="tip-comment">图片四链接</span></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

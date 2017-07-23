@@ -1,0 +1,109 @@
+<{include file="merchant:block/header.html"}>
+
+<div class="row">   
+    <div class="col-sm-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">评价</span>
+                <h5>店铺评价数</h5>
+            </div>
+            <div class="ibox-content">
+                <p class="num"><{$shop_comment_count}></p>
+                <div class="stat-percent font-bold text-info">
+                    <a href="<{link ctl='merchant/shop/comment/index'}>" class="btn btn-primary">立即查看</a>
+                </div>
+                <small> &nbsp;</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">评价</span>
+                <h5>外卖评价数</h5>
+            </div>
+            <div class="ibox-content">
+                <p class="num"><{$waimai_comment_count}></p>
+                <div class="stat-percent font-bold text-info">
+                    <a href="<{link ctl='merchant/waimai/comment/index'}>" class="btn btn-primary">立即查看</a>
+                </div>
+                <small> &nbsp;</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">订单</span>
+                <h5>客户流量</h5>
+            </div>
+            <div class="ibox-content">
+                <p class="num"><{$shop_members_count}></p>
+                <div class="stat-percent font-bold text-info">
+                    <a href="<{link ctl='merchant/shop/member/index'}>" class="btn btn-primary">立即查看</a>
+                </div>
+                <small> &nbsp;</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">收藏</span>
+                <h5>我的粉丝</h5>
+            </div>
+            <div class="ibox-content">
+                <p class="num"><{$shop_fans_count}></p>
+                <div class="stat-percent font-bold text-info">
+                    <a href="<{link ctl='merchant/shop/member/fans'}>" class="btn btn-primary">立即查看</a>
+                </div>
+                <small> &nbsp;</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins dianpu_info">
+            <div class="ibox-title">
+                <h5>店铺信息</h5>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th class="text-right gray-bg col-sm-2">店铺名称：</th>
+                            <td><{$shop.title}></td>
+                            <th class="text-right gray-bg">联系电话：</th>
+                            <td><{if $shop.phone}><{$shop.phone}><{else}><{$shop.mobile}><{/if}></td>
+                            <th class="text-right gray-bg">分类：</th>
+                            <td><{$shop.cate_title}></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">店铺LOGO：</th>
+                            <td class="" colspan="5"><img src="<{$pager.img}>/<{$shop.logo}>" width="80" height="60"></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">店铺Banner：</th>
+                            <td class="" colspan="5"><img src="<{$pager.img}>/<{$shop.banner}>" width="100" height="100"></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">地址：</th>
+                            <td colspan="5"><{$shop.addr}></td>
+                        </tr>                             
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+</div>
+
+
+  
+<{include file="merchant:block/footer.html"}>
+
+<script  type="text/javascript" charset="utf-8" async defer>
+$(".view_btn").click(function () {
+    $('.tr_' + $(this).attr('rel')).slideToggle();
+})
+</script>

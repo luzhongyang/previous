@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>家政-服务列表</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	附近服务人员
+    </div>
+    <i class="right"><a href="#" class="ico headerIco headerIco_7"></a></i>
+</header>
+<div class="saixuan_pull_box">
+    <div class="saixuan_pull">
+        <ul>
+            <li class="saixuan_pull_list"><div class="click">分类<em></em></div>
+                <div class="saixuan_pull_child_box saixuan_fenlei" style="display:none;">
+                	
+                    <ul>
+                        <li class="saixuan_pull_child"><a href="#">全部<span class="num">63</span></a></li>
+                        <li class="saixuan_pull_child on" rel='1'>保洁服务<span class="num">63</span><span class="linkIco" style="display:none;"></span></li>
+                        <li class="saixuan_pull_child" rel='2'>洗护服务<span class="num">63</span><span class="linkIco" style="display:none;"></span></li>
+                        <li class="saixuan_pull_child"><a href="#">家电清洗<span class="num">63</span></a></li>
+                        <li class="saixuan_pull_child"><a href="#">家居保养<span class="num">63</span></a></li>
+                        <li class="saixuan_pull_child"><a href="#">维修开锁<span class="num">63</span></a></li>
+                    </ul>
+                    <div class="saixuan_fenlei_list_box">
+                        <ul class="saixuan_fenlei_list_nr" id="a1">
+                            <li class="saixuan_fenlei_list"><a href="#">家庭保洁1<span class="num">63</span></a></li>
+                            <li class="saixuan_fenlei_list"><a href="#">家庭保洁1<span class="num">63</span></a></li>
+                            <li class="saixuan_fenlei_list"><a href="#">家庭保洁1<span class="num">63</span></a></li>
+                            <li class="saixuan_fenlei_list"><a href="#">家庭保洁1<span class="num">63</span></a></li>
+                        </ul>
+                        <ul class="saixuan_fenlei_list_nr" id="a2" style="display:none;">
+                            <li class="saixuan_fenlei_list"><a href="#">家庭保2洁<span class="num">63</span></a></li>
+                            <li class="saixuan_fenlei_list"><a href="#">家庭保2洁<span class="num">63</span></a></li>
+                            <li class="saixuan_fenlei_list"><a href="#">家庭保2洁<span class="num">63</span></a></li>
+                            <li class="saixuan_fenlei_list"><a href="#">家庭保2洁<span class="num">63</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="saixuan_pull_list"><div class="click">评价<em></em></div>
+            	<div class="saixuan_pull_child_box" style="display:none;">
+                    <ul>
+                        <li class="saixuan_pull_child"><a href="#">可选</a></li>
+                        <li class="saixuan_pull_child"><a href="#">不可选</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="saixuan_pull_list"><div class="click">距离<em></em></div>
+            	<div class="saixuan_pull_child_box" style="display:none;">
+                    <ul>
+                        <li class="saixuan_pull_child"><a href="#">可选</a></li>
+                        <li class="saixuan_pull_child"><a href="#">不可选</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<section class="page_center_box">
+    <div class="jiazheng">
+        <div class="map txt_center"><img src="pic/map.png" width="100%"></div>
+    </div>
+</section>
+<footer>
+	<div class="btn_box"><input type="button" class="long_btn" value="立即下单"></div>
+</footer>
+<script>
+$(document).ready(function() {
+	/*头部下拉开始*/
+    if ($('.saixuan_pull').length > 0)/*判断是否存在这个html代码*/
+	{
+		$('.saixuan_pull .saixuan_pull_list').width(100 / $('.saixuan_pull .saixuan_pull_list').length + '%');
+		$('.page_center_box').css('top', '0.91rem');
+	}
+	
+	$(".saixuan_pull_list .click").click(function(){
+		
+		if($(this).hasClass("on")){
+			
+			$(".saixuan_pull_list .click").removeClass("on");
+			$(".saixuan_pull_list .saixuan_pull_child_box").hide();
+			
+			$(".saixuan_pull_box .mask_bg").hide();
+		}
+		else{
+			
+			$(".saixuan_pull_list .click").removeClass("on");
+			$(".saixuan_pull_list .saixuan_pull_child_box").hide();
+			
+			$(this).addClass("on");
+			$(this).parent().find(".saixuan_pull_child_box").show();
+			$(".saixuan_pull_box .mask_bg").show();
+		}
+	});
+	
+	$('.saixuan_fenlei .saixuan_pull_child').click(function(){
+		var rel = $(this).attr('rel');
+		$(this).parent().find(".saixuan_pull_child").removeClass("on");
+		$(this).addClass("on");
+		$('.saixuan_fenlei_list_nr').hide();
+		
+		if($('#a'+rel).length>0){
+			$('.saixuan_fenlei_list_box').show();
+			$('#a'+rel).show();
+			$('.saixuan_pull_child .linkIco').show();
+		}else{
+			$('.saixuan_fenlei_list_box').hide();
+			$('.saixuan_pull_child .linkIco').hide();
+		}
+		
+	});
+	
+	/*头部下拉结束*/
+});
+</script>
+</body>
+</html>

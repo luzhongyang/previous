@@ -1,0 +1,57 @@
+<{include file="admin:common/header.html"}>
+
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="shop/shop:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+        <tr>
+            <th>店铺：</th><td><{$detail.title}>&nbsp;[sid:<{$detail.sid}>]</td>
+        </tr>
+        <tr>
+            <th>上级店铺：</th><td><{if $detail.parent}><{$detail.parent.title}><{else}>--<{/if}></td>
+        </tr>
+        <tr>
+            <th>店主：</th><td><{$detail.member.nickname}>&nbsp;[uid:<{$detail.uid}>]</td>
+        </tr>
+        <tr>
+            <th>商家名称：</th><td><{$detail.shop_name}>&nbsp;[shop_id:<{$detail.shop_id}>]</td>
+        </tr>
+        <tr>
+            <th>photo：</th><td><img src="<{$pager.img}>/<{$detail.photo}>" class="w-50" /></td>
+        </tr>
+        <tr>
+            <th>余额：</th><td><{$detail.money}></td>
+        </tr>
+        <tr>
+            <th>订单数：</th><td><{$detail.orders}></td>
+        </tr>
+        <tr>
+            <th>订单总交易额：</th><td><{$detail.orders_amount}></td>
+        </tr>
+        <tr>
+            <th>店铺状态：</th><td>
+                    <{if $detail.status == '1'}>
+                        <b class="green">已通过</b>
+                    <{elseif $detail.status == '2'}>
+                        <b class="red">已拒绝</b>
+                    <{else}>
+                        <{link ctl="weidian/fenxiao:set_status" arg0=$item.sid arg1=1 act="mini:通过" class="button" title="通过"}>
+                        <{link ctl="weidian/fenxiao:set_status" arg0=$item.sid arg1=2 title="拒绝" load="mini:拒绝" class="button"}>
+                    <{/if}></td>
+        </tr>
+        <tr>
+            <th>时间：</th><td><{$detail.dateline|format:'Y-m-d H:i:s'}></td>
+        </tr>
+        <tr>
+        <th>提现账户：</th><td><{if $detail.account}><{$detail.account.account_type}>-<{$detail.account.account_number}><{else}>--<{/if}></td>
+        </tr>
+    </table></div>
+
+<{include file="admin:common/footer.html"}>

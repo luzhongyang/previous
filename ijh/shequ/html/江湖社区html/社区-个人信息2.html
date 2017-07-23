@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>账户信息</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	账户信息
+    </div>
+    <i class="right"><a href="#" class=""></a></i>
+</header>
+<section class="page_center_box">
+    <ul class="accountInfor form_list_box">
+        <li class="accountInfor_headX pad10 border_b bgcolor_white">
+            <p class="fl">头像</p>
+            <div class="fr">
+                <div class="img"><img src="" width="100" height="100"/></div>
+            </div>
+            <div class="clear"></div>
+        </li>
+        <li class="pad10 border_b bgcolor_white mb10">
+            <a href="#">
+            <p class="fl">昵称</p>
+            <div class="fr"><span class="black9">franckver</span><em class="linkIco"></em></div>
+            <div class="clear"></div>
+            </a>
+        </li>
+        <li class="border_b border_t bgcolor_white" style="padding:0.05rem 0.1rem;">
+            <p class="black9">账户设置</p>
+        </li>
+        <li class="pad10 border_b bgcolor_white">
+            <a href="#">
+            <p class="fl"><em class="ico ico_1"></em>手机</p>
+            <div class="fr"><span class="black9 ml10">未绑定</span><em class="linkIco"></em></div>
+            <div class="clear"></div>
+            </a>
+        </li>
+        <li class="pad10 border_b bgcolor_white">
+            <a href="#">
+            <p class="fl"><em class="ico ico_2"></em>微信</p>
+            <div class="fr"><span class="black9 ml10 WCtUnbd">未绑定</span><em class="linkIco"></em></div>
+            <div class="clear"></div>
+            </a>
+        </li>
+        <li class="pad10 border_b bgcolor_white">
+            <a href="#">
+            <p class="fl"><em class="ico ico_3"></em>密码</p>
+            <div class="fr"><span class="black9 ml10">修改</span><em class="linkIco"></em></div>
+            <div class="clear"></div>
+            </a>
+        </li>
+    </ul>
+    <div class="btn_box mt10 mb10"><input type="button" class="long_btn" value="退出登录"></div>
+</section>
+<div class="mask_box">
+    <div class="accountInfor_headX_mask">
+        <div class="cont">
+            <label class="btn border_b"><input type="button" />拍照</label>
+            <label class="btn"><input type="file" />从手机相册选择</label>
+        </div>
+        <div class="mar10">
+            <input type="button" class="long_btn cancel" style="background:#fff; color:#999;" value="取消" />
+        </div>
+    </div>
+	<div class="mask_bg"></div>
+</div>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(document).ready(function() {
+	$(".accountInfor_headX").click(function(){
+		$(".accountInfor_headX_mask").show();
+		$(".accountInfor_headX_mask").parent().find(".mask_bg").show();
+	});
+	$(".accountInfor_headX_mask").parent(".mask_box").find(".cancel").click(function(){
+		$(".accountInfor_headX_mask").hide();
+		$(".accountInfor_headX_mask").parent().find(".mask_bg").hide();
+	});//头像弹出层结束
+	
+});
+</script>
+</body>
+</html>

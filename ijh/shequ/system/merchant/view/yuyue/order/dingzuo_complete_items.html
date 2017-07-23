@@ -1,0 +1,69 @@
+<{include file="merchant:block/header.html"}>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li ><a   href="<{link ctl='merchant/yuyue/order:dingzuo'}>" aria-expanded="true">待接单</a>
+                </li >
+                <li > <a href="<{link ctl='merchant/yuyue/order:dingzuo_wait_items'}>" aria-expanded="true">预约中</a>
+                </li>
+                <li class="active"> <a href="<{link ctl='merchant/yuyue/order:dingzuo_complete_items'}>" aria-expanded="true">已完成</a>
+                </li>
+                <li > <a href="<{link ctl='merchant/yuyue/order:dingzuo_cancel_items'}>" aria-expanded="true">已取消</a>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <table class="table table-striped table-hover" id="myTable">
+                            <thead>
+                            <tr>
+                                <th>订单编号</th>
+                                <th >客户</th>
+                                <th >手机号</th>
+                                <th >就餐人数</th>
+                                <th >桌号名称</th>
+                                <th >到店时间</th>
+                                <!-- <th >是否要求包厢</th> -->
+                                <th >备注</th>
+                                <th >操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <{foreach $items as $item}>
+                            
+                            <tr>
+                                <td><{$item.dingzuo_id}></td> 
+                                <td><{$item.contact}></td>        
+                                <td><{$item.mobile}></td>
+                                <td><{$item.yuyue_number}></td>
+                                <td><{$item.zhuohao_detail.title}></td>        
+                                <td><{$item.yuyue_time|format:'Y-m-d H:i'}></td>
+                                <!-- <td><{if $item.is_baoxiang==0}><b class="blue">否</b><{else}><b class="red">是</b><{/if}></td> -->
+                                <td><{$item.notice|default:'--'}></td>
+                                <td>
+                                    <b class="green">已确认到店</b>
+                                </td>
+                            </tr>
+                            <{foreachelse}>
+                            <tr><td colspan="20"><div class="alert alert-info">暂无数据</div></td></tr>
+                            <{/foreach}>
+                            </tbody>
+                        </table>
+
+                        <!--分页开始-->
+                        <div class="clearfix p-xs">
+                            <div class="pull-left">
+                            </div>
+                            <div class="btn-group pull-right pagination_box">
+                                <div class="page"><{$pager.pagebar}></div>
+                            </div>
+                        </div>
+                        <!--分页结束-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+<{include file="merchant:block/footer.html"}>

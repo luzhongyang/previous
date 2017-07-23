@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>红包选择</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	红包
+    </div>
+    <i class="right"><a href="#" class="">兑换</a></i>
+</header>
+<section class="page_center_box">
+   <p class="pad10" style="text-align:right;"><a href="#" class="black9"><em style="display:inline-block; width:0.14rem; height:0.14rem; text-align:center; line-height:0.14rem; border:0.01rem solid #999999; border-radius:100%; margin-right:0.05rem;">?</em>使用说明</a></p>
+   <div class="redBag_list_box">
+       <ul>
+           <li class="redBag_list mb10">
+           		<label class="radioLabel">
+           		<div class="pub_bag fl">
+                	<img src="images/redBag/redBag_red.png" width="100%" height="100%">
+                    <p class="price">￥10</p>
+                </div>
+                <div class="pub_wz" style="margin-right:0.3rem;">
+                	<p class="bt">江湖社区新手红包</p>
+                    <p class="black9">使用限制：满30元可使用</p>
+                    <p class="black9">过期时间：2015-12-12</p>
+                </div>
+                <span class="radioInt"><input type="radio"></span>
+                <div class="clear"></div>
+                </label>
+           </li>
+           <li class="redBag_list mb10">
+           		<label class="radioLabel">
+           		<div class="pub_bag fl">
+                	<img src="images/redBag/redBag_red.png" width="100%" height="100%">
+                    <p class="price">￥10</p>
+                </div>
+                <div class="pub_wz" style="margin-right:0.3rem;">
+                	<p class="bt">江湖社区新手红包</p>
+                    <p class="black9">使用限制：满30元可使用</p>
+                    <p class="black9">过期时间：2015-12-12</p>
+                </div>
+                <span class="radioInt"><input type="radio"></span>
+                <div class="clear"></div>
+                </label>
+           </li>
+           <li class="redBag_list mb10">
+           		<label class="radioLabel">
+           		<div class="pub_bag fl">
+                	<img src="images/redBag/redBag_red.png" width="100%" height="100%">
+                    <p class="price">￥10</p>
+                </div>
+                <div class="pub_wz" style="margin-right:0.3rem;">
+                	<p class="bt">江湖社区新手红包</p>
+                    <p class="black9">使用限制：满30元可使用</p>
+                    <p class="black9">过期时间：2015-12-12</p>
+                </div>
+                <span class="radioInt"><input type="radio"></span>
+                <div class="clear"></div>
+                </label>
+           </li>
+       </ul>
+   </div>
+</section>
+<footer>
+	<div class="btn_box"><input type="button" class="long_btn" style="background:#ff6600;" value="点击取消红包"></div>
+</footer>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(document).ready(function() {
+    /*单选项选择开始*/
+	$('.radioLabel').click(function(){
+		$('.radioInt').removeClass('on');
+		$(this).find('.radioInt').addClass('on');
+	});
+	/*单选项选择结束*/
+});
+</script>
+</body>
+</html>

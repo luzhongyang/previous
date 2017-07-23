@@ -1,0 +1,44 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="pintuan/product:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>商品ID：</th><td><{$detail.product_id}></td></tr>
+<tr><th>商户ID：</th><td><{$detail.shop_id}></td></tr>
+<tr><th>分类ID：</th><td><{$detail.cate_id}></td></tr>
+<tr><th>商品名称：</th><td><{$detail.title}></td></tr>
+<tr><th>图片：</th><td><img src="<{$pager.img}>/<{$detail.photo}>" class="wh-200" /></td></tr>
+<tr><th>价格：</th><td><{$detail.price}></td></tr>
+<tr><th>销量：</th><td><{$detail.sales}></td></tr>
+<tr><th>描述：</th><td><{$detail.intro}></td></tr>
+<tr><th>限购数：</th><td><{$detail.detail.item_limit}></td></tr>
+<tr><th>团类型：</th><td><{$detail.detail.tuan_type}></td></tr>
+<tr><th>参团人数(0,不限)：</th><td><{$detail.detail.user_num}></td></tr>
+<tr><th>团购价格：</th><td><{$detail.wei_price}></td></tr>
+<tr><th>成团有效期：</th><td><{$detail.detail.tuan_time}></td></tr>
+<tr><th>团限购：</th><td><{$detail.detail.tuan_limit}></td></tr>
+<tr><th>购买开团：</th><td><{$detail.detail.master_need_buy}></td></tr>
+<tr><th>团长佣金：</th><td><{$detail.detail.money_master}></td></tr>
+<tr><th>预付定金：</th><td><{$detail.detail.money_pre}></td></tr>
+<tr><th>配送类型：</th><td><{$detail.detail.address_type}></td></tr>
+<tr><th>配送费用：</th><td><{$detail.ship_fee}></td></tr>
+<tr><th>库存：</th><td><{$detail.stock}></td></tr>
+<tr><th>排序：</th><td><{$detail.orderby}></td></tr>
+<tr><th>是否在售：</th><td>
+    <{if $detail.is_onsale==1}>
+    <font style="color:green;">在售</font>
+    <{else}>
+    <font style="color:red">下架</font>
+    <{/if}>
+</td></tr>
+<tr><th>客户IP：</th><td><{$detail.clientip}></td></tr>
+<tr><th>创建时间：</th><td><{$detail.dateline|format}></td></tr>
+</table></div>
+<{include file="admin:common/footer.html"}>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>排队订座-订单列表</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	<div class="changeTab_box">
+            <div class="changeTab"><a href="#" class="link on">我的号单</a><a href="#" class="link">我的订座</a></div>
+        </div>
+    </div>
+    <i class="right"><a href="javascript:;" class="ico"></a></i>
+</header>
+
+<section class="page_center_box">
+	<div class="lineBook_ordlist_box">
+    	<ul>
+    	    <li class="lineBook_ordlist mb10">
+            	<div class="top border_b">
+                	<p class="fl">红泥小厨（皖河路店）</p>
+                    <p class="fr maincl">已取号</p>
+                </div>
+                <div class="cont">
+                	<div class="left">
+                    	<p><span class="black9">预计等待</span>  10分钟</p>
+                        <p><span class="black9">还需等待</span>  8桌</p>
+                    </div>
+                    <div class="right">
+                    	<p class="big maincl">A20</p>
+                        <p class="black6">小桌(午市)</p>
+                    </div>
+                </div>
+                <div class="bottom border_t black9"><span class="tag" style="background:#ff6600;">排队</span>过号不作废，在现场叫号基础上顺延3桌安排</div>
+            </li>
+            <li class="lineBook_ordlist mb10">
+            	<div class="top border_b">
+                	<p class="fl">红泥小厨（皖河路店）</p>
+                    <p class="fr black9">已取消</p>
+                </div>
+                <div class="cont">
+                	<div class="left">
+                    	<p><span class="black9">到店时间</span>  9-21周三14:00</p>
+                        <p><span class="black9">就餐人数</span>  4人 大厅</p>
+                    </div>
+                    <div class="right">
+                    	<p class="big maincl">--</p>
+                        <p class="black6">小桌(午市)</p>
+                    </div>
+                </div>
+                <div class="bottom border_t black9"><span class="tag" style="background:#ff6600;">排队</span>过号不作废，在现场叫号基础上顺延3桌安排</div>
+            </li>
+            
+	    </ul>
+    </div>
+</section>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	$(document).ready(function() {
+        if ($('.changeTab_box').length > 0)/*判断是否存在这个html代码*/
+		{
+			$('.page_center_box').css('top', '0.5rem');
+		}
+    });
+</script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的消息-编辑</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	消息中心
+    </div>
+    <i class="right"><a href="#" class="">取消</a></i>
+</header>
+<section class="page_center_box">
+	<ul class="message_list_box">
+        <li class="message_list" style="padding-left:0.4rem;">
+        	<label class="checkboxLabel">
+        	<span class="radioInt"><input type="checkbox"></span>
+        	<div class="fl"><em class="ico ico_1"></em></div>
+            <div class="wz">
+            	<p class="black3"><span class="bt">商家已经接单啦！</span><span class="fr black9 date">2015-10-12</span></p>
+                <p class="black6">您在[会客食堂]下的20151011订单商家已经接单</p>
+            </div>
+            <div class="clear"></div>
+            </label>
+        </li>
+        <li class="message_list" style="padding-left:0.4rem;">
+        	<label class="checkboxLabel">
+            <span class="radioInt"><input type="checkbox"></span>
+        	<div class="fl"><em class="ico ico_2"></em></div>
+            <div class="wz">
+            	<p class="black3"><span class="bt">恭喜您获得一个红包</span><span class="fr black9 date">2015-10-12 11:00</span></p>
+                <p class="black6">5元红包，在线支付可抵5元</p>
+            </div>
+            <div class="clear"></div>
+            </label>
+        </li>
+        <li class="message_list" style="padding-left:0.4rem;">
+        	<label class="checkboxLabel">
+        	<span class="radioInt"><input type="checkbox"></span>
+        	<div class="fl"><em class="ico ico_1"></em></div>
+            <div class="wz">
+            	<p class="black3"><span class="bt">商家已经接单啦！</span><span class="fr black9 date">2015-10-12</span></p>
+                <p class="black6">您在[会客食堂]下的20151011订单商家已经接单</p>
+            </div>
+            <div class="clear"></div>
+            </label>
+        </li>
+    </ul>
+</section>
+<footer>
+	<div class="btn_box"><input type="button" class="long_btn del_show" value="确定删除"></div>
+</footer>
+<div class="mask_box">
+    <div class="WCtUnbd_mask maskOne">
+        <div class="cont mt10">
+        	<p class="font_line24 font_size14">请确认删除本条消息！</p>
+        </div>
+        <div class="btn_box mb10">
+        	<input type="button" class="pub_btn cancel" style="background:#dddddd;" value="取消" />
+        	<input type="button" class="pub_btn" style="background:#ff5959;" value="删除" />
+        </div>
+    </div>
+	<div class="mask_bg"></div>
+</div>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(document).ready(function() {
+	
+	$(".del_show").click(function(){
+		$(".WCtUnbd_mask").show();
+		$(".WCtUnbd_mask").parent().find(".mask_bg").show();
+	});
+	$(".WCtUnbd_mask").parent(".mask_box").find(".cancel").click(function(){
+		$(".WCtUnbd_mask").hide();
+		$(".WCtUnbd_mask").parent().find(".mask_bg").hide();
+	});//解绑微信弹出层结束
+	
+});
+</script>
+</body>
+</html>

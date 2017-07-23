@@ -1,0 +1,105 @@
+<{assign var='tpl_title' value=L("添加团购")}>
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/header.html"}>
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=1.0,Transition=7)">
+<link href="%THEME%/static/css/mobiscroll.2.13.2.css" rel="stylesheet" />
+</head>
+
+<script src="%THEME%/static/js/jquery.js"></script>
+<script src="%THEME%/static/js/mobiscroll.2.13.2.js"></script>
+
+<script type="text/javascript" src="<{$pager.res}>/kindeditor/kindeditor.js"></script>
+<script type="text/javascript"  src="<{$pager.res}>/layer/layer.js?<{$VER}>"></script>
+
+<style type="text/css">
+    .ke-statusbar{display: none;}
+    .actvPublish_instr .ke-toolbar {border-bottom: 0 none;padding:0;}
+    .actvPublish_instr {padding: 0;background: #fff;}
+    .ke-edit {-webkit-overflow-scrolling: touch;overflow-y: scroll;} 
+</style>
+
+<body>
+    <div class="actvPublish_instr_mask on">
+        <div class="actvPublish_instr">
+            <textarea kindeditor="" style="width:100%;" name="data[info]" class="text_area_height" id="textarea"></textarea>
+        </div>
+        
+        <div class="actvPublish_footer">
+            <div class="imgup"><i class="ico"></i>添加图片<input type="button" uploadbtn="#file_photo" class="ke-upload_lay" value=" 选择文件 " ></div>
+            <div class="long_btn_box"><input type="button" class="long_btn" value="完成"></div>
+        </div>
+    </div>
+<script type="text/javascript">
+
+    (function(K, $){
+        KindEditor.ready(function(KE) {
+            $("[uploadbtn]").each(function(){
+                // var upload_url = $(this).attr("uploadbtn");
+                var uploadbutton = KE.uploadbutton({
+                    button : $(this)[0],
+                    fieldName : 'imgFile',
+                    url : '<{link ctl="tuan/upload:editor" http="ajax"}>',
+                    afterUpload : function(data) {
+                        if (data.error === 0) {
+                            layer.closeAll();
+                            editor.insertHtml('<img width="100%" src="'+data.url+'" /> <br /><br />');
+                            // $('.ke-content').focus(); 
+                            // Widget.MsgBox.success('上传图片成功');
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    afterError : function(str) {
+                        alert(str);
+                    }
+                });
+                uploadbutton.fileBox.change(function(e) {
+                    layer.load(1, {
+                        shade: [0.1,'#fff'] //0.1透明度的白色背景
+                    });
+                    uploadbutton.submit();
+                });
+            });
+            //$(".ke-upload_lay .ke-button").removeClass().addClass("imgup");
+            // $(".ke-upload_lay .ke-button-common").removeClass("ke-button-common");
+        });
+    })(window.KT, window.jQuery);
+
+    $(".actvPublish_instr_mask .long_btn").click(function(){
+        getContent();
+    });
+
+</script>
+
+<script type="text/javascript">
+var availHeight = $( window ).height()-50;
+(function(K, $){
+    editor = KindEditor.create('textarea[kindeditor]',{newlineTag:"br",items:[],
+        height: availHeight+"px",
+        cssData: 'body {font-family: "微软雅黑"; font-size: 16px}',
+        uploadJson : '<{link ctl="tuan/upload:editor" http="base"}>', extraFileUploadParams:{OTOKEN:"<{$OTOKEN}>"}});
+})(window.KT, window.jQuery);
+
+function getContent(){
+    editor.sync(); 
+    <{if $request.IN_APP_CLIENT == 'Android'}>
+    JHObj.app_html($("#textarea").val());
+    <{else}>
+    app_html($("#textarea").val());
+    <{/if}>
+}
+window.__IS_LOAD_Insert = false;
+function set_content(str){
+    if (str != '(null)') {
+        if(!__IS_LOAD_Insert){
+            __IS_LOAD_Insert = true;
+            editor.insertHtml(str);
+        }
+    };
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="tuan/tuan:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?tuan/tuan-index.html" id="SO-form" method="post">
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+    <tr>
+        <th>商家：</th>
+        <td>
+            <input type="hidden" name="SO[shop_id]" value="0" id="export_shop_id" />
+            <input type="text" value="" id="export_shop_title" class="input w-150" readonly/>
+            <{link ctl="shop/shop:dialog" title="选择商家" select="mini:#export_shop_id,#export_shop_title/N/选择商家" class="button"}>
+        </td>
+    </tr>
+    <tr>
+        <th><span class="red">*</span>类型：</th>
+        <td>
+            <select name="SO[type]" class="w-100">
+                <option <{if $detail.type == 'tuan'}>selected="selected"<{/if}> value="tuan">团购券</option>
+                <option <{if $detail.type == 'quan'}>selected="selected"<{/if}> value="quan">代金券</option>
+            </select>
+        </td>
+    </tr>
+    <tr><th>标题：</th><td><input type="text" name="SO[title]" value="" class="input w-200"/>标题</td></tr>
+    <tr><th>stime：</th><td><input type="text" name="SO[stime][0]" value="" class="input w-100" date="stime" readonly/>~<input type="text" name="SO[stime][1]" value="" class="input w-100" date="stime" readonly/></td></tr>
+    <tr><th>ltime：</th><td><input type="text" name="SO[ltime][0]" value="" class="input w-100" date="ltime" readonly/>~<input type="text" name="SO[ltime][1]" value="" class="input w-100" date="ltime" readonly/></td></tr>
+    <tr><th>创建时间：</th><td><input type="text" name="SO[dateline][0]" value="" class="input w-100" date="dateline" readonly/>~<input type="text" name="SO[dateline][1]" value="" class="input w-100" date="dateline" readonly/></td></tr>    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="搜 索" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

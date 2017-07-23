@@ -1,0 +1,93 @@
+<{include file="merchant:block/header.html"}>
+<!--内容开始-->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right"><{$weidian.ymd}></span>
+                <h5>收入</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><{$weidian.order_money}></h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right"><{$weidian.ymd}></span>
+                <h5>订单</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><{$weidian.order_count}></h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>店铺信息</h5>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th class="text-right gray-bg col-sm-2">微店名称：</th>
+                        <td><{$weidian.title}></td>
+                        <th class="text-right gray-bg">客服电话：</th>
+                        <td><{$weidian.phone}></td>
+                        <th class="text-right gray-bg">到店自提：</th>
+                        <td><{if $weidian['is_ziti']==1}>支持<{else}>不支持<{/if}></td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">微店LOGO：</th>
+                        <td class="" colspan="5"><img src="<{$pager.img}>/<{$weidian.logo}>" width="80" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">微店二维码：</th>
+                        <td class="" colspan="5"><img alt="模式一扫码支付"
+                                                      src="/qrcode?data=<{$weidian.url|urlencode}>&size=13" width="100"
+                                                      height="100"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">付款方式：</th>
+                        <td colspan="5">
+                            <{if 1 == $weidian.is_daofu && 1 == $weidian.online_pay}>全都支持(在线支付,货到付款)
+                            <{else if 1 == $weidian.online_pay}>仅支持在线支付
+                            <{else if 1 == $weidian.is_daofu}>仅支持货到付款
+                            <{/if}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">访问地址：</th>
+                        <td colspan="5"><b><a target="_blank" href="<{$weidian.url}>"
+                                              class="text-info"><{$weidian.url}></a></b></td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">地址：</th>
+                        <td colspan="5"><{$weidian.addr}></td>
+                    </tr>
+                    <!-- <tr>
+                                                     <th class="text-right">店铺佣金：</th>
+                                                     <td colspan="5">佣金佣金佣金</td>
+                                                 </tr>  -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--内容结束-->
+<{include file="merchant:block/footer.html"}>
+
+<script type="text/javascript" charset="utf-8" async defer>
+    function location_addr(address) {
+        if (address) {
+            window.location.href = address;
+        }
+    }
+</script>

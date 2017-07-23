@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>排队订座-号单详情-取号成功</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	号单详情
+    </div>
+    <i class="right"><a href="#" class="ico headerIco headerIco_8 mr5"></a> <a href="#" class="ico headerIco headerIco_4"></a></i>
+</header>
+
+<section class="page_center_box">
+	<div class="lineBook_ordDelt_state mb10"><i class="ico"></i>取号成功</div>
+	<div class="lineBook_ordlist lineBook_ordDelt mb10">
+        <div class="top border_b linkico">
+            <p class="fl">风波庄（摩尔街店）</p>
+        </div>
+        <p class="black9 pad_l10 pad_r10 pad_t10">2016-09-10  10:06    已取号</p>
+        <div class="cont">
+            <div class="left">
+                <p><span class="black9">预计等待</span>  10分钟</p>
+                <p><span class="black9">还需等待</span>  8桌</p>
+            </div>
+            <div class="right">
+                <p class="big maincl">A20</p>
+                <p class="black6">小桌(午市)</p>
+            </div>
+        </div>
+        <div class="bottom border_t ts"><i class="ico"></i>过号不作废，在现场叫号基础上顺延3桌安排</div>
+    </div>
+    <div class="lineBook_quhao mb10">
+    	<div class="list linkico">
+        	<div class="fl"><i class="ico ico2"></i>查看餐厅位置信息</div>
+        </div>
+    </div>
+</section>
+<footer>
+	<div class="lineBook_footer_btn">
+    	<a href="javascript:;" class="long_btn lineBook_quxiao_show">取消排队</a>
+    </div>
+</footer>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	$(document).ready(function() {
+        if ($('.changeTab_box').length > 0)/*判断是否存在这个html代码*/
+		{
+			$('.page_center_box').css('top', '0.5rem');
+		}
+    });
+</script>
+<!--取消是否弹出-->
+<div class="lineBook_quxiao_mask">
+	<div class="cont">
+    	<p>取消后您的派对信息无法恢复，请您谨慎选择</p>
+    </div>
+    <div class="btn_box">
+    	<a href="javascript:;" class="btn black6 cancel">取消</a>
+        <a href="#" class="btn fontcl1">确定</a>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+	$('.lineBook_quxiao_show').click(function(){
+		$('.lineBook_quxiao_mask').show();
+		$('.mask_bg').show();
+		
+	});
+	$('.lineBook_quxiao_mask .cancel').click(function(){
+		$('.lineBook_quxiao_mask').hide();
+		$('.mask_bg').hide();
+		
+	});	
+});
+</script>
+<!--取消是否弹出结束-->
+
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>跑腿-帮我买-信息填写</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	帮我买
+    </div>
+    <i class="right"><a href="#" class=""></a></i>
+</header>
+<section class="page_center_box">
+    <div class="jiazheng paotui">
+    	<div class="waimaiRun_mai_require">
+            <textarea placeholder="请输入购买的物件及要求"></textarea>
+            <div>
+            	<div class="uploader_input_img fl">
+                    <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple>
+                </div>
+                <div class="fr" style=" margin-top:0.3rem;">
+                    <span class="black9 mr10">36s</span><span class="waimaiRun_voice"></span><span class="microphone"></span>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        
+        <div class="order_details_nr waimaiRun_mai">
+            <ul class="form_list_box">
+                <li class="list">
+                    <div class="fl"><p><em class="runIco ico_1"></em>购买地址</p></div>
+                    <div class="fr"><span class="mr10 black9"><label class="radioLabel"><span class="radioInt mr10"><input name="recharge" type="radio"></span></label>指定地址</span><span class="black9"><label class="radioLabel"><span class="radioInt mr10"><input name="recharge" type="radio"></span></label>不指定地址</span></div>
+                </li>
+                <li class="list last">
+                    <div class="fl"><p>指定购买地址</p></div>
+                    <div class="fr"><em class="linkIco"></em></div>
+                </li>
+            </ul>
+            <div class="servOrd mb10">
+                <form>
+                <table width="100%">
+                    <tr>
+                        <th><em class="runIco ico_1"></em>收货地址</th>
+                        <td>
+                            <input type="text" placeholder="华润五彩国际"><em class="linkIco"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_6"></em>门牌号</th>
+                        <td>
+                            <input type="text" placeholder="幸福小区1栋382号">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_3"></em>联系人</th>
+                        <td>
+                            <input type="text" placeholder="张三">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_4"></em>联系方式</th>
+                        <td>
+                            <input type="text" placeholder="15395091193">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_5"></em>收货时间</th>
+                        <td>
+                            <input type="text" class="pointcl1" value="今天 16:45"><em class="linkIco"></em>
+                        </td>
+                    </tr> 
+                </table>
+                </form>
+            </div>
+                <script>
+					$(document).ready(function(e) {				
+						$(".tab_int").click(function(){
+							if($(this).hasClass("on")){
+								$(this).removeClass("on");
+							}
+							else{
+								$(this).addClass("on");
+							}
+						});
+						
+					});
+				</script>
+            <ul class="form_list_box">
+                <li class="list waimaiRun_mai_cost">
+                    <div class="fl bt"><p><em class="runIco ico_2"></em>购买物件费用</p></div>
+                    <div class="fr"><p class="black6">资金托管<em class="ico"></em></p><span class="tab_int"><input type="checkbox"></span></div>
+                </li>
+                <li class="list">
+                    <input type="text" class="waimaiRun_mai_longint" placeholder="请输入金额">
+                </li>
+                <li class="list last waimaiRun_son_standard">
+                    <p><em class="runIco ico_2"></em>配送费用<span class="pointcl1 ml10">5¥</span></p>
+                </li>
+                <li class="deposit_bar">
+                    <table class="volumeBar_table txt_center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="20"><p>定金</p><p class="black9">（元）</p></td>
+                            <td class="pad">
+                                <div class="volumeBar">
+                                    <input type="hidden" class="single-slider" value="0" />
+                                    <!-- <button id="g1">获取值</button> -->
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+                <li class="list last waimaiRun_mai_wz">
+                    <p class="pointcl1">计费说明</p>
+                    <p class="black9">白天（8:00-22:00） 3公里内，每单8元起 超出3公里，每公里加4元</p>
+                    <p class="black9">夜间（22:00-8:00）3公里内，每单13元起 超出3公里，每公里加4元（计算距离时以地图上的直线距离为准）</p>
+                    <p class="pointcl1">友情提示</p>
+                    <p class="black9">节假日、交通拥堵时段、恶劣天气等情况，适当增加服务费，接单成功率会大大提高。</p>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="btn_box">
+        <div class="fl">
+            <p class="font_line24 font_size14">定金：<span class="black9">￥<span class="fontcl1">10</span></span></p>
+        </div> 
+        <a href="#" class="fr pub_btn footer_btn" style="background:#ff6600;">立即下单</a>
+    </div>
+</footer>
+<script>
+$(document).ready(function() {
+    /*单选项选择开始*/
+	$('.radioLabel').click(function(){
+		$('.radioLabel .radioInt').removeClass('on');
+		$(this).find('.radioInt').addClass('on');
+	});
+	/*单选项选择结束*/
+});
+</script>
+<script src="js/jquery.range.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$(function(){
+	$('.single-slider').jRange({
+		from: 0,
+		to: 100,
+		step: 1,
+		scale: [0,25,50,75,100],
+		format: '%s',
+		width: '100%',
+		showLabels: true,
+		showScale: true
+	});
+	$("#g1").click(function(){
+		var aa = $(".single-slider").val();
+		alert(aa);
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class=""><a  href="<{link ctl='merchant/waimai/order:index'}>" >待接单</a></li>
+                <li class=""><a  href="<{link ctl='merchant/waimai/order:pei'}>" >待配送</a></li>
+                <li class=""><a  href="<{link ctl='merchant/waimai/order:delivered'}>" >配送中</a></li>
+                <li class=""><a  href="<{link ctl='merchant/waimai/order:complete'}>" >已完成</a></li>
+                <li class=""><a  href="<{link ctl='merchant/waimai/order:cancellist'}>" >已取消</a></li>
+                <li class="active"><a  href="javascript:;" >自提单</a></li>
+                <li class=""><a  href="<{link ctl='merchant/waimai/order:eatin'}>" >堂食</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="">
+                            <table class="table table table-striped table-hover" id="myTable">
+                            
+                                <thead>
+                                    <tr>
+                                        <th >订单编号</th>
+                                        <th >联系人</th>
+                                        <th >手机</th>
+                                        <th >下单时间</th>
+                                        <th >状态</th>
+                                        <th >操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <{foreach $items as $item}>
+                                    <tr>
+                                        <td><{$item.order_id}></td>     
+                                        <td><{$item.contact}></td>    
+                                        <td><{$item.mobile}></td>     
+                                        <td><{$item.dateline|format:'Y-m-d H:i'}></td>
+                                        <td><{if $item.spend_status==0}><b class="red">待核销</b><{/if}><{if $item.spend_status==1}><b class="green">已核销<b><{/if}></td>
+                                        <td>
+                                            <{if $item.spend_status==0}>
+                                            <button type="button" class="btn btn-primary btn-sm btn-outline" data-dismiss="modal" id="goto_spend" order="<{$item.order_id}>">去核销</button>
+                                            <!-- <a href="javascript:spendModal(<{$item.order_id}>);"  class="btn btn-primary btn-sm btn-outline" title="去核销">去核销</a> -->
+                                            <{else}>
+                                            <a href="javascript:;" class="btn btn-success btn-sm btn-outline" title="已核销">已核销</a>
+                                            <{/if}>
+                                            <{if $item.spend_status == 0}><a href="<{link ctl='merchant/waimai/order:cancel' arg0=$item.order_id}>" mini-act="confirm:您确定要取消订单吗" class="btn btn-danger btn-sm btn-outline" title="取消订单">取消订单</a><{/if}>
+                                            <a href="javascript:void(0);" rel="<{$item.order_id}>"  class="btn btn-success btn-sm btn-outline view_btn" title="查看">查看</a>
+                                        </td>
+                                    </tr>   
+                                    <tr class="table_child tr_<{$item.order_id}>" style="display:none;">
+                                            <td colspan="9" >
+                                                <table width="100%"   class="table table-striped  table-hover" >
+                                                    <tr>
+                                                        <tr>
+                                                            <th>订单号:<{$item.order_id}></th>
+                                                            <th>联系人：<{$item.contact}></th>
+                                                            <th>手机号：<{$item.mobile}></th>
+                                                            <th>下单时间：<{$item.dateline|format:'Y-m-d H:i'}></th>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th>状态：<{$item.order_status_label}></th>
+                                                            <th>在线支付：<{if $item.online_pay==1}>是<{else}>否<{/if}></th>
+                                                            <th>支付状态：<{if $item.pay_status==1}>已支付<{else}>未支付<{/if}></th>
+                                                            <th>送达时间：
+                                                            <{if $item.pei_time==0}>
+                                                            立即送达
+                                                            <{else}>
+                                                            <{$item.pei_time|format:'Y-m-d H:i'}>
+                                                            <{/if}>
+                                                            </th>
+                                                        </tr>
+                                                        </tr>
+                                                        <{foreach $item.products as $var}>
+                                                        <tr>
+                                                            <td colspan="2"><{$var.product_name}></td>
+                                                            <td >×<{$var.product_number}></td>
+                                                            <td colspan="2" class="txt_r"><{L('单价')}>：<span class="price">￥<{$var.product_price}></span></td>
+                                                        </tr>
+                                                        <{/foreach}>
+                                                        <tr>
+                                                            <td colspan="4">
+                                                                <{L('打包费')}>：￥<{if $item.package_price< 0.01}> 0 <{else}> <{$item.package_price}> <{/if}>
+                                                                <{L('运费')}>：￥<{if $item.freight< 0.01}> 0 <{else}> <{$item.freight}> <{/if}>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4"><{L('合计')}>：<span class="price_zong">￥ <{$item.total_price}></span><{L('结算价')}>：￥ <{$item.js_price}><{if $item.first_youhui>0}><{L('首单优惠')}>：-￥<{$item.first_youhui}><{/if}><{if $item.order_youhui>0}><{L('下单立减')}>：-￥<{$item.order_youhui}><{/if}><{if $item.hongbao>0}><{L('红包抵扣')}>：-￥<{$item.hongbao}><{/if}></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4"><{L('备注')}>：<{$item.intro|default:''}></td>
+                                                        </tr>
+                                                        <!--<tr class="bottom">-->
+                                                            <!--<td colspan="4"><a href="javascript:printorder(<{$item.order_id}>);" target="_self"><{L('打印小票')}></a></td>-->
+                                                        <!--</tr>-->
+                                                </table>
+                                            </td>
+                                        </tr>       
+                                    <{foreachelse}>
+                                        <tr><td colspan="20"><div class="alert alert-info">暂无订单</div></td></tr>
+                                    <{/foreach}>
+                                </tbody>
+                                <tfoot></tfoot>
+                            </table>
+                            <div class="btn-group pull-right pagination_box">
+                                <div class="page"><{$pager.pagebar}></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">您可以使用输入密码方式来进行核销：</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>消费码：</label> 
+                    <input type="text" placeholder="请输入消费密码" class="form-control" name="data[spend_number]">
+                    <input type="hidden"  class="form-control" name="data[order_id]">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="goto_spend">确定</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<{include file="merchant:block/footer.html"}>
+
+<script>
+// 查看
+$(".view_btn").click(function(){
+    $('.tr_'+$(this).attr('rel')).slideToggle();
+})
+
+// 核销弹出层
+/*function spendModal(order_id) {
+    $('#myModal5').modal();
+    $("input[name='data[order_id]']").val(order_id);
+}*/
+
+// 确认核销
+$(document).on('click', '#goto_spend', function() {
+    /*var s_order_id = $("input[name='data[order_id]']").val();
+    var s_spend_number = $("input[name='data[spend_number]']").val();*/
+    var s_order_id = $(this).attr('order');
+    jQuery.ajax({
+        url: "<{link ctl='merchant/waimai/order:setspend'}>",
+        async: true,
+        dataType: 'json',
+        type: 'POST',
+        data: {"data":{"order_id":s_order_id/*,"spend_number":s_spend_number*/}},
+        success: function (ret) {
+            parent.layer.msg(ret.message);
+            if (ret.error == 0) {
+                window.location.reload();
+            }else {
+                return;
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(errorThrown);
+      },
+    });
+})
+</script>

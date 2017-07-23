@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="statics/css/pub.css" rel="stylesheet">
+    <link href="statics/css/animate.css" rel="stylesheet">
+    <link href="statics/css/style.css" rel="stylesheet">
+    <script src="statics/js/jquery.js"></script>
+</head>
+<body class="shangcheng">
+    <div class="topOne">
+        <div class="pagewd">
+            <div class="phone fl maincl"><i class="ico"></i>手机版</div>
+            <a href="#" class="user fl maincl">元升franckever<i class="arrow_ico"></i></a>
+            <a href="#" class="message fl black6"><i class="ico"></i>消息<span class="fontcl1">1</span><i class="arrow_ico"></i></a>
+            <div class="fr link_box"><a href="#">我的订单</a> <span>|</span> <a href="#">我的收藏</a> <span>|</span> <a href="#">申请入驻</a></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="headerTop_one ">
+        <div class="pagewd shangcheng-headerTop">
+            <div class="logo fl">
+                <img src="statics/images/logo_green.png">
+            </div>
+            <div class="shangcheng-submit fr">
+                <ul>
+                    <li class="active">1.提交订单</li>
+                    <li>2.选择支付方式</li>
+                    <li>3.购买成功</li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!---->
+    <div class="shangcheng-submit-content">
+        <div class="information black3">
+            <div class="tit">
+                <span class="fl">收获人信息</span>
+                <span class="fr new"><a href="#">新增收获地址</a></span>
+            </div>
+            <div class="clear"></div>
+            <div class="address">
+                <div class="box active">
+                    <span class="fl">寄送至：</span><label><p><i><input type="radio" name="addresss" value="address"></i>费富元，13515608638，安徽省合肥市蜀山区 高新技术产业开发区 动物园对面蜀南庭院油墩社区3栋1单元，230061</p></label>
+                    <span class="fr"><a href="#" class="maincl">编辑</a></span>
+                </div>
+                <div class="box">
+                    <span class="fl">寄送至：</span><label><p><i><input type="radio" name="addresss" value="address"></i>费富元，13515608638，安徽省合肥市蜀山区 高新技术产业开发区 动物园对面蜀南庭院油墩社区3栋1单元，230061</p></label>
+                    <span class="fr"><a href="#" class="maincl">编辑</a></span>
+                </div>
+                
+            </div>
+        </div>
+        <div class="xinxi">
+            <div class="tit">
+                确认订单信息
+            </div>
+            <div class="detail">
+                <div class="nav">
+                   <span class="shop">商品</span> 
+                   <span class="num">数量</span> 
+                   <span class="jifen">积分</span> 
+                   <span class="price">金额</span> 
+                </div>
+                <div class="xiangxi">
+                    <a href="#"><img src="statics/pic/small-sh.png"></a>
+                    <div class="txt" class="black6">
+                        <h5 class="black6">商品名称</h5>
+                        <p><span>￥10</span>600积分</p>
+                        <p class="black9 kucun">剩余数量：12</p>
+                    </div>
+                    <p class="num black3">2</p>
+                    <p class="jifen black6">1200</p>
+                    <p class="price black6">20</p>
+                </div>
+            </div>
+            <div class="shangcheng-btn">
+                <p class="num">已选<span>1</span>件</p>
+                <p class="price">合计：<span>￥<span>20</span></span></p>
+                <p class="jifen"><span>1200</span>积分</p>
+                <a href="" class="btn ">提交订单</a>
+            </div>
+        </div>
+    </div>
+    <!---->    
+    <div class="footer_one">
+        <div class="smallpage">
+            <div class="footer_nav"><a href="#">网站首页</a> / <a href="#">加入我们</a> / <a href="#">关于我们</a> / <a href="#">下载APP</a> / <a href="#">帮助中心</a> / <a href="#">申请入驻</a></div>
+            <div class="footer_link"><a href="#">O2O解决方案</a> <a href="#">O2O网站系统</a> <a href="#">一团网</a> <a href="#">软件商城</a> <a href="#">江湖网站</a> <a href="#">baocms系统</a> <a href="#">江湖家居系统</a></div>
+            <div class="footer_copy">
+                <P>All Rights Reserved ICP备案：皖ICP备13010842号</P>
+                <P>合肥江湖信息科技有限公司</P>
+            </div>
+        </div>
+    </div>
+    <!-- js -->
+    <script type="text/javascript">
+        $('.shangcheng-submit-content .information .address .box').click(function(){
+        $(this).addClass('active').siblings().removeClass('active')
+    })
+    </script>
+</body>
+</html>

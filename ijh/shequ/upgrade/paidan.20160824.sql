@@ -1,0 +1,9 @@
+insert  into `jh_system_module`(`mod_id`,`module`,`level`,`ctl`,`act`,`title`,`visible`,`parent_id`,`orderby`,`dateline`) values (1835,'module',3,'waimai/order','dopaidan','外卖派单',0,1508,50,1471946952);
+insert  into `jh_system_module`(`mod_id`,`module`,`level`,`ctl`,`act`,`title`,`visible`,`parent_id`,`orderby`,`dateline`) values (1836,'module',3,'staff/staff','paiorder','选择派单',0,1524,50,1471948253);
+insert  into `jh_system_module`(`mod_id`,`module`,`level`,`ctl`,`act`,`title`,`visible`,`parent_id`,`orderby`,`dateline`) values (1837,'module',3,'paotui/order','paidan','派单管理',1,1639,50,1471950916);
+insert  into `jh_system_module`(`mod_id`,`module`,`level`,`ctl`,`act`,`title`,`visible`,`parent_id`,`orderby`,`dateline`) values (1838,'module',3,'paotui/order','dopaidan','跑腿派单',0,1639,50,1471950916);
+insert  into `jh_system_module`(`mod_id`,`module`,`level`,`ctl`,`act`,`title`,`visible`,`parent_id`,`orderby`,`dateline`) values (1839,'module',3,'house/order','paidan','派单管理',1,1531,50,1472004038);
+insert  into `jh_system_module`(`mod_id`,`module`,`level`,`ctl`,`act`,`title`,`visible`,`parent_id`,`orderby`,`dateline`) values (1840,'module',3,'house/order','dopaidan','家政派单',0,1531,50,1472004038);
+insert  into `jh_system_module`(`mod_id`,`module`,`level`,`ctl`,`act`,`title`,`visible`,`parent_id`,`orderby`,`dateline`) values (1841,'module',3,'weixiu/order','paidan','派单管理',1,1638,50,1472006363);
+insert  into `jh_system_module`(`mod_id`,`module`,`level`,`ctl`,`act`,`title`,`visible`,`parent_id`,`orderby`,`dateline`) values (1842,'module',3,'weixiu/order','dopaidan','维修派单',0,1638,50,1472006363);
+insert  into `jh_system_module`(`mod_id`,`module`,`level`,`ctl`,`act`,`title`,`visible`,`parent_id`,`orderby`,`dateline`) values (1824,'module',3,'waimai/order','paidan','派单管理',1,1508,50,1471507132);

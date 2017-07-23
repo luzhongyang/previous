@@ -1,0 +1,97 @@
+<{include file="merchant:block/header.html"}>
+<link rel="stylesheet" href="<{$pager.res}>/style/kt.widget.css?<{$VER}>" type="text/css" />
+<script type="text/javascript"  src="<{$pager.res}>/script/kt.js?<{$VER}>"></script>
+<script type="text/javascript" src="<{$pager.res}>/script/kt.j.js"></script>
+<script type="text/javascript"  src="<{$pager.res}>/script/widget.msgbox.js?<{$VER}>"></script>
+<!-- <div class="wrapper wrapper-content animated fadeInRight"> -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class=""><a  href="<{link ctl='merchant/weixin/index:welcome'}>" >单次关注</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/weixin/index:auto'}>" >自动回复</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/weixin/keyword:index'}>" >关键字回复</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/weixin/menu:index'}>" >自定义菜单</a></li>
+                    <li class="active"><a  href="javascript:;" >编辑关键字</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <!-- <div class="ibox-content"> -->
+                                <form action="<{link ctl='merchant/weixin/keyword:edit'}>" method="post" mini-form="jhcms" class="form-horizontal" ENCTYPE="multipart/form-data">
+                                    <input type="hidden" name="kw_id" value="<{$detail.kw_id}>" />
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">关键字：<br/></label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <input type="text" name="data[keyword]" value="<{$detail.keyword|default:''}>" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">回复图文：</label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <input type="hidden" name="data[reply_id]" value="<{$detail.reply_id}>" id="weixin_reply_id"/>
+                                                <div class="weixin-preview" style="float:left;<{if !$reply}>display:none;<{/if}>">
+                                                    <div class="weixin-box">
+                                                        <p class="weixin-title" id="weixin_reply_title"><{$reply.title}></p>
+                                                        <div class="weixin-cover"><img class="weixin-cover-pic" id="weixin_reply_photo" src="<{$pager.img}>/<{$reply.photo}>"></div>
+                                                    </div>
+                                                </div>
+                                                <a href="<{link ctl='merchant/weixin/reply:dialog'}>" id="weixin_reply_btn" class="btn btn-primary" title="选择微信素材">选择微信素材</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group" >
+                                        <label class="col-sm-2 control-label">回复文本：</label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <textarea name="data[content]"  class="form-control" style="height: 150px"><{$detail.content}></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">&nbsp;</label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <button class="btn btn-primary" type="submit">保存数据</button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a  href="<{link ctl='merchant/weixin/keyword:index'}>"class="btn btn-default" type="submit">返回</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+
+<{include file="merchant:block/footer.html"}>
+
+<script  type="text/javascript" charset="utf-8" async defer>
+
+(function(K, $){
+    $("#weixin_reply_btn").click(function(e){
+        e.stopPropagation(); e.preventDefault();
+        var link = $(this).attr("action") || $(this).attr("href");
+        Widget.Dialog.Select(link, 'N', function(ret){
+            $("#weixin_reply_id").val(ret[0]);
+            $("#weixin_reply_title").html(ret[1].title);
+            $("#weixin_reply_photo").attr("src", "<{$pager.img}>/"+ret[1].photo);
+            $(".weixin-preview").show();
+        }, {title:"选择微信素材",width:720});
+    });
+})(window.KT, window.jQuery);
+</script>
+
+
+
+

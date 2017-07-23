@@ -1,0 +1,29 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="xiaoqu/bianminreport:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data">
+    <table width="100%" border="0" cellspacing="0" class="table-data form">
+        <tr>
+            <th>投诉ID：</th><td class="w-300"><{$detail.report_id}></td>
+            <th>便民商户：</th><td><{$bianmin.title}>，<{$bianmin.phone}></td>
+        </tr>
+        <tr>
+            <th>小区：</th><td><b class="blue"><{$xiaoqu.title}>(ID:<{$xiaoqu.xiaoqu_id}>)</b></td>
+            <th>业主：</th><td><{$yezhu.house}>(<{$yezhu.contact}>, <{$yezhu.mobile}>)</td>
+        </tr>
+        <tr><th>投诉标题：</th><td colspan="3"><p class="tip-notice"><{$detail.title}></p></td></tr>
+        <tr><th>投诉内容：</th><td colspan="3"><p class="tip-notice"><{$detail.content|nl2br}></p></td></tr>
+		<tr>
+            <th>时间：</th><td colspan="3"><{$detail.dateline|format}>，<{$detail.clientip}>(<{$detail.clientip|iplocal}>)</td>
+        </tr>
+    </table>
+</div>
+<{include file="admin:common/footer.html"}>

@@ -1,0 +1,581 @@
+<{assign var='tpl_title' value=L("帮我送")}>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+    <script type="text/javascript" src="<{$pager.res}>/script/jquery.form.js"></script>
+</head>
+
+<body style="height:100%;">
+<header>
+    <i class="left"><a href="<{link ctl='paotui/index'}>" link-load="" link-type="right"
+                       class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+        帮我送
+    </div>
+    <i class="right"></i>
+</header>
+<form action="<{link ctl='paotui/song' }>" mini-form="car-form" id="paotui_form" enctype="multipart/form-data"
+      method="post">
+    <section class="page_center_box">
+        <script>
+            function fileSelected(obj, type) {
+                var files = obj.files;
+                for (var i = 0; i < files.length; i++) {
+                    var tag = '';
+                    var rFilter = /^(image\/gif|image\/jpeg|image\/jpg|image\/png)$/i;
+                    if (!rFilter.test(files[i].type)) {
+                        alert("只允许上传JPG、PNG、GIF格式图片");
+                        return false;
+                    }
+                    var reader = new FileReader();
+                    reader.onloadstart = function (e) {
+                        $(".loading").show();
+                    }
+                    reader.onload = function (e) {
+                        $('#photo' + type).hide();
+                        $("#img" + type).attr("src", e.target.result).show();  //图片编码字符串
+                    }
+                    reader.readAsDataURL(files[i]);
+                }
+            }
+        </script>
+        <div class="jiazheng paotui">
+            <div class="waimaiRun_mai_require">
+                <textarea placeholder="请输入要送的物件及要求" name='data[intro]' id="intro"></textarea>
+                <div>
+                    <div class="uploader_input_img fl">
+
+                        <label style="background:url(%THEME%/static/images/add@2x.png) no-repeat;background-size:100%;width:0.5rem;height:0.5rem; display: inline-block;">
+                            <input type="file" name="photo1" id="photo1" onchange="fileSelected(this,1)" value=""
+                                   style="width:0.5rem;height:0.5rem;border:none; filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;opacity: 0;"/>
+                            <img src="" id="img1" style="display:none;" width="70" height="70"/>
+                        </label>
+
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="servOrd mb10">
+
+                <table width="100%">
+                    <tr>
+                        <th><em class="runIco ico_5"></em>取货时间</th>
+                        <td>
+                            <input type="text" class="pointcl1 time_sel" name="data2[o_time]" id="o_time"
+                                   placeholder="选择时间" readonly><em class="linkIco"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_5"></em>收货时间</th>
+                        <td>
+                            <input type="text" class="pointcl1 time_sel" name="data2[time]" id="time" placeholder="选择时间"
+                                   readonly><em class="linkIco"></em>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="servOrd">
+
+                <table width="100%">
+                    <tr id="song_addr">
+                        <th><em class="runIco ico_1"></em>取货地址</th>
+                        <td>
+                            <input type="text" name="data2[o_addr]" id="o_addr" placeholder="输入地址"><em
+                                class="linkIco"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_6"></em>门牌号</th>
+                        <td>
+                            <input type="text" name="data2[o_house]" id="o_house" placeholder="输入门牌号">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_3"></em>联系人</th>
+                        <td>
+                            <input type="text" name="data2[o_contact]" id="o_contact" placeholder="输入联系人">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_4"></em>联系方式</th>
+                        <td>
+                            <input type="text" name="data2[o_mobile]" id="o_mobile" placeholder="输入联系方式">
+                        </td>
+                    </tr>
+                    <input type="hidden" name="data[o_lat]" id="o_lat" value="<{$o_address.o_lat}>">
+                    <input type="hidden" name="data[o_lng]" id="o_lng" value="<{$o_address.o_lng}>">
+                </table>
+
+            </div>
+            <div class="waimaiRun_runChange"><a href="#" class="ico"></a></div>
+            <div class="servOrd mb10">
+
+                <table width="100%">
+
+                    <tr>
+                        <th><em class="runIco ico_1"></em>收货地址</th>
+                        <td>
+                            <input type="text" placeholder="选择收货地址" name="data[addr]" id="addr" value=""><em
+                                class="linkIco"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_6"></em>门牌号</th>
+                        <td>
+                            <input type="text" placeholder="选择门牌号" name="data[house]" id="house" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_3"></em>联系人</th>
+                        <td>
+                            <input type="text" placeholder="联系人" name="data[contact]" id="contact" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><em class="runIco ico_4"></em>联系方式</th>
+                        <td>
+                            <input type="text" placeholder="联系方式" name="data[mobile]" id="mobile" value="">
+                        </td>
+                    </tr>
+                    <input type="hidden" name="data[lat]" id="lat" value="<{$address.lat}>">
+                    <input type="hidden" name="data[lng]" id="lng" value="<{$address.lng}>">
+                </table>
+
+
+            </div>
+
+            <div class="order_details_nr waimaiRun_mai">
+                <ul class="form_list_box">
+
+
+                    <style>
+                        .jiazheng .standard {
+                            width: 50%;
+                        }
+
+                        .jiazheng .standard table th {
+                            border-right: none;
+                        }
+
+                        .jiazheng .standard table td .box {
+                            margin: 0 0.1rem;
+                        }
+                    </style>
+                    <li class="list last waimaiRun_son_standard">
+                        <div class="standard fl">
+                            <table width="100%">
+                                <tr>
+                                    <th>距离</th>
+                                    <td>
+                                        <div class="box border_r"><input type="text" class="waimaiRun_mai_longint"
+                                                                         id="jl" placeholder="智能计算距离" val=""></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="standard fl">
+                            <table width="100%">
+                                <tr>
+                                    <th>重量</th>
+                                    <td>
+                                        <div class="box"><input type="text" class="waimaiRun_mai_longint" id="skg"
+                                                                placeholder="请输入总量/千克"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+
+                    <li class="list last waimaiRun_son_standard">
+                        <div class="standard fl">
+                            <p><em class="runIco ico_2"></em>配送费用<span class="pointcl1 ml10" val="" id="ps"><{$config.config.song_start_price}></span>
+                            </p>
+                        </div>
+                        <div class="standard fl">
+                            <table width="100%">
+                                <tr>
+                                    <td width="50">给小费</td>
+                                    <td><input type="text" disabled="disabled" class="waimaiRun_mai_longint"
+                                               name="xiaofei" id="xiaofei" placeholder="金额"></td>
+                                    <td width="36"><span class="tab_int" id="xf_btn"><input type="checkbox"></span></td>
+                                </tr>
+                            </table>
+                            <input type="hidden" name="data2[paotui_amount]" id="paotui_amount" value="">
+                            <input type="hidden" id="city_id" name="data[city_id]" value=""/>
+                        </div>
+                    </li>
+                    <li class="list last waimaiRun_mai_wz">
+                        <p class="pointcl1">计费说明</p>
+                        <p class="black9">起步价格：<span
+                                class="pointcl1"><{$config.config.song_start_price}></span>元，起步里程：<span
+                                class="pointcl1"><{$config.config.song_start_km}></span>公里，起步重量：<span class="pointcl1"><{$config.config.song_start_kg}></span>公斤。
+                        </p>
+                        <p class="black9">
+                            每超过起步里程每公里的价格：<span class="pointcl1"><{$config.config.song_addkm_price}></span>元。
+                            <br>每超过起步重量每公斤的价格：<span class="pointcl1"><{$config.config.song_addkg_price}></span>元。
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="btn_box">
+            <div class="fl">
+                <p class="font_line24 font_size14">定金：<span class="black9">￥<span class="fontcl1 dj"><{$config.config.song_start_price}></span></span>
+                </p>
+            </div>
+            <input type="submit" class="fr pub_btn footer_btn" style="background:#ff6600;" id="comment_submit"
+                   value="立即下单"/>
+        </div>
+    </footer>
+</form>
+
+<script src="%THEME%/static/js/jquery.range.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        function change_price(km, kg) {
+            var start_price = parseInt('<{$config.config.song_start_price}>');
+            var start_km = parseInt('<{$config.config.song_start_km}>');
+            var start_kg = parseInt('<{$config.config.song_start_kg}>');
+            var addkm_price = parseInt('<{$config.config.song_addkm_price}>');
+            var addkg_price = parseInt('<{$config.config.song_addkg_price}>');
+            var kmp = 0;
+            var kmg = 0;
+            if ((km - start_km) > 0) {
+                kmp = (km - start_km) * addkm_price;
+            }
+            if ((kg - start_kg) > 0) {
+                kmg = (kg - start_kg) * addkg_price;
+            }
+            var price = start_price + kmp + kmg;
+
+            $('#ps').attr('val', price).text('￥' + price);
+            $('.dj').text(price);
+            $('#paotui_amount').val(price);
+        }
+
+        setInterval(function () {
+            var ps_val = parseInt($('#ps').attr('val'));
+            var tg_val = parseInt($('#tuoguan').val());
+            var xf_val = parseInt($("#xiaofei").val());
+            if (!ps_val || ps_val == '') {
+                ps_val = 0
+            }
+            ;
+            if (!tg_val || tg_val == '') {
+                tg_val = 0
+            }
+            ;
+            if (!xf_val || xf_val == '') {
+                xf_val = 0
+            }
+            ;
+            $('#all_price').text(ps_val + tg_val + xf_val);//
+        }, 1000);
+
+        $('#skg').keyup(function () {
+            var km = parseInt($('#jl').attr('val') / 1000);
+            if (km < 1) {
+                km = 1
+            }
+            ;
+            var kg = parseInt($(this).val());
+            change_price(km, kg);
+        })
+
+
+        $("#xf_btn").click(function () {
+            $(this).toggleClass("on");
+            if ($(this).hasClass("on") == false) {
+                $("#xiaofei").attr("disabled", true).val('');
+            } else {
+                $("#xiaofei").attr("disabled", false);
+            }
+        });
+
+        $("#tg_btn").click(function () {
+            $(this).toggleClass("on");
+            if ($(this).hasClass("on") == false) {
+                $("#tuoguan").attr("disabled", true).val('');
+                ;
+            } else {
+                $("#tuoguan").attr("disabled", false);
+            }
+        });
+
+
+        //************取货地址*************
+
+        //对传递的信息进行保存localStorage处理
+
+        if (localStorage['select_address']) {
+            var address = JSON.parse(localStorage['select_address']);
+            if (typeof(address) != 'undefined') {
+                localStorage.setItem('paotuisong_o_contact', address.contact || "");
+                localStorage.setItem('paotuisong_o_mobile', address.mobile || "");
+                localStorage.setItem('paotuisong_o_house', address.house || "");
+                localStorage.setItem('paotuisong_o_addr', address.addr || "");
+                localStorage.setItem('paotuisong_o_lng', address.lng || "");
+                localStorage.setItem('paotuisong_o_lat', address.lat || "");
+                localStorage.removeItem('select_address');  //用完删除
+            }
+        }
+
+
+        //获取LocalStorage
+
+        var paotuisong_o_addr = localStorage.getItem('paotuisong_o_addr');
+        if (paotuisong_o_addr) {
+            $('#o_addr').val(paotuisong_o_addr);
+        }
+
+        var paotuisong_o_contact = localStorage.getItem('paotuisong_o_contact');
+        if (paotuisong_o_contact) {
+            $('#o_contact').val(paotuisong_o_contact);
+        }
+
+        var paotuisong_o_mobile = localStorage.getItem('paotuisong_o_mobile');
+        if (paotuisong_o_mobile) {
+            $('#o_mobile').val(paotuisong_o_mobile);
+        }
+
+        var paotuisong_o_house = localStorage.getItem('paotuisong_o_house');
+        if (paotuisong_o_house) {
+            $('#o_house').val(paotuisong_o_house);
+        }
+
+        var paotuisong_o_lat = localStorage.getItem('paotuisong_o_lat');
+        if (paotuisong_o_lat) {
+            $('#o_lat').val(paotuisong_o_lat);
+        }
+
+        var paotuisong_o_lng = localStorage.getItem('paotuisong_o_lng');
+        if (paotuisong_o_lng) {
+            $('#o_lng').val(paotuisong_o_lng);
+        }
+
+        //************取货地址end*************
+
+        //************收货地址*************
+        //对传递的信息进行保存localStorage处理
+        var o_address = "<{$o_address}>";
+        if (o_address) {
+            localStorage.setItem('paotuisong_addr', "<{$o_address.addr}>");
+            localStorage.setItem('paotuisong_lng', "<{$o_address.lng}>");
+            localStorage.setItem('paotuisong_lat', "<{$o_address.lat}>");
+        }
+
+        //获取LocalStorage
+        var paotuisong_addr = localStorage.getItem('paotuisong_addr');
+
+        if (paotuisong_addr) {
+            $('#addr').val(paotuisong_addr);
+        }
+
+
+        var paotuisong_lng = localStorage.getItem('paotuisong_lng');
+        if (paotuisong_lng) {
+            $('#lng').val(paotuisong_lng);
+        }
+
+        var paotuisong_lat = localStorage.getItem('paotuisong_lat');
+        if (paotuisong_lat) {
+            $('#lat').val(paotuisong_lat);
+        }
+
+        //************收货地址end*************
+
+
+        //**************需求和时间****************
+        $('#intro').keyup(function () {
+            localStorage.setItem('paotuisong_intro', $('#intro').val());
+        })
+        $('#o_time').blur(function () {
+            localStorage.setItem('paotuisong_o_time', $(this).val());
+        })
+        $('#time').blur(function () {
+            localStorage.setItem('paotuisong_time', $(this).val());
+        })
+
+        $('#house').keyup(function () {
+            localStorage.setItem('paotuisong_house', $('#house').val());
+        })
+
+        $('#contact').keyup(function () {
+            localStorage.setItem('paotuisong_contact', $('#contact').val());
+        })
+
+        $('#mobile').keyup(function () {
+            localStorage.setItem('paotuisong_mobile', $('#mobile').val());
+        })
+
+
+        //获取LocalStorage
+        var paotuisong_intro = localStorage.getItem('paotuisong_intro');
+        if (paotuisong_intro) {
+            $('#intro').val(paotuisong_intro);
+        }
+
+        var paotuisong_o_time = localStorage.getItem('paotuisong_o_time');
+        if (paotuisong_o_time) {
+            $('#o_time').val(paotuisong_o_time);
+        }
+
+        var paotuisong_time = localStorage.getItem('paotuisong_time');
+        if (paotuisong_time) {
+            $('#time').val(paotuisong_time);
+        }
+
+        var paotuisong_house = localStorage.getItem('paotuisong_house');
+        if (paotuisong_house) {
+            $('#house').val(paotuisong_house);
+        }
+
+        var paotuisong_contact = localStorage.getItem('paotuisong_contact');
+        if (paotuisong_contact) {
+            $('#contact').val(paotuisong_contact);
+        }
+
+        var paotuisong_mobile = localStorage.getItem('paotuisong_mobile');
+        if (paotuisong_mobile) {
+            $('#mobile').val(paotuisong_mobile);
+        }
+
+        //**************需求和时间结束****************
+
+        // 百度地图API功能
+        if (paotuisong_lng && paotuisong_lat && paotuisong_o_lng && paotuisong_o_lat) {
+            var map = new BMap.Map("allmap");
+            //map.centerAndZoom("重庆",12);  //初始化地图,设置城市和地图级别。
+            var pointA = new BMap.Point(paotuisong_lng, paotuisong_lat);  // 创建点坐标A--大渡口区
+            var pointB = new BMap.Point(paotuisong_o_lng, paotuisong_o_lat);  // 创建点坐标B--江北区
+            var km = (map.getDistance(pointA, pointB)).toFixed(2);//获取两点距离,保留小数点后两位
+            $('#jl').val(km + '米').attr('val', km);
+        }
+
+        // 时间选择器
+        function dateScroll(container) {
+            var date = new Date();
+            var curr = new Date().getFullYear(),
+                    d = date.getDate(),
+                    m = date.getMonth();
+            $(container).scroller('destroy').scroller({
+                preset: 'datehour',
+                minDate: new Date(curr, m, d, 8, 00),
+                maxDate: new Date(curr, m, d + 7),
+                invalid: [{d: new Date(), start: '00:00', end: (date.getHours()) + ':' + date.getMinutes()}],
+                theme: "android-ics light",
+                mode: "scroller",
+                lang: 'zh',
+                display: "bottom",
+                animate: "slideup",
+                stepMinute: 15,
+                dateOrder: 'MMDdd',
+                timeWheels: 'HH-ii',
+                rows: 3
+            });
+        }
+
+        // 取货时间
+        $('.time_sel').click(function () {
+            dateScroll(this);
+        });
+
+        $('#song_addr').click(function () {
+            localStorage['select_address'] = JSON.stringify({"backurl": window.location.href});
+            window.location.href = "<{link ctl='ucenter/addr:index'}>";
+        })
+
+        $('#addr').click(function () {
+            var link = "<{link ctl='ucenter/addr/add_map'}>";
+            localStorage['back_addr'] = JSON.stringify({"backurl": window.location.href});
+            window.location.href = link;
+
+            /*var link = "<{link ctl='ucenter/addr/add_map'}>";
+             var this_location = "<{$CONFIG.site.siteurl}>"+"<{link ctl='paotui/song'}>";
+             var url = encodeURIComponent(this_location);
+             link = link+'?url='+url;
+             window.location.href=link;*/
+        })
+
+
+        // ajax跑腿-下单
+        $("#paotui_form").ajaxForm({
+            "type": "post", "dataType": "json", "success": function (ret) {
+                if (ret.error == 0) {
+                    layer.open({content: ret.message, time: 2});
+                    var order_id = parseInt(ret.order_id);
+                    localStorage['order_pay'] = "<{link ctl='ucenter/order:detail-" + order_id + "'}>";
+                    var link = "<{link ctl='ucenter/order:pay' args='temp1'}>";
+
+                    //对记录进行清空
+                    localStorage.removeItem('paotuisong_o_contact');
+                    localStorage.removeItem('paotuisong_o_mobile');
+                    localStorage.removeItem('paotuisong_o_house');
+                    localStorage.removeItem('paotuisong_o_addr');
+                    localStorage.removeItem('paotuisong_o_lng');
+                    localStorage.removeItem('paotuisong_o_lat');
+                    localStorage.removeItem('paotuisong_addr');
+                    localStorage.removeItem('paotuisong_lng');
+                    localStorage.removeItem('paotuisong_lat');
+                    localStorage.removeItem('paotuisong_time');
+                    localStorage.removeItem('paotuisong_o_time');
+                    localStorage.removeItem('paotuisong_intro');
+
+                    setTimeout(function () {
+                        window.location.href = link.replace('temp1', order_id);
+                    }, 1000);
+                } else {
+                    layer.open({content: ret.message, time: 2});
+
+                }
+            }
+        });
+
+        //写入CITY—ID
+        var now_city_id = Cookie.get("UxCityId");
+        $('#city_id').val(now_city_id);
+
+
+        var km = parseInt($('#jl').attr('val') / 1000);
+        if (km < 1) {
+            km = 1
+        }
+        ;
+        change_price(km, 1);
+
+        $('.waimaiRun_runChange .ico').click(function () {
+            var a = new Array();
+            var b = new Array();
+            a['addr'] = $('#o_addr').val();
+            a['house'] = $('#o_house').val();
+            a['contact'] = $('#o_contact').val();
+            a['mobile'] = $('#o_mobile').val();
+            b['addr'] = $('#addr').val();
+            b['house'] = $('#house').val();
+            b['contact'] = $('#contact').val();
+            b['mobile'] = $('#mobile').val();
+
+            $('#o_addr').val(b['addr']);
+            $('#o_house').val(b['house']);
+            $('#o_contact').val(b['contact']);
+            $('#o_mobile').val(b['mobile']);
+            $('#addr').val(a['addr']);
+            $('#house').val(a['house']);
+            $('#contact').val(a['contact']);
+            $('#mobile').val(a['mobile']);
+        })
+
+    })
+
+</script>
+
+
+<{include file="block/footer.html"}>

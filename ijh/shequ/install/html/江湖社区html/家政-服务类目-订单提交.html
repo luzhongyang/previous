@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>家政-服务类目-订单提交</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	擦玻璃
+    </div>
+    <i class="right"><a href="#" class=""></a></i>
+</header>
+<section class="page_center_box">
+    <div class="jiazheng">
+        <div class="findAunt_serv">
+            <ul class="border_t">
+                <li>
+                    <div class="fl">
+                        <img class="fl img" src="" width="100" height="100">
+                        <p class="overflow_clear font_size14">擦玻璃</p>
+                        <p class="overflow_clear black9">计价方式：2.00元 /平米</p>
+                        <p class="overflow_clear black9">服务费用：60元起</p>
+                    </div>
+                    <div class="fr">
+                        <span class="linkIco"></span>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="servOrd mt10">
+            <form>
+            <table width="100%">
+            	<tr>
+                    <th><em class="runIco ico_5"></em>服务时间</th>
+                    <td>
+                        <input type="text" class="pointcl1" value="2016-3-1（今天）16:45-17:30"><em class="linkIco"></em>
+                    </td>
+                </tr>
+                <tr>
+                    <th><em class="runIco ico_1"></em>服务小区</th>
+                    <td>
+                        <input type="text" placeholder="合肥市蜀山区新福小区352号"><em class="linkIco"></em>
+                    </td>
+                </tr>
+                <tr>
+                    <th><em class="runIco ico_6"></em>门牌号</th>
+                    <td>
+                        <input type="text" placeholder="幸福小区1栋382号">
+                    </td>
+                </tr>
+                <tr>
+                    <th><em class="runIco ico_4"></em>联系方式</th>
+                    <td>
+                        <input type="text" placeholder="15395091193">
+                    </td>
+                </tr>
+                <tr>
+                    <th><em class="runIco ico_3"></em>服务人员</th>
+                    <td>
+                        <div class="mr10">
+                            <input type="text" class="txt_right maincl" placeholder="系统派指人员" value="李阿姨 18907005600">
+                        </div>
+                    </td>
+                </tr>
+                
+            </table>
+            </form>
+        </div>
+        <p class="black9 mar10 clear_both"><label class="checkboxLabel mr5 fl"><span class="radioInt"><input type="checkbox"></span></label>如果该服务人员很忙今天不能服务，接受更换Ta人服务</p>
+        <div class="waimaiRun_mai_require">
+            <textarea placeholder="请输入您的要求"></textarea>
+            <div>
+                <div class="fr" style=" margin-top:0.16rem;">
+                    <span class="black9 mr10">36s</span><span class="waimaiRun_voice"></span><span class="microphone"></span>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="appointForm_imgdup border_t border_b mb10 clear_both">
+        	<ul>
+        	    <li class="appointForm_img" style="background-image:url(pic/banner1.png);"><img src="" width="70" height="70"></li>
+                <li class="appointForm_img" style="background-image:url(pic/banner1.png);"><img src="" width="70" height="70"></li>
+                <li class="appointForm_img" style="background-image:url(pic/banner1.png);"><img src="" width="70" height="70"></li>
+    	    </ul>
+            <div class="uploader_input_img fl">
+                <input class="weui_uploader_input" type="button" accept="image/jpg,image/jpeg,image/png,image/gif" multiple>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="btn_box">
+        <div class="fl">
+            <p class="font_line24 font_size14">定金：<span class="black9">￥<span class="fontcl1">50</span></span></p>
+        </div> 
+        <a href="#" class="fr pub_btn footer_btn" style="background:#ff6600;">提交订单</a>
+    </div>
+</footer>
+<div class="mask_box">
+    <div class="accountInfor_headX_mask">
+        <div class="cont">
+            <label class="btn border_b"><input type="button" />拍照</label>
+            <label class="btn"><input type="file" />从手机相册选择</label>
+        </div>
+        <div class="mar10">
+            <input type="button" class="long_btn cancel" style="background:#fff; color:#999;" value="取消" />
+        </div>
+    </div>
+	<div class="mask_bg"></div>
+</div>
+<script>
+$(document).ready(function() {
+	$(".uploader_input_img").click(function(){
+		$(".accountInfor_headX_mask").show();
+		$(".accountInfor_headX_mask").parent().find(".mask_bg").show();
+	});
+	$(".accountInfor_headX_mask").parent(".mask_box").find(".cancel").click(function(){
+		$(".accountInfor_headX_mask").hide();
+		$(".accountInfor_headX_mask").parent().find(".mask_bg").hide();
+	});//头像弹出层结束
+	
+});
+</script>
+</body>
+</html>

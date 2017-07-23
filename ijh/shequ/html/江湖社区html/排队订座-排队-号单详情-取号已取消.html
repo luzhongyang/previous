@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>排队订座-号单详情-取号已取消</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	号单详情
+    </div>
+    <i class="right"><a href="#" class="ico headerIco headerIco_8"></a></i>
+</header>
+
+<section class="page_center_box">
+	<div class="lineBook_ordDelt_state mb10"><i class="ico ico2"></i>已取消</div>
+	<div class="lineBook_ordlist lineBook_ordDelt mb10">
+        <div class="top border_b linkico">
+            <p class="fl">风波庄（摩尔街店）</p>
+        </div>
+        <p class="black9 pad_l10 pad_r10 pad_t10">2016-09-10  10:06    已取消</p>
+        <div class="cont">
+            <div class="left">
+                <p class="black9"><span>预计等待</span>  --</p>
+                <p class="black9"><span>还需等待</span>  --</p>
+            </div>
+            <div class="right">
+                <p class="big maincl">--</p>
+                <p class="black6">小桌(午市)</p>
+            </div>
+        </div>
+        <div class="bottom border_t ts"><i class="ico"></i>过号请重新取号，谢谢配合</div>
+    </div>
+    <div class="lineBook_quhao mb10">
+    	<div class="list linkico">
+        	<div class="fl"><i class="ico ico2"></i>查看餐厅位置信息</div>
+        </div>
+    </div>
+</section>
+<footer>
+	<div class="lineBook_footer_btn">
+    	<a href="javascript:;" class="long_btn lineBook_quxiao_show">删除号单</a>
+    </div>
+</footer>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<!--取消是否弹出-->
+<div class="lineBook_quxiao_mask">
+	<div class="cont">
+    	<p>确定删除该号单？确定删除后当前号单不在显示</p>
+    </div>
+    <div class="btn_box">
+    	<a href="javascript:;" class="btn black6 cancel">取消</a>
+        <a href="#" class="btn fontcl1">确定</a>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+	$('.lineBook_quxiao_show').click(function(){
+		$('.lineBook_quxiao_mask').show();
+		$('.mask_bg').show();
+		
+	});
+	$('.lineBook_quxiao_mask .cancel').click(function(){
+		$('.lineBook_quxiao_mask').hide();
+		$('.mask_bg').hide();
+		
+	});	
+});
+</script>
+<!--取消是否弹出结束-->
+</html>

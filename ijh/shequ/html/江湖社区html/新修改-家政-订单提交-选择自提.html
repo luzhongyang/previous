@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>家政-订单提交-选择自提</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<style>
+.jiazheng .form_list_box li{ border-top:none; overflow:hidden;padding: 0.05rem 0.1rem;}
+.jiazheng .form_list_box li:first-child{ border-top:0.01rem solid #e5e5e5;}
+.jiazheng .order_details_nr .list{ border-bottom:0.01rem solid #e5e5e5;}
+</style>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	香辣虾（芜湖路店）
+    </div>
+    <i class="right"><a href="#" class=""></a></i>
+</header>
+<section class="page_center_box">
+	<div class="setPage_list" style="border:none;">
+    	<p class="fl">是否自提</p>
+        <input type="checkbox" class="switch_int fr">
+    </div>
+    
+    <div class="jiazheng">
+    	<div class="order_details_nr">
+            <ul class="form_list_box">
+            	<li class="list">
+                    <div class="fl"><p>自提时间</p></div>
+                    <div class="fr"><p class="maincl">立即自提（大约18:40自提）<em class="linkIco"></em></p></div>
+                </li>
+                <li class="list last">
+                    <div class="fl"><p class="black6">自提地点</p></div>
+                    <div class="fr"><p class="black9">蜀山区芜湖路555号5栋101<em class="linkIco"></em></p></div>
+                </li>
+            </ul>
+        </div>
+    	
+        <div class="minePay mb10">
+            <ul class="form_list_box">
+                <li class="recharge">
+                    <label class="radioLabel">
+                    <div class="fl"><p>在线支付</p><div class="order_confirm_tag"><span style="background:#46c3ff;">首单立减5元</span><span style="background:#ff3333;">有2个红包可用</span></div></div>
+                    <span class="fr radioInt on"><input name="recharge" type="radio" checked></span>
+                    </label> 
+                </li>
+                <li class="recharge">
+                    <label class="radioLabel">
+                    <p class="fl">货到付款</p>
+                    <span class="fr radioInt"><input name="recharge" type="radio"></span>
+                    </label> 
+                </li>
+                <script>
+				/*$(document).ready(function(e) {				
+					$(".tab_int").click(function(){
+						if($(this).hasClass("on")){
+							$(this).removeClass("on");
+						}
+						else{
+							$(this).addClass("on");
+						}
+					});
+					
+				});*/
+			</script>
+                
+            </ul>
+        </div>
+    	<div class="order_details_nr">
+            <ul class="form_list_box">
+                <li class="list last">
+                    <div class="fl"><p class="black6">订单备注</p></div>
+                    <div class="fr"><p class="black9">添加备注<em class="linkIco"></em></p></div>
+                </li>
+                <li class="list">
+                    <div class="fl"><p class="black6">回锅肉</p></div>
+                    <div class="fr"><p class="black9">x1&nbsp;&nbsp;￥10</p></div>
+                </li>
+                <li class="list">
+                    <div class="fl"><p class="black6">回锅肉</p></div>
+                    <div class="fr"><p class="black9">x1&nbsp;&nbsp;￥10</p></div>
+                </li>
+                <li class="list">
+                    <div class="fl"><p class="black6">回锅肉</p></div>
+                    <div class="fr"><p class="black9">x1&nbsp;&nbsp;￥10</p></div>
+                </li>
+                <li class="list">
+                    <div class="fl"><p class="pointcl1">红包抵扣</p></div>
+                    <div class="fr"><p class="pointcl1">-￥10</p></div>
+                </li>
+                <li class="list last">
+                    <div class="fl"><a class="add_btn">再来一份</a></div>
+                    <div class="fr"><p class="pointcl1 total">合计  ￥20</p></div>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</section>
+<footer>
+    <div class="ord_tousu">
+		<p class="fl">合计：<span class="pointcl1">￥20</span>&nbsp;&nbsp;<span class="black9">已优惠￥10</span></p>
+		<a href="#" class="fr pub_btn">确认下单</a></div>
+</footer>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(document).ready(function() {
+    /*单选项选择开始*/
+	$('.recharge .radioLabel').click(function(){
+		$('.recharge .radioLabel .radioInt').removeClass('on');
+		$(this).find('.radioInt').addClass('on');
+	});
+	$('.payWay .radioLabel').click(function(){
+		$('.payWay .radioLabel .radioInt').removeClass('on');
+		$(this).find('.radioInt').addClass('on');
+	});
+	/*单选项选择结束*/
+});
+</script>
+</body>
+</html>

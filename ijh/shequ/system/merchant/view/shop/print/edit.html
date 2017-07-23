@@ -1,0 +1,111 @@
+<{include file="merchant:block/header.html"}>
+<!-- <div class="zxTabs">
+    <a href="<{link ctl='merchant/shop/print:index'}>" class="on">打印设置</a>
+    <div class="tishi pointcl"></div>
+</div>
+<div class="ucenter_c">
+    <form action="<{link ctl='merchant/shop/print:edit' args=<{$detail.plat_id}>}>" mini-form="ucenter" method="post" ENCTYPE="multipart/form-data">
+        <table cellspacing="0" cellpadding="0" class="form">
+            <tr>
+                <th>平台名称：</th>
+                <td><input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="input w-300"/></td>
+            </tr>
+            <tr>
+                <th>用户id：</th>
+                <td><input type="text" name="data[partner]" value="<{$detail.partner|default:''}>" class="input w-300"/></td>
+            </tr>
+            <tr>
+                <th>API密钥：</th>
+                <td><input type="text" name="data[apikey]" value="<{$detail.apikey|default:''}>" class="input w-300"/></td>
+            </tr>
+            <tr>
+                <th>打印机终端号：</th>
+                <td><input type="text" name="data[machine_code]" value="<{$detail.machine_code|default:''}>" class="input w-300"/></td>
+            </tr>
+            <tr>
+                <th>打印机终端密钥：</th>
+                <td><input type="text" name="data[mkey]" value="<{$detail.mkey|default:''}>" class="input w-300"/></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="保存数据" class="btn btn-primary" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript" src="<{$pager.res}>/script/widget.bmap.js"></script>
+<script type="text/javascript" src="<{$pager.res}>/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+(function(K, $){
+var editor = KindEditor.create('textarea[kindeditor]',{uploadJson : '<{link ctl="biz/upload:editor" http="base"}>', extraFileUploadParams:{OTOKEN:"<{$OTOKEN}>"}});
+})(window.KT, window.jQuery);
+</script>   -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class=""><a  href="<{link ctl='merchant/shop/print:index'}>" >打印设置</a></li>
+                    <li class="active"><a  href="javascript:;" >修改设置</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="">
+                                <form action="<{link ctl='merchant/shop/print:edit' args=<{$detail.plat_id}>}>" method="post" class="form-horizontal" ENCTYPE="multipart/form-data">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">平台名称：</label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">用户id：</label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <input type="text" name="data[partner]" value="<{$detail.partner|default:''}>" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">API密钥：</label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <input type="text" name="data[apikey]" value="<{$detail.apikey|default:''}>" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">打印机终端号：</label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <input type="text" name="data[machine_code]" value="<{$detail.machine_code|default:''}>" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">打印机终端密钥：</label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <input type="text" name="data[mkey]" value="<{$detail.mkey|default:''}>" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">&nbsp;</label>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-4">
+                                                <button class="btn btn-primary" type="submit">保存数据</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<{include file="merchant:block/footer.html"}>

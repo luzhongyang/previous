@@ -1,0 +1,60 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li ><a   href="<{link ctl='merchant/shop/member:index'}>" aria-expanded="true">我的客户</a>
+                </li >
+                <li class="active"> <a href="<{link ctl='merchant/shop/member:fans'}>" aria-expanded="true">我的粉丝</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+
+                        <div class="">
+
+                            <table class="table table-striped table-hover" >
+                                <thead>
+                                <tr>
+                                    <th>粉丝ID</th>
+                                    <th >昵称</th>
+                                    <th >手机号</th>
+                                    <th >图像</th>
+                                    <th >最后登录时间</th>
+                                    <th >操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <{foreach $items as $item}>
+                                <tr>
+                                    <td><{$item.uid}></td>
+                                    <td><{$members[$item['uid']]['nickname']}></td>
+                                    <td><{$members[$item['uid']]['mobile']}></td>
+                                    <td><img width="50" src="<{$pager.img}>/<{$members[$item['uid']]['face']}>" class="wh-50" style="height:50px;" /></td>
+                                    <td><{$members[$item['uid']]['lastlogin']|format}></td>
+                                    <td><a href="<{link ctl='merchant/shop/member:detail' arg0=$item.uid}>" class="btn btn-primary btn-sm btn-outline" title="查看">查看</a></td>
+                                </tr>
+                                <{foreachelse}>
+                                <tr><td colspan="20"><div class="alert alert-info">没有数据</div></td></tr>
+                                <{/foreach}>
+                                </tbody>
+                                <tfoot>
+                                <!-- <tr>
+                                    <td colspan="5">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr> -->
+                                </tfoot>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<{include file="merchant:block/footer.html"}>

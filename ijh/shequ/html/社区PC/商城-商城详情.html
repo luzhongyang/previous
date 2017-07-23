@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	 <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="statics/css/pub.css" rel="stylesheet">
+    <link href="statics/css/animate.css" rel="stylesheet">
+    <link href="statics/css/style.css" rel="stylesheet">
+    <script src="statics/js/jquery.js"></script>
+</head>
+<body>
+	<div class="shangcheng-xiangqing">
+		<div class="pagewd">
+			<div class="sm-tip">首页&gt;积分商城&gt;积分商城详情</div>
+			<div class="caozuo-box">
+				<div class="pic fl"><img src="statics/pic/shangpin.png"></div>
+				<div class="txt border_b">
+					<h5><a href="#">奁工艺 精品鸡翅木手串 手链 念珠 佛珠</a></h5>
+					<div class="tip">
+						<div class="jifen fl">积分：<div class="xiangqing-jifen">600积分</div></div>
+						<p class="num black6 fl">剩余数量：189</p>
+						<p class="share fr">分享到<i></i></p>
+					</div>
+					<p class="price black6 ">换购价：<span>￥<span class="xiangqing-danjia">10</span></span></p>
+					<div class="number">
+						<span class="fl">数量：</span>
+						<i class="jian">-</i><input type="text" value="1"><i class="jia">+</i>
+					</div>
+				</div>
+				<div class="abtn">
+					<a href="" class="btn fl btn-duihuan">立即兑换</a>
+					<a href="" class="btn fl btn-jiagou">加入购物车</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="tuwen fl articleBox">
+				<div class="title border_b maincl">
+					图文详情
+				</div>
+				<div class="detail">
+					<p>产品详情内容产品详情内容产品详情内容产品详情内容</p>
+					<img src="statics/pic/detail.png">
+				</div>
+			</div>
+			<div class="jilu fr">
+				<div class="title border_b">浏览记录</div>
+				<ul class="shangcheng-dingdan-content">
+					<li>
+						<div class="jifen">600积分</div>
+						<a class="pic" href="#"><img src="statics/pic/pic.png"></a>
+						<div class="txt">
+							<p class="tit"><a href="#">新疆正宗牦牛干</a></p>
+							<p class="black6">支付<span>￥10</span><i></i></p>
+						</div>
+					</li>
+					<li>
+						<div class="jifen">600积分</div>
+						<a class="pic" href="#"><img src="statics/pic/pic.png"></a>
+						<div class="txt">
+							<p class="tit"><a href="#">新疆正宗牦牛干</a></p>
+							<p class="black6">支付<span>￥10</span><i></i></p>
+						</div>
+					</li>
+					<li>
+						<div class="jifen">600积分</div>
+						<a class="pic" href="#"><img src="statics/pic/pic.png"></a>
+						<div class="txt">
+							<p class="tit"><a href="#">新疆正宗牦牛干</a></p>
+							<p class="black6">支付<span>￥10</span><i></i></p>
+						</div>
+					</li>
+					<li>
+						<div class="jifen">600积分</div>
+						<a class="pic" href="#"><img src="statics/pic/pic.png"></a>
+						<div class="txt">
+							<p class="tit"><a href="#">新疆正宗牦牛干</a></p>
+							<p class="black6">支付<span>￥10</span><i></i></p>
+						</div>
+					</li>
+					<li>
+						<div class="jifen">600积分</div>
+						<a class="pic" href="#"><img src="statics/pic/pic.png"></a>
+						<div class="txt">
+							<p class="tit"><a href="#">新疆正宗牦牛干</a></p>
+							<p class="black6">支付<span>￥10</span><i></i></p>
+						</div>
+					</li>
+	    		</ul>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		// 商城详情数量变化
+	var $xq_jian=$('.shangcheng-xiangqing .caozuo-box .number .jian')
+	var $xq_jia=$('.shangcheng-xiangqing .caozuo-box .number .jia')
+	var $xq_num=$('.shangcheng-xiangqing .caozuo-box .number input')
+	$xq_jian.click(function(){
+		var $xq_num=$(this).parent('.number').find('input');
+		$xq_num.val($xq_num.val()-1)
+		if($xq_num.val()<0){$xq_num.val(0)}
+	});
+	$xq_jia.click(function(){
+		var $xq_num=$(this).parent('.number').find('input');
+		$xq_num.val(parseInt($xq_num.val())+1)
+	});
+	})
+	</script>
+</body>
+</html>

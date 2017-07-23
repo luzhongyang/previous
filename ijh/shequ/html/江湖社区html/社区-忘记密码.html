@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>忘记密码</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	登录密码修改
+    </div>
+    <i class="right"><a href="#" class=""></a></i>
+</header>
+<section class="page_center_box">
+    <div class="loginPage" style="padding:0;">
+        <div class="mt10">
+        	<form action="" method="post">
+        	<div class="loginPage_int_box border_b border_t">
+            	<div class="pub_ico fl"><em class="ico ico_1"></em></div>
+                <div class="pub_box">
+                    <input class="long_int" type="text" placeholder="请输入手机号">
+                    <a href="javascript:;" class="pub_btn">获取验证码</a>
+                </div>
+            </div>
+            <div class="loginPage_int_box border_b">
+            	<div class="pub_ico fl"><em class="ico ico_2"></em></div>
+                <div class="pub_box">
+                    <input class="long_int" type="text" placeholder="请输入验证码">
+                </div>
+            </div>
+            <div class="loginPage_int_box border_b">
+            	<div class="pub_ico fl"><em class="ico ico_3"></em></div>
+                <div class="pub_box"><input class="long_int" type="password" placeholder="请输入密码（不少于6位）" value=""></div>
+            </div>
+            <div class="loginPage_int_box border_b mb10">
+            	<div class="pub_ico fl"><em class="ico ico_3"></em></div>
+                <div class="pub_box"><input class="long_int" type="password" placeholder="请再输入密码（不少于6位）" value=""></div>
+            </div>
+            <div class="btn_box">
+                <input class="long_btn" type="button" value="立即提交">
+            </div>
+            </form>
+        </div>
+    </div>
+</section>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 60;
+        var mobile_lock = 0;
+        $(function () {
+            $(".pub_btn").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 60;
+					$(".pub_btn").addClass("graybg");
+                    $('.pub_btn').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".pub_btn").removeClass("graybg");
+                $('.pub_btn').removeAttr("disabled");
+                $('.pub_btn').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+				$('.pub_btn').removeClass("on");
+            }
+            else {
+                mobile_count--;
+                $('.pub_btn').text( + mobile_count.toString() + "秒...");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+				$('.pub_btn').addClass("on");
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+</body>
+</html>

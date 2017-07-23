@@ -1,0 +1,61 @@
+<{include file="merchant:block/header.html"}>
+<style type="text/css">
+    .col-lg-2{width: auto;}
+</style>
+<div class="row">
+    <div class="col-lg-2">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>桌号：通用桌号</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="carousel slide" qrdata="<{$common_qrcode}>">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+<{foreach $items as $v}>
+    <div class="col-lg-2">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>桌号：<{$v.title}></h5>
+            </div>
+            <div class="ibox-content">
+                <div class="carousel slide" qrdata="<{$v.mylink}>">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+<{foreachelse}>
+    <div class="alert alert-info"><{L('没有数据')}></div>
+<{/foreach}>
+</div>
+<!--分页开始-->
+<div class="clearfix p-xs">
+    <div class="pull-left">
+    </div>
+    <div class="btn-group pull-right pagination_box">
+        <div class="page"><{$pager.pagebar}></div>
+    </div>
+</div>
+<!--分页结束-->
+<{include file="merchant:block/footer.html"}>
+<script>
+// 生成二维码
+$(document).ready(function(){
+    $("[qrdata]").each(function(){
+        $(this).qrcode({
+            render: "canvas",            //渲染方式 table 和 canvas两种
+            width: 135,                  //设置宽度  
+            height: 135,                 //设置高度  
+            typeNumber: -1,              //计算模式 
+            correctLevel: 2,             //纠错等级  0,1,2,3 默认为2
+            background: "#ffffff",       //背景颜色  
+            foreground: "#000000",       //前景颜色 
+            text    : $(this).attr('qrdata')
+        });   
+    });
+});
+</script>

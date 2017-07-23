@@ -1,0 +1,78 @@
+##服务端接口##
+
+验证码：magic/sendsms,参数mobile
+
+登录接口:staff/entry/login,参数 手机号码[mobile],登录密码[passwd]
+修改密码:staff/entry/revise,参数 手机号码[mobile],验证码[sms_code],密码[passwd]
+忘记密码:staff/entry/forgot,参数 手机号码[mobile],验证码[sms_code],密码[passwd]
+申请合作:staff/entry/combine,
+  参数   from[house|weixiu|paotui]
+         uname,用户名
+	 mobile,手机号码
+         sms_code,短信验证
+         passwd,设置密码
+         city_id,城市id
+         options,[{"id":"","cate_id":"","title":""},{"id":"","cate_id":"","title":""}]
+         
+实时更新位置
+更新位置,staff/entry/position,参数,lng,lat
+
+
+资料管理
+
+资料管理首页,staff/account/index,参数staff_id
+
+修改密码,staff/account/editpswd,参数staff_id，oldpswd，newpswd
+
+更换手机号,staff/account/update_mobile,参数staff_id,sms_code,mobile
+
+修改姓名,staff/account/update_name,参数,staff_id,name
+
+更换头像,staff/account/update_face,参数,staff_id,face
+
+开户行设置,staff/account/account_set，参数account_type，account_name,account,staff_id
+
+技能列表,staff/account/techs,参数,options:技能选项,可选
+
+更新性别,staff/account/sex,参数,sex[1:男,2:女]
+
+评论相关
+
+评论列表,staff/comment/items,参数,staff_id,page
+回复评论,staff/comment/reply,参数，comment_id，reply
+
+
+消息相关
+
+消息列表,staff/mesg/items,参数,staff_id,page
+设为已读,staff/mesg/read,参数,msg_id
+
+资金相关
+
+最近30天收入,staff/money/items,参数,staff_id, type[1:全部,2:收入,3:支出]
+
+资金管理，staff/money/capital,参数,staff_id
+
+申请提现,staff/money/tixian,参数，staff_id
+
+确认提现,staff/money/sure_tixian，参数,staff_id
+
+
+服务人员相关
+
+
+服务人员类型，staff/staff/type,参数，空
+
+服务分类,staff/staff/cate,参数，from[house|paotui|weixiu]
+
+
+统计相关
+
+订单统计,staff/tongji/order,参数，staff_id
+
+收入统计,staff/tongji/amount,参数，staff_id
+
+身份认证相关
+
+身份认证,staff/account/submit_audit,参数,uname,number,face
+

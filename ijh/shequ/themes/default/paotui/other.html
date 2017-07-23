@@ -1,0 +1,325 @@
+<{assign var='tpl_title' value=L("其它")}>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+    <script type="text/javascript" src="<{$pager.res}>/script/jquery.form.js"></script>
+</head>
+
+<body style="height:100%;">
+<header>
+    <i class="left"><a href="<{link ctl='paotui/index'}>" link-load="" link-type="right"
+                       class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+        其它
+    </div>
+    <i class="right"></i>
+</header>
+
+<form action="<{link ctl='paotui/other' }>" mini-form="car-form" id="paotui_form" enctype="multipart/form-data"
+      method="post">
+    <section class="page_center_box">
+        <script>
+            function fileSelected(obj, type) {
+                var files = obj.files;
+                for (var i = 0; i < files.length; i++) {
+                    var tag = '';
+                    var rFilter = /^(image\/gif|image\/jpeg|image\/jpg|image\/png)$/i;
+                    if (!rFilter.test(files[i].type)) {
+                        alert("只允许上传JPG、PNG、GIF格式图片");
+                        return false;
+                    }
+                    var reader = new FileReader();
+                    reader.onloadstart = function (e) {
+                        $(".loading").show();
+                    }
+                    reader.onload = function (e) {
+                        $('#photo' + type).hide();
+                        $("#img" + type).attr("src", e.target.result).show();  //图片编码字符串
+                    }
+                    reader.readAsDataURL(files[i]);
+                }
+            }
+        </script>
+        <div class="jiazheng paotui">
+            <div class="waimaiRun_mai_require">
+                <textarea placeholder="请输入您的要求" name='data[intro]' id="intro"></textarea>
+                <div>
+                    <div class="uploader_input_img fl">
+
+                        <label style="background:url(%THEME%/static/images/add@2x.png) no-repeat;background-size:100%;width:0.5rem;height:0.5rem; display: inline-block;">
+                            <input type="file" name="photo1" id="photo1" onchange="fileSelected(this,1)" value=""
+                                   style="width:0.5rem;height:0.5rem;border:none; filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;opacity: 0;"/>
+                            <img src="" id="img1" style="display:none;" width="50" height="50"/>
+                        </label>
+
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="order_details_nr waimaiRun_mai">
+                <ul class="form_list_box">
+                    <li class="list">
+                        <p>服务地址</p>
+                    </li>
+                </ul>
+                <div class="servOrd mb10">
+
+                    <table width="100%">
+                        <tr>
+                            <th><em class="runIco ico_1"></em>我的地址</th>
+                            <td>
+                                <input type="text" placeholder="选择收货地址" name="data[addr]" id="addr" value=""><em
+                                    class="linkIco"></em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><em class="runIco ico_6"></em>门牌号</th>
+                            <td>
+                                <input type="text" placeholder="选择门牌号" name="data[house]" id="house" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><em class="runIco ico_3"></em>联系人</th>
+                            <td>
+                                <input type="text" placeholder="联系人" name="data[contact]" id="contact" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><em class="runIco ico_4"></em>联系方式</th>
+                            <td>
+                                <input type="text" placeholder="联系方式" name="data[mobile]" id="mobile" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><em class="runIco ico_5"></em>服务时间</th>
+                            <td>
+                                <input type="text" class="pointcl1 time_sel" id="time" name="data2[time]" value=""
+                                       placeholder="选择时间"><em class="linkIco"></em>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <ul class="form_list_box">
+                    <li class="deposit_bar">
+                        <table class="volumeBar_table txt_center" width="100%" border="0" cellspacing="0"
+                               cellpadding="0">
+                            <tr>
+                                <td width="20"><p>定金</p>
+                                    <p class="black9">（元）</p></td>
+                                <td class="pad">
+                                    <div class="volumeBar">
+                                        <input type="hidden" class="single-slider" name="data2[paotui_amount]"
+                                               value="<{$config.config.other_start_price}>"/>
+                                        <input type="hidden" id="city_id" name="data[city_id]" value=""/>
+                                        <input type="hidden" id="lat" name="data[lat]" value=""/>
+                                        <input type="hidden" id="lng" name="data[lng]" value=""/>
+                                        <!-- <button id="g1">获取值</button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li class="list last waimaiRun_mai_wz">
+                        <p class="pointcl1">计费说明</p>
+                        <p class="black9">起步价格：<{$config.config.other_start_price}>元</p>
+                        <p class="pointcl1">友情提示</p>
+                        <p class="black9">节假日、交通拥堵时段、恶劣天气等情况，适当增加服务费，接单成功率会大大提高。</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="btn_box">
+            <div class="fl">
+                <p class="font_line24 font_size14">定金：<span class="black9">￥<span class="fontcl1" id="dj"><{$config.config.other_start_price}></span></span>
+                </p>
+            </div>
+            <input type="submit" class="fr pub_btn footer_btn" style="background:#ff6600;" id="comment_submit"
+                   value="立即下单"/>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            /*单选项选择开始*/
+            $('.radioLabel').click(function () {
+                $('.radioLabel .radioInt').removeClass('on');
+                $(this).find('.radioInt').addClass('on');
+            });
+            /*单选项选择结束*/
+        });
+    </script>
+
+    <script src="%THEME%/static/js/jquery.range.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //************取货地址*************
+            //对传递的信息进行保存localStorage处理
+
+            if (localStorage['select_address']) {
+                var address = JSON.parse(localStorage['select_address']);
+                if (address.addr) {
+                    localStorage.setItem('paotuiother_contact', address.contact);
+                    localStorage.setItem('paotuiother_mobile', address.mobile);
+                    localStorage.setItem('paotuiother_house', address.house);
+                    localStorage.setItem('paotuiother_addr', address.addr);
+                    localStorage.setItem('paotuiother_lng', address.lng);
+                    localStorage.setItem('paotuiother_lat', address.lat);
+                    localStorage.removeItem('select_address');  //用完删除
+                }
+            }
+
+            //获取LocalStorage
+
+            var paotuiother_addr = localStorage.getItem('paotuiother_addr');
+            if (paotuiother_addr) {
+                $('#addr').val(paotuiother_addr);
+            }
+
+            var paotuiother_contact = localStorage.getItem('paotuiother_contact');
+            if (paotuiother_contact) {
+                $('#contact').val(paotuiother_contact);
+            }
+
+            var paotuiother_mobile = localStorage.getItem('paotuiother_mobile');
+            if (paotuiother_mobile) {
+                $('#mobile').val(paotuiother_mobile);
+            }
+
+            var paotuiother_house = localStorage.getItem('paotuiother_house');
+            if (paotuiother_house) {
+                $('#house').val(paotuiother_house);
+            }
+
+            var paotuiother_lat = localStorage.getItem('paotuiother_lat');
+            if (paotuiother_lat) {
+                $('#lat').val(paotuiother_lat);
+            }
+
+            var paotuiother_lng = localStorage.getItem('paotuiother_lng');
+            if (paotuiother_lng) {
+                $('#lng').val(paotuiother_lng);
+            }
+
+            //************取货地址end*************
+
+
+            //**************需求和时间****************
+            $('#intro').keyup(function () {
+                localStorage.setItem('paotuiother_intro', $('#intro').val());
+            })
+
+            $('#time').blur(function () {
+                localStorage.setItem('paotuiother_time', $(this).val());
+            })
+
+            //获取LocalStorage
+            var paotuiother_intro = localStorage.getItem('paotuiother_intro');
+            if (paotuiother_intro) {
+                $('#intro').val(paotuiother_intro);
+            }
+
+            var paotuiother_time = localStorage.getItem('paotuiother_time');
+            if (paotuiother_time) {
+                $('#time').val(paotuiother_time);
+            }
+            //**************需求和时间结束****************
+
+            var start = parseInt("<{$config.config.other_start_price}>");
+            $('.single-slider').jRange({
+                from: 0,
+                to: 100,
+                step: 1,
+                scale: [0, 25, 50, 75, 100],
+                format: '%s',
+                width: '100%',
+                showLabels: true,
+                showScale: true,
+                onstatechange: function (e) {
+                    $('#dj').text(e);
+                    if (e < start) {
+                        $('.single-slider').jRange('setValue', start);
+                        $('#dj').text(start);
+                    }
+                },
+            });
+            $("#g1").click(function () {
+                var aa = $(".single-slider").val();
+                alert(aa);
+            });
+
+
+            // 时间选择器
+            function dateScroll(container) {
+                var date = new Date();
+                var curr = new Date().getFullYear(),
+                        d = date.getDate(),
+                        m = date.getMonth();
+                $(container).scroller('destroy').scroller({
+                    preset: 'datehour',
+                    minDate: new Date(curr, m, d, 8, 00),
+                    maxDate: new Date(curr, m, d + 7),
+                    invalid: [{d: new Date(), start: '00:00', end: (date.getHours()) + ':' + date.getMinutes()}],
+                    theme: "android-ics light",
+                    mode: "scroller",
+                    lang: 'zh',
+                    display: "bottom",
+                    animate: "slideup",
+                    stepMinute: 15,
+                    dateOrder: 'MMDdd',
+                    timeWheels: 'HH-ii',
+                    rows: 3
+                });
+            }
+
+            // 取货时间
+            $('.time_sel').click(function () {
+                dateScroll(this);
+            });
+
+            $('#addr').click(function () {
+                localStorage['select_address'] = JSON.stringify({"backurl": window.location.href});
+                window.location.href = "<{link ctl='ucenter/addr:index'}>";
+            })
+
+            // ajax跑腿-下单
+            $("#paotui_form").ajaxForm({
+                "type": "post", "dataType": "json", "success": function (ret) {
+                    if (ret.error == 0) {
+                        layer.open({content: ret.message, time: 2});
+                        var order_id = parseInt(ret.order_id);
+                        localStorage['order_pay'] = "<{link ctl='ucenter/order:detail-" + order_id + "'}>";
+                        var link = "<{link ctl='ucenter/order:pay' args='temp1'}>";
+                        //对记录进行清空
+                        localStorage.removeItem('paotuiother_contact');
+                        localStorage.removeItem('paotuiother_mobile');
+                        localStorage.removeItem('paotuiother_house');
+                        localStorage.removeItem('paotuiother_addr');
+                        localStorage.removeItem('paotuiother_lng');
+                        localStorage.removeItem('paotuiother_lat');
+                        localStorage.removeItem('paotuiother_time');
+                        localStorage.removeItem('paotuiother_intro');
+                        setTimeout(function () {
+                            window.location.href = link.replace('temp1', order_id);
+                        }, 1000);
+                    } else {
+                        layer.open({content: ret.message, time: 2});
+                    }
+                }
+            });
+
+            //写入CITY—ID
+            var now_city_id = Cookie.get("UxCityId");
+            $('#city_id').val(now_city_id);
+
+        })
+
+    </script>
+
+
+    <{include file="block/footer.html"}>

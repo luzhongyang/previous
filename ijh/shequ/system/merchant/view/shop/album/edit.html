@@ -1,0 +1,55 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class=""><a href="<{link ctl='merchant/shop/album:index'}>">相册设置</a></li>
+                <li class="active"><a href="javascript:;">修改相册</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="">
+                            <form action="<{link ctl='merchant/shop/album:edit' args=<{$detail.photo_id}>}>"
+                                  method="post" mini-form="merchant" class="form-horizontal" ENCTYPE="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">类型：<br/></label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="data[type]" value="1" <{if
+                                                $detail.type==1}>checked="checked"<{/if}>>环境
+                                            </label>
+
+                                            <label class="radio-inline">
+                                                <input type="radio" name="data[type]" value="2" <{if
+                                                $detail.type==2}>checked="checked"<{/if}>>商品
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group draggable">
+                                    <label class="col-sm-2 control-label">图标：</label>
+                                    <div class="col-sm-10" style="padding: 0;">
+                                        <div class="col-sm-4"><input type="text" name="data[photo]" class="form-control" id="file_photo" value="<{$detail.photo}>"<{if $detail.photo}> photo="<{$pager.img}>/<{$detail.photo}>"<{/if}> readonly="readonly"/></div>
+                                        <div class="col-sm-8"><input type="button" uploadbtn="#file_photo" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview="#file_photo" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span> 预览</a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">&nbsp;</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-primary" type="submit">保存数据</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>

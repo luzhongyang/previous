@@ -1,0 +1,61 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="xiaoqu/baoxiu:so" load="mini:搜索内容" width="mini:500" class="button" title="搜索"}></td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data">
+    <{if $xiaoqu.xiaoqu_id}><div class="tip-notice">(小区：<b class="red"><{$xiaoqu.title}></b>)</div><{/if}>
+    <form id="items-form">
+    <table width="100%" border="0" cellspacing="0" class="table-data table">
+    <tr>
+        <th class="w-100">ID</th>
+        <th>用户</th>
+        <th class="w-50">小区</th>
+        <th class="w-50">业主</th>
+        <th>联系人</th>
+        <th>联系电话</th>
+        <th>预约时间</th>
+        <th>内容</th>
+        <th class="w-50">状态</th>
+        <th class="w-100">保修时间</th>
+        <th class="w-150">操作</th>
+    </tr>
+    <{foreach $items as $item}>
+    <tr>
+        <td><label><input type="checkbox" value="<{$item.baoxiu_id}>" name="baoxiu_id[]" CK="PRI"/><{$item.baoxiu_id}><label></td>
+        <td><{$member_list[$item.uid].nickname}>(UID:<{$item.uid}>)</td>
+        <td><{$xiaoqu_list[$item.xiaoqu_id].title}>(ID:<{$item.xiaoqu_id}>)</td>
+        <td><{$yezhu_list[$item.yezhu_id].house}>(ID:<{$item.yezhu_id}>)</td>
+        <td><{$item.contact}></td>
+        <td><{$item.mobile}></td>
+        <td><{if $item.yuyue_time}><{$item.yuyue_time|format:"m-d H:i"}><{else}> -- <{/if}></td>
+        <td><{$item.content}></td>
+        <td><{if $item.status < 0}><b class="gray">已撤销</b><{elseif $item.status > 0}><b class="green">已处理</b><{else}><b class="blue">待处理</b><{/if}></td>
+        <td><{$item.dateline|format}><br /><{$item.clientip}>(<{$item.clientip|iplocal}>)</td>
+        <td>
+            <{link ctl="xiaoqu/baoxiu:detail" args=$item.baoxiu_id class="button" title="查看"}>
+            <{link ctl="xiaoqu/baoxiu:delete" args=$item.baoxiu_id act="mini:删除" confirm="mini:确定要删除吗？" title="删除" class="button"}>
+        </td>
+</tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="text-align tip-notice">没有数据</p></td></tr>
+    <{/foreach}>
+    </table>
+    </form>
+    <div class="page-bar">
+        <table>
+            <tr>
+            <td class="w-100"><label><input type="checkbox" CKA="PRI"/>&nbsp;&nbsp;全选</label></td>
+            <td colspan="10" class="left"><{link ctl="xiaoqu/baoxiu:delete" type="button" submit="mini:#items-form" confirm="mini:确定要批量删除选中的内容吗?" priv="hide" value="批量删除"}></td>
+            <td class="page-list"><{$pager.pagebar}></td>
+        </tr>
+        </table>
+    </div>
+</div>
+<{include file="admin:common/footer.html"}>

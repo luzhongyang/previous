@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>排队订座-订座-提交预约</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link href="css/mobiscroll.2.13.2.css" rel="stylesheet" />
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="ico headerIco headerIco_3"></a></i>
+    <div class="title">
+    	排队取号
+    </div>
+    <i class="right"><a href="javascript:;" class="ico"></a></i>
+</header>
+
+<section class="page_center_box">
+	<div class="lineBook_quhao">
+    	<div class="list linkico">
+        	<div class="fl"><i class="ico"></i>人数</div>
+            <div class="fr txt_right">
+            	<div data-role="fieldcontain" class="demo-select">
+                    <select id="city" class="demo-test-select" data-role="none">
+                        <option value="1">2人</option>
+                        <option value="2">3人</option>
+                        <option value="3">4人</option>
+                        <option value="4">8人</option>
+                        <option value="5">10人</option>
+                        <option value="6">15人</option>
+                        <option value="7">20人</option>
+                        <option value="8">30人</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <p class="bt">顾客信息</p>
+        <div class="list disbox border_b">
+        	<div class="int_box"><input type="text" placeholder="尊称：请填写您的姓名"></div>
+            <div class="selct_box">
+            	<label class="radioInt"><input type="radio"></label>先生
+                <label class="radioInt ml10"><input type="radio"></label>女士
+            </div>
+        </div>
+        <div class="list disbox">
+        	<div class="name">联系电话：</div>
+        	<div class="int_box"><input type="text" placeholder="联系电话：请填写您的手机号"></div>
+        </div>
+    </div>
+    <div class="btn_box"><a href="#" class="long_btn">立即取号</a></div>
+</section>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(document).ready(function() {
+    $('.radioInt input').click(function(){
+		$('.radioInt').removeClass('on');
+		$(this).parent('.radioInt').addClass('on');
+	});
+});
+</script>
+
+<script src="js/mobiscroll.2.13.2.js"></script>
+<script type="text/javascript">
+	$(function () {
+		var curr = new Date().getFullYear();
+		var opt = {  
+			'default': {
+				theme: 'default',
+				mode: 'scroller',
+				display: 'modal',
+				animate: 'fade'
+			},		
+			'select': {
+				preset: 'select'
+			},
+		}
+		$('.demo-test-select').scroller($.extend(opt['select'],opt['default']));			
+	});
+</script>
+</html>

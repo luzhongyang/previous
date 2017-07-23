@@ -1,0 +1,245 @@
+<{include file="merchant:block/header.html"}>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="javascript:;">佣金记录</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+
+                        <div class="ibox float-e-margins">
+                            <div class="">
+                                <table cellspacing="0" cellpadding="0"
+                                       class="table-data table table-striped table-hover" id="myTable"
+                                       data-page-size="1" data-filter=#filter>
+                                    <thead>
+                                    <tr>
+                                        <th>拼团编号</th>
+                                        <th>订单编号</th>
+                                        <th>订单用户编号</th>
+                                        <th>商品名称</th>
+                                        <th>支付佣金</th>
+                                        <th>佣金支付时间</th>
+                                        <!-- th>库存</th> -->
+                                        <!--  <th>操作</th> -->
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <{foreach $items as $item}>
+
+                                    <tr>
+                                        <td><{$item.group_id}></td>
+                                        <td>
+                                            <label><{$item.order_id}><label>
+                                        </td>
+                                        <td><{$item.uid}></td>
+                                        <td><{$item.product_name}></td>
+                                        <td><{$item.money_master_paid}></td>
+                                        <td><{$item.money_master_time|format:'Y-m-d H:i'}></td>
+                                        <!-- <td>
+                                            <a href="javascript:void(0);" rel="<{$item.order_id}>"  class="btn btn-success view_btn" title="<{L('查看')}>">查看详情</a>
+                                        </td> -->
+
+                                    </tr>
+
+                                    <{foreachelse}>
+                                    <tr>
+                                        <td colspan="20">
+                                            <div class="alert alert-info"><{L('没有数据')}></div>
+                                        </td>
+                                    </tr>
+                                    <{/foreach}>
+                                    </tbody>
+                                    <tfoot>
+                                    <!-- <tr>
+                                        <td colspan="5">
+                                            <ul class="pagination pull-right"></ul>
+                                        </td>
+                                    </tr> -->
+                                    </tfoot>
+                                </table>
+
+                                <div class="btn-group pull-right pagination_box">
+                                    <div class="page"><{$pager.pagebar}></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<{include file="merchant:block/footer.html"}>
+
+<script type="text/javascript">
+    (function (K, $) {
+        var editor = KindEditor.create('textarea[kindeditor]', {
+            uploadJson: '<{link ctl="merchant/upload:editor" http="merchant"}>',
+            extraFileUploadParams: {OTOKEN: "<{$OTOKEN}>"}
+        });
+    })(window.KT, window.jQuery);
+</script>
+
+<script type="text/javascript" charset="utf-8" async defer>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "language": {
+                "aria": {
+                    "sortAscending": ": 排序列正序排列",
+                    "sortDescending": ": 排序列倒序排列"
+                },
+                "emptyTable": "表中没有可用的数据",
+                "info": "_START_ - _END_ / 总 _TOTAL_ 条记录",
+                "infoEmpty": "没有找到记录",
+                "infoFiltered": "",
+                "lengthMenu": "每页 _MENU_ 行",
+                "search": false,
+                "zeroRecords": "没有找到匹配的记录",
+                "loadingRecords": "加载中...",
+                "paginate": {
+                    "previous": "上一页",
+                    "next": "下一页",
+                    "last": "尾页",
+                    "first": "首页"
+                }
+            },
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "所有"]
+            ],
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $(".view_btn").click(function () {
+            $('.tr_' + $(this).attr('rel')).slideToggle();
+        })
+
+        $(".stamp .mask_bg").click(function () {
+            $(".stamp").hide();
+        })
+    })
+
+    function cancel(id) {
+        var link = "<{link ctl='merchant/order:cancel' arg0='temp'}>";
+        jQuery.ajax({
+            url: link.replace('temp', id),
+            async: true,
+            dataType: 'json',
+            type: 'POST',
+            success: function (ret) {
+                if (ret.error > 0) {
+                    layer.msg(ret.message);
+                } else {
+                    layer.msg(ret.message);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+        });
+    }
+
+
+    function accept(id, type) {
+        var link = "<{link ctl='merchant/pintuangroup:status_ok' arg0='temp' arg1='oooo'}>";
+        jQuery.ajax({
+            url: link.replace('temp', id).replace('oooo', type),
+            async: true,
+            dataType: 'json',
+            type: 'POST',
+            success: function (ret) {
+                if (ret.error > 0) {
+                    layer.msg(ret.message);
+                } else {
+                    layer.msg(ret.message);
+                    localStorage['is_one'] = ret.is_one;
+                    setTimeout(function () {
+                        layer.open({
+                            title: '<{L("温馨提示")}>',
+                            content: '<{L("您是否要自动打印小票")}>？',
+                            btn: ['<{L("确认")}>', '<{L("取消")}>'],
+                            shadeClose: false,
+                            yes: function () {
+                                check_print(id);
+                                layer.closeAll();
+                            },
+                            cancel: function () {
+                                if (ret.is_one == 1) {
+                                    setTimeout(function () {
+                                        window.location.href = "<{link ctl='merchant/order:pei'}>";
+                                    }, 1000);
+                                } else {
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1000);
+                                }
+                                layer.closeAll();
+                            }
+                        });
+
+                    }, 1000);
+                    //是否自动打印订单小票
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+        });
+    }
+
+    function check_print(order_id) {
+        var link1 = "<{link ctl='merchant/order:check_print'}>";
+        var link2 = "<{link ctl='merchant/order:porder' args='temp1'}>";
+        link2 = link2.replace('temp1', order_id);
+        jQuery.ajax({
+            url: link1,
+            async: true,
+            dataType: 'json',
+            type: 'POST',
+            success: function (ret) {
+                if (ret.error > 0) {
+                    Widget.MsgBox.error(ret.message);
+                } else {
+                    layer.open({
+                        type: 2,
+                        title: "<{L('打印小票')}>",
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['350px', '60%'],
+                        content: link2
+                    });
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+        });
+    }
+
+    function printorder(order_id) {
+
+        $(".stamp_list_" + order_id).show();
+        $(".print_" + order_id).click(function () {
+            var link = "<{link ctl='merchant/order:porder' args='__order_id'}>";
+            $.get(link.replace('__order_id', order_id), function (ret) {
+                $('#abc').html(ret);
+                $('#abc').printArea();
+            }, 'html')
+        })
+
+    }
+</script>

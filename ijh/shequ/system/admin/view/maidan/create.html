@@ -1,0 +1,36 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="maidan/maidan:index" priv="hidden" class="button"}></td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?maidan/maidan-create.html" mini-form="maidan-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+    <input type="hidden" name="shop_id" value="<{$shop_id}>" />
+    <tr><th><span class="red">*</span>优惠类型：</th><td><label><input type="radio" name="data[type]" value="1" class="jq_type"/>折扣</label><label><input type="radio" name="data[type]"  value="0" checked="checked" class="jq_type"/>满减</label></td></tr>
+    <tr class="jq_type_0"><th><span class="red">*</span>每满多少：</th><td><input type="text" name="data[each_amount]" value="<{$detail.each_amount|default:'0.00'}>" class="input w-100"/></td></tr>
+    <tr class="jq_type_0"><th><span class="red">*</span>优惠多少：</th><td><input type="text" name="data[each_youhui]" value="<{$detail.each_youhui|default:'0.00'}>" class="input w-100"/></td></tr>
+    <tr class="jq_type_1"><th><span class="red">*</span>折扣：</th><td><input type="text" name="data[discount]" value="<{$detail.discount|default:'100'}>" class="input w-100"/></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<script>
+    $(document).ready(function(){
+        $(".jq_type").change(function () {
+            if ($(this).val() == 0) {
+                $(".jq_type_0").show();
+                $(".jq_type_1").hide();
+            } else {
+                $(".jq_type_1").show();
+                $(".jq_type_0").hide();
+            }
+        });
+        $(".jq_type").change();
+    })   
+</script>
+<{include file="admin:common/footer.html"}>
