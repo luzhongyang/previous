@@ -1,0 +1,301 @@
+<{assign var='tpl_title' value=L("评价")}>
+<{include file="block/header.html"}>
+<div class="page page-current"> 
+	<!--头部-->
+    <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+        <h1 class="title">评价</h1>
+    </header>
+    <!--头部结束-->
+    <!--底部-->
+    
+    <div class="bar bar-tab ordSubmit_footer">
+    	<div class="fl ml10">评价得<span class="fontcl1"><{$comment.jifen}></span>积分</div>
+        <div class="fr"><a  mini-submit="#comment-form" class="pub_btn" >提交</a></div>
+    </div>
+    <!--底部结束-->
+    <div class="content">
+        <form id="comment-form" action="<{link ctl='waimai/order:subcomment'}>" method="post" enctype="multipart/form-data">
+        <{if in_array($comment.order.pei_type,array(1,2)) && $comment.order.staff_id>0}>
+        <div class="ord_evlut_form">
+            <div class="list-block media-list top_box">
+                <ul>
+                  <li>
+                    <div href="#" class="item-content">
+                      <div class="item-media"><img src="<{$pager.img}>/<{$comment.staff.face}>"></div>
+                      <div class="item-inner">
+                        <div class="item-title mt10"><{$comment.staff.name}>  <{$comment.staff.mobile}></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+            </div>
+            <p class="txt_center black9">为配送打分</p>
+            <div class="star_box txt_center">
+                <span class="starBg txt_left" style="opacity:0.6;">
+                    <span class="star" style="width:60%;">
+                        <span class="star_clink" id="staff_score">
+                            <a href="#" val="1"></a>
+                            <a href="#" val="2"></a> 
+                            <a href="#" val="3"></a> 
+                            <a href="#" val="4"></a> 
+                            <a href="#" val="5"></a>
+                            <input type="hidden" name="data[staff_score]" value="3">
+                        </span>
+                    </span>
+                </span>
+            </div>
+            <div class="mallord_delt_mask ord_mark pad_t10">
+                <div class="row selct_box" id="staff_mark">
+                    <a href="javascript:;" class="fl col-33 qt">穿着专业</a> 
+                    <a href="javascript:;" class="fl col-33 qt">送货快</a> 
+                    <a href="javascript:;" class="fl col-33 qt">准时送达</a> 
+                    <a href="javascript:;" class="fl col-33 qt">服务态度好</a> 
+                    <a href="javascript:;" class="fl col-33 qt">餐品保存完好</a> 
+                    <a href="javascript:;" class="fl col-33 qt">提供额外帮助</a>
+                    <input type="hidden" name="data[staff_mark]" value="0">
+                    <div class="cl"></div>
+                </div>
+            </div>
+            <div class="mineSet_feedback">
+                <div class="list-block">
+                    <ul>
+                      <li class="align-top">
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-input">
+                              <textarea minlength="16" placeholder="写下您对骑手的评价(至少16个字符)" onkeyup="staffcontent(this);"></textarea>
+                              <input type="hidden" name="data[staff_content]">
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+            </div>
+        </div>
+        <{/if}>
+        <div class="ord_evlut_form">
+        	<div class="list-block media-list top_box">
+                <ul>
+                  <li>
+                    <div href="#" class="item-content">
+                      <div class="item-media"><img src="<{$pager.img}>/<{$comment.shop.logo}>"></div>
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                          <div class="item-title"><{$comment.shop.title}></div>
+                        </div>
+                        <{if $comment.order.pei_type!=3}>
+                        <div class="item-title-row">
+                          <div class="item-title">送达时间</div>
+                          <div class="item-after"><input id="waimai_comment_picker" type="text" value="请选择"></div>
+                          <input type="hidden" name="data[pei_time]" value="">
+                        </div>
+                        <{/if}>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+            </div>
+            <p class="txt_center black9">为商家打分</p>
+            <div class="star_box">服务态度
+                <span class="starBg" style="opacity:0.6;">
+                    <span class="star" style="width:60%;">
+                        <span class="star_clink">
+                            <a href="#" val="1"></a>
+                            <a href="#" val="2"></a> 
+                            <a href="#" val="3"></a> 
+                            <a href="#" val="4"></a> 
+                            <a href="#" val="5"></a>
+                            <input type="hidden" name="data[score_fuwu]" value="3">
+                        </span>
+                    </span>
+                </span>
+            </div>
+            
+            <div class="star_box">商品打分
+                <span class="starBg" style="opacity:0.6;">
+                    <span class="star" style="width:60%;">
+                        <span class="star_clink">
+                            <a href="#" val="1"></a>
+                            <a href="#" val="2"></a>
+                            <a href="#" val="3"></a>
+                            <a href="#" val="4"></a>
+                            <a href="#" val="5"></a>
+                            <input type="hidden" name="data[score_kouwei]" value="3">
+                        </span>
+                    </span>
+                </span>
+            </div>
+            <div class="mallord_delt_mask ord_mark">
+                <div class="row selct_box" id="shop_mark">
+                    <a href="javascript:;" class="fl col-33 qt">食材新鲜</a> 
+                    <a href="javascript:;" class="fl col-33 qt">清淡不油腻</a> 
+                    <a href="javascript:;" class="fl col-33 qt">包装精美</a> 
+                    <a href="javascript:;" class="fl col-33 qt">分量足</a> 
+                    <a href="javascript:;" class="fl col-33 qt">商家服务好</a> 
+                    <a href="javascript:;" class="fl col-33 qt">物美价廉</a>
+                    <input type="hidden" name="data[mark]">
+                    <div class="cl"></div>
+                </div>
+            </div>
+            <div class="mineSet_feedback">
+                <div class="list-block">
+                    <ul>
+                      <li class="align-top">
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-input">
+                              <textarea minlength="16" placeholder="写下您对商家的评价(至少16个字符)" onkeyup="savenr(this);"></textarea>
+                              <input type="hidden" name="data[content]">
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+
+                <div class="img_upload">
+                    <script type="text/javascript">
+                        // HTML5图片上传
+                        function fileSelected(obj,num){
+                            var files = obj.files;
+                            for(var i = 0 ; i < files.length; i++){
+                                var rFilter = /^(image\/gif|image\/jpeg|image\/jpg|image\/png)$/i;
+                                if (! rFilter.test(files[i].type)) {                   
+                                    alert("只允许上传JPG、PNG、GIF格式图片");
+                                    return;
+                                }
+                                var reader = new FileReader();
+                                reader.onload = function(e){
+                                    $(".face_img_"+num).attr('src',e.target.result);
+                                }
+                                reader.readAsDataURL(files[i]);
+                            }
+                        }
+                    </script>
+                    <div class="upload_int fl">
+                        <input type="file" name="data[image_file_1]" id="photo1" onChange="fileSelected(this,1)" >
+                        <div class="img"><img class="face_img_1" src="" width="70" height="70"></div>
+                    </div>
+                    <div class="upload_int fl">
+                        <input type="file" name="data[image_file_2]" id="photo2" onChange="fileSelected(this,2)" >
+                        <div class="img"><img class="face_img_2" src="" width="70" height="70"></div>
+                    </div>
+                    <div class="upload_int fl">
+                        <input type="file" name="data[image_file_3]" id="photo3" onChange="fileSelected(this,3)" >
+                        <div class="img"><img class="face_img_3" src="" width="70" height="70"></div>
+                    </div>
+                    <div class="upload_int fl">
+                        <input type="file" name="data[image_file_4]" id="photo4" onChange="fileSelected(this,4)" >
+                        <div class="img"><img class="face_img_4" src="" width="70" height="70"></div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="data[order_id]" value="<{$comment.order.order_id}>">
+        </form>   
+    </div>  
+      
+<!--内容结束-->   
+</div>
+<style type="text/css">
+.upload_int{margin-right:0.55rem;}
+.upload_int .img{width: 3.5rem;height: 3.5rem;background: no-repeat center center;background-size: cover; position:relative; z-index: 1; }
+.upload_int .img img{ width: 100%; height: 100%;}
+.mineSet_feedback .upload_int:before, .upload_int:after{ z-index: 0; }
+.mineSet_feedback .upload_int input{ z-index: 2;}
+</style>
+
+<script type="text/javascript">
+ 
+// 送达时间picker
+$(document).off('focus','#waimai_comment_picker').on('focus','#waimai_comment_picker',function() {
+    $(this).picker({
+        toolbarTemplate: '<header class="bar bar-nav">\<button class="button button-link pull-left close-picker">取消</button>\<button class="button button-link pull-right close-picker" id="wcpickerok">确定</button>\<h1 class="title"><span class="whitecl"></span></h1>\</header>',
+        cols: [
+            {
+              textAlign: 'center',
+              values: [<{foreach $comment.timestr as $k=>$v}>"<{$k}>",<{/foreach}>],
+              displayValues: [<{foreach $comment.timestr as $v}>"<{$v}>",<{/foreach}>],
+            }
+        ]
+    })
+})
+
+// 确定选择送达时间
+$(document).off('click','#wcpickerok').on('click','#wcpickerok',function() {
+    var pei_time = $('#waimai_comment_picker').val();
+    if(pei_time == '请选择') {pei_time = 10; $('#waimai_comment_picker').val(10);}
+    $("input[name='data[pei_time]']").val(pei_time);
+    $('#waimai_comment_picker').val(pei_time+'分钟');
+})
+
+// 给商家打分评分
+$(document).off('click','.star_clink a').on('click','.star_clink a',function() {
+    var value = $(this).attr('val');
+    $(this).parent().find('input').val(value);
+    $(this).parent().parent().css('width', value*20+'%').parent().css('opacity',value*0.2);
+})
+
+// 给配送员打分
+$(document).off('click','#staff_score a').on('click','#staff_score a',function() {
+    var value = $(this).attr('val');
+    $(this).parent().find('input').val(value);
+    $(this).parent().parent().css('width', value*20+'%').parent().css('opacity',value*0.2);
+})
+
+// 选择商家mark
+var mark = [];
+$(document).off('click','#shop_mark a').on('click','#shop_mark a',function() {
+    var curr_mark = $(this).text();
+    if($(this).hasClass('active')) {
+        mark.push(curr_mark);
+    }else {
+        removeByValue(mark, curr_mark);
+    }
+    $("input[name='data[mark]']").val(mark.join(","));
+})
+
+// 选择配送员mark
+var mark2 = [];
+$(document).off('click','#staff_mark a').on('click','#staff_mark a',function() {
+    var curr_mark2 = $(this).text();
+    if($(this).hasClass('active')) {
+        mark2.push(curr_mark2);
+    }else {
+        removeByValue(mark2, curr_mark2);
+    }
+    $("input[name='data[staff_mark]']").val(mark2.join(","));
+})
+
+// 记录商家评价内容
+function savenr(obj) {
+    $("input[name='data[content]']").val($(obj).val());
+}
+
+// 记录配送员评价内容
+function staffcontent(obj) {
+    $("input[name='data[staff_content]']").val($(obj).val());
+}
+
+</script>
+<{include file="block/footer.html"}>
+<script type="text/javascript">
+// mark切换高亮和灰色状态
+$(document).off('click','#staff_mark .qt').on('click','#staff_mark .qt',function () {
+    if($(this).hasClass("active")){
+        $(this).removeClass("active");
+    }else{
+        $(this).addClass("active");
+    }
+});
+
+$(document).off('click','#shop_mark .qt').on('click','#shop_mark .qt',function () {
+    if($(this).hasClass("active")){
+        $(this).removeClass("active");
+    }else{
+        $(this).addClass("active");
+    }
+});
+</script>

@@ -1,0 +1,725 @@
+<{assign var='tpl_title' value=L("提交订单")}>
+<{include file="block/header.html"}>
+   <div class="page page-current">
+        <!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back" id="waimai_order_backurl"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">提交订单</h1>
+        </header>
+        <!--头部结束-->
+        <div class="bar bar-tab ordSubmit_footer" style="line-height: 2.5rem;">
+            <div class="fl ml10" id="total_youhui2"></div>
+            <div class="fr">待支付<span class="fontcl1" id="jiesuan_price2"></span><a class="pub_btn" id="createorder">提交</a></div>
+
+        </div>
+        <div class="content">
+           <div class="ordSubmit">
+            <form id="form_post" method="post">
+                <input type="hidden" name="params[shop_id]" value="<{$shop.shop_id}>">
+                <input type="hidden" name="params[products]" value="<{$products}>">
+                <input type="hidden" name="params[product_price]" value="<{$product_price}>" />
+                <input type="hidden" name="params[pei_type]" value="<{$shop.pei_type}>">
+                <input type="hidden" name="params[addr_id]"  value="<{$m_addr.addr_id}>"/>
+                <input type="hidden" name="params[online_pay]" value="0"/>
+                <input type="hidden" name="params[first_amount]" value="<{$first_youhui}>">
+                <input type="hidden" name="params[pei_time]" value=""/>
+                <input type="hidden" name="params[ziti_time]" value=""/>
+                <input type="hidden" name="params[intro]" value=""/>
+                <input type="hidden" name="params[coupon_id]" value="<{$coupon.coupon_id}>">
+                <input type="hidden" name="params[hongbao_id]" value="0"/>
+                <input type="hidden" name="params[package_amount]" value="<{$package_price}>" />
+                <input type="hidden" name="params[freight_amount]" value="" />
+                <div class="list-block">
+                    <ul>
+                        <{if $shop.is_ziti==1}>
+                        <li class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">是否自提</div>
+                          <div class="item-after">
+                              <label class="label-switch ziti_judge_select">
+                                <input type="checkbox">
+                                <div class="checkbox"></div>
+                              </label>
+                          </div>
+                        </div>
+                        </li>
+                        <li class="item-content item-link ziti_judge">
+                          <div class="item-inner">
+                            <div class="item-title">自提时间</div>
+                            <div class="item-after"><input class="maincl font_size14" id='ziti-time' value="立即自提|大约<{$ziti_yuji}>"></div>
+                          </div>
+                        </li>
+                        <li class="item-content item-link ziti_judge" id="ziti_map_locate">
+                          <div class="item-inner">
+                            <div class="item-title">自提地址</div>
+                            <div class="item-after"><span class="font_size14" id="ziti-addr"><{$shop.addr}></span></div>
+                          </div>
+                        </li>
+                        <{/if}>
+                    </ul>
+                </div>
+
+                <div class="list-block media-list ziti_judge_no">
+                  <ul>
+                    <li class="ordSubmit_infor">
+                        <{if !$m_addr}>
+                            <a id="select_addr" href="<{link ctl='ucenter/addr/create'}>" >
+                                <div class="item-content item-link">
+                                <div class="item-media"><i class="iconfont icon-site-copy"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title mb10"></div>
+                                    </div>
+                                    <div class="item-subtitle add">
+                                        <p style="text-align:center;color:#3d4145;">您还没有设置地址</p>
+                                        <p style="text-align:center;color:#3d4145;">点击立即添加地址</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </a>
+                        <{else}>
+
+                            <a href="" id="select_addr">
+                                <div class="item-content item-link">
+                                <div class="item-media"><i class="iconfont icon-site-copy"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title mb10 contacts" style="color:#3d4145;">
+                                            <{$m_addr.contact}>&nbsp;<{$m_addr.mobile}>
+                                        </div>
+                                    </div>
+                                    <div class="item-subtitle address" style="color:#3d4145;font-size: 0.7rem;"><{$m_addr.addr}><{$m_addr.house}></div>
+                                </div>
+                                </div>
+                            </a>
+                        <{/if}>
+                    </li>
+                  </ul>
+                </div>
+                <div class="list-block media-list ordSubmit_radio">
+                  <ul>
+                    <{if $shop.online_pay == 1 || $shop.online_pay==2}>
+                    <li>
+                      <label class="label-checkbox item-content" paymethod="1">
+                        <div class="item-inner">
+                            在线支付
+
+                                <!-- <{if $first_youhui>0}><span class="ml10 ts" style="font-size:0.7rem;">首单立减<{$first_youhui}>元</span><{/if}>
+                                <{if $txt_manjian}><span class="ml10 ts" style="font-size:0.7rem;"><{$txt_manjian}></span><{/if}> -->
+
+                        </div>
+                        <input type="radio" name="my-radio" checked="checked">
+                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                      </label>
+                    </li>
+                    <{/if}>
+                    <{if $shop.is_daofu == 1 || $shop.online_pay==0 || $shop.online_pay==2}>
+                    <li>
+                      <label class="label-checkbox item-content" paymethod="0">
+                        <div class="item-inner">货到付款</div>
+                        <input type="radio" name="my-radio">
+                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                      </label>
+                    </li>
+                    <{/if}>
+                  </ul>
+                </div>
+                <div class="list-block">
+                  <ul>
+
+                    <li class="item-content item-link ziti_judge_no">
+                      <div class="item-inner">
+                        <div class="item-title">送达时间</div>
+                        <div class="item-after"><input class="maincl font_size14" id='song-time' value="尽快送达|预计<{$yuji_time}>"></div>
+                      </div>
+                    </li>
+
+                    <li class="item-content item-link note">
+                      <div class="item-inner">
+                        <div class="item-title">订单备注</div>
+                        <div class="item-after"><span class="black9 font_size14" id="kouwei">可输入偏好、忌口等</span></div>
+                      </div>
+                    </li>
+
+                  </ul>
+                </div>
+                <div class="list-block" id="coupon_hongbao">
+                  <ul>
+                    <li class="item-content item-link coupon">
+                      <div class="item-inner">
+                        <div class="item-title">商家优惠券</div>
+                        <div class="item-after">
+                            <{if $coupon.count>0}>
+                            <span class="fontcl1 font_size14"><{$coupon.count}>个商家优惠券可用</span>
+                            <{else}>
+                            <span class="black9 font_size14">暂无商家优惠券可用</span>
+                            <{/if}>
+                        </div>
+                      </div>
+
+                    </li>
+                    <li class="item-content item-link hongbao">
+                      <div class="item-inner">
+                        <div class="item-title">红包</div>
+                        <div class="item-after">
+                            <{if $hongbao.count>0}>
+                            <span class="fontcl1 font_size14"><{$hongbao.count}>个红包可用</span>
+                            <{else}>
+                            <span class="black9 font_size14">暂无红包可用</span>
+                            <{/if}>
+                        </div>
+                      </div>
+
+                    </li>
+                  </ul>
+                </div>
+                <div class="list-block media-list ordSubmit_list">
+                  <ul>
+                    <li class="item-content bt">
+                      <div class="item-media"><i class="iconfont icon-dianpu"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title"><span class="black6"><{$shop.title}></span></div>
+                      </div>
+                    </li>
+                    <{if $product_list}>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <{foreach $product_list as $p}>
+                        <div class="item-title-row">
+                            <div class="item-title">
+                            <{if $p.is_spec}><{$p.title}>(<{$p.spec_name}>)<{else}><{$p.title}><{/if}>
+                            </div>
+                            <div class="item-after"><span class="mr10 black9">x<{$p.num}></span>￥<{$p.price}></div>
+                        </div>
+                        <{/foreach}>
+                      </div>
+                    </li>
+                    <{/if}>
+                    <li class="item-content" id="freight_package">
+                      <div class="item-inner">
+                        <div class="item-title-row" id="freight_p">
+                            <div class="item-title">配送费</div>
+                            <div class="item-after"><span class="ml10" id="freight_amount"></span></div>
+
+                        </div>
+                        <div class="item-title-row" id="package_p">
+                            <div class="item-title">餐盒费</div>
+                            <div class="item-after"><span class="ml10" id="package_amount">￥<{$package_price}></span></div>
+
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="item-content" id="famount_coupon">
+                      <div class="item-inner">
+                        <{if $first_youhui>0}>
+                        <div class="item-title-row" id="first_amounts">
+                            <div class="item-title"><span class="fontcl1">首单立减</span></div>
+                            <div class="item-after"><span class="fontcl1" id="first_amount">-￥<{$first_youhui}></span></div>
+                        </div>
+                        <{/if}>
+                        <div class="item-title-row" >
+                            <div class="item-title"><span class="fontcl1">商家优惠券</span></div>
+                            <div class="item-after"><span class="fontcl1" id="coupon_amount"></span></div>
+                        </div>
+                        <div class="item-title-row">
+                            <div class="item-title"><span class="fontcl1">满减优惠</span></div>
+                            <div class="item-after"><span class="fontcl1" id="youhui_amount">-￥<{$youhui_amount}></span></div>
+                        </div>
+                        <div class="item-title-row">
+                            <div class="item-title"><span class="fontcl1">红包优惠</span></div>
+                            <div class="item-after"><span class="fontcl1" id="hongbao_amount">-￥<{$hongbao.amount}></span></div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                            <div class="item-title"><span class="mr10 pad_r10" id="total_price"></span><span class="mr10 pad_r10" id="total_youhui"></span></div>
+                            <div class="item-after">实付<span class="fontcl1" id="jiesuan_price"></span></div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+            </form>
+           </div>
+        </div>
+    <!--内容结束-->
+    </div>
+<style>
+    .maincl{text-align:right;}
+</style>
+
+<script>
+window.WorderData = window.WorderData || {"params":{}};
+
+var is_ziti = parseInt(<{$shop.is_ziti}>);
+$(document).ready(function() {
+    peitime_format();
+    // 默认方式为配送
+    $('.ziti_judge').hide();
+    $('.ziti_judge_no').show();
+    $('.ziti_judge_select').removeClass('on');
+    // 默认选择的支付方式
+    if($('.ordSubmit_radio .label-checkbox input').attr('checked') == 'checked') {
+        $("input[name='params[online_pay]']").val($('.ordSubmit_radio .label-checkbox').attr('paymethod'));
+    }
+
+    // 自提地址显示长度优化
+    var ziti_addr = "<{$shop.addr}>";
+    $('#ziti-addr').html(ziti_addr.substring(0,18)+'...');
+
+    // 读取各存储状态
+    if(localStorage['waimai_order_state']) {
+        var stateJSON = JSON.parse(localStorage['waimai_order_state']);
+        if(stateJSON.pei_type == 3) {
+            $('.ziti_judge_select').find('input').click();
+            $("input[name='params[pei_type]']").val(3);
+            $('.ziti_judge').css('display','flex');
+            $('.ziti_judge_no').hide();
+            $('.ziti_judge_select').addClass('on');
+        }else {
+            $('.ziti_judge_select').find(':checked').click();
+            $("input[name='params[pei_type]']").val(<{$shop.pei_type}>);
+        }
+        if(stateJSON.addr_id) {
+            $("input[name='params[addr_id]']").val(stateJSON.addr_id);
+        }
+        if(stateJSON.online_pay==1) {
+            $("input[name='params[online_pay]']").val(1);
+            $(".ordSubmit_radio .label-checkbox[paymethod='1']").click();
+        }else if(stateJSON.online_pay==0){
+            $("input[name='params[online_pay]']").val(0);
+            $(".ordSubmit_radio .label-checkbox[paymethod='0']").click();
+        }
+    }
+
+    // 自动填写选择的地址
+    if(localStorage['select_address']) {
+        var addr = JSON.parse(localStorage['select_address']);
+        if(addr.addr_id && addr.contact && addr.mobile && addr.address) {
+            $("input[name='params[addr_id]']").val(addr.addr_id);
+            $("#addr_id").val(addr.addr_id);
+            $(".contacts").html(addr.contact+'&nbsp;'+addr.mobile);
+            $(".address").html(addr.address);
+        }
+    }
+
+    // 展示编辑完成的备注信息
+    if(localStorage['waimai_order_remarks']) {
+        var remark_obj = JSON.parse(localStorage['waimai_order_remarks']);
+        if(remark_obj) {
+            var kouwei = remark_obj.kouwei + remark_obj.content;
+            $('#intro').val(kouwei);
+            $("input[name='params[intro]']").val(kouwei);
+            $('#kouwei').text(kouwei.substring(0,20)+'...');
+        }
+    }
+
+    // 如果选取了店铺优惠券，更新显示
+    if(localStorage['select_coupon']) {
+        var cJSON = JSON.parse(localStorage['select_coupon']);
+        if(cJSON.coupon_id) {      
+            // 根据coupon_id ajax请求获得优惠券
+            $("input[name='params[coupon_id]']").val(cJSON.coupon_id);
+        }
+    }
+
+    // 如果选取了红包，更新显示
+    if(localStorage['select_hongbao']) {
+        var hJSON = JSON.parse(localStorage['select_hongbao']);
+        // hongbao_id ajax请求获得红包
+        if(hJSON.hongbao_id) {
+            $("input[name='params[hongbao_id]']").val(hJSON.hongbao_id);
+        }
+    }
+
+    if(localStorage['waimai_order_peitime']) {
+        $('#song-time').val(localStorage['waimai_order_peitime']);
+        $("input[name='params[pei_time]']").val(localStorage['waimai_order_peitime']);
+    }
+
+    if(localStorage['waimai_order_zititime']) {
+        $('#ziti-time').val(localStorage['waimai_order_zititime']);
+        $("input[name='params[ziti_time]']").val(localStorage['waimai_order_zititime']);
+    }
+
+    setTimeout(function(){__Ajax_Waimai_Order();},1)
+    
+})
+
+function getParams() {
+    WorderData.params['shop_id'] = $("input[name='params[shop_id]']").val();
+    WorderData.params['pei_type'] = $("input[name='params[pei_type]']").val();
+    WorderData.params['package_price'] = parseFloat($("input[name='params[package_amount]']").val()).toFixed(2);
+    WorderData.params['addr_id'] = $("input[name='params[addr_id]']").val();
+    WorderData.params['online_pay'] = $("input[name='params[online_pay]']").val();
+    WorderData.params['coupon_id'] = $("input[name='params[coupon_id]']").val();
+    WorderData.params['hongbao_id'] = $("input[name='params[hongbao_id]']").val();
+    WorderData.params['product_price'] = parseFloat($("input[name='params[product_price]']").val()).toFixed(2);
+}
+
+function __Ajax_Waimai_Order() {
+//    return false;
+    getParams();
+    $.ajax({
+        url: "<{link ctl='waimai/order:ajaxorder'}>",
+        async: true,
+        dataType: 'json',
+        data: WorderData.params,
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error == 0 ) {
+                $('#freight_amount').html('￥'+ret.data.freight);
+                $('#coupon_amount').html('-￥'+ret.data.coupon);
+                $('#youhui_amount').html('-￥'+ret.data.youhui_amount);
+                $('#hongbao_amount').html('-￥'+ret.data.hongbao_amount);
+
+                $('#first_amount').html('-￥'+ret.data.first_amount);
+                
+                $('#total_price').html('总计￥'+ret.data.total_price);
+                $('#total_youhui').html('优惠￥'+ret.data.total_youhui);
+                $('#total_youhui2').html('已优惠￥'+ret.data.total_youhui);
+                $('#jiesuan_price').html('￥'+ret.data.jiesuan_price);
+                $('#jiesuan_price2').html('￥'+ret.data.jiesuan_price);
+                if(parseInt(ret.data.hongbao_amount)>0) {
+                    $('.item-content.item-link.hongbao').find('span').text(ret.data.hongbao_amount+'元'+ret.data.hongbao.title);
+                }
+                if(parseInt(ret.data.coupon_amount)>0) {
+                    $('.item-content.item-link.coupon').find('span').html('<span class="fontcl1 font_size14">'+ret.data.coupon_amount+'元店铺优惠券</span>');
+                }
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+}
+
+/*--------------------------选择支付方式处理开始------------------------------*/
+$(document).off('click','.label-checkbox.item-content').on('click','.label-checkbox.item-content',function(){
+    $('.label-checkbox.item-content').removeClass('on');
+    if($(this).hasClass('on')) {
+        $(this).removeClass('on');
+    }else {
+        $(this).addClass('on');
+    }
+    $("input[name='params[online_pay]']").val($(this).attr('paymethod'));
+
+    // 设置选择的支付方式
+
+    var online_pay = $("input[name='params[online_pay]']").val();
+    if(online_pay == 0) {
+        $("input[name='params[first_amount]']").val(0);
+        $('#famount_coupon').hide();
+        $('#coupon_hongbao').hide();
+    }else {
+        $("input[name='params[first_amount]']").val(parseFloat("<{$shop.first_amount}>").toFixed(2));
+        $('#famount_coupon').show();
+        $('#coupon_hongbao').show();
+    }
+    __Ajax_Waimai_Order();
+});
+/*--------------------------选择支付方式处理结束------------------------------*/
+
+
+/*--------------------------是否自提处理开始------------------------------*/
+// 是否自提 hasClass('on')
+$(document).off('click', '.ziti_judge_select').on('click','.ziti_judge_select', function () {
+    localStorage.removeItem('waimai_order_state');
+    if($(this).hasClass("on")){
+        // 配送 显示配送费
+        $(this).removeClass("on");
+        $(".ziti_judge").hide();
+        $(".ziti_judge_no").show();
+        $('#freight_p').css('display','flex');
+        $("input[name='params[pei_type]']").val(<{$shop.pei_type}>);
+        peitime_format();
+        $("label[paymethod$='0']").css('display','flex');
+    }else{
+       // 自提 隐藏配送费
+        $(this).addClass("on");
+        $(".ziti_judge").show();
+        $(".ziti_judge_no").hide();
+        $('#freight_p').hide();
+        $("input[name='params[pei_type]']").val(3);
+        zititime_format();
+        
+        $("label[paymethod$='0']").css('display','none');
+    }
+    // ajax
+    __Ajax_Waimai_Order();
+});
+/*--------------------------是否自提处理结束------------------------------*/
+
+
+/*--------------------------送达时间处理开始------------------------------*/
+// 送达时间数组
+if("<{$yuji_time}>") {
+    $('#song-time').val("尽快送达|预计" + "<{$yuji_time}>");
+    var sd_str = time_select("<{$yuji_time}>","<{$set_time['start']}>", "<{$set_time['start_quarter']}>", "<{$set_time['end']}>", "<{$set_time['end_quarter']}>");
+    var sd_timelist = sd_str.split(",");
+    sd_timelist[0] = "尽快送达|预计" + sd_timelist[0];
+    if(sd_timelist[sd_timelist.length-1] == '') {
+        sd_timelist.pop();
+    }
+}
+// 送达时间选择器
+    $("#song-time").picker({
+        toolbarTemplate: '<header class="bar bar-nav">\<button class="button button-link pull-left" id="cancelsong">取消</button>\<button class="button button-link pull-right close-picker" id="select_stime_ok">确定</button>\<h1 class="title"><span class="whitecl">选择送达时间</span></h1>\</header>',
+        cols: [{textAlign: 'center',values: sd_timelist}]
+    });
+
+// 送达时间选好之后点击确定事件
+$(document).off('click','#select_stime_ok').on('click','#select_stime_ok', function() {
+    peitime_format();
+    localStorage['waimai_order_peitime'] = $("input[name='params[pei_time]']").val();
+});
+
+// 送达时间选择器关闭事件
+$(document).off('click','#cancelsong').on('click','#cancelsong', function() {
+    $("#song-time").picker("close");
+    localStorage['waimai_order_peitime'] = $("input[name='params[pei_time]']").val();
+})
+
+function peitime_format() {
+    var song_time = $('#song-time').val();
+    if(song_time.match("尽快送达|预计")) {
+        song_time = song_time.replace("尽快送达|预计", '');
+    }
+    //$('#song-time').val(song_time);
+    $("input[name='params[pei_time]']").val(song_time);
+}
+
+
+/*--------------------------送达时间处理结束------------------------------*/
+
+
+/*--------------------------自提时间处理开始------------------------------*/
+// 自提时间数组
+if("<{$ziti_yuji}>") {
+    $('#ziti-time').val("立即自提|大约" + "<{$ziti_yuji}>");
+    var zt_str = time_select("<{$ziti_yuji}>","<{$set_time['start']}>", "<{$set_time['start_quarter']}>", "<{$set_time['end']}>", "<{$set_time['end_quarter']}>");
+    var zt_timelist = zt_str.split(",");
+    if(zt_timelist[zt_timelist.length-1] == '') {
+        zt_timelist.pop();
+    }
+    var zt_timelist2 = zt_timelist;
+    zt_timelist[0] = "立即自提|大约" + zt_timelist[0];
+}
+// 自提时间明天、后天数组
+if("<{$tomorrow_set_time}>") {
+    var tomorrow_timelist = time_select('', "<{$tomorrow_set_time['start']}>", "<{$tomorrow_set_time['start_quarter']}>", "<{$tomorrow_set_time['end']}>", "<{$tomorrow_set_time['end_quarter']}>");
+    var tomorrow_timelist = tomorrow_timelist.split(",");
+    if(tomorrow_timelist[tomorrow_timelist.length-1] == '') {
+        tomorrow_timelist.pop();
+    }
+}
+// 自提时间选择
+
+    $('#ziti-time').picker({
+        toolbarTemplate: '<header class="bar bar-nav">\<button class="button button-link pull-left" id="cancelziti">取消</button>\<button class="button button-link pull-right close-picker" id="select_ziti_ok">确定</button>\<h1 class="title"><span class="whitecl">选择送达时间</span></h1>\</header>',
+        cols: [
+            {
+                textAlign: 'center',
+                displayValues: ["<{$displayValues[0]}>", "<{$displayValues[1]}>", "<{$displayValues[2]}>"],
+                values:["<{$values[0]}>", "<{$values[1]}>", "<{$values[2]}>"],
+                onChange: function (picker, values, displayValues) {
+                    var dataxxx = {"<{$values[0]}>":zt_timelist2, "<{$values[1]}>":tomorrow_timelist,"<{$values[2]}>":tomorrow_timelist};
+                    picker.cols[1].replaceValues(dataxxx[picker.cols[0].value]);
+                },
+            },
+            {
+                textAlign: 'center',
+                displayValues: zt_timelist,
+                values: zt_timelist2
+            }
+        ],
+        formatValue: function (picker, values, displayValues){
+            return displayValues.join(" ");
+        },
+    });
+// 自提时间选好之后点击确定事件
+$(document).off('click','#select_ziti_ok').on('click','#select_ziti_ok', function() {
+    zititime_format();
+    localStorage['waimai_order_zititime'] = $("input[name='params[ziti_time]']").val();
+});
+
+// 自提时间选择器关闭事件
+$(document).off('click','#cancelziti').on('click','#cancelziti', function() {
+    $("#song-time").picker("close");
+    localStorage['waimai_order_zititime'] = $("input[name='params[ziti_time]']").val();
+})
+
+function zititime_format()  {
+    var ziti_time = $('#ziti-time').val();
+    if(ziti_time.match("立即自提|大约")) {
+        ziti_time = ziti_time.replace("立即自提|大约", '');
+    }
+    if(ziti_time.match("今天")) {
+        ziti_time = ziti_time.replace("今天","<{$values[0]}>");
+    }
+    if(ziti_time.match("明天")) {
+        ziti_time = ziti_time.replace("明天","<{$values[1]}>");
+    }
+    if(ziti_time.match("后天")) {
+        ziti_time = ziti_time.replace("后天","<{$values[2]}>");
+    }
+    var tmp1 = ziti_time;
+    tmp1 = tmp1.substr(0,14);
+    if(tmp1.match("-")) {
+        tmp1 = tmp1.replace("-","");
+    }
+    $("input[name='params[ziti_time]']").val(tmp1);
+}
+
+/*--------------------------自提时间处理结束------------------------------*/
+
+
+/*--------------------------收货地址处理开始------------------------------*/
+// 从地址列表中选择收货地址
+$(document).off('click', '#select_addr').on('click', '#select_addr', function() {
+    localStorage['select_address'] = JSON.stringify({"backurl":window.location.href});
+    $.router.load("<{link ctl='ucenter/addr:index'}>", true);
+})
+//第一次购物,没有地址,bug,
+
+
+/*--------------------------收货地址处理结束------------------------------*/
+
+
+/*--------------------------订单备注处理开始------------------------------*/
+// 填写订单备注信息
+$(document).off('click','.item-content.item-link.note').on('click','.item-content.item-link.note', function() {
+    var pei_type = $("input[name='params[pei_type]']").val();
+    var addr_id = $("input[name='params[addr_id]']").val();
+    var online_pay = $("input[name='params[online_pay]']").val();
+    var hongbao_id = $("input[name='params[hongbao_id]']").val();
+    var coupon_id = $("input[name='params[coupon_id]']").val();
+    localStorage['waimai_order_state'] = JSON.stringify({"hongbao_id":hongbao_id,"coupon_id":coupon_id,"pei_type":pei_type,"addr_id":addr_id,"online_pay":online_pay,"backurl":window.location.href});
+    $.router.load("<{link ctl='waimai/order:note'}>", true);
+})
+
+/*--------------------------订单备注处理结束------------------------------*/
+
+
+/*--------------------------店铺优惠券处理开始------------------------------*/
+// 选取可用店铺优惠券
+$(document).off('click','.item-content.item-link.coupon').on('click','.item-content.item-link.coupon', function() {
+    var amount = parseFloat(<{$first_price}>);
+    var shop_id = parseInt(<{$shop.shop_id}>);
+    var pei_type = $("input[name='params[pei_type]']").val();
+    var addr_id = $("input[name='params[addr_id]']").val();
+    var online_pay = $("input[name='params[online_pay]']").val();
+    var hongbao_id = $("input[name='params[hongbao_id]']").val();
+    var coupon_id = $("input[name='params[coupon_id]']").val();
+    localStorage['waimai_order_state'] = JSON.stringify({"hongbao_id":hongbao_id,"coupon_id":coupon_id,"pei_type":pei_type,"addr_id":addr_id,"online_pay":online_pay,"backurl":window.location.href});
+    localStorage['select_coupon'] = JSON.stringify({"backurl":window.location.href});
+    $.router.load("<{link ctl='ucenter/coupon:lists-"+shop_id+"-"+amount+"'}>", true);
+})
+
+/*--------------------------店铺优惠券处理结束-------------------------*/
+
+
+/*--------------------------红包处理开始------------------------------*/
+// 选取可用外卖专项或全场通用红包
+$(document).off('click','.item-content.item-link.hongbao').on('click','.item-content.item-link.hongbao', function() {
+    var amount = parseFloat(<{$third_price}>);
+    var hongbao_type = 'waimai';
+    var pei_type = $("input[name='params[pei_type]']").val();
+    var addr_id = $("input[name='params[addr_id]']").val();
+    var online_pay = $("input[name='params[online_pay]']").val();
+    var hongbao_id = $("input[name='params[hongbao_id]']").val();
+    var coupon_id = $("input[name='params[coupon_id]']").val();
+    localStorage['waimai_order_state'] = JSON.stringify({"hongbao_id":hongbao_id,"coupon_id":coupon_id,"pei_type":pei_type,"addr_id":addr_id,"online_pay":online_pay,"backurl":window.location.href});
+    localStorage['select_hongbao'] = JSON.stringify({"backurl":window.location.href});
+    localStorage['ucenter_hongbao_list_backurl'] = window.location.href;
+    $.router.load("<{link ctl='ucenter/hongbao:lists-"+hongbao_type+"-"+amount+"'}>", true);
+})
+
+/*--------------------------红包处理结束------------------------------*/
+
+
+
+
+// 提交订单
+$(document).off('click','#createorder').on('click','#createorder',function() {
+    $.ajax({
+        url: "<{link ctl='waimai/order:create'}>",
+        async: false,
+        dataType: 'json',
+        data: $("#form_post").serializeArray(),
+        type: 'POST',
+        success: function (ret) {
+            if (ret.error == 0) {
+                /* 下单成功
+                1.清空购物车cookie,localStorage
+                2.如果已支付跳转到订单详情页，如果未支付跳转到支付页面
+                */
+                Widget.MsgBox.success(ret.message);
+                localStorage.removeItem('waimai_order_state');
+                localStorage.removeItem('select_address');
+                localStorage.removeItem('waimai_order_remarks');
+                localStorage.removeItem('select_hongbao');
+                localStorage.removeItem('select_coupon');
+                localStorage.removeItem('ECart');
+                Cookie.set('ECart', {});
+                var order_id = parseInt(ret.order.order_id);
+                var pay_status = parseInt(ret.order.pay_status);
+                var online_pay = parseInt(ret.order.online_pay);
+                var detail_link = "<{link ctl='waimai/order:detail-"+order_id+"'}>";
+                var payment_link = "<{link ctl='ucenter/order:payment-"+order_id+"'}>";
+                localStorage['waimai_detail_backurl'] = "<{link ctl='waimai/order:index'}>";
+                setTimeout(function(){
+                    Widget.MsgBox.hide();
+                    if(online_pay == 1 && pay_status == 0) {
+                        localStorage['payment_backurl'] = detail_link;
+                        $.router.load(payment_link, true);
+                    }else {
+                        $.router.load(detail_link, true);
+                    }
+                },1500);
+
+
+            } else {
+                Widget.MsgBox.error(ret.message);
+                if(ret.error == 101) {
+                    setTimeout(function(){
+                        Widget.MsgBox.hide();
+                        $.router.load("<{link ctl='passport/login'}>", true);
+                    }, 1500);
+                }else {
+                    setTimeout(function(){
+                        Widget.MsgBox.hide();
+                    },4000)
+                }
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+$(document).off('click','#ziti_map_locate').on('click','#ziti_map_locate',function(){
+    var pei_type = $("input[name='params[pei_type]']").val();
+    var addr_id = $("input[name='params[addr_id]']").val();
+    var online_pay = $("input[name='params[online_pay]']").val();
+    var hongbao_id = $("input[name='params[hongbao_id]']").val();
+    var coupon_id = $("input[name='params[coupon_id]']").val();
+    localStorage['waimai_order_state'] = JSON.stringify({"hongbao_id":hongbao_id,"coupon_id":coupon_id,"pei_type":pei_type,"addr_id":addr_id,"online_pay":online_pay,"backurl":window.location.href});
+    var shop_id = parseInt(<{$shop.shop_id}>);
+    $.router.load("<{link ctl='waimai/order:locate-"+shop_id+"'}>");
+})
+
+$(document).off('click','#waimai_order_backurl').on('click','#waimai_order_backurl',function(){
+    localStorage.removeItem('waimai_order_state');
+    localStorage.removeItem('select_address');
+    localStorage.removeItem('waimai_order_remarks');
+    localStorage.removeItem('select_hongbao');
+    localStorage.removeItem('select_coupon');
+    localStorage.removeItem('waimai_order_zititime');
+    localStorage.removeItem('waimai_order_peitime');
+})
+</script>
+<{include file="block/footer.html"}>

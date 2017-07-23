@@ -1,0 +1,475 @@
+<{assign var='tpl_title' value=L("我的订单")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<style type="text/css">
+.loading_end {
+    margin: 0.5rem;
+    font-size:0.65rem;
+    text-align: center;
+}
+</style>
+<div class="page page-current">
+<header class="bar bar-nav header_Ico">
+  <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/ucenter/index:index'}>
+    ">
+    <span class="Ico1"></span>
+  </a>
+  <h1 class="title">我的订单</h1>
+</header>
+<!--头部结束-->
+<div class="content infinite-scroll infinite-scroll-bottom">
+  <div style="padding-bottom:0.5rem" class="dingdan-lists" id="weidian_order_items">
+    <!-- <div class="dingdan-list-card">
+      <div class="list-block">
+        <ul>
+          <li class="item-content">
+            <div class="item-inner">
+              <div class="item-title">订单号：232736616677</div>
+              <div class="item-after">
+                <span class="maincl">
+                  还剩
+                  <span id="sheng_time"></span>
+                </span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="list-block media-list">
+        <ul>
+          <li>
+            <a href="#" class="item-content">
+              <div class="item-media">
+                <img src="pic/melon.png" width="100%"></div>
+              <div class="item-inner">
+                <div class="item-title">
+                  <big>
+                    芒果嘟乐
+                    <span class="fr">￥5</span>
+                  </big>
+                </div>
+                <div class="item-title-row">
+                  <div class="item-title">
+                    <span class="black9">2016/05/04 17:20</span>
+                  </div>
+                  <div class="item-after">
+                    <span class="total-num">
+                      共
+                      <span class="maincl">2</span>
+                      件
+                    </span>
+                    <big>
+                      总计:
+                      <span class="maincl">￥54</span>
+                    </big>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <p class="long_btn">查看其他商品</p>
+      <div class="button-rows border_b">
+        <div class="col-50">
+          <a href="#" class="button button-big button-fill button-danger">再来一单</a>
+        </div>
+        <div class="col-50">
+          <a href="#" class="button button-big button-fill button-success">去支付</a>
+        </div>
+        <div class="cl"></div>
+      </div>
+    </div> -->
+  </div>
+  <!-- 加载提示符 -->
+  <div class="infinite-scroll-preloader">
+      <div class="preloader"></div>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+
+function __Weidian_Order_Load_Items(){
+    if(LoadData.__LOAD_LOCK){
+        return false;
+    }
+    LoadData.__LOAD_LOCK = true;
+    LoadData.params.page ++;
+    $.post("<{link ctl='weidian/ucenter/order:ajax_waimai_order_items'}>", LoadData.params, function(ret){
+        if(ret.error>0){
+            //$.alert(ret.message);
+        }else{
+            var html = '';var status_label = '';
+            if(GetJsonLen(ret.data.items) > 0) {
+                //console.log(ret.data.items);
+                $.each(ret.data.items, function(index,item){
+                    html += '<div class="dingdan-list-card">';
+                      html += '<div class="list-block">';
+                        html += '<ul>';
+                          html += '<li class="item-content">';
+                            html += '<div class="item-inner">';
+                              html += '<div class="item-title">';
+                              if(item.pei_type==3) {
+                                html +='<i class="self-tidan-logo">自提单</i>';
+                              }
+                              html += '订单号：'+item.order_id+'</div>';
+                              html += '<div class="item-after">';
+                                html += '<span class="maincl">';
+                                  html += item.status_label;
+                                  html += '<span id="sheng_time"></span>';
+                                html += '</span>';
+                              html += '</div>';
+                            html += '</div>';
+                          html += '</li>';
+                        html += '</ul>';
+                      html += '</div>';
+                      html += '<div class="list-block media-list">';
+                        html += '<ul>';
+                          html += '<li>';
+                            html += '<a href="#" class="item-content">';
+                              html += '<div class="item-media" style="width:2.8rem;height:2.8rem;">';
+                                html += '<img src="<{$pager.img}>/'+item.pro_info.photo+'" width="100%"></div>';
+                              html += '<div class="item-inner">';
+                                html += '<div class="item-title">';
+                                  html += '<big style="font-size:0.75rem">';
+                                    html += item.pro_info.title;
+                                    //html += '<span class="fr">￥5</span>';
+                                  html += '</big>';
+                                html += '</div>';
+                                html += '<div class="item-title-row">';
+                                  html += '<div class="item-title">';
+                                    html += '<span class="black9" style="font-size:0.65rem">'+item.format_dateline+'</span>';
+                                  html += '</div>';
+                                  html += '<div class="item-after">';
+                                    html += '<span class="total-num" style="font-size:0.65rem">';
+                                      html += '共';
+                                      html += '<span class="maincl">'+item.pro_info.total_count+'</span>';
+                                      html += '件商品';
+                                    html += '</span>';
+                                    html += '<big>';
+                                      //html += '总计:';
+                                      html += '<span class="maincl" style="font-size:0.65rem">￥'+item.amount+'</span>';
+                                    html += '</big>';
+                                  html += '</div>';
+                                html += '</div>';
+                              html += '</div>';
+                            html += '</a>';
+                          html += '</li>';
+                        html += '</ul>';
+                      html += '</div>';
+                      html += '<a href="/weidian_'+item.shop_id+'/ucenter/order/waimai_order_detail-'+item.order_id+'.html" class="external"><p class="long_btn" style="font-size:0.65rem">查看订单详情</p></a>';
+                        html += '<div class="button-rows border_b">';
+                        if (item.pei_type==3) {       
+                            if (item.order_status==-1) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="onemore" shop_id="'+item.shop_id+'">再来一单</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success"></a>';
+                                html += '</div>';
+                            }
+                            if (item.order_status==0 && item.online_pay==1 && item.pay_status==0) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="cancel">取消订单</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="payment">去支付</a>';
+                                html += '</div>';
+                            }
+                            if (item.order_status==0 && item.pay_status==1 && item.online_pay==1) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="cancel">取消订单</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success"></a>';
+                                html += '</div>';
+                            }
+                            if ((item.order_status==1 || item.order_status==2 || item.order_status==3) && item.pei_type==3) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="zitima"></a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success"></a>';
+                                html += '</div>';
+                            }
+                            if ((item.order_status==8 || item.order_status==4) && item.comment_status==0) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="comment">评价得积分</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="onemore" shop_id="'+item.shop_id+'">再来一单</a>';
+                                html += '</div>';
+                            }
+                            
+                            if (item.order_status==8 && item.comment_status==1) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="look_comment">查看评价</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="onemore" shop_id="'+item.shop_id+'">再来一单</a>';
+                                html += '</div>';
+                            }
+                        }else{
+                            
+                            if (item.order_status==0 && item.online_pay==1 && item.pay_status==0) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="cancel">取消订单</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="payment">去支付</a>';
+                                html += '</div>';
+                            }
+                            if (item.order_status==0 && item.pay_status==1 && item.online_pay==1) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="cancel">取消订单</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success"></a>';
+                                html += '</div>';
+                            }
+                            if ((item.order_status==1 || item.order_status==2 || item.order_status==3) && item.pei_type!=3) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="cuidan">催单</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success"></a>';
+                                html += '</div>';
+                            }
+                            if (item.order_status==-1) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="onemore" shop_id="'+item.shop_id+'">再来一单</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success"></a>';
+                                html += '</div>';
+                            }
+                            if (item.order_status==4) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="arrived">确认送达</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success"></a>';
+                                html += '</div>';
+                            }
+                            if ((item.order_status==8) && item.comment_status==0) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="comment">评价得积分</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="onemore" shop_id="'+item.shop_id+'">再来一单</a>';
+                                html += '</div>';
+                            }
+                            if (item.order_status==8 && item.comment_status==1) {
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="look_comment">查看评价</a>';
+                                html += '</div>';
+                                html += '<div class="col-50">';
+                                html += '<a href="javascript:;" order_id="'+item.order_id+'" style="font-size:0.65rem" class="button button-big button-fill button-success" id="onemore" shop_id="'+item.shop_id+'">再来一单</a>';
+                                html += '</div>';
+                            }
+                            
+                        }
+                        html += '<div class="cl"></div>';
+                        html += '</div>';
+                })
+                if(LoadData.params.page == 1){
+                    $('#weidian_order_items').html(html);
+                }else{
+                    $('#weidian_order_items').append(html);
+                }
+            }else if(LoadData.params.page > 1){
+                $.detachInfiniteScroll($('.infinite-scroll-bottom'));
+                $('.infinite-scroll-preloader').remove();
+                $('#weidian_order_items').append('<div class="loading_end">没有更多了...</div>');
+            }else {
+                var nodata = '';
+                nodata += '<div class="nonePage txt_center">';
+                nodata += '<img src="%THEME%/weidian/<{$theme_style}>/static/images/nodata/icon_order_no@2x.png">';
+                nodata += '<p class="black3">无外卖订单记录</p>';
+                nodata += '</div><p class="txt_center font_size12  black9">马上去下单吧</p>';
+                $.detachInfiniteScroll($('.infinite-scroll-bottom'));
+                $('#weidian_order_items').html(nodata);
+                $('.infinite-scroll-preloader').remove();
+            }
+            if(GetJsonLen(ret.data.items) < 9) {
+                $('.infinite-scroll-preloader').hide();
+            }
+        }
+        LoadData.__LOAD_LOCK = false;
+    },"json");
+}
+
+$(document).ready(function(){
+    LoadData.params.page = 0;
+    __Weidian_Order_Load_Items();
+})
+
+$(document).on('infinite', '.infinite-scroll-bottom',function() {
+    __Weidian_Order_Load_Items();
+});
+
+
+//取消理由样式
+$(document).on('click','.mallord_delt_mask .selct_box a',function () {
+    $(".mallord_delt_mask .selct_box a").removeClass("active");
+    $(this).addClass("active");
+});
+
+// 检查补充说明字数
+function checkLen(obj) {
+    var len = GetStrLen($(obj).val());
+    if(len <= 120) {
+        var limit = 120-len;
+        $('.txt_right').text('还可输入' + limit + '字');
+    }
+}
+
+// 取消订单
+function cancelanorder(reason,order_id) {
+    $.ajax({
+        url: "<{link ctl='weidian/ucenter/order/waimai_order_cancel'}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id,"reason":reason},
+        type: 'POST',
+        success: function (ret) {
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+}
+
+// 取消订单modal
+$(document).off('click', '#cancel').on('click','#cancel', function () {
+    var reason = '';
+    var order_id = parseInt($(this).attr('order_id'));
+    var modal = $.modal({
+        title: "温馨小提示",
+        afterText:"确定要取消订单吗？",
+        buttons: [
+            {
+                text: "<span class='black6'>取消</span>"
+            },
+            {
+                text: "<span class='maincl'>确定</span>",
+                bold: true,
+                onClick: function () {
+                    cancelanorder(reason,order_id);
+                }
+            },
+        ]
+    })
+});
+
+
+// 再来一单
+$(document).off('click','#onemore').on('click','#onemore',function() {
+    var order_id = parseInt($(this).attr('order_id'));
+    var shop_id = parseInt($(this).attr('shop_id'));
+    $.ajax({
+        url: "<{link ctl='weidian/ucenter/order/waimai_order_onemore'}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{
+                // 取得订单商品表数组加入购物车
+                window.WDCart = new window.WDCart(shop_id);
+                window.WDCart.clear();
+                if(ret.product_list) {
+                    $.each(ret.product_list,function(index,value){
+                        window.WDCart.add(index, value.product_number, value);
+                        window.WDCart.set_status(index,1);
+                    });
+
+                    // 跳转到购物车结算页面
+                    setTimeout(function(){
+                        window.location.href = "<{link ctl='weidian/waimai:get_cart-"+shop_id+"'}>";
+                    },500);
+                }
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+// 支付订单
+$(document).off('click', '#payment').on('click', '#payment', function() {
+    var order_id = parseInt($(this).attr('order_id'));
+    window.location.href = "<{link ctl='weidian/ucenter/order:payment-"+order_id+"'}>";
+});
+
+// 催单
+$(document).off('click','#cuidan').on('click','#cuidan',function() {
+    var order_id = parseInt($(this).attr('order_id'));
+    $.ajax({
+        url: "<{link ctl='weidian/ucenter/order/waimai_order_cuidan'}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error == 0 ) {
+                $.alert(ret.message);
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                $.alert(ret.message);
+                return false;
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+// 确认送达
+$(document).off('click','#arrived ').on('click','#arrived ',function() {
+    var order_id = parseInt($(this).attr('order_id'));
+    $.ajax({
+        url: "<{link ctl='weidian/ucenter/order/waimai_order_arrived '}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error > 0){
+                $.alert(ret.message);
+            }else{
+                $.alert(ret.message);
+                setTimeout(function(){window.location.reload();},1000);
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+// 去评价
+$(document).off('click','#comment').on('click','#comment',function() {
+    var order_id = parseInt($(this).attr('order_id'));
+    window.location.href = "<{link ctl='weidian/ucenter/order:waimai_order_comment-"+order_id+"'}>";
+})
+
+// 查看评价
+$(document).off('click','#look_comment').on('click','#look_comment',function() {
+    var order_id = parseInt($(this).attr('order_id'));
+    window.location.href = "<{link ctl='weidian/ucenter/order:waimai_order_lookcomment-"+order_id+"'}>";
+})
+
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

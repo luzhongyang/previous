@@ -1,0 +1,315 @@
+<{assign var='tpl_title' value=L("商城订单")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left" href="<{link ctl='ucenter'}>"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">商城订单</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content pull-to-refresh-content" data-ptr-distance="44">
+            <!-- 默认的下拉刷新层 -->
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="card-container mallord_list_box mt10" id="mall-order-items">
+                <!-- <div class="card mallord_list">
+                    <div class="card-header">card</div>
+                    <div class="card-content">
+                        <div class="card-content-inner">
+                            这里是第1个card，下拉刷新会出现第2个card。
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div id="load_end"> </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    LoadData.__LOAD_LOCK = false;
+    LoadData.params.page = 0;
+    __Mall_Order_Load_Items(LoadData.params);
+});
+
+// ajax加载列表
+function __Mall_Order_Load_Items(params){
+    if(LoadData.__LOAD_LOCK){
+        return false;
+    }
+    LoadData.__LOAD_LOCK = true;
+    LoadData.params.page ++;
+    params = params || {};
+    LoadData.params = $.extend(LoadData.params, params);
+    $.post("<{link ctl='mall/order:items'}>", LoadData.params, function(ret){
+        if(ret.error > 0){
+            Widget.MsgBox.error(ret.message);
+        }else{
+            var html = ''; 
+            var items_len = GetJsonLen(ret.data.items);
+            if(items_len > 0) {
+                $.each(ret.data.items, function(index,item){
+                    var shanchu = '';
+                    var order_status_label = ''; 
+                    var card_footer = '';
+                    if (item.pay_status==0 && item.order_status==0) {
+                        order_status_label = '订单待支付';
+                        card_footer = '<div class="card-footer"><a href="" class="button button-cancel" order_id="'+item.order_id+'">取消订单</a><a href="" class="button button-warning" order_id="'+item.order_id+'">支付订单</a></div>';
+                    }else if(item.pay_status==1 && item.order_status==0) {
+                        order_status_label = '订单待发货';
+                        card_footer = '<div class="card-footer"><a href="" class="button button-cancel" order_id="'+item.order_id+'">取消订单</a></div>';
+                    }else if(item.order_status==3) {
+                        order_status_label = '订单已发货';
+                        card_footer = '<div class="card-footer"><a href="" class="button setreceipt" order_id="'+item.order_id+'">确认收货</a></div>';
+                    }else if(item.order_status==-1) {
+                        order_status_label = '订单已取消';
+                        card_footer = '';
+                    }else if(item.order_status==8) {
+                        order_status_label = '订单已完成';
+                        card_footer = '';
+                    }
+                    if(item.order_status == 8 || item.order_status == -1) {
+                        //shanchu = '<i class="iconfont icon-shanchu" order_id="'+item.order_id+'"></i>';
+                    }
+
+                    html += '<div class="card mallord_list">';
+                    html += '<div class="card-header"><a style="color: #3d4145" href="'+item.link+'"><p>'+order_status_label+'<small class="black9">-'+item.dateline+'</small></p></a>'+shanchu+'</div>';
+                    html += '<a style="color: #3d4145" href="'+item.link+'">';
+                    html += '<div class="card-content">';
+                    html += '<div class="list-block media-list">';
+                    html += '<ul>';
+                    if(item.child) {
+                        $.each(item.child, function(key, value) {
+                            html += '<li class="item-content">';
+                            html += '<div class="item-media">';
+                            html += '<img src="<{$pager.img}>/'+value.photo+'" width="90">';
+                            html += '</div>';
+                            html += '<div class="item-inner">';
+                            html += '<div class="item-title">'+value.product_name+'</div>';
+                            html += '<div class="item-title-row">';
+                            html += '<div class="item-text"><span class="fontcl1 mr10">￥'+value.product_price+'</span>'+value.product_jifen+'<span class="black9">积分</span></div>';
+                            html += '<div class="item-after">x'+value.product_number+'</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</li>';
+                        });
+                    }
+                    html += '</ul>';
+                    html += '</div>';
+                    html += '</a>';
+                    html += '</div>';
+                    html += card_footer+'</div>';
+                })
+                if(LoadData.params.page == 1){
+                    $('#mall-order-items').html(html);
+                }else{
+                    $('#mall-order-items').append(html);
+                }
+            }else if(LoadData.params.page > 1){
+                $('.infinite-scroll-preloader').remove();
+                $('#load_end').html('<div class="loading_end font_size12">没有更多了...</div>'); 
+            }else {
+                html += "<div class='content-block biaoqian-content'>";
+                html += "<div class='wushuju'>";
+                html += "<img src='/themes/default/static/images/kong.png' width='30%'>";
+                html += "<p class='mt10'>暂无数据，<a href='/mall/product'><spanclass='fontcl1'>马上去逛逛~</span></a></p>";
+                html += "</div>";
+                html += "</div>";
+                $('#mall-order-items').html(html);
+                $('.infinite-scroll-preloader').remove();
+            }
+            if(ret.data.items.length < 9) {
+                $('.infinite-scroll-preloader').hide();
+            }
+        }
+        LoadData.__LOAD_LOCK = false;
+    },"json");
+}
+
+// 删除订单
+function deleteorder(order_id) {
+    $.ajax({  
+        url: "<{link ctl='mall/order:delete'}>", 
+        async: false,  
+        dataType: 'json',  
+        data: {"order_id":order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){
+                    $('.modal').remove();
+                    $('.modal-overlay').remove();
+                    window.location.reload();
+                },1000);
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+
+// 删除订单modal
+$(document).off('click', '.icon-shanchu').on('click', '.icon-shanchu', function() {
+    var order_id = $(this).attr('order_id');
+    $.modal({
+        title: "删除订单",
+        afterText:"确认删除吗？删除后不可恢复哦",
+        buttons: [{text: "<span class='maincl'>取消</span>"},{text: "<span class='maincl'>删除</span>",bold: true,}],
+        onClick: function (modal, index) {
+            if(index == 0) {}
+            if(index == 1) {
+                $('.modal-overlay').removeClass('modal-overlay-visible');
+                deleteorder(order_id);
+            }
+        }
+    });
+})
+
+// 确认收货
+function receipt(order_id) {
+    $.ajax({  
+        url: "<{link ctl='mall/order:setreceipt'}>", 
+        async: false,  
+        dataType: 'json',  
+        data: {"order_id":order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){
+                    window.location.reload();
+                },1000) 
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+
+// 确认收货modal
+$(document).off('click', '.setreceipt').on('click', '.setreceipt', function() {
+    var order_id = parseInt($(this).attr('order_id'));
+    $.modal({
+        title: "确认收货",
+        afterText:"确认商品已送达吗？",
+        buttons: [{text: "<span class='maincl'>取消</span>"},{text: "<span class='maincl'>确定</span>",bold: true,}],
+        onClick: function (modal, index) {
+            if(index == 0) {}
+            if(index == 1) {
+                $('.modal-overlay').removeClass('modal-overlay-visible');
+                receipt(order_id);
+            }
+        }
+    }); 
+});
+
+    // 取消订单
+    function cancelanorder(reason_mark,order_id) {
+        var reason  = reason_mark;
+    $.ajax({  
+        url: "<{link ctl='mall/order:cancel'}>", 
+        async: false,  
+        dataType: 'json',  
+        data: {"order_id":order_id,"reason":reason},
+        type: 'POST',   
+        success: function (ret) { 
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                window.location.reload();
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+
+
+
+// 取消订单modal
+$(document).off('click', '.button-cancel').on('click', '.button-cancel', function() {
+    var order_id = parseInt($(this).attr('order_id'));
+    var c_html = '';
+    c_html += '<div class="mallord_delt_mask"><div class="row selct_box" id="reason_mark">';
+    <{foreach $reason as $v}>
+    c_html += '<a href="javascript:;" class="fl col-33">'+'<{$v}>'+'</a>';
+    <{/foreach}>
+    c_html += '<div class="cl"></div></div><div class="list-block"><div class="item-input"><textarea maxlength="120" id="buchong" placeholder="补充说明" onkeyup="checkLen(this)" ></textarea><p class="txt_right font_size14 black9">还可输入120字</p></div></div></div>';
+
+   var modal = $.modal({
+    title: "<div class='mallord_delt_mask_tit'>取消理由</div>",
+    afterText:"<div class='mallord_delt_mask'><div class='row selct_box'><a href='javascript:;' class='fl col-33 active'>点错菜了</a><a href='javascript:;' class='fl col-33'>信息填错了</a><a href='javascript:;' class='fl col-33'>优惠不满意</a><a href='javascript:;' class='fl col-33'>临时有事</a><a href='javascript:;' class='fl col-33'>我不想买了</a><a href='javascript:;' class='fl col-33'>其他</a><div class='cl'></div></div><div class='list-block'><div class='item-input'><textarea maxlength='120' placeholder='补充说明' onkeyup='checkLen(this)' ></textarea><p class='txt_right font_size14 black9'>还可输入120字</p></div></div></div>",
+    buttons: [
+                {
+                    text: "<span class='black6'>取消</span>"
+                },
+                {
+                    text: "<span class='maincl'>确定</span>",
+                    bold: true,
+                    onClick: function () {
+                        var reason_mark = '';
+                        if($('#reason_mark .active').text() == null) {
+                            reason_mark = '取消理由:无';
+                        }else {
+                            reason_mark = '取消理由:' + $('#reason_mark .active').text();
+                        }
+                        if($('#buchong').val() == '') {
+                            reason_mark += ',补充说明:无';
+                        }else {
+                            reason_mark += ',补充说明:' + $('#buchong').val();
+                        }
+                        cancelanorder(reason_mark,order_id);
+                    }
+                },
+            ]
+})
+});
+ //弹出框,点击标签动作
+$(document).on('click','.mallord_delt_mask .selct_box a',function () {
+	$(".mallord_delt_mask .selct_box a").removeClass("active");
+	$(this).addClass("active");
+});
+// 检查补充说明字数
+function checkLen(obj) {
+    var len = GetStrLen($(obj).val());
+    if(len <= 120) {
+        var limit = 120-len;
+        $('.txt_right').text('还可输入' + limit + '字');
+    }
+}
+
+// 支付订单
+$(document).off('click', '.button-warning').on('click', '.button-warning', function() {
+    var order_id = parseInt($(this).attr('order_id'));
+    var link = "<{link ctl='ucenter/order:payment-"+order_id+"'}>";
+    localStorage['payment_backurl'] = window.location.href;
+    $.router.load(link, true);
+});
+
+// 添加'refresh'监听器
+$(document).on('refresh', '.pull-to-refresh-content',function(e) {
+    setTimeout(function() {
+        __Mall_Order_Load_Items(LoadData.params);
+        // 加载完毕需要重置
+        $.pullToRefreshDone('.pull-to-refresh-content');
+    }, 800);
+});
+
+//弹出层消失,点击灰色区域,
+$(document).on('click', '.modal-overlay', function () {
+    $(this).removeClass('modal-overlay-visible');
+    $('.modal').removeClass('modal-in');
+    $('.modal').css('display', 'none');
+});
+</script>
+<{include file="block/footer.html"}>

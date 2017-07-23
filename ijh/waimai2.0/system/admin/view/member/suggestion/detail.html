@@ -1,0 +1,27 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="member/suggestion:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>ID：</th><td><{$detail.id}></td></tr>
+<tr><th>用户：</th><td><{$detail.user.nickname}>(ID:<{$detail.uid}>)</td></tr>
+<tr><th>图片：</th><td>
+<{if $detail.pic}>
+<img src="<{$pager.img}>/<{$detail.pic}>" class="w-200" />
+<{else}>
+用户未上传图片
+<{/if}>
+</td>
+</tr>
+<tr><th>内容：</th><td><{$detail.content}></td></tr>
+<tr><th>创建时间：</th><td><{$detail.create_time|format:'Y-m-d H:i'}></td></tr>
+</table></div>
+
+<{include file="admin:common/footer.html"}>

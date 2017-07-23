@@ -1,0 +1,45 @@
+<{assign var='tpl_title' value=L("消息提示")}>
+<{include file="block/header.html" }>
+<div class="page page-current"> 
+    <!--头部-->
+    <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+        <h1 class="title">消息提示</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content">
+         <div class="ordtsPage">
+            <{if $pager.error==0}>
+            <img src="%THEME%/static/images/ord_cg.png">
+            <{else}>
+            <img src="%THEME%/static/images/ord_sb.png">
+            <{/if}>
+            <p><{$pager.message}></p>
+            <p class="small black9"><span id="ShowDiv"><{$pager.timer}></span><!-- <{$smarty.session.WEIDIAN_SHOP_ID}> -->秒后自动<a class="external" href="<{if $pager.link}><{$pager.link}><{else}><{link ctl='index'}><{/if}>" >跳转</a></p>
+         </div>          
+    </div>        
+<!--内容结束-->   
+</div>
+
+<{if $smarty.session.WEIDIAN_SHOP_ID}>
+<style>
+    .bar-nav {
+        background: #ff7800;
+</style>
+<{/if}>
+<script>
+    var secs = 4; //倒计时的秒数 
+    function Load(url){ 
+        for(var i=secs;i>=0;i--) { 
+            window.setTimeout('doUpdate(' + i + ')', (secs-i) * 1000); 
+        } 
+    } 
+    function doUpdate(num)  { 
+        document.getElementById('ShowDiv').innerHTML = num; 
+        if(num == 0) { window.location=url; } 
+    }
+</script>
+<script language="javascript"> 
+    var url = "<{if $pager.link}><{$pager.link}><{else}><{link ctl='index'}><{/if}>";
+    Load(url); //要跳转到的页面 
+</script>
+<{include file="block/footer.html"}>

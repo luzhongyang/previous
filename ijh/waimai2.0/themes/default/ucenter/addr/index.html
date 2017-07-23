@@ -1,0 +1,82 @@
+<{assign var='tpl_title' value=L("收货地址")}>
+<{include file="block/header.html" }>
+	<div class="page page-current">
+		<!--头部-->
+	    <header class="bar bar-nav"> 
+	    	<a class="button button-link button-nav pull-left" href=""> 
+	    		<span class="iconfont icon-iconfontxiangyou"></span> 
+	    	</a> 
+	    	<{if $addrs}>
+	    	<a class="button button-link button-nav pull-right" id='manage' href="javascript:;">管理</a>
+	    	<{/if}>
+	        <h1 class="title">收货地址</h1>
+	    </header>
+	    <!--头部结束-->
+	    <!-- 工具栏 -->
+	    <nav class="bar bar-tab footer_addAddr">
+	        <a class="tab-item" href="<{link ctl='ucenter/addr/create'}>">
+	        	<span class="iconfont icon-tianjia maincl"></span>
+	        	<span class="black3">新增收货地址</span>
+	        </a>
+	    </nav>
+	    <!-- 工具栏结束 -->
+	    <div class="content">
+			<div class="mineGdsaddr_list_box">
+			<{foreach $addrs as $addr}>
+	        	<div class="mineGdsaddr_list fl" address='{"addr_id":"<{$addr.addr_id}>","lng":"<{$addr.lng}>","lat":"<{$addr.lat}>","address":"<{$addr.addr}><{$addr.house}>", "contact":"<{$addr.contact}>", "mobile":"<{$addr.mobile}>", "addr":"<{$addr.addr}>", "house":"<{$addr.house}>"}'>
+	        		<div class="left">
+	            		<h4><{$addr.contact}><span class="ml10 pad_l10"><{$addr.mobile}></span></h4>
+	                	<p class="black9"><span class="tag tag_<{$addr.tag}>"><{$tags[$addr.tag]}></span><{$addr.addr}><{$addr.house}></p>
+	            	</div>
+				</div>
+	        <{foreachelse}>
+
+	            <div class="content">
+		           <div class="nonePage txt_center">
+		           		<img src="%THEME%/static/images/none/icon_address_no@2x.png">
+		           		<p class="black9">
+		           			<h5>没有收货地址</h5>
+	                		<h6>快去添加一个地址吧</h6>
+		           		</p>
+		           </div>
+		        </div> 
+			<{/foreach}>
+	    	</div>
+		</div>        
+	</div>
+	<script type="text/javascript">
+	var addrJSON = null;
+	var backurl = null;
+	var is_ziti = null;
+	var address = null;
+	
+	if(localStorage['select_address']) {
+        addrJSON = JSON.parse(localStorage['select_address']);
+        if(addrJSON) {
+            if(addrJSON.backurl) {
+                backurl = addrJSON.backurl; 
+            }
+        }
+    }
+
+	if(backurl){
+		$(document).off('click', '.mineGdsaddr_list').on('click', '.mineGdsaddr_list', function() {
+		    address = JSON.parse($(this).attr('address'));
+		    localStorage['select_address'] = JSON.stringify(address);
+		    setTimeout(function () {
+		        window.location.href = backurl;
+		    }, 100);
+		});
+		
+		$(".pull-left").attr('href',backurl); 
+	}else{
+		$(".pull-left").attr('href',"<{link ctl='ucenter/index'}>");
+	}
+
+	$('#manage').click(function(){
+		var check = '<{$check}>';
+		var link = "<{link ctl='ucenter/addr/manage' check='__check'}>";
+		window.location.href = link.replace('__check', check);
+	});
+</script>
+<{include file="block/footer.html"}>

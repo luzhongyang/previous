@@ -1,0 +1,170 @@
+<{assign var='tpl_title' value=L("定位")}>
+<{include file="block/header.html"}>
+    <div class="page page-current" id="position"> 
+        <{include file="block/baidu_map.html"}>
+        <!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a> <a class="button button-link button-nav pull-right" id="search-submit">搜索</a>
+            <div class="searchbar">
+                <a class="searchbar-cancel iconfont icon-x-copy"></a>
+                <div class="search-input">
+                  <label class="icon iconfont icon-sousuo" for="search"></label>
+                  <input type="search" id='search' placeholder='请输入地址'/>
+                </div>
+            </div>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+           <div class="sy_serch_hot">
+            <h3>当前地址</h3>
+            <div class="sy_posit"><a href="#" class="fr maincl"><i class="ico"></i><i class="ico2"></i>重新定位</a><p class="overflow_clear font_size12">&nbsp;</p></div>
+            <h3>附近地址</h3>
+            <ul class="lishi">
+                <!-- <li><a href="#">金环花园</a></li>
+                <li><a href="#">华润五彩国际</a></li> -->
+            </ul>
+           </div>
+        </div>         
+    <!--内容结束-->   
+    </div>
+<script type="text/javascript">
+
+var now_city_name = localStorage["UxCity"] || "";
+now_city_name = '合肥';
+if(!now_city_name){
+    $('.title').text('还未选择城市');
+    $.router.load("<{link ctl='city'}>", true);
+}else{
+    $('.title').text(now_city_name);
+}
+
+/*渲染数据到模板*/
+function sethtml(ret) {
+    $('.overflow_clear').empty().text(ret.addr);
+    $('.overflow_clear').attr('data', '{"lng":"'+ret.lng+'","lat":"'+ret.lat+'","addr":"'+ret.addr+'"}');
+    if(ret.lng && ret.lat) {
+        $.ajax({  
+            url: "<{link ctl='bmap:getpois'}>", 
+            async: false,  
+            dataType: 'json',  
+            data: {"lng":ret.lng,"lat":ret.lat},
+            type: 'POST',   
+            success: function (ret) { 
+                if(ret.data.length > 0) {
+                    var li = '';
+                    $.each(ret.data, function(index,item) {
+                        if(index <= 5 && index > 0) {
+                            li += '<li data=\'{"lng":"'+parseFloat(item.point.x).toFixed(6)+'","lat":"'+parseFloat(item.point.y).toFixed(6)+'","addr":"'+item.addr+'"}\'><a href=""><p class="font_size14">'+item.addr+'</p></a></li>'; 
+                        }
+                    });
+                    $('.lishi').empty().html(li);
+                }
+            }, 
+            error: function (xhr, status, err) { 
+                $.alert(err); 
+            },  
+        });
+    }
+}
+
+/*自动定位*/
+getUxLocation(function(ret){
+    if(!ret.error) {
+        sethtml(ret);
+    }   
+});   
+
+/*重新定位*/
+$(document).off('click', '.maincl').on('click', '.maincl', function() {
+    setUxLocation({});
+    window.location.reload();
+    getUxLocation(function(ret){
+        if(!ret.error) {
+            sethtml(ret);
+            window.location.reload();
+        }
+    });   
+});
+
+/*取消输入*/
+$(document).off('click', '.searchbar-cancel').on('click', '.searchbar-cancel', function() {
+    $('#search').val('');
+});
+
+/*搜索事件*/
+$(document).off('click', '#search-submit').on('click', '#search-submit', function() {
+    var addr_name = $('#search').val();
+    if(addr_name == '') {
+        $.alert('请输入地址');
+        return false;
+    }
+    $.ajax({  
+        url: "<{link ctl='bmap:placeapi'}>", 
+        async: false,  
+        dataType: 'json',  
+        data: {"key":addr_name,"cityname":now_city_name},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.data.length > 0) {
+                var li = '';
+                $.each(ret.data, function(index,item) {
+                    if(item.address == undefined) {
+                        li = '<li><a href=""><p class="font_size14">暂时没有找到您查询的信息</p></a></li>'; 
+                        //$('.overflow_clear').text('　');  
+                    }else {
+                        if(index <= 5 && index > 0) {
+                            li += '<li data=\'{"lng":"'+parseFloat(item.location.lng).toFixed(6)+'","lat":"'+parseFloat(item.location.lat).toFixed(6)+'","addr":"'+item.address+'"}\'><a href=""><p class="font_size14">'+item.address+'</p></a></li>'; 
+                        }
+                        if(index == 0) {
+                            $('.overflow_clear').text(item.address); 
+                            $('.overflow_clear').attr('data', '{"lng":"'+item.location.lng+'","lat":"'+item.location.lat+'","addr":"'+item.address+'"}'); 
+                        }
+                    }  
+                });
+                $('.lishi').empty().html(li);
+            }
+        }, 
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },  
+    });      
+});
+
+/*选择地址事件1*/
+$(document).on('click', '.overflow_clear', function() {
+    var addr = {};
+    try{
+        addr = JSON.parse($(this).attr("data"));
+        setUxLocation(addr);
+        setTimeout(function(){
+            if(localStorage['position_back']) {
+                var backurl = localStorage['position_back'];
+                localStorage.removeItem('position_back');
+                $.router.load(backurl, true); 
+            } 
+        },500);
+    }catch(e){
+        $.alert(e);
+    }
+});
+
+/*选择地址事件2*/
+$(document).on('click', '.lishi li', function() {
+    var addr = {};
+    try{
+        addr = JSON.parse($(this).attr("data"));
+        setUxLocation(addr);
+        setTimeout(function(){
+            if(localStorage['position_back']) {
+                var backurl = localStorage['position_back'];
+                localStorage.removeItem('position_back');
+                $.router.load(backurl, true); 
+            } 
+        },500);
+    }catch(e){
+        $.alert(e);
+    }
+});
+
+
+</script>
+<{include file="block/footer.html"}>

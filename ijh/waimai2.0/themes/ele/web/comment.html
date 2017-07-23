@@ -1,0 +1,150 @@
+<{assign var='seo_title' value=L("店铺评价-<{$detail.title}>")}>
+<{include file="web/block/header2.html"}>
+<!--内容开始-->
+<div class="shopnav">
+    		<div class="pagewd">
+            		<div class="shopnav-left">
+                                <ul>
+                                    <li class="list <{if $act == 'index'}>on<{/if}> "><a href="<{link ctl='web/menu/index' args=$detail['shop_id']}>">菜单</a></li>
+                                    <li class="list <{if $act == 'comment'}>on<{/if}>" ><a href="<{link ctl='web/menu/comment' args=$detail['shop_id']}>">评价</a></li>
+                                </ul>
+                                <!--<div class="shopnav-filter fr">
+                                    <a href="javascript:;">默认排序</a><a href="javascript:;">评分<i></i></a><a href="javascript:;">销量<i></i></a><a href="javascript:;" class="state2">价格<i></i></a>
+                                </div>-->
+                    </div>
+                    <div class="shopnav-search fr">
+                    		<form action="<{link ctl='web/shop/index'}>" method="get">
+                                <div class="serch_box">
+                                    <input type="text" name="kw" class="place-search-input" value="<{$pager.kw}>" placeholder="搜索商家，美食">
+                                    <em class="ico"></em>
+                                    <input type="submit" class="btn" value="搜索" >
+                                    
+                                </div>
+            				</form>	
+                    </div>
+                    <div class="cl"></div>
+            </div>
+    </div>
+<div class="pagewd mt20 mb30">
+    <script>
+        $(document).ready(function(){
+            $('#qrcodeTable').qrcode({
+                render: "canvas",            //渲染方式 table 和 canvas两种
+                width: 54,                  //设置宽度  
+                height: 54,                 //设置高度  
+                typeNumber: -1,              //计算模式 
+                correctLevel: 2,             //纠错等级  0,1,2,3 默认为2
+                background: "#ffffff",       //背景颜色  
+                foreground: "#000000",       //前景颜色 
+                text    : "<{$url}>"
+            }); 
+            
+            
+            $(".collect_btn").click(function(){
+                var url = "<{link ctl='web/shop/collect' args=$detail.shop_id}>";
+                $.post(url,{},function(ret){
+                    if (ret.error == 300) {
+                        layer.msg(ret.message);
+                        setTimeout(function(){
+                            window.location.href = "<{link ctl='web/passport/login'}>";
+                        },1000)
+                    }else if(ret.error == 0){
+                        layer.msg(ret.message);
+                        setTimeout(function(){
+                            window.location.reload(true);
+                        },1000)
+                    }else{
+                        layer.msg(ret.message);
+                    }
+                },'json')
+            })
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".selct_box input").click(function () {
+                //alert($(this).attr('rel'));return flase;
+                if ($(this).prop('checked') == true) {
+                    location.href = $(this).attr('rel');
+                }
+            });
+        });</script>
+    <div class="shangjia_cont">
+        <div class="fl shangjia_cont_left">
+            <!--评价列表-->
+            <div class="shangjia_evlt">
+            	<div class="selct_box">
+                	<!--<ul>
+                    	<li class="on">全部评价</li>
+                        <li>好评</li>
+                        <li>中评</li>
+                        <li>差评</li>
+                    </ul>
+                    -->
+                    
+                    <label <{if empty($st)}>class="on"<{/if}> >
+                        <input type="radio" <{if empty($st)}>checked="checked"<{/if}> rel="<{link ctl='web/menu/comment' args=$detail.shop_id}>" name="evlt">全部评价
+                        <span class="black9 on">(<{$counts}>)</span>
+                    </label>
+                    <label <{if $st==1}>class="on"<{/if}> >
+                        <input type="radio" <{if $st==1}>checked="checked"<{/if}> rel="<{link ctl='web/menu/comment' args=$detail.shop_id st=1}>" name="evlt">好评<span class="black9 on">(<{$count1}>)</span>
+                    </label>
+                    <label <{if $st==2}>class="on"<{/if}> >
+                        <input type="radio" <{if $st==2}>checked="checked"<{/if}> rel="<{link ctl='web/menu/comment' args=$detail.shop_id st=2}>" name="evlt">中评<span class="black9 on">(<{$count2}>)</span>
+                    </label>
+                    <label <{if $st==3}>class="on"<{/if}> >
+                        <input type="radio" <{if $st==3}>checked="checked"<{/if}> rel="<{link ctl='web/menu/comment' args=$detail.shop_id st=3}>" name="evlt">差评<span class="black9 on">(<{$count3}>)</span>
+                    </label>
+                    <div class="cl"></div>
+                </div>
+                <ul class="">
+                    <{foreach $items as $item}>
+                	<li class="shangjia_evlt_list">
+                    	<div class="top">
+                        <span class="name"><{$users[$item['uid']]['nickname']}></span> 
+                        <small class="black9">
+                            服务评价：
+                            <span class="starBg mr5">
+                                <span class="star" style="width:<{$item['score_fuwu']*20}>%;"></span>
+                            </span>
+                            口味评价：
+                            <span class="starBg mr5">
+                                <span class="star" style="width:<{$item['score_kouwei']*20}>%;"></span>
+                            </span>
+                        </small>
+                        <span class="fr black9">评价时间 <{$item.dateline|format:'Y-m-d'}></span></div>
+                        <{if $item.photos}>
+                            <ul class="img_box">
+                                <{foreach $item.photos as $pic}>
+                                    <li><img src="<{$pager.img}>/<{$pic.photo}>" width="70" height="70"></li>
+                                <{/foreach}>
+                            </ul>
+                        <{/if}>
+                        <p class="mb10"><{$item.content}></p>
+                        <{if $item.reply}><p class="maincl"><{$item.reply}></p><{/if}>
+                    </li>
+                    <{/foreach}>
+                </ul>
+                <div class="page_box">
+                    <!--分页-->
+                    <div class="page"><{$pager.pagebar}></div>
+                    <!--分页end-->
+                </div>
+            </div>
+            <!--评价列表end-->
+            
+        </div>
+        <div class="fr shangjia_cont_right">
+        	<div class="shangjia_pingfen">
+            	<p class="bt"><{$detail.title}>评分：</p>
+                <p class="black9">(共收到<{$counts}>份美食评价)</p>
+                <div class="total maincl"><big><{$avg_comment}></big><b style="font-size: 20px;">好评率</b></div>
+                <div class="box black9"><span class="starBg"><span class="star" style="width:<{$detail['score_fuwu']/$detail['comments']*20}>%;"></span></span> <b style="font-size:12px;">服务态度</b></div>
+                <div class="box black9"><span class="starBg"><span class="star" style="width:<{$detail['score_kouwei']/$detail['comments']*20}>%;"></span></span> <b>商品打分</b></div>
+            </div>
+        </div>
+        <div class="cl"></div>
+    </div>
+</div>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

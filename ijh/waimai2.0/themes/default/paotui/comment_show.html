@@ -1,0 +1,56 @@
+<{assign var='tpl_title' value=L("评价")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">评价</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	<div class="ord_evlut_form">
+            	<div class="list-block media-list top_box">
+                    <ul>
+                      <li>
+                        <div href="#" class="item-content">
+                          <div class="item-media"><img src="<{$pager.img}>/<{$staff.face}>"></div>
+                          <div class="item-inner">
+                            <div class="item-title mt10"><{$staff.account_name}> <{$staff.mobile}></div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+                <p class="txt_center black9">我对接单员的打分</p>
+                <div class="star_box txt_center"><span class="starBg txt_left"><span class="star" style="width:<{$comment['score']/5*100}>%;"></span></span></div>
+                <div class="mallord_delt_mask ord_mark">
+                    <div class="row selct_box">
+                    <{foreach $titles as $k=>$v}>
+                    	<a href="javascript:;" class="fl col-33 qt <{if $comment['marks'][$k]}>active<{/if}>"><{$v}></a>
+                    <{/foreach}>
+                        <div class="cl"></div>
+                    </div>
+                </div>
+                <div class="nr_box"><{$comment['content']}></div>
+                <div class="mineSet_feedback">
+                      <div class="img_upload">
+                        <ul>
+                        <{foreach $comment['photos'] as $k=>$v}>
+                        	<li style="background-image:url(pic/banner1.png);">
+                        		<img src="<{$pager.img}>/<{$v['photo']}>" width="70" height="70">
+                        	</li>
+                        <{/foreach}>
+                        </ul>
+                        <div class="cl"></div>
+                    </div>
+                </div>
+                <{if $comment['reply']}>
+                <div class="reply_box" style="margin-top:0;">
+                	<p class="black6"><span class="maincl">接单员回复：</span><{$comment['reply']}></p>
+                    <p class="txt_right"><small class="black9"><{$comment['reply_time']|format}></small></p>
+                </div>
+                <{/if}>
+            </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+<{include file="block/footer.html"}>

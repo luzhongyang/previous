@@ -1,0 +1,219 @@
+<{assign var='tpl_title' value=L("评价订单")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav header_Ico">
+        <a class="button button-link button-nav pull-left back">
+            <span class="Ico1"></span>
+        </a>
+        <h1 class="title">评价订单</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content">
+        <div class="pingjia-dingdan-box">
+            <{if in_array($comment.order.pei_type,array(1,2)) && $comment.order.staff_id>0}>
+            <div class="dafen_form">
+                <div class="list-block media-list top_box">
+                    <ul>
+                        <li>
+                            <div href="javascript:;" class="item-content">
+                                <div class="item-media">
+                                    <img src="<{$pager.img}>/<{$comment.staff.face}>">
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title"><{$comment.staff.name}></div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <p class="txt_center black9">为配送打分</p>
+                <div class="star_box txt_center">
+                    <span class="starBg txt_left">
+                        <span class="star" style="width:60%;">
+                          <span class="star_clink" id="staff_star">
+                            <a href="javascript:;" cent="20"></a>
+                            <a href="javascript:;" cent="40"></a>
+                            <a href="javascript:;" cent="60"></a>
+                            <a href="javascript:;" cent="80"></a>
+                            <a href="javascript:;" cent="100"></a>
+                          </span>
+                        </span>
+                    </span>
+                    <input type="hidden" id="score_staff" value="3">
+                </div>
+                <div class="list-block">
+                    <ul>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <textarea id="staff_content" placeholder="说说您的看法，帮大家选择"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <{/if}>
+            <div class="dafen_form">
+                
+                <div class="list-block media-list top_box">
+                    <ul>
+                        <li>
+                            <div href="javascript:;" class="item-content">
+                                <div class="item-media">
+                                    <img src="<{$pager.img}>/<{$comment.shop.logo}>">
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title"><{$comment.shop.title}></div>
+                                    </div>
+                                    <{if $comment.order.pei_type != 3}>
+                                    <div class="item-title-row">
+                                        <div class="item-title">配送速度</div>
+                                        <div class="item-after">
+                                            <input id="choose_peitime" type="text" value="请选择">
+                                            <input type="hidden" id="pei_time" value="10">
+                                        </div>
+                                    </div>
+                                    <{/if}>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <p class="txt_center black9">为商家打分</p>
+                <div class="star_box txt_center">服务态度
+                    <span class="starBg txt_left">
+                        <span class="star" style="width:60%;">
+                          <span class="star_clink" id="fuwu_star">
+                            <a href="javascript:;" cent="20"></a>
+                            <a href="javascript:;" cent="40"></a>
+                            <a href="javascript:;" cent="60"></a>
+                            <a href="javascript:;" cent="80"></a>
+                            <a href="javascript:;" cent="100"></a>
+                          </span>
+                        </span>
+                    </span>
+                    <input type="hidden" id="score_fuwu" value="3">
+                </div>
+                <div class="star_box txt_center">商品口味
+                    <span class="starBg txt_left">
+                        <span class="star" style="width:60%;">
+                          <span class="star_clink" id="kouwei_star">
+                            <a href="javascript:;" cent="20"></a>
+                            <a href="javascript:;" cent="40"></a>
+                            <a href="javascript:;" cent="60"></a>
+                            <a href="javascript:;" cent="80"></a>
+                            <a href="javascript:;" cent="100"></a>
+                          </span>
+                        </span>
+                    </span>
+                    <input type="hidden" id="score_kouwei" value="3">
+                </div>
+                
+                <div class="list-block">
+                    <ul>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <textarea id="shop_content" placeholder="说说您的看法，帮大家选择"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="long_btn" id="subcomment">提交</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var order_id = parseInt(<{$comment.order.order_id}>);
+
+$("#choose_peitime").picker({
+    toolbarTemplate: '<header class="bar bar-nav">\<button class="button button-link pull-right close-picker" id="time_ok">确定</button>\<h1 class="title txt_left pad_l10"><span class="whitecl" id="time_no">取消</span></h1>\</header>',
+    onOpen: function(){
+        var loop_div = $(".picker-item");
+        loop_div.each(function(i){
+            if(10 == $(this).attr("data-picker-value"))
+            {
+                console.log($(this));
+                $(this).trigger("click");
+            }
+        });
+    },
+    cols: [
+    {
+      textAlign: 'center',
+      values: [<{foreach $comment.timestr as $k=>$v}>"<{$k}>",<{/foreach}>],
+      displayValues: [<{foreach $comment.timestr as $v}>"<{$v}>",<{/foreach}>],
+    }
+  ]
+});
+
+$(document).off('click','#time_ok').on('click','#time_ok',function(){
+    $.closeModal(".picker-modal.modal-in");
+    $("#pei_time").val($('#choose_peitime').val());
+})
+
+$(document).off('click','#time_no').on('click','#time_no',function(){
+    $.closeModal(".picker-modal.modal-in");
+    $("#pei_time").val($('#choose_peitime').val());
+})
+
+$(document).off('click','#fuwu_star a').on('click','#fuwu_star a',function(){
+    $(this).parent().parent().css('width', $(this).attr('cent')+'%');
+    $('#score_fuwu').val(parseInt($(this).attr('cent'))/20);
+})
+
+$(document).off('click','#kouwei_star a').on('click','#kouwei_star a',function(){
+    $(this).parent().parent().css('width', $(this).attr('cent')+'%');
+    $('#score_kouwei').val(parseInt($(this).attr('cent'))/20);
+})
+
+$(document).off('click','#staff_star a').on('click','#staff_star a',function(){
+    $(this).parent().parent().css('width', $(this).attr('cent')+'%');
+    $('#score_staff').val(parseInt($(this).attr('cent'))/20);
+})
+
+$(document).off('click','#subcomment').on('click','#subcomment',function(){
+    var score_staff = $('#score_staff').val();
+    var score_kouwei = $('#score_kouwei').val();
+    var score_fuwu = $('#score_fuwu').val();
+    var staff_content = $('#staff_content').val();
+    var shop_content = $('#shop_content').val();
+    var pei_time = $('#pei_time').val();
+    var shop_id = parseInt(<{$comment.shop.shop_id}>);
+    $.ajax({
+        url: "<{link ctl='weidian/ucenter/order:waimai_order_subcomment'}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id,"score_staff":score_staff,"staff_content":staff_content,"score_fuwu":score_fuwu,"score_kouwei":score_kouwei,"shop_content":shop_content,"pei_time":pei_time},
+        type: 'POST',
+        success: function (ret) {
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){
+                    $.closeModal();
+                    window.location.href = "<{link ctl='weidian_"+shop_id+"/ucenter/order:waimai_order_detail-"+order_id+"'}>";
+                },4000);
+            }else {
+                return;
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+ <head><title>MiniFrame</title></head>
+ <body>
+<script type="text/javascript">
+window.Zepto = window.Zepto || parent.window.Zepto;
+window.Widget = window.Widget || parent.window.Widget;
+(function($){
+setTimeout(function(){
+    parent.window.clearTimeout(parent.window.__MINI_LOAD_TIMEER);
+    clearTimeout(parent.window.__MINI_LOAD_TIMEER);
+    Widget.MsgBox.hide();
+    <{if $pager.error == '101'}>
+        Widget.MsgBox.error("<{$pager.message}>",function(){window.location.href = "<{link ctl='passport:login'}>";});
+    <{elseif $pager.error && $pager.error != 200}>
+       Widget.MsgBox.error("<{$pager.message}>");
+       parent.window.__MINI_LOAD = false;
+    <{elseif $MINICALL}>
+        $MINICALL({"error":"<{$pager.error}>", "message":"<{$pager.message}>"});
+    <{elseif $MINIFUNC}>
+        parent.$MINIFUNC;
+    <{elseif $pager.show_content}>         
+        Widget.MsgBox.hide();
+        parent.window.__MINI_LOAD = false;
+        $.modal({title:'',text: '<{$pager.show_content}>',buttons: [{text:'确定'}]});
+    <{else}>
+       Widget.MsgBox.success("<{$pager.message}>");
+       setTimeout(function(){<{if $pager.link}>parent.window.location = "<{$pager.link}>";<{else}>parent.window.location.reload(true);<{/if}>}, <{$pager.timer|default:0}>*1000);
+    <{/if}>
+ }, 500);   
+})(parent.window.Zepto);
+</script>
+<{if $pager.appendjs}><{$pager.appendjs}><{/if}>
+</body>
+</html>

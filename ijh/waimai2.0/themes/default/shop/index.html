@@ -1,0 +1,453 @@
+<{assign var='tpl_title' value=L("商家列表")}>
+<{include file="block/header.html" }>
+<div class="page page-current header_append">
+<style type="text/css">
+.saixuan_pull_child img{
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+
+    background-size: contain;
+    margin-right: 0.3rem;
+    vertical-align: middle;
+}
+
+.saixuan_fenlei_list .num_box i {
+    display: inline-block;
+    padding: 0 0.25rem;
+    line-height: 0.8rem;
+    background: #dedede;
+    border-radius: 1rem;
+    color: #fff;
+    font-size: 0.6rem;
+}
+</style>
+    <!--头部-->
+    <header class="bar bar-nav" style="z-index:100;">
+        <a class="button button-link button-nav pull-left" href="<{link ctl="index"}>"> <i class="iconfont icon-iconfontxiangyou"></i> </a>
+        <div class="sy_serch">
+            <div class="searchbar">
+                <div class="search-input">
+                    <a href="<{link ctl='position'}>" onclick="backurl();">
+                    <i class="iconfont icon-place"></i>
+                    <input type="search" id='search-shop-index' value=''/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <button class="button pull-right" onclick="backurl2();" style="margin-top:0.35rem;"><i class="iconfont icon-sousuo"></i></button>
+    </header>
+    <!--头部结束-->
+    <!-- 工具栏 -->
+    <{include file="block/navbar.html"}>
+    <!-- 工具栏结束 -->
+    <!--下拉选项-->
+        <div class="saixuan_pull_box saixuan_fixed">
+            <div class="saixuan_pull">
+                <ul>
+                    <li class="saixuan_pull_list" style="width:33.3333%" >
+                        <div class="click" pull="cate">分类<i class="iconfont icon-xialajiantou"></i></div>
+                        <div class="saixuan_pull_child_box saixuan_fenlei" style="display:none;">
+                            <ul class="box">
+                                <li class="saixuan_pull_child" rel="0">
+                                    <a href="">
+                                        <i class="ico ico_1"></i>
+                                        <span class="cate-name">全部</span>
+                                        <span class="fr num_box no_bg"><i><{$total_count}></i></span>
+                                    </a>
+                                </li>
+                                <{foreach $cate_tree as $v}>
+                                <{if !$v.parent_id}>
+                                <li class="saixuan_pull_child" rel='<{$v.cate_id}>'><a href=""><img src="<{$pager.img}>/<{$v.ico}>" /><{$v.title}><span class="fr num_box"><i><{$v.shop_num}></i></span></a></li>
+                                <{/if}>
+                                <{/foreach}>
+                            </ul>
+                            <div class="saixuan_fenlei_list_box">
+                            <{foreach $cate_tree as $item}>
+                            <{if $item.childrens}>
+                                <ul class="saixuan_fenlei_list_nr" id="a<{$item.cate_id}>">
+                                    <li class="saixuan_fenlei_list">
+                                        <a href="" cate_id="<{$item.cate_id}>">
+                                            <i class="ico ico_1"></i>
+                                            <span class="cate-name">全部<{$item.title}></span>
+                                            <span class="fr num_box no_bg"><i><{$item.shop_num}></i></span>
+                                        </a>
+                                    </li>
+                                    <{foreach $item.childrens as $child}>
+                                    <{if $child.parent_id == $item.cate_id}>
+                                    <li class="saixuan_fenlei_list">
+                                        <a href="" cate_id="<{$child.cate_id}>">
+                                            <i class="ico ico_1"></i>
+                                            <span class="cate-name"><{$child.title}></span>
+                                            <span class="fr num_box no_bg"><i><{$child.shop_num}></i></span>
+                                        </a>
+                                    </li>
+                                    <{/if}>
+                                    <{/foreach}>
+                                </ul>
+                            <{/if}>
+                            <{/foreach}>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="saixuan_pull_list" style="width:33.3333%">
+                        <div class="click" pull="orderby">智能排序<i class="iconfont icon-xialajiantou"></i></div>
+                        <div class="saixuan_pull_child_box filterorderby" style="display:none;">
+                            <ul id="filter-orderby" class="saixuan_fenlei_list_nr">
+                                <li class="saixuan_fenlei_list"><a href="" orderby="default"><i class="icon ico_1"></i><span class="orderby-name">智能排序</span><i class="ico fr"></i></a></li>
+                                <li class="saixuan_fenlei_list"><a href="" orderby="juli"><i class="icon ico_2"></i><span class="orderby-name">距离最近</span><i class="ico fr"></i></a></li>
+                                <li class="saixuan_fenlei_list"><a href="" orderby="sales"><i class="icon ico_3"></i><span class="orderby-name">销量最高</span><i class="ico fr"></i></a></li>
+                                <li class="saixuan_fenlei_list"><a href="" orderby="min_amount"><i class="icon ico_4"></i><span class="orderby-name">起送价最低</span><i class="ico fr"></i></a></li>
+                                <li class="saixuan_fenlei_list"><a href="" orderby="time"><i class="icon ico_5"></i><span class="orderby-name">送餐速度最快</span><i class="ico fr"></i></a></li>
+                                <li class="saixuan_fenlei_list"><a href="" orderby="score"><i class="icon ico_6"></i><span class="orderby-name">评价最好</span><i class="ico fr"></i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="saixuan_pull_list" style="width:33.3333%">
+                        <div class="click" pull="sort">筛选<i class="iconfont icon-xialajiantou"></i></div>
+                        <div class="saixuan_pull_child_box filtersort" style="display:none;">
+                            <ul id="filter-sort" class="saixuan_selct_box">
+                                <li>配送方式
+                                    <div class="fr peisong_way">
+                                        <label peitype="all" style="border-radius:0.8rem 0 0 0.8rem;" >不限</label>
+                                        <label peitype="pintai">平台送</label>
+                                        <label peitype="shop" style="border-radius:0 0.8rem 0.8rem 0;">商家送</label>
+                                    </div>
+                                </li>
+                                <li>在线支付
+                                    <div class="fr">
+                                        <label class="label-switch" >
+                                            <input type="checkbox" id="online-pay"/>
+                                            <div class="checkbox">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>新店开业<div class="fr"><label class="label-switch"><input type="checkbox" id="is-new"/><div class="checkbox" ></div></label></div></li>
+                                <li style="background:#f5f5f5;"><span class="black3">优惠活动</span></li>
+                                <li>
+                                    <div class="saixuan_selct_hd">
+                                        <a href="" youhui="first_amount"><img src="%THEME%/static/images/tag1.png"><i class="ico"></i>新用户优惠</a>
+                                        <a href="" youhui="youhui"><img src="%THEME%/static/images/tag2.png"><i class="ico"></i>下单立减</a>
+                                        <a href="" youhui="coupon"><img src="%THEME%/static/images/tag4.png"><i class="ico"></i>商家优惠券</a>
+                                    </div>
+                                </li>
+                                <li class="btn_box"><input type="button" class="btn cancel fl" value="清空所选"><input type="button" class="btn confirm fr" value="确定"></li>
+                            </ul>
+                            <script>
+                                $(document).ready(function(e) {
+                                    $(".peisong_way label").click(function(){
+                                        $(this).parent().find("label").removeClass("on");
+                                        $(this).addClass("on");
+                                    });
+
+                                    $(".saixuan_selct_hd a").click(function(){
+                                        if($(this).hasClass("on")){
+                                            $(".saixuan_selct_hd a").removeClass("on");
+                                            $(this).removeClass("on");
+                                        }
+                                        else{
+                                            $(".saixuan_selct_hd a").removeClass("on");
+                                            $(this).addClass("on");
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="mask_bg"></div>
+        </div>
+        <!--下拉选项结束-->
+
+    <div class="content infinite-scroll-shopindex infinite-scroll-bottom-shopindex">
+        
+        <!--外卖商家列表-->
+        <div class="tabs shangjia_list_box">
+            <div id="tab1" class="tab infinite-scroll active">
+                  <div class="list-block">
+                    <ul class="list-container" id="shop-index-shopitems">
+
+                    </ul>
+                  </div>
+                  <!-- 加载提示符 -->
+                  <div class="infinite-scroll-preloader">
+                    <div class="preloader">
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <!--外卖商家列表结束-->
+    </div>
+</div>
+<script>
+$('.saixuan_fenlei_list_box ul').hide();
+LoadData.params = {"cate_id":0,"is_new":0,"online_pay":0,"pei_type":0,"youhui":""};
+
+function __Shop_Index_Load_Items(params){
+    if(LoadData.__LOAD_LOCK){
+        return false;
+    }
+    LoadData.__LOAD_LOCK = true;
+    LoadData.params.page ++;
+    params = params || {};
+    LoadData.params = $.extend(LoadData.params, params);
+    $.post("<{link ctl='shop:loaditems'}>", LoadData.params, function(ret){
+        if(ret.error){
+            //$.alert(ret.message);
+        }else{
+            var html = '';
+            if(ret.data.items.length > 0) {
+                $.each(ret.data.items, function(index,item){
+                    html += '<li class="shangjia_list"><a href="'+item.link+'" data-no-cache="true">';
+                    html += '<div class="box">';
+
+                    html += '<div class="pub_img"><img src="/attachs/'+item.logo+'">';
+                    if(0==item.yy_status_type)
+                    {
+                        html += '<p class="state state3">打烊</p>';
+                    }
+                    if(2==item.yy_status_type)
+                    {
+                        html += '<p class="state state3">繁忙</p>';
+                    }
+                    html +=         '</div>';
+
+                    html += '<div class="pub_wz">';
+                    html += '<div class="fl left">';
+                    html += '<h3 class="overflow_clear black3">'+item.title+'</h3>';
+                    html += '<div class="black9"><span class="starBg"><span class="star" style="width:'+item.star*20+'%;"></span></span>已售'+item.orders+'份</div>';
+                    if(item.freight_price>0) {
+                        html += '<p class="black9"><span class="fontcl1">￥'+parseFloat(item.freight_price).toFixed(2)+'</span>&nbsp;配送费</p>';
+                    }else {
+                        html += '<p class="black9">&nbsp;免配送费</p>';
+                    }
+                    html += '</div>';
+                    html += '<div class="fr right">';
+                    html += '<p class="black9"><span class="fontcl1">￥<big>'+parseFloat(item.min_amount).toFixed(2)+'</big></span>&nbsp;起送</p>';
+                    html += '<p class="black9 mt10 pad_t10" style="font-size:0.5rem;">'+formatDistance(item.juli)+'/<span class="maincl">'+item.pei_time+'分钟</span></p>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '<div class="cl"></div>';
+                    html += '</div>';
+                    html += '<div class="tag_box">';
+                    if(item.first_amount > 0) {
+                        html += '<div class="list"><img src="/themes/default/static/images/tag1.png">新用户首次下单立减'+parseFloat(item.first_amount).toFixed(2)+'元</div>';
+                    }
+                    if(item.youhui) {
+                        html += '<div class="list"><img src="/themes/default/static/images/tag2.png">在线支付'+item.youhui_title+'</div>';
+                    }
+                    if(item.online_pay == 1 || item.online_pay == 2) {
+                        html += '<div class="list"><img src="/themes/default/static/images/tag3.png">商家支持在线支付</div>';
+                    }
+                    if(item.coupon) {
+                        html += '<div class="list"><img src="/themes/default/static/images/tag4.png">店铺'+item.coupon_title+'优惠券可领</div>';
+                    }
+
+                    html += '</div>';
+                    if(item.is_new == 1) {
+                        html += '<div class="lab_box"><img src="/themes/default/static/images/lab_new.png"></div>';
+                    }else if(item.is_new == 2) {
+                        html += '<div class="lab_box"><img src="/themes/default/static/images/lab_brand.png"></div>';
+                    }
+                    html += '</a></li>';
+                })
+                if(LoadData.params.page == 1){
+                    $('#shop-index-shopitems').html(html);
+                }else{
+                    $('#shop-index-shopitems').append(html);
+                }
+            }else if(LoadData.params.page > 1){
+                $.detachInfiniteScroll($('.infinite-scroll-shopindex'));
+                $('.infinite-scroll-preloader').remove();
+                $('.infinite-scroll.active .list-block').append('<div class="loading_end">没有更多了...</div>');
+            }else {
+                var nodata = '';
+                nodata += '<div class="nonePage txt_center">';
+                nodata += '<img src="%THEME%/static/images/none/icon_shop_no@2x.png">';
+                nodata += '<p class="black3">没有搜索结果</p>';
+                nodata += '</div><p class="txt_center font_size12  black9">换个分类试试吧</p>';
+                $('#shop-index-shopitems').html(nodata);
+//                $.detachInfiniteScroll($('.infinite-scroll-shopindex'));
+                $('.infinite-scroll-preloader').remove();
+            }
+            if(ret.data.items.length < 9) {
+                $('.infinite-scroll-preloader').hide();
+            }
+        }
+        LoadData.__LOAD_LOCK = false;
+    },"json");
+}
+
+$('#search-shop-index').val('定位中...');
+
+getUxLocation(function (ret) {
+    if (ret.error) {
+        //alert(ret.message);
+        //$.router.load("<{link ctl='position'}>", true);
+    } else {
+        //$.alert('UxLocation Success');
+        if(GetStrLen(ret.addr) > 30) {
+            $('#search-shop-index').val(ret.addr.substring(0,15)+' ...');
+        }else {
+            $('#search-shop-index').val(ret.addr);
+        }
+        LoadData.params = {};
+        if(parseInt("<{$pager.cate_id}>") > 0) {
+            LoadData.params['cate_id'] = parseInt("<{$pager.cate_id}>");
+        }
+
+        LoadData.params['page'] = 0;
+        __Shop_Index_Load_Items(LoadData.params);
+    }
+});
+
+
+$(document).on('infinite', '.infinite-scroll-bottom-shopindex',function() {
+    __Shop_Index_Load_Items(LoadData.params);
+});
+
+
+$(".saixuan_pull_list .click").click(function(){
+    if($(this).hasClass("on")){
+        $(".saixuan_pull_list .click").removeClass("on");
+        $(".saixuan_pull_list .saixuan_pull_child_box").hide();
+        $(".saixuan_pull_box .mask_bg").hide();
+        $('.shangjia_list_box').show();
+    }
+    else{
+        $(".saixuan_pull_list .click").removeClass("on");
+        $(".saixuan_pull_list .saixuan_pull_child_box").hide();
+        $(this).addClass("on");
+        $(this).parent().find(".saixuan_pull_child_box").show();
+        $(".saixuan_pull_box .mask_bg").show();
+        $('.shangjia_list_box').hide();
+    }
+    $(".saixuan_pull_list .saixuan_pull_child_box").find('.box').css("width","50%");
+});
+
+
+// 一级分类点击事件
+$('.saixuan_fenlei .saixuan_pull_child').click(function(){
+    var rel = $(this).attr('rel');
+    $(this).parent().find(".saixuan_pull_child").removeClass("on");
+    $(this).addClass("on");
+    $(this).parents(".saixuan_fenlei").find('.saixuan_fenlei_list_nr').hide();
+
+    if($(this).parents(".saixuan_fenlei").find('#a'+rel).length>0){
+        $(this).parents(".saixuan_fenlei").find('.saixuan_fenlei_list_box').show();
+        $(this).parents(".saixuan_fenlei").find('#a'+rel).show();
+        $(this).parents(".saixuan_fenlei").find('.box').css("width","50%");
+    }else{
+        // 全部
+        $('.saixuan_fenlei_list_box ul').hide();
+        $(this).parents(".saixuan_fenlei").find('.saixuan_pull_list .saixuan_pull_child_box').hide();
+        $(this).parents(".saixuan_fenlei").find('.box').css("width","100%");
+        $(".saixuan_pull_list .saixuan_pull_child_box").hide();
+        $(".saixuan_pull_box .mask_bg").hide();
+        $(".saixuan_pull_list .click").removeClass("on");
+        $(".saixuan_pull_list [pull='cate']").html($(this).parents(".saixuan_fenlei").find('.cate-name').text()+'<i class="iconfont icon-xialajiantou"></i>');
+        LoadData.params['page'] = 0;
+        LoadData.params['cate_id'] = 0;
+        __Shop_Index_Load_Items(LoadData.params);
+        $('.shangjia_list_box').show();
+    }
+});
+
+// 二级分类点击事件
+$('.saixuan_fenlei_list_box .saixuan_fenlei_list_nr .saixuan_fenlei_list a').click(function() {
+    $('.saixuan_fenlei_list_box .saixuan_fenlei_list_nr .saixuan_fenlei_list a').removeClass('on');
+    $(this).addClass('on');
+    $('.saixuan_fenlei').hide();
+    $(".saixuan_pull_box .mask_bg").hide();
+    $(".saixuan_pull_list .click").removeClass("on");
+    $(".saixuan_pull_list [pull='cate']").html($(this).find('.cate-name').text()+'<i class="iconfont icon-xialajiantou"></i>');
+    LoadData.params['page'] = 0;
+    LoadData.params['cate_id'] = $(this).attr('cate_id');
+    __Shop_Index_Load_Items(LoadData.params);
+    $('.shangjia_list_box').show();
+});
+
+
+// 智能排序点击事件
+$('#filter-orderby .saixuan_fenlei_list a').click(function() {
+    $('#filter-orderby .saixuan_fenlei_list a').removeClass('on');
+    $(this).addClass('on');
+    $(".saixuan_pull_list [pull='orderby']").html($(this).find('.orderby-name').text()+'<i class="iconfont icon-xialajiantou"></i>');
+    setTimeout(function() {
+        $('.filterorderby').hide();
+        $('.saixuan_pull_box .mask_bg').hide();
+        $(".saixuan_pull_list .click").removeClass("on");
+    },300);
+    LoadData.params['page'] = 0;
+    LoadData.params['orderby'] = $(this).attr('orderby');
+    __Shop_Index_Load_Items(LoadData.params);
+    $('.shangjia_list_box').show();
+});
+
+// 筛选点击事件
+
+$('.peisong_way label').click(function() {
+    LoadData.params['pei_type'] = $(this).attr('peitype');
+});
+
+$(document).on('change', '#online-pay', function() {
+    if($(this).is(':checked')) {
+        LoadData.params['online_pay'] = 1;
+    }else {
+        LoadData.params['online_pay'] = 0;
+    }
+});
+
+$(document).on('change', '#is-new', function() {
+    if($(this).is(':checked')) {
+        LoadData.params['is_new'] = 1;
+    }else {
+        LoadData.params['is_new'] = 0;
+    }
+});
+
+$('.saixuan_selct_hd a').click(function() {
+    LoadData.params['youhui'] = $(this).attr('youhui');
+});
+
+$('.btn.cancel.fl').click(function() {
+    //清空所选
+    $('.peisong_way label').removeClass('on');
+    $('.saixuan_selct_hd a').removeClass('on');
+    $('.label-switch').find(':checked').click();
+    $('.label-switch').find(':checked').click();
+    LoadData.params['pei_type'] = 0;
+    LoadData.params['is_new'] = 0;
+    LoadData.params['online_pay'] = 0;
+    LoadData.params['youhui'] = '';
+});
+
+// 筛选确定
+$(document).on('click', '.btn.confirm.fr', function() {
+    $('.filtersort').hide();
+    $('.saixuan_pull_box .mask_bg').hide();
+    $(".saixuan_pull_list .click").removeClass("on");
+    LoadData.params['page'] = 0;
+    __Shop_Index_Load_Items(LoadData.params);
+    $('.shangjia_list_box').show();
+})
+
+function backurl() {
+    localStorage['position_back'] = window.location.href;
+}
+function backurl2() {
+    localStorage['search_back'] = window.location.href;
+    $.router.load("<{link ctl='search'}>", true);
+}
+
+$(document).off('click','.mask_bg').on('click','.mask_bg',function(){
+    $(this).hide();
+    $('.saixuan_pull_child_box').hide();
+    $('.saixuan_pull_list .click').removeClass('on');
+    $('.shangjia_list_box').show();
+})
+</script>
+<{include file="block/footer.html"}>

@@ -1,0 +1,362 @@
+<{assign var='tpl_title' value=L("查看订单")}>
+<{include file="block/header.html"}>
+
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav"> <a class="button button-link button-nav pull-left" href="<{link ctl='pintuan:tuan_order_list'}>"> <span class="iconfont icon-iconfontxiangyou" style="margin-top:-0.2rem;"></span></a> <a href="#" class="button button-link button-nav pull-right"> <span class="iconfont icon-callphone-copy whitecl" id="create_contacts"></span> </a>
+        <h1 class="title">订单详情</h1>
+    </header>
+    <!--头部结束-->
+    <nav class="bar bar-tab ord_footer">
+        <{if $order.order_status==0 && $order.pay_status==0}>
+        <a href="javascript:;" class="button button-cancel open-slider-modal" id="cancel">取消订单</a>
+        <{/if}>
+        <{if $order.order_status!=-1 && $order.pintuan_order.is_money_pre==1 && $order.pintuan_order.money_paid==0}>
+        <a href="javascript:payment(<{$order.order_id}>);" class="button button-warning">预付款</a>
+        <{/if}>
+        <{if in_array($order.order_status,array(3,4))}>
+        <a href="javascript:;" class="button" id="arrived">确认送达</a>
+        <{/if}>
+        <{if $button_pay_weikuan==1}>
+        <a href="javascript:payment(<{$order.order_id}>);" class="button button-warning">付尾款</a>
+        <{/if}>
+        <{if $order.order_status!=-1 && $order.pintuan_order.is_money_pre==0 && $order.pay_status==0}>
+        <a href="javascript:payment(<{$order.order_id}>);" class="button button-warning">去付款</a>
+        <{/if}>
+    </nav>
+    <div class="content">
+        <div class="paying-wait_content">
+            <div class="list-block" style="margin-bottom:0.25rem;">
+                <ul>
+                    <li class="item-content danhao">
+                        <div class="item-inner" style="padding-right:0;">
+                            <div class="item-title"><span class="fontcl1" style="padding-left:0.75rem">
+<!--                                <{if $order.order_status==0 && $order.pay_status==0 && $order.pintuan_order.is_money_pre==1 && $order.pintuan_order.money_paid==0}>
+                                待付预付款
+                                <{/if}>
+                                <{if $order.order_status==0 && $order.pay_status==0 && $order.pintuan_order.is_money_pre==1 && $order.pintuan_order.money_paid>0 && $order.pintuan_order.money_paid< $order.amount}>
+                                待付尾款
+                                <{/if}>
+                                <{if $order.order_status==0 && $order.pay_status==1}>
+                                待接单
+                                <{/if}>
+                                <{if $order.order_status==1}>
+                                已接单(待发货)
+                                <{/if}>
+                                 <{if $order.order_status==2}>
+                                配货中
+                                <{/if}>
+                                 <{if $order.order_status==3}>
+                                配货开始
+                                <{/if}>
+                                 <{if $order.order_status==4}>
+                                配货完成
+                                <{/if}>
+                                <{if $order.order_status==8}>
+                                已完成
+                                <{/if}>
+                                <{if $order.order_status==-1}>
+                                已取消
+                                <{/if}>-->
+                                <{$display_status}>
+                            </span></div>
+                            <{if $order.pei_type==3}>
+                            <div class="item-after"><a href="#" class="ziti-button">自提单</a></div>
+                            <{/if}>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <{if $order.pei_type==3}>
+            <div class="list-block media-list" style="margin-bottom:0;">
+                <ul>
+                    <li>
+                        <a href="#" class="item-link item-content">
+                            <div class="item-media"><i class="iconfont icon-site-copy jiaodan"></i></div>
+                            <div class="item-inner">
+                                <div class="item-subtitle"><span><{$order.shop.contact}></span><span style="margin-left:0.5rem"><{$order.shop.mobile}></span></div>
+                                <div class="item-text"><span class="black3"><{$order.shop.addr}> </span></div>
+                            </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="list-block">
+                <ul>
+                    <li class="item-content danhao">
+                        <div class="item-inner">
+                            <div class="item-title"><span style="padding-left:0.75rem">自提时间</span></div>
+                            <div class="item-after"><{$order.ziti_time|format:'Y-m-d H:i'}></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <{/if}>
+            <div class="list-block" style=" border-bottom:none;" id="linkto_shop">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-media"><i class="iconfont icon-dianpu" style="color: #999; font-size:0.9rem;"></i></div>
+                        <div class="item-inner" style="margin-left: 0.25rem;">
+                            <div class="item-title"><{$order.shop.title}></div>
+                            <div class="item-after"><i class="rightIco"></i></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <{if $order.pintuan_order}>
+            <div class="list-block media-list" style="margin-bottom:0;" >
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><img src="<{$pager.img}>/<{$order.pintuan_order.photo}>" style='width: 4.2rem;'></div>
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title overflow_clear"><{$order.pintuan_order.product_name}></div>
+                                </div>
+                                <div class="item-subtitle black9"><span class="shuliang">数量:X<{$order.pintuan_order.product_number}></span></div>
+                                <div class="item-subtitle fontcl1">￥<big><{$order.pintuan_order.product_price/$order.pintuan_order.product_number}></big></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <{/if}>
+            <div class="list-block">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title"></div>
+                            <div class="item-after black6">实付款: 商品金额<span class="cheng-color">￥<{$order.pintuan_order.product_price}></span> + 运费<span class="cheng-color">￥<{$order.pintuan_order.freight}></span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-block">
+                <ul>
+                    <li class="item-content danhao mt10 border_t">
+                        <div class="item-inner">
+                            <div class="item-title"><span style="padding-left:0.75rem">成团时间</span></div>
+                            <div class="item-after"><span class="black3"><{$order.pintuan_order.tuan_time}>天</span></div>
+                        </div>
+                    </li>
+                    <li class="item-content danhao ">
+                        <div class="item-inner">
+                            <div class="item-title"><span style="padding-left:0.75rem">团长佣金</span></div>
+                            <div class="item-after"><span class="cheng-color">￥<{$order.pintuan_order.money_master}></span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-block" style=" margin-top:0.5rem;">
+                <ul>
+                    <li class="item-content danhao border_t">
+                        <div class="item-inner">
+                            <div class="item-title"><span style="padding-left:0.75rem">订单号：<{$order.order_id}></span></div>
+                        </div>
+                    </li>
+                    <li class="item-content danhao">
+                        <div class="item-inner">
+                            <div class="item-title"><span style="padding-left:0.75rem">支付方式：
+                            <{if $order.pay_code=='money'}>
+                            余额支付
+                            <{else if $order.pay_code=='alipay'}>
+                            支付宝支付
+                            <{else if $order.pay_code=='wxpay'}>
+                            微信支付
+                            <{else}>
+                            未支付
+                            <{/if}>
+                            </span></div>
+                        </div>
+                    </li>
+                    <li class="item-content danhao">
+                        <div class="item-inner">
+                            <div class="item-title"><span style="padding-left:0.75rem">下单时间：<{$order.dateline|format:'Y-m-d H:i'}></span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var order_id = parseInt(<{$order.order_id}>);
+// 联系商家弹出层
+$(document).off('click','#create_contacts').on('click','#create_contacts',function() {
+    var buttons1 = [
+        {
+            text: "<p style='color:#00cdda;'>联系商家<a href='tel:<{$order.shop.mobile}>'></a></p>",
+            onClick: function() {
+            }
+        },
+        {
+            text: "<p style='color:#00cdda;'>联系客服<a href='tel:<{$order.shop.phone}>'></a></p>",
+            onClick: function() {
+            }
+        },
+    ];
+    var buttons2 = [
+        {
+            text: "<div style='color:#00cdda;'>取消</div>",
+        }
+    ];
+    var groups = [buttons1, buttons2];
+    $.actions(groups);
+})
+
+$(document).off('click','#linkto_shop').on('click','#linkto_shop',function(){
+    var shop_id = parseInt(<{$order.shop.shop_id}>);
+    $.router.load("<{link ctl='pintuan:shop-"+shop_id+"'}>", true);
+})
+
+    //取消理由样式
+$(document).on('click','.mallord_delt_mask .selct_box a',function () {
+    $(".mallord_delt_mask .selct_box a").removeClass("active");
+    $(this).addClass("active");
+});
+
+// 检查补充说明字数
+function checkLen(obj) {
+    var len = GetStrLen($(obj).val());
+    if(len <= 120) {
+        var limit = 120-len;
+        $('.txt_right').text('还可输入' + limit + '字');
+    }
+}
+
+// 确认送达
+$(document).off('click','#arrived ').on('click','#arrived ',function() {
+    $.ajax({
+        url: "<{link ctl='waimai/order:arrived '}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error > 0){
+                Widget.MsgBox.success(ret.message);
+            }else{
+                Widget.MsgBox.error(ret.message);
+                setTimeout(function(){window.location.reload();},1000);
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+// 取消订单
+function cancelanorder(reason_mark) {
+    var reason  = reason_mark;
+    var order_id = parseInt(<{$order.order_id}>);
+    $.ajax({  
+        url: "<{link ctl='pintuan/order_cancel'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id":order_id,"reason":reason},
+        type: 'POST',   
+        success: function (ret) { 
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+
+// 取消订单modal
+$(document).off('click', '#cancel').on('click','#cancel', function () {
+    var c_html = '';
+    c_html += '<div class="mallord_delt_mask"><div class="row selct_box" id="reason_mark">';
+    <{foreach $order.reason as $v}>
+    c_html += '<a href="javascript:;" class="fl col-33">'+'<{$v}>'+'</a>';
+    <{/foreach}>
+    c_html += '<div class="cl"></div></div><div class="list-block"><div class="item-input"><textarea maxlength="120" id="buchong" placeholder="补充说明" onkeyup="checkLen(this)" ></textarea><p class="txt_right font_size14 black9">还可输入120字</p></div></div></div>';
+    
+    var modal = $.modal({
+        title: "<div class='mallord_delt_mask_tit'>取消理由</div>",
+        afterText:c_html,
+        buttons: [
+            {
+                text: "<span class='black6'>取消</span>"
+            },
+            {
+                text: "<span class='maincl'>确定</span>",
+                bold: true,
+                onClick: function () {
+                    var reason_mark = '';
+                    if($('#reason_mark .active').text() == null) {
+                        reason_mark = '取消理由:无';
+                    }else {
+                        reason_mark = '取消理由:' + $('#reason_mark .active').text();
+                    }
+                    if($('#buchong').val() == '') {
+                        reason_mark += ',补充说明:无';
+                    }else {
+                        reason_mark += ',补充说明:' + $('#buchong').val();
+                    }
+                    cancelanorder(reason_mark);
+                }
+            },
+        ]
+    })
+});
+
+//全局, 产品属性弹出层,点击空白处消失,
+$(document).on('click', '.modal-overlay', function () {
+
+        $(this).removeClass('modal-overlay-visible');
+    $('.modal-in').removeClass('modal-in');
+    $('.modal-in').css('display', 'none');
+});
+</script>
+<{if $app_webview == 1}>
+<script type="text/javascript">
+    
+    var android = "<{$android}>";
+    if(android == 1){
+        var tel = {};
+        tel.mobile = "<{$order.shop.mobile}>";
+        tel.phone = "<{$order.shop.phone}>";
+        window.Obj.return_tel(tel.mobile,tel.phone);
+    }else{
+        function return_tel() {
+            
+            return tel;
+        }
+        return_tel();
+    }
+
+    // 去付款
+    function payment(order_id) {
+        var order_id = parseInt(order_id);
+        var link = "<{link ctl='ucenter/order:payment-"+order_id+"'}>";
+        return_link(link);
+        return false;
+    }
+
+</script>
+<{else}>
+<script type="text/javascript">
+    // 去付款
+    function payment(order_id) {
+        var order_id = parseInt(order_id);
+        var link = "<{link ctl='ucenter/order:payment-"+order_id+"'}>";
+        localStorage['payment_backurl'] = window.location.href;
+        $.router.load(link,true);
+    }
+</script>
+<{/if}>
+
+
+
+
+<{include file='block/footer.html'}>

@@ -1,0 +1,145 @@
+<{assign var='tpl_title' value=L("换绑手机")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current"> 
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/ucenter/profile/index'}>"> <span class="Ico1"></span> </a>
+        <h1 class="title">换绑手机</h1>
+    </header>
+    <!-- 标题栏结束 --> 
+    <!-- 主要内容 -->
+    <div class="content">
+    	<div class="hbMobile">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" id="mobile" placeholder="">
+                                </div>
+                                <a href="javascript:get_sms();" class="yzmget" id="getsms">获取验证码</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" id="smscode" placeholder="请输入验证码">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" id="new_mobile" placeholder="请输入新的手机号码">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block">
+                <p><a href="javascript:edit_submit();" class="button button-big button-round">验证后绑定新手机</a></p>
+            </div>
+            <p class="wz txt_center font_size14">
+            	<span>若当前号码已不用/丢失，或无法收到验证码？</span>
+                <span>请联系客服：<em class="fontcl1"><{$phone}></em></span>
+            </p>
+        </div>
+    </div>
+    <!-- 主要内容结束 --> 
+</div>
+<script type="text/javascript">
+
+var countdown = 60;
+var Mobile_Timeout = null;
+
+// 获取验证码按钮点击事件
+function get_sms() {
+    if(!$('#mobile').val()) {
+        $.alert('请填写手机号');
+        setTimeout(function(){$.closeModal();},4000);
+        return false;
+    }else {
+        $("#getsms").addClass("graybg");
+        $('#getsms').attr("disabled", "disabled");
+        if(countdown > 0 && countdown < 60) {
+            return;
+        }
+        btn_count();
+        send_sms();
+    }
+}
+
+// 倒计时事件
+function btn_count() {
+    if (countdown == 0) {
+        $("#getsms").removeClass("graybg");
+        $('#getsms').removeAttr("disabled");
+        $('#getsms').text("重新获取");
+        clearTimeout(Mobile_Timeout);
+        $('#getsms').removeClass("on");
+        countdown = 60;
+    }else {
+        countdown--;
+        $('#getsms').text( + countdown.toString() + "s重新获取");
+        Mobile_Timeout = setTimeout(btn_count, 1000);
+        $('#getsms').addClass("on");
+    }
+}
+
+// 请求验证码
+function send_sms() {
+    var mobile = $('#mobile').val(); 
+    $.ajax({  
+        url: "<{link ctl='passport/sendsms'}>",
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',   
+        data:{"mobile":mobile},
+        success: function (ret) { 
+            if(ret.error > 0){
+                $.alert(ret.message);
+                setTimeout(function(){$.closeModal();},4000);
+            }else{
+                
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },     
+    });
+}
+
+// 确定修改
+function edit_submit() {
+    var yzm = $("#smscode").val();
+    var mobile = $("#new_mobile").val();
+    $.ajax({  
+        url: "<{link ctl='weidian/ucenter/profile/set_mobile'}>",
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',   
+        data:{"yzm":yzm,"mobile":mobile},
+        success: function (ret) { 
+            if(ret.error > 0){
+                $.alert(ret.message);
+                setTimeout(function(){$.closeModal();},4000);
+            }else{
+                $.alert(ret.message);
+                setTimeout(function(){
+                    window.location.href="<{link ctl='weidian/ucenter/index:index'}>";
+                },2000)
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },     
+    });
+}
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

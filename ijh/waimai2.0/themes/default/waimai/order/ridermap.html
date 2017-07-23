@@ -1,0 +1,217 @@
+<{include file="block/header.html"}>
+<div class="page page-current">
+	<!--头部-->
+	<header class="bar bar-nav ord_header">
+      <a class="button button-link button-nav pull-left ico ico_1 back"></a>
+      <a class="pull-right ico ico_2" id="refresh"></a>
+    </header>
+    <!--头部结束-->
+	<!--工具栏-->
+    <nav class="bar bar-tab ord_footer">
+    	<{if in_array($order.order_status,array(1,2,3)) && $order.pei_type!=3}>
+        <a href="javascript:;" class="button button-cancel" id="cuidan">催单</a>
+        <{/if}>
+        <{if $order.order_status==3}>
+        <a href="javascript:;" class="button" id="arrived">确认送达</a>
+        <{/if}>
+        <{if $order.order_status==8 || $order.order_status==4}>
+        <a href="javascript:;" class="button button-cancel" id="onemore">再来一单</a>
+        <{/if}>
+        <{if ($order.order_status==8 || $order.order_status==4) && $order.comment_status==0}>
+        <a href="javascript:;" class="button button-warning" id="comment">评价得积分</a>
+        <{/if}>
+        <{if $order.order_status==8 && $order.comment_status==1}>
+        <a href="javascript:;" class="button button-cancel" id="look_comment">查看评价</a>
+        <{/if}>
+    </nav>
+    <!--工具栏结束-->
+    <div class="content" style="top:0;" id="staff_map">
+    	<div class="ord_rider" id="allmap" style="width:100%;height:100%;"></div>
+    </div>        
+<!--内容结束-->   
+</div>
+<script type="text/javascript">
+
+// 强制执行地图初始化
+loadJScript();
+
+var order_id = parseInt(<{$order.order_id}>);
+
+// 确认送达
+$(document).off('click','#arrived ').on('click','#arrived ',function() {
+    $.ajax({  
+        url: "<{link ctl='waimai/order:arrived '}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id":order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                Widget.MsgBox.success(ret.message);
+            }else{
+                Widget.MsgBox.error(ret.message);
+                setTimeout(function(){window.location.reload();},1000);
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+})
+
+// 去评价
+$(document).off('click','#comment').on('click','#comment',function() {
+    $.router.load("<{link ctl='waimai/order:comment-"+order_id+"'}>", true);
+})
+
+// 查看评价
+$(document).off('click','#look_comment').on('click','#look_comment',function() {
+    $.router.load("<{link ctl='waimai/order:lookcomment-"+order_id+"'}>", true);
+})
+
+// 再来一单
+$(document).off('click','#onemore').on('click','#onemore',function() {
+    $.ajax({  
+        url: "<{link ctl='waimai/order:onemore'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id":order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{
+                // 取得订单商品表数组加入购物车
+                var ecart = new ECart(parseInt("<{$order.shop.shop_id}>"));
+                if(ret.product_list) {
+                    $.each(ret.product_list,function(index,value){
+                        ecart.add(index, value.product_number, value);
+                    });
+                    // 跳转到店铺点菜页面
+                    setTimeout(function(){
+                        $.router.load("<{link ctl='shop:detail' arg0=$order.shop.shop_id}>",true);
+                    },500);    
+                } 
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+})
+
+//百度地图API功能
+function loadJScript() {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8&callback=init";
+    document.getElementById("staff_map").appendChild(script);
+}
+function init() {
+    mapstatus();
+    setInterval(function(){
+        mapstatus();
+    },15000);
+    
+}  
+function mapstatus() {
+    var marker = null; var myIcon = null; var sContent = null;
+    var staff_lng = null;
+    var staff_lat = null;
+    var staff_id = parseInt(<{$order.staff.staff_id}>);
+    var shop_lng = <{$order.shop.lng}>;
+    var shop_lat = <{$order.shop.lat}>;
+    var user_lng = <{$order.lng}>;
+    var user_lat = <{$order.lat}>;
+    var order_status = <{$order.order_status}>;
+    var map = new BMap.Map("allmap");  
+    // 添加用户marker
+    var upoint = new BMap.Point(user_lng, user_lat);  
+    var uIcon = new BMap.Icon("%THEME%/static/images/icon_myLocation@2x.png", new BMap.Size(50,50));
+    var umarker = new BMap.Marker(upoint,{icon:uIcon});   
+    map.addOverlay(umarker);  
+    // 添加商家marker
+    var spoint = new BMap.Point(shop_lng, shop_lat);  
+    var shopIcon = new BMap.Icon("%THEME%/static/images/icon_shopLocation@2x.png", new BMap.Size(50,50));
+    var smarker = new BMap.Marker(spoint,{icon:shopIcon});   
+    map.addOverlay(smarker);   
+      
+    map.enableDragging();       
+    map.disableScrollWheelZoom();              
+    $.ajax({  
+        url: "<{link ctl='waimai/order:staffpos'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"staff_id":staff_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error == 0 ) {
+                staff_lng = ret.data.lng;
+                staff_lat = ret.data.lat;
+                var point = new BMap.Point(staff_lng, staff_lat);        // 创建点坐标
+                map.centerAndZoom(point,18);      
+                myIcon = new BMap.Icon("%THEME%/static/images/order_che_status@2x.png", new BMap.Size(50,50));
+                marker = new BMap.Marker(point,{icon:myIcon}); 
+                map.addOverlay(marker); 
+                var opts = {
+                  position : point,    // 指定文本标注所在的地理位置
+                  offset   : new BMap.Size(-45, -55)    //设置文本偏移量
+                }
+                if(order_status == 3) {
+                    var distance = parseInt(GetDistance(staff_lng,staff_lat,user_lng,user_lat));
+                    var label = new BMap.Label("距离您"+distance+"m", opts);  // 创建文本标注对象
+                }else {
+                    var distance = parseInt(GetDistance(staff_lng,staff_lat,shop_lng,shop_lat));
+                    var label = new BMap.Label("距离商家"+distance+"m", opts);  // 创建文本标注对象
+                }
+                label.setStyle({
+                    color : "black",
+                    fontSize : "12px",
+                    height : "30px",
+                    lineHeight : "30px",
+                    fontFamily:"微软雅黑",
+                    borderRadius:"5px",
+                    border:"2px solid #fdfdfc",
+                    textAlign:"center",
+                    padding:"0 5px",
+                    backgroundColor:"#fdfdfc",
+                 });
+                map.addOverlay(label);  
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+//window.onload = loadJScript;  //异步加载地图
+
+// 催单
+$(document).off('click','#cuidan').on('click','#cuidan',function() {
+    $.ajax({  
+        url: "<{link ctl='waimai/order:cuidan'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id":order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error == 0 ) {
+                Widget.MsgBox.success(ret.message);
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                Widget.MsgBox.error(ret.message);
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+})
+
+// 刷新骑手位置信息
+$(document).off('click','#refresh').on('click','#refresh',function() {
+    mapstatus();
+})
+</script>
+<{include file="block/footer.html"}>

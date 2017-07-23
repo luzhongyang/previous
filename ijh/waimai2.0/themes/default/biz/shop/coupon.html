@@ -1,0 +1,137 @@
+<{include file="biz/block/header.html"}>
+<div class="zxTabs">
+    <a href="<{link ctl='biz/shop:youhui'}>" ><{L('满减优惠')}></a>
+    <a href="<{link ctl='biz/shop:coupon'}>" class="on"><{L('店铺优惠券')}></a>
+    <div class="tishi pointcl"></div>
+</div>
+
+<div class="ucenter_c">
+
+
+    <span class="r">
+        <b style="color:green;">使用情况</b>：</br>
+        领取总数: <{$count.total}> ,     使用数: <{$count.used}> ,     未使用数: <{$count.no_use}><br />
+
+        <b style="color:green;">小提示</b>：</br>
+        1.如果券已有用户领取过则只能修改库存 </br>
+        2.当券未过期且用户领取过了不能删除</br>
+        <a href="javascript:void(0);"  class="btn btn-success jq_add">+<{L('新增一行')}></a></span></br>
+    </span>
+    <form id="post_form" action="<{link ctl='biz/shop/coupon'}>" mini-form="ucenter" method="post" ENCTYPE="multipart/form-data">
+        <table cellspacing="0" cellpadding="0" class="table">
+            <tr>
+                <th><{L('满多少元可使用')}></th>
+                <th><{L('券面值')}></th>
+                <th><{L('库存')}></th>
+                <th><{L('生效时间')}></th>
+                <th><{L('过期时间')}></th>
+                <th><{L('是否领取')}></th>
+                <th><{L('操作')}></th>
+            </tr>
+            <{foreach $items as $item}>
+            <tr class="jq_tr" id="coupon_<{$item.coupon_id}>">
+                <td>
+                    <{if $item.picked>0}>
+                    <input type="text" class="input w-50" name="data1[<{$item.coupon_id}>][order_amount]" value="<{$item.order_amount}>" disabled/>
+                    <{else}>
+                    <input type="text" class="input w-50" name="data1[<{$item.coupon_id}>][order_amount]" value="<{$item.order_amount}>" />
+                    <{/if}>
+                </td>
+                <td>
+                    <{if $item.picked>0}>
+                    <input type="text" class="input w-50" name="data1[<{$item.coupon_id}>][coupon_amount]" value="<{$item.coupon_amount}>" readonly="readonly"/>
+                    <{else}>
+                    <input type="text" class="input w-50" name="data1[<{$item.coupon_id}>][coupon_amount]" value="<{$item.coupon_amount}>" />
+                    <{/if}>
+                </td>
+                <td><input type="text" class="input w-50" name="data1[<{$item.coupon_id}>][sku]" value="<{$item.sku}>" /></td>
+                <td>
+                    <{if $item.picked>0}>
+                     <input disabled type="text" class="input w-150" id="d1<{$item.coupon_id}>" name="data1[<{$item.coupon_id}>][stime]" value="<{$item.stime|format:'Y-m-d H:i:s'}>" readonly="readonly"/>
+                    <{else}>
+                    <input disabled type="text" class="input w-150" id="d1<{$item.coupon_id}>" name="data1[<{$item.coupon_id}>][stime]" value="<{$item.stime|format:'Y-m-d H:i:s'}>" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'d2<{$item.coupon_id}>\',{d:-1})}'})" readonly="readonly"/>
+                    <{/if}>
+                </td>
+                <td>
+                    <{if $item.picked>0}>
+                    <input type="text" class="input w-150" id="d2<{$item.coupon_id}>" name="data1[<{$item.coupon_id}>][ltime]" value="<{$item.ltime|format:'Y-m-d H:i:s'}>" readonly="readonly"/>
+                    <{else}>
+                    <input type="text" class="input w-150" id="d2<{$item.coupon_id}>" name="data1[<{$item.coupon_id}>][ltime]" value="<{$item.ltime|format:'Y-m-d H:i:s'}>" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'d1<{$item.coupon_id}>\',{d:1})}'})"/>
+                    <{/if}>
+                </td>
+                <td>
+                    <{if $item.picked}>
+                    <font style="color:green;">是</font>
+                    <{else}>
+                    <font style="color:red;">否</font>
+                    <{/if}>
+                </td>
+                <td>
+                    <{if $item.picked>0}><{else}>
+                    <a href="<{link ctl='biz/shop/coupondel' coupon_id=$item.coupon_id}>" mini-act="remove:coupon_<{$item.coupon_id}>" mini-confirm="<{L('确认要删除吗')}>？" class="btn btn-warning"><{L('删除')}><{/if}></a>
+                </td>
+            </tr>
+            <{foreachelse}>
+            <tr class="jq_tr nodata"><td colspan="20"><div class="alert alert-info"><{L('没有数据')}></div></td></tr>
+            <{/foreach}>
+        </table>
+        <div><div class="jq_bottom"><input type="submit" class="btn btn-success jq_save" value="<{L('保存数据')}>"/></div></div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+
+(function(K, $){
+$(document).ready(function(){
+    var items = "<{$items}>";
+    if(!items) {
+        $('.jq_bottom').hide();
+    }
+    $(document).on('click','.jq_add', function() {
+        var guid = K.GGUID();
+        var stime_id = guid;
+        var ltime_id = guid + 1;
+        var html = '<tr class="jq_tr jq_tr2">';
+        html+='<td><input type="text" class="input w-50" name="data2['+guid+'][order_amount]" value="" /></td>';
+        html+='<td><input type="text" class="input w-50" name="data2['+guid+'][coupon_amount]" value="" /></td>';
+        html+='<td><input type="text" class="input w-50" name="data2['+guid+'][sku]" value="" /></td>';
+//        html+='<td><input type="text" class="input w-150 stimeWdate" id="'+stime_id+'" name="data2['+guid+'][stime]" value="" /></td>';
+        html+='<td>默认当前时间</td>';
+        html+='<td><input type="text" class="input w-150 ltimeWdate" id="'+ltime_id+'" name="data2['+guid+'][ltime]" value="" ' +
+                'onFocus="WdatePicker({dateFmt:\'yyyy-MM-dd HH:mm:ss\'})" /></td><td></td>';
+        html+='<td><a href="javascript:void(0);" class="btn btn-warning jq_delete"><{L("移除")}></a></td></tr>';
+        $(".table").append(html);
+        $('.nodata').hide();
+        $('.jq_bottom').show();
+
+
+    })
+    $(".table").on('click','.jq_delete', function () {
+        $(this).parent().parent().remove();
+        if($('.jq_tr2').html() == undefined) {
+            $('.jq_bottom').hide();
+            $('.nodata').show();
+            //window.location.reload();
+        }
+    })
+
+    // JQuery 动态HTML 需要document绑定
+    $(document).on('click','.stimeWdate', function() {
+        // 生效时间最大值 = 过期时间 - 1
+        var next_id = $(this).parent().next().find('input').attr('id');
+        WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D('+next_id+',{d:-1})}'});
+    })
+
+    $(document).on('click','.ltimeWdate', function() {
+        // 过期时间最小值 = 生效时间 + 1
+        var prev_id = $(this).parent().prev().find('input').attr('id');
+        WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D('+prev_id+',{d:1})}'});
+    })
+
+});
+
+})(window.KT, window.jQuery);
+
+</script>
+<{include file="biz/block/footer.html"}>

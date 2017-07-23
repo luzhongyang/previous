@@ -1,0 +1,355 @@
+<{assign var='tpl_title' value=L("邀请好友参团")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="popup popup-about share-yun_box">
+    <div class="share-yun close-popup"><img src="<{$weidian_theme}>static/images/share-yun.png"></div>
+</div>
+    <div class="page page-current">
+
+        <!-- 标题栏开始 -->
+
+        <!-- 标题栏结束 -->
+        <!-- 工具栏 -->
+        <nav class="bar bar-tab nav_btn">
+            <ul>
+
+
+                <{if 0==$group.status}>
+                <li class="list3 open-about2" id="buy_tuan" style="width:100% !important;">
+                    <a href="#">
+                        <p class="mt5"><i>拼团价：￥</i><em><{$product.tuan_price}></em></p>
+                        <p>立即参团</p>
+                    </a>
+                </li>
+                <{else if 1==$group.status && 0==$product.tuan_limit && $product.stock >0 }>
+                <li class="list3 open-about2" id="buy_tuan" style="width:100% !important;">
+                    <a href="#">
+                        <p class="mt5"><i>拼团价：￥</i><em><{$product.tuan_price}></em></p>
+                        <p>立即参团</p>
+                    </a>
+                </li>
+                <{else}>
+                <li class="list4" style="width:100% !important;">
+                    <a href="<{link ctl='weidian/pintuan:product' product_id=$product.pintuan_product_id}>">点击重开一团</a>
+                </li>
+                <{/if}>
+
+
+        </ul>
+        <div class="cl"></div>
+    </nav>
+        <!-- 工具栏结束 -->
+        <!-- 主要内容 -->
+        <div class="content">
+        	<!-- Slider -->
+            <div class="seller_caidelt_top sp_detail_top"><img src="/attachs/<{$product.photo}>" style="width: 100%">
+                <div class="top">
+                    <a href="<{link ctl='weidian/pintuan:tuan_detail' arg0=$group.pintuan_group_id}>" class="fl"><i class="Ico1"></i></a>
+                    <a href="#" class="fr"><i class="Ico2 open-about"></i></a>
+                    <div class="cl"></div>
+                </div>
+                <div class="bottom">
+                    <p class="fl"><{$product.title}></p>
+                    <div class="fr"><i num="<{$product.pintuan_product_id}>"  class="<{if $collect.uid>0}>guanzhu scIco2 <{else}>guanzhu scIco1<{/if}>"></i></div>
+                    <div class="cl"></div>
+                </div>
+            </div>
+
+
+
+
+
+            <form id="create_order" action="<{link ctl="weidian/pintuan/tuan_join_order"}>" method="get">
+                <div class="sp_detail">
+                    <div class="list-block">
+                        <ul>
+                            <li class="item-content border_b">
+                                <div class="item-inner f_size1">
+                                    <div class="item-title maincl"><em class="f_size2">￥<{$product.tuan_price}></em>/份
+                                        <del class="ml10 black9">¥<{$product.price}>/份</del>
+                                    </div>
+                                    <div class="item-after">销量：<{$product.sales}></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                    <{$product.attr_html}>
+
+                    <div class="mallord_delt_mask seller_caidelt_box border_bt">
+
+                        <div class="clearfix ">
+                            <div class="fl f_size1">购买数量<{if $product.item_limit >0}>
+                                <small class="fontcl1">(限购<{$product.item_limit}>份)</small>
+                                <{/if}></div>
+                            <div class="fr">
+                                <div class="num_operate sp_nums">
+                                    <span class="reduce" quantity="-">-</span>
+                                    <input type="text" value="1" class="text_box" name="num" readonly>
+                                    <span class="add" quantity="+">+</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="wz pad10 bgcolor_white border_t border_b">
+                        <ul class="wz1 black9">
+                            <li class="fl">原价:<span class="jiage"><em><{$product.price}></em>元</span></li>
+                            <li class="fr">成团时间：<em><{$product.tuan_time}></em>天</li>
+                        </ul>
+                        <div class="cl"></div>
+                        <p class="wz1 color1">支付开团并邀好友参加，人数不足自动退款。详见下方拼团介绍</p>
+
+                        <{if 1 == $product.tuan_type}>
+                        <div class="ladder_price">
+                            <div class="fl tit">拼团价</div>
+                            <div class="select_box">
+                                <ul>
+                                    <{$product.level_html}>
+                                </ul>
+                            </div>
+                            <div class="cl"></div>
+                        </div>
+                        <{/if}>
+                    </div>
+
+
+                    <div class="seller_caidelt_box mb10 xinxi">
+                        <p>
+                            <{$product.intro|strip_tags}>
+                        </p>
+                    </div>
+
+                </div>
+
+                <input name="product_id" type="hidden" value="<{$product.pintuan_product_id}>"/>
+                <input name="group_id" type="hidden" value="<{$group.pintuan_group_id}>"/>
+            </form>
+
+
+
+
+
+            <div class="pt_nr mt10">
+
+                <{if 2==$group.status}><p class="wz2">组团失败，您也可以重新再团一单</p><{/if}>
+                <div class="zt_shibai bgcolor_white font_size14 border_b">
+                	<div>
+                        <div class="fl">
+                        	<div class="touxiang fl"><img src="/attachs/<{$group.face}>"/></div>
+                            <p class="fl wz_left"><{$group.nickname}></p>
+                            <div class="cl"></div>
+                        </div>
+                        <div class="fr wz_right">发起时间：<span><{$group.ymd}></span><em><{$group.his}></em></div>
+                        <div class="cl"></div>
+                    </div>
+
+                    <{if 0==$group.status}>
+                    <div>
+                    	<div class="fl"></div>
+                    	<div style=" margin-left:2.5rem;">
+                            <ul class="btn">
+                                <li class="btn1 fl"><span class="ml10">￥<em><{$product.tuan_price}></em>/件</span></li>
+                                <li class="btn2 fl txt_center bg_color2"><{if 0==$group.leave_person}>组团成功，可以继续参团<{else}>还差<em><{$group.leave_person}></em>人成团，火速参团<{/if}></li>
+                            </ul>
+                            <div class="cl"></div>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <{else if 2==$group.status}>
+                    <div>
+                        <div class="fl"></div>
+                        <div style=" margin-left:2.5rem;">
+                            <ul class="btn">
+                                <li class="btn1 fl"><span class="ml10">￥<em><{$product.tuan_price}></em>/件</span></li>
+                                <li class="btn2 fl txt_center bg_color1">还差<em><{$group.leave_person}></em>人成团，组团失败</li>
+                            </ul>
+                            <div class="cl"></div>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <{else if 1==$group.status}>
+                    <div>
+                        <div class="fl"></div>
+                        <div style=" margin-left:2.5rem;">
+                            <div class="btn3 txt_center">组团人数已满，等待商家发货</div>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <{else}>
+                    <div>
+                        <div class="fl"></div>
+                        <div style=" margin-left:2.5rem;">
+                            <div class="btn3 txt_center">组团订单已完成</div>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <{/if}>
+                </div>
+                <{include file="weidian/$theme_style/pintuan/block_pintuan_liucheng.html"}>
+
+
+
+            </div>
+
+            <div class="sp_xinxi bgcolor_white mt10">
+                <div class="buttons-tab border_t"><a href="#tab1" class="tab-link active button Btn">商品详情</a>
+                    <!--<a href="#tab2" class="tab-link button Btn">商品评价(3)</a>-->
+                </div>
+                <div class="content-block">
+                    <div class="tabs">
+                        <div id="tab1" class="tab active">
+
+                            <{$product.intro}>
+
+                        </div>
+                        <!--<div id="tab2" class="tab"></div>-->
+                    </div>
+                </div>
+            </div>
+
+            <{include file="weidian/$theme_style/pintuan/block_pintuan_relate_product.html"}>
+
+        </div>
+        <!-- 主要内容结束 -->
+    </div>
+
+
+<style>
+    .border_bt, .border_t{border-bottom: 1px #d3d4da solid !important;}
+    .border_b {
+        border: 0 !important;
+        border-bottom: 1px #d3d4da dashed !important;
+    }
+    /*.resou-box{ height: 110px !important;}*/
+</style>
+<script>
+    $(document).ready(function () {
+
+//        $("#buy_tuan").click(function(){
+//            console.log($("#create_order").attr("action"));
+//            console.log('tuan');
+//        })
+
+        $(".resou-name").click(function () {
+                    $(this).parent().find(".resou-name").removeClass("on");
+                    $(this).addClass("on");
+                }
+        );
+
+        var numb = $(".text_box").val();
+        $(".add").click(function(){
+            if(numb< <{if $product.item_limit<1}>9999<{else}><{$product.item_limit}><{/if}> ){
+
+                numb++;
+                $(".text_box").val(numb);
+            }
+            });
+            $(".reduce").click(function(){
+                if(numb>0){
+                    numb--;
+                    $(".text_box").val(numb);
+                }
+            });
+
+        //参团主方法
+        $(".open-about2").click(function () {
+            $(".open-about2").unbind('click');
+            ajax_join_check();
+        })
+
+
+
+        function ajax_join_check()
+        {
+            $.post("<{link ctl='weidian/pintuan:ajax_tuan_join' arg0=$group.pintuan_group_id}>", {"group_id": "<{$group.pintuan_group_id}>"},
+                    function (data) {
+                        if(2==data.status)
+                        {
+                            $.alert(data.message,function () {
+                                //增加绑定
+                                $(".open-about2").click(function () {
+                                    $(".open-about2").unbind('click');
+                                    ajax_join_check();
+                                })
+                            });
+
+                            setTimeout(function () {
+                                if(null != data.url){
+                                    window.location=data.url;
+                                }
+                            }, 1000);
+                        }
+                        else
+                        {
+                            $("#create_order").submit();
+                        }
+//                        console.log(data.message); //debug
+                    }, "json"
+            )
+        }
+
+        //弹出层消失,点击灰色区域,
+        $(document).on('click', '.modal-overlay', function () {
+            $(this).removeClass('modal-overlay-visible');
+            $('.actions-modal').removeClass('modal-in');
+            $('.actions-modal').css('display', 'none');
+        });
+
+        });
+
+
+    $(function () {
+        var swiper = new Swiper('.swiper-container5', {
+            pagination: '.swiper-pagination5',
+            slidesPerView: 2.5,
+            paginationClickable: true,
+            spaceBetween: 10,
+            freeMode: true
+        });
+    });
+    $(document).on('click','.open-about', function () {
+        $.popup('.popup-about');
+    });
+</script>
+
+<{if $app_webview == 1}>
+<script type="text/javascript">
+
+    var android = "<{$android}>";
+    if(android == 1){
+        //返回分享
+        var share = {};
+        share.title = "<{$product.title}>";
+        share.photo = "<{$product.photo}>";
+        share.product_id = "<{$product.pintuan_product_id}>";
+        share.share_str = "<{$product.title}>";
+        window.Obj.return_share{share.title,share.photo,share.product_id,share.share_str};
+        //返回收藏
+        var is_collect = "<{$is_collect}>";
+        window.Obj.is_collect(is_collect);
+    }else{
+        function return_share() {
+        var share = {};
+            share.title = "<{$product.title}>";
+            share.photo = "<{$product.photo}>";
+            share.product_id = "<{$product.pintuan_product_id}>";
+            share.share_str = "<{$product.title}>";
+            return share;
+        }
+        return_share();
+        function is_collect(){
+            var is_collect = "<{$is_collect}>";
+            return is_collect;
+        }
+        is_collect();
+    }
+
+</script>
+<{/if}>
+
+<link rel="stylesheet" href="%THEME%/weidian/<{$theme_style}>/static/css/pt_join.css">
+<{include file="weidian/$theme_style/pintuan/block_pintuan_relate_product_js.html"}>
+<{include file="weidian/$theme_style/block/footer.html"}>

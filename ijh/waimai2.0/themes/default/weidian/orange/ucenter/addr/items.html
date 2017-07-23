@@ -1,0 +1,214 @@
+<{assign var='tpl_title' value=L("收货地址")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current"> 
+	<!--头部-->
+    <header class="bar bar-nav header_Ico">  
+    <a class="button button-link button-nav pull-left external"  id="addr_items_back"> 
+    <span class="Ico1"></span> </a> 
+    <a class="button button-link button-nav pull-right" id="edit_all">编辑</a>
+    <a class="button button-link button-nav pull-right" id="cancel_all">取消</a>
+        <h1 class="title">收货地址</h1>
+    </header>
+    <!--头部结束-->
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab footer_addAddr add-address">
+        <a class="tab-item external" href="<{link ctl='weidian/ucenter/addr:create'}>"><span style=" color:#fff;">添加新的地址</span></a>
+    </nav>
+    <!-- 工具栏结束 -->
+    <div class="content">
+       <div class="mineGdsaddr_list_box">
+
+       </div>
+    </div>        
+</div>
+<script type="text/javascript">
+
+$('#cancel_all').hide();
+ajax_addr_items();
+
+
+// ajax 请求收货地址列表
+function ajax_addr_items() {
+    $.ajax({  
+        url: "<{link ctl='weidian/ucenter/addr:ajax_addr_items'}>",
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                $.alert(ret.message);
+                setTimeout(function(){$.closeModal();},4000);
+            }else{
+                if(GetJsonLen(ret.data.items) > 0) {
+                    var html = '';
+                    $.each(ret.data.items,function(index,item){
+                        html += '<div class="mb10"><div class="mineGdsaddr_list address" addr_id="'+item.addr_id+'" contact="'+item.contact+'" mobile="'+item.mobile+'" address="'+item.addr+item.house+'">';
+                        html += '<div class="left">';
+                        html += '<h4>'+item.contact+'<span class="ml10 pad_l10">'+item.mobile+'</span></h4>';
+                        html += '<p class="black9"><span class="tag '+item.tag_class+'">'+item.tag_name+'</span>'+item.addr+'</p>';
+                        html += '</div></div></div>';
+                    })
+                    $('.mineGdsaddr_list_box').html(html);
+                }else {
+                    $('#edit_all').hide();
+                    var nodata = '';
+                    nodata += '<div class="nonePage txt_center">';
+                    nodata += '<img src="%THEME%/weidian/<{$theme_style}>/static/images/nodata/icon_address_no@2x.png">';
+                    nodata += '<p class="black3">无收货地址</p>';
+                    nodata += '</div><p class="txt_center font_size12  black9">马上去添加吧</p>';
+                    $('.mineGdsaddr_list_box').html(nodata);
+                }
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },     
+    });
+}
+
+// 编辑按钮点击事件
+$(document).off('click','#edit_all').on('click','#edit_all',function(){
+    $('#cancel_all').show();
+    $('#edit_all').hide();
+    $.ajax({  
+        url: "<{link ctl='weidian/ucenter/addr:ajax_addr_items'}>",
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                $.alert(ret.message);
+                setTimeout(function(){$.closeModal();},4000);
+            }else{
+                if(GetJsonLen(ret.data.items) > 0) {
+                    var html = '';
+                    $.each(ret.data.items,function(index,item){
+                        html += '<div class="mb10"><div class="mineGdsaddr_list address">';
+                        html += '<div class="left">';
+                        html += '<h4>'+item.contact+'<span class="ml10 pad_l10">'+item.mobile+'</span></h4>';
+                        html += '<p class="black9"><span class="tag '+item.tag_class+'">'+item.tag_name+'</span>'+item.addr+'</p>';
+                        html += '</div></div>';
+                        html += '<div class="list-block media-list ziLiao1 f_size1">';
+                        html += '<ul><li>';
+                        html += '<label class="label-checkbox item-content short-bord fl">';
+                        if(item.is_default==1) {
+                            html += '<input type="radio" name="my-radio" checked="checked">';
+                        }else {
+                            html += '<input type="radio" name="my-radio">';
+                        }
+                        html += '<div class="item-media"><i class="icon icon-form-checkbox mr10 setdef" addr_id="'+item.addr_id+'"></i>设为默认</div></label>';
+                        html += '<div class="fr edit">';
+                        html += '<span class="mr10 toedit" edit_url="'+item.edit_url+'"><i class="Ico1"></i>编辑</span>';
+                        html += '<span class="delete" addr_id="'+item.addr_id+'"><i class="Ico2"></i>删除</span>';
+                        html += '</div><div class="cl"></div></li></ul></div>';
+                        html += '</div>';
+                    })
+                    $('.mineGdsaddr_list_box').html(html);
+                }else {
+                    var nodata = '';
+                    nodata += '<div class="nonePage txt_center">';
+                    nodata += '<img src="%THEME%/weidian/<{$theme_style}>/static/images/nodata/icon_address_no@2x.png">';
+                    nodata += '<p class="black3">无收货地址</p>';
+                    nodata += '</div><p class="txt_center font_size12  black9">马上去添加吧</p>';
+                    $('.mineGdsaddr_list_box').html(nodata);
+                }
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },     
+    });
+})
+
+// 取消按钮点击事件
+$(document).off('click','#cancel_all').on('click','#cancel_all',function(){
+    $('#cancel_all').hide();
+    $('#edit_all').show();
+    ajax_addr_items();
+})
+
+//设为默认事件
+$(document).off('click','.setdef').on('click','.setdef',function(){
+    var addr_id = parseInt($(this).attr('addr_id'));
+    $.ajax({  
+        url: "<{link ctl='weidian/ucenter/addr:set_default'}>",
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',  
+        data:{"addr_id":addr_id}, 
+        success: function (ret) { 
+            if(ret.error > 0){
+                $.alert(ret.message);
+                setTimeout(function(){$.closeModal();},4000);
+            }else{
+                $.alert(ret.message);
+                setTimeout(function(){
+                    window.location.reload();
+                },1500);
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },     
+    });
+})
+
+// 删除事件
+$(document).off('click','.delete').on('click','.delete',function(){
+    var addr_id = parseInt($(this).attr('addr_id'));
+    $.confirm('确定要删除该地址吗?', '温馨提示',function () {
+            // 点击确认按钮事件
+            $.ajax({  
+                url: "<{link ctl='weidian/ucenter/addr:delete'}>",
+                async: true,  
+                dataType: 'json',  
+                type: 'POST',  
+                data:{"addr_id":addr_id}, 
+                success: function (ret) { 
+                    if(ret.error > 0){
+                        $.alert(ret.message);
+                        setTimeout(function(){$.closeModal();},4000);
+                    }else{
+                        $.alert(ret.message);
+                        setTimeout(function(){
+                            window.location.reload();
+                        },1500);
+                    }
+                }, 
+                error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                    alert(errorThrown); 
+                },     
+            });
+        },function () {
+            // 点击取消按钮事件
+        }
+    );
+})
+
+// 编辑按钮事件
+$(document).off('click','.toedit').on('click','.toedit',function(){
+    window.location.href = $(this).attr('edit_url');
+})
+
+var backurl = '';
+if(localStorage['weidian_waimai_choose_addr']) {
+    var wjson = JSON.parse(localStorage['weidian_waimai_choose_addr']);
+    if(wjson.backurl) {
+        backurl = wjson.backurl;
+        $('#addr_items_back').attr('href',backurl);
+    }
+    $(document).off('click','.mineGdsaddr_list').on('click','.mineGdsaddr_list',function(){
+        var addr_id = parseInt($(this).attr('addr_id'));
+        var contact = $(this).attr('contact');
+        var mobile = $(this).attr('mobile');
+        var address = $(this).attr('address');
+        localStorage['weidian_waimai_choosed_addr'] = JSON.stringify({"addr_id":addr_id,"contact":contact,"mobile":mobile,"address":address});
+        window.location.href = backurl;
+    })
+}else {
+    $('#addr_items_back').attr('href',"<{link ctl='weidian/ucenter/index:index'}>");
+}
+
+
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

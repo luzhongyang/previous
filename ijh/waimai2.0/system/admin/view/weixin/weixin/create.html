@@ -1,0 +1,51 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="weixin/weixin:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?weixin/weixin-create.html" mini-form="weixin-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr>
+    <th><span class="red">*</span>商铺ID：</th>
+    <td>
+        <input type="hidden" name="data[shop_id]" value="<{$detail.shop_id}>" id="select_shop_shop_id_id" />
+        <input type="text" value="<{$shop.title}>" id="select_shop_shop_id_title" class="input w-300" readonly/>
+        <{link ctl="shop/shop:dialog" select="mini:#select_shop_shop_id_id,#select_shop_shop_id_title/N/选择商户" title="选择商户" class="button"}>
+    </td>
+</tr>
+<tr><th><span class="red">*</span>wx_appid：</th><td><input type="text" name="data[wx_appid]" value="<{$detail.wx_appid|default:''}>" class="input w-300"/></td></tr>
+<tr><th>wx_appsecret：</th><td><input type="text" name="data[wx_appsecret]" value="<{$detail.wx_appsecret|default:''}>" class="input w-300"/></td></tr>
+<tr><th>access_token：</th><td><input type="text" name="data[access_token]" value="<{$detail.access_token|default:''}>" class="input w-300"/></td></tr>
+<tr><th>refresh_token：</th><td><input type="text" name="data[refresh_token]" value="<{$detail.refresh_token|default:''}>" class="input w-300"/></td></tr>
+<tr><th>token过期时间：</th><td><input type="text" name="data[token_expire_in]" value="<{$detail.token_expire_in|default:''}>" class="input w-300"/></td></tr>
+<tr><th>微信昵称：</th><td><input type="text" name="data[nick_name]" value="<{$detail.nick_name|default:''}>" class="input w-300"/></td></tr>
+<tr>
+	<th> 认证：</th>
+	<td>
+		<label><input type="radio" name="data[verify_type]" <{if $detail.verify_type}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[verify_type]" <{if isset($detail.verify_type) && empty($detail.verify_type)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+<tr>
+	<th>类型：</th>
+	<td>
+		<label><input type="radio" name="data[wx_type]" <{if $detail.wx_type}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[wx_type]" <{if isset($detail.wx_type) && empty($detail.wx_type)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+<tr><th>微信号：</th><td><input type="text" name="data[wx_name]" value="<{$detail.wx_name|default:''}>" class="input w-300"/></td></tr>
+<tr><th>原始ID：</th><td><input type="text" name="data[wx_ghid]" value="<{$detail.wx_ghid|default:''}>" class="input w-300"/></td></tr>
+<tr><th>公众号头像：</th><td><input type="text" name="data[head_img]" value="<{$detail.head_img|default:''}>" class="input w-300"/></td></tr>
+<tr><th>公众号二维码：</th><td><input type="text" name="data[qrcode_url]" value="<{$detail.qrcode_url|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>dateline：</th><td><input type="text" name="data[dateline]" value="<{$detail.dateline|default:''}>" class="input w-300"/></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

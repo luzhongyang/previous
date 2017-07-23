@@ -1,0 +1,229 @@
+<{assign var='tpl_title' value=L("评价")}>
+<{include file="block/header.html" }>
+    <div class="page page-current"> 
+        <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100" style='overflow-x:hidden;'> 
+           <div class="dianpu_top">
+           	   <{include file="shop/dianpu_intro.html"}>
+               <div class="buttons-tab fixed-tab">
+                    <a href="<{link ctl='shop/detail' arg0=$detail.shop_id}>" class="button back external">菜单</a>
+                    <a href="<{link ctl='shop/comment' arg0=$detail.shop_id}>" class="button active external">评价</a>
+                    <a href="<{link ctl='shop/shop' arg0=$detail.shop_id}>" class="button external">商家</a>
+               </div>
+           </div>
+           <div class="seller_evlut_tol mt10 mb10">
+                <div class="fl">
+                    <p class="fen fontcl1"><{$detail.agv}>%</p>
+                    <p class="">好评率</p> 
+                </div>
+                <div class="fr">
+                    <p>服务态度<span class="starBg txt_left ml10"><span class="star" style="width:<{$detail['score_fuwu']/$detail['comments']*20}>%;"></span></span></p>
+                    <p>商品打分<span class="starBg txt_left ml10"><span class="star" style="width:<{$detail['score_kouwei']/$detail['comments']*20}>%;"></span></span></p>
+                </div>
+                <div class="cl"></div>
+            </div>
+            <div class="evaluate_list_box">
+            	<div class="mallord_delt_mask seller_evlut_box">
+                    <div class="row selct_box" id='comment_type'>
+                        <input type="hidden" name="hide_type" id="hide_type" value="0" />
+                        <a href="" class="fl col-25 active" val='0'>全部（<{$comment_array['all_comment']}>）</a><a href="" class="fl col-25" val='3'>好评（<{$comment_array['good_comment']}>）</a><a href="" class="fl col-25" val='2'>中评（<{$comment_array['m_comment']}>）</a><a href="" class="fl col-25" val='1'>差评（<{$comment_array['bad_comment']}>）</a>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="black9 font_size14"><label><span class="checkbox_xy"><input type="checkbox" name="is_content" id="is_content" value="1"></span>只显示有内容的评价</label></div>
+                </div>
+                <div id="wrapper" style="position: ;">
+                <ul id="wrapper_ul">
+                    
+                    
+                </ul>
+                </div>
+            </div>
+            
+            <!-- 加载提示符 -->
+          <div class="infinite-scroll-preloader">
+              <div class="preloader"></div>
+          </div>
+            
+        </div>        
+    <!--内容结束-->   
+    </div>
+  <!--商家公告弹出层-->
+<div class="popup popup-about">
+    <div class="seller_annot">
+        <h1><{$detail.title}></h1>
+        <div class="txt_center"><span class="state"><{if $detail.yy_status==0}>打烊<{else}>营业中<{/if}></span></div>
+        <div class="txt_center"><span class="starBg txt_left"><span class="star" style="width:<{$detail['score']/$detail['comments']*20}>%;"></span></span></div>
+        <div class="bt txt_center">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="sid"><hr></td>
+                    <td class="mid"><span>商家公告</span></td>
+                    <td class="sid"><hr></td>
+                </tr>
+            </table>
+        </div>
+        <div class="nr" style="text-align:center;"><{$detail.info}></div>
+        <a href="javascript:;" class="closs close-popup"></a>
+    </div>
+</div>   
+
+        <script>
+            window.__LOAD_LOCK = false;
+
+            function __Comment_Index_Load_Items(params){
+                if(LoadData.__LOAD_LOCK){
+                    return false;
+                }
+                LoadData.__LOAD_LOCK = true;
+                LoadData.params.page ++;
+                if($('#is_content').is(':checked')) {
+                    LoadData.params.is_content = 1;
+                }
+                else {
+                    LoadData.params.is_content = 0;
+                }
+                params = params || {};
+                LoadData.params = $.extend(LoadData.params, params);
+                $.post("<{link ctl='shop/items'}>", LoadData.params, function(ret){
+                    if(ret.error){
+                        $.alert(ret.message);
+                    }else{
+                        var html = '';
+                        if(ret.data.items.length > 0) {
+                            $.each(ret.data.items, function(index,item){
+                                html+='<li class="evaluate_list">';
+                                html+='<div class="tx fl"><img src="<{$pager.img}>/'+item.face+'" width="100" height="100" /></div>';
+                                html+='<div class="wz">';
+                                html+='<h3>'+item.nickname+'<small class="fr black9 time">'+item.dateline+'</small></h3><div>';
+                                html+='<span class="star_evaluate"><span class="bq" style="background:#ff4568;">服</span><span class="starBg"><span class="star" style="width:'+item.score_fuwu*20+'%;"></span></span></span>';
+                                html+='<span class="star_evaluate"><span class="bq" style="background:#ffc000;">商</span><span class="starBg"><span class="star" style="width:'+item.score_kouwei*20+'%;"></span></span></span></div>';
+//                                html+='<div class="font_size14 mb5">';
+//                                html+='<span class="star_evaluate black9"><span class="bq" style="background:#00b7ee;">配</span>'+item.pei_time+'</span></div>';
+                                html+='<p>'+item.content+'</p>';
+                                html+='<div class="img_list mb10">';
+                                html+='<ul>';
+
+                                    for(x in item.photo){
+                                        html+='<li><img src="<{$pager.img}>/'+item.photo[x]['photo']+'" width="100" height="100" /></li>';
+                                    }
+                                     
+      
+                                html+='</ul>'; 
+                                html+='<div class="cl"></div></div>';
+                                
+                                if(item.reply){
+                                    html+='<div class="evaluate_reply"><p>'+item.reply+'</p><p class="time black9">'+item.reply_time+'</p></div>';
+                                }
+                                
+                                html+='</div><div class="cl"></div></li>';
+                            })
+                            if(LoadData.params.page == 1){
+                                $('#wrapper #wrapper_ul').html(html);
+                            }else{
+                                console.log(html);
+                                $('#wrapper #wrapper_ul').append(html);
+                            }
+                        }else if(LoadData.params.page > 1){
+                            $.detachInfiniteScroll($('.infinite-scroll-bottom'));
+                            $('#wrapper ul#wrapper_ul').append('<div class="loading_end">没有更多了...</div>'); 
+                            $('.infinite-scroll-preloader').remove();
+                        }else {
+                            $.detachInfiniteScroll($('.infinite-scroll-bottom'));
+                            $('#wrapper ul#wrapper_ul').append('<div class="loading_end">没有数据...</div>'); 
+                            $('.infinite-scroll-preloader').remove();
+                        }
+                        if(ret.data.items.length < 9) {
+                            $('.infinite-scroll-preloader').remove();
+                        }
+                    }
+                    LoadData.__LOAD_LOCK = false;
+                },"json");
+            }
+
+
+        $(document).on('click','.mallord_delt_mask .selct_box a',function () {
+            $(".mallord_delt_mask .selct_box a").removeClass("active");
+            $("#hide_type").val($(this).attr('val'));
+            $(this).addClass("active");
+        });
+        $(document).ready(function() {
+            LoadData.params['page'] = 0;
+            LoadData.params['shop_id'] = "<{$detail.shop_id}>";
+            __Comment_Index_Load_Items(LoadData.params);
+            $(".checkbox_xy").click(function(){
+                if($(this).hasClass("on")){
+                    $(this).removeClass("on");
+                }else{
+                    $(this).addClass("on");
+                }
+            });
+            $('#comment_type a').click(function(){
+                $('#wrapper ul#wrapper_ul').html('');
+                var val = $(this).attr('val');
+                LoadData.params['page'] = 0;
+                LoadData.params['type'] = val;
+                LoadData.params['shop_id'] = "<{$detail.shop_id}>";
+                __Comment_Index_Load_Items(LoadData.params);
+            });
+            
+            $(document).on('infinite', '.infinite-scroll-bottom',function() {
+
+            });
+            $('#is_content').change(function() {
+                $('#wrapper ul#wrapper_ul').html('');
+                var val = $("#hide_type").val();
+                LoadData.params['page'] = 0;
+                LoadData.params['type'] = val;
+                LoadData.params['shop_id'] = "<{$detail.shop_id}>";
+                __Comment_Index_Load_Items(LoadData.params);
+            });
+        });
+        // 分享到新浪微博
+        $(document).off('click','#share_sinablog').on('click','#share_sinablog',function() {
+            var buttons1 = [
+            {
+                text: "<div style='color:#00cdda;'>分享到新浪微博</div>",
+                onClick: function() {
+                    var shareUrl = window.location.href;   //获取当前页面完整的地址栏URL
+                    var sharePic = "<{$pager.img}>/<{$detail.logo}>";       // 获取商家logo图片
+                    var shareTitle = '这家店不错哦，一起去吧！'+"<{$detail.title}>，"+"<{$detail.addr}>，"+"<{$detail.mobile}>。"+"@<{$CONFIG.site.title}>"; // 内容
+                    window.location.href ='http://service.weibo.com/share/share.php?appkey=1550938859'+'&url='+encodeURIComponent(shareUrl)+'&content=utf-8&sourceUrl='+encodeURIComponent(shareUrl)+'&pic='+encodeURIComponent(sharePic)+'&title='+encodeURIComponent(shareTitle);
+                    }
+                }
+            ];
+            var buttons2 = [
+                {
+                    text: "<div style='color:#00cdda;'>取消</div>",
+                }
+            ];
+            var groups = [buttons1, buttons2];
+            $.actions(groups);
+        })
+        $(document).off('click','#open-about').on('click','#open-about',function(){
+            $.popup('.popup-about');
+        })
+        // 收藏
+        $(document).off('click','#collects').on('click','#collects',function() {
+            var shop_id = parseInt(<{$detail.shop_id}>);
+            $.ajax({  
+                url: "<{link ctl='shop:collect-"+shop_id+"'}>", 
+                async: true,  
+                dataType: 'json',  
+                type: 'POST',   
+                success: function (ret) { 
+                    if(ret.error == 0){
+                        Widget.MsgBox.success('收藏成功');
+                        $('#collects').addClass('active')
+                    }else{
+                        Widget.MsgBox.error(ret.message);
+                        $('#collects').removeClass('active');
+                        
+                    }
+                },
+                error: function (xhr, status, err) { 
+                    $.alert(err); 
+                },
+            });
+        })
+    </script>
+    
+<{include file="block/footer.html"}>

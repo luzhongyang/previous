@@ -1,0 +1,167 @@
+<{assign var='tpl_title' value=L("在线支付")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current">
+  <!--头部-->
+  <header class="bar bar-nav header_Ico">
+    <a class="button button-link button-nav pull-left external" href="<{$order.link}>">
+      <span class="Ico1"></span>
+    </a>
+    <h1 class="title">在线支付</h1>
+  </header>
+  <!--头部结束-->
+  <nav class="bar bar-tab">
+    <a href="javascript:;" class="button button-big queren-pay" id="subpayment">确认支付</a>
+  </nav>
+  <div class="content">
+    <div class="pay_lefttime mb10">
+      支付剩余时间：
+      <span id="daojishi_98" rel="<{$leftover_seconds}>"></span>
+    </div>
+    <div class="list-block">
+      <ul>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <p>订单号：<{$order.order_id}></p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="list-block border_b">
+      <ul>
+        <li class="item-content" >
+          <div class="item-inner">
+            <div class="item-title">支付金额</div>
+            <div class="item-after">
+              <span class="maincl">￥<{$order.amount}></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="list-block media-list zhifu-way" style="margin-top:0.5rem">
+      <ul>
+        <{if $weixin==1}>
+            <li>
+              <label class="label-checkbox item-content payment">
+                <div class="item-media tu">
+                  <img src="%THEME%/weidian/<{$theme_style}>/static/images/pay/pay2.png"></div>
+                <div class="item-inner">
+                  <div class="item-subtitle">微信支付</div>
+                </div>
+                <input type="radio" name="my-radio" checked="checked" paycode="wxpay">
+                <div class="item-media"> <i class="icon icon-form-checkbox"></i>
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="label-checkbox item-content payment">
+                <div class="item-media tu">
+                  <img src="%THEME%/weidian/<{$theme_style}>/static/images/pay/pay3.png"></div>
+                <div class="item-inner">
+                  <div class="item-subtitle">余额支付</div>
+                </div>
+                <input type="radio" name="my-radio" paycode="money">
+                <div class="item-media">
+                  <i class="icon icon-form-checkbox"></i>
+                </div>
+              </label>
+            </li>
+        <{else}>
+            <li>
+              <label class="label-checkbox item-content payment">
+                <div class="item-media tu">
+                  <img src="%THEME%/weidian/<{$theme_style}>/static/images/pay/pay1.png"></div>
+                <div class="item-inner">
+                  <div class="item-subtitle">支付宝</div>
+                </div>
+                <input type="radio" name="my-radio" checked="checked" paycode="alipay">
+                <div class="item-media"> <i class="icon icon-form-checkbox"></i>
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="label-checkbox item-content payment">
+                <div class="item-media tu">
+                  <img src="%THEME%/weidian/<{$theme_style}>/static/images/pay/pay2.png"></div>
+                <div class="item-inner">
+                  <div class="item-subtitle">微信支付</div>
+                </div>
+                <input type="radio" name="my-radio" paycode="wxpay">
+                <div class="item-media"> <i class="icon icon-form-checkbox"></i>
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="label-checkbox item-content payment">
+                <div class="item-media tu">
+                  <img src="%THEME%/weidian/<{$theme_style}>/static/images/pay/pay3.png"></div>
+                <div class="item-inner">
+                  <div class="item-subtitle">余额支付</div>
+                </div>
+                <input type="radio" name="my-radio" paycode="money">
+                <div class="item-media">
+                  <i class="icon icon-form-checkbox"></i>
+                </div>
+              </label>
+            </li>
+        <{/if}>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var order_id = parseInt(<{$order.order_id}>);
+var time_over = parseInt(<{$leftover_seconds}>);
+var order_from = "<{$order.from}>";
+
+if(time_over <= 0) {
+    clearInterval(my_time);
+    $("#daojishi_98").html("<span class='box'>" +"00"+ "</span>" + ":" + "<span class='box'>" + "00" + "</span>");
+    setTimeout(function(){
+        window.location.href = link;
+    },1000)
+}else if(time_over > 0){
+    //如果剩余支付时间大于0则进入计时器
+    // 先显示一次
+    Countdown("daojishi_98");
+    // 然后开启计时器
+    var my_time = setInterval(function () {
+        Countdown("daojishi_98");
+    }, 1000);
+}
+
+// 剩余支付时间倒计时
+function Countdown(id) { 
+    var time_left = Math.floor($("#" + id).attr('rel'));
+    time_left--;
+    var minute = Math.floor(time_left / 60 % 60);
+    var second = Math.floor(time_left % 60);
+    if(minute < 10) {minute = '0' + minute;}
+    if(second < 10) {second = '0' + second;}
+    $("#" + id).attr('rel', time_left);
+    $("#" + id).html("<span class='box'>" + minute+ "</span>" + ":" + "<span class='box'>" + second + "</span>"); 
+    if(time_left <= 0) {
+        clearInterval(my_time);
+        $("#daojishi_98").html("<span class='box'>" +"00"+ "</span>" + ":" + "<span class='box'>" + "00" + "</span>"); 
+        setTimeout(function(){
+            // 如果倒计时已结束则跳转到订单详情页
+            window.location.href = "<{link ctl='weidian/ucenter/order/waimai_order_detail-"+order_id+"'}>";
+        },1000)
+    }
+} 
+
+// 确认支付
+$(document).off('click', '#subpayment').on('click', '#subpayment', function() {
+    var paycode = $('.label-checkbox.payment').find(':checked').attr('paycode');
+    if(paycode != "" && order_id > 0) {
+        var link = "<{link ctl='trade/payment/order-"+paycode+"-"+order_id+"'}>";
+        window.location.href = link;
+    }else {
+        $.alert('请选择支付方式');return;
+    }
+});
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

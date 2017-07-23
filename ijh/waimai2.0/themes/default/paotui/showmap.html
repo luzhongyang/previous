@@ -1,0 +1,357 @@
+<{include file="block/header.html"}>
+<style>
+    .tangram-suggestion table tr td{height: 40px !important;line-height: 25px !important; border-bottom: 1px solid #ededed;}
+    .tangram-suggestion-main{ z-index:9999 !important}
+</style>
+    <div class="page page-current">
+        <{include file="block/baidu_map.html"}>
+		<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">
+			<{if $type == 'buy'}>
+				帮我买
+			<{elseif $type == 'send'}>
+				帮我送
+			<{else}>
+				其他
+			<{/if}>
+			</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	<div class="runBuy_idx"><div id="allmap" style="width: 100%; height:100%;background:url(%THEME%/static/images/map_loading.gif) center center no-repeat;"></div>
+            	<div class="tips">周围有<span class="fontcl1" id="staffcount">(0)</span>位自由跑腿人等待为你服务</div>
+                <div class="addr_box">
+                    <div class="runSub_box">
+                        <div class="list-block">
+                            <ul>
+								<li>
+                                	<div class="item-content item-link">
+										<div class="item-media">
+										<{if $type == 'buy'}>
+											<i class="icon ico_7"></i>
+										<{elseif $type == 'send'}>
+											<i class="icon ico_8"></i>
+										<{else}>
+											<i class="icon ico_6"></i>
+										<{/if}>
+										</div>
+                                  		<div class="item-inner">
+                                    		<div class="item-input">
+                                      			<input type="text" id='suggestId' size="20">
+                                    		</div>
+                                  		</div>
+                                  		<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:100%;height:auto; display:none;position:absolute;"></div>
+                                	</div>
+                              	</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn_box"><a href="javascript:;" class="button button-fill button-warning" id="order">立即下单</a></div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+
+$(document).off('click','#order').on('click','#order',function(){
+	var type = "<{$type}>";
+	var link = "<{link ctl='paotui'}>"+type+"/";
+	$.router.load(link, true);
+});
+
+$('#clears').click(function(){
+	$("#suggestId").val('');
+});
+
+
+localStorage.removeItem('face_img_1');
+localStorage.removeItem('face_img_2');
+localStorage.removeItem('face_img_3');
+localStorage.removeItem('face_img_4');
+localStorage.removeItem('lng');
+localStorage.removeItem('lat');
+localStorage.removeItem('picker-time');
+localStorage.removeItem('tip');
+localStorage.removeItem('intro');
+localStorage.removeItem('mobile');
+localStorage.removeItem('contact');
+localStorage.removeItem('house');
+localStorage.removeItem('select_amount');
+localStorage.removeItem('o_addr');
+localStorage.removeItem('o_lng');
+localStorage.removeItem('o_lat');
+localStorage.removeItem('o_mobile');
+localStorage.removeItem('o_contact');
+localStorage.removeItem('o_house');
+localStorage.removeItem('picker-time');
+localStorage.removeItem('pei_time');
+localStorage.removeItem('select_address');
+
+// div容器
+var container = document.getElementById("allmap");
+var centerDiv = document.getElementById("centerDiv");  // 放置自定义控件的dom容器
+// 初始化地图
+var map = new BMap.Map("allmap");
+var addr = null;
+var point = null;
+var lng = localStorage.getItem('lng');
+var lat = localStorage.getItem('lat');
+var myGeo = new BMap.Geocoder();
+
+if (lng==null && lat==null) {
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(geolocation.getStatus() == BMAP_STATUS_SUCCESS){
+            lng = r.point.lng;
+            lat = r.point.lat;
+            map.centerAndZoom(new BMap.Point(lng, lat), 17);
+            var point = new BMap.Point(lng, lat);
+            //左下角坐标
+            SouthWlng = map.getBounds().getSouthWest().lng;
+            SouthWlat  = map.getBounds().getSouthWest().lat;
+            //右上角坐标
+            NorthElng = map.getBounds().getNorthEast().lng;
+            NorthElat = map.getBounds().getNorthEast().lat;
+            if(SouthWlat && SouthWlng && NorthElat && NorthElng) {
+                $.ajax({
+                    url: "<{link ctl='paotui:getstaffpoi'}>",
+                    async: true,
+                    dataType: 'json',
+                    data: {"SouthWlng":SouthWlng,"SouthWlat": SouthWlat,"NorthElng": NorthElng,"NorthElat": NorthElat},
+                    type: 'POST',
+                    success: function (ret) {
+                        if(ret.error > 0){
+                        	$("#staffcount").html('(0)');
+                        }else{
+                            items = ret.data.items;
+                            $("#staffcount").html('('+ret.count+')');
+                            $.each(items,function(key,val){
+                                var each_point = new BMap.Point(val.lng, val.lat);
+                                addMarker(each_point);
+                            });
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    },
+                });
+            }
+
+            // 根据浏览器定位获得经纬度获取周围POI点
+            var mOption = {poiRadius : 100,numPois : 6};
+            myGeo.getLocation(point, function mCallback(rs) {
+            	var allPois = rs.surroundingPois;
+                var s = [];
+                var first_dq = '';
+                for( i = 0; i < allPois.length ; ++i ){
+                    if(i == 0){
+                    	if(window.localStorage){
+                    		ac.setInputValue(allPois[i].title);
+                    		setplace(allPois[i].point);
+                        }else{
+                            alert("<{L('浏览器还不支持')}> web storage <{L('功能')}>");
+                        }
+                    }
+                }
+            },mOption);
+        }else {
+            //alert('failed'+this.getStatus());
+        }
+    },{enableHighAccuracy: true});
+} else {
+    // 根据上一次存储的经纬度获取周围POI点
+    map.centerAndZoom(new BMap.Point(lng, lat), 17);
+    var point = new BMap.Point(lng, lat);
+    //左下角坐标
+    SouthWlng = map.getBounds().getSouthWest().lng;
+    SouthWlat  = map.getBounds().getSouthWest().lat;
+    //右上角坐标
+    NorthElng = map.getBounds().getNorthEast().lng;
+    NorthElat = map.getBounds().getNorthEast().lat;
+    if(SouthWlat && SouthWlng && NorthElat && NorthElng) {
+        $.ajax({
+            url: "<{link ctl='paotui:getstaffpoi'}>",
+            async: true,
+            dataType: 'json',
+            data: {"SouthWlng":SouthWlng,"SouthWlat": SouthWlat,"NorthElng": NorthElng,"NorthElat": NorthElat},
+            type: 'POST',
+            success: function (ret) {
+                if(ret.error > 0){
+                	$("#staffcount").html('(0)');
+                }else{
+                    items = ret.data.items;
+                    $("#staffcount").html('('+ret.count+')');
+                    $.each(items,function(key,val){
+                        var each_point = new BMap.Point(val.lng, val.lat);
+                        addMarker(each_point);
+                    });
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+        });
+    }
+
+    var mOption = {poiRadius : 500,numPois : 5};
+    myGeo.getLocation(point, function mCallback(rs) {
+    	var allPois = rs.surroundingPois;
+        var s = [];
+        var first_dq = '';
+        for( i = 0; i < allPois.length ; ++i ){
+            if(i == 0){
+            	if(window.localStorage){
+            		ac.setInputValue(allPois[i].title);
+            		setplace(allPois[i].point);
+                }else{
+                    alert("<{L('浏览器还不支持')}> web storage <{L('功能')}>");
+                }
+            }
+        }
+    },mOption);
+}
+
+/*创建自定义控件----开始-------*/
+var middleControl = document.createElement("div");
+middleControl.style.left = "50%";
+middleControl.style.marginLeft="-18px";
+middleControl.style.top="50%";
+middleControl.style.marginTop="-18px";
+middleControl.style.position="relative";
+middleControl.style.width="36px";
+middleControl.style.height="36px";
+middleControl.style.zIndex="100000";
+middleControl.innerHTML ='<img src="%THEME%/static/images/my02@2x.png" />';
+// 将自定义控件加入到地图容器中
+container.appendChild(middleControl);
+/*创建自定义控件----结束-------*/
+
+ /*地图拖拽事件*/
+map.addEventListener("dragend", function(){
+    var center = map.getCenter();
+    var mPoint = new BMap.Point(center.lng, center.lat);
+    map.enableScrollWheelZoom();  //启用滚轮缩放
+    map.centerAndZoom(mPoint,17); // 设置地图显示级别
+    var mOption = {poiRadius : 500,numPois : 10}; //获取全部POI（该点半径为100米内有6个POI点）
+    var myGeo = new BMap.Geocoder(); //创建地址解析实例
+    SouthWlng = map.getBounds().getSouthWest().lng;
+    SouthWlat  = map.getBounds().getSouthWest().lat;
+    //右上角坐标
+    NorthElng = map.getBounds().getNorthEast().lng;
+    NorthElat = map.getBounds().getNorthEast().lat;
+    if(SouthWlat && SouthWlng && NorthElat && NorthElng) {
+        $.ajax({
+            url: "<{link ctl='paotui:getstaffpoi'}>",
+            async: true,
+            dataType: 'json',
+            data: {"SouthWlng":SouthWlng,"SouthWlat": SouthWlat,"NorthElng": NorthElng,"NorthElat": NorthElat},
+            type: 'POST',
+            success: function (ret) {
+                if(ret.error > 0){
+                	$("#staffcount").html('(0)');
+                }else{
+					items = ret.data.items;
+					$("#staffcount").html('('+ret.count+')');
+                    $.each(items,function(key,val){
+                    	var each_point = new BMap.Point(val.lng, val.lat);
+                        addMarker(each_point);
+                    });
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+        });
+    }
+     //使用反地址解析
+    myGeo.getLocation(mPoint, function mCallback(rs) {
+    	var allPois = rs.surroundingPois;
+        var s = [];
+        var first_dq = '';
+        for( i = 0; i < allPois.length ; ++i ){
+            if(i == 0){
+            	if(window.localStorage){
+            		ac.setInputValue(allPois[i].title);
+            		setplace(allPois[i].point);
+                }else{
+                    alert("<{L('浏览器还不支持')}> web storage <{L('功能')}>");
+                }
+            }
+        }
+    },mOption);
+});
+
+function G(id) {
+    return document.getElementById(id);
+}
+
+var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+    {"input" : "suggestId"
+    ,"location" : map
+});
+
+ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+var str = "";
+    var _value = e.fromitem.value;
+    var value = "";
+    if (e.fromitem.index > -1) {
+        value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+    }
+    str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+    value = "";
+    if (e.toitem.index > -1) {
+        _value = e.toitem.value;
+        value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+    }
+    str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+    G("searchResultPanel").innerHTML = str;
+});
+
+var myValue;
+ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+var _value = e.item.value;
+    myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+    G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+    setplace(_value);
+    myGeo.getPoint(myValue, function(point){
+        if (point) {
+            map.centerAndZoom(point, 17);
+            setplace(point);
+        }else{
+            alert("<{L('您选择地址没有解析到结果')}>!");
+        }
+    }, _value.city);
+});
+
+function setplace(point) {
+    var addr_info,addr_lng,addr_lat;
+    addr_info = $('#suggestId').val();
+    addr_lng = point.lng;
+    addr_lat = point.lat;
+
+    if(window.localStorage){
+        if(localStorage['select_address'] == 'o_addr'){
+            localStorage.setItem('o_addr',addr_info);
+            localStorage.setItem('o_lng',addr_lng);
+            localStorage.setItem('o_lat',addr_lat);
+        }else{
+            localStorage.setItem('addr',addr_info);
+            localStorage.setItem('lng',addr_lng);
+            localStorage.setItem('lat',addr_lat);
+        }
+    }else{
+        alert("<{L('浏览器还不支持')}> web storage <{L('功能')}>");
+    }
+
+}
+function addMarker(point){
+    var myIcon = new BMap.Icon("%THEME%/static/images/ren@2x.png", new BMap.Size(32,37));
+    var marker = new BMap.Marker(point,{icon:myIcon});  // 创建标注
+    map.addOverlay(marker);
+}
+
+$('#suggestId').val(localStorage.getItem('addr'));
+</script>
+<{include file="block/footer.html"}>

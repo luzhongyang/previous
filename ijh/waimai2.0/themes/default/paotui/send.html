@@ -1,0 +1,653 @@
+<{assign var='tpl_title' value=L("帮我送")}>
+<{include file="block/header.html" }>
+<script src="%THEME%/static/js/jquery.js"></script>
+<script>jQuery.noConflict()</script>
+<link rel="stylesheet" href="%THEME%/static/css/nouislider.min.css">
+<script type='text/javascript' src='%THEME%/static/js/nouislider.js' charset='utf-8'></script>
+<script type="text/javascript" src="<{$pager.res}>/kindeditor/kindeditor.js"></script>
+<style type="text/css">
+	.upload_int{margin-right:0.55rem;}
+	.upload_int .img{width: 3.5rem;height: 3.5rem;background: no-repeat center center;background-size: cover; position:relative; z-index: 1; }
+	.upload_int .img img{ width: 100%; height: 100%;}
+	.mineSet_feedback .upload_int:before, .upload_int:after{ z-index: 0; }
+	.mineSet_feedback .upload_int input{ z-index: 2;}
+	.ke-upload-file {width:75px !important}
+</style>
+    <div class="page page-current"> 
+		<!--头部-->
+        <header class="bar bar-nav"> 
+        	<a class="button button-link button-nav pull-left external" href="<{link ctl='paotui'}>"> 
+        		<span class="iconfont icon-iconfontxiangyou"></span> 
+        	</a> 
+        	<a href="<{link ctl='paotui/info'}>" class="button button-link button-nav pull-right">
+        		<i class="headerIco instroIco"></i>
+        	</a>
+            <h1 class="title">帮我送</h1>
+        </header>
+        <!--头部结束-->
+        <div class="bar bar-tab ordSubmit_footer">
+        	<div class="fl ml10">待支付<span class="fontcl1">￥<i id="price"></i></span>
+        	<span class="black9 ml10 pad_l10 border_l">已优惠￥<i id="youhui">0</i></span></div>
+            <div class="fr"><a class="pub_btn" mini-submit="#content-form">提交</a></div>
+        </div>
+        <div class="content">
+        <form id="content-form" action="<{link ctl='paotui/send'}>" method="post">
+			<div class="runSub_box_change">
+            	<div class="runSub_box">
+                	<div class="list-block">
+                    	<ul>
+                        	<li>
+                            	<div class="item-content item-link">
+                            	  	<div class="item-media"><i class="icon ico_8"></i></div>
+                              		<div class="item-inner">
+	                                	<div class="item-input">
+    										<input type="text" id="o_addr" name="o_addr" placeholder="" value="">
+                                		</div>
+                              		</div>
+                            	</div>
+                          	</li>  
+                          	<li>
+                            	<div class="item-content">
+                              		<div class="item-media"></div>
+                              		<div class="item-inner">
+                                		<div class="item-input">
+                                  			<input type="text" id="o_house" name="o_house" placeholder="门牌号" value="">
+                                  			<input type="hidden" placeholder="" value="" id="o_lng" name="o_lng">
+                              				<input type="hidden" placeholder="" value="" id="o_lat" name="o_lat">
+                                		</div>
+                              		</div>
+                            	</div>
+                          	</li> 
+                          	<li>
+                            	<div class="item-content">
+                              		<div class="item-media"></div>
+                              		<div class="item-inner">
+                                		<div class="item-input border_r">
+                                  			<input type="text" id="o_contact" name="o_contact" placeholder="发货人姓名" value="">
+                                		</div>
+                                		<div class="item-input">
+                                  			<input type="text" id="o_mobile" name="o_mobile" placeholder="联系电话" value="">
+                                		</div>
+                              		</div>
+                            	</div>
+                          	</li>  
+                          	<li>
+                            	<div class="item-content item-link">
+                              		<div class="item-inner">
+                              			<a href="#" id="my_address" class="maincl linkA">调取我的地址</a>
+                              		</div>
+                            	</div>
+                          	</li> 
+                        </ul>
+                    </div>
+                </div>
+                <a href="javascript:;" class="changeP"></a>
+            </div>
+            <div class="runSub_box">
+                <div class="list-block">
+					<ul>
+                    	<li>
+                        	<div class="item-content item-link">
+                          		<div class="item-media"><i class="icon ico_7"></i></div>
+                          		<div class="item-inner">
+                            		<div class="item-input">
+                              			<input type="text" id="addr" placeholder="" value="" name="addr">
+                              			<input type="hidden" placeholder="" value="" id="lng" name="lng">
+                              			<input type="hidden" placeholder="" value="" id="lat" name="lat">
+                            		</div>
+                          		</div>
+                        	</div>
+                      	</li>  
+                      	<li>
+	                        <div class="item-content">
+                          		<div class="item-media"></div>
+		        				<div class="item-inner">
+        		                	<div class="item-input">
+                              			<input type="text" id="house" name="house" placeholder="门牌号" value="">
+                            		</div>
+                          		</div>
+                        	</div>
+                      	</li> 
+                      	<li>
+                        	<div class="item-content">
+                          		<div class="item-media"></div>
+                          		<div class="item-inner">
+                            		<div class="item-input border_r">
+                              			<input type="text" id="contact" name="contact" placeholder="收货人姓名" value="">
+                            		</div>
+                            		<div class="item-input">
+                              			<input type="text" id="mobile" name="mobile" placeholder="联系电话" value="">
+                            		</div>
+                          		</div>
+                        	</div>
+                      	</li>             
+                    </ul>
+                </div>
+            </div>
+            <div class="runSub_box">
+                <div class="list-block">
+                    <ul>
+                      <li>
+                        <div class="item-content item-link">
+                          <div class="item-media"><i class="icon ico_2"></i></div>
+                          <div class="item-inner">
+                            <div class="item-input">
+                            	<input type="text" id="picker-time" placeholder="收货时间">
+								<input type="hidden" id="pei_time" name="pei_time" value="<{$pei_time}>">
+                            </div>
+                          </div>
+                        </div>
+                      </li>               
+                    </ul>
+                </div>
+            </div>
+            <div class="runSub_box">
+                <div class="list-block">
+                    <ul>
+						<li>
+	                        <div class="item-content item-link">
+	                          	<div class="item-media"><i class="icon ico_3"></i></div>
+	                          	<div class="item-inner">
+	                            	<div class="item-input">
+										<input type="text" placeholder="选择红包" class="hongbao">
+										<input type="hidden" id="hongbao_id"  name="hongbao_id">
+		                            	<input type="hidden" id="hongbao"  name="hongbao" value="0">
+	                            	</div>
+	                        	</div>
+							</div>
+                      	</li> 
+                      	<li class="popup_tip">
+							<div class="item-content item-link">
+                          		<div class="item-media"><i class="icon ico_4"></i></div>
+                          		<div class="item-inner">
+                            		<div class="item-title fontcl1">￥<i class="amount"><{$config.send_price}></i></div>
+		                            <input type="hidden" id="amount" name="amount" value="0">
+		          					<div class="item-after">
+		          						<span class="black9">加<i id="tip"></i>小费</span>
+		          						<input name="reward_amount" id="tip2" type="hidden" value="0">
+		          					</div>
+                          		</div>
+                        	</div>
+                    	</li>              
+                	</ul>
+                </div>
+            </div>
+            <div class="runSub_box">
+                <div class="list-block">
+                    <ul>
+                      <li class="align-top">
+                        <div class="item-content">
+                          <div class="item-media"><i class="icon ico_1"></i></div>
+                          <div class="item-inner">
+                            <div class="item-input">
+                              <textarea placeholder="备注信息（如买啥东西，买多少等）" id="intro" name="intro"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="operate_nr">
+                      	<!-- <div class="box">
+                        	<div class="voice_box fl"><i class="ico"></i>5"</div>
+                            <a href="javascript:;" class="close fr"></a>
+                        </div>   -->                          
+                        <div class="img_box">
+                        	<div class="mineSet_feedback">
+		                      	<div class="img_upload">
+				                    <!-- <div class="upload_int fl" hidden>
+				                        <input type="hidden" class="imgs" id="photo0">
+				                    </div>
+				                    <div class="upload_int fl">
+				                        <input type="file" class="imgs" name="photo1" id="photo1" onChange="fileSelected(this,1)" >
+				                        <div class="img"><img class="face_img_1" src="" width="70" height="70"></div>
+				                    </div>
+				                    <div class="upload_int fl">
+				                        <input type="file" class="imgs" name="photo2" id="photo2" onChange="fileSelected(this,2)" >
+				                        <div class="img"><img class="face_img_2" src="" width="70" height="70"></div>
+				                    </div>
+				                    <div class="upload_int fl">
+				                        <input type="file" class="imgs" name="photo3" id="photo3" onChange="fileSelected(this,3)" >
+				                        <div class="img"><img class="face_img_3" src="" width="70" height="70"></div>
+				                    </div>
+				                    <div class="upload_int fl">
+				                        <input type="file" class="imgs" name="photo4" id="photo4" onChange="fileSelected(this,4)" >
+				                        <div class="img"><img class="face_img_4" src="" width="70" height="70"></div>
+				                    </div> -->
+				                    <div class="upload_int fl">
+                    					<input type="button" uploadbtn="#file_photo1" id="face_img_1" class="imgs" value="" />
+                    					<input type="hidden" class="photo" name="face_img_1" value="">
+				                        <div class="img"><img class="face_img_1" src="" width="70" height="70"></div>
+				                    </div>
+				                    <div class="upload_int fl">
+				                        <input type="button" uploadbtn="#file_photo2" id="face_img_2" class="imgs" value="" />
+				                        <input type="hidden" class="photo" name="face_img_2" value="">
+				                        <div class="img"><img class="face_img_2" src="" width="70" height="70"></div>
+				                    </div>
+				                    <div class="upload_int fl">
+				                        <input type="button" uploadbtn="#file_photo3" id="face_img_3" class="imgs" value="" />
+				                        <input type="hidden" class="photo" name="face_img_3" value="">
+				                        <div class="img"><img class="face_img_3" src="" width="70" height="70"></div>
+				                    </div>
+				                    <div class="upload_int fl">
+				                        <input type="button" uploadbtn="#file_photo4" id="face_img_4" class="imgs" value="" />
+				                        <input type="hidden" class="photo" name="face_img_4" value="">
+				                        <div class="img"><img class="face_img_4" src="" width="70" height="70"></div>
+				                    </div>
+				                    <div class="cl"></div>
+				                </div>
+			                </div>
+                        </div>
+                      	</li>
+                      	<!-- <li class="operate_box">
+							<a href="#" class="ico sound"></a>
+                      		<a href="#" class="ico photo"></a>
+						</li>     -->           
+                    </ul>
+                </div>
+            </div>
+        </form>
+        </div>
+    <!--内容结束-->
+    </div>
+    
+<script>
+	localStorage['back_url'] = window.location.href;
+	
+	function change_price(){
+		var price = <{$config.send_price}>;
+		var distence = GetDistance($("#lng").val(),$("#lat").val(),$("#o_lng").val(),$("#o_lat").val());
+		var over_dt = Math.ceil(distence/1000) - <{$config.send_km}>;
+		if(over_dt > 0){
+			price += over_dt * <{$config.send_pk}>;
+		}
+		$(".amount").html(price);
+		$("#amount").val(price);
+		var tip = $("#tip2").val();
+		var hongbao = $('#hongbao').val();
+		//alert(price+"/"+tip+"/"+hongbao);
+		price = price + parseInt(tip) - parseInt(hongbao);
+		$("#price").html(price);
+	}
+	
+	function save_info(){
+		localStorage['addr'] = $("#addr").val();
+		localStorage['lng'] = $("#lng").val();
+		localStorage['lat'] = $("#lat").val();
+		localStorage['mobile'] = $("#mobile").val();
+		localStorage['contact'] = $("#contact").val();
+		localStorage['house'] = $("#house").val();
+		localStorage['o_addr'] = $("#o_addr").val();
+		localStorage['o_lng'] = $("#o_lng").val();
+		localStorage['o_lat'] = $("#o_lat").val();
+		localStorage['o_mobile'] = $("#o_mobile").val();
+		localStorage['o_contact'] = $("#o_contact").val();
+		localStorage['o_house'] = $("#o_house").val();
+		localStorage['intro'] = $("#intro").val();
+		localStorage['tip'] = $("#tip2").val();
+		localStorage['picker-time'] = $("#picker-time").val();
+		localStorage['pei_time'] = $("#pei_time").val();
+	}
+
+	function set_info(){
+		if(localStorage['addr'] && localStorage['addr'] != undefined){
+			$("#addr").val(localStorage['addr']);
+		}
+		if(localStorage['house'] && localStorage['house'] != undefined){
+			$("#house").val(localStorage['house']);
+		}
+		if(localStorage['contact'] && localStorage['contact'] != undefined){
+			$("#contact").val(localStorage['contact']);
+		}
+		if(localStorage['mobile'] && localStorage['mobile'] != undefined){
+			$("#mobile").val(localStorage['mobile']);
+		}
+		if(localStorage['o_addr'] && localStorage['o_addr'] != undefined){
+			$("#o_addr").val(localStorage['o_addr']);
+		}
+		if(localStorage['o_house'] && localStorage['o_house'] != undefined){
+			$("#o_house").val(localStorage['o_house']);
+		}
+		if(localStorage['o_contact'] && localStorage['o_contact'] != undefined){
+			$("#o_contact").val(localStorage['o_contact']);
+		}
+		if(localStorage['o_mobile'] && localStorage['o_mobile'] != undefined){
+			$("#o_mobile").val(localStorage['o_mobile']);
+		}
+		if(localStorage['intro'] && localStorage['intro'] != undefined){
+			$("#intro").val(localStorage['intro']);
+		}
+		if(localStorage['tip'] && localStorage['tip'] != undefined){
+			$("#tip").html(localStorage['tip']);
+			$("#tip2").val(localStorage['tip']);
+		}
+		if(localStorage['picker-time'] && localStorage['picker-time'] != undefined){
+			$("#picker-time").val(localStorage['picker-time']);
+		}
+		if(localStorage['pei_time'] && localStorage['pei_time'] != undefined){
+			$("#pei_time").val(localStorage['pei_time']);
+		}
+		if(!(!localStorage['face_img_1'])){
+			$(".face_img_1").attr('src',"<{$pager.img}>/"+localStorage['face_img_1']);
+			$("input[name^='face_img_1']").val(localStorage['face_img_1']);
+		}
+		if(!(!localStorage['face_img_2'])){
+			$(".face_img_2").attr('src',"<{$pager.img}>/"+localStorage['face_img_2']);
+			$("input[name^='face_img_2']").val(localStorage['face_img_2']);
+		}
+		if(!(!localStorage['face_img_3'])){
+			$(".face_img_3").attr('src',"<{$pager.img}>/"+localStorage['face_img_3']);
+			$("input[name^='face_img_3']").val(localStorage['face_img_3']);
+		}
+		if(!(!localStorage['face_img_4'])){
+			$(".face_img_4").attr('src',"<{$pager.img}>/"+localStorage['face_img_4']);
+			$("input[name^='face_img_4']").val(localStorage['face_img_4']);
+		}
+		$("#lng").val(localStorage['lng']);
+		$("#lat").val(localStorage['lat']);
+		$("#o_lng").val(localStorage['o_lng']);
+		$("#o_lat").val(localStorage['o_lat']);
+		change_price();
+	}
+</script>
+
+<!--加小费弹出层-->
+<div class="popup popup_tip_mask">
+	<div class="tit">
+		<a href="javascript:;" class="fl close-popup cancel_tip">取消</a> 
+		<a href="javascript:;" class="fr close-popup confirm_tip">确定</a>
+	</div>
+    <div class="tip_bar_box">
+    	<div class="tipBar_w" id="slider-connect">
+    		<span class="tip_num">5</span>
+    	</div>
+    </div>
+</div>
+
+<script>
+var connectSlider = document.getElementById('slider-connect');
+var s_start = 0;
+var tip = 0;
+
+if(localStorage['select_amount']){
+	s_start = localStorage['select_amount'];
+}else{
+	s_start = 0;
+}
+
+noUiSlider.create(connectSlider, {
+	start: s_start,
+	connect: 'lower',
+	range: {
+	  'min': 0,
+	  'max': 100
+	}
+});
+
+connectSlider.noUiSlider.on('update', function( values, handle ) {
+	tip = Math.round(values/100*45)+5;
+	$('.tip_num').html(tip);
+	localStorage['select_amount'] = values;
+});
+
+$(".confirm_tip").click(function(){
+	$('#tip').html(tip+'元');
+	$('#tip2').val(tip);
+	localStorage['tip'] = tip;
+	change_price();
+});
+
+$(".cancel_tip").click(function(){
+	var amount = <{$config.buy_price}>;
+	tip = 0;
+	$('#tip').html(tip+'元');
+	$('#tip2').val(tip);
+	localStorage['tip'] = tip;
+	localStorage.removeItem('select_amount');
+	change_price();
+});
+</script>
+<!--加小费弹出层结束-->
+
+<script>
+$(document).on('click','.popup_tip', function () {
+	localStorage.removeItem('select_hongbao'); 
+	$('.hongbao').val('');
+    $('#hongbao_id').val('');
+    $('#hongbao').val('0');
+    $('#youhui').html('0');
+    change_price();
+	$.popup('.popup_tip_mask');
+});
+
+/*--------------------------自提时间处理开始------------------------------*/
+//自提时间数组
+$('#pei_time').val("<{$values[0]}> <{$ziti_yuji}>"); //默认时间添加
+if("<{$ziti_yuji}>") {
+ $('#picker-time').val("<{$ziti_yuji}>");
+ var zt_str = time_select("<{$ziti_yuji}>","<{$set_time['start']}>", "<{$set_time['start_quarter']}>", "<{$set_time['end']}>", "<{$set_time['end_quarter']}>");
+ var zt_timelist = zt_str.split(",");
+ if(zt_timelist[zt_timelist.length-1] == '') {
+     zt_timelist.pop();
+ }
+ var zt_timelist2 = zt_timelist;
+ zt_timelist[0] = zt_timelist[0];
+}
+//自提时间明天、后天数组
+if("<{$tomorrow_set_time}>") {
+ var tomorrow_timelist = time_select('', "<{$tomorrow_set_time['start']}>", "<{$tomorrow_set_time['start_quarter']}>", "<{$tomorrow_set_time['end']}>", "<{$tomorrow_set_time['end_quarter']}>");
+ var tomorrow_timelist = tomorrow_timelist.split(",");
+ if(tomorrow_timelist[tomorrow_timelist.length-1] == '') {
+     tomorrow_timelist.pop();
+ }
+}
+//自提时间选择
+
+$(document).off('focus', '#picker-time').on('focus', '#picker-time', function() {
+ $(this).picker({
+     toolbarTemplate: '<header class="bar bar-nav">\<button class="button button-link pull-left" id="cancelziti">取消</button>\<button class="button button-link pull-right close-picker" id="select_ziti_ok">确定</button>\<h1 class="title"><span class="whitecl">选择送达时间</span></h1>\</header>',
+	 onOpen: function(){
+		 loop_div = $(".picker-item");
+		 loop_div.each(function(i){
+			 if(<{$values[0]}> == $(this).attr("data-picker-value"))
+			 {
+				 $(this).trigger("click");
+			 }
+		 });
+	 },
+     cols: [
+         {
+             textAlign: 'center',
+             displayValues: ["<{$displayValues[0]}>", "<{$displayValues[1]}>", "<{$displayValues[2]}>"],
+             values:["<{$values[0]}>", "<{$values[1]}>", "<{$values[2]}>"],
+             onChange: function (picker, values, displayValues) {
+                 var dataxxx = {"<{$values[0]}>":zt_timelist2, "<{$values[1]}>":tomorrow_timelist,"<{$values[2]}>":tomorrow_timelist};
+                 picker.cols[1].replaceValues(dataxxx[picker.cols[0].value]);
+             },
+         },
+         {
+             textAlign: 'center',
+             displayValues: zt_timelist,
+             values: zt_timelist2
+         }
+     ],
+     formatValue: function (picker, values, displayValues){
+         return displayValues.join(" ");
+     },
+ });
+})
+//自提时间选好之后点击确定事件
+$(document).off('click','#select_ziti_ok').on('click','#select_ziti_ok', function() {
+ var ziti_time = $('#picker-time').val();
+ $('#picker-time').val(ziti_time);
+ if(ziti_time.match("今天")) {
+     ziti_time = ziti_time.replace("今天","<{$values[0]}>");
+ }
+ if(ziti_time.match("明天")) {
+     ziti_time = ziti_time.replace("明天","<{$values[1]}>");
+ }
+ if(ziti_time.match("后天")) {
+     ziti_time = ziti_time.replace("后天","<{$values[2]}>");
+ }
+ var tmp1 = ziti_time;
+ tmp1 = tmp1.substr(0,14);
+ if(tmp1.match("-")) {
+     tmp1 = tmp1.replace("-","");
+ }
+ $("input[name='pei_time']").val(tmp1);
+});
+//自提时间选择器关闭事件
+$(document).off('click','#cancelziti').on('click','#cancelziti', function() {
+ $("#picker-time").picker("close");
+})
+/*--------------------------自提时间处理结束------------------------------*/
+
+</script>
+
+<script type="text/javascript">
+    // HTML5图片上传
+    function fileSelected(obj,num){
+        var files = obj.files;
+        for(var i = 0 ; i < files.length; i++){
+            var rFilter = /^(image\/gif|image\/jpeg|image\/jpg|image\/png)$/i;
+            if (! rFilter.test(files[i].type)) {                   
+                alert("只允许上传JPG、PNG、GIF格式图片");
+                return;
+            }
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $(".face_img_"+num).attr('src',e.target.result);
+            }
+            reader.readAsDataURL(files[i]);
+        }
+    }
+
+  //点击循环上传图片
+    $(".photo").click(function(){
+		$(".ke-upload-file").each(function(index,val){
+			if(!$(this).parents('.fl').find('.photo').attr('value')){
+				$(this).click();
+				return false;	
+			}
+		});
+	});
+</script>
+
+<script>
+	$(".hongbao").click(function(){
+		save_info();
+		var amount = parseInt($("#amount").val()) + parseInt($("#tip2").val());
+		var link = "<{link ctl='ucenter/hongbao:lists-4-"+amount+"'}>";
+		$.router.load(link, true);
+	});
+	
+	//如果选取了红包，更新显示
+	if(localStorage['select_hongbao'] && localStorage['select_hongbao']['hongbao_id'] > 0 ) {
+	    alert(localStorage['select_hongbao']);
+		var hJSON = JSON.parse(localStorage['select_hongbao']);
+	    if(hJSON) {
+	        $('.hongbao').val(hJSON.amount+'元'+'红包');
+	        $('#hongbao_id').val(hJSON.hongbao_id);
+	        $('#hongbao').val(hJSON.amount);
+	        $('#youhui').html(hJSON.amount);
+	        change_price();
+	    }
+	}
+</script>
+
+<script>
+	$('.changeP').click(function(){
+		var addr = $("#addr").val();
+		var lng = $("#lng").val();
+		var lat = $("#lat").val();
+		var house = $("#house").val();
+		var contact = $("#contact").val();
+		var mobile = $("#mobile").val();
+		$("#addr").val($("#o_addr").val());
+		$("#lng").val($("#o_lng").val());
+		$("#lat").val($("#o_lat").val());
+		$("#house").val($("#o_house").val());
+		$("#contact").val($("#o_contact").val());
+		$("#mobile").val($("#o_mobile").val());
+		$("#o_addr").val(addr);
+		$("#o_lng").val(lng);
+		$("#o_lat").val(lat);
+		$("#o_house").val(house);
+		$("#o_contact").val(contact);
+		$("#o_mobile").val(mobile);
+	});
+</script>
+
+<script>
+	$("#o_addr").click(function(){
+		save_info();
+		localStorage.removeItem('select_address');
+		localStorage['select_address'] = 'o_addr';
+		localStorage['back_url'] = JSON.stringify({"backurl":window.location.href});
+              $.router.load("<{link ctl='paotui:showmap' arg0='send'}>", true);
+	});
+	
+	$("#addr").click(function(){
+		save_info();
+		localStorage.removeItem('select_address');
+		localStorage['back_url'] = JSON.stringify({"backurl":window.location.href});
+              $.router.load("<{link ctl='paotui:showmap' arg0='send'}>", true);
+	});
+
+	$("#my_address").click(function(){
+		save_info();
+		localStorage['select_address'] = JSON.stringify({"backurl":window.location.href});
+	   	$.router.load("<{link ctl='ucenter/addr:index'}>", true);
+	});
+	
+	if(localStorage['select_address']) {
+		var addr = JSON.parse(localStorage['select_address']);
+		if(addr.addr) {
+	    	localStorage['o_addr'] = addr.addr;
+			localStorage['o_lng'] = addr.lng;
+			localStorage['o_lat'] = addr.lat;
+			localStorage['o_mobile'] = addr.mobile;
+			localStorage['o_contact'] = addr.contact;
+			localStorage['o_house'] = addr.house;
+		}
+	}
+</script>
+
+<script>
+	$(".pub_btn").click(function(){
+		localStorage['payment_backurl'] = "<{link ctl='paotui:order'}>";	
+	});
+	
+	set_info();
+</script>
+
+<script type="text/javascript">
+(function(K, $){
+KindEditor.ready(function(KE) {
+    $("[uploadbtn]").each(function(){
+    	 var flag = $(this).attr('id');
+         var upload_url = $(this).attr("uploadbtn")
+         var uploadbutton = KE.uploadbutton({
+            button : $(this)[0],
+            fieldName : 'imgFile',
+            url : '<{link ctl="paotui:photo" http="ajax"}>',
+            afterUpload : function(data) {
+                if (data.error === 0) {
+                    var photo = data.photo;
+                    $("input[name^='"+flag+"']").val(photo);
+                    $("."+flag).attr("src","<{$pager.img}>/"+photo);
+                    localStorage[flag] = photo;
+                } else {
+                    alert(data.message);
+                }
+            },
+            afterError : function(str) {
+                alert(str);
+            }
+        });
+        uploadbutton.fileBox.change(function(e) {
+            uploadbutton.submit();
+        });           
+    });
+});
+})(window.KT, window.jQuery);
+</script>
+<{include file="block/footer.html"}>

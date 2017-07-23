@@ -1,0 +1,346 @@
+<{assign var='tpl_title' value=L("派活订单")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> 
+        	<a class="button button-link button-nav pull-left" href="<{link ctl='paotui'}>" >
+        		<span class="iconfont icon-iconfontxiangyou"></span> 
+        	</a>
+            <h1 class="title">派活订单</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	  <div class="top_tab">
+                  <div class="content-block">
+                    <div class="buttons-row">
+                      <a href="#tab1" class="tab-link active button">待处理</a>
+                      <a href="#tab2" class="tab-link button">已完成</a>
+                    </div>
+                  </div>
+              </div>
+              <div class="tabs">
+                <div id="tab1" class="tab active">
+                    <!--待处理-->
+                    <div class="runordList_box">
+                    <{foreach $orders_wait as $item}>
+                    	<div class="card">
+                    	<a href="<{link ctl='paotui/order_detail' arg0=$item.order_id}>">
+							<div class="card-header">
+								<p class="maincl">
+									<{if $item['paotui_order'].type == 'buy'}>
+										<span class="tag" style="background:#fb6624;">买</span>
+									<{elseif $item['paotui_order'].type == 'song'}>
+										<span class="tag" style="background:#2fd2a0;">送</span>
+									<{else}>
+										<span class="tag" style="background:#fab42e;">他</span>
+									<{/if}>
+									[<{$item.order_status_label}>]<small class="black9">-<{$item.past_time}>下单</small>
+								</p>
+								<p class="fontcl1"><small>￥</small><{$item.amount}></p>
+							</div>
+                          	<div class="card-content">
+                            	<p class="black9 overflow_clear">
+                            		<i class="ico ico_1"></i>
+                            		<span class="black3">收：</span><{$item.pei_time|format}>
+                            	</p>
+                            	<p class="black9 overflow_clear">
+                            		<i class="ico ico_2"></i>
+                            		<span class="black3">收：</span><{$item.addr}>
+                            	</p>
+                            	<{if $item['paotui_order'].type == 'song'}>
+                            	<p class="black9 overflow_clear">
+                            		<i class="ico ico_2"></i>
+                            		<span class="black3">收：</span><{$item['paotui_order'].o_addr}>
+                            	</p>
+                            	<{/if}>	
+							</div>
+							</a>
+                          	<div class="card-footer">
+                          		<{if $item.order_status == '0'}>
+									<a href="javascript:;" class="button button-cancel cancel" order_id="<{$item.order_id}>" id="cancel">取消订单</a>
+									<{if $item.pay_status == '0'}>
+                          				<a href="<{link ctl='ucenter/order:payment' arg0=$item.order_id}>" class="button button-warning">去支付</a>
+                          			<{else}>
+                          				<a href="<{link ctl='paotui/order_detail' arg0=$item.order_id}>" class="button button-warning external">追加小费</a>
+                          			<{/if}>										
+								<{elseif $item.order_status == '1'}>
+									<a href="#" class="button button-cancel"><span class="black9">待服务</span></a>
+								<{elseif $item.order_status == '3'}>
+									<a href="#" class="button button-warning confirm" link="<{link ctl='paotui/order_detail' arg0=$item.order_id}>">确认完成</a>
+								<{/if}>
+                          	</div>
+                        </div>
+                    <{foreachelse}>
+	                    <div class="nonePage txt_center">
+                            <img src="%THEME%/static/images/none/icon_order_no@2x.png">
+                            <p class="black3">暂无待处理订单</p>
+                        </div>
+                    <{/foreach}>
+                    </div>
+                    <!--待处理结束-->
+                </div>
+                <div id="tab2" class="tab">
+                	<!--已完成-->
+                    <div class="runordList_box">
+                    <{foreach $orders_done as $item}>
+                        <{if $item.closed==0}>
+                    	<div class="card">
+                    		<a href="<{link ctl='paotui/order_detail' arg0=$item.order_id}>">
+							<div class="card-header">
+								<p class="maincl">
+									<{if $item['paotui_order'].type == 'buy'}>
+										<span class="tag" style="background:#fb6624;">买</span>
+									<{elseif $item['paotui_order'].type == 'song'}>
+										<span class="tag" style="background:#2fd2a0;">送</span>
+									<{else}>
+										<span class="tag" style="background:#fab42e;">他</span>
+									<{/if}>
+									[<{$item.order_status_label}>]<small class="black9"><{$item.past_time}>下单</small>
+								</p>
+								<p class="fontcl1"><small>￥</small><{$item.amount}></p>
+							</div>
+                          	<div class="card-content">
+                            	<p class="black9 overflow_clear">
+                            		<i class="ico ico_1"></i>
+                            		<span class="black3">收：</span><{$item.pei_time|format}>
+                            	</p>
+                            	<p class="black9 overflow_clear">
+                            		<i class="ico ico_2"></i>
+                            		<span class="black3">收：</span><{$item.addr}>
+                            	</p>
+                            	<{if $item['paotui_order'].type == 'song'}>
+                            	<p class="black9 overflow_clear">
+                            		<i class="ico ico_2"></i>
+                            		<span class="black3">收：</span><{$item['paotui_order'].o_addr}>
+                            	</p>
+                            	<{/if}>	
+							</div>
+							</a>
+                          	<div class="card-footer">
+                                <{if in_array($item.order_status,array(-1,8))}>
+                                <!-- <a href="javascript:order_del_modal(<{$item.order_id}>);" class="button button-cancel">删除</a> -->
+                                <{/if}>
+                          		<{if $item.order_status == '-1'}>
+									<a href="javascript:;" class="button button-warning repai" order_id="<{$item.order_id}>">重新派活</a>
+								<{elseif $item.order_status == '4'}>
+									<a href="<{link ctl='paotui/order_confirm' arg0=$item.order_id}>" class="button button-warning">确认完成</a>																	
+								<{elseif $item.order_status == '8'}>
+									<{if $item.comment_status == '0'}>
+                          				<a href="<{link ctl='paotui/order_detail' arg0=$item.order_id}>" class="button button-warning external">追加小费</a>
+                          				<a href="<{link ctl='paotui/order_comment' arg0=$item.order_id}>" class="button button-warning">去评价</a>
+                          			<{else}>
+                          				<a href="<{link ctl='paotui/order_comment' arg0=$item.order_id}>" class="button button-cancel">查看评价</a>
+                          			<{/if}>	
+								<{/if}>
+                          	</div>
+                        </div>
+                        <{/if}>
+                    <{foreachelse}>
+	                     <div class="nonePage txt_center">
+                            <img src="%THEME%/static/images/none/icon_order_no@2x.png">
+                            <p class="black3">暂无已完成订单</p>
+                        </div>
+                    <{/foreach}>
+                    </div>
+                    <!--已完成结束-->
+                </div>
+            </div>
+        </div>  
+        <!--自提单-已完成-自提码弹出层-->
+		<div class="quxiao_mask">
+            <div class="maskOne">
+                    <div class="quxiao-tit border_b">自提码</div>
+                    <div class="cont">
+                            <div class="quxiao-tit"><span class="black9">2016 0212 3625 2865</span></div>
+                            <div class="img"><img src="" width="100" height="100"></div>
+                            <div class="quxiao-tit">商家已核销</div>
+                    </div>
+            </div>
+            <div class="mask_bg" ></div>
+        </div>
+		<!--自提单-已完成-自提码弹出层-->      
+    <!--内容结束-->   
+    </div>
+<script>
+$(document).ready(function(){
+	$(".zitima-anniu-1").click(function(){
+		if($(".quxiao_mask .maskOne").css("display")=="none"){
+			$(".quxiao_mask .maskOne").show();
+			$(".quxiao_mask .maskOne").parent().find(".mask_bg").show();
+			}
+		else{
+			$(".quxiao_mask .maskOne").hide();
+			$(".quxiao_mask .maskOne").parent().find(".mask_bg").hide();
+			}
+		$(".quxiao_mask .mask_bg").click(function(){
+			$(this).hide();
+			$(this).parent().find(".maskOne").hide();
+		});
+	});
+});
+
+
+
+//取消理由样式
+$(document).on('click','.mallord_delt_mask .selct_box a',function () {
+    $(".mallord_delt_mask .selct_box a").removeClass("active");
+    $(this).addClass("active");
+});
+
+// 检查补充说明字数
+function checkLen(obj) {
+    var len = GetStrLen($(obj).val());
+    if(len <= 120) {
+        var limit = 120-len;
+        $('.txt_right').text('还可输入' + limit + '字');
+    }
+}
+
+// 取消订单
+function cancelanorder(reason_mark,order_id) {
+    $.ajax({
+        url: "<{link ctl='paotui:order_cancel'}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id,"reason":reason_mark},
+        type: 'POST',
+        success: function (ret) {
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+}
+
+// 取消订单modal
+$(document).off('click', '#cancel').on('click','#cancel', function () {
+    var order_id = parseInt($(this).attr('order_id'));
+    var c_html = '';
+    c_html += '<div class="mallord_delt_mask"><div class="row selct_box" id="reason_mark">';
+    <{foreach $reason as $v}>
+    c_html += '<a href="javascript:;" class="fl col-33">'+'<{$v}>'+'</a>';
+    <{/foreach}>
+    c_html += '<div class="cl"></div></div><div class="list-block"><div class="item-input"><textarea maxlength="120" id="buchong" placeholder="补充说明" onkeyup="checkLen(this)" ></textarea><p class="txt_right font_size14 black9">还可输入120字</p></div></div></div>';
+
+    var modal = $.modal({
+        title: "<div class='mallord_delt_mask_tit'>取消理由</div>",
+        afterText:c_html,
+        buttons: [
+            {
+                text: "<span class='black6'>取消</span>"
+            },
+            {
+                text: "<span class='maincl'>确定</span>",
+                bold: true,
+                onClick: function () {
+                    var reason_mark = '';
+                    if($('#reason_mark .active').text() == null) {
+                        reason_mark = '取消理由:无';
+                    }else {
+                        reason_mark = '取消理由:' + $('#reason_mark .active').text();
+                    }
+                    if($('#buchong').val() == '') {
+                        reason_mark += ',补充说明:无';
+                    }else {
+                        reason_mark += ',补充说明:' + $('#buchong').val();
+                    }
+                    cancelanorder(reason_mark,order_id);
+                }
+            },
+        ]
+    })
+});
+
+$(document).off('click','.confirm').on('click','.confirm',function(){
+	var link = $(this).attr('link');
+	$.confirm("您要确认完成订单吗?", function(ret){
+        if(ret){
+        	window.location.href=link;
+        }
+    });
+	
+})
+
+$(document).off('click','.repai').on('click','.repai',function(){
+	var order_id = $(this).attr('order_id');
+	$.ajax({  
+        url: "<{link ctl='paotui/order_repai'}>", 
+        dataType: 'json',  
+        data: {"order_id":order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+            	$.alert(ret.message);
+            }else{
+            	//console.log(ret);
+            	localStorage['addr'] = ret.addr;
+				localStorage['lng'] = ret.lng;
+				localStorage['lat'] = ret.lat;
+				localStorage['mobile'] = ret.mobile;
+				localStorage['contact'] = ret.contact;
+				localStorage['house'] = ret.house;
+				localStorage['o_addr'] = ret.o_addr;
+				localStorage['o_lng'] = ret.o_lng;
+				localStorage['o_lat'] = ret.o_lat;
+				localStorage['o_mobile'] = ret.o_mobile;
+				localStorage['o_contact'] = ret.o_contact;
+				localStorage['o_house'] = ret.o_house;
+				localStorage['intro'] = ret.intro;
+				localStorage['picker-style'] = ret.style;
+				localStorage['typepick'] = ret.typepick;
+				$.router.load(ret.link, true);
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+    });
+})
+
+// 删除跑腿订单modal
+function order_del_modal(order_id) {
+    var modal = $.modal({
+        title: "温馨提示:",
+        afterText:'确认删除订单吗？删除订单后不可恢复哦',
+        buttons: [
+            {
+                text: "<span class='black6'>取消</span>"
+            },
+            {
+                text: "<span class='maincl'>确定</span>",
+                bold: true,
+                onClick: function () {order_del(order_id);}
+            },
+        ]
+    })
+}
+
+// 删除跑腿订单
+function order_del(order_id) {
+    $.ajax({
+        url: "<{link ctl='paotui:order_del'}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id},
+        type: 'POST',
+        success: function (ret) {
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+}
+</script>
+<{include file="block/footer.html"}>

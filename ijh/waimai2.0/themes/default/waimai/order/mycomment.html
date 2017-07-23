@@ -1,0 +1,109 @@
+<{assign var='tpl_title' value=L("评价")}>
+<{include file="block/header.html"}>
+<div class="page page-current"> 
+	<!--头部-->
+    <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+        <h1 class="title">评价</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content">
+        <{if in_array($order.pei_type, array(1,2)) && $order.order_id>0}>
+        <div class="ord_evlut_form">
+            <div class="list-block media-list top_box">
+                <ul>
+                  <li>
+                    <div href="#" class="item-content">
+                      <div class="item-media"><img src="<{$pager.img}>/<{$staff.face}>"></div>
+                      <div class="item-inner">
+                        <div class="item-title mt10"><{$staff.name}>  <{$staff.mobile}></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+            </div>
+            <p class="txt_center black9">为配送打分</p>
+            <div class="star_box txt_center"><span class="starBg txt_left"><span class="star" style="width:<{$staff_comment.score*20}>%;"></span></span></div>
+            <div class="mallord_delt_mask ord_mark pad_t10">
+                <div class="row selct_box">
+                    <{foreach $staff_comment.marklist as $v}>
+                    <a href="javascript:;" class="fl col-33 qt active">食材新鲜</a>
+                    <{/foreach}>
+                    <div class="cl"></div>
+                </div>
+            </div>
+            <div class="nr_box"><{$staff_comment.content}></div>
+        </div>
+        <{/if}>
+
+        <div class="ord_evlut_form">
+            <div class="list-block media-list top_box">
+                <ul>
+                  <li>
+                    <div href="#" class="item-content">
+                      <div class="item-media"><img src="<{$pager.img}>/<{$shop.logo}>"></div>
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                          <div class="item-title"><{$shop.title}></div>
+                        </div>
+                        <div class="item-title-row">
+                          <div class="item-title">送达时间</div>
+                          <div class="item-after"><span class="black9"><{$shop_comment.song_time}></span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+            </div>
+            <p class="txt_center black9">为商家打分</p>
+            <div class="star_box">服务态度
+                <span class="starBg" style="opacity:<{$shop_comment.score_fuwu*0.2}>;">
+                    <span class="star" style="width:<{$shop_comment.score_fuwu*20}>%;">
+                        <span class="star_clink">
+                            <a href=""></a><a href=""></a><a href=""></a><a href=""></a><a href=""></a>
+                        </span>
+                    </span>
+                </span>
+            </div>
+            <div class="star_box">商品打分
+                <span class="starBg" style="opacity:<{$shop_comment.score_kouwei*0.2}>;">
+                    <span class="star" style="width:<{$shop_comment.score_kouwei*20}>%;">
+                        <span class="star_clink">
+                        <a href=""></a> <a href=""></a> <a href=""></a> <a href=""></a> <a href=""></a>
+                        </span>
+                    </span>
+                </span>
+            </div>
+            <div class="mallord_delt_mask ord_mark">
+                <div class="row selct_box" id="marklist">
+                    <{foreach $shop_comment.marklist as $v}>
+                    <a href="javascript:;" class="fl col-33 qt active"><{$v}></a>
+                    <{/foreach}>
+                    <div class="cl"></div>
+                </div>
+            </div>
+            <div class="nr_box"><{$shop_comment.content}></div>
+            <{if $shop_comment.reply}>
+            <div class="reply_box">
+                <p class="black6"><span class="maincl">商家回复：</span><{$shop_comment.reply}></p>
+                <p class="txt_right"><small class="black9"><{$shop_comment.reply_time|format:'Y/m/d H:i:s'}></small></p>
+            </div>
+            <{/if}>
+            <{if $shop_comment.photos}>
+            <div class="mineSet_feedback">
+                <div class="img_upload">
+                    <ul>
+                        <{foreach $shop_comment.photos as $v}>
+                        <li style="background-image:url(pic/banner1.png);"><img src="<{$pager.img}>/<{$v.photo}>" width="70" height="70"></li>
+                        <{/foreach}>
+                    </ul>
+                    <div class="cl"></div>
+                </div>
+            </div>
+            <{/if}>
+        </div>
+    </div>        
+<!--内容结束-->   
+</div>
+<script type="text/javascript">
+</script>
+<{include file="block/footer.html"}>

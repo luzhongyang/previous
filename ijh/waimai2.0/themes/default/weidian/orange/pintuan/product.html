@@ -1,0 +1,184 @@
+<{assign var='tpl_title' value=L("<{$product.title}>")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<!--分享遮罩层-->
+<div class="popup popup-about share-yun_box">
+    <div class="share-yun close-popup"><img src="<{$weidian_theme}>static/images/share-yun.png"></div>
+</div>
+
+<div class="page page-current">
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab pintuan-footer txt_center">
+        <!-- <div class="box1 color1">
+            <i num="<{$product.pintuan_product_id}>"   class="<{if $collect.uid>0}>guanzhu ico2 <{else}>guanzhu ico1<{/if}>"></i>
+
+            <p class=" font_size14">收藏</p></div> -->
+
+        <{if $product.stock<$product.user_num}>
+        <div id="return_pintuan" class="box3"><em class=" mt5">无库存<br />查看其他拼团</div>
+        <!--<a href="<{link ctl='weidian:pintuan'}>-->
+        <{else}>
+        <div id="buy_single" class="box2 f_size1"><em class=" mt5">￥<{$product.price}></em><em>单独团</em></div>
+        <div id="buy_tuan" class="box3"><em class=" mt5">￥<{$product.tuan_price}></em><em><{$product.user_num}>人团</em></div>
+        <{/if}>
+    </nav>
+    <!-- 工具栏结束 -->
+    <!--主要内容-->
+    <div class="content">
+        <div class="seller_caidelt_top sp_detail_top"><img src="/attachs/<{$product.photo}>" style="width: 100%">
+            <div class="top">
+                <a href="<{link ctl="weidian/pintuan"}>" class="fl"><i class="Ico1"></i></a>
+                <a href="#" class="fr"><i class="Ico2 open-about"></i></a>
+                <div class="cl"></div>
+            </div>
+            <div class="bottom">
+                <p class="fl"><{$product.title}></p>
+                <div class="fr"><i num="<{$product.pintuan_product_id}>"  class="<{if $collect.uid>0}>guanzhu scIco2 <{else}>guanzhu scIco1<{/if}>"></i></div>
+                <div class="cl"></div>
+            </div>
+        </div>
+
+        <form id="create_order" action="<{link ctl="weidian/pintuan/order_tuan"}>" method="get">
+        <div class="sp_detail">
+            <div class="list-block">
+                <ul>
+                    <li class="item-content border_b">
+                        <div class="item-inner f_size1">
+                            <div class="item-title maincl"><em class="f_size2">￥<{$product.tuan_price}></em>/份
+                                <del class="ml10 black9">¥<{$product.price}>/份</del>
+                            </div>
+                            <div class="item-after">销量：<{$product.sales}></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <{$product.attr_html}>
+
+            <div class="mallord_delt_mask seller_caidelt_box border_bt">
+
+                <div class="clearfix ">
+                    <div class="fl f_size1">购买数量<{if $product.item_limit >0}>
+                        <small class="fontcl1">(限购<{$product.item_limit}>份)</small>
+                        <{/if}></div>
+                    <div class="fr">
+                        <div class="num_operate sp_nums">
+                            <span class="reduce" quantity="-">-</span>
+                            <input type="text" value="1" class="text_box" name="num" readonly>
+                            <span class="add" quantity="+">+</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="seller_caidelt_box mb10 xinxi">
+                <p>
+                    <{$product.intro|strip_tags}>
+                </p>
+            </div>
+            <div class="sp_xinxi bgcolor_white">
+                <div class="buttons-tab border_t"><a href="#tab1" class="tab-link active button Btn">商品详情</a>
+                    <!--<a href="#tab2" class="tab-link button Btn">商品评价(3)</a>-->
+                </div>
+                <div class="content-block">
+                    <div class="tabs">
+                        <div id="tab1" class="tab active">
+
+                            <{$product.intro}>
+
+                        </div>
+                        <!--<div id="tab2" class="tab"></div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <input name="product_id" type="hidden" value="<{$product.pintuan_product_id}>"/>
+            </form>
+
+    </div>
+    <!--主要内容结束-->
+</div>
+
+
+
+    <style>
+        .border_bt, .border_t{border-bottom: 1px #d3d4da solid !important;}
+        .border_b {
+            border: 0 !important;
+            border-bottom: 1px #d3d4da dashed !important;
+        }
+        /*.resou-box{ height: 110px !important;}*/
+    </style>
+
+
+<script>
+
+    $(function(){
+
+        //attr select
+        $(document).ready(function () {
+            $(".resou-box .resou-name").click(function () {
+                        $(this).parent().find(".resou-name").removeClass("on");
+                        $(this).addClass("on");
+                    }
+            );
+        });
+
+        //submit order
+        $("#buy_single").click(function(){
+            $("#create_order").attr("action","<{link ctl="weidian/pintuan/order_single"}>");
+
+
+            $("#create_order").submit();
+            console.log($("#create_order").attr("action"));
+            console.log('single');
+        })
+        $("#buy_tuan").click(function(){
+            $("#create_order").attr("action","<{link ctl="weidian/pintuan/order_tuan"}>");
+
+
+            $("#create_order").submit();
+            console.log($("#create_order").attr("action"));
+            console.log('tuan');
+        })
+        $("#return_pintuan").click(function(){
+            window.location.href="<{link ctl="weidian/pintuan"}>";
+        })
+
+        //add reduce num.
+        var numb = $(".text_box").val();
+        $(".add").click(function(){
+            if(numb< <{if $product.item_limit<1}>99<{else}><{$product.item_limit}><{/if}> ){
+
+                numb++;
+                $(".text_box").val(numb);
+            }
+        });
+        $(".reduce").click(function(){
+            if(numb>0){
+
+                numb--;
+                $(".text_box").val(numb);
+            }
+        });
+    })
+
+    $(document).on('click','.open-about', function () {
+        $.popup('.popup-about');
+    });
+
+
+
+;
+    $(document).ready(function () {
+        $(".mallord_delt_mask .selct_box a").click(function () {
+                    $(this).parent().find(".mallord_delt_mask .selct_box a").removeClass("active");
+                    $(this).addClass("active");
+                }
+        );
+    });
+</script>
+<{include file="weidian/$theme_style/pintuan/block_pintuan_relate_product_js.html"}>
+<{include file="weidian/$theme_style/block/footer.html"}>

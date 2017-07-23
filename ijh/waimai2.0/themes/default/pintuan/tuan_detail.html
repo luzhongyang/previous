@@ -1,0 +1,196 @@
+<{assign var='tpl_title' value=L("团详情")}>
+<{include file="block/header.html"}>
+
+<div class="page page-current">
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav">
+        <!--<a href="#" class="button button-link button-nav pull-left" data-no-cache="true">-->
+        <a href="<{link ctl='pintuan:tuan_my'}>" class="button button-link button-nav pull-left"
+           data-no-cache="true">
+            <span
+                    class="iconfont icon-iconfontxiangyou"></span> <span class="wz1">团详情</span> </a></header>
+    <!-- 标题栏结束 -->
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab">
+        <div class="iyman_nav">
+            <a href="<{link ctl='pintuan'}>" class="btn1 fl"><img src="/themes/default/static/images/syIco.png" width="22px"/></a>
+            <{if 0 == $arr_group.status}>
+            <{if 1==$master_is_buy}>
+            <a href="<{link ctl='pintuan:tuan_join' arg0=$arr_group.pintuan_group_id}>" class="btn2 color2">快来邀请好友参团吧</a>
+            <{else}>
+            <a href="<{link ctl='pintuan:tuan_order_detail' arg0=$arr_order.order_id}>" class="btn2 color2" external>支付拼团订单</a>
+            <{/if}>
+            <{elseif 2 == $arr_group.status}>
+            <a href="<{link ctl='pintuan:product' product_id=$arr_product.pintuan_product_id}>" class="btn2 color2">点击新开一团</a>
+            <{elseif 1 == $arr_group.status}>
+            <a href="<{link ctl='pintuan:tuan_join' group_id=$arr_group.pintuan_group_id}>" class="btn2 color1">分享给好友</a>
+            <{else}>
+            <a href="<{link ctl='pintuan:tuan_join' group_id=$arr_group.pintuan_group_id}>" class="btn2 color1">分享给好友</a>
+            <{/if}>
+            <div class="cl"></div>
+        </div>
+    </nav>
+    <!-- 工具栏结束 -->
+    <!-- 主要内容 -->
+    <div class="content">
+        <div class="yiman_wz">
+
+            <{if 0 == $arr_group.status}>
+            <{if 1==$master_is_buy}>
+            <p class="wz1"><span class="smile"></span>组团进行中</p>
+            <p class="wz2">赶快召唤小伙伴加入吧！</p>
+            <{else}>
+            <p class="wz1"><span class="unhappy"></span>团长未支付,不能邀请好友参团</p>
+            <p class="wz2"><a href="<{link ctl='pintuan:tuan_order_detail' arg0=$arr_order.order_id}>" external>支付拼团订单</a>,邀请好友开团吧！</p>
+            <{/if}>
+            <{elseif 2 == $arr_group.status}>
+            <p class="wz1 color"><span class="unhappy"></span>组团失败</p>
+            <p class="wz2">不要气馁，也许更好的在后面哦！</p>
+            <{elseif 1 == $arr_group.status}>
+            <p class="wz1"><span class="smile"></span>组团成功</p>
+            <p class="wz2">我们会尽快为您发货，请耐心等待</p>
+            <{else}>
+            <p class="wz1"><span class="smile"></span>组团成功</p>
+            <p class="wz2">我们已经发货，感谢您参加本次团购</p>
+            <{/if}>
+        </div>
+        <div class="list-block media-list pintuna_margin">
+            <ul>
+                <li>
+                    <a href="<{link ctl='pintuan:product' arg0=$arr_product.pintuan_product_id}>" class="item-content" style=" color:inherit;">
+                        <div class="item-media"><img src="/attachs/<{$arr_product.photo}>" style='width: 4.5rem;'></div>
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title"> <{if $arr_group.group_title}> <{$arr_group.group_title}>
+                                    <{else}> <{$arr_product.title}> <{/if}></div>
+                            </div>
+                            <div class="item-subtitle"><em><{$arr_group.user_num}></em>人团：<span style=" color:#ff3300;">￥<em
+                                    style="font-size:0.85rem;"><{if $arr_group.user_num<=1}><{$arr_product.price}><{else}><{$arr_product.tuan_price}><{/if}></em>/件</span></div>
+                            <div class="item-subtitle">查看详情<i class="rightIco"></i></div>
+                        </div>
+                        <{if 1 == $arr_group.status || 3 == $arr_group.status}>
+                            <img src="/themes/default/static/images/zutuan_cg.png" width="80px" height="auto" class="zutuan_cg">
+                        <{else if 2==$arr_group.status}>
+                            <img src="/themes/default/static/images/zutuan_sb.png" width="80px" height="auto" class="zutuan_cg">
+                        <{/if}>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="yiman_nr mt10">
+            <div class="img">
+                <{$arr_group.tuan_person_icon}>
+            </div>
+
+            <{if 0 == $arr_group.status}>
+            <p style=" text-align:center; font-size:0.7rem;">还差<em style=" font-size:0.9rem; color:#ff3300;"><{$arr_group.leave_person}></em>人，盼你如南方人盼暖气~
+            </p>
+            <div class="yiman_title"><i>剩余<span id="daojishi_98" rel="<{$arr_group.leave_second}>" class="limtBuy_time"></span> 结束</i>
+            </div>
+            <script>
+                function daojishi(id) {
+                    var t = Math.floor($("#" + id).attr('rel'));
+                    t--;
+                    var d = Math.floor(t / 60 / 60 / 24);
+                    var h = Math.floor(t / 60 / 60 % 24);
+                    var m = Math.floor(t / 60 % 60);
+                    var s = Math.floor(t % 60);
+                    $("#" + id).attr('rel', t);
+                    $("#" + id).html('<span>' + d + '</span>' + '<i>' + ':</i>' + '<span>' + h + '</span>' + '<i>' + ':</i>' + '<span>' + m + '</span>' + '<i>' + ':</i>' + '<span>' + s + '</span>');
+                }
+
+            </script>
+            <script type="text/javascript" language="javascript">
+                setInterval(function () {
+                    daojishi("daojishi_98");
+                }, 1000);
+            </script>
+            <{elseif 2 == $arr_group.status}>
+            <div class="yiman_title"> <i><em>组团失败，召唤小伙伴失败</em></i> </div>
+            <{elseif 1 == $arr_group.status}>
+            <p style=" text-align:center; font-size:0.7rem;">对于诸位大神的相助，团长感激涕零</p>
+            <div class="yiman_title"> <i><em>组团人数已满，等待商家发货！</em></i> </div>
+            <{else}>
+            <div class="yiman_title"> <i><em>商品已经发货，万分感谢您的参与！</em></i> </div>
+            <{/if}>
+
+            <div class="box">
+                <{$arr_group.tuan_person_html}>
+
+                <{if 0 == $arr_group.status || 2 == $arr_group.status}>
+                <div class="left" style=" padding:0.4rem 0">
+                    <div class="fl touxiang"><img src="/themes/default/static/images/touxiang_04.png"></div>
+                    <p class="fl">还差<em><{$arr_group.leave_person}></em>人成团</p>
+                    <div class="cl"></div>
+                </div>
+                <{/if}>
+
+                <!--<div class="upwardIco"></div>-->
+            </div>
+
+            <!--<div class="yiman_title"><a href="#">查看更多</a></div>-->
+        </div>
+        <{include file='pintuan/block_pintuan_relate_product.html'}>
+        <{include file='pintuan/block_pintuan_relate_product_js.html'}>
+    </div>
+</div>
+<!-- 主要内容结束 -->
+<script>
+    $(document).on('click', '.open-slider-modal', function () {
+        this_save = $(this);
+        var modal = $.modal({
+            title: '<div class="tuan_mask">' + '消息提示' + '<div>',
+            text: '<p class="black6 font_size14 wz">' + '该团员还未付款，确定将Ta踢出本团？' + '<p>',
+            buttons: [
+                {
+                    text: "<div class='white-btn'>取消</div>"
+                },
+                {
+                    text: "<div class='white-btn'>确认</div>",
+                              bold: true,
+                     onClick: function () {
+                            ajax_data = {"order_id": this_save.attr('order_id')};
+                            $.post("<{link ctl='pintuan:tuan_kick'}>", ajax_data,
+                            function (res) {
+                                $.alert(res.message);
+                                setTimeout(function(){window.location.reload();},1000);
+                            }, "json");
+//                         $.alert('Thanks! I know you like it!')
+                     }
+                },
+            ]
+        });
+    });
+    $(function () {
+        var swiper = new Swiper('.swiper-container5', {
+            pagination: '.swiper-pagination5',
+            slidesPerView: 2.5,
+            paginationClickable: true,
+            spaceBetween: 10,
+            freeMode: true
+        });
+    });
+</script>
+
+</div>
+
+<style type="text/css">
+    .tuan_mask {
+        text-align: left;
+        font-size: 0.8rem;
+    }
+
+    .modal-inner {
+        border-radius: 0.25rem;
+    }
+
+    .modal-button {
+        color: #00cdda;
+    }
+
+    .tuan_mask .wz {
+        line-height: 2;
+    }
+</style>
+
+<{include file='block/footer.html'}>

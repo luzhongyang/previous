@@ -1,0 +1,112 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="mall/order:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+
+<div class="page-data">
+	<table width="100%" border="0" cellspacing="0" class="table-data form">
+	<tr><th>订单ID：</th><td><{$order.order_id}></td></tr>
+	<tr><th>用户ID：</th><td><{$order.uid}></td></tr>
+	<!-- <tr><th>商品信息：</th><td><{$p_name}></td></tr> -->
+	<tr><th>收货人：</th><td><{$member.nickname}></td></tr>
+	<tr><th>收货人手机号：</th><td><{$member.mobile}></td></tr>
+	<tr><th>收货人地址：</th><td><{$order.addr}><{$order.house}></td></tr>
+	<tr><th>状态：</th><td>
+	<{if $order.order_status==3}><span class="green" style="font-weight: bold;">已发货<{/if}>
+	<{if $order.order_status==0}><span class="red" style="font-weight: bold;">未发货<{/if}>
+	<{if $order.order_status==8}><span class="blue" style="font-weight: bold;">已完成<{/if}>
+	<{if $order.order_status==-1}><span class="grey" style="font-weight: bold;">已取消<{/if}>
+	</td></tr>
+	<tr><th>运费：</th><td><{$order.pei_amount}></td></tr>
+	<tr><th>下单时间：</th><td><{$order.dateline|format:'Y-m-d H:i'}></td></tr>
+	<{if $detail.post_id && $detail.post_name}>
+	<tr><th>物流承运来源：</th><td><{$detail.post_name}></td></tr>
+	<tr><th>物流运单编号：</th><td><{$detail.post_id}></td></tr>
+	<{else}>
+<!-- 	<tr><th>物流承运来源：</th><td><{$detail.post_name}></td></tr>
+	<tr><th>单编号：</th><td><{$detail.post_id}></td></tr> -->
+	<{/if}>
+	</table>
+    <{if $items}>
+    <table width="100%" border="0" cellspacing="0" class="table-data table">
+    <tr>
+        <th class="w-100">商品ID</th>
+        <th class="w-50">商品名称</th>
+        <th class="w-50">花费金额</th>
+        <th class="w-50">花费积分</th>
+        <th class="w-100">数量</th>
+        <th class="w-100">金额小计</th>
+        <th class="w-100">积分小计</th>
+    </tr>
+    <{foreach $items as $var}>
+    <tr>
+        <td>ID:<{$var.product_id}></td>
+        <td><{$var['product_name']}></td>
+        <td>￥<{$var['product_price']}></td>
+        <td><{$var['product_jifen']}></td>
+        <td>X<{$var['product_number']}></td>
+        <td>￥<{$var['product_number']*$var['product_price']}></td>
+        <td><{$var['product_number']*$var['product_jifen']}></td>
+    </tr>
+    <{/foreach}>
+    </table>   
+    <{/if}>
+
+    <{if $logs}>
+    <table width="100%" border="0" cellspacing="0" class="table-data table">
+    <tr>
+        <th class="w-100">日志编号</th>
+        <th class="w-50">操作人员</th>
+        <th class="w-150">明细</th>
+        <th class="w-100">时间</th>
+    </tr>
+    <{foreach $logs as $var}>
+    <tr >
+        <td><{$var.log_id}></td>
+        <td>
+        <{if $var.from=='member'}>用户<{/if}>
+        <{if $var.from=='payment'}>用户<{/if}>
+        <{if $var.from=='admin'}>平台<{/if}>
+        (<{$types[$var['type']]}>)</td>
+        <td><{$var.log}></td>
+        <td><{$var.dateline|format}></td>
+    </tr>
+    <{/foreach}>
+    </table> 
+    <{/if}>
+
+	<{if in_array($order.order_status,array(-1,8))}>
+	<{else}>
+    <table width="100%" border="0" cellspacing="0" class="table-data table">
+    <tr>
+        <th class="w-20">管理员操作</th>
+        <th class="w-200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th class="w-1400">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    </tr>
+    <tr>
+        <{if $order.order_status == 0}>
+            <td><{link ctl="mall/order:cancel" args=$order.order_id act="mini:取消订单" confirm="mini:确定要取消订单吗" title="取消订单" class="button"}></td>
+            <{if $order.pay_status==1}>
+            <td><{link ctl="mall/order:deliver" args=$order.order_id act="mini:发货" confirm="mini:确定要发货吗？" title="发货" class="button"}></td>
+            <{else}>
+            <td class="w-200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <{/if}>
+        <{/if}>
+        <{if $order.order_status == 3}>
+            <td><{link ctl="mall/order:info" args=$order.order_id class="button" title="编辑物流信息"}></td>
+           	<td class="w-200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <{/if}>
+        <td class="w-1400">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </tr>   
+    </table>
+    <{/if}>
+</div>
+
+<{include file="admin:common/footer.html"}>

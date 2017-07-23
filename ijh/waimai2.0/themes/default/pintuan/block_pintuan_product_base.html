@@ -1,0 +1,25 @@
+<div class="wz pad10 bgcolor_white border_t border_b">
+    <p class="bt"><{$product.title}></p>
+    <{if $product.money_master>0}>
+    <div><a href="#" class="btn1">佣金团</a></div>
+    <{/if}>
+    <p class="wz1 black9"><{$product.intro|strip_tags}></p>
+    <ul class="wz1 black9">
+        <li class="fl">原价:<span class="jiage"><em><{$product.price}></em>元</span></li>
+        <li class="fr">成团时间：<em><{$product.tuan_time}></em>天</li>
+    </ul>
+    <div class="cl"></div>
+    <p class="wz1 color1">支付开团并邀好友参加，人数不足自动退款。详见下方拼团介绍</p>
+
+    <{if 1 == $product.tuan_type}>
+    <div class="ladder_price">
+        <div class="fl tit">拼团价</div>
+        <div class="select_box">
+            <ul>
+                <{$product.level_html}>
+            </ul>
+        </div>
+        <div class="cl"></div>
+    </div>
+    <{/if}>
+</div>

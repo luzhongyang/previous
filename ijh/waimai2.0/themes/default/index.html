@@ -1,0 +1,247 @@
+<{assign var='tpl_title' value=L("<{$pager.web_title}>")}>
+<{include file="block/header.html"}>
+    <div class="page page-current">
+        <{include file="block/baidu_map.html"}>
+        <!--头部-->
+        <!--<header class="bar bar-nav">
+        </header>-->
+        <!--头部结束-->
+        <!-- 工具栏 -->
+        <{include file="block/navbar.html"}>
+        <!-- 工具栏结束 -->
+
+        <div class="content infinite-scroll infinite-scroll-bottom">
+            <!--幻灯banner-->
+            <!-- Slider -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <{foreach $adv_item as $adv}>
+                    <div class="swiper-slide"><img src="<{$pager.img}>/<{$adv.thumb}>"  width="100%"></div>
+                    <{/foreach}>
+                </div>
+                <div class="swiper-pagination"></div>
+                <!--搜索栏-->
+                <div class="sy_serch">
+                    <div class="searchbar row">
+                        <div class="search-input col-85">
+                            <a href="<{link ctl='position'}>" onclick="backurl();">
+                            <i class="iconfont icon-place"></i>
+                            <input class="txt_center" type="search" id="search" placeholder="中国邮政储蓄银行（望江路..." style="font-size:0.7rem;">
+                            <i class="iconfont icon-xiangyou ico_2"></i>
+                            </a>
+                        </div>
+                        <a href="<{link ctl='search'}>" onclick="backurl2();" class="button button-fill button-primary col-15"><span class="iconfont icon-sousuo"></span></a>
+                    </div>
+                </div>
+                <!--搜索栏end-->
+            </div>
+            <!--幻灯banner结束-->
+            <!--外卖功能-->
+            <div class="funct_list_box_bg">
+                <div class="funct_list_box">
+                    <div class="row no-gutter">
+                        <{foreach $cate_items as $cate}>
+                        <{if $cate.title=='拼团'}>
+                        <div class="col-25 funct_list"><a href="<{link ctl='pintuan:index'}>"><img src="<{$pager.img}>/<{$cate.icon}>"><p><{$cate.title}></p></a></div>
+                        <{else}>
+                        <div class="col-25 funct_list"><a href="<{link ctl='shop:index' cate_id=$cate.cate_id}>"><img src="<{$pager.img}>/<{$cate.icon}>"><p><{$cate.title}></p></a></div>
+                        <{/if}>
+                        <{/foreach}>
+                        <div class="col-25 funct_list"><a href="<{link ctl='shop:index' page=1}>"><img src="%THEME%/static/images/functIco8.png"><p>更多</p></a></div>
+                    </div>
+                </div>
+            </div>
+            <!--外卖功能结束-->
+            <!--下拉选项-->
+            <div class="list-block sy_shangjia_bt">
+              <ul>
+                <li class="item-content item-link">
+                  <div class="item-media"><i class="iconfont icon-dianpu"></i></div>
+                  <div class="item-inner">
+                    <div class="item-title"><span class="black6">附近商家</span></div>
+                    <div class="item-after"><a href="<{link ctl='shop:index' page=1}>" class="black9">更多</a></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!--下拉选项结束-->
+            <!--外卖商家列表-->
+            <div class="tabs shangjia_list_box">
+                <div id="tab1" class="tab infinite-scroll active">
+                      <div class="list-block">
+                        <ul class="list-container" id="index_shop_items"></ul>
+                      </div>
+                      <!-- 加载提示符 -->
+                      <div class="infinite-scroll-preloader">
+                        <div class="preloader">
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <!--外卖商家列表结束-->
+        </div>
+    </div>
+<script type="text/javascript">
+$('.tab-item.external').removeClass('active');
+$('#tab-item1').addClass('active');
+
+/*轮播图配置*/
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    //paginationClickable: true,
+    speed: 400,
+    autoplay: 5000,
+});
+
+
+window.__Index_Page = 0;
+window.__LOAD_LOCK = false;
+function __Index_Load_Items(){
+    if(window.__LOAD_LOCK){
+        return false;
+    }
+    window.__Index_Page ++;
+    window.__LOAD_LOCK = true;
+    $.ajax({
+        url: "<{link ctl='shop:loaditems'}>",
+        async: false,
+        dataType: 'json',
+        data: {"page":window.__Index_Page},
+        type: 'POST',
+        success: function (ret) {
+            var html = '';
+            console.log(ret.items);
+            if(ret.data.items.length > 0) {
+                $.each(ret.data.items, function(index,item){
+                    html += '<li class="shangjia_list"><a href="'+item.link+'" data-no-cache="true">';
+                    html += '<div class="box">';
+                    html += '<div class="pub_img"><img src="/attachs/'+item.logo+'"></div>';
+                    html += '<div class="pub_wz">';
+                    html += '<div class="fl left">';
+                    html += '<h3 class="overflow_clear black3">'+item.title+'</h3>';
+                    html += '<div class="black9"><span class="starBg"><span class="star" style="width:'+item.star*20+'%;"></span></span>已售'+item.orders+'份</div>';
+                    if(item.freight_price>0) {
+                        html += '<p class="black9"><span class="fontcl1">￥'+parseFloat(item.freight_price).toFixed(2)+'</span>&nbsp;配送费</p>';
+                    }else {
+                        html += '<p class="black9">&nbsp;免配送费</p>';
+                    }
+                    
+                    html += '</div>';
+                    html += '<div class="fr right">';
+                    html += '<p class="black9"><span class="fontcl1">￥<big>'+parseFloat(item.min_amount).toFixed(2)+'</big></span>&nbsp;起送</p>';
+                    html += '<p class="black9 mt10 pad_t10" style="font-size:0.5rem;">'+formatDistance(item.juli)+'/<span class="maincl">'+item.pei_time+'分钟</span></p>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '<div class="cl"></div>';
+                    html += '</div>';
+                    html += '<div class="tag_box">';
+                    if(item.first_amount > 0) {
+                        html += '<div class="list"><img src="/themes/default/static/images/tag1.png">新用户首次下单立减'+parseFloat(item.first_amount).toFixed(2)+'元</div>';
+                    }
+                    if(item.youhui) {
+                        html += '<div class="list"><img src="/themes/default/static/images/tag2.png">在线支付'+item.youhui_title+'</div>';
+                    }
+                    if(item.online_pay == 1 || item.online_pay == 2) {
+                        html += '<div class="list"><img src="/themes/default/static/images/tag3.png">商家支持在线支付</div>';
+                    }
+                    if(item.coupon) {
+                        html += '<div class="list"><img src="/themes/default/static/images/tag4.png">店铺'+item.coupon_title+'优惠券可领</div>';
+                    }
+
+                    html += '</div>';
+                    if(item.is_new == 1) {
+                        html += '<div class="lab_box"><img src="/themes/default/static/images/lab_new.png"></div>';
+                    }else if(item.is_new == 2) {
+                        html += '<div class="lab_box"><img src="/themes/default/static/images/lab_brand.png"></div>';
+                    }
+                    html += '</a></li>';
+                })
+                if(window.__Index_Page == 1){
+                    $('#index_shop_items').html(html);
+                }else{
+                    $('#index_shop_items').append(html);
+                    //$(html).appendTo($('.infinite-scroll.active .list-container'));
+                }
+                 window.__LOAD_LOCK = false;
+            }else if(window.__Index_Page > 1){
+                window.__LOAD_LOCK = true;
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').remove();
+                $('.loading_end').remove();
+                $('.infinite-scroll.active .list-block').append('<div class="loading_end">没有更多了...</div>');
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+            window.__LOAD_LOCK = false;
+        },
+    });
+}
+
+//var demo_uxlocation = {"lng":"117.257186","lat":"31.835828","addr":"华润五彩国际"};
+//setUxLocation(demo_uxlocation);
+Cookie.set("ask_deme_uxlocation", 1);
+function ask_demo_uxlocation(){
+    var content = '为了更好的体验程序功能，建议您切换地址为【合肥.华润五彩国际】？';
+    var title = '切换地址';
+    $.confirm(content,title,
+        function () {
+            var demo_uxlocation = {"lng":"117.257186","lat":"31.835828","addr":"华润五彩国际"};
+            setUxLocation(demo_uxlocation);
+            Cookie.set("UxCityId", 1);
+            Cookie.set("UxCity", '合肥');
+            localStorage["UxCity"] = "合肥";
+            localStorage["UxCityId"] = 1;
+            Cookie.set("ask_deme_uxlocation", 1);
+            $.router.load("index.html", true);
+        },
+        function () {
+            Cookie.set("ask_deme_uxlocation", 1);
+            $.router.load("index.html", true);
+        }
+    );
+}
+
+
+$(document).ready(function(){
+    /*定位*/
+    var now_city_name = localStorage["UxCity"];
+    $('#search').val('定位中...');
+    if(Cookie.get("ask_deme_uxlocation")!=1){
+        //ask_demo_uxlocation();
+    }else{
+        var LocTimer = setTimeout(function(){
+            $.alert('获取不到你的地址');
+            //setTimeout(function(){$.router.load("<{link ctl='position'}>", true);},2000);
+        }, 8000);
+        getUxLocation(function(ret){
+            clearTimeout(LocTimer);
+            if(ret.error){
+                //$.alert(ret.message);
+                //setTimeout(function(){$.router.load("<{link ctl='position'}>", true);},2000);
+            }else{
+                if(GetStrLen(ret.addr) > 30) {
+                    $('#search').val(ret.addr.substring(0,15)+' ...');
+                }else {
+                    $('#search').val(ret.addr);
+                }
+
+                __Index_Load_Items();
+            }
+        });
+    }
+});
+
+$(document).on('infinite', '.infinite-scroll-bottom',function() {
+    __Index_Load_Items();
+});
+
+function backurl() {
+    localStorage['position_back'] = window.location.href;
+}
+function backurl2() {
+    localStorage['search_back'] = window.location.href;
+}
+</script>
+<{include file='block/footer.html'}>
+

@@ -1,0 +1,61 @@
+<{assign var='tpl_title' value=L("余额充值")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">余额充值</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	<div class="mineBalance_rechrg mt10">
+            	<div class="list-block media-list">
+                  <ul>
+                  <{foreach $money_pack as $key=>$val}>
+                    <li>
+                      <label class="label-checkbox item-content">
+                        <div class="item-inner">充值<{$key}>元送<span class="fontcl1"><{$val}>元</span></div>
+                        <input type="radio" id="recharge" name="my-radio" <{if $val@index==0}>checked="checked"<{/if}> value="<{$key}>">
+                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                      </label>
+                    </li>
+                  <{/foreach}>
+                  </ul>
+    			</div>
+                <div class="mt10"></div>
+                <div class="list-block media-list">
+                  <ul>
+                    <{if $weixin == 1}>
+                    <li>
+                      <label class="label-checkbox item-content">
+                        <div class="item-inner"><img src="%THEME%/static/images/pay/pay2.png">微信支付</div>
+                        <input type="radio" name="way" checked="checked" value="wxpay">
+                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                      </label>
+                    </li>
+                    <{else}>
+                    <li>
+                      <label class="label-checkbox item-content">
+                        <div class="item-inner"><img src="%THEME%/static/images/pay/pay1.png">支付宝</div>
+                        <input type="radio" name="way" checked="checked" value="alipay">
+                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                      </label>
+                    </li>
+                    <{/if}>   
+                  </ul>
+    			</div>
+                <div class="content-block"> <a href="javascript:paymoney();" class="button button-big button-fill button-success">确认充值</a> </div>
+            </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+    
+    <script>
+	    function paymoney () {
+	    	var amount = $("input[name='my-radio']:checked").val();
+	    	var code = $("input[name='way']:checked").val();
+	        var link = "<{link ctl='trade/payment:money' code=codes amount=amounts}>";
+            link = link.replace('codes',code).replace('amounts',amount);
+	        window.location.href = link;
+	    }
+    </script>
+<{include file="block/footer.html"}>

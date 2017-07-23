@@ -1,0 +1,19 @@
+<{assign var='tpl_title' value=L("支付问题")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">支付问题</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+           <div class="mineEnter_problm mineServe_problm">
+                <div class="mineEnter_problm_list">
+                	<h4><!-- <span class="num">1</span> --><{$detail.desc}></h4>
+                    <p><{$detail.content}></p>
+                </div>
+           </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+<{include file="block/footer.html"}>

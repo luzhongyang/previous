@@ -1,0 +1,84 @@
+<{assign var='tpl_title' value=L("派活")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+		<!--头部-->
+        <header class="bar bar-nav"> 
+        	<a class="button button-link button-nav pull-left back"> 
+        		<span class="iconfont icon-iconfontxiangyou"></span> 
+        	</a> 
+        	<a href="<{link ctl='paotui:order'}>" class="button button-link button-nav pull-right">
+        		<i class="headerIco sendnewsIco">
+        			<{if $wait_count}>
+        				<em class="num" count="<{$wait_count}>"></em>
+        			<{/if}>
+        		</i>
+        	</a>
+            <h1 class="title">派活</h1>
+        </header>
+        <!--头部结束-->
+        <!-- 工具栏 -->
+        <{include file="block/navbar.html"}>
+        <!-- 工具栏结束 -->
+        
+        <div class="content"> 
+        	<!--幻灯banner-->
+            <div class="sendBanner">
+                <div class="swiper-container" data-space-between='10'>
+                    <div class="swiper-wrapper">
+					<{foreach $adv_item as $adv}>
+                    	<div class="swiper-slide"><img src="<{$pager.img}>/<{$adv.thumb}>" width="100%"></div>
+                    <{/foreach}>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <!--幻灯banner结束-->            
+            <div class="send_cate_box">
+            	<ul>
+            	    <li class="send_cateOne">
+                    	<div class="list_box">
+                    		<a href="<{link ctl='paotui:showmap' arg0='buy'}>">
+                    			<img src="%THEME%/static/images/send/idxBg1.png" width="100%">
+                            	<div class="box"> 
+                                	<img src="%THEME%/static/images/send/idxImg1.png">
+                                	<h3>帮我买</h3>
+                                	<p class="overflow_clear">生活用品、夜宵、外卖</p>
+                            	</div>
+                    		</a>
+                    	</div>
+                    </li>
+                    <li class="send_cateTwo">
+                    	<div class="list_box">
+                    		<a href="<{link ctl='paotui:showmap' arg0='send'}>">
+                    			<img src="%THEME%/static/images/send/idxBg2.png" width="100%">
+                            	<div class="box">
+                                	<img src="%THEME%/static/images/send/idxImg2.png">
+                                	<h3>帮我送</h3>
+                                	<p class="overflow_clear">礼物、蛋糕、鲜花</p>
+                            	</div>
+                    		</a>
+                    	</div>
+                    </li>
+                    <li class="send_cateTwo">
+                    	<div class="list_box">
+                    		<a href="<{link ctl='paotui:showmap' arg0='other'}>">
+                    			<img src="%THEME%/static/images/send/idxBg3.png" width="100%">
+	                            <div class="box">
+    	                            <img src="%THEME%/static/images/send/idxImg3.png">
+        	                        <h3>其他</h3>
+            	                    <p class="overflow_clear">取件、代排队、待占座</p>
+                	            </div>
+                    		</a>
+                    	</div>
+                    </li>
+        	    </ul>
+                <div class="cl"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$('.tab-item.external').removeClass('active');
+$('#tab-item2').addClass('active');
+</script>
+<{include file="block/footer.html"}>

@@ -1,0 +1,97 @@
+<{assign var='tpl_title' value=L("我的红包")}>
+<{include file="block/header.html" }>
+<div class="page page-current">
+	<!--头部-->
+    <header class="bar bar-nav"> 
+    	<a class="button button-link button-nav pull-left back" > 
+    		<span class="iconfont icon-iconfontxiangyou"></span> 
+    	</a> 
+    	<script>
+        	if(localStorage['ucenter_hongbao_list_backurl']){
+				$(".pull-left").attr('href',localStorage['ucenter_hongbao_list_backurl']); 
+			}else{
+				$(".pull-left").attr('href',"<{link ctl='ucenter/index'}>");
+			}
+    	</script>
+    	<a class="button button-link button-nav pull-right" href="<{link ctl='ucenter/hongbao/exchange'}>">兑换</a>
+        <h1 class="title">我的红包</h1>
+    </header>
+    <!--头部结束-->
+    <div class="bar bar-tab ord_bag_footer">
+        <div class="fl font_size14 black6">
+            <label class="label-checkbox item-content" hongbao_id="">
+                <input type="radio" name="my-radio">
+                <span class="item-media"><i class="icon icon-form-checkbox"></i></span>
+            </label>
+            <span class='black3' style="font-size:0.8rem;margin-left:0.5rem;">不使用红包</span>
+        </div>
+        <!-- <a class="pub_btn fr">确定</a> -->
+    </div>
+    <div class="content">
+       <div class="mineBag_ts">
+       	<div class="fl black6">您有<span class="pointcl1"><{$hb_count}></span>个红包即将到期</div>
+        <a href="<{link ctl='ucenter/hongbao/info'}>" class="fr maincl"><i class="iconfont icon-wenhao"></i>红包使用说明</a>
+        </div>
+        <div class="ord_bag">
+            <div class="list-block media-list" id="hongbao_items">
+                <ul>
+                    <{foreach $items as $item}>
+                    <li>
+                        <label class="label-checkbox item-content" hongbao_id="<{$item.hongbao_id}>">
+                            <div class="item-inner">
+                           		<div class="mineCoupon_list mineBag_list">
+                                	<div class="right">
+                                    	<div class="price fontcl1 txt_center"><small>￥</small><{$item.amount}></div>
+                                    </div>
+                                	<div class="left">
+                                    	<h3 class="overflow_clear" type="<{$item.type}>"><{$item.title}></h3>
+                                        <ul>
+                                        	<li>满<{$item.min_amount}>元可用</li>
+                                            <li><{$item.stime}>至<{$item.ltime}></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="radio" name="my-radio">
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                        </label>
+                    </li>
+                    <{foreachelse}>
+                    <div class="nonePage txt_center">
+                        <img src="%THEME%/static/images/none/bag_no.png">
+                        <p class="black9">暂无红包</p>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        
+       	<{/foreach}>
+        <{if $money<1}>
+        <p class="txt_center font_size14 mar10"><a href="<{link ctl='ucenter/hongbao/index'}>" class="black9">查看其他红包</a></p>
+        <{/if}>
+
+    </div>        
+<!--内容结束-->   
+</div>
+<script type="text/javascript">
+var hongbaoJSON = null;
+var backurl = null;
+
+$(document).off('click',".label-checkbox").on('click','.label-checkbox',function(){
+    var hongbao_id = $(this).attr('hongbao_id');
+    if(localStorage['select_hongbao']) {
+        hongbaoJSON = JSON.parse(localStorage['select_hongbao']);
+        if(hongbaoJSON) {
+            if(hongbaoJSON.backurl) {
+                backurl = hongbaoJSON.backurl; 
+                localStorage['select_hongbao'] = JSON.stringify({"hongbao_id":hongbao_id});
+                setTimeout(function () {
+                    window.location.href = backurl;
+                }, 1000);
+            }
+        }
+    }
+});
+
+</script>
+<{include file="block/footer.html"}>

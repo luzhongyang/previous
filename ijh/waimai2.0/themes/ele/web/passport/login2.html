@@ -1,0 +1,116 @@
+<{assign var='seo_title' value=L("登陆")}>
+<{include file="web/block/head.html"}>
+<script type="text/javascript" language="javascript">
+    function enterPress(e){ 
+        if(e.keyCode == 13) { 
+            $('#psw_btn').click();
+        }
+    }
+</script>
+<!--内容开始-->
+<div style="background:#fff;">
+	<div class="new_login">
+		<header class="head">
+			<a href="#"><img src="/themes/ele/web/static/images/logo1.png"/></a>
+		</header>
+		<div class="login_newNr">
+			<img src="/themes/ele/web/static/images/login-left.png" class="img" />
+			<div class="login_form">
+				<div class="top">
+					<h3>登录</h3>
+					<a href="<{link ctl='web/passport/login'}>">手机验证登录<i class="ico ico1"></i></a>
+					<div class="cl"></div>
+				</div>
+				<form>
+					<div class="compact int_box">
+						<em class="ico ico_1"></em>
+						<input type="text" placeholder="手机号/邮箱/用户名" onKeyDown="javascript:enterPress(event);" id="mobile"/>
+					</div>					
+					<div class="compact int_box">
+						<em class="ico ico_2"></em>
+						<input type="password" placeholder="密码" onKeyDown="javascript:enterPress(event);" id="password"/>
+					</div>
+					<!--
+					<div class="compact int_group">
+						<input type="text" maxlength="6" placeholder="验证码"/>
+						<span class="group">
+							<span><img src=""/><a href="#">看不清换一张</a></span>
+						</span>
+					</div>
+					-->
+					<div class="compact" style=" font-size:14px; color:#666;"> 
+						<label> <input class="check" type="checkbox" checked="checked">下次自动登录 </label> 
+					</div>
+					<input type="button" id="psw_btn" class="long_btn" value="登录">
+				</form>
+				<div class="line">
+					<a href="<{link ctl='web/passport/register'}>">新用户注册</a>
+					<a href="<{link ctl='web/passport/passwd'}>" class="fr">忘记密码</a>
+					<div class="cl"></div>
+				</div>
+				<div class="zhanghao">
+					<div>
+						<h4>可使用以下账号直接登录</h4>
+						<a href="#" class="qq"></a>
+						<a href="#" class="weibo"></a>
+					</div>
+				</div>
+			</div>
+			<div class="cl"></div>
+		</div>
+	</div>
+</div>
+
+                    <script>
+                        function focusInput(focusClass, normalClass) {
+                            var elements = document.getElementsByTagName("input");
+                            for (var i = 0; i < elements.length; i++) {
+                                if (elements[i].type != "button" && elements[i].type != "submit" && elements[i].type != "reset") {
+                                    //if(elements[i].type=="text"){
+                                    elements[i].onfocus = function () {
+                                        $(this).parent(".login_form .int_box").addClass("on")
+                                    };
+                                    elements[i].onblur = function () {
+                                        $(this).parent(".login_form .int_box").removeClass("on")
+                                    };
+                                }
+                            }
+                        }
+                        window.onload = function () {
+                            focusInput('focusInput', 'normalInput');
+                        }//input状态
+                        $(document).ready(function () {
+                            $(".login_form .selct_int .box").click(function () {
+                                if ($(this).hasClass("on")) {
+                                    $(this).removeClass("on");
+                                }
+                                else {
+                                    $(this).addClass("on");
+                                }
+                            });
+                        });
+                    </script>
+                    
+<!--内容结束-->
+<script>
+    $(document).ready(function(){
+        $('#psw_btn').click(function(){
+            var mobile = $('#mobile').val(); 
+            var password = $('#password').val();
+            var link = "<{link ctl='passport/handle2' }>";
+            $.post(link,{mobile:mobile,password:password},function(ret){
+                if(ret.error != 0){
+                    layer.msg(ret.message);
+                    return ;
+                }else{
+                    layer.msg(ret.message);
+                    setTimeout(function(){
+                       window.location.href='<{$backurl}>';
+                    },1000)
+                    BtnCount();
+                }
+            },'json');
+        })
+    })
+</script>
+<{include file="web/block/foot.html"}>

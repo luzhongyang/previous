@@ -1,0 +1,206 @@
+<{include file="block/header.html"}>
+<div class="page page-current"> 
+    <!--头部-->
+    <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a> 
+        <h1 class="title">提交订单</h1>
+    </header>
+    <!--头部结束-->
+    <nav class="bar bar-tab tijiao">
+        <span class="tijiao-left fl fontcl1">
+            <span  id="total_price">￥<{$total.price+$freight|default:0}></span>
+            <span class="black3" style="margin-left:0.5rem" id="total_jifen">
+                <{$total.jifen|default:0}>
+            </span>
+            <span class="black9">积分</span>
+
+            <span class="black6 font_size12">运费&yen;<{$freight|default:0}></span>
+        </span>
+        <a href="javascript:;" class="pub_btn fr" style="width:30%">提交</a>
+        <div class="cl"></div>
+    </nav>
+    <div class="content">
+        <div class="wantJoin-tuan">
+            <div class="list-block media-list bot-img">
+                <ul>
+                    <li>
+                        <{if !$addr_count}>
+                        <a href="<{link ctl='ucenter/addr/create'}>" >
+                            <div class="wz">
+                                <p class="bt"><{L('您还没有设置地址')}> </p>
+                                <p><{L('点击立即添加地址')}> </p>
+                            </div>
+                        </a>
+                        <{else}>
+                        <a href="" id="select_addr" class="item-link item-content">
+                            <div class="item-media"><i class="iconfont icon-site-copy jiaodan"></i></div>
+                            <div class="item-inner">
+                                <{if $my_addr}>
+                                <input type="hidden" id="addr_id" value="<{$my_addr.addr_id}>"/>
+                                <div class="item-subtitle">
+                                    <span id="contact"><{$my_addr.contact}></span>
+                                    <span id="mobile" style="margin-left:0.5rem"><{$my_addr.mobile}></span>
+                                </div>
+                                <div class="item-text">
+                                    <span id="address" class="black3"><{$my_addr.addr}><{$my_addr.house}></span>
+                                </div> 
+                                <{else}>
+                                <p class="bt"><{L('当前您有')}> <b style="color:#ff0000;"><{$addr_count}></b><{L('个地址')}> </p>
+                                <p><{L('点击立即选择地址')}> </p>
+                                <{/if}>
+                            </div>
+                        </a>
+                        <{/if}>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-block media-list border_t" style="margin-top:0.5rem;">
+                <ul>
+                    <{foreach $mallcart as $k=>$v}>
+                    <li class="border_b" id="li_<{$k}>">
+                        <div class="item-content">
+                            <a href="<{link ctl='mall/product:detail' arg0=$products[$k].product_id}>">
+                                <div class="item-media">
+                                    <img src="<{$pager.img}>/<{$products[$k].photo}>" style='width: 4.2rem;'>
+                                </div>
+                            </a>
+                            <div class="item-inner no-bodert">
+                                <div class="item-title-row">
+                                    <div class="item-title overflow_clear"><big><{$products[$k].title}></big></div>
+                                </div>
+                                <div class="item-subtitle fontcl1">￥<{$products[$k].price}><span style="margin-left:0.5rem" class="black3"><{$products[$k].jifen}><i class="black9">积分</i></span></div>
+                                <div class="item-title-row">
+                                    <div class="item-title black9"><span class="shuliang">剩余数量: <{$products[$k].sku}> </span></div>
+                                    <div class="item-after">
+                                        <div class="num_operate tidan-num">
+                                            <span class="reduces" pid="<{$k}>"  quantity="-">-</span>
+                                            <input type="text" value="<{$v}>" class="text_box_<{$k}>" readonly>
+                                            <span class="adds" pid="<{$k}>"  quantity="+">+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <{/foreach}>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    var total = "<{$total.count}>";
+    if (!total) {
+        $.alert('购物车无商品，请重新下单', function () {
+            $.router.load("<{link ctl='mall/product'}>", true);
+        });
+    }
+
+    window.__Mall_Product_Freight = parseInt("<{$freight}>");
+
+    // 加号
+    $('.adds').click(function (e) {
+        var pid = $(this).attr('pid');
+        var link = "<{link ctl='mall/order:addcart'}>";
+        $.post(link, {pid: pid}, function (ret) {
+            if (ret.error == 0) {
+                var price = window.__Mall_Product_Freight + parseFloat(ret.data.price);
+                $('#total_count').html(ret.data.count);
+                $('#total_price').html('￥' + price);
+                $('#total_jifen').html(ret.data.jifen);
+                var val = $('.text_box_' + pid).val();
+                val = parseInt(val, 10) + 1;
+                $('.text_box_' + pid).attr('value', val);
+            } else {
+                $.alert(ret.message);
+            }
+        }, 'json');
+    });
+
+    // 减号
+    $('.reduces').click(function () {
+        var pid = $(this).attr('pid');
+        var link = "<{link ctl='mall/order:addcart'}>";
+        var val = $('.text_box_' + pid).val();
+        val = parseInt(val, 10) - 1;
+        $.post(link, {pid: pid, reduce: 1}, function (ret) {
+            if (ret.error == 0) {
+                var price = window.__Mall_Product_Freight + parseFloat(ret.data.price);
+                $('#total_count').html(ret.data.count);
+                $('#total_price').html('￥' + price);
+                $('#total_jifen').html(ret.data.jifen);
+                $('.text_box_' + pid).attr('value', val);
+            } else if (ret.error == 244) {
+                $.alert(ret.message, function () {
+                    $.router.load("<{link ctl='mall/product'}>", true);
+                });
+            } else {
+                $.alert(ret.message);
+            }
+        }, 'json');
+        if (val <= 0) {
+            $('#li_' + pid).remove();
+        }
+    });
+
+
+    // 提交（下单）
+    $('.pub_btn').click(function () {
+        var addr_id = $('#addr_id').val();
+        var link = "<{link ctl='mall/order:create'}>";
+        $.post(link, {addr_id: addr_id}, function (ret) {
+            if (ret.error == 0) {
+                $.alert(ret.message);
+                var order_id = parseInt(ret.data.order_id);
+                var pay_status = parseInt(ret.data.pay_status);
+                var link = "<{link ctl='ucenter/order:payment-" + order_id + "'}>";
+                var success = "<{link ctl='mall/order:detail-" + order_id + "'}>";
+                localStorage['payment_backurl'] = "<{link ctl='mall/order:detail-" + order_id + "'}>";
+                setTimeout(function () {
+                    $('.modal-overlay').remove();
+                    $('.modal').remove();
+                    if (1 == pay_status) {
+                        $.router.load(success, true);
+                    } else
+                    {
+                        $.router.load(link, true);
+                    }
+
+                }, 1500)
+            } else {
+                $.alert(ret.message);
+                if (ret.forward) {
+                    setTimeout(function () {
+                        $.router.load(ret.forward, true);
+                    }, 1500);
+                }
+                if (ret.error == 101) {
+                    setTimeout(function () {
+                        $('.modal-overlay').remove();
+                        $('.modal').remove();
+                        $.router.load("<{link ctl='passport/login'}>", true);
+                    }, 1500);
+                }
+            }
+        }, 'json');
+    });
+
+    // 点击立即选择地址
+    $(document).off('click', '#select_addr').on('click', '#select_addr', function () {
+        localStorage['select_address'] = JSON.stringify({"backurl": window.location.href});
+        $.router.load("<{link ctl='ucenter/addr:index'}>", true);
+    })
+
+    // 自动填写选择的地址
+    if (localStorage['select_address']) {
+        var addr = JSON.parse(localStorage['select_address']);
+        if (addr) {
+            $("#addr_id").val(addr.addr_id);
+            $("#contact").html(addr.contact);
+            $("#mobile").html(addr.mobile);
+            $("#address").html(addr.address);
+            localStorage.removeItem('select_address');
+        }
+    }
+</script>
+<{include file='block/footer.html'}>

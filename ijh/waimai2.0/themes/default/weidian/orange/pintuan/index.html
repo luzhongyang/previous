@@ -1,0 +1,183 @@
+<{assign var='tpl_title' value=L("特价拼团")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<style>
+    .maxItems {
+        visibility: hidden;
+    }
+    .infinite-scroll-nomore {
+        display: none;
+    }
+    .loading_end {
+        text-align: center;
+    }
+</style>
+<div class="page page-current">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav header_Ico"><a class="button button-link button-nav pull-left"
+                                              href="<{link ctl='weidian/index:index' arg0=$smarty.session.WEIDIAN_SHOP_ID }>">
+        <span class="Ico1"></span> </a>
+        <h1 class="title">特价拼团</h1>
+    </header>
+    <!-- 标题栏结束 -->
+    <!-- 工具栏 -->
+    <{include file="weidian//$theme_style/block/navbar.html"}>
+    <!-- 工具栏结束 -->
+    <!--主要内容-->
+    <div class="content ajax_data_order_list">
+
+        <div class="tabs pintuan_list_box">
+            <div id="tab1" class="tab active infinite-scroll">
+                <div class="biaoqian-content list-container">
+
+
+                </div>
+
+                <input name="page" id="page" class="page" value="2"/>
+                <input name="maxItems" type="hidden" id="maxItems" class="maxItems" value="<{$count.count_0}>"/>
+                <!-- 加载提示符 -->
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
+                <div class="infinite-scroll-nomore">
+                    <div class="loading_end">没有更多了...</div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <!--主要内容结束-->
+</div>
+
+
+
+<{include file="weidian/$theme_style/pintuan/block_pintuan_relate_product_js.html"}>
+<script>
+ $('.tab-item').removeClass('active');
+ $('#tab-item3').addClass('active');   
+    var limit = 10;
+    ajax_data = {"status": 0, "page": 1, "limit": limit};
+    function __ajax_tuan_my(tabIndex, ajax_data) {
+        ajax_data.status = tabIndex;
+        $.post("<{link ctl='weidian/pintuan:ajax_search'}>", ajax_data,
+                function (res) {
+                    next_page = parseInt(ajax_data.page) + 1;
+                    $('.infinite-scroll').eq(tabIndex).find('.page').val(next_page);
+//                        console.log(res.data.count_num + '|||' + next_page);
+//                        $('.infinite-scroll.active .list-container').append(res.data.html);
+                    //html start
+                    var html = '';
+                    if (0 == res.data.is_have) {
+                        html = "<div class='content-block biaoqian-content'>" +
+                                "                                    <div class='wushuju'>" +
+                                "                                    <img src='/themes/default/static/images/kong.png' width='30%'>" +
+                                "                                    <p class='mt10'>暂无数据.</p>" +
+                                "                                    </div>" +
+                                "                                    </div>";
+                    }
+                    else {
+                        $.each(res.data.items, function (index, item) {
+                            html += "" +
+                                    "<div class='pintuan_nr mb10 one_item'>" +
+                                    "   <div class='seller_caidelt_top sp_detail_top'> <a href='" + item.link + "'><img src='<{$pager.img}>/" + item.photo + "' width='100%'></a>" +
+                                    "       <div class='bottom'>" +
+                                    "           <p class='fl'>" + item.title + "</p>" +
+                                    "           <div class='fr'>￥" + item.tuan_price + "</div>" +
+                                    "           <div class='cl'></div>" +
+                                    "       </div>" +
+                                    "   </div>" +
+                                    "   <p class='pad10 maincl f_size1 overflow_clear bgcolor_white'>" + item.intro + "</p>" +
+                                    "       <div class='pintuan_list_state bgcolor_white'>" +
+                                    "       <div class='box'>" +
+                                    "           <i class='tuanIco1 mr10'></i>" +
+                                    "           <em class='mr10'>" + item.user_num + "人团</em><em>￥" + item.tuan_price + "</em>" +
+                                    "           <a href='" + item.link + "' class='btn fr'>去开团<i class='tuanIco2 ml10'></i></a>" +
+                                    "       </div><div num='" + item.pintuan_product_id + "' class='"+item.is_collect+"'></div>" +
+                                    "   </div>" +
+                                    "</div>";
+
+                        })
+                    }
+                    $('.infinite-scroll.active .list-container').append(html);
+                    //html end
+                    guanzhu_pintuan();
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+
+                    console.log(tabIndex + ' / ' + lastIndex + ' / ' + maxItems);
+                    $('.infinite-scroll-preloader').eq(tabIndex).hide();
+                    if (lastIndex >= maxItems) {
+                        $('.infinite-scroll-nomore').eq(tabIndex).show();
+                        $('.infinite-scroll-preloader').eq(tabIndex).empty();
+                        return;
+                    }
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    $.refreshScroller();
+//                        console.log(res.data.html);
+                }, "json");
+    }
+
+    __ajax_tuan_my(0, ajax_data);
+
+    //init first time
+    $('.list-container').eq(0).empty();
+    $('.list-container').eq(1).empty();
+    $("#tab2").removeClass('active');
+    $("#tab2_link").removeClass('active');
+    $("#tab1").addClass('active');
+    $("#tab1_link").addClass('active');
+
+
+    $("#tab1_link").click(function () {
+        ajax_data = {"status": 0, "page": 1, "limit": limit};
+        tabIndex = 0;
+        $('.infinite-scroll-nomore').eq(tabIndex).hide();
+        $('.infinite-scroll-preloader').eq(tabIndex).html('<div class="preloader"></div>');
+        $('.list-container').eq(tabIndex).empty();
+        __ajax_tuan_my(0, ajax_data);
+    });
+    $("#tab2_link").click(function () {
+        ajax_data = {"status": 1, "page": 1, "limit": limit};
+        tabIndex = 1;
+        $('.infinite-scroll-nomore').eq(tabIndex).hide();
+        $('.infinite-scroll-preloader').eq(tabIndex).html('<div class="preloader"></div>');
+        $('.list-container').eq(tabIndex).empty();
+        __ajax_tuan_my(1, ajax_data);
+    });
+
+    var loading = false;
+    var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+    var tabIndex = 0;
+    $(document).on('infinite', '.ajax_data_order_list', function () {
+        if (loading) return;
+        loading = true;
+        $('.infinite-scroll-preloader').eq(tabIndex).show();
+        //set data
+        setTimeout(function () {
+            $('.infinite-scroll-preloader').eq(tabIndex).show();
+            loading = false;
+            var tabIndex = 0;
+            if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab1") {
+                tabIndex = 0;
+            }
+            if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab2") {
+                tabIndex = 1;
+            }
+
+            var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+            if (lastIndex >= maxItems) {
+                $('.infinite-scroll-preloader').eq(tabIndex).empty();
+                $('.infinite-scroll-nomore').eq(tabIndex).show();
+                return;
+            }
+            ajax_data.page = $('.infinite-scroll').eq(tabIndex).find('.page').val();
+            __ajax_tuan_my(tabIndex, ajax_data);
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+            $.refreshScroller();
+        }, 1000);
+    });
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

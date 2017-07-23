@@ -1,0 +1,62 @@
+<{assign var='tpl_title' value=L("拼团收藏")}>
+<{include file="block/header.html" }>
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav"><a class="button button-link button-nav pull-left" id="back_btn"
+                                   onclick="javascript:reback();"> <span class="iconfont icon-iconfontxiangyou"></span>
+    </a>
+        <h1 class="title">拼团收藏</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content">
+        <div class="pintuan_list_box">
+
+            <{if $pintuan_list}>
+
+
+            <{foreach $pintuan_list as $item}>
+            <div class="pintuan_list">
+                <a href="<{link ctl='pintuan:product' arg0=$item.pintuan_product_id}>">
+                    <div class="pub_img">
+                        <img src="<{$pager.img}>/<{$item.photo}>" width="100%">
+                        <span class="tag"><big><{$item.rate}></big>折</span>
+                    </div>
+                </a>
+                <div class="pub_wz">
+                    <h3 class="black">【<{$item.cate}>】<{$item.title}></h3>
+                    <p class="black9"><{strip_tags($item.intro)}></p>
+                </div>
+                <div class="pintuan_list_state">
+                    <div class="box">
+                        <big><{$item.tuan_price}></big>元/<{$item.user_num}>人团<a
+                            href="<{link ctl='pintuan:product' arg0=$item.pintuan_product_id}>" class="btn fr">去开团</a>
+                    </div>
+                    <img src="%THEME%/static/images/pintuanIco.png">
+                </div>
+            </div>
+
+
+            <{/foreach}>
+
+            <{else}>
+            <div class="nonePage txt_center">
+                <img src="%THEME%/static/images/none/colct_no.png">
+                <p class="black9">暂无收藏</p>
+            </div>
+            <{/if}>
+
+
+        </div>
+    </div>
+    <!--内容结束-->
+</div>
+
+<script>
+
+    function reback() {
+        history.back(-1);
+    }
+
+</script>
+
+<{include file="block/footer.html"}>

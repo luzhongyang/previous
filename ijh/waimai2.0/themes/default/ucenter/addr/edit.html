@@ -1,0 +1,232 @@
+<{assign var='tpl_title' value=L("修改收货地址")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> 
+        	<a class="button button-link button-nav pull-left" href="<{link ctl='ucenter/addr'}>"> 
+        		<span class="iconfont icon-iconfontxiangyou"></span> 
+        	</a>
+            <h1 class="title">修改收货地址</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	<div class="mineGdsaddr_add">
+            	<h3>联系人</h3>
+            	<div class="list-block">
+                    <ul>
+                      <!-- Text inputs -->
+                      <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-title label">姓名：</div>
+                            <div class="item-input">
+                              <input type="text" id="contact" value="<{$detail.contact}>">
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-title label">手机：</div>
+                            <div class="item-input">
+                              <input type="text" id="mobile" value="<{$detail.mobile}>">
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                 </div>
+                 <h3>收货地址</h3>
+            	 <div class="list-block">
+                    <ul>
+                      <!-- Text inputs -->
+                      <li>
+                        <div class="item-content item-link">
+                          <div class="item-inner">
+                            <div class="item-title label">小区/写字楼/学校：</div>
+                            <div class="item-input">
+                            <a href="<{link ctl='ucenter/addr:add_map' args=$detail.addr_id }>" onClick="saveForm();" class="link">
+                              <input type="text" id="addr" value="<{$detail.addr}>">
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-title label">楼号-门牌号：</div>
+                            <div class="item-input">
+                              <input type="text" id="house" value="<{$detail.house}>">
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                 </div>
+                 <div class="mt10"></div>
+                 <div class="list-block">
+                    <ul>
+                      <!-- Text inputs -->
+                      <li>
+                        <div class="item-content item-link_down">
+                          <div class="item-inner open-vertical-modal">
+                            <div class="item-title label">标签：</div>
+                            <div class="item-input txt_right">
+                            <{if $detail.tag == 1}>
+                            	<div class='bgcolor_white bg1'>公司</div>
+                            <{elseif $detail.tag == 2}>
+                            	<div class='bgcolor_white bg2'>家</div>
+                            <{elseif $detail.tag == 3}>
+                            	<div class='bgcolor_white bg3'>学校</div>
+                            <{else}>
+                            	<div class='bgcolor_white no'>无</div>
+                            <{/if}>
+                            </div>
+                            <input id='tag' value='<{$detail.tag}>' hidden>
+                          </div>
+                          <i class="iconfont icon-iconfontxiangyou open-vertical-modal"></i>
+                        </div>
+                      </li>
+                    </ul>
+                 </div>
+                 <div class="content-block"> <a class="button button-big button-fill button-success">确定</a> </div>
+            </div>
+           
+        </div>        
+    <!--内容结束-->   
+    </div>
+<script>
+$('.open-vertical-modal').click(function(){
+    $(".mineGdsaddr_add .list-block .item-link_down").addClass("on");
+    $.modal({
+    	title:  "<div class='txt_center'>选择地址标签</div>",
+		verticalButtons: true,
+      	buttons: [
+        {
+        	text: "<div class='bgcolor_white'>无</div>",
+          	onClick: function() {
+				$('.open-vertical-modal .item-input').html("<div class='bgcolor_white no'>无</div>");
+			  	$('#tag').attr('value',0);
+                $(".mineGdsaddr_add .list-block .item-link_down").removeClass("on");
+          	}
+        },
+        {
+        	text: "<div class='bgcolor_white'>家</div>",
+          	onClick: function() {
+				$('.open-vertical-modal .item-input').html("<div class='bgcolor_white bg2'>家</div>");
+			  	$('#tag').attr('value',2);
+                $(".mineGdsaddr_add .list-block .item-link_down").removeClass("on");
+          	}
+        },
+        {
+          text: "<div class='bgcolor_white'>公司</div>",
+          onClick: function() {
+			  $('.open-vertical-modal .item-input').html("<div class='bgcolor_white bg1'>公司</div>");
+			  $('#tag').attr('value',1);
+              $(".mineGdsaddr_add .list-block .item-link_down").removeClass("on");
+          }
+        },
+		{
+          text: "<div class='bgcolor_white'>学校</div>",
+          onClick: function() {
+			  $('.open-vertical-modal .item-input').html("<div class='bgcolor_white bg3'>学校</div>");
+			  $('#tag').attr('value',3);
+              $(".mineGdsaddr_add .list-block .item-link_down").removeClass("on");
+          }
+        },
+      ]
+    })
+    
+});
+
+$('.button-success').click(function(){
+	var addr_id = <{$detail.addr_id}>;
+	var addr_lng = localStorage.getItem('addr_lng'); 
+    var addr_lat = localStorage.getItem('addr_lat'); 
+    if(addr_lng == null) {
+    	$.alert("请优先在地图上选择您的位置");
+        return false;
+    }
+	
+	var contact = $('#contact').val();
+	var mobile = $('#mobile').val();
+	var addr = $('#addr').val();
+	var house = $('#house').val();
+	var tag = $('#tag').val();
+	var link = "<{link ctl='ucenter/addr/editsave'}>";
+		$.post(link, {addr_id:addr_id,contact:contact,mobile:mobile,addr:addr,house:house,tag:tag,addr_lng:addr_lng,addr_lat:addr_lat}, function (ret) {
+		if (ret.error == 0) {
+			$.alert(ret.message); 
+			setTimeout(function(){
+                window.location.href="<{link ctl='ucenter/addr'}>";
+            },2000)
+		} else {
+        	$.alert(ret.message);                    }
+    }, 'json');
+});
+
+
+
+//弹出层消失,点击灰色区域,
+$(document).on('click', '.modal-overlay', function () {
+    $(this).removeClass('modal-overlay-visible');
+    $('.modal').removeClass('modal-in');
+    $('.modal').css('display', 'none');
+});
+
+
+//设置表单
+function setAddrinfo() {
+    if(window.localStorage){ 
+    	if(!(!localStorage.getItem('addr_info'))){
+    		$('#house').val(localStorage.getItem('addr_info'));	
+    	}
+    	if(!(!localStorage.getItem('addr_num'))){
+    		$('#addr').val(localStorage.getItem('addr_num'));	
+    	}
+		if(!(!localStorage.getItem('contact'))){
+			$('#contact').val(localStorage.getItem('contact'));
+    	}
+		if(!(!localStorage.getItem('mobile'))){
+			$('#mobile').val(localStorage.getItem('mobile'));  
+		}
+          
+        var tag = localStorage.getItem('tag');
+		if(!tag){
+        	tag = "<{$detail.tag}>";
+        }
+        if(tag == 1){
+        	$('.open-vertical-modal .item-input').html("<div class='bgcolor_white bg1'>公司</div>");
+			$('#tag').attr('value',1);
+        }else if(tag == 2){
+        	$('.open-vertical-modal .item-input').html("<div class='bgcolor_white bg2'>家</div>");
+			$('#tag').attr('value',2);
+        }else if(tag == 3){
+        	$('.open-vertical-modal .item-input').html("<div class='bgcolor_white bg3'>学校</div>");
+			$('#tag').attr('value',3);
+        }else{
+        	$('.open-vertical-modal .item-input').html("<div class='bgcolor_white no'>无</div>");
+			$('#tag').attr('value',0);
+        }
+    }else{  
+        alert("<{L('浏览器还不支持')}> web storage <{L('功能')}>");  
+    } 
+}
+
+// 保存联系人、手机号、新增地址动作
+function saveForm() {
+    if(window.localStorage) {
+        localStorage.setItem('contact',$('#contact').val());
+        localStorage.setItem('mobile',$('#mobile').val());
+        localStorage.setItem('tag',$('#tag').val());
+        localStorage.setItem('addr_info',$('#house').val());
+    }else{  
+        alert("<{L('浏览器还不支持')}> web storage <{L('功能')}>");  
+    } 
+}
+
+setAddrinfo();
+</script>
+<{include file="block/footer.html"}>

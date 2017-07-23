@@ -1,0 +1,133 @@
+<{include file="block/header.html"}>
+    <div class="page page-current"> 
+        <!-- 标题栏开始 -->
+        <header class="bar bar-nav">
+            <h1 class="title">商城</h1>
+        </header>
+        <!-- 标题栏结束 --> 
+        <!-- 工具栏 -->
+        <{include file="block/navbar.html"}>
+        <!-- 工具栏结束 --> 
+        <!-- 主要内容 -->
+        <div class="content jifen_sy"> 
+            <!-- 幻灯banner --> 
+            <!-- Slider -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <{foreach $adv_item as $adv}>
+                    <div class="swiper-slide"><img src="<{$pager.img}>/<{$adv.thumb}>" height="100%" width="100%"></div>
+                    <{/foreach}>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <!-- 幻灯banner结束 --> 
+            <!-- 我的积分 -->
+            <div class="list-block myPoints">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title font_size14">我的积分<em class="num fontcl1 ml5"><{$MEMBER.jifen}></em></div>
+                            <div class="item-after" style=" max-height:none;">
+                            	<a href="<{link ctl='mall/order'}>" class="btn black6 external">
+                            		<em class="Ico"></em>商城订单
+                            	</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 我的积分结束 --> 
+            <!-- 积分商城功能 -->
+            <div class="funct_list_box_bg">
+                <div class="funct_list_box function">
+                    <div class="row no-gutter">
+                    <{foreach $cates as $k=>$cate}>
+                    	<div class="col-25 funct_list">
+                        	<a href="<{link ctl='mall/product:items' arg0=$cate.cate_id}>" class="external"><img src="<{$pager.img}>/<{$cate.icon}>">
+                            	<p><{$cate.title}></p>
+                            </a>
+                        </div>
+                    <{/foreach}>
+                </div>
+            </div>
+            <!-- 积分商城功能结束 --> 
+            <!-- 积分商城商品 -->
+            <div class="nr">
+                <ul>
+                <{foreach $products as $k=>$v}>
+                	<li class="nr_list">
+                        <div class="box"> 
+                        	<a href="<{link ctl='mall/product:detail' arg0=$v.product_id}>" class="external" onclick="setprobackurl();">
+                        	<div class="img">
+                            	<img src="<{$pager.img}>/<{$v.photo}>"/>
+                            	<p><{$v.jifen}>积分</p>
+                            </div>
+                            </a>
+                        	<div class="wz pad10">
+                            	<p class="font_size14"><{$v.title}></p>
+                                <div>
+                                	<p class="fl black9 font_size14">支付<span class="fontcl1">￥<em class="num"><{$v.price}></em></span></p>
+                                    <div class="fr num_operate">
+                                		<span class="add" pid='<{$v.product_id}>' quantity="+">+</span>
+                            		</div>
+                                    <div class="cl"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                <{/foreach}>
+                </ul>
+                <div class="cl"></div>
+            </div>
+            <!-- 积分商城商品结束 -->
+            <!-- 购物车 --> 
+            <div class="shoppingCart">
+           		<img src="%THEME%/static/images/gwcIco.png"/>
+               	<span class="number" id="total_count"><{$total.count|default:0}></span>
+            </div>
+            <!-- 购物车结束 --> 
+        </div>
+        <!-- 主要内容结束 -->         
+    </div>
+<style>
+.font_size14 {
+font-size: 0.7rem;
+height: 25px;
+overflow: hidden;
+}
+.jifen_sy .nr .box .img {
+height: 150px;
+overflow: hidden;
+}
+</style>
+    <script>
+    $('.tab-item.external').removeClass('active');
+    $('#tab-item4').addClass('active');
+    $('.add').click(function(){
+   		var pid = $(this).attr('pid');
+   		var link = "<{link ctl='mall/order:addcart'}>";
+        $.post(link, {pid: pid}, function (ret) {
+            if (ret.error == 0) {
+            		$('#total_count').html(ret.data.count);
+            } else {
+            	$.alert(ret.message); 
+                if(ret.error == 101) {
+                    setTimeout(function(){
+                        $('.modal-overlay').remove();
+                        $('.modal').remove();
+                        $.router.load("<{link ctl='passport/login'}>", true);
+                    }, 1500);
+                }                   
+            }
+        }, 'json');
+   	});
+    
+    $('.shoppingCart').click(function(){
+    	$.router.load("<{link ctl='mall/order:cart'}>", true);
+    });
+
+    function setprobackurl(){
+        localStorage['mall_product_detail_backurl'] = window.location.href;
+    }
+   </script>
+<{include file='block/footer.html'}>

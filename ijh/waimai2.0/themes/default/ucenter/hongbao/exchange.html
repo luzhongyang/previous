@@ -1,0 +1,45 @@
+<{assign var='tpl_title' value=L("红包兑换")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">红包兑换</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	<div class="mineBag_change">
+            	<div class="list-block">
+                    <ul>
+                      <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-input">
+                              <input type="text" id="code" placeholder="请输入兑换码">
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="content-block"> <a href="javascript:;" id="submit" class="button button-big button-fill button-success">兑换</a> </div>
+            </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+    <script>
+    	$("#submit").click(function(){
+    		var code = $('#code').val();
+    		var link = "<{link ctl='ucenter/hongbao/exchange'}>";
+    		$.post(link,{hongbao_sn:code},function(ret){
+    			if (ret.error == 0) {
+    				$.alert(ret.message); 
+    				setTimeout(function(){
+    	                window.location.href="<{link ctl='ucenter/hongbao'}>";
+    	            },2000)
+    			} else {
+    	        	$.alert(ret.message);                    
+    	        }
+    		},'json');
+    	});
+    </script>
+<{include file="block/footer.html"}>

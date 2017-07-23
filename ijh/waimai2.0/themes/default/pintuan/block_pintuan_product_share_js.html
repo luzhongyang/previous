@@ -1,0 +1,59 @@
+<script>
+    // 分享到新浪微博
+    $(document).off('click','.icon-fenxiang').on('click','.icon-fenxiang',function() {
+        var buttons1 = [
+            {
+                text: "<div style='color:#00cdda;'>分享到qq微博</div>",
+                onClick: function() {
+                    var shareUrl = window.location.href;   //获取当前页面完整的地址栏URL
+                    var sharePic = "<{$pager.img}>/<{$product.photo}>";       // 获取商家logo图片
+                    var shareTitle = ''+"<{$product.title}>，特价拼团，只要<{$product.tuan_price}>元！"+"@<{$CONFIG.site.title}>"; // 内容
+                    window.location.href ='http://share.v.t.qq.com/index.php?c=share&a=index'+'&url='+encodeURIComponent(shareUrl)+'%3Fbsh_bid%3D1467222821&content=utf-8&sourceUrl='+
+                            encodeURIComponent(shareUrl)+'&pic='+encodeURIComponent(sharePic)+'&title='+encodeURIComponent(shareTitle);
+                }
+            }
+        ];
+         var buttons2 = [
+            {
+                text: "<div style='color:#00cdda;'>分享给qq好友</div>",
+                onClick: function() {
+                    var shareUrl = window.location.href;   //获取当前页面完整的地址栏URL
+                    var sharePic = "<{$pager.img}>/<{$product.photo}>";       // 获取商家logo图片
+                    var shareTitle = ''+"<{$product.title}>，特价拼团，只要<{$product.tuan_price}>元！"+"@<{$CONFIG.site.title}>"; // 内容
+                    window.location.href ='http://connect.qq.com/widget/shareqq/index.html'+'?url='+encodeURIComponent(shareUrl)+'&content=utf-8&pics='+encodeURIComponent(sharePic)+'&desc='+encodeURIComponent(shareTitle);
+                }
+            }
+        ];
+        var buttons3 = [
+            {
+                text: "<div style='color:#00cdda;'>分享到qq空间</div>",
+                onClick: function() {
+                    var shareUrl = window.location.href;   //获取当前页面完整的地址栏URL
+                    var sharePic = "<{$pager.img}>/<{$product.photo}>";       // 获取商家logo图片
+                    var shareTitle = ''+"<{$product.title}>，特价拼团，只要<{$product.tuan_price}>元！"+"@<{$CONFIG.site.title}>"; // 内容
+                    window.location.href ='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey'+'?url='+encodeURIComponent(shareUrl)+'&content=utf-8&sourceUrl='+
+                            encodeURIComponent(shareUrl)+'&pics='+encodeURIComponent(sharePic)+'&desc='+encodeURIComponent(shareTitle)+'&summary=';
+                }
+            }
+        ];
+        var buttons4 = [
+            {
+                text: "<div style='color:#00cdda;'>分享到新浪微博</div>",
+                onClick: function() {
+                    var shareUrl = window.location.href;   //获取当前页面完整的地址栏URL
+                    var sharePic = "<{$pager.img}>/<{$product.photo}>";       // 获取商家logo图片
+                    var shareTitle = ''+"<{$product.title}>，特价拼团，只要<{$product.tuan_price}>元！"+"@<{$CONFIG.site.title}>"; // 内容
+                    window.location.href ='http://service.weibo.com/share/share.php?appkey=1550938859'+'&url='+encodeURIComponent(shareUrl)+'&content=utf-8&sourceUrl='+
+                            encodeURIComponent(shareUrl)+'&pic='+encodeURIComponent(sharePic)+'&title='+encodeURIComponent(shareTitle);
+                }
+            }
+        ];
+        var buttons100 = [
+            {
+                text: "<div style='color:#00cdda;'>取消</div>",
+            }
+        ];
+        var groups = [buttons1,buttons2,buttons3, buttons4,buttons100];
+        $.actions(groups);
+    })
+</script>

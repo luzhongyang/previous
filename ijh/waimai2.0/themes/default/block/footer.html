@@ -1,0 +1,69 @@
+</div>
+<{if $app_webview == 1}>
+<script type="text/javascript">
+    var android = "<{$android}>";
+    window.error = function(){
+        return true;
+    }
+    if(android == 1){
+        var title = $('header h1').text();
+        if (!title) {
+            title = $('header span.wz1').text();
+        }
+        window.Obj.return_title(title);
+    }else{
+        function return_title() {
+            var title = $('header h1').text();
+            if (!title) {
+                title = $('header span.wz1').text();
+            }
+            return title;
+        }
+        return_title();
+    }
+
+    setTimeout(function () {
+        $('a').click(function () {
+            var link = $(this).attr('href');
+            //indexOf的值如果为-1则不包含，>=0则返回该字符的位置
+            //返回字符串所在位置，-1则没有
+            if (link && link.indexOf("#") == -1 && link.indexOf("javascript:") == -1){
+                if ($(this).hasClass("search_a")) {
+                    if(android == 1){
+                        window.Obj.return_link(link, $(this).text()); //link返给安卓
+                    }else{
+                        return_link(link, $(this).text()); //link返给IOS   第二个参数用于搜索按钮点击的时候获取按钮中的文字内容
+                    }                    
+                } else {
+                    if(android == 1){
+                        window.Obj.return_link(link); //link返给安卓
+                    }else{
+                        return_link(link); //link返给IOS  第二个参数用于搜索按钮点击的时候获取按钮中的文字内容
+                    }
+                }
+                return false;
+            }
+        });
+    }, 50);
+    
+</script>
+<style>
+    .bar-nav ~ .content {
+        top: 0px
+    }
+</style>
+<{/if}>
+
+
+<script>
+    //全局, 产品属性弹出层,点击空白处消失,
+    $(document).on('click', '.popup-overlay', function () {
+        $(this).removeClass('modal-overlay-visible');
+        $('.popup').removeClass('modal-in');
+        $('.popup').css('display', 'none');
+        $(this).remove();
+    });
+</script>
+<script type="text/javascript">$.init();</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<{include file="biz/block/header.html"}>
+<div class="zxTabs">
+	<a href="<{link ctl='biz/shop:opened'}>" class="on">功能开通</a>
+	<div class="tishi pointcl"></div>
+</div>
+<div class="ucenter_c">
+<form method="post" action="<{link ctl='biz/shop:setopened'}>" mini-form="ucenter">
+<table cellspacing="0" cellpadding="0" class="form">
+    <tr><th>小提示：</th><td>勾选为开通，不勾选为关闭</td></tr>
+    <tr><th>拼团：</th>
+        <td>
+            <input type="checkbox" name="pintuan" value="<{$shop.pintuan}>" <{if $shop.pintuan == 1}>checked="checked"<{/if}> ><span class="tip-comment">开通拼团功能</span>
+        </td>
+    </tr>
+    <tr><th>微店：</th>
+        <td>
+            <input type="checkbox" name="weidian" value="<{$shop.weidian}>" <{if $shop.weidian == 1}>checked="checked"<{/if}> ><span class="tip-comment">开通微店功能</span>
+        </td>
+    </tr>
+    <tr><th></th><td><input type="submit" id="save" value="提交更改" class="btn btn-success" />
+    </td></tr>
+</table>
+</form>
+</div>
+<script type="text/javascript">
+$("input[name='pintuan']").change(function(){
+    if($(this).attr('checked') != undefined) {
+        $(this).val(1);
+        $(this).attr('checked',true);
+    }else{
+        $(this).val(0);
+        $(this).attr('checked',false);
+    }
+});
+$("input[name='weidian']").change(function(){
+    if($(this).attr('checked') != undefined) {
+        $(this).val(1);
+        $(this).attr('checked',true);
+    }else{
+        $(this).val(0);
+        $(this).attr('checked',false);
+    }
+});
+</script> 
+<{include file="biz/block/footer.html"}>

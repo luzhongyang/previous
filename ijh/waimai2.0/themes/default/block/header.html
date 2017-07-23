@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><{$tpl_title|default:$CONFIG.site.title}></title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="%THEME%/static/css/sm.css">
+	<link rel="stylesheet" href="%THEME%/static/css/sm-extend.css">
+	<link rel="stylesheet" href="%THEME%/static/css/style.css">
+	<link rel="stylesheet" href="%THEME%/static/css/append.css">
+	<link rel="stylesheet" href="%THEME%/static/css/swiper.min.css">
+	<style type="text/css">.page-group{background: #f5f5f5;}</style>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript">
+		<{if $request.IN_WEIXIN}>
+		window.WXJS_CFG = {
+			debug: false,
+			appId: '<{$wxjs_config["appId"]}>',
+			timestamp: '<{$wxjs_config["timestamp"]}>',
+			nonceStr: '<{$wxjs_config["nonceStr"]}>',
+			signature: '<{$wxjs_config["signature"]}>',
+			jsApiList: ['getLocation']
+		};
+		wx.config(WXJS_CFG);
+		<{/if}>
+		window.CFG = {"domain":"<{$CONFIG.site.domain}>","url":"<{$CONFIG.site.siteurl}>", "title":"<{$CONFIG.site.title}>", "res":"<{$pager.res}>", "img":"<{$pager.img}>","C_PREFIX":"KT-"};
+	</script>
+</head>
+<body>
+<iframe id="miniframe" name="miniframe" style="display:none;"></iframe>
+<div class="page-group">
+<!-- <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script> -->
+<script type='text/javascript' src='%THEME%/static/js/zepto.min.js' charset='utf-8'></script>
+<script src="<{$pager.res}>/script/layer.m/layer.m.js" type="text/javascript" charset="utf-8"></script>
+<script type='text/javascript' src='%THEME%/static/js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='%THEME%/static/js/sm-extend.js' charset='utf-8'></script>
+<script type='text/javascript' src='%THEME%/static/js/swiper.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='%THEME%/static/js/common.js' charset='utf-8'></script>
+<script type='text/javascript' src='%THEME%/static/js/ecart.js' charset='utf-8'></script>
+<script>_title("<{$tpl_title}>");jQuery.noConflict();</script>
+<{if $app_webview == 1}>
+<style>
+    header{display:none;}
+</style>
+<{/if}>

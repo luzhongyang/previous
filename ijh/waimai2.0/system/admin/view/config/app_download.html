@@ -1,0 +1,27 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?system/config-app_download.html" mini-form="config-form" method="post" >
+<input type="hidden" name="K" value="app_download" />
+<table width="100%" border="0" cellspacing="0" class="table-data form"><tr><th>客户端版本：</th><td><input type="text" name="config[waimai_version]" value="<{$config.waimai_version|default:''}>" class="input w-300"/></td></tr>
+<tr><th>客户端下载地址：</th><td><input type="text" name="config[waimai_download]" value="<{$config.waimai_download|default:''}>" class="input w-300"/><span class="tip-comment">客户端下载地址 http:// 开头</span></td></tr>
+<tr><th>客户端版本更新说明：</th><td><textarea name="config[waimai_intro]" class="textarea"><{$config.waimai_intro}></textarea><br /></td></tr>
+<tr><th>商户端版本：</th><td><input type="text" name="config[biz_version]" value="<{$config.biz_version|default:''}>" class="input w-300"/></td></tr>
+<tr><th>商户端下载地址：</th><td><input type="text" name="config[biz_download]" value="<{$config.biz_download|default:''}>" class="input w-300"/><span class="tip-comment">商户端下载地址 http:// 开头</span></td></tr>
+<tr><th>商户端版本更新说明：</th><td><textarea name="config[biz_intro]" class="textarea"><{$config.biz_intro}></textarea><br /></td></tr>
+<tr><th>配送端版本：</th><td><input type="text" name="config[staff_version]" value="<{$config.staff_version|default:''}>" class="input w-300"/></td></tr>
+<tr><th>配送端下载地址：</th><td><input type="text" name="config[staff_download]" value="<{$config.staff_download|default:''}>" class="input w-300"/><span class="tip-comment">配送端下载地址 http:// 开头</span></td></tr>
+<tr><th>配送端版本更新说明：</th><td><textarea name="config[staff_intro]" class="textarea"><{$config.staff_intro}></textarea><br /></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

@@ -1,0 +1,18 @@
+<{assign var='tpl_title' value=L("<{$detail.title}>")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current"> 
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/ucenter/service/index'}>"> <span class="Ico1"></span> </a>
+        <h1 class="title"><{$detail.title}></h1>
+    </header>
+    <!-- 标题栏结束 --> 
+    <!-- 主要内容 -->
+    <div class="content">
+           <div class="service-questions-one bgcolor_white border_b pad10">
+                <{$detail.content}>
+           </div>
+           
+    </div>
+    <!-- 主要内容结束 --> 
+</div>
+<{include file="weidian/$theme_style/block/footer.html"}>

@@ -1,0 +1,67 @@
+<{assign var='tpl_title' value=L("修改用户名")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<style type="text/css">
+    .button.button-fill {
+        color: #fff;
+        background: #ff7800;
+        border: none;
+        line-height: 1.35rem;
+    }
+</style>
+<div class="page page-current"> 
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/ucenter/profile/index'}>"> <span class="Ico1"></span> </a>
+        <h1 class="title">修改用户名</h1>
+    </header>
+    <!-- 标题栏结束 --> 
+    <!-- 主要内容 -->
+    <div class="content">
+    	<div class="userName">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" placeholder="用户名" id="nickname">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <p class="pad_l10 mb10 font_size14" style=" color:#a8a8ae;">用户名长度（5-24个字符之间）</p>
+            <div class="content-block">
+                <p><a href="javascript:editsave();" class="button button-big button-fill">确认修改</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- 主要内容结束 --> 
+</div>
+<script type="text/javascript">
+function editsave() {
+    var nickname = $('#nickname').val();
+    $.ajax({  
+        url: "<{link ctl='weidian/ucenter/profile:set_nickname'}>",
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',   
+        data:{"nickname":nickname},
+        success: function (ret) { 
+            if(ret.error > 0){
+                $.alert(ret.message);
+            }else{
+                setTimeout(function(){
+                    window.location.href="<{link ctl='weidian/ucenter/profile:index'}>";
+                },2000)
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },     
+    });
+}
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>
+

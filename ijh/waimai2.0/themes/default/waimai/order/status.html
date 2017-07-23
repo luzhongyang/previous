@@ -1,0 +1,1081 @@
+<{assign var='tpl_title' value=L("订单详情")}>
+<{include file="block/header.html"}>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left" href="<{link ctl='waimai:order'}>"> <span class="iconfont icon-iconfontxiangyou"></span><{$order.shop.title}></a> <div class="button button-link button-nav pull-right"><a href="<{link ctl='waimai/order:complaint' args=$order.order_id}>" class="iconfont tousu"></a><a href="#" class="iconfont icon-callphone-copy whitecl" id="create_contacts"></a></div>
+        </header>
+        <!--头部结束-->
+
+    	<!--配送订单nav开始-->
+        <{if in_array($order.pei_type,array(0,1,2))}>
+        <nav class="bar bar-tab ord_footer">
+            <{if $order.order_status==0 && $order.online_pay==1 && $order.pay_status==0}>
+            <a href="javascript:;" class="button button-cancel open-slider-modal" id="cancel">取消订单</a>
+            <a href="#" class="button button-warning" id="payment">去支付</a>
+            <{/if}>
+            <{if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+            <a href="javascript:;" class="button button-cancel open-slider-modal" id="cancel">取消订单</a>
+            <{/if}>
+            <{if in_array($order.order_status,array(1,2,3)) && $order.pei_type!=3}>
+            <a href="javascript:;" class="button button-cancel" id="cuidan">催单</a>
+            <{/if}>
+            <{if $order.order_status==3}>
+            <a href="javascript:;" class="button" id="arrived">确认送达</a>
+            <{/if}>
+            <{if $order.order_status==8 || $order.order_status==4 || $order.order_status==-1}>
+            <a href="javascript:;" class="button button-cancel" id="onemore">再来一单</a>
+            <{/if}>
+            <{if ($order.order_status==8 || $order.order_status==4) && $order.comment_status==0}>
+            <a href="javascript:;" class="button button-warning" id="comment">评价得积分</a>
+            <{/if}>
+            <{if $order.order_status==8 && $order.comment_status==1}>
+            <a href="javascript:;" class="button button-cancel" id="look_comment">查看评价</a>
+            <{/if}>
+        </nav>
+        <{/if}>
+        <!--配送订单nav结束-->
+
+
+        <!--自提订单nav开始-->
+        <{if $order.pei_type==3}>
+        <nav class="bar bar-tab ord_footer">
+            <{if $order.order_status==8 || $order.order_status==4 || $order.order_status==-1}>
+            <a href="javascript:;" class="button button-cancel" id="onemore">再来一单</a>
+            <{/if}>
+            <{if $order.order_status==0 && $order.online_pay==1 && $order.pay_status==0}>
+            <a href="javascript:;" class="button button-cancel open-slider-modal" id="cancel">取消订单</a>
+            <a href="#" class="button button-warning" id="payment">去支付</a>
+            <{/if}>
+            <{if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+            <a href="javascript:;" class="button button-cancel open-slider-modal" id="cancel">取消订单</a>
+            <{/if}>
+            <{if in_array($order.order_status,array(1,2,3)) && $order.pei_type==3}>
+            <a href="javascript:;" class="button button-warning" id="zitima">自提码</a>
+            <{/if}>
+            <{if ($order.order_status==8 || $order.order_status==4) && $order.comment_status==0}>
+            <a href="javascript:;" class="button button-warning" id="comment">评价得积分</a>
+            <{/if}>
+            <{if $order.order_status==8 && $order.comment_status==1}>
+            <a href="javascript:;" class="button button-cancel" id="look_comment">查看评价</a>
+            <{/if}>
+        </nav>
+        <{/if}>
+        <!--自提订单nav结束-->
+
+
+        <div class="content">
+        	<div class="buttons-tab fixed-tab" data-offset="44">
+              <a href="javascript:;" class="active button external">订单状态</a>
+              <a href="<{link ctl='waimai/order:detail' args=$order.order_id}>" class="button external">订单详情</a>
+            </div>
+
+            <!--配送订单log开始-->
+            <{if in_array($order.pei_type,array(0,1,2))}>
+            <div class="ord_state">
+            	<div class="state_box mt10">
+                	<h3 class="maincl">
+                    <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+                    等待支付
+                    <{else if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==0}>
+                    等待商家接单
+                    <{else if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+                    等待商家接单
+                    <{else if $order.order_status==1 && $order.staff_id==0}>
+                    商家已接单
+                    <{else if in_array($order.order_status,array(1,2)) && $order.pei_type==0}>
+                    商家正在配货
+                    <{else if in_array($order.order_status,array(1,2)) && $order.staff_id>0 && in_array($order.pei_type,array(1,2))}>
+                    骑手正在取餐
+                    <{else if $order.order_status==3 && $order.staff_id>0 && in_array($order.pei_type,array(1,2))}>
+                    骑手正在送餐
+                    <{else if $order.order_status==3 && $order.pei_type==0}>
+                    商家正在送餐
+                    <{else if $order.order_status==-1}>
+                    订单已取消
+                    <{else if $order.order_status==4}>
+                    订单已完成
+                    <{else if $order.order_status==8 && $order.comment_status==0}>
+                    订单已完成
+                    <{else if $order.order_status==8 && $order.comment_status==1}>
+                    订单已完成
+                    <{/if}>
+                    <small class="black9">-<{$order.formatdateline}>下单</small></h3>
+                    <p class="black9">
+                    <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+                    订单超过30分钟未支付将自动取消
+                    <{else if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==0}>
+                    请耐心等待，商家稍后会进行处理
+                    <{else if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+                    请耐心等待，商家稍后会进行处理
+                    <{else if $order.order_status==1}>
+                    请耐心等待送达
+                    <{else if in_array($order.order_status,array(1,2)) && $order.staff_id>0}>
+                    请耐心等待送达
+                    <{else if $order.order_status==3 && $order.staff_id>0}>
+                    请耐心等待送达
+                    <{else if $order.order_status==-1}>
+                        <{$order.logs[0].log}>
+                    <{else if $order.order_status==4}>
+                    等待评价
+                    <{else if $order.order_status==8 && $order.comment_status==0}>
+                    等待评价
+                    <{else if $order.order_status==8 && $order.comment_status==1}>
+                    已评价
+                    <{/if}>
+                    </p>
+                </div>
+                <div class="order_progress">
+                <!--订单状态： -1取消，0其他，1下单，2支付，3接单，4配送，5送达，6确认完成-->
+                    <ul>
+                        <{if $order.log_type==1}>
+                            <{if $order.online_pay==1 && $order.pay_status==0}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3>订单待支付<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">请在订单提交后10分钟内完成支付</p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <li class="order_progress_list <{if $order.online_pay==0}>on<{/if}>">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,2)}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3>等待商家接单<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">请耐心等待，商家稍后会进行处理</p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{if $order.online_pay==1 && $order.pay_status==0}>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已支付<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,2,3) && $order.online_pay==1 && $order.pay_status==1}>
+                            <{if $order.staff_id>0 && in_array($order.pei_type,array(1,2))}>
+                            <li class="order_progress_list on" id="staff_map">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord4.png"></div>
+                                <div class="wz">
+                                    <h3 class="">骑手正在取餐<small class="black9 fr"><{$order.lasttime|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">骑手：<{$order.staff.name}> ，<a href="tel:<{$order.staff.mobile}>" class="maincl"><{$order.staff.mobile}><big class="mt5"><b class="ml10">→</b></big></a></p>
+                                    <div class="map_box" id="allmap" style="width:15rem;height:8rem;"></div>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <li class="order_progress_list <{if $order.staff_id==0}>on<{/if}>">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已支付<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[2].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,3) && $order.online_pay==0}>
+                            <{if $order.staff_id>0 && in_array($order.pei_type,array(1,2))}>
+                            <li class="order_progress_list on" id="staff_map">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord4.png"></div>
+                                <div class="wz">
+                                    <h3 class="">骑手正在取餐<small class="black9 fr"><{$order.lasttime|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">骑手：<{$order.staff.name}> ，<a href="tel:<{$order.staff.mobile}>" class="maincl"><{$order.staff.mobile}><big class="mt5"><b class="ml10">→</b></big></a></p>
+                                    <div class="map_box" id="allmap" style="width:15rem;height:8rem;"></div>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <li class="order_progress_list <{if $order.staff_id==0}>on<{/if}>">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,2,3,4) && $order.online_pay==1 && $order.pay_status==1}>
+                            <{if in_array($order.pei_type,array(1,2)) && $order.staff_id>0}>
+                            <li class="order_progress_list on" id="staff_map">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord4.png"></div>
+                                <div class="wz">
+                                    <h3 class="">骑手正在送餐<small class="black9 fr"><{$order.lasttime|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">骑手：<{$order.staff.name}> ，<a href="tel:<{$order.staff.mobile}>" class="maincl"><{$order.staff.mobile}><big class="mt5"><b class="ml10">→</b></big></a></p>
+                                    <div class="map_box" id="allmap" style="width:15rem;height:8rem;"></div>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord4.png"></div>
+                                <div class="wz">
+                                    <h3 class="">骑手已取餐<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">骑手：<{$order.staff.name}> ，<a href="tel:<{$order.staff.mobile}>" class="maincl"><{$order.staff.mobile}><big class="mt5"><b class="ml10">→</b></big></a></p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <{if $order.pei_type==0 && in_array($order.pei_type,array(1,2))}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家配货中<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <{if $order.pei_type==0 && $order.order_status==3}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家正在送餐<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已支付<small class="black9 fr"><{$order.logs[2].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,3,4) && $order.online_pay==0}>
+                            <{if in_array($order.pei_type,array(1,2)) && $order.staff_id>0}>
+                            <li class="order_progress_list on" id="staff_map">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord4.png"></div>
+                                <div class="wz">
+                                    <h3 class="">骑手正在送餐<small class="black9 fr"><{$order.lasttime|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">骑手：<{$order.staff.name}> ，<a href="tel:<{$order.staff.mobile}>" class="maincl"><{$order.staff.mobile}><big class="mt5"><b class="ml10">→</b></big></a></p>
+                                    <div class="map_box" id="allmap" style="width:15rem;height:8rem;"></div>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord4.png"></div>
+                                <div class="wz">
+                                    <h3 class="">骑手已取餐<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">骑手：<{$order.staff.name}> ，<a href="tel:<{$order.staff.mobile}>" class="maincl"><{$order.staff.mobile}><big class="mt5"><b class="ml10">→</b></big></a></p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <{if $order.pei_type==0 && in_array($order.pei_type,array(1,2))}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家配货中<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <{if $order.pei_type==0 && $order.order_status==3}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家正在送餐<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{/if}>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,2,3,5) && $order.online_pay==1 && $order.pay_status==1}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord6.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已送达<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已支付<small class="black9 fr"><{$order.logs[2].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[3].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,3,5) && $order.online_pay==0}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord6.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已送达<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[2].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,-1)}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord5.png"></div>
+                                <div class="wz">
+                                    <h3 class="">订单已取消<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9"><{$order.logs[0].log}></p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3 class="">待支付<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">请在订单提交后10分钟内完成支付</p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                    </ul>
+                </div>
+            </div>
+            <a href="#" class="zixun_fixed"><i></i></a>
+            <{/if}>
+            <!--配送订单log结束-->
+
+
+            <!--自提订单log开始-->
+            <{if $order.pei_type==3}>
+            <div class="ord_state">
+                <div class="state_box mt10">
+                    <h3 class="maincl">
+                    <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+                    等待支付
+                    <{else if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==0}>
+                    等待商家接单
+                    <{else if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+                    等待商家接单
+                    <{else if $order.order_status==1}>
+                    商家已接单
+                    <{else if $order.order_status==8}>
+                    订单已完成
+                    <{else if $order.order_status==-1}>
+                    订单已取消
+                    <{/if}>
+                    <small class="black9">-<{$order.formatdateline}>下单</small></h3>
+                    <p class="black9">
+                    <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+                    订单超过30分钟未支付将自动取消
+                    <{else if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==0}>
+                    请耐心等待，商家稍后会进行处理
+                    <{else if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+                    请耐心等待，商家稍后会进行处理
+                    <{else if $order.order_status==1}>
+                    请及时上门自提
+                    <{else if $order.order_status==8 && $order.comment_status==0}>
+                    等待评价
+                    <{else if $order.order_status==8 && $order.comment_status==1}>
+                    已评价
+                    <{else if $order.order_status==-1}>
+                    下单10分钟未支付已自动取消
+                    <{/if}>
+                    </p>
+                    <span class="ziti">自提单</span>
+                </div>
+                <div class="order_progress">
+                    <ul>
+                        <{if $order.log_type==1}>
+                            <li class="order_progress_list <{if $order.online_pay==0}>on<{/if}>">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <{if $order.online_pay==1 && $order.pay_status==0}>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3>订单待支付<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">请在订单提交后10分钟内完成支付</p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{/if}>
+                        <{if $order.log_type==array(1,2) && $order.order_status==0 }>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已支付<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3>等待商家接单<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">请耐心等待，商家稍后会进行处理</p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,2,3) && $order.order_status==1 && $order.online_pay==1 && $order.pay_status==1}>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[2].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已支付<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,3) && $order.online_pay==0}>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,2,3,6) && $order.online_pay==1 && $order.pay_status==1}>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[3].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord1.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已支付<small class="black9 fr"><{$order.logs[2].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord6.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已核销<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,3,6) && $order.online_pay==0}>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[2].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord3.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">商家已接单<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord6.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已核销<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                        <{if $order.log_type==array(1,-1)}>
+                            <li class="order_progress_list">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord2.png"></div>
+                                <div class="wz">
+                                    <h3 class="mt5 pad_t10">订单已提交<small class="black9 fr"><{$order.logs[1].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                            <li class="order_progress_list on">
+                                <div class="ico fl"><img src="%THEME%/static/images/ico/ord5.png"></div>
+                                <div class="wz">
+                                    <h3 class="">订单已取消<small class="black9 fr"><{$order.logs[0].dateline|format:'Y/m/d H:i'}></small></h3>
+                                    <p class="black9">10分钟内未支付已自动取消</p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                                <div class="cl"></div>
+                            </li>
+                        <{/if}>
+                    </ul>
+                </div>
+            </div>
+            <a href="#" class="zixun_fixed"><i></i></a>
+            <{/if}>
+            <!--自提订单log结束-->
+        </div> 
+         <div class="quxiao_mask">
+            <div class="maskOne">
+                <div class="quxiao-tit border_b">自提码</div>
+                <div class="cont">
+                    <div class="quxiao-tit"><span class="cheng-color"><{$order.waimai_order.spend_number}></span></div>
+                    <div class="img"><img src="<{$order.qrcode}>" width="100" height="100"></div>
+                    <div class="quxiao-tit">待商家核销</div>
+                </div>
+            </div>
+            <div class="mask_bg" ></div>
+        </div>       
+       
+    </div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    // 自提码弹出层
+    $(document).off('click','#zitima').on('click','#zitima',function() {
+        if($(".quxiao_mask .maskOne").css("display")=="none"){
+            $(".quxiao_mask .maskOne").show();
+            $(".quxiao_mask .maskOne").parent().find(".mask_bg").show();
+            }
+        else{
+            $(".quxiao_mask .maskOne").hide();
+            $(".quxiao_mask .maskOne").parent().find(".mask_bg").hide();
+            }
+        $(".quxiao_mask .mask_bg").click(function(){
+            $(this).hide();
+            $(this).parent().find(".maskOne").hide();
+        });
+    })
+});
+var order_id = parseInt(<{$order.order_id}>);
+
+//取消理由样式
+$(document).on('click','.mallord_delt_mask .selct_box a',function () {
+    $(".mallord_delt_mask .selct_box a").removeClass("active");
+    $(this).addClass("active");
+});
+
+// 检查补充说明字数
+function checkLen(obj) {
+    var len = GetStrLen($(obj).val());
+    if(len <= 120) {
+        var limit = 120-len;
+        $('.txt_right').text('还可输入' + limit + '字');
+    }
+}
+
+// 联系商家弹出层
+$(document).off('click','#create_contacts').on('click','#create_contacts',function() {
+    var staff_text = "";
+    var staff_id = parseInt(<{$order.staff_id}>);
+    if(staff_id) {
+        staff_text = "<p style='color:#00cdda;'>联系骑手</p>";
+    }
+    var buttons1 = [
+        {
+            text: "<p style='color:#00cdda;'>联系商家</p>",
+            onClick: function() {
+                window.open('tel:<{$order.shop.mobile}>');
+            }
+        },
+        {
+            text: staff_text,
+            onClick: function() {
+                window.open('tel:<{$order.staff.mobile}>');
+            }
+        },
+        {
+            text: "<p style='color:#00cdda;'>联系客服</p>",
+            onClick: function() {
+                window.open('tel:<{$order.shop.phone}>');
+            }
+        },
+    ];
+    var buttons2 = [
+        {
+            text: "<div style='color:#00cdda;'>取消</div>",
+        }
+    ];
+    var groups = [buttons1, buttons2];
+    $.actions(groups);
+})
+
+// 取消订单
+function cancelanorder(reason_mark) {
+    var reason  = reason_mark;
+    $.ajax({  
+        url: "<{link ctl='waimai/order:cancel'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id":order_id,"reason":reason},
+        type: 'POST',   
+        success: function (ret) { 
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+
+// 取消订单modal
+$(document).off('click', '#cancel').on('click','#cancel', function () {
+    var c_html = '';
+    c_html += '<div class="mallord_delt_mask"><div class="row selct_box" id="reason_mark">';
+    <{foreach $order.reason as $v}>
+    c_html += '<a href="javascript:;" class="fl col-33">'+'<{$v}>'+'</a>';
+    <{/foreach}>
+    c_html += '<div class="cl"></div></div><div class="list-block"><div class="item-input"><textarea maxlength="120" id="buchong" placeholder="补充说明" onkeyup="checkLen(this)" ></textarea><p class="txt_right font_size14 black9">还可输入120字</p></div></div></div>';
+    var modal = $.modal({
+        title: "<div class='mallord_delt_mask_tit'>取消理由</div>",
+        afterText:c_html,
+        buttons: [
+            {
+                text: "<span class='black6'>取消</span>"
+            },
+            {
+                text: "<span class='maincl'>确定</span>",
+                bold: true,
+                onClick: function () {
+                    var reason_mark = '';
+                    if($('#reason_mark .active').text() == null) {
+                        reason_mark = '取消理由:无';
+                    }else {
+                        reason_mark = '取消理由:' + $('#reason_mark .active').text();
+                    }
+                    if($('#buchong').val() == '') {
+                        reason_mark += ',补充说明:无';
+                    }else {
+                        reason_mark += ',补充说明:' + $('#buchong').val();
+                    }
+                    cancelanorder(reason_mark,order_id);
+                }
+            },
+        ]
+    })
+});
+
+
+// 去支付
+$(document).off('click','#payment').on('click','#payment',function() {
+    var link = "<{link ctl='ucenter/order:payment-"+order_id+"'}>";
+    localStorage['payment_backurl'] = window.location.href;
+    $.router.load(link, true);
+})
+
+// 催单
+$(document).off('click','#cuidan').on('click','#cuidan',function() {
+    $.ajax({  
+        url: "<{link ctl='waimai/order:cuidan'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id":order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error == 0 ) {
+                Widget.MsgBox.success(ret.message);
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                Widget.MsgBox.error(ret.message);
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+})
+
+// 确认送达
+$(document).off('click','#arrived ').on('click','#arrived ',function() {
+    $.ajax({  
+        url: "<{link ctl='waimai/order:arrived '}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id":order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                Widget.MsgBox.success(ret.message);
+            }else{
+                Widget.MsgBox.error(ret.message);
+                setTimeout(function(){window.location.reload();},1000);
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+})
+
+// 去评价
+$(document).off('click','#comment').on('click','#comment',function() {
+    $.router.load("<{link ctl='waimai/order:comment-"+order_id+"'}>", true);
+})
+
+// 查看评价
+$(document).off('click','#look_comment').on('click','#look_comment',function() {
+    $.router.load("<{link ctl='waimai/order:lookcomment-"+order_id+"'}>", true);
+})
+
+// 再来一单
+$(document).off('click','#onemore').on('click','#onemore',function() {
+    $.ajax({  
+        url: "<{link ctl='waimai/order:onemore'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id":order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{
+                // 取得订单商品表数组加入购物车
+                var ecart = new ECart(parseInt("<{$order.shop.shop_id}>"));
+                if(ret.product_list) {
+                    $.each(ret.product_list,function(index,value){
+                        ecart.add(index, value.product_number, value);
+                    });
+                    // 跳转到店铺点菜页面
+                    setTimeout(function(){
+                        $.router.load("<{link ctl='shop:detail' arg0=$order.shop.shop_id}>",true);
+                    },500);    
+                } 
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+})
+
+//百度地图API功能
+function loadJScript() {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8&callback=init";
+    document.getElementById("staff_map").appendChild(script);
+}
+function init() {
+    mapstatus();
+    setInterval(function(){
+        mapstatus();
+    },15000);
+    
+}  
+function mapstatus() {
+    var marker = null; var myIcon = null; var sContent = null;
+    var staff_lng = null;
+    var staff_lat = null;
+    var staff_id = parseInt(<{$order.staff.staff_id}>);
+    var shop_lng = <{$order.shop.lng}>;
+    var shop_lat = <{$order.shop.lat}>;
+    <{if $order.pei_type!=3}>
+    var user_lng = <{$order.lng}>;
+    var user_lat = <{$order.lat}>;
+    <{else}>
+    var user_lng = 0;
+    var user_lat = 0;
+    <{/if}>
+    var order_status = <{$order.order_status}>;
+    var map = new BMap.Map("allmap");            
+    // 添加用户marker
+    var upoint = new BMap.Point(user_lng, user_lat);  
+    var uIcon = new BMap.Icon("%THEME%/static/images/icon_myLocation@2x.png", new BMap.Size(80,80));
+    var umarker = new BMap.Marker(upoint,{icon:uIcon});   
+    map.addOverlay(umarker);  
+    // 添加商家marker
+    var spoint = new BMap.Point(shop_lng, shop_lat);  
+    var shopIcon = new BMap.Icon("%THEME%/static/images/icon_shopLocation@2x.png", new BMap.Size(50,50));
+    var smarker = new BMap.Marker(spoint,{icon:shopIcon});   
+    map.addOverlay(smarker);     
+    map.disableDragging();           
+    map.disableScrollWheelZoom();                
+    $.ajax({  
+        url: "<{link ctl='ucenter/order:waimai_order_staffpos'}>",
+        async: true,  
+        dataType: 'json',  
+        data: {"staff_id":staff_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error == 0 ) {
+                staff_lng = ret.data.lng;
+                staff_lat = ret.data.lat;
+                var point = new BMap.Point(staff_lng, staff_lat);        // 创建点坐标
+                map.centerAndZoom(point,18);      
+                myIcon = new BMap.Icon("%THEME%/static/images/order_che_status@2x.png", new BMap.Size(50,50));
+                marker = new BMap.Marker(point,{icon:myIcon}); 
+                map.addOverlay(marker); 
+                var opts = {
+                  position : point,    // 指定文本标注所在的地理位置
+                  offset   : new BMap.Size(-45, -55)    //设置文本偏移量
+                }
+                if(order_status == 3) {
+                    var distance = parseInt(GetDistance(staff_lng,staff_lat,user_lng,user_lat));
+                    var label = new BMap.Label("距离您"+distance+"m", opts);  // 创建文本标注对象
+                }else {
+                    var distance = parseInt(GetDistance(staff_lng,staff_lat,shop_lng,shop_lat));
+                    var label = new BMap.Label("距离商家"+distance+"m", opts);  // 创建文本标注对象
+                }
+                
+                label.setStyle({
+                    color : "black",
+                    fontSize : "12px",
+                    height : "30px",
+                    lineHeight : "30px",
+                    fontFamily:"微软雅黑",
+                    borderRadius:"5px",
+                    border:"2px solid #fdfdfc",
+                    textAlign:"center",
+                    padding:"0 5px",
+                    backgroundColor:"#fdfdfc",
+                 });
+                map.addOverlay(label);  
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+<{if $order.pei_type!=3 && in_array($order.order_status,array(1,2,3))}>
+window.onload = loadJScript;  //异步加载地图
+<{/if}>
+
+// 骑手地图点击查看大地图
+$(document).off('click','#allmap').on('click','#allmap',function(){
+    $.router.load("<{link ctl='waimai/order:ridermap-"+order_id+"'}>",true);
+})
+</script>
+<{include file="block/footer.html"}>

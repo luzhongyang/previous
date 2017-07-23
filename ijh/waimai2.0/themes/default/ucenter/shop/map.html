@@ -1,0 +1,262 @@
+<{assign var='tpl_title' value=L("选择地址")}>
+<{include file="block/header.html"}>
+<style>
+    .tangram-suggestion table tr td{height: 40px !important;line-height: 25px !important; border-bottom: 1px solid #ededed;}
+    .tangram-suggestion-main{ z-index:9999 !important}
+</style>
+    <div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav"> 
+        	<a class="button button-link button-nav pull-left back"> 
+        		<span class="iconfont icon-iconfontxiangyou"></span> 
+        	</a> 
+        <!-- <a class="button button-link button-nav pull-right">搜索</a> -->
+            <div class="searchbar">
+                <a class="searchbar-cancel iconfont icon-x-copy" id="clears"></a>
+                <div class="search-input">
+                  <label class="icon iconfont icon-sousuo" for="search"></label>
+                  <input type="search" id='suggestId2' placeholder='小区/写字楼/学校'/>
+                </div>
+            </div>
+            <div id="searchResultPanel2" style="border:1px solid #C0C0C0;width:100%;height:auto; display:block;position:absolute;"></div>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+			<div>
+				<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8"></script>
+        		<div class="map" id="allmap_shop_reg_opt" style="width: 100%; height:220px;position:fixed; z-index: 100;"></div>
+			</div>
+			<div class="mineGdsaddr_loct" id="locaNr_serUl2">
+			<!-- <div><ul id="locaNr_serUl2" class="locaNr_serUl2" ></ul></div> -->
+        	</div>        
+		</div>
+	</div>
+<!--百度地图JavaScript API开始-->
+<script>
+	$('#clears').click(function(){
+		$("#suggestId2").val(''); 
+	});
+</script>
+<script type="text/javascript">
+    var h4_class = null;
+    var h4_text = null;
+    // div容器
+    var container = document.getElementById("allmap_shop_reg_opt");
+    var centerDiv = document.getElementById("centerDiv");  // 放置自定义控件的dom容器
+    // 初始化地图
+    var map = new BMap.Map("allmap_shop_reg_opt");
+    var addr = null;
+    var point = null;
+    var lng = "<{$location.lng}>";
+    var lat = "<{$location.lat}>";
+    var myGeo = new BMap.Geocoder(); 
+    if (lng=='' && lat=='') {
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                lng = r.point.lng;
+                lat = r.point.lat;
+                map.centerAndZoom(new BMap.Point(lng, lat), 17);
+                var point = new BMap.Point(lng, lat);  
+                // 根据浏览器定位获得经纬度获取周围POI点
+                var mOption = {poiRadius : 100,numPois : 6}; 
+                myGeo.getLocation(point, function mCallback(rs) {
+                    var allPois = rs.surroundingPois;       
+                    var s = [];
+                    for( i = 0; i < allPois.length ; ++i ){
+                        if(i == 0) {
+                            h4_class = 'maincl';
+                            h4_text = '[当前]';
+                        }else {
+                            h4_class = 'black3';
+                        }
+                        s.push('<div class="list"><div class="iconfont icon-dizhi"></div><div class="right"><h4 class="'+h4_class+'">' + h4_text + allPois[i].title + '</h4><p class="black9">'  + allPois[i].address +  '</p><input type="hidden" class="dpoint1" value="'+allPois[i].point.lng+'"><input type="hidden" class="dpoint3" value="'+allPois[i].point.lat+'"></div></div>');
+                    } 
+                    document.getElementById("locaNr_serUl2").innerHTML = s.join("");  
+                },mOption); 
+            }else {
+                //alert('failed'+this.getStatus());
+            }        
+        },{enableHighAccuracy: true});
+
+    } else {
+        // 根据上一次存储的经纬度获取周围POI点
+        map.centerAndZoom(new BMap.Point(lng, lat), 17);
+        var point = new BMap.Point(lng, lat);
+        var mOption = {poiRadius : 500,numPois : 5}; 
+        myGeo.getLocation(point, function mCallback(rs) {
+            var allPois = rs.surroundingPois;       
+            var s = [];
+            for( i = 0; i < allPois.length ; ++i ){
+                if(i == 0) {
+                    h4_class = 'maincl';
+                    h4_text = '[当前]';
+                }else {
+                    h4_class = 'black3';
+                }
+                s.push('<div class="list"><div class="iconfont icon-dizhi"></div><div class="right"><h4 class="'+h4_class+'">' + h4_text + allPois[i].title + '</h4><p class="black9">'  + allPois[i].address +  '</p><input type="hidden" class="dpoint1" value="'+allPois[i].point.lng+'"><input type="hidden" class="dpoint3" value="'+allPois[i].point.lat+'"></div></div>');
+            } 
+            document.getElementById("locaNr_serUl2").innerHTML = s.join("");           
+        },mOption); 
+    }
+  
+    /*创建自定义控件----开始-------*/
+    var middleControl = document.createElement("div");
+    middleControl.style.left = "50%";
+    middleControl.style.marginLeft="-18px";
+    middleControl.style.top="50%";
+    middleControl.style.marginTop="-18px";
+    middleControl.style.position="relative";
+    middleControl.style.width="36px";
+    middleControl.style.height="36px";
+    middleControl.style.zIndex="100000";
+    middleControl.innerHTML ='<img src="%THEME%/static/images/my02@2x.png" />';
+    // 将自定义控件加入到地图容器中
+    container.appendChild(middleControl);   
+    /*创建自定义控件----结束-------*/
+    
+     /*地图拖拽事件*/
+    map.addEventListener("dragend", function(){    
+        var center = map.getCenter();    
+        var mPoint = new BMap.Point(center.lng, center.lat);
+        map.enableScrollWheelZoom();  //启用滚轮缩放
+        map.centerAndZoom(mPoint,17); // 设置地图显示级别
+
+        var mOption = {poiRadius : 500,numPois : 10}; //获取全部POI（该点半径为100米内有6个POI点）
+        var myGeo = new BMap.Geocoder(); //创建地址解析实例
+        
+         //使用反地址解析
+        myGeo.getLocation(mPoint, function mCallback(rs) {
+            var allPois = rs.surroundingPois;       
+            var s = [];
+            for( i = 0; i < allPois.length ; ++i ){
+                if(i == 0) {
+                    h4_class = 'maincl';
+                    h4_text = '[当前]';
+                }else {
+                    h4_class = 'black3';
+                }
+                s.push('<div class="list"><div class="iconfont icon-dizhi"></div><div class="right"><h4 class="'+h4_class+'">' + h4_text + allPois[i].title + '</h4><p class="black9">'  + allPois[i].address +  '</p><input type="hidden" class="dpoint1" value="'+allPois[i].point.lng+'"><input type="hidden" class="dpoint3" value="'+allPois[i].point.lat+'"></div></div>');
+            } 
+            document.getElementById("locaNr_serUl2").innerHTML = s.join("");  
+        },mOption); 
+    });
+
+    /*搜索下拉*/
+    function showPoint(e) {
+        var p = new BMap.Point(e.point.lng, e.point.lat);
+        myGeo.getLocation(p, function (rs) {
+            var addComp = rs.addressComponents;
+            addr = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+            var opts = {
+                width: 200, // 信息窗口宽度
+                height: 80, // 信息窗口高度
+                enableMessage: false,
+            }
+            //var infoWindow = new BMap.InfoWindow("<div id='addr' style='height:48px; line-height:24px;'>地址: " + addr + "</div>" + "\r\n", opts);  // 创建信息窗口对象 
+            //map.openInfoWindow(infoWindow, p); //开启信息窗口
+
+        });
+    }
+    map.enableScrollWheelZoom(true);  //启用滚轮缩放
+    map.addEventListener("click", showPoint);
+    function G(id) {
+        return document.getElementById(id);
+    }
+    var ac = new BMap.Autocomplete(//建立一个自动完成的对象
+            {"input": "suggestId2"
+                , "location": map
+            });
+
+    ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+        var str = "";
+        var _value = e.fromitem.value;
+        var value = "";
+        if (e.fromitem.index > -1) {
+            value = _value.province + _value.city + _value.district + _value.street + _value.business;
+        }
+        str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+        value = "";
+        if (e.toitem.index > -1) {
+            _value = e.toitem.value;
+            value = _value.province + _value.city + _value.district + _value.street + _value.business;
+        }
+        str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+        G("searchResultPanel2").innerHTML = str;
+    });
+
+    var myValue;
+    /*鼠标点击下拉列表后的事件*/
+    ac.addEventListener("onconfirm", function (e) { 
+        var _value = e.item.value;
+
+        myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+        //G("searchResultPanel2").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+        setPlace(); 
+        //根据地址得到经纬度进行定位
+        myGeo.getPoint(myValue, function(point){
+            if (point) {
+                map.centerAndZoom(point, 17);
+            }else{
+                alert("<{L('您选择地址没有解析到结果')}>!");
+            }
+        }, _value.city);
+         
+    });
+
+    
+
+    /*搜索结果列表*/
+    function setPlace() {
+        map.clearOverlays();    //清除地图上所有覆盖物
+        var options = {
+            onSearchComplete: function (results) {
+                if (local.getStatus() == BMAP_STATUS_SUCCESS) {
+                    // 判断状态是否正确   
+                    var s = [];
+                    for (var i = 0; i < results.getCurrentNumPois(); i++) {
+                        if(i == 0) {
+                            h4_class = 'maincl';
+                            h4_text = '[当前]';
+                        }else {
+                            h4_class = 'black3';
+                        }
+                    	s.push('<div class="list"><div class="iconfont icon-dizhi"></div><div class="right"><h4 class="'+h4_class+'">' + h4_text + results.getPoi(i).title + '</h4><p class="black9">'  + results.getPoi(i).address +  '</p><input type="hidden" class="dpoint1" value="'+results.getPoi(i).point.lng+'"><input type="hidden" class="dpoint3" value="'+results.getPoi(i).point.lat+'"></div></div>');
+                    }
+                    document.getElementById("locaNr_serUl2").innerHTML = s.join("");
+                }
+            }
+        };
+        var local = new BMap.LocalSearch(map, options);
+        local.setPageCapacity(6);
+        local.search(myValue);
+    }  
+
+    /*选择地址*/
+    
+    $("#locaNr_serUl2").on('click', '.list', function () {  //移动端动态加载的li要祖先元素来代理委派后代元素的事件绑定
+        var addr_num,addr_info,addr_lng,addr_lat;
+        addr_num= $(this).find('.maincl').text();
+        if(addr_num) {
+             addr_info  = $(this).find('.black9').text();
+             addr_lng = $(this).find('.dpoint1').val();
+             addr_lat = $(this).find('.dpoint3').val();
+        }else {
+             addr_num= $(this).find('.black3').text();
+             addr_info  = $(this).find('.black9').text();
+             addr_lng = $(this).find('.dpoint1').val();
+             addr_lat = $(this).find('.dpoint3').val();
+        }
+        addr_num = addr_num.replace('[当前]','');
+        localStorage['shop_reg_adderss'] = JSON.stringify({"addr":addr_num,"house":addr_info,"lng":addr_lng,"lat":addr_lat});
+        window.location.href = "<{link ctl='ucenter/shop:register'}>";            
+    });  
+    
+</script>
+<!--百度地图JavaScript API结束-->
+<script>
+
+</script>
+<{include file="block/footer.html"}>

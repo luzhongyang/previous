@@ -1,0 +1,110 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <!--订单详情-->
+        <div class="prslCenter_order_delt">
+            <h2>订单详情</h2>
+            <!--订单详情状态-->
+            <div class="prslCenter_order_delt_state">
+                <div class="fl">
+                    <h3><{$detail.order_status_label}></h3>
+                    <p class="black9"><{$last_log.log}></p>
+                </div>
+                <div class="fr">
+                    <!--<a href="<{link ctl='web/ucenter/order/onemore' args=$detail.order_id}>" class="linkA black9">再来一单</a> -->
+                    <{if $detail.online_pay ==0}>
+                    <a href="javascript:void(0);" class="btn">货到付款</a>
+                    <{else}>
+                    <{if $detail.order_status == 0&&$detail.pay_status == 0}>
+                    <a onclick="cancel(<{$detail.order_id}>);" class="btn" href="javascript:void(0);">取消订单</a>
+                    <a href="<{link ctl='web/order/pay' args=$detail.order_id}>" class="btn">立即支付</a>
+                    <{elseif $detail.order_status == 0&&$detail.pay_status == 1}>
+                    <a onclick="cancel(<{$detail.order_id}>);" class="btn" href="javascript:void(0);">取消订单</a>
+                    <a href="javascript:void(0);" class="btn">等待接单</a>
+                    <{elseif $detail.order_status == 1}>
+                    <a href="javascript:void(0);" class="btn">等待配送</a>
+                    <{elseif $detail.order_status == 3||$detail.order_status ==4}>
+                    <a href="<{link ctl='web/ucenter/order/complete' args=$detail.order_id}>" class="btn">完成订单</a>
+                    <{elseif $detail.order_status == 8&&$detail.comment_status == 0}>
+                    <a href="<{link ctl='web/ucenter/order/comment' args=$detail.order_id}>" class="btn">订单评价</a>
+                    <{/if}>
+                    <{/if}>
+                </div>
+                <div class="cl"></div>
+            </div>
+            <!--订单详情状态end-->
+            <div class="prslCenter_evlt_list">
+                <div class="box">
+                    <div class="fl">
+                        <div class="pub_img fl"><a href="<{link ctl='web/menu/index' args=$detail.shop_id}>"><img src="<{$pager.img}>/<{$shop.logo}>"></a></div>
+                        <div class="pub_wz">
+                            <h3 class="mb20"><a href="<{link ctl='web/menu/index' args=$detail.shop_id}>"><{$shop.title}><em class="ico"></em></a></h3>
+                            <P class="black9">订单号：<{$detail.order_id}></P>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="wz">
+                        <p class="black9 mb30">商家电话：<{$shop.phone}></p>
+                        <p class="black9">下单时间：<{$detail.dateline|format:'Y-m-d H:i'}><a href="<{link ctl='web/ucenter/order/complaint' args=$detail.order_id}>" class="fr black9 tousu"><em class="ico"></em>投诉商家</a></p>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="nr" style="display:block;">
+                    <div class="fl menu_box">
+                        <h3>菜品共 <span class="pointcl"><{$detail.product_number}></span> 份，总价<span class="pointcl">￥<{$detail.amount+$detail.money}></span></h3>
+                        <ul>
+                            <{foreach $products as $item}>
+                            <li class="black6"><span class="fl w120"><{$item.product_name}></span><span class="fl ml10 w60">￥<{$item.product_price}></span><span class="fl ml10 w60"><{$item.product_number}>份</span><span class="fr">￥<{$item.amount}></span></li>
+                            <{/foreach}>
+                        </ul>
+                        <div class="addr">
+                            <p>地址：<{$detail.addr}><{$detail.house}></p>
+                            <p>姓名：<{$detail.contact}></p>
+                            <p>电话：<{$detail.mobile}></p>
+                            <p>备注：<{$detail.note|default:'无'}></p>
+                        </div>
+                    </div>
+                    <div class="fl state_box">
+                        <ul>
+                            <{foreach $logs as $log}>
+                            <li><{$log.log}> <small class="black9 fr"><{$log.dateline|format:'H:i'}></small>
+                                <div class="cl"></div>
+                                <{if $log@index != 0}><span class="xian"></span><{/if}>
+                                <{if $log@index != (count($logs)-1)}><span class="xian_long"></span><{/if}>
+
+                                <em class="ico"></em>
+                            </li>
+                            <{/foreach}>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--订单详情end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<script>
+    function cancel(order_id) {
+        layer.confirm('<{L("您确定要取消订单吗")}>？', {
+            btn: ['<{L("确认")}>', '<{L("取消")}>']
+        }, function () {
+            var url = "<{link ctl='web/ucenter/order/cancel' args=oooo}>";
+            $.post(url.replace('oooo', order_id), {}, function (ret) {
+                if (ret.error == 0) {
+                    layer.msg(ret.message);
+                    setTimeout(function () {
+                        window.location.reload(true);
+                    }, '1000')
+                } else {
+                    layer.msg(ret.message);
+                }
+            }, 'json')
+        });
+    }
+</script>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

@@ -1,0 +1,47 @@
+<{assign var='tpl_title' value=L("服务中心")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current"> 
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/ucenter/index/index'}>"> <span class="Ico1"></span> </a>
+        <h1 class="title">服务中心</h1>
+    </header>
+    <!-- 标题栏结束 --> 
+    <!-- 主要内容 -->
+    <div class="content">
+            <div class="mb10" id="contact_service">
+                <div class="list-block">
+                    <ul>
+                        <li class="item-content item-link">
+                            <div class="item-inner">
+                                <div><i class="kefu-cio-img fl"></i><span class="contact-kefu service-title fl">联系客服</span></div><div class="cl"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="list-block service-key-box">
+                <ul>
+                    <{foreach $items as $v}>
+                    <li class="item-content item-link border_b weidian_article" article_id="<{$v.article_id}>">
+                        <div class="item-inner">
+                            <div class="item-title service-title"><{$v.title}></div>
+                        </div>
+                    </li>
+                    <{/foreach}>
+                </ul>
+            </div>
+    </div>
+    <!-- 主要内容结束 --> 
+</div>
+<script type="text/javascript">
+$(document).off('click','#contact_service').on('click','#contact_service',function(){
+    var service_tel = "<{$shop.phone}>" ? "<{$shop.phone}>" : "<{$shop.mobile}>";
+    window.open('tel:'+service_tel);
+})
+
+$(document).off('click','.weidian_article').on('click','.weidian_article',function(){
+    var article_id = parseInt($(this).attr('article_id'));
+    window.location.href = "<{link ctl='weidian/ucenter/service:detail-"+article_id+"'}>"
+})
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

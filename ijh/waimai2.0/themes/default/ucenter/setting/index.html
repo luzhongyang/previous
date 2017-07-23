@@ -1,0 +1,69 @@
+<{assign var='tpl_title' value=L("设置")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> 
+        	<a class="button button-link button-nav pull-left" href="<{link ctl='ucenter'}>"> 
+        		<span class="iconfont icon-iconfontxiangyou"></span> 
+        	</a>
+            <h1 class="title">设置</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+           <div class="mineModpswd mineSet mt10">
+           		<div class="list-block">
+                    <ul>
+                      <li>
+                      <a href="<{link ctl='ucenter/setting/suggestion'}>" class="item-content item-link">
+                        <div class="item-inner">
+                          <div class="item-title">意见反馈</div>
+                        </div>
+                      </a>
+                      </li>
+                      <!-- <li class="item-content item-link">
+                        <div class="item-inner">
+                          <div class="item-title">消息推送</div>
+                          <div class="item-after">
+                              <label class="label-switch">
+                                <input type="checkbox">
+                                <div class="checkbox"></div>
+                              </label>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="item-content item-link">
+                        <div class="item-inner alert-text">
+                          <div class="item-title">检查更新</div>
+                          <div class="item-after"><span class="black9">当前版本V2.0</span></div>
+                        </div>
+                      </li> -->
+                      <li>
+                      <a href="<{link ctl='about'}>" class="item-content item-link">
+                        <div class="item-inner">
+                          <div class="item-title">关于我们</div>
+                        </div>
+                      </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt10"></div>
+                  <div class="list-block">
+                    <ul>
+                      <li><a href="<{link ctl='passport/loginout'}>" class="item-link list-button"><span class="pointcl1">退出登录</span></a></li>
+                    </ul>
+                  </div>
+           </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+<script>
+$(function(){
+     $(document).on('click','.alert-text',function () {
+        $.alert('当前已是最新版本啦');
+     });
+  })
+</script>
+<script>   
+	$.init();
+</script>
+<{include file="block/footer.html"}>

@@ -1,0 +1,126 @@
+<{assign var='tpl_title' value=L("邀请好友")}>
+<{include file="block/header.html" }>
+<div class="page page-current">
+    <div class="content">
+    	 <div class="share-page-bg">
+         	 <div class="share-weixin">
+                 <div class="weixin_share-top">
+                      <img src="%THEME%/static/images/share_logo.png">
+                      <div><span class="hong-bao"><big><span class="pointcl1"><{$inviteCfg.hongbao_amount}>元</span>红包</big></span></div>
+                 </div>
+                 <div class="weixin_Share_form">
+                      <div class="head-man">
+                        <img src="<{$pager.img}>/<{$member.face}>"/>
+                        <P class="userName"><{$member.nickname}></P>
+                        <P>正在邀请您使用<{$pager.web_title}></P>
+                      </div>
+                      <div class="form_box">
+                            <form>
+                                <div class="inp-box">
+                                    <input type="text" placeholder="请输入手机号" id="invite_form_mobile"/>
+                                    <a href="javascript:;" class="yzmget button" id="get_sms_code">获取验证码</a>
+                                </div>
+                                <input type="text" placeholder="请输入验证码" id="invite_form_sms_code"/>
+                                <input type="button" value="注册领取红包" class="long_btn" id="get_it"/>
+                            </form>
+                            <!-- <p class="whitecl">活动说明？</p> -->
+                      </div>
+                </div> 
+             </div>
+         </div>          
+    </div>        
+    <!--内容结束-->   
+</div>
+
+<script>
+
+var invite_mobile_timeout = '';
+var invite_mobile_count = 0;
+var invite_mobile_lock = 0;
+var minute = 60;
+
+$(document).off('click','#get_sms_code').on('click','#get_sms_code',function() {
+    if(!$("#get_sms_code").hasClass("graybg")) {
+        if($("#invite_form_mobile").val()){
+            if (invite_mobile_lock == 0) {
+                invite_mobile_count = 60;
+                $("#get_sms_code").addClass("graybg");
+                $('#get_sms_code').attr("disabled", "disabled");
+                send_sms();
+                return true;
+            }   
+        }else{
+            $.alert("请填写手机号");
+        }
+    }
+    $("#yzmget2").removeClass("graybg");
+});
+invite_BtnCount = function () {
+    if (invite_mobile_count == 0) {
+		$(".yzmget").removeClass("graybg");
+        $('.yzmget').removeAttr("disabled");
+        $('.yzmget').text("重新获取");
+        invite_mobile_lock = 0;
+        clearTimeout(invite_mobile_timeout);
+		$('.yzmget').removeClass("on");
+    }
+    else {
+        invite_mobile_count--;
+        $('.yzmget').text( + invite_mobile_count.toString() + "s重新获取");
+        invite_mobile_timeout = setTimeout(invite_BtnCount, 1000);
+		$('.yzmget').addClass("on");
+    }
+};
+
+// 立即领取	
+$(document).off('click','#get_id').on('click','#get_it',function(){
+    var pmid = "<{$member.uid}>";
+    var mobile = $('#invite_form_mobile').val();
+    var sms_code = $('#invite_form_sms_code').val();
+    $.ajax({
+        url: "<{link ctl='market:invite_handle'}>",
+        async: true,
+        dataType: 'json',
+        data: {"pmid":pmid,"mobile":mobile,"sms_code":sms_code},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error > 0){
+                Widget.MsgBox.success(ret.message);
+            }else{
+                Widget.MsgBox.error(ret.message);
+                setTimeout(function(){
+                    window.location.href = "<{link ctl='passport:forgot'}>";
+                },1500) 
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+//获取验证码
+function send_sms() {
+    var mobile = $('#invite_form_mobile').val(); 
+    $.ajax({
+        url: "<{link ctl='passport/sendsms'}>",
+        async: true,
+        dataType: 'json',
+        data: {"mobile":mobile},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error == 0){ 
+                invite_BtnCount();
+                $(".yzmget").addClass("graybg");
+                $('.yzmget').attr("disabled", "disabled");
+            }else{
+                Widget.MsgBox.error(ret.message);
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+}
+</script>
+<{include file="block/footer.html"}>

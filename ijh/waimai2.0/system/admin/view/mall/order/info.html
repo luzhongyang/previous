@@ -1,0 +1,45 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?mall/order-sub_info-<{$order.order_id}>.html" mini-form="cate-form" method="post" ENCTYPE="multipart/form-data">
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<!-- <input type="hidden" name="data[order_id]" value="<{$order.order_id}>"/> -->
+<tr>
+	<th><span class="red">*</span>物流公司：</th>
+	
+	<td>
+	<{if $order.order_status==3}>
+		<input type="text" name="data[post_name]" value="<{$post_name|default:''}>" class="input w-300"/>
+	<{else}>
+		<{$order.post_name}>
+	<{/if}>
+	</td>
+</tr>
+<tr>
+	<th><span class="red">*</span>运单号码：</th>
+	<td>
+	<{if $order.order_status==3}>
+		<input type="text" name="data[post_id]" value="<{$post_id|default:''}>" class="input w-300"/>
+	<{else}>
+		<{$order.post_id}>
+	<{/if}>
+	</td>
+</tr>
+
+<{if $order.order_status==3}>
+ <tr>
+    <th class="clear-th-bottom"></th>
+    <td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td>
+</tr>
+<{/if}>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

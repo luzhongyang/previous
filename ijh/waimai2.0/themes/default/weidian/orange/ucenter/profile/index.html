@@ -1,0 +1,239 @@
+<{assign var='tpl_title' value=L("个人资料")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<script src="%THEME%/static/js/jquery.js"></script>
+<script>jQuery.noConflict()</script>
+<script type="text/javascript" src="<{$pager.res}>/kindeditor/kindeditor.js"></script>
+<div class="page page-current"> 
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav header_Ico"> 
+    <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/ucenter/index'}>"> 
+    <span class="Ico1"></span> </a>
+        <h1 class="title">个人资料</h1>
+    </header>
+    <!-- 标题栏结束 --> 
+    <!-- 主要内容 -->
+    <div class="content">
+    	<div class="gerenZiliao">
+            <div class="list-block ziLiao1">
+                <ul>
+                    <style type="text/css">
+                        .ke-upload-file {width:100% !important}
+                        .ke-button{display:none;}
+                        .Acnt_hdImg{ position:relative;}
+                        .ke-upload-file{position: absolute; left:0; top: 0; width:100%; height: 100%; opacity: 0;}
+                    </style>
+                    <li class="item-content Acnt_hdImg">
+                        <div class="item-inner">
+                            <div class="item-title ">头像</div>
+                            <div class="item-after zl-after open-vertical-modal img"><img class="face_img" src="<{$pager.img}>/<{$MEMBER.face}>"></div>
+                        </div>
+                        <input  type="button" uploadbtn="#file_photo" id="face_img" class="imgs" value="头像" style="display:none;"/>
+                    </li>
+                    <li class="item-content item-link" id="up_username">
+                        <div class="item-inner">
+                            <div class="item-title ">用户名</div>
+                            <div class="item-after font_size15 zl-title" zl-title><{$MEMBER.nickname}></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt10 mb10">
+                <div class="list-block">
+                    <ul>
+                        <li class="item-content item-link" id="up_passwd">
+                            <div class="item-inner">
+                                <div class="item-title ">登录密码</div>
+                                <div class="item-after font_size15 zl-title">修改</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="list-block">
+                <ul>
+                    <li class="item-content item-link" id="up_mobile">
+                        <div class="item-inner">
+                            <div class="item-title ">手机号</div>
+                            <div class="item-after font_size15 zl-title"><{substr_replace($MEMBER.mobile,'****',3,4)}></div>
+                        </div>
+                    </li>
+                    <li class="item-content item-link" <{if !$MEMBER.wx_openid}>id="wxbind"<{/if}>>
+                        <div class="item-inner">
+                            <div class="item-title ">微信号</div>
+                            <div class="item-after font_size15 zl-title <{if $MEMBER.wx_openid}>open-slider-moda2<{/if}>">
+                                <{if $MEMBER.wx_openid}>
+                                已绑定
+                                <{else}>
+                                    <a href="javascript:;" class="maincl">未绑定</a>
+                                <{/if}>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <form id='faceform' name='faceform' action="<{link ctl='weidian/ucenter/profile:upload_face'}>" method='post' enctype='multipart/form-data' hidden>
+            <input id="face" class='face' type='file' name='face' onChange="fileSumbit(this)"/>从相册选择
+            <input id="subbtn" value='sub' type='submit'>submit
+        </form> 
+    </div>
+    <!-- 主要内容结束 --> 
+</div>
+<script type="text/javascript">
+
+$(document).off('click','.open-vertical-modal').on('click','.open-vertical-modal', function () {
+    var buttons1 = [
+        {
+            text: "<div class='mineAcntinfor_btn black3'>拍照</div>",
+            onClick: function() {
+              
+            }
+        },
+        {
+          text: "<div class='mineAcntinfor_btn black3'>从相册选择</div>",
+          onClick: function() {
+            $(".face").click();
+          }
+        }
+        ];
+        var buttons2 = [
+        {
+          text: "<div class='mineAcntinfor_btn black9'>取消</div>",
+        }
+        ];
+        var groups = [buttons1, buttons2];
+        $.actions(groups);
+});
+
+function fileSumbit(obj){
+    var files = obj.files;
+    if(files){
+        for(var i=0;i<files.length;i++){
+            var tag = '';
+            var rFilter = /^(image\/gif|image\/jpeg|image\/jpg|image\/png)$/i;
+            if (! rFilter.test(files[i].type)) {                   
+                $.alert("<{L('只允许上传')}>JPG、PNG、JPEG<{L('格式图片')}>");
+                return false;
+            }
+        }
+        $('#subbtn').click();
+    }
+}
+    
+function fileSelected(obj){
+    var files = obj.files;
+    for(var i=0;i<files.length;i++){
+        var tag = '';
+        var rFilter = /^(image\/gif|image\/jpeg|image\/jpg|image\/png)$/i;
+        if (! rFilter.test(files[i].type)) {                   
+            alert("<{L('只允许上传')}>JPG、PNG、GIF<{L('格式图片')}>");
+            return false;
+        }
+        var reader = new FileReader();
+        reader.onloadstart = function(e){
+                $(".loading").show();
+        }
+        reader.onload = function(e){
+            $(".face_img").attr('src',e.target.result);
+            var img = e.target.result;
+            $.post("<{link ctl='weidian/ucenter/profile:uploadface'}>",{img:img},function(ret){
+                $.alert(ret.message);           
+            },'json');
+            
+        }
+        reader.readAsDataURL(files[i]);
+    }
+}
+
+
+
+
+// 微信解绑弹出层
+$(document).off('click','.open-slider-moda2').on('click','.open-slider-moda2', function () {
+    var modal = $.modal({
+      title: "<div class='maincl'>解除绑定</div>",
+      afterText:"<div class='txt_left'>确定要解除账号与微信的关联吗？</div>",
+      buttons: [
+        {
+          text: "<span class='maincl txt_left' style=' display:block;'>取消</span>"
+        },
+        {
+          text: "<span class='maincl txt_right' style=' display:block;'>解除绑定</span>",
+          bold: true,
+          onClick: function () {
+            wx_bind();
+          }
+        },
+      ]
+    })
+    $.swiper($$(modal).find('.swiper-container'), {pagination: '.swiper-pagination'});
+});
+
+
+$(document).off('click','#wxbind').on('click','#wxbind',function(){
+    wx_bind();
+});
+
+// 微信绑定
+function wx_bind() {
+    $.ajax({  
+        url: "<{link ctl='weidian/ucenter/profile:wx_bind'}>",
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                $.alert(ret.message);
+            }else{
+                window.location.reload();
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },    
+        
+    });
+}
+
+var shop_id = parseInt(<{$shop.shop_id}>);
+$(document).off('click','#up_username').on('click','#up_username',function(){
+    window.location.href = "/weidian_"+shop_id+"/ucenter/profile/up_username";
+})
+$(document).off('click','#up_passwd').on('click','#up_passwd',function(){
+    window.location.href = "/weidian_"+shop_id+"/ucenter/profile/up_passwd";
+})
+$(document).off('click','#up_mobile').on('click','#up_mobile',function(){
+    window.location.href = "/weidian_"+shop_id+"/ucenter/profile/up_mobile";
+})
+</script>
+
+<script type="text/javascript">
+
+(function(K, $){
+KindEditor.ready(function(KE) {
+    $("[uploadbtn]").each(function(){
+         var flag = $(this).attr('id');
+         var upload_url = $(this).attr("uploadbtn")
+         var uploadbutton = KE.uploadbutton({
+            button : $(this)[0],
+            fieldName : 'imgFile',
+            url : '<{link ctl="weidian/ucenter/profile:photo" http="ajax"}>',
+            afterUpload : function(data) {
+                if (data.error === 0) {
+                    window.location.href="<{link ctl='weidian/ucenter/profile:index'}>";
+                } else {
+                    $.alert(data.message);
+                }
+            },
+            afterError : function(str) {
+                alert(str);
+            }
+        });
+        uploadbutton.fileBox.change(function(e) {
+            uploadbutton.submit();
+        });           
+    });
+});
+})(window.KT, window.jQuery);
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

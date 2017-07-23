@@ -1,0 +1,61 @@
+<{assign var='tpl_title' value=L("修改密码")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left external" href="<{link ctl='ucenter/info'}>"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">修改密码</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+            <div class="login_tab_cont mt10">
+                <div class="list_box">
+                    <div class="list-block">
+                        <ul>
+                        	<li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" id="old_pwd" placeholder="旧密码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" id="new_pwd" placeholder="新密码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="font_size14 mar10 black9">密码长度至少6个字符，最多32个字符</div>
+                    <div class="content-block"> 
+                    	<a class="button button-big button-fill button-success" id="btn1">确定</a> 
+                    </div>
+                </div>
+            </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+    <script>
+    	$('#btn1').click(function(){
+    		var old_passwd = $("#old_pwd").val();
+    		var new_passwd = $("#new_pwd").val();
+    		var link = "<{link ctl='ucenter/info:passwd_by_old'}>";
+    		$.post(link,{old_passwd:old_passwd,new_passwd:new_passwd},function(ret){
+                if(ret.error == 0){
+                	$.alert(ret.message);
+                	setTimeout(function(){
+                        window.location.href="<{link ctl='ucenter/info'}>";
+                    },2000)
+                }else{
+                	$.alert(ret.message);
+                }
+                
+            },'json');
+    	});
+    </script>
+<{include file="block/footer.html"}>

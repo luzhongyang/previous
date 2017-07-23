@@ -1,0 +1,59 @@
+<{assign var='tpl_title' value=L("404 页面不存在")}>
+<{include file="block/header.html" }>
+
+
+
+	<div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">404 页面不存在</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+			<div class="czts">
+                <div class="cztsnr cztsnr_Failure">页面不存在
+                    <p class="czts_p">自动跳转中...<br />
+                       等待时间：<span class="czts_time" id="czts_time">
+                       </span>
+                       <br />
+                    <{foreach $pager.url_list as $link}>
+                        <img src="<{$pager.res}>/images/icon/link.gif" align="absmiddle" style="margin-right:5px;"/><a href="<{$link.url}>" style="color: #006699"><{$link.title}></a>
+                        <{foreachelse}>
+                        <img src="<{$pager.res}>/images/icon/link.gif" align="absmiddle" style="margin-right:5px;"/><a href="<{if $pager.link}><{$pager.link}><{else}><{link ctl='index'}><{/if}>" style="color: #006699">点击立即跳转</a>
+                        <{/foreach}>
+                    
+                    </p>
+                </div>
+            </div>
+            
+            
+                    
+                    
+        </div>        
+    <!--内容结束-->   
+    </div>
+
+
+<script>
+var secs =5; //倒计时的秒数 
+var URL ; 
+function Load(url){ 
+	URL =url; 
+	for(var i=secs;i>=0;i--) 
+	{ 
+		window.setTimeout('doUpdate(' + i + ')', (secs-i) * 1000); 
+	} 
+} 
+function doUpdate(num) 
+{ 
+	document.getElementById('czts_time').innerHTML = num; 
+	if(num == 0) { window.location=URL; } 
+}
+</script>
+<script language="javascript"> 
+	var link = "<{if $pager.link}><{$pager.link}><{else}><{link ctl='index'}><{/if}>";
+	Load(link); //要跳转到的页面 
+</script> 
+
+
+<{include file='block/footer.html'}>

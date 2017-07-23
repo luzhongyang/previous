@@ -1,0 +1,82 @@
+<{assign var='tpl_title' value=L("商家收藏")}>
+<{include file="block/header.html" }>
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav"><a class="button button-link button-nav pull-left back"> <span
+            class="iconfont icon-iconfontxiangyou"></span> </a>
+        <h1 class="title">商家收藏</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content">
+        <div class="shangjia_list_box mt10">
+            <div class="infinite-scroll active">
+                <div class="list-block">
+                    <ul class="list-container">
+                        <{if $items}>
+                        <{foreach $items as $item}>
+                        <a href="<{link ctl='shop/detail' arg0=$item.shop_id}>" class="black">
+                            <li class="shangjia_list">
+                                <div class="box">
+                                    <div class="pub_img">
+                                        <img src="<{$pager.img}>/<{$item.logo}>">
+                                    </div>
+                                    <div class="pub_wz">
+                                        <div class="fl left">
+                                            <h3 class="overflow_clear"><{$item.title}></h3>
+                                            <div class="black9"><span class="starBg"><span class="star" style="width:<{$item.star*20}>%;"></span></span>已售<{$item.orders}>份
+                                            </div>
+                                            <{if $item.pei_amount>0}>
+                                            <p class="black9"><span class="fontcl1"><{$item.pei_amount}></span>配送费</p>
+                                            <{else}>
+                                            <p class="black9"><span class="fontcl1"></span>免配送费</p>
+                                            <{/if}>
+                                        </div>
+                                        <div class="fr right">
+                                            <p class="black9"><span
+                                                    class="fontcl1">￥<big><{round($item.min_amount)}></big></span>起送</p>
+                                            <p class="black9 mt10 pad_t10"><{$item.juli}>/<span class="maincl"><{$item.pei_time}>分钟</span></p></p>
+                                        </div>
+                                    </div>
+                                    <div class="cl"></div>
+                                </div>
+                                <div class="tag_box">
+                                    <{if $item.first_amount}>
+                                    <div class="list"><img src="%THEME%/static/images/tag1.png">新用户首次下单立减<{$item.first_amount}>元
+                                    </div>
+                                    <{/if}>
+                                    <{if $item.youhui}>
+                                    <div class="list"><img src="%THEME%/static/images/tag2.png">在线支付<{$item.youhui_title}>元！
+                                    </div>
+                                    <{/if}>
+                                    <{if $item.online_pay}>
+                                    <div class="list"><img src="%THEME%/static/images/tag3.png">商家支持在线支付</div>
+                                    <{/if}>
+                                    <{if $item.coupon}>
+                                    <div class="list"><img src="%THEME%/static/images/tag4.png">店铺<{$item.coupon_title}>优惠券可领
+                                    </div>
+                                    <{/if}>
+                                </div>
+                                <{if $item.is_new == 1}>
+                                <div class="lab_box"><img src="%THEME%/static/images/lab_new.png"></div>
+                                <{elseif $item.is_new == 2}>
+                                <div class="lab_box"><img src="%THEME%/static/images/lab_brand.png"></div>
+                                <{/if}>
+                            </li>
+                        </a>
+                        <{/foreach}>
+                        <{else}>
+                        <div class="nonePage txt_center">
+                            <img src="%THEME%/static/images/none/colct_no.png">
+                            <p class="black9">暂无收藏</p>
+                        </div>
+                        <{/if}>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--内容结束-->
+</div>
+<{include file="block/footer.html"}>

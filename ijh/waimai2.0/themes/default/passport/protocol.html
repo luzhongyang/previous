@@ -1,0 +1,18 @@
+<{assign var='tpl_title' value=L("<{$register.title}>")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+        <!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title"><{$register.title}></h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+
+
+            <div class="serveIntro">
+                <{$register.content}>
+            </div>
+        </div>
+    <!--内容结束-->   
+    </div>
+<{include file="block/footer.html"}>

@@ -1,0 +1,451 @@
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current"> 
+    <!-- 工具栏 -->
+    <{include file="weidian//$theme_style/block/navbar.html"}>
+    <!-- 工具栏结束 -->
+
+    <div class="content infinite-scroll-weidianindex infinite-scroll-bottom-weidianindex"> 
+    	<!--幻灯banner-->
+        <!-- Slider -->
+        <div class="swiper-container" data-space-between='0'>
+            <div class="swiper-wrapper">
+                    <{foreach $adv_item as $adv}>
+                    <div class="swiper-slide"><img src="<{$pager.img}>/<{$adv.photo}>" width="100%"></div>
+                    <{/foreach}>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <!--幻灯banner结束-->
+        <!--首页优惠券-->
+        <div class="idxCop mt10 mb10">
+        	<div class="row">
+                <{foreach $shop.manjian as $v}>
+              <div class="col-33 list" <{if $v@index>2}>style="margin-top:0.3rem;"<{/if}>>
+                <big>￥<{$v.youhui_amount}></big>
+                <p>买满<{$v.order_amount}>元立减</p>
+                <i class="bg_l"></i>
+                <i class="bg_r"></i>
+              </div>
+               <{/foreach}>
+            </div>
+        </div>
+        <!--首页优惠券end-->
+		<!--首页推荐-->
+        <div class="idxRecmd mb10">
+        	<div class="idxRecmd_tit">
+                <h3 class="fl">活动推荐</h3><a href="<{link ctl="weidian_<{$shop.shop_id}>/index:is_best_goodsitems"}>" class="fr more external">更多</a>
+            </div>
+            <div style="display:-moz-box;display:-webkit-box;display:box; -moz-box-align:center;-webkit-box-align:center;-o-box-align:center;box-align:center; height:6rem; overflow: hidden; ">
+            <{if $shop.is_best}>
+            <a href="<{link ctl="weidian_<{$shop.shop_id}>/waimai:goods_detail" args=$shop.is_best.product_id}>" class="external"><img src="<{$pager.img}>/<{$shop.is_best.photo}>" style="width:100%;"></a>
+            <{/if}>
+            </div>
+        </div>
+        <!--首页推荐end-->
+        <!--筛选-->
+        <div class="goods_shaixuan">
+            <div class="list_box"><a id="all_title">全部商品</a>
+                <ul class="pull_list" style="display:none;">
+                    <li cate_id="0"><a href="">全部</a></li>
+                    <{foreach $shop.cate_list as $v}>
+                    <li cate_id="<{$v.cate_id}>"><a href=""><{$v.title}></a></li>
+                    <{/foreach}>
+                </ul>
+            </div>
+            <div class="list_box" id="isnew"><a>上新<i class="ico up"></i></a></div>
+            <div class="list_box" id="sales"><a>销量<i class="ico up"></i></a></div>
+            <div class="list_box" id="price"><a>价格<i class="ico down"></i></a></div>
+            <div class="cl"></div>
+        </div>
+        <!--筛选end-->
+        <!--商品列表-->
+        <div class="goods_list_box">
+            <ul id="waimai_goods_items"></ul>
+            <div class="cl"></div>
+        </div>
+        <!--商品列表end-->
+        <div class="cart_fixed"><i>0</i></div>
+    </div>        
+</div>
+
+<!--带规格商品弹出层-->          
+<div class="popup popup-about goodsAdd_mask">
+    <div class="dingdan-details" style="margin-top:1rem;">
+        <div class="list-block media-list">
+            <ul>
+              <li>
+                <a href="#" class="item-content" style="padding:0.5rem;">
+                  <div class="item-media spec_img"></div>
+                  <div class="item-inner">
+                   <div class="item-title black3 mb10"><big class="product_title"></big></div>             
+                   <div class="item-title"><big class="fontcl1 spec_price"></big><!-- <small class="fontcl1">/份</small> --></div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mallord_delt_mask seller_caidelt_box border_b">
+        <p class="wz">规格选择：</p>
+        <div class="row selct_box chicun-box"> 
+            <!-- <a href="javascript:;" class="fl col-25 active">8寸</a> 
+            <a href="javascript:;" class="fl col-25">12寸</a> 
+            <a href="avascript:;" class="fl col-25">24寸</a> 
+            <a href="javascript:;" class="fl col-25">48寸</a> -->
+        </div>
+        <div class="clearfix mt10">
+            <div class="fl f_size1">购买数量：</div>
+            <div class="fr">
+                <div class="num_operate sp_nums"> 
+                   <!--  <span class="reduce" quantity="-" skuid="">-</span>
+                   <input type="text" value="1" class="text_box">
+                   <span class="add" quantity="+" skuid="">+</span>  -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn_box"><!-- <a href="#" class="btn btn2">加入购物车</a> --><a href="javascript:;" style="float:right;" class="btn" id="goto_cart">立即购买</a></div>
+    <i class="sy_popup_delIco close-popup" style="top:0.2rem;right:0.2rem;"></i>
+</div>
+<!--添加商品弹出层-->
+
+<script type="text/javascript">
+
+/*轮播图配置*/
+// var swiper = new Swiper('.swiper-container', {
+//     pagination: '.swiper-pagination',
+//     //paginationClickable: true,
+//     speed: 400,
+//     autoplay: 5000,
+// });
+
+$('.tab-item').removeClass('active');
+$('#tab-item1').addClass('active');
+
+var shop_id = parseInt(<{$shop.shop_id}>);
+window.WDCart = new window.WDCart(shop_id);
+spec_nums_refresh();
+window.__Index_Spec_items = null;
+LoadData.params = {"cate_id":0};
+
+$(".goods_shaixuan .list_box>a").click(function(){
+    $(this).parent().find(".pull_list").toggle();
+});
+$(document).ready(function(){
+    $(document).off('click','.list_box').on('click','.list_box',function(){
+        if($(this).find('.ico').hasClass('up')) {
+            $(this).find('.ico').removeClass('up');
+            $(this).find('.ico').addClass('down');
+        }else {
+            $(this).find('.ico').removeClass('down');
+            $(this).find('.ico').addClass('up');
+        }
+    })
+    LoadData.params['page'] = 0;
+    LoadData.params['shop_id'] = parseInt(<{$shop.shop_id}>);
+    __Weidian_Index_Load_Items(LoadData.params);
+})
+
+/*轮播图配置*/
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    //paginationClickable: true,
+    speed: 400,
+    autoplay: 5000,
+});
+
+// 选择规格弹层
+$(document).off('click','.spec').on('click','.spec',function(){
+    var data = [];
+    var indexes = 0;
+    var selct_spec_html = '';
+    var spec_img_html = '';
+    var sp_nums_html = '';
+    var pid = $(this).attr('pid');
+    var title = $(this).attr('title');
+    $.each(window.__Index_Spec_items,function(index,item){
+        if(item.product_id == pid) {
+            data[indexes] = window.__Index_Spec_items[index];
+            indexes ++;
+        }
+    })
+    var first_sp = '';
+    $.each(data,function(key,val){
+        var class_name = '';
+        class_name += 'fl col-';
+        class_name += String(parseInt(100 / parseInt(GetJsonLen(data))));
+        if(key==0) { 
+            class_name += ' active'; 
+            spec_img_html += '<img src="<{$pager.img}>/'+val.spec_photo+'" width="100%">';
+            $('.spec_price').html('￥' + val.price);
+            sp_nums_html += '<span class="reduce" quantity="-" skuid="'+val.product_id+'-'+val.spec_id+'" product_id="'+val.product_id+'" title="'+title+'" spec_name="'+val.spec_name+'" price="'+val.price+'" package="'+val.package_price+'" sale_sku="'+val.sale_sku+'" sale_type="1">-</span>';
+            sp_nums_html += '<input type="text" value="0" class="text_box">';
+            sp_nums_html += '<span class="add" quantity="+" skuid="'+val.product_id+'-'+val.spec_id+'" product_id="'+val.product_id+'" title="'+title+'" spec_name="'+val.spec_name+'" price="'+val.price+'" package="'+val.package_price+'" sale_sku="'+val.sale_sku+'" sale_type="1">+</span>';
+            first_sp = 'p_'+pid+'-'+val.spec_id;
+        }
+        
+        selct_spec_html += '<a href="javascript:;" pid="'+val.product_id+'" specid="'+val.spec_id+'" photo="'+val.spec_photo+'" sale_sku="'+val.sale_sku+'" price="'+val.price+'" title="'+title+'" spec_name="'+val.spec_name+'" price="'+val.price+'" package="'+val.package_price+'" sale_type="1" class="'+class_name+'">'+val.spec_name+'</a>'; 
+    })  
+    $('.chicun-box').html("");
+    $('.chicun-box').html(selct_spec_html);
+    $('.spec_img').html(spec_img_html);
+    $('.product_title').html('【'+ $(this).attr('title') + '】');
+    $('.sp_nums').html(sp_nums_html);
+    $('.sp_nums').attr('id',first_sp);
+    $.popup('.goodsAdd_mask');
+    spec_nums_refresh();
+})
+
+// 更新带规格商品的已选数量和购物车总数
+function spec_nums_refresh() {
+    var product_list = [];
+    for(var k in window.WDCart.shop_cart){
+        product_list.push(window.WDCart.shop_cart[k]);
+    }
+    var is_on = $('.chicun-box .active');
+    var sku_id = is_on.attr('pid')+'-'+is_on.attr('specid');
+    $('.text_box').val(0);
+    if(product_list.length > 0){
+        $.each(product_list, function(key,val){
+            $("#p_"+val.sku_id+' .text_box').val(val.num);
+        })
+    }
+    if(Cookie.get('WDCart') != null) {
+        $('.cart_fixed').html('<i>'+window.WDCart.total_count()+'</i>');
+    }else {
+        window.WDCart.clear();
+    }
+    
+}
+
+// 选择规格点击事件
+$(document).off('click','.chicun-box a').on('click','.chicun-box a',function(){
+    $('.chicun-box a').removeClass('active');
+    $(this).addClass('active');
+    var pid = $(this).attr('pid');
+    var specid = $(this).attr('specid');
+    var sku_id = pid+'-'+specid;
+    var _title = $(this).attr('title');
+    var _spec_name = $(this).attr('spec_name');
+    var _price = $(this).attr('price');
+    var _package = $(this).attr('package');
+    var _sale_sku = $(this).attr('sale_sku');
+    var _sale_type = $(this).attr('sale_type');
+    var spec_img_html = '';
+    var sp_nums_html = '';
+    var photo = $(this).attr('photo');
+    spec_img_html += '<img src="<{$pager.img}>/'+photo+'" width="100%">';
+    $('.spec_img').html(spec_img_html);
+    $('.spec_price').html('￥' + $(this).attr('price'));
+    sp_nums_html += '<span class="reduce" quantity="-" skuid="'+pid+'-'+specid+'" product_id="'+pid+'" title="'+_title+'" spec_name="'+_spec_name+'" price="'+_price+'" package="'+_package+'" sale_sku="'+_sale_sku+'" sale_type="'+_sale_type+'">-</span>';
+    sp_nums_html += '<input type="text" value="" class="text_box">';
+    sp_nums_html += '<span class="add" quantity="+" skuid="'+pid+'-'+specid+'" product_id="'+pid+'" title="'+_title+'" spec_name="'+_spec_name+'" price="'+_price+'" package="'+_package+'" sale_sku="'+_sale_sku+'" sale_type="'+_sale_type+'">+</span>';
+    $('.sp_nums').html(sp_nums_html);
+    $('.sp_nums').attr('id','p_'+pid+'-'+specid);
+    spec_nums_refresh();
+})
+
+
+//带规格加号、减号点击事件
+$(document).off('click', '[quantity]').on("click", '[quantity]', function(){
+    var data = {};
+    var skuid = $(this).attr('skuid');
+    var _product_id = $(this).attr('product_id');
+    var _title = $(this).attr('title');
+    var _spec_name = $(this).attr('spec_name');
+    var _price = $(this).attr('price');
+    var _package = $(this).attr('package');
+    var _sale_sku = $(this).attr('sale_sku');
+    var _sale_type = $(this).attr('sale_type');
+
+    var info = JSON.stringify({"product_id":_product_id,"title":_title,"spec_name":_spec_name,"price":_price,"package":_package,"sale_sku":_sale_sku,"sale_type":_sale_type});
+
+    if($("#p_"+skuid).size()>0){
+        data = JSON.parse(info) || {};
+    }else{
+        data = window.WDCart.product[skuid];
+    }
+    data.status = 1; //商品是否参与结算状态 0不参与 1参与
+    var num = window.WDCart.product_num(skuid);
+
+    if($(this).attr("quantity") == '-'){
+        if(num < 1){
+            return false;
+        }
+        window.WDCart.add(skuid, -1, data);
+    }else{
+        if(num >= data.sale_sku) {
+            $.alert('商品库存不足');
+            setTimeout(function(){
+                $.closeModal();
+            },4000);
+            return false;
+        }
+        window.WDCart.add(skuid, 1, data);
+    }
+    spec_nums_refresh();
+})
+
+// ajax加载外卖商品列表
+function __Weidian_Index_Load_Items(params){
+    if(LoadData.__LOAD_LOCK){
+        return false;
+    }
+    LoadData.__LOAD_LOCK = true;
+    LoadData.params.page ++;
+    params = params || {};
+    LoadData.params = $.extend(LoadData.params, params);
+    var shop_id = parseInt(<{$shop.shop_id}>);
+    var link  = "/weidian_"+shop_id+"/index/goodsitems";
+    $.post(link, LoadData.params, function(ret){
+        if(ret.error == 0){
+            var html = '';
+            if(ret.data.items.length > 0) {
+                $.each(ret.data.items, function(index,item){
+                    html += '<li class="goods_list">';
+                    html += '<div class="box">';
+                    html += '<div class="img_box"><a href="'+item.link_url+'" class="external"><img src="<{$pager.img}>/'+item.photo+'" style="width:100%;height:6rem;"></a>';
+                    if(item.is_spec == 1)
+                        html += '<a href="javascript:;" pid="'+item.product_id+'" title="'+item.title+'" class="spec open-about"></a> ';
+                    else {
+                        // var pdata = '{\"product_id\":\"'++'\",\"title\":"+item.title+",\"spec_name\":"+",\"price\":"+item.price+",\"package\":"+item.package_price+",\"sale_sku\":"+item.stock+",\"sale_type\":"+"1"+"}';
+                        html += '<a href="javascript:;" class="cartAdd" quantity="+" skuid="'+item.product_id+'-0" id="p_'+item.product_id+'-0"';
+                        html += 'product_id="'+item.product_id+'"';
+                        html += ' title="'+item.title+'"';
+                        html += ' spec_name=""';
+                        html += ' price="'+item.price+'"';
+                        html += ' package="'+item.package_price+'"';
+                        html += ' sale_sku="'+item.stock+'"';
+                        html += ' sale_type="1"';
+                        html += '</a>';
+                    }         
+                    html += '</div>';
+                    html += '<div class="wz_box">';
+                    html += '<h3 class="overflow_clear"><a href="">'+item.title+'</a></h3>';
+                    html += '<h3 class="overflow_clear"><a href="" style="float:left;font-size:0.65rem;">销量'+item.sales+'</a></h3>';
+                    html += '<div class="price">￥'+item.price+'<small></small></div>';
+                    // if(item.intro) {
+                    //     html += '<p>'+item.intro+'</p>';
+                    // }
+                    html += '</div>';
+                    html += ' </div>';
+                    html += '</li>';
+                })
+                if(LoadData.params.page == 1){
+                    $('#waimai_goods_items').html(html);
+                }else{
+                    $('#waimai_goods_items').append(html);
+                }
+            }else if(LoadData.params.page > 1){
+                $.detachInfiniteScroll($('.infinite-scroll-weidianindex'));
+                $('.infinite-scroll-preloader').remove();
+                $('.infinite-scroll.active .list-block').append('<div class="loading_end">没有更多了...</div>'); 
+            }else {
+                var nodata = '';
+                nodata += '<div class="nonePage txt_center">';
+                nodata += '<img src="%THEME%/static/images/none/pic_shopProduct_no@2x.png">';
+                nodata += '<p class="black3" style="font-size:0.7rem;">该分类暂无商品</p>';
+                nodata += '</div><p class="txt_center black9" style="font-size:0.5rem;">换个分类试试吧</p>';
+                $.detachInfiniteScroll($('.infinite-scroll-weidianindex'));
+                $('#waimai_goods_items').html(nodata);
+                $('.infinite-scroll-preloader').remove();
+            }
+            if(ret.data.items.length < 9) {
+                $('.infinite-scroll-preloader').hide();
+            }
+            if(ret.data.spec_items) {
+               window.__Index_Spec_items = ret.data.spec_items;
+            }
+        }else{
+            
+        }
+        LoadData.__LOAD_LOCK = false;
+    },"json");
+}
+
+// 无限下拉滚动
+$(document).on('infinite', '.infinite-scroll-bottom-weidianindex',function() {
+    __Weidian_Index_Load_Items(LoadData.params);
+});
+
+// 上新排序
+$(document).off('click','#isnew').on('click','#isnew',function(){
+    LoadData.params['page'] = 0;
+    LoadData.params['sales'] = '';
+    LoadData.params['price'] = '';
+    if($(this).find('.ico').hasClass('up')) {
+        LoadData.params['dateline'] = 'dateline_desc';
+    }else {
+        LoadData.params['dateline'] = 'dateline_asc';
+    }
+    LoadData.params['shop_id'] = parseInt(<{$shop.shop_id}>);
+    __Weidian_Index_Load_Items(LoadData.params);
+})
+
+// 销量排序
+$(document).off('click','#sales').on('click','#sales',function(){
+    LoadData.params['page'] = 0;
+    LoadData.params['dateline'] = '';
+    LoadData.params['price'] = '';
+    if($(this).find('.ico').hasClass('up')) {
+        LoadData.params['sales'] = 'sales_desc';
+    }else {
+        LoadData.params['sales'] = 'sales_asc';
+    }
+    LoadData.params['shop_id'] = parseInt(<{$shop.shop_id}>);
+    __Weidian_Index_Load_Items(LoadData.params);
+})
+
+// 价格排序
+$(document).off('click','#price').on('click','#price',function(){
+    LoadData.params['page'] = 0;
+    LoadData.params['dateline'] = '';
+    LoadData.params['sales'] = '';
+    if($(this).find('.ico').hasClass('up')) {
+        LoadData.params['price'] = 'price_desc';
+    }else {
+        LoadData.params['price'] = 'price_asc';
+    }
+    LoadData.params['shop_id'] = parseInt(<{$shop.shop_id}>);
+    __Weidian_Index_Load_Items(LoadData.params);
+})
+
+// 点击分类事件
+$(document).off('click','.pull_list li').on('click','.pull_list li',function(){
+    $('#all_title').text($(this).find('a').text());
+    $(this).parent().toggle();
+    LoadData.params['page'] = 0;
+    LoadData.params['dateline'] = '';
+    LoadData.params['sales'] = '';
+    LoadData.params['price'] = '';
+    LoadData.params['cate_id'] = $(this).attr('cate_id');
+    LoadData.params['shop_id'] = parseInt(<{$shop.shop_id}>);
+    __Weidian_Index_Load_Items(LoadData.params);
+})
+
+// 跳转到购物车结算页面
+$(document).off('click','.cart_fixed').on('click','.cart_fixed',function(){
+    if(JSON.stringify(window.WDCart.shop_cart) == '{}') {
+        $.alert('购物车是空的,去逛逛吧');
+        setTimeout(function(){
+            $.closeModal();
+        },4000);
+        return;
+    }
+    window.location.href = "/weidian_"+shop_id+"/waimai/get_cart-"+shop_id+".html";
+})
+$(document).off('click','#goto_cart').on('click','#goto_cart',function(){
+    if(JSON.stringify(window.WDCart.shop_cart) == '{}') {
+        $.alert('购物车是空的,去逛逛吧');
+        setTimeout(function(){
+            $.closeModal();
+            $('.modal').remove();
+            $('.modal-overlay-visible').remove();
+        },3000);
+        return;
+    }
+    window.location.href = "/weidian/waimai/get_cart-"+shop_id+".html";
+})
+
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

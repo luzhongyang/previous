@@ -1,0 +1,56 @@
+<{assign var='tpl_title' value=L("消息中心")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">消息中心</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+           <div class="mineNews">
+           		<div class="list-block media-list">
+                    <ul>
+                    <{foreach $items as $item}>
+                      <li>
+                        <a href="javascript:;" link="<{$item.url}>" msg_id="<{$item.message_id}>" class="item-content" id="msg_list" >
+                          <div msg_id="<{$item.message_id}>" class="item-media"><i class="ico ico_<{$item.ico}>"></i><span class="num"></span></div>
+                          <div class="item-inner">
+                            <div class="item-title-row mb10">
+                              <div class="item-title black3"><{$item.title}></div>
+                              <div class="item-after"><small class="black9"><{$item.dateline|format}></small></div>
+                            </div>
+                            <div class="item-subtitle"><p class="black6"><{$item.content}></p></div>
+                          </div>
+                        </a>
+                      </li>
+                      <{foreachelse}>
+                      	<div class="nonePage txt_center">
+           					<img src="%THEME%/static/images/none/new_no.png">
+           					<p class="black9">暂无消息</p>
+           				</div>
+                      <{/foreach}>
+                    </ul>
+                  </div>
+           </div>
+        </div>
+        <script>
+            $(document).off('click','#msg_list').on('click','#msg_list',function(){
+        		var classn = $(this).find('.ico').attr('class');
+        		var a = classn.substr(classn.length-1,1);
+        		if(a == 1){
+        			$(this).find('.ico').attr('class','ico ico_3');
+        		}else if(a == 2){
+        			$(this).find('.ico').attr('class','ico ico_4');
+        		}
+        		var msg_id = $(this).attr('msg_id');
+        		var link = $(this).attr('link');
+        		$.post("<{link ctl='ucenter/msg/setread'}>",{message_id:msg_id},function(ret){
+        			//window.location.href= link;
+        			$.router.load(link, true);
+        		});
+        		
+        	});
+        </script>        
+    <!--内容结束-->   
+    </div>
+<{include file="block/footer.html"}>

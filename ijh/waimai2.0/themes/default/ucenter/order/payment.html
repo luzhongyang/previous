@@ -1,0 +1,180 @@
+<{assign var='tpl_title' value=L("订单支付")}>
+<{include file="block/header.html" }>
+<div class="page page-current">
+    <!--头部-->
+   <header class="bar bar-nav"> <a class="button button-link button-nav pull-left" id="goback"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+        <h1 class="title">订单支付</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content">
+    	<div class="paying-wait_content">
+        	<!--<div class="paying_time">请在14分59秒内付款，过期需要重新下单</div>-->
+            <div class="ord_pay_time">
+            	<p>支付剩余时间</p>
+                <div id="daojishi_98" rel="<{$leftover_seconds}>"></div>
+            </div>
+        	<div class="list-block">
+              <ul>
+              	<li>
+                  <div class="item-content">
+                    <div class="item-inner"><p>订单号：<span class="black9"><{$order.order_id}></span></p></div>
+                  </div>
+                </li>
+              </ul>
+			</div>
+            <div class="list-block border_t" style="margin-top:0.5rem;">
+            	<ul>
+                      <li class="item-content danhao" >
+                            <div class="item-inner no-bodert">
+                              <div class="item-title"><span style="padding-left:0.75rem">需支付</span></div>
+                              <div class="item-after"><span class="cheng-color">￥<{$order.amount}></span></div>
+                            </div>
+                      </li>
+                </ul>
+            </div>
+            <div class="list-block media-list shangjia_peisong border_t" style="margin:0.5rem 0">
+             	<ul>
+                       <{if $weixin==1}>
+                       <li>
+                            <label class="label-checkbox item-content short-bord payment">
+                              <div class="item-media"><img src="%THEME%/static/images/loginWay.png" style='width: 2rem;'></div>
+                              <div class="item-inner no-bodert zhifu-box">
+                                <div class="item-subtitle">微信支付</div>
+                              </div>
+                              <input type="radio" name="my-radio" paycode="wxpay">
+                              <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            </label>
+                       </li>
+                       <{else}>
+                        <{if 1 == $status.alipay}>
+                               <li>
+                                    <label class="label-checkbox item-content short-bord payment">
+                                      <div class="item-media"><img src="%THEME%/static/images/zhifubao.png" style='width: 2rem;'></div>
+                                      <div class="item-inner no-bodert zhifu-box">
+                                        <div class="item-subtitle">支付宝</div>
+                                      </div>
+                                      <input type="radio" name="my-radio" checked="checked" paycode="alipay">
+                                      <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                    </label>
+                               </li>
+                        <{/if}>
+                        <{if 1 == $status.wxpay}>
+                               <li>
+                                    <label class="label-checkbox item-content short-bord payment">
+                                      <div class="item-media"><img src="%THEME%/static/images/loginWay.png" style='width: 2rem;'></div>
+                                      <div class="item-inner no-bodert zhifu-box">
+                                        <div class="item-subtitle">微信支付</div>
+                                      </div>
+                                      <input type="radio" name="my-radio" paycode="wxpay">
+                                      <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                    </label>
+                               </li>
+                        <{/if}>
+                        <{if 1 == $status.stripe}>
+                                <li>
+                                    <label class="label-checkbox item-content short-bord payment">
+                                        <div class="item-media"><img src="%THEME%/static/images/stripe.png" style='width: 2rem;'></div>
+                                        <div class="item-inner no-bodert zhifu-box">
+                                            <div class="item-subtitle">Stripe</div>
+                                        </div>
+                                        <input type="radio" name="my-radio" paycode="stripe">
+                                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                    </label>
+                                </li>
+                        <{/if}>
+                       <{/if}>
+                       <li>
+                            <label class="label-checkbox item-content payment">
+                              <div class="item-media"><img src="%THEME%/static/images/qian.png" style='width: 2rem;'></div>
+                              <div class="item-inner  no-bodert zhifu-box">
+                                <div class="item-subtitle">余额支付</div>
+                              </div>
+                              <input type="radio" name="my-radio" paycode="money">
+                              <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            </label>
+                       </li>
+                </ul>
+             </div>
+             <div class="content-block"> 
+            	<p><a href="javascript:;" class="button button-fill cheng-bg" id="subpayment">确认支付</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript"> 
+var link = "<{$order.link}>";
+var order_id = parseInt(<{$order.order_id}>);
+var time_over = parseInt(<{$leftover_seconds}>);
+var order_from = "<{$order.from}>";
+
+<{if !$order.is_weikuan}>
+// 如果支付倒计时结束直接跳转到订单详情页
+if(time_over <= 0) {
+    clearInterval(my_time);
+    $("#daojishi_98").html("<span class='box'>" +"00"+ "</span>" + ":" + "<span class='box'>" + "00" + "</span>");
+    setTimeout(function(){
+        window.location.href = link;
+    },1000)
+}else if(time_over > 0){
+    //如果剩余支付时间大于0则进入计时器
+    // 先显示一次
+    Countdown("daojishi_98");
+    // 然后开启计时器
+    var my_time = setInterval(function () {
+        Countdown("daojishi_98");
+    }, 1000);
+}
+<{else}>
+$(".ord_pay_time").html("请7天内支付尾款");
+<{/if}>
+// 剩余支付时间倒计时
+function Countdown(id) { 
+    var time_left = Math.floor($("#" + id).attr('rel'));
+    time_left--;
+    var minute = Math.floor(time_left / 60 % 60);
+    var second = Math.floor(time_left % 60);
+    if(minute < 10) {minute = '0' + minute;}
+    if(second < 10) {second = '0' + second;}
+    $("#" + id).attr('rel', time_left);
+    $("#" + id).html("<span class='box'>" + minute+ "</span>" + ":" + "<span class='box'>" + second + "</span>"); 
+    if(time_left <= 0) {
+        clearInterval(my_time);
+        $("#daojishi_98").html("<span class='box'>" +"00"+ "</span>" + ":" + "<span class='box'>" + "00" + "</span>"); 
+        setTimeout(function(){
+            window.location.href = link;
+        },1000)
+    }
+} 
+
+// 返回上一页
+$(document).off('click','#goback').on('click', '#goback', function() {
+    if(localStorage['payment_backurl']) {
+        var backurl = localStorage['payment_backurl'];
+        localStorage.removeItem('payment_backurl');
+        window.location.href = backurl;
+    }else{
+    	history.go(-1);
+    }
+});
+
+// 确认支付
+$(document).off('click', '#subpayment').on('click', '#subpayment', function() {
+    var order_id = parseInt(<{$order.order_id}>);
+    var order_from = "<{$order.from}>";
+    var paycode = $('.label-checkbox.payment').find(':checked').attr('paycode');
+    if(paycode != null && order_id > 0) {
+        var link = "<{link ctl='trade/payment:order' arg0='{paycode}' arg1='{order_id}'}>".replace("{paycode}", paycode).replace("{order_id}", order_id);
+        //var link = "<{link ctl='trade/payment/order-"+paycode+"-"+order_id+"'}>";
+        if(order_from == 'waimai') {
+            localStorage['waimai_detail_backurl'] = "<{link ctl='waimai/order:index'}>";
+        }
+        window.location.href = link;
+    }else {
+        $.alert('请选择支付方式');return false;
+    }
+});
+</script>
+<{include file="block/footer.html"}>
+
+

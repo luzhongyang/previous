@@ -1,0 +1,274 @@
+<{assign var='tpl_title' value=L("订单详情")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left" href="<{link ctl='mall:order'}>"> <span class="iconfont icon-iconfontxiangyou"></span> </a> 
+        <{if in_array($order.pay_status, array(0,1)) && $order.order_status==0}>
+        <a class="button button-link button-nav pull-right button-xk open-slider-modal">取消订单</a>
+        <{/if}>
+            <h1 class="title">订单详情</h1>
+        </header>
+        <!--头部结束-->
+        <!-- 工具栏 -->
+        <nav class="bar bar-tab footer_long_btn">
+            <{if empty($order.pay_status) && $order.order_status==0}>
+            <a class="button button-fill button-warning" href="" id="payment">支付订单</a>
+            <{/if}>
+            <{if $order.order_status==3}>
+            <a class="button button-fill" href="" id="setreceipt">确认收货</a>
+            <{/if}>
+            <{if $order.order_status==-1 || $order.order_status==8}>
+            <!-- <a class="tab-item" href="" id="shanchu"><span class="iconfont icon-shanchu"></span>删除订单</a> -->
+            <{/if}>
+        </nav>
+        <!-- 工具栏结束 -->
+        <div class="content">
+           <div class="mallord_list_box mt10">
+           	<div class="card mallord_list mallord_delt_list">
+              <div class="card-header"><p>
+              <{if empty($order.pay_status) && $order.order_status==0}>
+              订单待支付
+              <{/if}>
+              <{if $order.pay_status==1 && $order.order_status==0}>
+              订单待发货
+              <{/if}>
+              <{if $order.order_status==3}>
+              订单已发货
+              <{/if}>
+              <{if $order.order_status==-1}>
+              订单已取消
+              <{/if}>
+              <{if $order.order_status==8}>
+              订单已完成
+              <{/if}>
+              <small class="black9">-<{$order.dateline|format:'Y-m-d H:i'}></small></p></div>
+              <div class="card-content">
+                <div class="list-block media-list">
+                  <ul>
+                    <{foreach $order.child as $v}>
+                    <li class="item-content">
+                      <div class="item-media">
+                        <img src="<{$pager.img}>/<{$v.photo}>" width="90">
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title"><{$v.product_name}></div>
+                        <div class="item-title-row">
+                          <div class="item-text"><span class="fontcl1 mr10">￥<{$v.product_price}></span><{$v.product_jifen}><span class="black9">积分</span></div>
+                          <div class="item-after">x<{$v.product_number}></div>
+                        </div>
+                      </div>
+                    </li>
+                    <{/foreach}>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-footer">商品总价<p class="fontcl1">￥<{$order.amount-$order.pei_amount}></p></div>
+              <div class="card-footer">运费<p class="fontcl1">￥<{$order.pei_amount}></p></div>
+              <div class="card-footer">合计<p class="fontcl1">￥<{$order.amount}></p></div>
+            </div>
+           </div>
+           <div class="mallord_delt">
+           		<div class="list-block">
+                    <ul>
+                      <li class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title black">订单详情</div>
+                        </div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p>订单号：<{$order.order_id}></p></div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p>联系人：<{$order.contact}>  <{$order.mobile}></p></div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p>联系地址：<{$order.addr}><{$order.house}></p></div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p>支付方式：<{$order.pay_label}></p></div>
+                      </li>
+                      <li class="item-content">
+                      <div class="item-inner"><p>订单状态：
+                      <{if empty($order.pay_status) && $order.order_status==0}>
+                      订单待支付
+                      <{/if}>
+                      <{if $order.pay_status==1 && $order.order_status==0}>
+                      订单待发货
+                      <{/if}>
+                      <{if $order.order_status==3}>
+                      订单已发货
+                      <{/if}>
+                      <{if $order.order_status==-1}>
+                      订单已取消
+                      <{/if}>
+                      <{if $order.order_status==8}>
+                      订单已完成
+                      <{/if}>
+                      </p></div>
+                      </li>
+                    </ul>
+                  </div>
+           </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+
+
+<script>
+
+// 检查补充说明字数
+function checkLen(obj) {
+    var len = GetStrLen($(obj).val());
+    if(len <= 120) {
+        var limit = 120-len;
+        $('.txt_right').text('还可输入' + limit + '字');
+    }
+}
+
+// 删除订单
+function deleteorder() {
+    $.ajax({  
+        url: "<{link ctl='mall/order:delete'}>", 
+        async: false,  
+        dataType: 'json',  
+        data: {"order_id":parseInt(<{$order.order_id}>)},
+        type: 'POST',   
+        success: function (ret) { 
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                // 删除成功跳转至订单列表
+                setTimeout(function(){
+                    $('.modal').remove();
+                    $('.modal-overlay').remove();
+                    $.router.load("<{link ctl='mall/order:items'}>", true);
+                },1000);
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+
+// 删除订单modal
+$(document).off('click', '#shanchu').on('click', '#shanchu', function() {
+    $.modal({
+        title: "删除订单",
+        afterText:"确认删除吗？删除后不可恢复哦",
+        buttons: [{text: "<span class='maincl'>取消</span>"},{text: "<span class='maincl'>删除</span>",bold: true,}],
+        onClick: function (modal, index) {
+            if(index == 0) {}
+            if(index == 1) {
+                $('.modal-overlay').removeClass('modal-overlay-visible');
+                deleteorder();
+            }
+        }
+    });
+})
+
+// 取消订单
+function cancelanorder() {
+    $.ajax({  
+        url: "<{link ctl='mall/order:cancel'}>", 
+        async: false,  
+        dataType: 'json',  
+        data: {"order_id":parseInt(<{$order.order_id}>)},
+        type: 'POST',   
+        success: function (ret) { 
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+
+// 取消订单modal
+$(document).off('click', '.open-slider-modal').on('click','.open-slider-modal', function () {
+    var modal = $.modal({
+        title: "<div class='mallord_delt_mask_tit'>取消理由</div>",
+        afterText:"<div class='mallord_delt_mask'><div class='row selct_box'><a href='javascript:;' class='fl col-33 active'>点错菜了</a><a href='javascript:;' class='fl col-33'>信息填错了</a><a href='javascript:;' class='fl col-33'>优惠不满意</a><a href='javascript:;' class='fl col-33'>临时有事</a><a href='javascript:;' class='fl col-33'>我不想买了</a><a href='javascript:;' class='fl col-33'>其他</a><div class='cl'></div></div><div class='list-block'><div class='item-input'><textarea maxlength='120' placeholder='补充说明' onkeyup='checkLen(this)' ></textarea><p class='txt_right font_size14 black9'>还可输入120字</p></div></div></div>",
+        buttons: [
+            {
+                text: "<span class='black6'>取消</span>"
+            },
+            {
+                text: "<span class='maincl'>确定</span>",
+                bold: true,
+                onClick: function () {
+                    cancelanorder();
+                }
+            },
+        ]
+    })
+    $.swiper($(modal).find('.swiper-container'), {pagination: '.swiper-pagination'});
+});
+ //弹出框,点击标签动作
+$(document).on('click','.mallord_delt_mask .selct_box a',function () {
+	$(".mallord_delt_mask .selct_box a").removeClass("active");
+	$(this).addClass("active");
+});
+// 支付订单
+$(document).off('click', '#payment').on('click', '#payment', function() {
+    var order_id = parseInt(<{$order.order_id}>);
+    var link = "<{link ctl='ucenter/order:payment-"+order_id+"'}>";
+    localStorage['payment_backurl'] = window.location.href;
+    $.router.load(link, true);
+});
+
+// 确认收货
+function receipt() {
+    $.ajax({  
+        url: "<{link ctl='mall/order:setreceipt'}>", 
+        async: false,  
+        dataType: 'json',  
+        data: {"order_id":parseInt(<{$order.order_id}>)},
+        type: 'POST',   
+        success: function (ret) { 
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){
+                    window.location.reload();
+                },1000) 
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });  
+}
+
+// 确认收货modal
+$(document).off('click', '#setreceipt').on('click', '#setreceipt', function() {
+    $.modal({
+        title: "确认收货",
+        afterText:"确认商品已送达吗？",
+        buttons: [{text: "<span class='maincl'>取消</span>"},{text: "<span class='maincl'>确定</span>",bold: true,}],
+        onClick: function (modal, index) {
+            if(index == 0) {}
+            if(index == 1) {
+                $('.modal-overlay').removeClass('modal-overlay-visible');
+                receipt();
+            }
+        }
+    }); 
+});
+
+
+//弹出层消失,点击灰色区域,
+$(document).on('click', '.modal-overlay', function () {
+    $(this).removeClass('modal-overlay-visible');
+    $('.modal').removeClass('modal-in');
+    $('.modal').css('display', 'none');
+});
+</script>
+<{include file="block/footer.html"}>

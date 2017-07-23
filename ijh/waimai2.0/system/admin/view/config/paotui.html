@@ -1,0 +1,98 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?system/config-paotui.html" mini-form="config-form" method="post" >
+<input type="hidden" name="K" value="paotui" />
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+	<tr>
+		<th>"帮我买"价格：</th>
+		<td>
+			<input type="text" name="config[buy_price]" value="<{$config.buy_price|default:'8'}>" class="input w-100"/>
+			<span class="tip-comment">元</span>
+		</td>
+	</tr>
+	<tr>
+		<th>"帮我送"起步价格：</th>
+		<td>
+			<input type="text" name="config[send_price]" value="<{$config.send_price|default:'8'}>" class="input w-100"/>
+			<span class="tip-comment">元</span>
+		</td>
+	</tr>
+        <tr>
+		<th>"帮我送"起步公里数：</th>
+		<td>
+			<input type="text" name="config[send_km]" value="<{$config.send_km|default:'1'}>" class="input w-100"/>
+			<span class="tip-comment">公里</span>
+		</td>
+	</tr>
+	<tr>
+		<th>"帮我送"每超出起步每公里价格：</th>
+		<td>
+			<input type="text" name="config[send_pk]" value="<{$config.send_pk|default:'1'}>" class="input w-100"/>
+			<span class="tip-comment">元</span>
+		</td>
+	</tr>
+	<!-- <tr>
+		<th>"跑腿"价格：</th>
+		<td>
+			<input type="text" name="config[other_price]" value="<{$config.other_price|default:'1'}>" class="input w-100"/>
+			<span class="tip-comment">元</span>
+		</td>
+	</tr> -->
+	
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form>
+
+<form action="?paotui/paotui-paotui_cart.html" mini-form="smstmpl-form" method="post" >
+	<table width="100%" border="0" cellspacing="0" class="table-data table">
+		<tr>
+			<th class="w-200">名称</th><th class="w-200">type</th><th class="w-200">价格</th>
+			<th class="w-100"><a href="###" batch="add_new_line">新增一行</a></th>
+		</tr>
+		<{foreach $othercate as $k=>$v}>
+		<tr item="seo" id="mod-ctl-<{$mod.mod_id}>">
+			<td><input type="text" name="cart[<{$v@index}>][k]" class="input w-200" value="<{$v.title}>"></td>
+			<td><input type="text" name="cart[<{$v@index}>][t]" class="input w-200" value="<{$v.type}>"></td>
+			<td><input type="text" name="cart[<{$v@index}>][v]" class="input w-200" value="<{$v.price}>"></td>
+			<td><a href="###" batch="remove_item_line">删除</a></td>
+		</tr>
+		<{/foreach}>
+		<tr batch="tool_bar">
+			<td colspan="2" class="table-button-td right"><input type="submit" class="bt-big"  id="button2" value="提 交 数 据" /></td><td class="table-button-td"></td></tr>
+	</table>
+</form>
+    
+<script type="text/paint" id="module_tmpl">
+	<tr>
+		<td><input type="text" name="cart[{index}][k]" class="input w-200" value=""></td>
+		<td><input type="text" name="cart[{index}][t]" class="input w-200" value=""></td>
+		<td><input type="text" name="cart[{index}][v]" class="input w-200" value=""></td>
+		<td><a href="###" batch="remove_item_line">取消</a></td>
+	</tr>
+	</script>
+	<script type="text/javascript">
+	(function(K, $){
+	$(document).ready(function(){
+		var tmpl = $("#module_tmpl").html();
+		$("a[batch='add_new_line']").click(function(){
+			var k = K.Guid();
+			$("[batch='tool_bar']").before(tmpl.replace(new RegExp("{index}","gm"),k));
+		}).click();
+		$("a[batch='remove_item_line']").click(function(){
+			$(this).parent().parent('tr').remove();
+		});
+	});
+	})(window.KT, window.jQuery)
+</script>
+
+
+<{include file="admin:common/footer.html"}>

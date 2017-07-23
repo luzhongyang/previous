@@ -1,0 +1,66 @@
+<script>
+//    $(function () {
+//        $(".scIco1").click(function () {
+//            if ($(this).hasClass("scIco1")) {
+//                $(this).removeClass("scIco1");
+//                $(this).addClass("scIco2");
+//            } else {
+//                $(this).addClass("scIco1");
+//                $(this).removeClass("scIco2");
+//            }
+//        });
+//        $(".ico1").click(function () {
+//            if ($(this).hasClass("ico1")) {
+//                $(this).removeClass("ico1");
+//                $(this).addClass("ico2");
+//            } else {
+//                $(this).addClass("ico1");
+//                $(this).removeClass("ico2");
+//            }
+//        });
+//    })
+
+    function guanzhu_pintuan()
+    {
+        $(".guanzhu").unbind('click').click(function () {
+            this_save = $(this);
+            collect = 'default';
+            ajax_data = {"product_id": this_save.attr('num')};
+            $.post("<{link ctl='weidian/pintuan:ajax_collect'}>", ajax_data,
+                    function (res) {
+                        if (1 != res.status) {
+                            $.confirm('立即登录收藏产品?', '', function () {
+                                window.location.href="<{link ctl='passport/login'}>";
+                            });
+                        }
+                        else {
+
+                            if (this_save.hasClass("scIco1") ) {
+                                this_save.removeClass("scIco1");
+                                this_save.addClass("scIco2");
+                                collect = 'save';
+                            } else {
+                                this_save.removeClass("scIco2");
+                                this_save.addClass("scIco1");
+                                collect = 'cancel';
+                            }
+
+                            if (this_save.hasClass("ico1") ) {
+                                this_save.removeClass("ico1");
+                                this_save.addClass("ico2");
+                                collect = 'save';
+                            } else {
+                                this_save.removeClass("ico2");
+                                this_save.addClass("ico1");
+                                collect = 'cancel';
+                            }
+
+                        }
+//                        console.log(res.message + res.status + collect);
+                    }, "json");
+        });
+    }
+    $(function () {
+        guanzhu_pintuan();//全局,ajax异步会用到
+    })
+</script>

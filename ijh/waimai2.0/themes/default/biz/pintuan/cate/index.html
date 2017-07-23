@@ -1,0 +1,38 @@
+<{include file="biz/block/header.html"}>
+<div class="ucenter_t">
+	<ul>
+            <li class="on"><a href="<{link ctl='biz/cate:index'}>"><{L('拼团系统分类')}></a></li>
+            <li><a href="<{link ctl='biz/product:index'}>"><{L('商品管理')}></a></li>
+	</ul>
+
+</div>
+<div class="ucenter_c">
+    <table cellspacing="0" cellpadding="0" class="table">
+    <tr>
+		<th ><{L('父级分类')}></th>
+        <th ><{L('分类')}>ID</th>
+
+        <th><{L('分类名称')}></th>
+		<th ><{L('分类图片')}></th>
+
+    </tr>
+    <{foreach $items as $item}>
+    <tr>
+<td><{$item.parent_id}></td>
+<td><{$item.pintuan_cate_id}></td>
+
+<td><{$item.title}></td>
+<td><img src="<{$pager.img}>/<{$item.icon}>" class="wh-50" /></td>
+
+
+
+</tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="text-align tip-notice"><{L('没有数据')}></p></td></tr>
+    <{/foreach}>
+    
+    <tr>
+    </table>
+    <div class="page"><{$pager.pagebar}></div>
+</div>
+<{include file="biz/block/footer.html"}>

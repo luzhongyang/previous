@@ -1,0 +1,40 @@
+<div class="dianpu_intro">
+   <div class="top">
+       <a class="fl iconfont icon-iconfontxiangyou" href="<{link ctl="shop"}>"></a>
+       <div class="fr">
+       	  <!-- <a id="chat" href="#" class="iconfont ico_3"><i class="point"></i></a> -->
+       	  <a id="search" href="<{link ctl='shop:searchgoods' args=$detail.shop_id}>" class="iconfont icon-sousuo"></a>
+          <{if $detail.pintuan==1}>
+          <a id="pintuan" href="<{link ctl='pintuan/shop' args=$detail.shop_id}>" class="iconfont ico_1"></a>
+          <{/if}>
+          <{if $detail.weidian==1}>
+          <a id="weidian" href="<{link ctl="weidian_<{$detail.shop_id}>/index/index" args=$detail.shop_id}>" class="iconfont ico_2 external"></a>
+          <!-- <a id="weidian" href="<{link ctl='weidian/index:index' args=$detail.shop_id}>" class="iconfont ico_2 external"></a> -->
+          <{/if}>
+          <a id="share_sinablog" href="javascript:;" class="iconfont icon-fenxiang mb5"></a>
+       </div>
+       <div class="cl"></div>
+   </div>
+   <div class="list-block media-list">
+    <ul>
+      <li>
+        <a href="#" class="item-content">
+            <div class="item-media"><img src="<{$pager.img}>/<{$detail.logo}>"></div>
+          <div class="item-inner">
+            <div class="item-title-row">
+              <div class="item-title"><span class="tag"><{if $detail.yy_status_type==0}>打烊<{else}>营业中<{/if}></span><{$detail.title}></div>
+              <div class="item-after <{if 1 == $is_collect}>active<{/if}>" id="collects"></div>
+            </div>
+            <div class="item-text">
+            	<div><span class="starBg mr10"><span class="star" style="width:<{$detail['score']/$detail['comments']*20}>%;"></span></span>已售<{$detail.orders}>单</div>
+                <p>起送价￥<{$detail.min_amount}>  |  配送费￥<{$detail.freight_price}>  |  平均<{$detail.pei_time}>分钟送达</p>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="bottom" id="open-about"><a href="javascript:;" class="iconfont icon-gengduo fr"></a><p><i class="iconfont icon-gonggao mr5"></i><{$detail.info}></p>
+  	<div class="cl"></div>
+  </div>
+</div>

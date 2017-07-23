@@ -1,0 +1,48 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+	<table width="100%" align="center" cellpadding="0" cellspacing="0" >
+		<tr>
+			<td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+			<th><{$MOD.title}></th>
+			<td align="right"><{link ctl="pintuan/productattr:create" class="button" title="添加"}>
+<{link ctl="pintuan/productattr:so" load="mini:搜索内容" width="mini:500" class="button" title="搜索"}></td>
+			<td width="15"></td>
+		</tr>
+	</table>
+</div>
+<div class="page-data">	
+	<form id="items-form">
+    <table width="100%" border="0" cellspacing="0" class="table-data table">
+    <tr><th class="w-100">主键</th>
+<th>团产品id</th>
+<th>属性名称</th>
+<th>属性值</th>
+<th>创建时间</th>
+<th class="w-150">操作</th>
+</tr>
+    <{foreach $items as $item}>
+    <tr>
+<td><label><input type="checkbox" value="<{$item.pintuan_attr_id}>" name="pintuan_attr_id[]" CK="PRI"/><{$item.pintuan_attr_id}><label></td>
+<td><{$item.pintuan_product_id}></td>
+<td><{$item.attr_name}></td>
+<td><{$item.attr_value}></td>
+<td><{$item.dateline}></td>
+<td><{link ctl="pintuan/productattr:detail" args=$item.pintuan_attr_id class="button" title="查看"}><{link ctl="pintuan/productattr:edit" args=$item.pintuan_attr_id title="修改" class="button"}><{link ctl="pintuan/productattr:delete" args=$item.pintuan_attr_id act="mini:删除" confirm="mini:确定要删除吗？" title="删除" class="button"}></td>
+</tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="text-align tip-notice">没有数据</p></td></tr>
+    <{/foreach}>
+    </table>
+	</form>
+	<div class="page-bar">
+		<table>
+			<tr>
+			<td class="w-100"><label><input type="checkbox" CKA="PRI"/>&nbsp;&nbsp;全选</label></td>
+			<td colspan="10" class="left"><{link ctl="pintuan/productattr:delete" type="button" submit="mini:#items-form" confirm="mini:确定要批量删除选中的内容吗?" priv="hide" value="批量删除"}>
+<{link ctl="pintuan/productattr:doaudit" type="button" submit="mini:#items-form" confirm="mini:确定要批量审核选中的内容吗?" priv="hide" value="批量审核"}></td>
+			<td class="page-list"><{$pager.pagebar}></td>
+		</tr>
+		</table>
+	</div>
+</div>
+<{include file="admin:common/footer.html"}>

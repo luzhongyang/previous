@@ -1,0 +1,197 @@
+<{assign var='tpl_title' value=L("跑腿订单")}>
+<{include file="block/header.html" }>
+<style>
+    .maxItems{
+        visibility: hidden;
+    }
+    .infinite-scroll-nomore {
+        display:none;
+    }
+</style>
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back"> 
+        	<span class="iconfont icon-iconfontxiangyou" style="margin-top:-0.2rem;"></span>
+        </a>
+        <h1 class="title">跑腿订单</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content ajax_data_order_list">
+        <div class="top_tab">
+            <div class="content-block">
+                <div class="buttons-row">
+                    <a href="#tab1" id="tab1_link" class="tab-link active button">待处理</a>
+                    <a href="#tab2" id="tab2_link" class="tab-link button">已完成</a>
+                </div>
+            </div>
+        </div>
+        <div class="content-block biaoqianye">
+            <div class="tabs">
+                <div id="tab1" class="tab active infinite-scroll">
+                    <div class="content-block biaoqian-content list-container">
+
+
+                    </div>
+
+                    <input name="page" id="page" class="page" value="2"/>
+                    <input name="maxItems" id="maxItems" class="maxItems" value="<{$count.count_0}>"/>
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                    <div class="infinite-scroll-nomore">
+                        <div class="loading_end">没有更多了...</div>
+                    </div>
+
+                </div>
+                <div id="tab2" class="tab infinite-scroll">
+                    <div class="content-block biaoqian-content list-container">
+
+
+
+
+
+                    </div>
+
+                    <input name="page" id="page" class="page" value="2"/>
+                    <input name="maxItems" id="maxItems" class="maxItems" value="<{$count.count_1}>"/>
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                    <div class="infinite-scroll-nomore">
+                        <div class="loading_end">没有更多了...</div>
+                    </div>
+
+                </div>
+            </div>
+            <!--tab end-->
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var limit = 2;
+
+    //定义数据
+    ajax_data = {"status": 0, "page": 1, "limit": limit};//limit 翻页数,线上需要更改
+    function __ajax_tuan_my(tabIndex, ajax_data) {
+        ajax_data.status = tabIndex;
+        $.post("<{link ctl='pintuan:ajax_tuan_order_list'}>", ajax_data,
+                function (res) {
+//            console.warn(res.data.html);
+                    //maxItems > 现有页数, 追加翻页
+                    next_page = parseInt(ajax_data.page) + 1;
+                    $('.infinite-scroll').eq(tabIndex).find('.page').val(next_page);
+                    console.log(res.data.count_num + '|||' + next_page); //  2pm
+                    // 添加新条目
+                    $('.infinite-scroll.active .list-container').append(res.data.html);//线上直接返回html数据
+
+
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+
+                    console.log(tabIndex + ' / ' + lastIndex + ' / ' + maxItems); //  2pm
+//                console.log(lastIndex + ' / ' + maxItems); //  2pm
+                    $('.infinite-scroll-preloader').eq(tabIndex).hide();
+                    if (lastIndex >= maxItems) {
+                        // 加载完毕，则注销无限加载事件，以防不必要的加载:$.detachInfiniteScroll($('.infinite-scroll').eq(tabIndex));多个无线滚动请自行根据自己代码逻辑判断注销时机
+                        // 删除加载提示符
+//                        $.detachInfiniteScroll($('.infinite-scroll').eq(tabIndex));
+                        $('.infinite-scroll-nomore').eq(tabIndex).show();
+//                        $('.infinite-scroll-preloader').eq(tabIndex).remove();
+                        $('.infinite-scroll-preloader').eq(tabIndex).empty();
+
+                        return;
+                    }
+
+                    // 更新最后加载的序号
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    $.refreshScroller();
+//                        console.log(res.data.html); //  2pm
+                }, "json");
+    }
+
+    __ajax_tuan_my(0, ajax_data);
+
+    //初始化,防止退会按钮出错
+    $('.list-container').eq(0).empty();
+    $('.list-container').eq(1).empty();
+    $("#tab2").removeClass('active');
+    $("#tab2_link").removeClass('active');
+    $("#tab1").addClass('active');
+    $("#tab1_link").addClass('active');
+
+
+    $("#tab1_link").click(function(){
+        ajax_data = {"status": 0, "page": 1, "limit": limit};
+        tabIndex = 0;
+        $('.infinite-scroll-nomore').eq(tabIndex).hide();
+        $('.infinite-scroll-preloader').eq(tabIndex).html('<div class="preloader"></div>');
+        $('.list-container').eq(tabIndex).empty();
+        __ajax_tuan_my(0, ajax_data);
+    });
+    $("#tab2_link").click(function(){
+        ajax_data = {"status": 1, "page": 1, "limit": limit};
+        tabIndex = 1;
+        $('.infinite-scroll-nomore').eq(tabIndex).hide();
+        $('.infinite-scroll-preloader').eq(tabIndex).html('<div class="preloader"></div>');
+//        $('.infinite-scroll.active .list-container').empty();
+        $('.list-container').eq(tabIndex).empty();
+        __ajax_tuan_my(1, ajax_data);
+    });
+
+    var loading = false;
+    var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+    //    var itemsPerLoad = 20;
+    var tabIndex = 0;
+    $(document).on('infinite', '.ajax_data_order_list', function () {
+        if (loading) return;// 如果正在加载，则退出
+        loading = true;// 设置flag
+//        $('.infinite-scroll-nomore').eq(tabIndex).hide();
+        $('.infinite-scroll-preloader').eq(tabIndex).show();
+
+
+        // 模拟1s的加载过程
+        setTimeout(function () {
+            $('.infinite-scroll-preloader').eq(tabIndex).show();
+            // 重置加载flag
+            loading = false;
+            var tabIndex = 0;
+            if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab1") {
+                tabIndex = 0;
+            }
+            if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab2") {
+                tabIndex = 1;
+            }
+
+            var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+//            console.log(tabIndex + ' / ' + lastIndex + ' / ' + maxItems); //  2pm
+            if (lastIndex >= maxItems) {
+                // 加载完毕，则注销无限加载事件，以防不必要的加载
+//                $.detachInfiniteScroll($('.infinite-scroll'));
+                // 删除加载提示符
+//                $('.infinite-scroll-preloader').remove();
+//                $('.infinite-scroll-preloader').eq(tabIndex).hide();
+                $('.infinite-scroll-preloader').eq(tabIndex).empty();
+                $('.infinite-scroll-nomore').eq(tabIndex).show();
+                return;
+            }
+            // 添加新条目
+            ajax_data.page = $('.infinite-scroll').eq(tabIndex).find('.page').val();
+            __ajax_tuan_my(tabIndex, ajax_data);
+            // 更新最后加载的序号
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+            //容器发生改变,如果是js滚动，需要刷新滚动
+            $.refreshScroller();
+        }, 1000);
+
+
+    });
+</script>
+
+
+<{include file='block/footer.html'}>

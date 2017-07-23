@@ -1,0 +1,241 @@
+<{assign var='tpl_title' value=L("换绑手机")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+        <!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">换绑手机</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	<div class="mineBangding_tab">
+            	<div class="list fl active fl1"><span class="num">1</span>验证旧手机</div>
+                <div class="list fl fl2"><span class="num">2</span>绑定新手机</div>
+            </div>
+            <div class="mineBangding_tab_cont mt10">
+                <div class="list_box" id="box1">
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" value="<{substr_replace($MEMBER.mobile,'****',3,4)}>" readonly>
+                                            <input id="mobile1" value="<{$MEMBER.mobile}>" hidden>
+                                        </div>
+                                        <a href="javascript:;" class="yzmget yzmget1">获取验证码</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" id="yzm1" placeholder="验证码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-block"> <a id="button1" class="button button-big button-fill button-success open-slider-modal">验证后绑定新手机</a> </div>
+                </div>
+                <script>
+                $('#button1').click(function(){
+                    var mobile = $('#mobile1').val(); 
+                    var yzm = $('#yzm1').val();
+                    var link = "<{link ctl='ucenter/info:old_mobile' }>";
+                    $.post(link,{mobile:mobile,yzm:yzm},function(ret){
+                        if(ret.error == 0){
+                        	$.alert(ret.message);
+                        	$("#box1").hide();
+                        	$(".fl1").removeClass('active');
+                        	$("#box2").show();
+                        	$(".fl2").addClass('active');
+                        }else{
+                        	$.alert(ret.message);
+                        }
+                        
+                    },'json');
+                })
+                </script>
+                <div class="list_box" id="box2" hidden>
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" id="mobile2" placeholder="新手机号">
+                                        </div>
+                                        <a href="javascript:;" class="yzmget yzmget2">获取验证码</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" id="yzm2" placeholder="验证码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-block"> <a id="button2" class="button button-big button-fill button-success">绑定</a> </div>
+                </div>
+                <script>
+                $('#button2').click(function(){
+                    var mobile = $('#mobile2').val(); 
+                    var yzm = $('#yzm2').val();
+                    var link = "<{link ctl='ucenter/info:set_mobile' }>";
+                    $.post(link,{mobile:mobile,yzm:yzm},function(ret){
+                        if(ret.error == 0){
+                        	$.alert(ret.message);
+                        	setTimeout(function(){
+	                            window.location.href="<{link ctl='ucenter/info'}>";
+	                        },2000)
+                        }else{
+                        	$.alert(ret.message);
+                        }
+                        
+                    },'json');
+                })
+                </script>
+            </div>            
+        </div>        
+    <!--内容结束-->   
+    </div>
+<script>
+	var mobile_timeout;
+	var mobile_count = 60;
+	var mobile_lock = 0;
+	var step = 0;
+	$(function(){
+        $(function () {
+            $(".yzmget1").click(function () {
+            	var mobile1 = $("#mobile1").val();
+            	if(mobile1){
+	                if (mobile_lock == 0) {
+	                    mobile_count = 60;
+						$(".yzmget1").addClass("graybg");
+	                    $('.yzmget1').attr("disabled", "disabled");
+	                    step = 1;
+	                    verify_pic();
+	                }
+            	}else{
+            		$.alert("请填写手机号");
+            	}
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".yzmget1").removeClass("graybg");
+                $('.yzmget1').removeAttr("disabled");
+                $('.yzmget1').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+				$('.yzmget1').removeClass("on");
+            }
+            else {
+                mobile_count--;
+                $('.yzmget1').text( + mobile_count.toString() + "s重新获取");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+				$('.yzmget1').addClass("on");
+            }
+        };
+		//注册页获取验证码部分结束
+	});
+	
+	function verify_pic(){
+		var modal = $.modal({
+		    title: "<div class='txt_left'>请填写图形验证码</div>",
+		    afterText:  "<div class='yzmint'><input type='text' id='pass-verify' value=''><span class='yzmimg'><img verify='#pass-verify' src="+"<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>"+" id='pass-verify'/></span></div>",
+		    buttons: [
+				{
+					text: '取消'
+				},
+		      	{
+		        	text: '确定',
+		        	bold: true,
+		        	onClick: function () {
+		        		var verifycode = $("#pass-verify").val();
+		        		var link = "<{link ctl='passport/verify_img'}>";
+		                 $.post(link,{verifycode:verifycode},function(ret){
+		                	 if(ret.error){
+		                        	$.alert(ret.message);
+		                        }else{
+		                        	send_sms();
+		                        }
+		               },'json');
+			        }
+		      	},
+			]
+	  	})
+	  	$.swiper($$(modal).find('.swiper-container'), {pagination: '.swiper-pagination'});
+	}
+	
+	function send_sms(){
+		if(step == 1){
+			var mobile = $('#mobile1').val();	
+		}else{
+			var mobile = $('#mobile2').val();
+		}
+		 
+		var link = "<{link ctl='passport/sendsms'}>";
+		$.post(link,{mobile:mobile},function(ret){
+			if(ret.error == 0){
+		    	BtnCount();
+				mobile_lock = 1;
+				$(".get_yzm").addClass("on");
+				$('.get_yzm').attr("disabled", "disabled");  
+		    }else{
+				$.alert(ret.message);
+				mobile_lock = 0;
+		    }
+		},'json');
+		mobile_count = minute;                    
+	}
+</script>
+<script>
+	var mobile_timeout2;
+	var mobile_count2 = 60;
+	var mobile_lock2 = 0;
+	$(function(){
+        $(".yzmget2").click(function () {
+        	var mobile2 = $("#mobile2").val();
+        	if(mobile2){
+                if (mobile_lock2 == 0) {
+                    mobile_count2 = 60;
+					$(".yzmget2").addClass("graybg");
+                    $('.yzmget2').attr("disabled", "disabled");
+                    step = 2;
+                    verify_pic();
+                }
+        	}else{
+        		$.alert("请填写手机号");
+        	}
+        });
+        BtnCount2 = function () {
+            if (mobile_count2 == 0) {
+				$(".yzmget2").removeClass("graybg");
+                $('.yzmget2').removeAttr("disabled");
+                $('.yzmget2').text("重新获取");
+                mobile_lock2 = 0;
+                clearTimeout(mobile_timeout2);
+				$('.yzmget2').removeClass("on");
+            }
+            else {
+                mobile_count2--;
+                $('.yzmget2').text( + mobile_count2.toString() + "s重新获取");
+                mobile_timeout2 = setTimeout(BtnCount2, 1000);
+				$('.yzmget2').addClass("on");
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+<{include file="block/footer.html"}>

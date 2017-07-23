@@ -1,0 +1,34 @@
+/*参团新增*/
+.cheng-color {color: #ff3300;}
+/*创建拼团*/
+.cantuan_create{ background:#fff; padding:0.25rem 0.5rem; border-bottom:1px solid #e6e6e6;}
+.cantuan_create .bt{ font-size:0.75rem; line-height:1.2rem;}
+.cantuan_create .box{ margin-left:4rem;}
+.cantuan_create .box textarea{ width:100%; height:2rem; background:none; border:none; font-size:0.7rem; line-height:1.2rem;}
+.cantuan_create_selct{ margin:1rem; text-align:center; overflow:hidden}
+.cantuan_create_selct .btn{ display:inline-block; width:48%; border-radius:0.2rem; background:#fff; border:1px solid #e6e6e6; height:2rem; line-height:2rem; font-size:0.75rem; position:relative; color:#666;}
+.cantuan_create_selct .btn input{ position:absolute; left:0; top:0; right:0; bottom:0; opacity:0;}
+.cantuan_create_selct .btn.on{ background:#ff3300; border-color:#ff3300; color:#fff;}
+
+.selfti_kaiguan .item-after{ line-height:1.8rem;}
+.selfti_kaiguan .item-after .label-checkbox{ margin-right:0.2rem; margin-left:1rem;}
+.wantJoin-tuan .list-block,.wantJoin-tuan .list-block .item-after{ font-size:0.7rem;}
+/*创建拼团结束*/
+/*我要参团*/
+.shuliang {font-size: 0.65rem;}
+.wantJoin-tuan{padding-bottom:0.5rem}
+.jion_soon{text-align:right;}
+.jion_soon .heji{display:inline-block;margin-right:0.5rem;color:#ff3300}
+.jion_soon a.pub_btn{height:2.5rem;line-height:2.5rem;border-radius:0;padding:0 1rem;font-size:0.8rem;}
+.wantJoin-tuan .icon-dizhi1{color:#656565;font-size:0.9rem;display:inline-block;margin-right:0.26rem;}
+.wantJoin-tuan .choose{font-size:0.75rem;}
+.bot-img{border:0.1rem solid transparent;border-top:0 solid transparent;-moz-border-image: url(../images/border_img.png) 3 0 round;
+    -webkit-border-image: url(../images/border_img.png) 3 0 round;-o-border-image: url(../images/border_img.png) 3 0 round;border-image: url(../images/border_img.png) 3 0 round;}
+.wantJoin-tuan .list-block{font-size:0.7rem;margin:0;}
+.wantJoin-tuan .list-block .item-text{color:#999;height:1rem;line-height:1rem;font-size:0.68rem;}
+.selfti_kaiguan .item-input{width:2.6rem;}
+.shangjia_peisong .item-media{padding-right:0.75rem}
+.icon-dizhi1.bigda{color:#666;font-size:1.2rem;display:inline-block;margin-right:0;vertical-align:middle}
+.wantJoin-tuan .list-block textarea{height:3rem;}
+.list-block .ziti-input input[type="text"]{display:inline-block;height:1.15rem;color: #00CDDA;font-size: 0.7rem;margin-top:0.2rem;}
+/*参团新增结束*/

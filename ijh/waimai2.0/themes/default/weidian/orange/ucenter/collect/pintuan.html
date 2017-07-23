@@ -1,0 +1,99 @@
+<{assign var='tpl_title' value=L("拼团收藏")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<!--     <style>
+.modal{width: 12.5rem;left:53%}
+.modal-inner{padding:1.5rem 0.75rem;border-radius: 0.15rem 0.15rem 0 0;}
+.modal-inner:after{background-color: #ff7800;height: 2px}
+.modal-buttons .modal-button{background-color: #fff;color:#333}
+.modal-button:first-child{border-radius: 0 0 0 0.15rem;}
+.modal-button:last-child{border-radius: 0 0 0.15rem 0 ;}
+.modal-button:after{background-color:#ff7800;-webkit-transform: scaleY(1);transform: scaleY(1);}
+</style> -->
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav header_Ico">
+        <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/ucenter/index/index'}>">
+            <span class="Ico1"></span>
+        </a>
+        <h1 class="title">拼团收藏</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content content-padding">
+        <div class="buttons-tab"> 
+            <a href="<{link ctl='weidian/ucenter/collect:waimai_items'}>" class="button external">外卖商品</a> 
+            <a href="javascript:;" class="button active">拼团商品</a> 
+       </div>
+       	<{if $items}>
+        <div class="my-collect">
+        	<{foreach $items as $v}>
+            <div class="list-block media-list border_b">
+                <ul>
+                    <li>
+                        <a href="" class="item-content">
+                            <div class="item-media">
+                                <img src="<{$pager.img}>/<{$v.photo}>" width="100%"></div>
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title black3">
+                                        <big>【<{$v.title}>】</big>
+                                    </div>
+                                    <div class="item-after">
+                                        <span class="maincl xiaoliang">销售量:<{$v.sales}></span>
+                                    </div>
+                                </div>
+                                <div class="item-text"></div>
+                                <div class="item-subtitle maincl">
+                                    <big>￥<{$v.price}></big>
+                                    <small>/份</small>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="pub_btn confirm-ok" pintuan_product_id="<{$v.pintuan_product_id}>">取消收藏</div>
+                    </li>
+                </ul>
+            </div>
+            <{/foreach}>
+        </div>
+        <{else}>
+        <div class="nonePage txt_center">
+            <img src="%THEME%/weidian/<{$theme_style}>/static/images/nodata/pic_shopProduct_no@2x.png">
+            <p class="black3">无拼团商品收藏记录</p>
+        </div>
+        <p class="txt_center font_size12  black9">马上去收藏吧</p>
+        <{/if}>
+    </div>
+</div>
+<script>
+
+// 取消收藏
+$(document).off('click','.confirm-ok').on('click','.confirm-ok', function () {
+    var pintuan_product_id = parseInt($(this).attr('pintuan_product_id'));
+    $.confirm('<span class="maincl">确定取消该商品的收藏?</span>',
+        function () { 
+            $.ajax({
+                url: "<{link ctl='weidian/pintuan:ajax_collect'}>",
+                async: true,
+                dataType: 'json',
+                type: 'POST',
+                data:{'product_id':pintuan_product_id},
+                success: function (ret) {
+                    if(ret.error == 0){ 
+                    }else {
+                        // 取消收藏成功
+                        $.alert('取消收藏成功');
+                    }
+                    setTimeout(function(){
+                        $.closeModal();
+                        window.location.reload();
+                    },2000);
+                },
+                error: function (xhr, status, err) {
+                    $.alert(err);
+                },
+            });
+        },
+        function () {}
+      );
+});
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

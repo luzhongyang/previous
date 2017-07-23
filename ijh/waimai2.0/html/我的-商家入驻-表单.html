@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>我的-商家入驻-表单</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">我要入驻</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	<div class="mar10">
+            	<div class="mineEnter_form">
+                	<div class="list-block">
+                        <ul>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-inner">
+                                <div class="item-title label">申请人</div>
+                                <div class="item-input">
+                                  <input type="text" placeholder="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-inner">
+                                <div class="item-title label">联系电话</div>
+                                <div class="item-input">
+                                  <input type="text" placeholder="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-inner">
+                                <div class="item-title label">验证码</div>
+                                <div class="item-input">
+                                  <input type="text" placeholder="">
+                                </div>
+                                <a href="javascript:;" class="yzmget">获取验证码</a>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-inner">
+                                <div class="item-title label">密码</div>
+                                <div class="item-input">
+                                  <input type="password" placeholder="请设置密码（6-20位字符）">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+  					</div>
+            	</div>
+                <div class="mineEnter_form">
+                	<div class="list-block">
+                        <ul>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-inner">
+                                <div class="item-title label">店铺名称</div>
+                                <div class="item-input">
+                                  <input type="text" placeholder="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-inner">
+                                <div class="item-title label">服务电话</div>
+                                <div class="item-input">
+                                  <input type="text" placeholder="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content item-link">
+                              <div class="item-inner">
+                                <div class="item-title label">店铺类型</div>
+                                <div class="item-input">
+                                  <input type="text" id='picker-name' placeholder="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-inner">
+                                <div class="item-title label">店铺地址</div>
+                                <div class="item-input">
+                                  <input type="text" placeholder="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+  					</div>
+            	</div>
+                <div class="mineEnter_form">
+                	<div class="list-block">
+                        <ul>
+                          <li class="align-top">
+                            <div class="item-content">
+                              <div class="item-inner">
+                                <div class="item-input">
+                                  <textarea placeholder="店铺简介"></textarea>
+                                  <p class="txt_right black9"><small>200字以内</small></p>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+  					</div>
+            	</div>
+                <div class="content-block"> <a class="button button-big button-fill button-success">提交</a> </div>
+            </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+</div>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 60;
+        var mobile_lock = 0;
+        $(function () {
+            $(".yzmget").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 60;
+					$(".yzmget").addClass("graybg");
+                    $('.yzmget').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".yzmget").removeClass("graybg");
+                $('.yzmget').removeAttr("disabled");
+                $('.yzmget').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+				$('.yzmget').removeClass("on");
+            }
+            else {
+                mobile_count--;
+                $('.yzmget').text( + mobile_count.toString() + "s重新获取");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+				$('.yzmget').addClass("on");
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+<script>
+$("#picker-name").picker({
+  toolbarTemplate: '<header class="bar bar-nav">\
+  <button class="button button-link pull-right close-picker">确定</button>\
+  <button class="button button-link pull-left close-picker">取消</button>\
+  </header>',
+  cols: [
+    {
+      textAlign: 'center',
+      values: ['父级分类1', '父级分类2', '父级分类3', '父级分类4', '父级分类5', '父级分类6', '父级分类7', '父级分类8']
+      //如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+    },
+    {
+      textAlign: 'center',
+      values: ['子分类1', '子分类2', '子分类3', '子分类4', '子分类5', '子分类6', '子分类7']
+    }
+  ]
+});
+</script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

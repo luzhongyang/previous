@@ -1,0 +1,44 @@
+<{assign var='tpl_title' value=L("<{$register.title}>")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav"><a class="button button-link button-nav pull-left back"> <span
+            class="iconfont icon-iconfontxiangyou"></span> </a>
+
+        <h1 class="title"><{$register.title}></h1>
+    </header>
+    <!--头部结束-->
+    <div class="content">
+        <div class="mt10 pt_nr">
+            <div class="pintuan-way mt10 border_b" style="padding:20px 10px 10px 10px;">
+                <div class="row font_size14">
+                    <div class="col-25">
+                        <div class="num fl">1</div>
+                        <div class="fl"><span>选择</span><span>心仪商品</span></div>
+                    </div>
+                    <div class="col-25">
+                        <div class="num fl">2</div>
+                        <div class="fl"><span>支付开团</span><span>或参团</span></div>
+                    </div>
+                    <div class="col-25">
+                        <div class="num fl">3</div>
+                        <div class="fl"><span>等待好友</span><span>参团支付</span></div>
+                    </div>
+                    <div class="col-25">
+                        <div class="num fl">4</div>
+                        <div class="fl"><span>达到人数</span><span>拼团成功</span></div>
+                    </div>
+                </div>
+                <div class="cl">
+                </div>
+            </div>
+            <div class="serveIntro_nr black9 pad_t10 border_t border_b">
+                <div class="nr">
+                    <{$register.content}>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <{include file="weidian/$theme_style/block/footer.html"}>

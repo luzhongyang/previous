@@ -1,0 +1,70 @@
+<{assign var='tpl_title' value=L("搜索店内商品")}>
+<{include file="block/header.html" }>
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a> <a class="button button-link button-nav pull-right" id="searchgoods">搜索</a>
+        <div class="searchbar">
+            <a class="searchbar-cancel iconfont icon-x-copy" id="reset"></a>
+            <div class="search-input">
+              <label class="icon iconfont icon-sousuo" for="search"></label>
+              <input type="search" id='search-shopgoods' placeholder='搜索店内商品'/>
+            </div>
+        </div>
+    </header>
+    <!--头部结束-->
+    <div class="content" id="goods_items">
+    </div>      
+</div>
+<script type="text/javascript">
+$(document).off('click','#reset').on('click','#reset',function() {
+    $('#search-shopgoods').val('');
+})
+
+var html = '';
+$(document).off('click','#searchgoods').on('click','#searchgoods',function() {
+    var shop_id = parseInt(<{$shop.shop_id}>);
+    var title = $('#search-shopgoods').val();
+    if(title == '') {
+        Widget.MsgBox.alert('请输入商品名称');
+        setTimeout(function(){Widget.MsgBox.hide();},4000);
+        return;
+    }
+    $.ajax({  
+        url: "<{link ctl='shop:searchtitle'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"shop_id":shop_id,"title":title},
+        type: 'POST',   
+        success: function (ret) {    
+            if(ret.error == 0){
+                html = '';
+                $('#goods_items').html("");
+                if(ret.data.items.length>0) {
+                    $.each(ret.data.items, function(key,value){
+                        html +='<div class="dianpu_list"><a href="'+value.url+'">';
+                        html +='<div class="img fl"><img src="<{$pager.img}>/'+value.photo+'" width="100" height="100" /></div>';
+                        html +='<div class="wz">';
+                        html +='<h3 class="black3">'+value.title+'</h3>';
+                        html +='<p class="black9">已售：'+value.sales+'份</p>';
+                        html +='<p class="fontcl1">￥'+value.price+'</p>';
+                        if(value.is_spec != 0) {
+                            html +='<div class="waimai_guigeA">可选规格</div>';
+                        }
+                        html +='</div></a></div>';
+                    })
+                }else {
+                    html += '<div class="nonePage txt_center">';
+                    html += '<img src="%THEME%/static/images/none/pic_shopProduct_no@2x.png">';
+                    html += '<p class="black3">没有搜索结果</p>';
+                    html += '</div><p class="txt_center font_size12  black9">换个关键词试试吧</p>';
+                }
+                $('#goods_items').html(html);
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });
+})
+</script>
+<{include file="block/footer.html"}>

@@ -1,0 +1,149 @@
+<{assign var='tpl_title' value=L("修改密码")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left external" href="<{link ctl='ucenter/info'}>"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">修改密码</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	<p class="black9 font_size14 mar10" id="top_alert" hidden>验证码已发送至<{substr_replace($MEMBER.mobile,'****',3,4)}></p>
+            <div class="login_tab_cont">
+                <div class="list_box">
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                        	<input type="text" id="yzm" value="" placeholder="验证码">
+                                            <input id="mobile" value="<{$MEMBER.mobile}>" hidden>
+                                        </div>
+                                        <a href="javascript:;" class="yzmget">获取验证码</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" id="new_passwd" placeholder="新密码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="font_size14 mar10 black9">密码长度至少6个字符，最多32个字符</div>
+                    <div class="content-block"> <a class="button button-big button-fill button-success" id="btn1">确定</a> </div>
+                </div>
+            </div>
+        </div> 
+        <script>
+    	$('#btn1').click(function(){
+    		var yzm = $("#yzm").val();
+    		var new_passwd = $("#new_passwd").val();
+    		var link = "<{link ctl='ucenter/info:passwd_by_msg'}>";
+    		$.post(link,{yzm:yzm,new_passwd:new_passwd},function(ret){
+                if(ret.error == 0){
+                	$.alert(ret.message);
+                	setTimeout(function(){
+                        window.location.href="<{link ctl='ucenter/info'}>";
+                    },2000)
+                }else{
+                	$.alert(ret.message);
+                }
+                
+            },'json');
+    	});
+    </script>       
+    <!--内容结束-->   
+    </div>
+<script>
+	var mobile_timeout;
+	var mobile_count = 60;
+	var mobile_lock = 0;
+	$(function(){
+        $(function () {
+            $(".yzmget").click(function () {
+            	var mobile = $("#mobile").val();
+            	if(mobile){
+            		if (mobile_lock == 0) {
+                        mobile_count = 60;
+    					$(".yzmget1").addClass("graybg");
+                        $('.yzmget1').attr("disabled", "disabled");
+                        verify_pic();
+                    }
+            	}else{
+            		$.alert("请填写手机号");
+            	}
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".yzmget").removeClass("graybg");
+                $('.yzmget').removeAttr("disabled");
+                $('.yzmget').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+				$('.yzmget').removeClass("on");
+				$("#top_alert").hide();
+            }
+            else {
+                mobile_count--;
+                $('.yzmget').text( + mobile_count.toString() + "s重新获取");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+				$('.yzmget').addClass("on");
+				$("#top_alert").show();
+            }
+        };
+		//注册页获取验证码部分结束
+	});
+	
+	function verify_pic(){
+		var modal = $.modal({
+		    title: "<div class='txt_left'>请填写图形验证码</div>",
+		    afterText:  "<div class='yzmint'><input type='text' id='pass-verify' value=''><span class='yzmimg'><img verify='#pass-verify' src="+"<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>"+" id='pass-verify'/></span></div>",
+		    buttons: [
+				{
+					text: '取消'
+				},
+		      	{
+		        	text: '确定',
+		        	bold: true,
+		        	onClick: function () {
+		        		var verifycode = $("#pass-verify").val();
+		        		var link = "<{link ctl='passport/verify_img'}>";
+		                 $.post(link,{verifycode:verifycode, mobile: <{$member.mobile}>},function(ret){
+		                	 if(ret.error){
+		                        	$.alert(ret.message);
+		                        }else{
+		                        	send_sms();
+		                        }
+		               },'json');
+			        }
+		      	},
+			]
+	  	})
+	  	$.swiper($$(modal).find('.swiper-container'), {pagination: '.swiper-pagination'});
+	}
+	
+	function send_sms(){
+		var mobile = $('#mobile').val();	
+		var link = "<{link ctl='passport/sendsms'}>";
+		$.post(link,{mobile:mobile},function(ret){
+			if(ret.error == 0){
+		    	BtnCount();
+				mobile_lock = 1;
+				$(".get_yzm").addClass("on");
+				$('.get_yzm').attr("disabled", "disabled");  
+		    }else{
+				$.alert(ret.message);
+				mobile_lock = 0;
+		    }
+		},'json');
+		mobile_count = minute;                    
+	}
+</script>
+<{include file="block/footer.html"}>

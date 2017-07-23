@@ -1,0 +1,154 @@
+<{include file="block/header.html"}>
+<div class="page page-current"> 
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav" style="z-index:20;"> 
+        <a class="button button-link button-nav pull-left external" href="<{link ctl='mall/product/index'}>"> 
+            <span class="iconfont icon-iconfontxiangyou"></span> 
+        </a> 
+        <a class="button button-link button-nav pull-right"> 
+            <span class="iconfont icon-gengduo1 open-jifen_xiala" id="xiala"></span>
+            <script>
+                $('#xiala').click(function () {
+                    if ($(".mask_box .jifen_xiala").css("display") == "none") {
+                        $(".mask_box .jifen_xiala").show();
+                        $(".mask_box .jifen_xiala").parent().find(".mask_bg").show();
+                    } else {
+                        $(".mask_box .jifen_xiala").hide();
+                        $(".mask_box .jifen_xiala").parent().find(".mask_bg").hide();
+                    }
+                });
+            </script>
+        </a>
+        <h1 class="title">商城列表</h1>
+    </header>
+    <!-- 标题栏结束 --> 
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab dianpu_footer">
+        <div class="dianpu_fot_shop">
+            <div class="fl" id="pub">
+                <div class="fl spcart iconfont icon-gouwuche"><i id="total_count"><{$total.count|default:0}></i></div>
+                <div class="fl zjia"><p class="fontcl1" id="total_price">￥<{$total.price|default:0}></p></div>
+                <div class="fl zfen"><p class="black9"><em class="black3" id="total_jifen"><{$total.jifen|default:0}></em>积分</p></div>
+                <div class="fl zfen"><p class="black6 freight">运费&yen;<{$total.freight|default:0}></p></div>
+            </div>
+            <div class="fr"><a href="" class="pub_btn">立即购买</a></div>
+            <div class="cl"></div>
+        </div> 
+    </nav>
+    <!-- 工具栏结束 --> 
+    <!-- 主要内容 -->
+    <div class="content jifen_sy"> 
+        <!-- 积分商城商品 -->
+        <div class="nr mt10">
+            <ul>
+                <{foreach $product as $v}>
+                <li class="nr_list">
+                    <div class="box"> 
+                        <a href="<{link ctl='mall/product:detail' arg0=$v.product_id}>" class="external" onclick="setprobackurl();">
+                            <div class="img">
+                                <img src="<{$pager.img}>/<{$v.photo}>"/>
+                                <p><{$v.jifen}>积分</p>
+                            </div>
+                        </a>
+                        <div class="wz pad10">
+                            <p class="font_size14"><{$v.title}></p>
+                            <div>
+                                <p class="fl black9 font_size14">支付<span class="fontcl1">￥<em class="num"><{$v.price}></em></span></p>
+                                <div class="fr num_operate">
+                                    <span class="add" pid='<{$v.product_id}>' quantity="+">+</span>
+                                </div>
+                                <div class="cl"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <{/foreach}>
+            </ul>
+            <div class="cl"></div>
+        </div>
+        <!-- 积分商城商品结束 -->
+    </div>
+    <style>
+        .font_size14 {
+            font-size: 0.7rem;
+            height: 25px;
+            overflow: hidden;
+        }
+        .jifen_sy .nr .box .img {
+            height: 150px;
+            overflow: hidden;
+        }
+    </style>
+    <script>
+
+        $(document).off('click', '.add').on('click', '.add', function () {
+            var pid = $(this).attr('pid');
+            var link = "<{link ctl='mall/order:addcart'}>";
+            $.post(link, {pid: pid}, function (ret) {
+                if (ret.error == 0) {
+                    window.__Mall_Product_Freight = parseInt(ret.data.freight);
+                    var price = parseFloat(ret.data.price);
+                    $('#total_count').html(ret.data.count);
+                    $('#total_price').html('￥' + price);
+                    $('#total_jifen').html(ret.data.jifen);
+                    $('.freight').html('运费￥' + window.__Mall_Product_Freight);
+                } else {
+                    $.alert(ret.message);
+                    if (ret.error == 101) {
+                        setTimeout(function () {
+                            $('.modal-overlay').remove();
+                            $('.modal').remove();
+                            $.router.load("<{link ctl='passport/login'}>", true);
+                        }, 1500);
+                    }
+                }
+            }, 'json');
+        });
+        function setprobackurl(){
+            localStorage['mall_product_detail_backurl'] = window.location.href;
+        }
+    </script>
+    <!--下拉选项-->
+    <div class="mask_box"> 
+        <div class="jifen_xiala" style="display:none;">
+            <div class="box">
+                <ul class="">
+                    <li>
+                        <a href="javascript:;" shref="<{link ctl='mall/product:index'}>">
+                            <div class="fl">全部</div><p class="fr radioIco"></p><div class="cl"></div>
+                        </a>
+                    </li>
+                    <{foreach $cates as $v}>
+                    <li <{if $v.cate_id == $cate.cate_id}>class="on"<{/if}> >
+                        <a href="javascript:;" shref="<{link ctl='mall/product:items' arg0=$v.cate_id}>"><div class="fl"><{$v.title}></div><p class="fr radioIco"></p><div class="cl"></div></a>
+                    </li>
+                    <{/foreach}>
+                </ul>
+            </div>
+
+        </div>
+        <div class="mask_bg" style="z-index:11;"></div>
+    </div>
+    <!--下拉选项结束-->
+    <!-- 主要内容结束 -->         
+</div>
+<script>
+    $('.tab-item.external').removeClass('active');
+    $('#tab-item4').addClass('active');
+
+    $('.pub_btn').click(function () {
+        $.router.load("<{link ctl='mall/order:cart'}>", true);
+    })
+
+    $('#pub').click(function () {
+        $.router.load("<{link ctl='mall/order:cart'}>", true);
+    })
+
+    $(document).on('click', '.box ul li a', function () {
+        var link = $(this).attr('shref');
+        location.href = link;
+    })
+   
+</script>
+
+<{include file='block/footer.html'}>

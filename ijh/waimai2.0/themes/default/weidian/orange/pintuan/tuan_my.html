@@ -1,0 +1,340 @@
+<{assign var='tpl_title' value=L("我的团迹")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<style>
+    .maxItems{
+        visibility: hidden;
+        height:0px;
+    }
+    .loading_end{
+        text-align: center;
+    }
+    .infinite-scroll-nomore {
+        display:none;
+    }
+</style>
+<div class="page page-current">
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav header_Ico">
+        <a class="button button-link button-nav pull-left external" href="<{link ctl="weidian/ucenter/index/"}>"> <span class="Ico1"></span> </a>
+        <h1 class="title">我的团迹</h1>
+    </header>
+    <!-- 标题栏结束 -->
+    <!-- 工具栏 -->
+
+    <!-- 工具栏结束 -->
+    <!-- 主要内容 -->
+    <div class="content ajax_data_order_list">
+        <div class="buttons-tab">
+            <a href="#tab0" id="tab0_link" class="tab-link active button">全部</a>
+            <a href="#tab1" id="tab1_link" class="tab-link button">组团中</a>
+            <a href="#tab2" id="tab2_link" class="tab-link button">已成团</a>
+            <a href="#tab3" id="tab3_link" class="tab-link button">组团失败</a>
+        </div>
+        <div class="myTuanji">
+            <div class="tabs">
+                <div id="tab0" class="tab active mt10 infinite-scroll">
+                    <!-- 全部  -->
+                    <div class="ordList_box tuanji list-container">
+
+
+
+                    </div>
+
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                    <div class="infinite-scroll-nomore">
+                        <div class="loading_end">没有更多了...</div>
+                    </div>
+                    <input name="page" id="page" class="page" value="2"/>
+                    <input name="maxItems" id="maxItems" class="maxItems" value="<{$count.count_0}>"/>
+                    <!-- 全部结束 -->
+                </div>
+                <div id="tab1" class="tab mt10 infinite-scroll">
+                    <!-- 组团中  -->
+                    <div class="ordList_box tuanji list-container">
+
+
+
+                    </div>
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                    <div class="infinite-scroll-nomore">
+                        <div class="loading_end">没有更多了...</div>
+                    </div>
+                    <input name="page" id="page" class="page" value="2"/>
+                    <input name="maxItems" id="maxItems" class="maxItems" value="<{$count.count_1}>"/>
+                    <!-- 组团中结束  -->
+                </div>
+                <div id="tab2" class="tab mt10 infinite-scroll">
+                    <!-- 已成团  -->
+                    <div class="ordList_box tuanji list-container">
+
+
+
+                    </div>
+
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                    <div class="infinite-scroll-nomore">
+                        <div class="loading_end">没有更多了...</div>
+                    </div>
+                    <input name="page" id="page" class="page" value="2"/>
+                    <input name="maxItems" id="maxItems" class="maxItems" value="<{$count.count_2}>"/>
+                    <!-- 已成团结束 -->
+                </div>
+                <div id="tab3" class="tab mt10 infinite-scroll">
+                    <!-- 组团失败  -->
+                    <div class="ordList_box tuanji list-container">
+
+
+
+                    </div>
+
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                    <div class="infinite-scroll-nomore">
+                        <div class="loading_end">没有更多了...</div>
+                    </div>
+                    <input name="page" id="page" class="page" value="2"/>
+                    <input name="maxItems" id="maxItems" class="maxItems" value="<{$count.count_3}>"/>
+                    <!-- 组团失败结束 -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 主要内容结束 -->
+</div>
+
+
+<script>
+    // 确认送达
+    $(document).off('click','#arrived ').on('click','#arrived ',function() {
+        var order_id = $(this).attr('order_id');
+        $.ajax({
+            url: "<{link ctl='waimai/order:arrived '}>",
+            async: true,
+            dataType: 'json',
+            data: {"order_id":order_id},
+            type: 'POST',
+            success: function (ret) {
+                if(ret.error > 0){
+                    Widget.MsgBox.success(ret.message);
+                }else{
+                    Widget.MsgBox.error(ret.message);
+                    setTimeout(function(){window.location.reload();},1000);
+                }
+            },
+            error: function (xhr, status, err) {
+                $.alert(err);
+            },
+        });
+    })
+
+    var limit = 10;
+    //定义数据
+    ajax_data = {"status": 100, "page": 1, "limit": limit};//limit 翻页数,线上需要更改
+    function __ajax_tuan_my(tabIndex, ajax_data) {
+//        ajax_data.status = tabIndex;
+        $.post("<{link ctl='weidian/pintuan:ajax_tuan_my'}>", ajax_data,
+                function (res) {
+//            console.warn(res.data.html);
+                    next_page = parseInt(ajax_data.page) + 1;
+                    $('.infinite-scroll').eq(tabIndex).find('.page').val(next_page);
+//                    console.log(res.data.count_num + '|||' + next_page); //  2pm
+                    $('.list-container').eq(tabIndex).append(res.data.html);//线上直接返回html数据
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    maxItems =  $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+
+                    console.log(tabIndex + ' / ' + lastIndex + ' / ' + maxItems); //  2pm
+//                    $('.infinite-scroll-preloader').eq(tabIndex).hide();//多tab不能hide
+                    if (lastIndex >= maxItems) {
+                        $('.infinite-scroll-nomore').eq(tabIndex).show();
+                        $('.infinite-scroll-preloader').eq(tabIndex).empty();
+                        return;
+                    }
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    $.refreshScroller();
+                }, "json");
+    }
+
+    __ajax_tuan_my(0, ajax_data);
+
+    //初始化,防止退会按钮出错
+//    $('.list-container').eq(0).empty();
+//    $('.list-container').eq(1).empty();
+//    $("#tab1").removeClass('active');
+//    $("#tab1_link").removeClass('active');
+//    $("#tab0").addClass('active');
+//    $("#tab0_link").addClass('active');
+
+    $("#tab0_link").click(function(){
+        ajax_data = {"status": 100, "page": 1, "limit": limit};
+        link_click(0,ajax_data);
+    });
+    $("#tab1_link").click(function(){
+        ajax_data = {"status": 0, "page": 1, "limit": limit};
+        link_click(1,ajax_data);
+    });
+    $("#tab2_link").click(function(){
+        ajax_data = {"status": 1, "page": 1, "limit": limit};
+        link_click(2,ajax_data);
+    });
+    $("#tab3_link").click(function(){
+        ajax_data = {"status": 2, "page": 1, "limit": limit};
+        link_click(3,ajax_data);
+    });
+
+
+    function link_click(tabIndex,ajax_data){
+        ajax_data = ajax_data;
+        tabIndex = tabIndex;
+        $('.infinite-scroll-nomore').eq(tabIndex).hide();
+        $('.infinite-scroll-preloader').eq(tabIndex).html('<div class="preloader"></div>');
+        $('.list-container').eq(tabIndex).empty();
+        __ajax_tuan_my(tabIndex, ajax_data);
+    }
+
+    var loading = false;
+    var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+    var tabIndex = 0;
+    $(document).on('infinite', '.ajax_data_order_list', function () {
+        if (loading) return;
+        loading = true;
+        $('.infinite-scroll-preloader').eq(tabIndex).show();
+        setTimeout(function () {
+            $('.infinite-scroll-preloader').eq(tabIndex).show();
+            // 重置加载flag
+            loading = false;
+            var tabIndex = 0;
+            if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab0") {
+                tabIndex = 0;
+            }else if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab1") {
+                tabIndex = 1;
+            }else if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab2") {
+                tabIndex = 2;
+            }else if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab3") {
+                tabIndex = 3;
+            }else if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab4") {
+                tabIndex = 4;
+            }
+
+            var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+//            console.log(tabIndex + ' / ' + lastIndex + ' / ' + maxItems); //  2pm
+            if (lastIndex >= maxItems) {
+                $('.infinite-scroll-preloader').eq(tabIndex).empty();
+                $('.infinite-scroll-nomore').eq(tabIndex).show();
+                return;
+            }
+            ajax_data.page = $('.infinite-scroll').eq(tabIndex).find('.page').val();
+            __ajax_tuan_my(tabIndex, ajax_data);
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+            $.refreshScroller();
+        }, 500);
+
+    });
+    // 支付订单
+    $(document).off('click', '#payment').on('click', '#payment', function() {
+        var order_id = parseInt($(this).attr('order_id'));
+        var link = "<{link ctl='ucenter/order:payment-"+order_id+"'}>";
+        localStorage['payment_backurl'] = window.location.href;
+        $.router.load(link, true);
+    });
+
+    // 检查补充说明字数
+    function checkLen(obj) {
+        var len = GetStrLen($(obj).val());
+        if(len <= 120) {
+            var limit = 120-len;
+            $('.txt_right').text('还可输入' + limit + '字');
+        }
+    }
+
+    //取消理由样式
+    $(document).on('click','.mallord_delt_mask .selct_box a',function () {
+        $(".mallord_delt_mask .selct_box a").removeClass("active");
+        $(this).addClass("active");
+    });
+
+    // 取消订单
+    function cancelanorder(reason_mark,order_id) {
+        var reason  = reason_mark;
+        $.ajax({
+            url: "<{link ctl='pintuan:order_cancel'}>",
+            async: true,
+            dataType: 'json',
+            data: {"order_id":order_id,"reason":reason},
+            type: 'POST',
+            success: function (ret) {
+                $.alert(ret.message);
+                if(ret.error == 0 ) {
+                    setTimeout(function(){window.location.reload();},2000);
+                }else {
+                    return false;
+                }
+            },
+            error: function (xhr, status, err) {
+                $.alert(err);
+            },
+        });
+    }
+
+    // 取消订单modal
+    $(document).off('click', '#cancel').on('click','#cancel', function () {
+        var order_id = parseInt($(this).attr('order_id'));
+        var c_html = '';
+        c_html += '<div class="mallord_delt_mask"><div class="row selct_box" id="reason_mark">';
+        <{foreach $reason as $v}>
+        c_html += '<a href="javascript:;" class="fl col-33">'+'<{$v}>'+'</a>';
+        <{/foreach}>
+        c_html += '<div class="cl"></div></div><div class="list-block"><div class="item-input"><textarea maxlength="120" id="buchong" placeholder="补充说明" onkeyup="checkLen(this)" ></textarea><p class="txt_right font_size14 black9">还可输入120字</p></div></div></div>';
+
+        var modal = $.modal({
+            title: "<div class='mallord_delt_mask_tit'>取消理由</div>",
+            afterText:c_html,
+            buttons: [
+                {
+                    text: "<span class='black6'>取消</span>"
+                },
+                {
+                    text: "<span class='maincl'>确定</span>",
+                    bold: true,
+                    onClick: function () {
+                        var reason_mark = '';
+                        if($('#reason_mark .active').text() == null) {
+                            reason_mark = '取消理由:无';
+                        }else {
+                            reason_mark = '取消理由:' + $('#reason_mark .active').text();
+                        }
+                        if($('#buchong').val() == '') {
+                            reason_mark += ',补充说明:无';
+                        }else {
+                            reason_mark += ',补充说明:' + $('#buchong').val();
+                        }
+                        cancelanorder(reason_mark,order_id);
+                    }
+                },
+            ]
+        })
+    });
+
+    $(function () {
+        //弹出层消失,点击灰色区域,
+        $(document).on('click', '.modal-overlay', function () {
+            $(this).removeClass('modal-overlay-visible');
+            $('.modal').removeClass('modal-in');
+            $('.modal').css('display', 'none');
+        });
+    })
+
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

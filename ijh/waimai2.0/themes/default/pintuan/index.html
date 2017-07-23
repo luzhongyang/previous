@@ -1,0 +1,202 @@
+<{assign var='tpl_title' value=L("拼团")}>
+<{include file="block/header.html"}>
+<style>
+    .maxItems{
+        visibility: hidden;
+    }
+    .infinite-scroll-nomore {
+        display:none;
+    }
+</style>
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav"><a class="button button-link button-nav pull-left" href="<{link ctl='index'}>"> <span
+            class="iconfont icon-iconfontxiangyou" style="margin-top:-0.2rem;"></span></a>
+        <a href="<{link ctl='pintuan/search'}>" class="button button-link button-nav pull-right"><span class="iconfont icon-sousuo"
+                                                                  style="margin-right:0.4rem"></span>
+        </a>
+        <h1 class="title">江湖拼团</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content ajax_data_order_list">
+        <!--幻灯banner-->
+        <!-- Slider -->
+        <div class="swiper-container" data-space-between='10'>
+            <div class="swiper-wrapper">
+                <{adv id="3" name="拼团轮播" city_id=$request.city_id}>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <!--幻灯banner结束-->
+        <div class="funct_list_box_bg">
+            <div class="funct_list_box">
+                <div class="row no-gutter">
+                    <{foreach $cate as $k => $v}>
+                    <div class="col-25 funct_list"><a href="<{link ctl='pintuan:search' cate_id=$v.pintuan_cate_id}>"><img src="<{$pager.img}>/<{$v.icon}>">
+                        <p><{$v.title}></p></a></div>
+                    <{/foreach}>
+                    <div class="col-25 funct_list"><a href="<{link ctl='pintuan:search' cate_id=1}>"><img src="%THEME%/static/images/gn08.png">
+                        <p>更多</p></a></div>
+                </div>
+            </div>
+        </div>
+        <!--功能结束-->
+
+        <div class="tabs pintuan_list_box">
+            <div id="tab1" class="tab active infinite-scroll">
+                <div class="content-block biaoqian-content list-container">
+
+
+                </div>
+
+                <input name="page" id="page" class="page" value="2"/>
+                <input name="maxItems" type="hidden" id="maxItems" class="maxItems" value="<{$count.count_0}>"/>
+                <input name="orderby" id="orderby" type="orderby" class="page" value="<{$orderby}>"/>
+                <!-- 加载提示符 -->
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
+                <div class="infinite-scroll-nomore">
+                    <div class="loading_end">没有更多了...</div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+<script>
+    var limit = 10;
+    var cate_id = $('#cate_id').val();
+    var orderby = $('#orderby').val();
+    ajax_data = {"status": 0, "page": 1, "limit": limit, 'cate_id': cate_id, 'orderby': orderby};
+    function __ajax_tuan_my(tabIndex, ajax_data) {
+        ajax_data.status = tabIndex;
+        $.post("<{link ctl='pintuan:ajax_search'}>", ajax_data,
+                function (res) {
+                    next_page = parseInt(ajax_data.page) + 1;
+                    $('.infinite-scroll').eq(tabIndex).find('.page').val(next_page);
+//                        console.log(res.data.count_num + '|||' + next_page);
+//                        $('.infinite-scroll.active .list-container').append(res.data.html);
+                    //html start
+                    var html = '';
+                    if(0 == res.data.is_have){
+                        html = "<div class='content-block biaoqian-content'>" +
+                                "                                    <div class='wushuju'>" +
+                                "                                    <img src='/themes/default/static/images/kong.png' width='30%'>" +
+                                "                                    <p class='mt10'>暂无数据.</p>" +
+                                "                                    </div>" +
+                                "                                    </div>";
+                    }
+                    else{
+                        $.each(res.data.items, function(index,item){
+                            html += "" +
+                                    "<div class='pintuan_list one_item'>" +
+                                    "<div class='pub_img'><a href='" +item.link+ "'>" +
+                                    "<img src='<{$pager.img}>/"+item.photo+"' width='100%'><span class='tag'><big>"+item.discount+"</big>折</span></a></div>" +
+                                    "<div class='pub_wz'>" +
+                                    "<h3 class='black'><a href='" +item.link+ "'>"+item.title+"</a></h3>" +
+                                    "<p class='black9'>" +item.intro+ "</p>" +
+                                    "</div>" +
+                                    "<div class='pintuan_list_state'>" +
+                                    "<div class='box'><big>"+item.tuan_price+"</big>元/"+item.user_num+"人团<a href='" +item.link+ "' class='btn fr'>去开团</a>" +
+                                    "</div>" +
+                                    "<img src='/themes/default/static/images/pintuanIco.png'>" +
+                                    "<a href='javascript:;' num='"+item.pintuan_product_id+"' class='"+item.is_collect+"'></a>" +
+                                    "</div>" +
+                                    "</div>" +
+                                    "<a href='"  +item.link_order+ "'><span class='xie-icon'></span></a>";
+
+                        })
+                    }
+                    $('.infinite-scroll.active .list-container').append(html);
+                    //html end
+                    guanzhu_pintuan();
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+
+//                        console.log(tabIndex + ' / ' + lastIndex + ' / ' + maxItems);
+//                console.log(lastIndex + ' / ' + maxItems);
+                    $('.infinite-scroll-preloader').eq(tabIndex).hide();
+                    if (lastIndex >= maxItems) {
+                        $('.infinite-scroll-nomore').eq(tabIndex).show();
+                        $('.infinite-scroll-preloader').eq(tabIndex).empty();
+                        return;
+                    }
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    $.refreshScroller();
+//                        console.log(res.data.html);
+                }, "json");
+    }
+
+        __ajax_tuan_my(0, ajax_data);
+
+    //init first time
+    $('.list-container').eq(0).empty();
+    $('.list-container').eq(1).empty();
+    $("#tab2").removeClass('active');
+    $("#tab2_link").removeClass('active');
+    $("#tab1").addClass('active');
+    $("#tab1_link").addClass('active');
+
+
+    $("#tab1_link").click(function(){
+        ajax_data = {"status": 0, "page": 1, "limit": limit};
+        tabIndex = 0;
+        $('.infinite-scroll-nomore').eq(tabIndex).hide();
+        $('.infinite-scroll-preloader').eq(tabIndex).html('<div class="preloader"></div>');
+        $('.list-container').eq(tabIndex).empty();
+        __ajax_tuan_my(0, ajax_data);
+    });
+    $("#tab2_link").click(function(){
+        ajax_data = {"status": 1, "page": 1, "limit": limit};
+        tabIndex = 1;
+        $('.infinite-scroll-nomore').eq(tabIndex).hide();
+        $('.infinite-scroll-preloader').eq(tabIndex).html('<div class="preloader"></div>');
+        $('.list-container').eq(tabIndex).empty();
+        __ajax_tuan_my(1, ajax_data);
+    });
+
+    var loading = false;
+    var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+    var tabIndex = 0;
+    $(document).on('infinite', '.ajax_data_order_list', function () {
+        if (loading) return;
+        loading = true;
+        $('.infinite-scroll-preloader').eq(tabIndex).show();
+        //set data
+        setTimeout(function () {
+            $('.infinite-scroll-preloader').eq(tabIndex).show();
+            loading = false;
+            var tabIndex = 0;
+            if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab1") {
+                tabIndex = 0;
+            }
+            if ($('.ajax_data_order_list').find('.infinite-scroll.active').attr('id') == "tab2") {
+                tabIndex = 1;
+            }
+
+            var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+            if (lastIndex >= maxItems) {
+                $('.infinite-scroll-preloader').eq(tabIndex).empty();
+                $('.infinite-scroll-nomore').eq(tabIndex).show();
+                return;
+            }
+            ajax_data.page = $('.infinite-scroll').eq(tabIndex).find('.page').val();
+            __ajax_tuan_my(tabIndex, ajax_data);
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+            $.refreshScroller();
+        }, 500);
+    });
+</script>
+
+
+<{include file='pintuan/block_pintuan_relate_product_js.html'}>
+<{include file='block/footer.html'}>

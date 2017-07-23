@@ -1,0 +1,44 @@
+<{assign var='tpl_title' value=L("活动详情")}>
+<{include file="block/header.html" }>
+	<script src="%THEME%/static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="%THEME%/static/js/jquery.qrcode.min.js" type="text/javascript" charset="utf-8"></script>
+    <div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left" id="ucenter_share_detail_backurl"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">活动详情</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+        	<div class="sharePage_details mt10 pad_t10">
+                <img src="%THEME%/static/images/shareXq.png" width="100%"> 
+                <div class="sm_box">
+                	<div id="qrcodeTable"></div>
+                    <p>扫一扫上面的二维码图案，分享好友</p>
+                    <p>或点击<span class="fontcl1">右上角</span>分享，获得红包</p>
+                </div>
+                <h1><span>活动规则说明</span></h1>
+                <div class="nr">
+                    <p class="black9">1.规则内容规则内容规则内容规则内容规则内容规则内容</p>
+                    <p class="black9">2.规则内容规则内容规则内容规则内容规则内容规则内容</p>
+                </div>
+            </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+    <script>
+	    $('#qrcodeTable').qrcode({
+	        render: "canvas",            //渲染方式 table 和 canvas两种
+	        width: 128,                  //设置宽度  
+	        height: 128,                 //设置高度  
+	        typeNumber: -1,              //计算模式 
+	        correctLevel: 2,             //纠错等级  0,1,2,3 默认为2
+	        background: "#ffffff",       //背景颜色  
+	        foreground: "#000000",       //前景颜色 
+	        text    : '<{$mylink}>'
+	    }); 
+        $(document).off('click','#ucenter_share_detail_backurl').on('click','#ucenter_share_detail_backurl',function(){
+            window.location.href = "<{link ctl='ucenter/share/index'}>";
+        })
+    </script>
+</body>
+</html>

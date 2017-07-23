@@ -1,0 +1,125 @@
+<{assign var='tpl_title' value=L("用户中心")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current"> 
+    <!-- 工具栏 -->
+    <{include file="weidian/$theme_style/block/navbar.html"}>
+    <!-- 工具栏结束 -->
+    <div class="content"> 
+        <div class="mineIdx_infor mb10">
+            <div class="infor" id="user_profile">
+                <div class="img"><img src="<{$pager.img}>/<{$MEMBER.face}>"></div>
+                <h3><{$MEMBER.mobile}></h3>
+            </div>
+            <div class="list_box">
+                <ul>
+                    <li>
+                        <p><{if $MEMBER.money>0}><{$MEMBER.money}><{else}>0<{/if}></p>
+                        <p>余额</p>
+                    </li>
+                    <li id="goto_mycoupon">
+                        <p><{if $coupon_count>0}><{$coupon_count}><{else}>0<{/if}></p>
+                        <p>优惠券</p>
+                    </li>
+                    <li>
+                        <p><{if $MEMBER.jifen>0}><{$MEMBER.jifen}><{else}>0<{/if}></p>
+                        <p>积分</p>
+                    </li>
+                </ul>
+                <div class="cl"></div>
+            </div>
+        </div>
+        <div class="list-block mineIdx_link">
+            <ul>
+                <li>
+                    <a href="<{link ctl='weidian/ucenter/order:waimai_order_items'}>
+                        " class="item-content item-link external">
+                        <div class="item-media"> <i class="ico ico_1"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">我的订单</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="<{link ctl='weidian/pintuan/tuan_my'}>
+                        " class="item-content item-link external">
+                        <div class="item-media"> <i class="ico ico_2"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">我的团迹</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="<{link ctl='weidian/ucenter/addr:items'}>
+                        " onclick="_init_choose_addr();" class="item-content item-link external">
+                        <div class="item-media">
+                            <i class="ico ico_3"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">收货地址</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li >
+                    <a href="<{link ctl='weidian/ucenter/collect:index'}>
+                        " class="item-content item-link external">
+                        <div class="item-media">
+                            <i class="ico ico_4"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">我的收藏</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="<{link ctl='weidian/ucenter/service:index'}>
+                        " class="item-content item-link external">
+                        <div class="item-media">
+                            <i class="ico ico_5"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">服务中心</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="<{link ctl='weidian/ucenter/suggestion:index'}>
+                        " class="item-content item-link external">
+                        <div class="item-media">
+                            <i class="ico ico_6"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">意见反馈</div>
+                            <div class="item-after"></div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block"> <a class="button button-big button-fill" href="<{link ctl='passport/loginout'}>">退出登录</a> </div> 
+    </div>   
+</div> 
+<script type="text/javascript">
+var shop_id = parseInt(<{$shop.shop_id}>);
+$('.tab-item').removeClass('active');
+$('#tab-item4').addClass('active');
+
+$(document).off('click','#user_profile').on('click','#user_profile',function(){
+    window.location.href = "<{link ctl='weidian/ucenter/profile:index'}>";
+})
+
+$(document).off('click','#goto_mycoupon').on('click','#goto_mycoupon',function(){
+    window.location.href = "<{link ctl='weidian/ucenter/coupon:index'}>";
+})
+
+function _init_choose_addr() {
+    localStorage.removeItem('weidian_waimai_choose_addr');
+}
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

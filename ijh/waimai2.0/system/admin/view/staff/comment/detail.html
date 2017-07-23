@@ -1,0 +1,56 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="staff/comment:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data">
+<form action="?staff/comment-detail-<{$detail.comment_id}>.html" mini-form="comment-form" method="post" >
+<input type="hidden" name="comment_id" value="<{$detail.comment_id}>" />
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr>
+	<th>评价ID：</th><td><{$detail.comment_id}></td>
+    <th>订单ID：</th>
+    <td>
+        <b><{$detail.order_id}></b>&nbsp;&nbsp;&nbsp;&nbsp; 
+        <{link ctl="order/order:detail" arg0=$detail.order_id title="查看订单详情" class="button"}>
+    </td>
+</tr>
+<tr><th>服务人员：</th><td><{$staff.name}></td><th>用户：</th><td><{$member.mobile}>(<{$member.nickname}>)</td> </tr>
+<tr>
+    <th>评分：</th>
+    <td><{$detail.score}>分</td>
+    <th>评价标签：</th><td><{$detail.remark|default:'--'}></td>
+</tr>
+
+<tr><td colspan="10" class="h-10"></td></tr>
+<tr>
+    <th>评价图片：</th>
+    <{foreach $photos as $v}>
+    <td><img src="<{$pager.img}>/<{$v.photo}>"/></td>
+    <{foreachelse}>
+    <td>无评价图片</td>
+    <{/foreach}>
+</tr>
+<tr><td colspan="10" class="h-10"></td></tr>
+
+<tr><th>评价内容：</th><td colspan="3"><p class="tip-notice"><{$detail.content|nl2br}></p></td></tr>
+<tr>
+    <th>评价时间：</th>
+    <td><{$detail.dateline|format}></td>
+    
+</tr>
+<tr>
+	<th>回复内容：</th><td colspan="3"><p class="tip-notice"><{$detail.reply|default:'--'}></p></td>
+</tr>
+<tr><th>回复时间：</th><td><{if $detail.reply_ip}><{$detail.reply_time|format}>(<{$detail.reply_ip}>,<{$detail.reply_ip|iplocal}>)<{else}>未回复<{/if}></td></tr>
+<!-- <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr> -->
+
+</table>
+</div>
+<{include file="admin:common/footer.html"}>

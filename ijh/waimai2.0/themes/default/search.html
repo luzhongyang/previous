@@ -1,0 +1,90 @@
+<{assign var='tpl_title' value=L("搜索商家")}>
+<{include file="block/header.html"}>
+    <div class="page" id="search">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left" href="<{link ctl="index"}>"> <span class="iconfont icon-iconfontxiangyou"></span> </a> <a class="button button-link button-nav pull-right search-submit1">搜索</a>
+            <div class="searchbar">
+                <a class="searchbar-cancel iconfont icon-x-copy"></a>
+                <div class="search-input">
+                  <label class="icon iconfont icon-sousuo" for="search"></label>
+                  <input type="search" id='search-title1' placeholder='请输入商家名称'/>
+                </div>
+            </div>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+            <div class="sy_serch_hot">
+           	    <h3>热门搜索</h3>
+                <div class="hot_box">
+                    <{foreach $hotsearch as $v}>
+                    <a href="<{link ctl='search:searchrlt' title=$v}>" <{if $v@index==0}>style="background:#00cdda;color:#ffffff"<{/if}>><{$v}></a>
+                    <{/foreach}>
+                </div>
+                <h3>搜索历史</h3>
+                <ul class="lishi">
+                	<!-- <li><a href="#">零食</a></li> -->
+                </ul>
+                <a href="#" class="clear">清空搜索记录</a>
+            </div>
+        </div>
+        <!--内容结束-->
+    </div>
+<script type="text/javascript">
+$(document).ready(function(){
+    // 读取历史搜索记录
+    var li = '';
+    if(localStorage['search_history']) {
+        var str = localStorage['search_history'];
+        var strs = new Array();
+        var strs = str.split(",");
+        strs = Unique(strs); //去重复元素
+        for (var i = strs.length - 1; i >= strs.length - 5; i--) {
+            if(strs[i] != undefined) {
+                var link = "/search/searchrlt.html?title="+encodeURIComponent(strs[i]);
+                li += '<li> <a href="'+link+'">'+strs[i]+'</a> </li>';
+            }
+        }
+        $('.lishi').html(li);
+    }
+
+    // 搜索事件
+    $(document).off('click', '.search-submit1').on('click', '.search-submit1', function() {
+        var search_title = $('#search-title1').val();
+        if(search_title == "") {
+            $.alert('请输入商家名称'); return false;
+        }else {
+            if(localStorage['search_history']) {
+                localStorage['search_history'] = localStorage['search_history'] + ',' +search_title;
+            }else {
+                localStorage['search_history'] = search_title;
+            }
+        }
+        var link = "<{link ctl='search:searchrlt' title='tmp'}>";
+        $.router.load(link.replace('tmp',search_title), true);
+    });
+
+    // 清空输入
+    $(document).off('click', '.searchbar-cancel').on('click', '.searchbar-cancel', function() {
+        $('#search-title1').val('');
+    });
+
+    // 清空搜索记录
+    $(document).off('click', '.clear').on('click', '.clear', function() {
+        $('#search-title1').val('');
+        localStorage.removeItem('search_history');
+        if(localStorage['search_history'] == undefined) {
+            $('.lishi').empty().html('');
+        }
+    });
+});
+
+//$(document).off('click', '#goback').on('click', '#goback', function() {
+//    if(localStorage['search_back']) {
+//        var backurl = localStorage['search_back'];
+//        localStorage.removeItem('search_back');
+//        $.router.load(backurl, true);
+//    }
+//})
+
+</script>
+<{include file="block/footer.html"}>

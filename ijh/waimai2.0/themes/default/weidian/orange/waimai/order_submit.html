@@ -1,0 +1,585 @@
+<{assign var='tpl_title' value=L("提交订单")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<style>
+.picker-modal .bar .title{color:#fff}
+.kaituan_nr .buttons-row .button.active {
+    background-color: #ff7800;
+    color: #fff;
+}
+.kaituan_nr .list-block .item-inner.no-rightico {
+    background-image: url();
+    padding-right: 0.1rem; 
+}
+</style>
+<div class="page page-current"> 
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/waimai/get_cart'}>" onclick="clear_localstorage();"> <span class="Ico1"></span> </a>
+        <h1 class="title">填写订单</h1>
+    </header>
+    <!-- 标题栏结束 --> 
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab kaituan-footer txt_center">
+        <div class="box1 color1">实付款：<em class="fontcl1" id="jiesuan_price">￥</em></div>
+        <div class="box2 f_size1" id="goto_submit">提交订单</div>
+    </nav>
+    <!-- 工具栏结束 --> 
+    <!-- 主要内容 -->
+    <div class="content">
+        <form id="form_post" method="post">
+            <input type="hidden" name="params[shop_id]" value="<{$shop.shop_id}>">
+            <input type="hidden" name="params[products]" value="<{$products}>">
+            <input type="hidden" name="params[product_price]" value="<{$product_price}>" />
+            <input type="hidden" name="params[pei_type]" value="<{$shop.pei_type}>">
+            <input type="hidden" name="params[addr_id]"  value="<{$m_addr.addr_id}>"/>
+            <input type="hidden" name="params[online_pay]" value="1"/>
+            <input type="hidden" name="params[first_amount]" value="<{$first_amount}>">
+            <input type="hidden" name="params[pei_time]" value=""/>
+            <input type="hidden" name="params[ziti_time]" value=""/>
+            <input type="hidden" name="params[intro]" value=""/>
+            <input type="hidden" name="params[coupon_id]" value="<{$coupon.coupon_id}>">
+            <input type="hidden" name="params[package_amount]" value="<{$package_price}>" />
+            <input type="hidden" name="params[freight_amount]" value="" />
+        </form>
+        <div class="kaituan_nr">
+            <div class="content-block bgcolor_white">
+                <div class="buttons-row"> 
+                    <{if $shop.is_ziti==0}>
+                    <a href="javascript:;" class="tab-link active button" pei_type="<{$shop.pei_type}>">配送</a> 
+                    <{/if}>
+                    <{if $shop.is_ziti==1}>
+                    <a href="javascript:;" class="tab-link active button" pei_type="3">自提</a> 
+                    <{/if}>
+                    <{if $shop.is_ziti==2}>
+                    <a href="javascript:;" class="tab-link active button" pei_type="<{$shop.pei_type}>">配送</a> 
+                    <a href="javascript:;" class="tab-link button" pei_type="3">自提</a> 
+                    <{/if}>
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="tab active">
+                    <div class="list-block media-list dian_name border_b pei_addr">
+                        <ul>
+                            <{if !$m_addr}>
+                                <li id="select_addr"> 
+                                    <div class="item-inner black3">
+                                        <div class="item-text" style="margin-top:0.1rem;text-align:center;line-height:1.05rem;height:1.05rem;color:#333;">请填写收货地址</div>
+                                    </div>
+                                </li>
+                            <{else}>
+                                <li id="select_addr"> 
+                                    <a href="#" class="item-content">
+                                        <div class="item-media"><i class="dizhi-icon"></i></div>
+                                        <div class="item-inner black3">
+                                            <div class="item-subtitle">
+                                                <span id="contact">收货人：<{$m_addr.contact}></span>
+                                                <span id="mobile" class="fr"><{$m_addr.mobile}></span>
+                                                <div class="cl"></div>
+                                            </div>
+                                            <div id="address" class="item-text"><{$m_addr.addr}><{$m_addr.house}></div>
+                                        </div>
+                                    </a> 
+                                </li>
+                            <{/if}>
+                        </ul>
+                    </div>
+                    <div class="list-block media-list dian_name border_b ziti_addr">
+                        <ul>
+                            <li> 
+                                <div class="item-inner black3">
+                                    <div class="item-text" style="margin-top:0.1rem;text-align:center;line-height:1.05rem;height:1.05rem;color:#333;">自提地址：<{$shop.addr}></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt10"></div>
+                    <div class="gerenZiliao">
+                        <div class="list-block">
+                            <ul>
+                                <li class="item-content item-link" id="pei_time_picker_area">
+                                    <div class="item-inner">
+                                        <div class="item-title f_size1" style=" color:#333;">送达时间</div>
+                                        <div class="item-after"><input type="text" id='pei_time' value="尽快送达|预计<{$yuji_pei_time}>" readonly style="color:#5f646e;"></div>
+                                    </div>
+                                </li>
+                                <li class="item-content item-link" id="ziti_time_picker_area">
+                                    <div class="item-inner">
+                                        <div class="item-title f_size1" style=" color:#333;">自提时间</div>
+                                        <div class="item-after"><input type="text" id='ziti_time' value="立即自提|预计<{$yuji_pei_time}>" readonly style="color:#5f646e;"></div>
+                                    </div>
+                                </li>
+                                <li class="item-content item-link" id="choose_coupon">
+                                    <div class="item-inner">
+                                        <div class="item-title f_size1" style="color:#333;">优惠券</div>
+                                        <{if $coupon_count>0}>
+                                        <div class="item-after f_size1" style="color:#ff7800;"><{$coupon_count}>张优惠券可用</div>
+                                        <{else}>
+                                        <div class="item-after f_size1" style="color:#5f646e;">无可用优惠券</div>
+                                        <{/if}>
+                                    </div>
+                                </li>
+                                <li class="item-content item-link" id="intro_choose">
+                                    <div class="item-inner">
+                                        <div class="item-title f_size1" style="color:#333;">备注</div>
+                                        <div class="item-after f_size1" style="color:#5f646e;" id="intro">（选填）可输入特殊要求</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="list-block media-list dan_goods kaituan_box1">
+                        <ul>
+
+                            <{foreach $product_lists as $v}>
+                            <li> <a href="#" class="item-content border_b" >
+                                <div class="item-media"><img src="<{$pager.img}>/<{$v.photo}>" width="100%"></div>
+                                <div class="item-inner no-rightico">
+                                    <div class="item-subtitle black3"><big>【<{$v.title}>】</big></div>
+                                    <div class="item-title-row">
+                                        <div class="item-title fontcl1 font_size14"><big class="f_size2">￥<{$v.price}></big>/份</div>
+                                        <div class="item-after"><span class="black9 mr5"><{$v.spec_name}></span><span class="fontcl1">X <{$v.num}></span></div>
+                                    </div>
+                                </div>
+                                </a> </li>
+                            <{/foreach}>
+                        </ul>
+                    </div>
+                    <div class="dingdan-details mb10 kaituan_box2">
+                        <div class="list-block">
+                            <ul>
+                                <li class="item-content">
+                                    <div class="item-inner no-rightico">
+                                        <div class="item-title"><span>打包费</span></div>
+                                        <div class="item-after"><span class="black3">￥<{$package_price}></span></div>
+                                    </div>
+                                </li>
+                                <li class="item-content" id="freight">
+                                    <div class="item-inner border_b no-rightico">
+                                        <div class="item-title"><span>配送费</span></div>
+                                        <div class="item-after">￥0</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="list-block media-list" id="manjian">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner border_b no-rightico">
+                                            <div class="item-title-row">
+                                                <div class="item-title"><span class="special-icon">减</span>满减优惠</div>
+                                                <div class="item-after">-￥0</div>
+                                            </div>
+                                            <div class="item-subtitle"><small class="black9"><!-- 特价商品按优惠后价格计算满减哦 --></small></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <{if $first_amount>0}>
+                        <div class="list-block media-list" id="shoudan">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner border_b no-rightico">
+                                            <div class="item-title-row">
+                                                <div class="item-title"><span class="special-icon">首</span>首单优惠</div>
+                                                <div class="item-after">-￥<{$first_amount}></div>
+                                            </div>
+                                            <div class="item-subtitle"><small class="black9"><!-- 特价商品按优惠后价格计算满减哦 --></small></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <{/if}>
+                        <div class="list-block">
+                            <ul>
+                                <li class="item-content border_b">
+                                    <div class="item-inner no-bord no-rightico" id="jiesuan_box">
+                                        <div class="item-title"><span class="black9">原价</span>￥0<span class="black9">共优惠</span>￥0</div>
+                                        <div class="item-after"><span class="maincl">总计：￥0</span></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 主要内容结束 --> 
+</div>
+
+<!--选择收货地址弹出层开始-->          
+<div class="popup popup-about kaituan_address_mask" id="addr_choose_layout">
+    <div class="address_box">
+        <h3 class="tit">选择收货地址</h3>
+        <{foreach $addr_list as $v}>
+        <div class="nr">
+            <label class="rad">
+                <div class="box border_t border_b">
+                    <div><{$v.contact}>&nbsp;&nbsp;<{$v.mobile}></div>
+                    <div><{$v.addr}><{$v.house}></div>
+                    <span class="radio <{if $v.is_default==1}>on<{/if}>"><input type="radio" name="my-radio" <{if $v.is_default==1}>checked<{/if}>></span>
+                </div>
+            </label>
+            <div class="btn">
+                <a href="#" class=" border_r"><i class="editIco"></i>编辑</a>
+                <a href="#"><i class="delIco"></i>删除</a>
+                <div class="cl"></div>
+            </div>
+        </div>
+        <{/foreach}>
+    </div>
+    <div class="mask_footerBtn" id="addr_create"><a href="javascript:;">新增收货地址</a></div>
+    <i class="sy_popup_delIco close-popup"></i>
+</div>
+<!--选择收货地址弹出层结束-->
+
+<!--新增地址弹出层开始-->   
+<div class="popup popup-about kaituan_add_mask" id="addr_create_layout">
+    <form>
+        <div class="add_box">
+            <h3 class="tit" style="font-size:0.75rem;">新增收货地址</h3>
+            <div class="nr_box">
+                <input id="s_contact" type="text" placeholder="联系人"/>
+                <input id="s_mobile" type="text" placeholder="联系电话"/>
+                <select id="s_province"></select>
+                <select id="s_city"></select>
+                <select id="s_country"></select>
+                <script type="text/javascript">_init_area();</script>
+                <input id="s_addr" type="text" placeholder="详细地址"/>
+                <input id="s_house" type="text" placeholder="门牌号"/>
+            </div>
+            <!-- <div id="show"></div> -->
+            <label class="">
+            <div class="checkbox mb10">设为默认地<span class="check">
+                <input type="checkbox" name="my-radio">
+                </span>址</div>
+            </label>
+            <div><a href="javascript:create_addr();" class="btn">保存</a></div>
+        </div>
+    </form>
+    <i class="sy_popup_delIco close-popup"></i> 
+</div>
+
+<!--新增地址弹出层结束-->   
+<script type="text/javascript">
+var shop_id = parseInt(<{$shop.shop_id}>);
+var is_ziti = parseInt(<{$shop.is_ziti}>);
+
+window.Weidian_Waimai_Order = window.Weidian_Waimai_Order || {"params":{}};
+
+// ajax POST 参数
+function getParams() {
+    Weidian_Waimai_Order.params['shop_id'] = $("input[name='params[shop_id]']").val();
+    Weidian_Waimai_Order.params['pei_type'] = $("input[name='params[pei_type]']").val();
+    Weidian_Waimai_Order.params['package_price'] = parseFloat($("input[name='params[package_amount]']").val()).toFixed(2);
+    Weidian_Waimai_Order.params['addr_id'] = $("input[name='params[addr_id]']").val();
+    Weidian_Waimai_Order.params['coupon_id'] = $("input[name='params[coupon_id]']").val();
+    Weidian_Waimai_Order.params['product_price'] = parseFloat($("input[name='params[product_price]']").val()).toFixed(2);
+}
+
+// ajax 请求 返回配送费、总优惠、满减
+function __Ajax_Waimai_Order_Dada() {
+    getParams();
+    $.ajax({
+        url: "<{link ctl='weidian/waimai:ajaxorder'}>",
+        async: true,
+        dataType: 'json',
+        data: Weidian_Waimai_Order.params,
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error == 0 ) {
+                var jiesuan_box = '';
+                jiesuan_box += '<div class="item-title"><span class="black9">原价</span>￥'+ret.data.total_price+'&nbsp;<span class="black9">';
+                jiesuan_box += '共优惠</span>￥'+ret.data.total_youhui+'</div>';
+                jiesuan_box += '<div class="item-after"><span class="maincl">总计：￥'+ret.data.jiesuan_price+'</span></div>';
+                $('#jiesuan_box').html(jiesuan_box);
+                $('#jiesuan_price').html('￥'+ ret.data.jiesuan_price);
+                $("input[name='params[freight_amount]']").val(ret.data.freight);
+                $('#freight .item-after').html('￥' + ret.data.freight);
+                $('#manjian .item-after').html('-￥' + ret.data.manjian_youhui);
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+}
+
+$(document).ready(function(){
+
+    peitime_format();
+    zititime_format();
+
+    if(localStorage['weidian_waimai_order_remarks']) {
+        var intro = JSON.parse(localStorage['weidian_waimai_order_remarks']);
+        if(intro.content) {
+            $('#intro').text(intro.content);
+            $("input[name='params[intro]']").val(intro.content);
+            $('#intro').text(intro.content.substring(0,15)+'...');
+        }
+    }
+
+    if(localStorage['weidian_waimai_choosed_addr']) {
+        var addr_json = JSON.parse(localStorage['weidian_waimai_choosed_addr']);
+        if(addr_json.addr_id && addr_json.contact && addr_json.mobile && addr_json.address) {
+            $("input[name='params[addr_id]']").val(addr_json.addr_id);
+            $("#contact").html('收货人：' + addr_json.contact);
+            $("#mobile").html(addr_json.mobile);
+            $("#address").html(addr_json.address);
+        }
+    }
+
+    if(localStorage['weidian_waimai_order_choosed_coupon']) {
+        var cou_json = JSON.parse(localStorage['weidian_waimai_order_choosed_coupon']);
+        if(cou_json.coupon_id && cou_json.coupon_amount) {
+            $("input[name='params[coupon_id]']").val(cou_json.coupon_id);
+            $('#choose_coupon .item-after').html(cou_json.coupon_amount + '元优惠券');
+        }
+    }
+
+    if(is_ziti==0 || is_ziti==2) {
+        $('.pei_addr').show();
+        $('.ziti_addr').hide();
+        $('#freight').css('display','flex');
+        $('#ziti_time_picker_area').hide();
+        $('#pei_time_picker_area').show();
+    }else {
+        $('.ziti_addr').show();
+        $('.pei_addr').hide();
+        $('#freight').css('display','none');
+        $('#ziti_time_picker_area').show();
+        $('#pei_time_picker_area').hide();
+        $("input[name='params[pei_type]']").val(3);
+    }
+
+    if(localStorage['weidian_waimai_order_peitype']) {
+        var ptype_json = JSON.parse(localStorage['weidian_waimai_order_peitype']);
+        if(ptype_json.pei_type==3) {
+            $("a[pei_type$='3']").click();
+        }
+    }
+
+    if(localStorage['weidian_waimai_order_peitime']) {
+        $('#pei_time').val(localStorage['weidian_waimai_order_peitime']);
+        $("input[name='params[pei_time]']").val(localStorage['weidian_waimai_order_peitime']);
+    }
+
+    if(localStorage['weidian_waimai_order_zititime']) {
+        $('#ziti_time').val(localStorage['weidian_waimai_order_zititime']);
+        $("input[name='params[ziti_time]']").val(localStorage['weidian_waimai_order_zititime']);
+    }
+
+    setTimeout(function(){__Ajax_Waimai_Order_Dada();},1);
+})
+
+
+/*--------------------------配送方式处理开始-------------------------------*/
+$(document).off('click','.tab-link').on('click','.tab-link',function(){
+    $('.tab-link').removeClass('active');
+    $(this).addClass('active');
+    var pei_type = parseInt($(this).attr('pei_type'));
+    $("input[name='params[pei_type]']").val(pei_type);
+    if(pei_type==3) {
+        $('.ziti_addr').show();
+        $('.pei_addr').hide();
+        $('#freight').css('display','none');
+        $('#ziti_time_picker_area').show();
+        $('#pei_time_picker_area').hide();
+    }else {
+        $('.ziti_addr').hide();
+        $('.pei_addr').show();
+        $('#freight').css('display','flex');
+        $('#ziti_time_picker_area').hide();
+        $('#pei_time_picker_area').show();
+    }
+    // 保存配送方式选择状态
+    localStorage['weidian_waimai_order_peitype'] = JSON.stringify({"pei_type":$("input[name='params[pei_type]']").val()});
+    __Ajax_Waimai_Order_Dada();
+})
+/*--------------------------配送方式处理结束-------------------------------*/
+
+
+
+/*--------------------------收货地址处理开始-------------------------------*/
+$(document).off('click','#select_addr').on('click','#select_addr', function () {
+    localStorage['weidian_waimai_choose_addr'] = JSON.stringify({"backurl":window.location.href});
+    window.location.href = "<{link ctl='weidian/ucenter/addr:items'}>";
+});
+/*--------------------------收货地址处理结束-------------------------------*/
+
+
+
+/*--------------------------自提时间处理开始-------------------------------*/
+// 自提时间数组
+if("<{$yuji_pei_time}>") {
+    var ziti_str = time_select("<{$yuji_pei_time}>","<{$pei_time_list['start']}>", "<{$pei_time_list['start_quarter']}>", "<{$pei_time_list['end']}>", "<{$pei_time_list['end_quarter']}>");
+    var ziti_timelist = ziti_str.split(",");
+    ziti_timelist[0] = "立即自提|预计" + ziti_timelist[0];
+    if(ziti_timelist[ziti_timelist.length-1] == '') {
+        ziti_timelist.pop();
+    }
+}
+
+$("#ziti_time").picker({
+    toolbarTemplate: '<header class="bar bar-nav">\<button class="button button-link pull-left" id="ziti_cancel">取消</button>\<button class="button button-link pull-right close-picker" id="ziti_ok">确定</button>\<h1 class="title">选择自提时间</h1>\</header>',
+    cols: [{textAlign: 'center',values: ziti_timelist}]
+});
+
+$(document).off('click','#ziti_cancel').on('click','#ziti_cancel', function() {
+    $("#ziti_time").picker("close");
+    zititime_format();
+    localStorage['weidian_waimai_order_zititime'] = $("input[name='params[ziti_time]']").val();
+})
+
+$(document).off('click','#ziti_ok').on('click','#ziti_ok', function() {
+    zititime_format();
+    localStorage['weidian_waimai_order_zititime'] = $("input[name='params[ziti_time]']").val();
+})
+
+function zititime_format() {
+    var ziti_time = $('#ziti_time').val();
+    if(ziti_time.match("立即自提|预计")) {
+        ziti_time = ziti_time.replace("立即自提|预计", '');
+    }
+    $("input[name='params[ziti_time]']").val(ziti_time);
+}
+/*--------------------------自提时间处理结束-------------------------------*/
+
+
+
+/*--------------------------送达时间处理开始-------------------------------*/
+// 送达时间数组
+if("<{$yuji_pei_time}>") {
+    var sd_str = time_select("<{$yuji_pei_time}>","<{$pei_time_list['start']}>", "<{$pei_time_list['start_quarter']}>", "<{$pei_time_list['end']}>", "<{$pei_time_list['end_quarter']}>");
+    var sd_timelist = sd_str.split(",");
+    sd_timelist[0] = "尽快送达|预计" + sd_timelist[0];
+    if(sd_timelist[sd_timelist.length-1] == '') {
+        sd_timelist.pop();
+    }
+}
+
+$("#pei_time").picker({
+    toolbarTemplate: '<header class="bar bar-nav">\<button class="button button-link pull-left" id="pei_cancel">取消</button>\<button class="button button-link pull-right close-picker" id="pei_ok">确定</button>\<h1 class="title">选择送达时间</h1>\</header>',
+    cols: [{textAlign: 'center',values: sd_timelist}]
+});
+
+$(document).off('click','#pei_cancel').on('click','#pei_cancel', function() {
+    $("#pei_time").picker("close");
+    peitime_format();
+    localStorage['weidian_waimai_order_peitime'] = $("input[name='params[pei_time]']").val();
+})
+
+$(document).off('click','#pei_ok').on('click','#pei_ok', function() {
+    peitime_format();
+    localStorage['weidian_waimai_order_peitime'] = $("input[name='params[pei_time]']").val();
+})
+
+function peitime_format() {
+    var song_time = $('#pei_time').val();
+    if(song_time.match("尽快送达|预计")) {
+        song_time = song_time.replace("尽快送达|预计", '');
+    }
+    $("input[name='params[pei_time]']").val(song_time);
+}
+/*--------------------------送达时间处理结束-------------------------------*/
+
+
+
+/*--------------------------订单备注处理开始------------------------------*/
+$(document).off('click','#intro_choose').on('click','#intro_choose',function(){
+    localStorage['weidian_waimai_order_peitype'] = JSON.stringify({"pei_type":$("input[name='params[pei_type]']").val()});
+    localStorage['weidian_waimai_order_intro_backurl'] = window.location.href;
+    window.location.href = "<{link ctl='weidian/waimai:intro_choose'}>";
+})
+/*--------------------------订单备注处理结束------------------------------*/
+
+
+
+/*--------------------------选择优惠券处理开始-------------------------------*/
+$(document).off('click','#choose_coupon').on('click','#choose_coupon',function(){
+    var amount = FloatSub(<{$product_price}>, <{$first_amount}>);
+    localStorage['weidian_waimai_order_peitype'] = JSON.stringify({"pei_type":$("input[name='params[pei_type]']").val()});
+    localStorage['weidian_waimai_order_choose_coupon'] = JSON.stringify({"backurl":window.location.href});
+    window.location.href = "<{link ctl='weidian/ucenter/coupon:choosecoupon-"+shop_id+"-"+amount+"'}>";
+})
+/*--------------------------选择优惠券处理结束-------------------------------*/
+
+
+// 提交订单
+$(document).off('click','#goto_submit').on('click','#goto_submit',function(){
+    $.ajax({
+        url: "<{link ctl='weidian/waimai:create_order'}>",
+        async: true,
+        dataType: 'json',
+        data: $("#form_post").serializeArray(),
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error == 0 ) {
+                $.alert(ret.message);
+                Cookie.set('WDCart', {});
+                localStorage.removeItem('WDCart');
+                localStorage.removeItem('weidian_waimai_choose_addr');
+                localStorage.removeItem('weidian_waimai_choosed_addr');
+                localStorage.removeItem('weidian_waimai_order_peitype');
+                localStorage.removeItem('weidian_waimai_order_remarks');
+                localStorage.removeItem('weidian_waimai_order_choose_coupon');
+                localStorage.removeItem('weidian_waimai_order_choosed_coupon');
+                localStorage.removeItem('weidian_waimai_order_intro_backurl');
+                localStorage.removeItem('weidian_waimai_order_peitime');
+                localStorage.removeItem('weidian_waimai_order_zititime');
+                var order_id = parseInt(ret.data.order_id);
+                var pay_status = parseInt(ret.data.pay_status);
+                setTimeout(function(){
+                    $.closeModal();
+                    if(pay_status==1) {
+                        //外卖订单详情页
+                        window.location.href = "<{link ctl='weidian/ucenter/order:waimai_order_detail-"+order_id+"'}>";
+                    }else {
+                        //外卖订单支付页
+                        window.location.href = "<{link ctl='weidian/ucenter/order:payment-"+order_id+"'}>";
+                    }
+                },2000);
+                
+            }else{
+                if(ret.error == 101) {
+                    setTimeout(function(){
+                        $.closeModal();
+                        window.location.href = "<{link ctl='passport/login'}>";
+                    }, 1500);
+                }else {
+                    setTimeout(function(){
+                        $.alert(ret.message);
+                    },4000)
+                }
+                return;
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+// 点击查看用户自提地址地图
+$(document).off('click','.ziti_addr').on('click','.ziti_addr',function(){
+    localStorage['weidian_waimai_order_zititime'] = $("input[name='params[ziti_time]']").val();
+    window.location.href = "/weidian_"+shop_id+"/waimai/ziti_map_locate";
+})
+
+// 返回上一页清除订单相关存储
+function clear_localstorage() {
+    localStorage.removeItem('weidian_waimai_choose_addr');
+    localStorage.removeItem('weidian_waimai_choosed_addr');
+    localStorage.removeItem('weidian_waimai_order_peitype');
+    localStorage.removeItem('weidian_waimai_order_remarks');
+    localStorage.removeItem('weidian_waimai_order_choose_coupon');
+    localStorage.removeItem('weidian_waimai_order_choosed_coupon');
+    localStorage.removeItem('weidian_waimai_order_intro_backurl');
+    localStorage.removeItem('weidian_waimai_order_peitime');
+    localStorage.removeItem('weidian_waimai_order_zititime');
+}
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

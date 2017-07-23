@@ -1,0 +1,45 @@
+<{assign var='tpl_title' value=L("修改用户名")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">修改用户名</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+           <div class="mineName mt10">
+           		<div class="list-block">
+                    <ul>
+                      <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-input">
+                              <input id="nickname" type="text" placeholder="<{$MEMBER.nickname}>">
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <p class="black9 font_size14 font_line24 mar10">以中文或英文字母开头，限4-16个字符</p>
+                  <div class="content-block"> <a class="button button-big button-fill button-success">确定</a> </div>
+           </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+    <script>
+    	$('.button-success').click(function(){
+    		var nickname = $("#nickname").val();
+    		$.post("<{link ctl='ucenter/info/set_nickname'}>", {nickname: nickname}, function (ret) {
+    			if (ret.error == 0) {
+    				$.alert(ret.message); 
+    				setTimeout(function(){
+    	                window.location.href="<{link ctl='ucenter/info'}>";
+    	            },2000)
+    			} else {
+    	        	$.alert(ret.message);
+    	        }
+		    }, 'json');
+    	});
+    </script>
+<{include file="block/footer.html"}>

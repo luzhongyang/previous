@@ -1,0 +1,105 @@
+<{assign var='tpl_title' value=L("添加备注")}>
+<{include file="block/header.html"}>
+<style type="">
+.ord_mark .selct_box a.ml0{ margin-left: 0; }
+</style>
+    <div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left" id="waimai_order_note_backurl"> <span class="iconfont icon-iconfontxiangyou"></span> </a> <a class="button button-link button-nav pull-right mark">完成</a>
+            <h1 class="title">添加备注</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+           <div class="mineSet_feedback mt10">
+            	<div class="list-block">
+                    <ul>
+                      <li class="align-top">
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-input">
+                              <textarea id="content" maxlength="100" placeholder="请输入备注，最多100字哦"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+            </div>
+            <div class="mallord_delt_mask ord_mark">
+                <div class="row selct_box">
+                    <a href="javascript:;" aid="1" class="fl col-33 la ml0 cate1"><{$notes[1][1]}></a>
+                    <a href="javascript:;" aid="2" class="fl col-33 la cate1"><{$notes[1][2]}></a>
+                    <a href="javascript:;" aid="3" class="fl col-33 la cate1"><{$notes[1][3]}></a>
+                    <a href="javascript:;" aid="4" class="fl col-33 qt ml0 cate2"><{$notes[2]}></a> 
+                    <a href="javascript:;" aid="5" class="fl col-33 qt cate2"><{$notes[3]}></a> 
+                    <a href="javascript:;" aid="6" class="fl col-33 qt cate2"><{$notes[4]}></a>
+                    <a href="javascript:;" aid="7" class="fl col-33 qt ml0 cate2"><{$notes[5]}></a>
+                    <a href="javascript:;" aid="8" class="fl col-33 la cate3"><{$notes[6][1]}></a>
+                    <a href="javascript:;" aid="9" class="fl col-33 la cate3"><{$notes[6][2]}></a>
+                    <a href="javascript:;" aid="10" class="fl col-33 la ml0 cate3"><{$notes[6][3]}></a>
+                    <div class="cl"></div>
+                </div>
+            </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+
+
+<script>
+
+var stateJSON = null;
+if(localStorage['waimai_order_state']) {
+    stateJSON = JSON.parse(localStorage['waimai_order_state']);
+}
+$(document).off('click','#waimai_order_note_backurl').on('click','#waimai_order_note_backurl',function(){
+    if(stateJSON.backurl) {
+        window.location.href = stateJSON.backurl;
+    }
+})
+
+// 读取上一次保存的备注信息
+if(localStorage['waimai_order_remarks']) {
+    var obj = JSON.parse(localStorage['waimai_order_remarks']);
+    $('#content').val(obj.content);
+    $.each(obj.aid, function(i, v) {
+        $(".selct_box [aid='"+ v +"']").addClass('active');
+    })
+    //localStorage.removeItem('waimai_order_remarks');
+}
+
+$(document).on('click','.mallord_delt_mask .selct_box .la.cate1',function () {
+	$(".mallord_delt_mask .selct_box .la.cate1").removeClass("active");
+	$(this).addClass("active");
+});
+$(document).on('click','.mallord_delt_mask .selct_box .la.cate3',function () {
+    $(".mallord_delt_mask .selct_box .la.cate3").removeClass("active");
+    $(this).addClass("active");
+});
+$(document).on('click','.mallord_delt_mask .selct_box .qt',function () {
+	if($(this).hasClass("active")){
+		$(this).removeClass("active");
+	}else{
+		$(this).addClass("active");
+	}
+});
+
+// 备注编辑完成事件
+
+$(document).off('click','.mark').on('click','.mark',function() {
+    var aid = []; var content= ''; var kouwei = '';
+    content = $('#content').val();
+    $('.selct_box a').each(function (index,domEle){
+        if($(domEle).hasClass('active')) {
+            aid.push($(domEle).attr('aid'));
+            kouwei += $(domEle).text() + ',';
+        }
+    });
+    localStorage['waimai_order_remarks'] = JSON.stringify({"content":content, "aid": aid, "kouwei": kouwei});
+    if(stateJSON.backurl) {
+        window.location.href = stateJSON.backurl;
+    }
+})
+
+
+</script>
+<{include file="block/footer.html"}>

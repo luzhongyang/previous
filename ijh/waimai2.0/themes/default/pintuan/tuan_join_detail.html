@@ -1,0 +1,127 @@
+<{assign var='tpl_title' value=L("立即参团")}>
+<{include file="block/header.html"}>
+
+<div class="page page-current">
+    <!-- 标题栏开始 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span>
+        </a>
+        <a class="button button-link button-nav pull-right"><i class="iconfont icon-fenxiang"
+                                                               style="font-size:26px;margin-top:-0.2rem;"></i></a>
+        <a class="button button-link button-nav pull-right"><i num="<{$product.pintuan_product_id}>" class="<{if $collect.uid>0}>guanzhu iconfont icon-xinshi-copy <{else}>guanzhu iconfont icon-kongxin <{/if}>"
+                                                               style="margin-top:0.2rem;"></i> </a>
+        <h1 class="title gai_top"><a class=""
+                                     href="<{link ctl='pintuan:tuan_join' arg0=$group.pintuan_group_id}>"><span<{if
+            'info'!=$smarty.get.detail }> class="on"<{/if}>>商品</span></a>
+            <a href="<{link ctl='pintuan:tuan_join' arg0=$group.pintuan_group_id detail=info}>"><span<{if
+                'info'==$smarty.get.detail }> class="on"<{/if}>>详情</span></a>
+        </h1>
+    </header>
+    <!-- 标题栏结束 -->
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab nav_btn">
+        <ul>
+                <li class="list1"> 
+                    <a href="<{link ctl='pintuan'}>">
+                        <div class="ico1"></div>
+                        <p class="font_size14"> 首页</p>
+					</a>
+                </li>
+
+
+                <{if 0==$group.status}>
+                <li class="list3 open-about2" style="width:80% !important;">
+                    <a href="#">
+                        <p class="mt5"><i>拼团价：￥</i><em><{$product.tuan_price}></em></p>
+                        <p>立即参团</p>
+                    </a>
+                </li>
+
+                <{else}>
+                <li class="list4">
+                    <a href="<{link ctl='pintuan:product' product_id=$product.pintuan_product_id}>">点击重开一团</a>
+                </li>
+                <{/if}>
+
+
+        </ul>
+        <div class="cl"></div>
+    </nav>
+        <!-- 工具栏结束 --> 
+        <!-- 主要内容 -->
+        <div class="content">
+            <{$product.intro}>
+        </div>
+        <!-- 主要内容结束 --> 
+    </div>
+
+
+<!--xiangqing弹出层2-->
+<div class="popup popup-about2 xiangqing_mask" style="overflow:visible">
+    <form action="<{link ctl='pintuan:tuan_join_order'}>" method="get">
+        <div class="list-block media-list" style="margin:0;">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media radius-shang" style="z-index:9999"><img src="/attachs/<{$product.photo}>"
+                                                                                       style='width: 4.2rem;'></div>
+                        <div class="item-inner">
+                            <div class="item-subtitle fontcl1" style="line-height:2rem;">
+                                ￥<big><{$product.tuan_price}></big></div>
+                        </div>
+                    </div>
+                    <div class="yuan-cha close-popup"></div>
+                </li>
+            </ul>
+        </div>
+
+        <{$product.attr_html}>
+
+        <p><button style="width: 100%;" href="#" class="gouwu-queding button button-big mt10">确定</button></p>
+        <input name="product_id" type="hidden" value="<{$product.pintuan_product_id}>"/>
+        <input name="group_id" type="hidden" value="<{$group.pintuan_group_id}>"/>
+    </form>
+</div>
+<!--xiangqing弹出层2-->
+
+<script>
+    $(document).ready(function () {
+
+        $(".resou-name").click(function () {
+                    $(this).parent().find(".resou-name").removeClass("on");
+                    $(this).addClass("on");
+                }
+        );
+
+        var numb = $(".text_box").val();
+        $(".add").click(function(){
+            if(numb< <{if $product.item_limit<1}>9999<{else}><{$product.item_limit}><{/if}> ){
+
+                numb++;
+                $(".text_box").val(numb);
+            }
+            });
+            $(".reduce").click(function(){
+                if(numb>0){
+
+                    numb--;
+                    $(".text_box").val(numb);
+                }
+            });
+        });
+	$(document).on('click','.open-about2', function () {
+      $.popup('.popup-about2');
+    });
+
+    $(function () {
+        var swiper = new Swiper('.swiper-container5', {
+            pagination: '.swiper-pagination5',
+            slidesPerView: 2.5,
+            paginationClickable: true,
+            spaceBetween: 10,
+            freeMode: true
+        });
+    });
+</script>
+<{include file='pintuan/block_pintuan_product_share_js.html'}>
+<{include file='block/footer.html'}>

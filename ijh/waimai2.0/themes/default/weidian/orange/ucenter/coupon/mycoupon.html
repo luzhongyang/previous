@@ -1,0 +1,37 @@
+<{assign var='tpl_title' value=L("我的优惠券")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current"> 
+    <!--头部-->
+    <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/ucenter/index/index'}>"> <span class="Ico1"></span> </a>
+    <a class="button button-link button-nav pull-right external" href="<{link ctl='weidian/ucenter/coupon:items'}>">领券</a>
+        <h1 class="title">我的优惠券</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content content-padding">
+    	<div class="youhui-quan-box">
+            <{foreach $items as $v}>
+        		<div class="quan-list border">
+            		<div class="up-wenzi">
+                    	<div class="left fl  maincl txt_center <{$v.money_class}>"><span style="font-size:0.8rem;">￥<big><{$v.coupon_amount}></big></span></div>
+                        <div class="right fr">
+                        	<h3 class="overflow_clear maincl <{$v.title_class}>"><{$v.shop_name}></h3>
+                            <p class="font_size14 font_line24">满<{$v.order_amount}>元可用、限手机客户端使用、每人限用一张</p>	
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                    <div class="down-useful" >
+                    	<p class="font_size14 font_line24 <{$v.useful_class}>">有效期：<{$v.stime|format:'Y-m-d'}>至<{$v.ltime|format:'Y-m-d'}></p>
+                    </div>
+                    <div class="quan-state <{$v.label_class}> font_size14"><{$v.status_label}></div>
+                </div>
+            <{foreachelse}>
+            <div class="nonePage txt_center">
+                <img src="%THEME%/weidian/<{$theme_style}>/static/images/nodata/icon_coupon_no@2x.png">
+                <p class="black3">无店铺优惠券</p>
+            </div>
+            <p class="txt_center font_size12  black9">马上去领券吧</p>
+            <{/foreach}>        
+        </div>
+    </div>
+</div>
+<{include file="weidian/$theme_style/block/footer.html"}>

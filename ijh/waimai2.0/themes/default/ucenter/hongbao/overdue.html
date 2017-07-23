@@ -1,0 +1,40 @@
+<{assign var='tpl_title' value=L("历史红包")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">历史红包</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+           <div class="mineCoupon_list_box">
+           <{foreach $items as $item}>
+           		<div class="mineCoupon_list mineBag_list">
+                	<div class="right">
+                    	<div class="price fontcl1 txt_center"><small>￥</small><{$item.amount}></div>
+                    </div>
+                	<div class="left">
+                    	<h3 class="overflow_clear"><{$item.title}><!-- <{$types[$item.type]}> --></h3>
+                        <ul>
+                        	<li>满<{$item.min_amount}>元可用</li>
+                            <li><{$item.stime}>至<{$item.ltime}></li>
+                        </ul>
+                    </div>
+                    <{if $item.order_id}>
+                    	<img src="%THEME%/static/images/bag_no.png" class="tag">
+                    <{else}>
+                    	<img src="%THEME%/static/images/bag_no2.png" class="tag">
+                    <{/if}>
+                    
+                </div>
+            <{foreachelse}>
+            	<div class="nonePage txt_center">
+	           		<img src="%THEME%/static/images/none/bag_no.png">
+	           		<p class="black9">暂无红包</p>
+				</div>
+           	<{/foreach}>
+           </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+<{include file="block/footer.html"}>

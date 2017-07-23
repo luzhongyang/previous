@@ -1,0 +1,116 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="pintuan/order:index" priv="hidden" class="button"}></td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data">
+    <table width="100%" border="0" cellspacing="0" class="table-data form">
+        <tr>
+            <th>订单ID：</th><td class="w-300"><{$detail.order_id}></td>
+            <th>用户：</th><td><{$detail.nickname}></td>
+        </tr>
+        <tr>
+            <th>商家：</th><td><span class="red"><{$detail.shop_items.title}></span></td>
+            <th>商品名称：</th><td><{$detail.product_name}></td>
+        </tr>
+        <tr>
+            <th>商品总价：</th><td><{$detail.product_price}></td>
+            <th>商品价格(单价)：</th><td><{$detail.order_product_items.product_price}></td>
+        </tr>
+        <tr>
+            <th>商品数量：</th><td><{$detail.product_number}></td>
+            <th>成团有效期：</th><td><{$detail.tuan_time}></td>
+        </tr>
+        <tr>
+            <th>团长佣金：</th><td><{$detail.money_master}></td>
+            <th>运费：</th><td><{$detail.freight}></td>
+        </tr> 
+        <tr>
+            <th>支付类型：</th><td><{if $detail.is_money_pre==0}>全款<{elseif $detail.is_money_pre==1}>预付款<{/if}></td>
+            <th>应付预付款：</th><td><{$detail.money_need_pay}></td>
+        </tr>
+        <tr>
+            <th>经纬度：</th><td>经度：<{$detail.order_items.lng}>&nbsp;纬度：<{$detail.order_items.lat}></td>
+            <th>地址：</th><td><span class="green"><{$detail.order_items.addr}>，<{$detail.order_items.house}>(<{$detail.order_items.contact}>,<{$detail.order_items.mobile}>)</span></td>
+        </tr>
+        <tr>
+            <th>订单状态：</th><td><span class="red"><{$detail['status'][$detail.order_items.order_status]}></span></td>
+            <th>支付状态：</th><td><span class="green"><{if $detail.order_items.pay_status==1}>已支付<{else}>未支付<{/if}></span></td>
+        </tr>
+        <tr>
+            <th>是否在线支付：</th><td><{if $detail.order_items.online_pay==1}>在线支付<{else}>餐到付款<{/if}></td>
+            <th>期望送达时间：</th><td><{if $detail.order_items.pei_time==0}>尽快送达<{else}><{$detail.order_items.dateline|format:'Y-m-d'}>&nbsp;<{$detail.order_items.pei_time|format:"H:i"}><{/if}></td>
+        </tr>
+        <tr>
+            <th>支付IP：</th><td><{$detail.order_items.pay_ip|default:'无'}></td>
+            <th>支付时间：</th><td><{$detail.order_items.pay_time|format:'Y-m-d H:i:s'}></td>
+        </tr>
+        <tr>
+            <th>配送类型：</th><td><{if $detail.order_items.pei_type==0}>商家自主配送<{elseif $detail.order_items.pei_type==1}>第三方配送<{else}>代购送<{/if}></td>
+            <th>配送员：</th>
+                <td>
+                    <{if $detail.order_items.pei_type==0}>
+                        商家自主配送
+                    <{else}>
+                        <{if $detail.order_items.staff_id>0}>
+                            <{$detail.staff.name}>(<{$detail.staff.mobile}>)
+                            <{if $detail.order_items.order_status==4 || $detail.order_items.order_status==3}>
+                            <{link ctl="order/order:quxiaopei" arg0=$detail.order_id act="mini:取消配送员" confirm="mini:确定要取消配送员吗" title="取消配送员" class="button"}>
+                            <{/if}>
+                            <{elseif $detail.order_items.order_status > 1 && $detail.order_items.order_status < 8 && $detail.staff < 1}>
+                            <{link ctl="order/order:dopaidan" arg0=$detail.order_id load="mini:派单给配送"  title="派单配送" class="button"}>
+                            <{else}>
+                            配送员未接单
+                            <{/if}>
+
+                    <{/if}>
+                </td>
+            </tr>
+        <tr>
+            <th>配送费用：</th><td><{$detail.order_items.pei_amount}></td>
+            <th>订单来源：</th><td><{$froms[$detail['order_items']['order_from']]}></td>
+        </tr>
+        <tr>
+            <th>客户IP：</th><td><{$detail.order_items.clientip}></td>
+            <th>下单时间：</th><td><{$detail.order_items.dateline|format:'Y-m-d H:i:s'}></td>
+        </tr>
+        <tr>
+            <th></th><td></td>
+            <th>取消订单操作：</th><td>
+            <{if $detail.order_items.order_status<=0 }>
+                订单已取消, 不能进行取消操作.
+            <{else if  $detail.order_items.order_status>=8 }>
+                订单已完成, 不能进行取消操作.
+            <{else}>
+                <a class="btn btn-success btn-sm btn-outline button" href="?order/order-detail-<{$detail.order_id}>-1.html" mini-act="audit"  mini-confirm="确定要取消吗？"> 取消订单</a>
+                取消订单, 资金将退到用户余额.
+            <{/if}>
+            </td>
+        </tr>
+        <tr><td colspan="10" class="h-10"></td></tr>
+    </table>
+    <{if $detail.logs}>
+    <table width="100%" border="0" cellspacing="0" class="table-data table">
+    <tr>
+        <th class="w-100">日志编号</th>
+        <th class="w-50">操作人员</th>
+        <th class="w-150">明细</th>
+        <th class="w-100">时间</th>
+    </tr>
+    <{foreach $detail.logs as $var}>
+    <tr >
+        <td><{$var.log_id}></td>
+        <td><{if $var.from=='member'}>用户<{elseif $var.from=='shop'}>商家<{elseif $var.from=='staff'}>配送员<{else}>管理人员<{/if}>(<{$detail['types'][$var['type']]}>)</td>
+        <td><{$var.log}></td>
+        <td><{$var.dateline|format}></td>
+    </tr>
+    <{/foreach}>
+    <{/if}>
+</div>
+<{include file="admin:common/footer.html"}>

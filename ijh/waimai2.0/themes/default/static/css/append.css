@@ -1,0 +1,13 @@
+/*没有更多了*/
+.loading_end{margin: 0.5rem;text-align: center;}
+
+/*字体大小扩展*/
+.font_size3{ font-size:0.15rem;}
+.font_size7{ font-size:0.35rem;}
+.font_size10{ font-size:0.5rem;}
+.font_size12{ font-size:0.6rem;}
+
+/*商家列表添加打烊状态*/
+.shangjia_list .pub_img{ position:relative;}
+.shangjia_list .pub_img .state{ position:absolute; left:0; right:0; bottom:0; background: rgba(51, 51, 51, 0.8); line-height: 24px; font-size: 14px; text-align: center; color: #fff;}
+/*商家列表添加打烊状态end*/

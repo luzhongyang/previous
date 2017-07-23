@@ -1,0 +1,66 @@
+/*参团新增*/
+    /*团详情，查看更多*/
+.pt_nr .wz .bt{ padding:0.35rem 0;}
+.pt_nr .wz .btn1{ padding:0.1rem 0.25rem; background:#91c202; color:#fff; border-radius:0.25rem; -webkit-border-radius:0.25rem;}
+.pt_nr .wz .btn2{ padding:0.1rem 0.25rem; background:#ff6600; color:#fff; border-radius:0.25rem; -webkit-border-radius:0.25rem;}
+.pt_nr .wz .wz1{ font-size:0.75rem; line-height:1.3rem;}
+.pt_nr .wz ul li span.jiage{ text-decoration: line-through;}
+.pt_nr .wz .color1{ color:#ff3300;}
+.pt_nr .wz2{padding:0.5rem 0.5rem; border-bottom:1px #e5e5e5 solid; color:#333; font-size:0.75rem;}
+.pt_nr .zt_shibai{padding:0.5rem 0.5rem;}
+.pt_nr .zt_shibai .touxiang{ background:url(../images/touxiang_04.png) no-repeat; width:40px; height:40px; border-radius:100%; overflow:hidden; background-size:100% auto;}
+.pt_nr .zt_shibai .touxiang img{ width:100%; height:100%;}
+.pt_nr .zt_shibai .wz_right em,.pt_nr .zt_shibai .wz_left{ margin-left:0.5rem;}
+.pt_nr .zt_shibai .wz_left,.pt_nr .zt_shibai .wz_right{ margin-top:0.4rem;}
+.pt_nr .zt_shibai .btn .btn1{ border:1px solid #ff7800; border-right:none; border-top-left-radius:0.25rem; border-bottom-left-radius:0.25rem;-webkit-border-top-left-radius:0.25rem; -webkit-border-bottom-left-radius:0.25rem; padding:0.5rem 0; width:35%;}
+.pt_nr .zt_shibai .btn .btn2{ border-top-right-radius:0.25rem; border-bottom-right-radius:0.25rem;-webkit-border-top-right-radius:0.25rem; -webkit-border-bottom-right-radius:0.25rem; color:#fff; padding:0.5rem 0; width:65%;}
+.pt_nr .zt_shibai .bg_color1{ background:#ff3300; border:1px solid #ff3300;}
+.pt_nr .zt_shibai .bg_color2{ background:#ff7800; border:1px solid #ff7800;}
+.pt_nr .zt_shibai .btn3{ background:#00cdda; border-radius:0.25rem; -webkit-border-radius:0.25rem; color:#fff; padding:0.5rem 0;}
+
+.pt_nr .dianpu .logo .img{ border-radius:100%; overflow:hidden; width:50px; height:50px;display: inline-block;}
+.pt_nr .dianpu .logo .img img{ width:100%;}
+.pt_nr .dianpu .logo .name i{ display:inline-block; background:url(../images/ziti.png) no-repeat; width:60px; height:15px; vertical-align:middle; background-size:60px 15px; margin-left:0.5rem;}
+.pt_nr .dianpu .logo .name{ font-size:0.8rem;}
+.pt_nr .dianpu .box li{ width:50%;box-sizing:border-box; -webkit-box-sizing:border-box;}
+.pt_nr .dianpu .dp_btn{ margin:0.5rem 0 0.25rem; padding:0;}
+.pt_nr .dianpu .dp_btn a{ height:2rem; line-height:2rem; font-size:0.8rem; border-color:#e5e5e5;}
+
+.pt_nr .liucheng .lc span{ display:inline-block; width:0.15rem; height:0.9rem; background:#00cdda; vertical-align:middle; margin-right:0.25rem;}
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden;}
+.pt_nr .liucheng .nr li{ float:left; width:25%; padding:0.5rem 0 0.25rem; font-size:0.7rem;}
+.pt_nr .liucheng .nr .num{ color:#00cdda; background:#e4f8f9; width:1rem; text-align:center; line-height:1rem; height:1rem; border-radius:100%; -webkit-border-radius:100%; margin-right:0.15rem;margin-top: 0.5rem;}
+.pt_nr .liucheng .nr .list{}
+.pt_nr .liucheng .nr .list span{ display:block;}
+.like_m{margin: 0.5rem 0.5rem 1rem;}
+.swiper-container .banner_wz{ position:absolute; top:0; left:0; background: rgba(0, 0, 0, 0.5); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000,endColorstr=#BF000000); width: 100%; height: 1.5rem; line-height:1.5rem; color: #fff; z-index:11;}
+/*团详情，查看更多结束*/
+/*拼团价格筛选*/
+.ladder_price{ margin:0.5rem 0;}
+.ladder_price .tit{ padding:0 0.5rem; height:1.3rem; background:#ff3300; color:#fff; line-height:1.3rem; border-radius:0.25rem 0 0 0.25rem;}
+.ladder_price .select_box{ margin:0 5rem 0 3.5rem; border:0.05rem solid #ff6600;}
+.ladder_price .select_box ul{ padding:0 !important;}
+.ladder_price .select_box ul li{ padding:0 0.4rem; height:1.8rem; line-height:1.8rem; border-bottom:0.05rem solid #ff6600; position:relative; text-align:center; font-size:0.7rem;}
+.ladder_price .select_box ul li:last-child{ border-bottom:none;}
+.ladder_price .select_box ul li .colr{ color:#ff6600;}
+.ladder_price .select_box ul li.on{ background:#ff6600; color:#fff;}
+.ladder_price .select_box ul li.on .colr{ color:#fff;}
+.ladder_price .select_box ul li.on .ts{ display:block;}
+.ladder_price .select_box ul li .ts{ position:absolute; display:none; right:-4rem; top:0; color:#333;}
+.ladder_price .select_box ul li .ts:before{ content:''; left:-0.8rem; top:0.6rem; border-top: 0.4rem solid transparent; border-bottom: 0.4rem solid transparent; border-right: 0.6rem solid #ff6600; position:absolute;}
+/*拼团价格筛选结束*/
+/*拼团底部*/
+.nav_btn ul li{ float:left; text-align:center; height:2.5rem; font-size:0.8rem;}
+.nav_btn ul li a{ display:block;}
+.nav_btn ul li p{ line-height:1rem;}
+.nav_btn .list1{ width:20%;}
+.nav_btn .list1 a{ color:#666;}
+.nav_btn .ico1{ margin: 0.25rem auto 0; background:url(../images/sy.png) no-repeat center top; width:25px; height:23px; background-size:25px 23px;}
+.nav_btn .list2{ width:40%; background:#fcca00;}
+.nav_btn .list2 a{ color:#5c3902;}
+.nav_btn .list3{ width:40%; background:#ff3300;}
+.nav_btn .list3 a{ color:#fff;}
+.nav_btn .list3 i{ font-size:0.7rem;}
+.nav_btn .list4{ width:80%; line-height:2.5rem; background:#fcca00;}
+.nav_btn .list4 a{ color:#5c3902;}
+/*拼团底部结束*/

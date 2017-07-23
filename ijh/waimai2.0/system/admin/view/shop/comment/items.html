@@ -1,0 +1,63 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+	<table width="100%" align="center" cellpadding="0" cellspacing="0" >
+		<tr>
+			<td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+			<th><{$MOD.title}></th>
+			<td align="right"><{link ctl="shop/comment:so" load="mini:搜索内容" width="mini:500" class="button" title="搜索"}></td>
+			<td width="15"></td>
+		</tr>
+	</table>
+</div>
+<div class="page-data">	
+	<form id="items-form">
+    <table width="100%" border="0" cellspacing="0" class="table-data table">
+        <tr><th class="w-100">ID</th>
+        <th class="w-50">商家</th>
+        <th class="w-50">用户</th>
+        <th class="w-50">订单</th>
+        <th class="w-50">评分</th>
+        <th class="w-50">服务评分</th>
+        <th class="w-50">口味评分</th>
+        <th class="w-50">配送速度</th>
+        <th>内容</th>
+        <th>回复</th>
+        <th class="w-100">评论时间</th>
+        <th class="w-150">操作</th>
+    </tr>
+    <{foreach $items as $item}>
+    <tr>
+    <td><label><input type="checkbox" value="<{$item.comment_id}>" name="comment_id[]" CK="PRI"/><{$item.comment_id}><label></td>
+    <td><{$shop_list[$item.shop_id].title}></td>
+    <td><{$member_list[$item.uid].nickname}>(<{$member_list[$item.uid].mobile}>)</td>
+    <td><{$item.order_id}></td>
+    <td><{$item.score}></td>
+    <td><{$item.score_fuwu}></td>
+    <td><{$item.score_kouwei}></td>
+    <td><{$item.pei_time_label}>(<{$item.pei_time}>)</td>
+    <td><{$item.content}></td>
+    <td><{if reply_time}><{$item.reply}><{else}>未回复<{/if}></td>
+    <td><{$item.dateline|format}><br /><{$item.clientip}>(<{$item.clientip|iplocal}>)</td>
+    <td>
+        <{link ctl="shop/comment:detail" args=$item.comment_id class="button" title="查看"}>
+        <{if empty($item.reply)}><{link ctl="shop/comment:reply" args=$item.comment_id title="回复" width="mini:450" load="mini:回复评论" class="button"}><{/if}>
+        <{link ctl="shop/comment:delete" args=$item.comment_id act="mini:删除" confirm="mini:确定要删除吗？" title="删除" class="button"}>
+    </td>
+</tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="text-align tip-notice">没有数据</p></td></tr>
+    <{/foreach}>
+    </table>
+	</form>
+	<div class="page-bar">
+		<table>
+			<tr>
+			<td class="w-100"><label><input type="checkbox" CKA="PRI"/>&nbsp;&nbsp;全选</label></td>
+			<td colspan="10" class="left"><{link ctl="shop/comment:delete" type="button" submit="mini:#items-form" confirm="mini:确定要批量删除选中的内容吗?" priv="hide" value="批量删除"}>
+<{link ctl="shop/comment:doaudit" type="button" submit="mini:#items-form" confirm="mini:确定要批量审核选中的内容吗?" priv="hide" value="批量审核"}></td>
+			<td class="page-list"><{$pager.pagebar}></td>
+		</tr>
+		</table>
+	</div>
+</div>
+<{include file="admin:common/footer.html"}>

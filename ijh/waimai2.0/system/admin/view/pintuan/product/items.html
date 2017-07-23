@@ -1,0 +1,97 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt=""/></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="pintuan/product:create" class="button" title="添加"}>
+                <{link ctl="pintuan/product:so" load="mini:搜索内容" width="mini:500" class="button" title="搜索"}>
+            </td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data">
+    <form id="items-form">
+        <table width="100%" border="0" cellspacing="0" class="table-data table">
+            <tr>
+                <th class="w-100">商品ID</th>
+                <th>商户ID</th>
+                <th>分类ID</th>
+                <th>图片</th>
+                <th>商品名称</th>
+                <th>团类型</th>
+                <th class="w-50">参团人数(0,不限)</th>
+                <th class="w-50">团购信息</th>
+                <!--<th>团长免单</th>-->
+                <th>购买开团</th>
+                <th class="w-50">佣金和预付款</th>
+                <th>排序</th>
+                <th class="w-50"><{L('是否在售')}></th>
+                <th class="w-100">创建时间</th>
+                <th class="w-150">操作</th>
+            </tr>
+            <{foreach $items as $item}>
+            <tr>
+                <td><label><input type="checkbox" value="<{$item.pintuan_product_id}>" name="pintuan_product_id[]"
+                                  CK="PRI"/><{$item.pintuan_product_id}><label></td>
+                <td><{$shop_list[$item.shop_id].title|default:'--'}></td>
+                <td><{$item.cate_id}></td>
+                <td><img src="<{$pager.img}>/<{$item.photo}>" class="wh-50"/></td>
+                <td>
+                    <{$item.title}><br />
+                    总销量:<{$item.sales}>
+                </td>
+
+                <td><{$item.tuan_type}></td>
+                <td><{$item.user_num}></td>
+                <td>
+                    单买价:<{$item.price}><br />
+                    <{$item.tuan_price}><br />
+                    单人购买上限:<{$item.item_limit}><br />
+                    成团有效期:<{$item.tuan_time}> <br />
+                    团限购:<{$item.tuan_limit}>
+
+                </td>
+                <!--<td><{$item.master_is_free}></td>-->
+                <td><{$item.master_need_buy}></td>
+                <td>
+                    佣金:<{$item.money_master}><br />
+                    预付款:<{$item.money_pre}></td>
+                <td><{$item.orderby}></td>
+                <td>
+                    <{if $item.is_onsale==1}>
+                    <font style="color:green;">在售</font>
+                    <{else}>
+                    <font style="color:red">下架</font>
+                    <{/if}>
+                </td>
+                <td><{$item.dateline|format}></td>
+                <td><{link ctl="pintuan/product:detail" args=$item.pintuan_product_id class="button" title="查看"}><{link
+                    ctl="pintuan/product:edit" args=$item.pintuan_product_id title="修改" class="button"}><{link
+                    ctl="pintuan/product:delete" args=$item.pintuan_product_id act="mini:删除" confirm="mini:确定要删除吗？"
+                    title="删除" class="button"}>
+                </td>
+            </tr>
+            <{foreachelse}>
+            <tr>
+                <td colspan="20"><p class="text-align tip-notice">没有数据</p></td>
+            </tr>
+            <{/foreach}>
+        </table>
+    </form>
+    <div class="page-bar">
+        <table>
+            <tr>
+                <td class="w-100"><label><input type="checkbox" CKA="PRI"/>&nbsp;&nbsp;全选</label></td>
+                <td colspan="10" class="left"><{link ctl="pintuan/product:delete" type="button"
+                    submit="mini:#items-form" confirm="mini:确定要批量删除选中的内容吗?" priv="hide" value="批量删除"}>
+                    <{link ctl="pintuan/product:doaudit" type="button" submit="mini:#items-form"
+                    confirm="mini:确定要批量审核选中的内容吗?" priv="hide" value="批量审核"}>
+                </td>
+                <td class="page-list"><{$pager.pagebar}></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<{include file="admin:common/footer.html"}>

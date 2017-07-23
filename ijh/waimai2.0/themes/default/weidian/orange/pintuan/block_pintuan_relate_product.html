@@ -1,0 +1,18 @@
+<div class="may-like mt10 border_b">
+    <div class="tit font-size75 black3">你可能还喜欢</div>
+    <ul class="cont">
+        <{foreach $block.relate_product as $v}>
+        <li class="list">
+            <div class="list-cont">
+                <div class="img"><a href="<{link ctl="weidian/pintuan/product" arg0=$v.pintuan_product_id}>" ><img src="<{$pager.img}>/<{$v.photo}>"></a></div>
+                <div class="wz font_size14">
+                    <p class="overflow_clear black3"><a href="<{link ctl="weidian/pintuan/product" arg0=$v.pintuan_product_id}>" >【<{$v.title}>】</a></p>
+                    <p class="black6">销售量:<{$v.sales}></p>
+                    <p class="fontcl1">￥<{$v.tuan_price}></p>
+                </div>
+            </div>
+        </li>
+        <{/foreach}>
+    </ul>
+    <div class="cl"></div>
+</div>

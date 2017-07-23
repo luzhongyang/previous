@@ -1,0 +1,114 @@
+<{assign var='tpl_title' value=L("评价订单")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+    <div class="page page-current">
+        <!--头部-->
+        <header class="bar bar-nav header_Ico">
+            <a class="button button-link button-nav pull-left back">
+                <span class="Ico1"></span>
+            </a>
+            <h1 class="title">评价订单</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+            <div class="pingjia-dingdan-box">
+                <{if in_array($order.pei_type,array(0,1,2))}>
+                <{if $order.staff_id>0}>
+                <div class="dafen_form">
+                    <div class="list-block media-list top_box">
+                        <ul>
+                            <li>
+                                <div href="javascript:;" class="item-content">
+                                    <div class="item-media">
+                                        <img src="<{$pager.img}>/<{$staff.face}>"></div>
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title"><{$staff.name}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="txt_center black9">为配送打分</p>
+                    <div class="star_box txt_center">
+                        <span class="starBg txt_left">
+                            <span class="star" style="width:<{$staff_comment.score*20}>%;">
+                                <span class="star_clink"></span>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="list-block">
+                        <ul>
+                            <li class="align-top">
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <textarea readonly="readonly"><{if $staff_comment.content}><{$staff_comment.content}><{else}>未填写<{/if}></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <{/if}>
+                <{/if}>
+                <div class="dafen_form">
+                    
+                    <div class="list-block media-list top_box">
+                        <ul>
+                            <li>
+                                <div href="#" class="item-content">
+                                    <div class="item-media">
+                                        <img src="<{$pager.img}>/<{$shop.logo}>"></div>
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title"><{$shop.title}></div>
+                                        </div>
+                                        <{if in_array($order.pei_type,array(0,1,2))}>
+                                        <div class="item-title-row">
+                                            <div class="item-title">配送速度</div>
+                                            <div class="item-after">
+                                                <{$shop_comment.song_time}>
+                                            </div>
+                                        </div>
+                                        <{/if}>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <p class="txt_center black9">为商家服务打分</p>
+                    <div class="star_box txt_center">服务态度
+                    <span class="starBg txt_left">
+                        <span class="star" style="width:<{$shop_comment.score_fuwu*20}>%;">
+                        </span>
+                    </span>
+          
+                </div>
+                <div class="star_box txt_center">商品口味
+                    <span class="starBg txt_left">
+                        <span class="star" style="width:<{$shop_comment.score_kouwei*20}>%;">
+                    </span>
+       
+                </div>
+                    <div class="list-block">
+                        <ul>
+                            <li class="align-top">
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <textarea readonly="readonly"><{if $shop_comment.content}><{$shop_comment.content}><{else}>未填写<{/if}></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <{include file="weidian/$theme_style/block/footer.html"}>

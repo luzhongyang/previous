@@ -1,0 +1,364 @@
+<{assign var='tpl_title' value=L("我的团")}>
+<{include file="block/header.html"}>
+
+<{include file="block/header.html"}>
+<style>
+    .maxItems {
+        visibility: hidden;
+    }
+    .infinite-scroll-preloader{
+        display: none;
+    }
+    <{if $count.count_0 >10 }>
+    .infinite-scroll-nomore{
+        display: none;
+    }
+    <{/if}>
+</style>
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav"><a class="button button-link button-nav pull-left" href="<{link ctl='ucenter'}>">
+        <span class="iconfont icon-iconfontxiangyou"></span> </a>
+        <a class="button button-link button-nav pull-right" href="<{link ctl='pintuan'}>"><span class="icon-zhuye"></span></a>
+        <h1 class="title">我的团</h1>
+    </header>
+    <!--头部结束-->
+    <div class="content ajax_data_tuan_my">
+        <div class="buttons-tab qiehuan">
+            <a href="#tab1" id="id_tab1" class="tab-link active button">组团中</a>
+            <a href="#tab2" id="id_tab2" class="tab-link button">组团成功</a>
+            <a href="#tab3" id="id_tab3" class="tab-link button">组团失败</a>
+        </div>
+        <div class="content-block biaoqianye">
+            <div class="tabs">
+                <div id="tab1" class="tab active infinite-scroll">
+
+                    <{if $list.list_0|@count neq 0}>
+
+                    <div class="content-block biaoqian-content">
+                        <ul class="list-container">
+                            <{foreach $list.list_0 as $group}>
+                            <li class="one_item">
+                                <div class="list-block media-list border_b border_t">
+                                    <ul>
+                                        <li>
+                                            <a  href="<{link ctl='pintuan:tuan_detail' arg0=$group.pintuan_group_id}>" >
+                                            <div class="item-content">
+                                                <div class="item-media"><img src="/attachs/<{$group.photo}>" style='width: 4.2rem;'></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title overflow_clear"><{$group.product_name}>　(团ID:<{$group.pintuan_group_id}>)
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-subtitle">
+                                                        <div class="pad_t10 pad_b10 pad_r10 pintuan-box">
+                                                            <i class="pintuan"></i>
+                                                            <span class="tuan-price">成团价：￥<big><{$group.product_price}></big>/件</span><span
+                                                                class="youji-blue"><i
+                                                                class="iconfont icon-xiangyou"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tuangou-ing border_b">
+                                    <div class="zuo-box fl border_r"><span class="maincl">团购进行中</span><br/>(还差<{$group.user_num
+                                        - $group.order_success_count}>人)
+                                    </div>
+                                    <div class="you-box">
+                                        <a type="button"
+                                           href="<{link ctl='pintuan:tuan_detail' arg0=$group.pintuan_group_id}>"
+                                           class="pub_btn gray-bd external" value="查看团详情">查看团详情</a>
+                                        <a type="button"
+                                           href="<{link ctl='pintuan:tuan_order_detail' arg0=$group.order_id}>"
+                                           class="pub_btn gray-bd" value="">查看订单</a>
+                                    </div>
+                                    <div class="cl"></div>
+                                </div>
+                            </li>
+                            <{/foreach}>
+                        </ul>
+
+                    </div>
+
+                    <input name="page" id="page" class="page" value="2"/>
+                    <input name="maxItems" id="maxItems" class="maxItems" value="<{$count.count_0}>"/>
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader">
+                        </div>
+                    </div>
+                    <div class="infinite-scroll-nomore">
+                        <div class="loading_end">没有更多了...</div>
+                    </div>
+                    <{else}>
+
+                    <div class="content-block biaoqian-content">
+                        <div class="wushuju">
+                            <img src="/themes/default/static/images/kong.png" width="30%">
+
+                            <p class="mt10">暂无数据，<a href="<{link ctl='pintuan'}>"><span
+                                    class="fontcl1">马上去逛逛~</span></a></p>
+
+                        </div>
+                    </div>
+                    <{/if}>
+                </div>
+
+
+                <div id="tab2" class="tab infinite-scroll">
+                    <{if $list.list_1|@count neq 0}>
+
+                    <div class="content-block biaoqian-content">
+                        <ul class="list-container">
+                            <{foreach $list.list_1 as $group}>
+                            <li class="one_item">
+                                <div class="list-block media-list border_b border_t">
+                                    <ul>
+                                        <li>
+                                            <a  href="<{link ctl='pintuan:tuan_detail' arg0=$group.pintuan_group_id}>" >
+                                            <div class="item-content">
+                                                <div class="item-media"><img
+                                                        src="/attachs/<{$group.photo}>"
+                                                        style='width: 4.2rem;'></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title overflow_clear"><{$group.product_name}>　(团ID:<{$group.pintuan_group_id}>)
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-subtitle">
+                                                        <div class="pad_t10 pad_b10 pad_r10 pintuan-box">
+                                                            <i class="pintuan"></i>
+                                                            <span class="tuan-price">成团价：￥<big><{$group.product_price}></big>/件</span><span
+                                                                class="youji-blue"><i
+                                                                class="iconfont icon-xiangyou"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tuangou-ing border_b">
+                                    <div class="zuo-box fl border_r"><span class="maincl">组团成功</span><br/>(<{$group.user_num}>人团)
+                                    </div>
+                                    <div class="you-box">
+                                        <a type="button"
+                                           href="<{link ctl='pintuan:tuan_detail' arg0=$group.pintuan_group_id}>"
+                                           class="pub_btn gray-bd" value="查看团详情">查看团详情</a>
+                                        <a type="button"
+                                           href="<{link ctl='pintuan:tuan_order_detail' arg0=$group.order_id}>"
+                                           class="pub_btn gray-bd" value="">查看订单</a>
+                                    </div>
+                                    <div class="cl"></div>
+                                </div>
+                            </li>
+
+                            <{/foreach}>
+                        </ul>
+                    </div>
+                    <!-- 加载提示符 -->
+                    <input name="page" id="page" class="page" value="2"/>
+                    <input name="maxItems" id="maxItems" class="maxItems" value="<{$count.count_1}>"/>
+
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader">
+                        </div>
+                    </div>
+                    <div class="infinite-scroll-nomore">
+                        <div class="loading_end">没有更多了...</div>
+                    </div>
+                    <{else}>
+
+                    <div class="content-block biaoqian-content">
+                        <div class="wushuju">
+                            <img src="/themes/default/static/images/kong.png" width="30%">
+
+                            <p class="mt10">暂无数据，<a href="<{link ctl='pintuan'}>"><span
+                                    class="fontcl1">马上去逛逛~</span></a></p>
+
+                        </div>
+                    </div>
+                    <{/if}>
+                </div>
+
+
+                <div id="tab3" class="tab infinite-scroll">
+                    <{if $list.list_2|@count neq 0}>
+
+                    <div class="content-block biaoqian-content">
+                        <ul class="list-container">
+                            <{foreach $list.list_2 as $group}>
+                            <li class="one_item">
+                                <div class="list-block media-list border_b border_t">
+                                    <ul>
+                                        <li>
+                                            <a  href="<{link ctl='pintuan:tuan_detail' arg0=$group.pintuan_group_id}>" >
+                                            <div class="item-content">
+                                                <div class="item-media"><img
+                                                        src="/attachs/<{$group.photo}>"
+                                                        style='width: 4.2rem;'></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title overflow_clear"><{$group.product_name}> (团ID:<{$group.pintuan_group_id}>)
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-subtitle">
+                                                        <div class="pad_t10 pad_b10 pad_r10 pintuan-box">
+                                                            <i class="pintuan"></i>
+                                                            <span class="tuan-price">成团价：￥<big><{$group.product_price}></big>/件</span><span
+                                                                class="youji-blue"><i
+                                                                class="iconfont icon-xiangyou"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tuangou-ing border_b">
+                                    <div class="zuo-box fl border_r"><span class="maincl">团购失败</span><br/>(还差<{$group.user_num
+                                        - $group.order_success_count}>人)
+                                    </div>
+                                    <div class="you-box">
+                                        <a type="button"
+                                           href="<{link ctl='pintuan:tuan_detail' arg0=$group.pintuan_group_id}>"
+                                           class="pub_btn gray-bd" value="查看团详情">查看团详情</a>
+                                        <a type="button"
+                                           href="<{link ctl='pintuan:tuan_order_detail' arg0=$group.order_id}>"
+                                           class="pub_btn gray-bd" value="">查看订单</a>
+                                    </div>
+                                    <div class="cl"></div>
+                                </div>
+                            </li>
+
+                            <{/foreach}>
+                        </ul>
+                    </div>
+                    <input name="page" id="page" class="page" value="2"/>
+                    <input name="maxItems" id="maxItems" class="maxItems" value="<{$count.count_2}>"/>
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader">
+                        </div>
+                    </div>
+                    <div class="infinite-scroll-nomore">
+                        <div class="loading_end">没有更多了...</div>
+                    </div>
+                    <{else}>
+                    <div class="content-block biaoqian-content">
+                        <div class="wushuju">
+                            <img src="/themes/default/static/images/kong.png" width="30%">
+
+                            <p class="mt10">暂无数据，<a href="<{link ctl='pintuan'}>"><span
+                                    class="fontcl1">马上去逛逛~</span></a></p>
+
+                        </div>
+                    </div>
+                    <{/if}>
+                </div>
+
+            </div>
+            <!--tbs end-->
+        </div>
+    </div>
+</div>
+<script>
+
+
+    //定义数据
+    ajax_data = {"status": 0, "page": 2, "limit": 2};//limit 翻页数,线上需要更改
+    function __ajax_tuan_my(tabIndex, ajax_data) {
+        ajax_data.status = tabIndex;
+        $.post("<{link ctl='pintuan:ajax_tuan_my'}>", ajax_data,
+                function (res) {
+                    //maxItems > 现有页数, 追加翻页
+                    next_page = parseInt(ajax_data.page) + 1;
+                    $('.infinite-scroll').eq(tabIndex).find('.page').val(next_page);
+                    console.log(res.data.count_num + '|||' + next_page); //  2pm
+                    // 添加新条目
+                    $('.infinite-scroll.active .list-container').append(res.data.html);//线上直接返回html数据
+
+
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+
+                console.log(lastIndex + ' / ' + maxItems); //  2pm
+                    $('.infinite-scroll-preloader').eq(tabIndex).hide();
+                    if (lastIndex >= maxItems) {
+                        // 加载完毕，则注销无限加载事件，以防不必要的加载:$.detachInfiniteScroll($('.infinite-scroll').eq(tabIndex));多个无线滚动请自行根据自己代码逻辑判断注销时机
+                        // 删除加载提示符
+//                        $.detachInfiniteScroll($('.infinite-scroll').eq(tabIndex));
+//                        $('.infinite-scroll-nomore').eq(tabIndex).html('<div class="loading_end">没有更多了...</div>');
+                        $('.infinite-scroll-nomore').eq(tabIndex).show();
+
+                        $('.infinite-scroll-preloader').eq(tabIndex).remove();
+                        return;
+                    }
+                    // 更新最后加载的序号
+                    lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+                    $.refreshScroller();
+//                        console.log(res.data.html); //  2pm
+                }, "json");
+    }
+
+
+    var loading = false;
+    var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+//    var itemsPerLoad = 20;
+    var tabIndex = 0;
+    $(document).on('infinite', '.ajax_data_tuan_my', function () {
+        if (loading) return;// 如果正在加载，则退出
+        loading = true;// 设置flag
+
+
+
+        $('.infinite-scroll-preloader').eq(tabIndex).show();
+
+        // 模拟1s的加载过程
+        setTimeout(function () {
+            // 重置加载flag
+            loading = false;
+            var tabIndex = 0;
+            if ($('.ajax_data_tuan_my').find('.infinite-scroll.active').attr('id') == "tab1") {
+                tabIndex = 0;
+            }
+            if ($('.ajax_data_tuan_my').find('.infinite-scroll.active').attr('id') == "tab2") {
+                tabIndex = 1;
+            }
+            if ($('.ajax_data_tuan_my').find('.infinite-scroll.active').attr('id') == "tab3") {
+                tabIndex = 2;
+            }
+            var maxItems = $('.infinite-scroll').eq(tabIndex).find('.maxItems').val();
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+            console.log(tabIndex + ' / ' + lastIndex + ' / ' + maxItems); //  2pm
+            if (lastIndex >= maxItems) {
+                // 加载完毕，则注销无限加载事件，以防不必要的加载
+//                $.detachInfiniteScroll($('.infinite-scroll'));
+                // 删除加载提示符
+//                $('.infinite-scroll-preloader').remove();
+                $('.infinite-scroll-preloader').eq(tabIndex).hide();
+//                $('.infinite-scroll-nomore').eq(tabIndex).html('<div class="loading_end">没有更多了...</div>');
+                $('.infinite-scroll-nomore').eq(tabIndex).show();
+                return;
+            }
+
+            // 添加新条目
+            ajax_data.page = $('.infinite-scroll').eq(tabIndex).find('.page').val();
+            __ajax_tuan_my(tabIndex, ajax_data);
+            // 更新最后加载的序号
+            lastIndex = $('.list-container').eq(tabIndex).find('.one_item').length;
+            //容器发生改变,如果是js滚动，需要刷新滚动
+            $.refreshScroller();
+        }, 500);
+
+
+    });
+</script>
+
+
+<{include file='block/footer.html'}>

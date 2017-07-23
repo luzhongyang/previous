@@ -1,0 +1,142 @@
+<{assign var='tpl_title' value=L("组团详情")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="popup popup-about share-yun_box">
+    <div class="share-yun close-popup"><img src="<{$weidian_theme}>static/images/share-yun.png"></div>
+</div>
+
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left" href="<{link ctl='weidian/pintuan:tuan_my'}>"> <span class="Ico1"></span> </a>
+        <h1 class="title">组团详情</h1>
+    </header>
+    <!--头部结束-->
+    <script>
+        $(document).on('click','.open-about', function () {
+            $.popup('.popup-about');
+        });
+    </script>
+    <nav class="bar bar-tab space-button-box">
+        <a href="<{link ctl="weidian/pintuan"}>" class="button tuan-more_button" style=""><i class="icon-wu"></i>更多拼团</a>
+        <{if 0 == $arr_group.status}>
+        <{if 1==$master_is_buy}>
+        <a href="<{link ctl='weidian/pintuan/tuan_join' arg0=$arr_group.pintuan_group_id}>" class="button cheng-bg-button" style="width:55%">快来邀请好友参团吧</a>
+        <{else}>
+        <a href="<{link ctl='weidian/pintuan:tuan_order_detail' arg0=$arr_order.order_id}>" class="button cheng-bg-button" style="width:55%" external>支付拼团订单</a>
+        <{/if}>
+        <{elseif 2 == $arr_group.status}>
+        <a href="<{link ctl='pintuan:product' product_id=$arr_product.pintuan_product_id}>" class="button cheng-bg-button" style="width:55%">点击新开一团</a>
+        <{elseif 1 == $arr_group.status}>
+        <a href="<{link ctl='weidian/pintuan:tuan_join' group_id=$arr_group.pintuan_group_id}>" class="button cheng-bg-button" style="width:55%">分享给好友</a>
+        <{else}>
+        <a href="<{link ctl='weidian/pintuan:tuan_join' group_id=$arr_group.pintuan_group_id}>" class="button cheng-bg-button" style="width:55%">分享给好友</a>
+        <{/if}>
+
+    </nav>
+    <div class="content content-padding">
+        <div class="list-block media-list tuan_goods">
+            <ul>
+                <li>
+                    <a href="#" class="item-content black3">
+                        <div class="item-media"><img src="<{$pager.img}>/<{$arr_product.photo}>" width="100%"></div>
+                        <div class="item-inner">
+                            <div class="item-subtitle"><big>【<{if $arr_group.group_title}> <{$arr_group.group_title}>
+                                <{else}> <{$arr_product.title}> <{/if}>】</big></div>
+                            <div class="item-text"><span class="black6"><{$arr_product.intro}></span></div>
+                            <div class="item-title-row">
+                                <div class="item-title"><{$arr_group.user_num}>人团<span class="fontcl1"> <big>￥<{$arr_product.tuan_price}></big>/份</span></div>
+                                <{if 0 == $arr_group.status}>
+                                <div class="item-after"><span class="fontcl1">组团当中</span></div>
+                                <{/if}>
+
+                            </div>
+                        </div>
+                    </a>
+                    <{if 2 == $arr_group.status}>
+                    <div class="zt_zhuangtai"><img src="<{$weidian_theme}>static/images/lose.png"></div>
+                    <{/if}>
+                    <{if 1 == $arr_group.status || 3 == $arr_group.status}>
+                    <div class="zt_zhuangtai"><img src="<{$weidian_theme}>static/images/suc.png"></div>
+                    <{/if}>
+
+                </li>
+            </ul>
+        </div>
+        <div class="zutuan_detail">
+            <div class="zutuan_detail-top">
+                <img src="<{$weidian_theme}>static/images/sanjiao.png" width="100%">
+                <div class="imgs">
+                    <{$arr_group.tuan_person_icon}>
+                </div>
+
+
+
+                <{if 0 == $arr_group.status}>
+                <div class="font_line24 black3 font-size75">还差<em style=" font-size:0.9rem; color:#ff3300;"><{$arr_group.leave_person}></em>人，就可组团成功噢！
+                </div>
+                <div class="font_line24 shengyu-time black9 font-size75"><i>剩余<span id="daojishi_98" rel="<{$arr_group.leave_second}>" class="limtBuy_time"></span> 结束</i>
+                </div>
+                <script>
+                    function daojishi(id) {
+                        var t = Math.floor($("#" + id).attr('rel'));
+                        t--;
+                        var d = Math.floor(t / 60 / 60 / 24);
+                        var h = Math.floor(t / 60 / 60 % 24);
+                        var m = Math.floor(t / 60 % 60);
+                        var s = Math.floor(t % 60);
+                        $("#" + id).attr('rel', t);
+                        $("#" + id).html('<span>' + d + '</span>' + '<i>' + '天</i>' + '<span>' + h + '</span>' + '<i>' + ':</i>' + '<span>' + m + '</span>' + '<i>' + ':</i>' + '<span>' + s + '</span>');
+                    }
+
+                </script>
+                <script type="text/javascript" language="javascript">
+                    setInterval(function () {
+                        daojishi("daojishi_98");
+                    }, 1000);
+                </script>
+                <{elseif 2 == $arr_group.status}>
+                <div class="font_line24 black3 font-size75"> <i><em>组团失败，召唤小伙伴失败</em></i> </div>
+                <{elseif 1 == $arr_group.status}>
+
+                <div class="font_line24 black3 font-size75"> <i><em>组团人数已满，等待商家发货！</em></i> </div>
+                <{else}>
+                <div class="font_line24 black3 font-size75"> <i><em>商品已经发货，万分感谢您的参与！</em></i> </div>
+                <{/if}>
+
+
+
+                <div class="font_line24 font_size14 black9 dianji-xiangqing">收起全部参团详情 <i class="sanjiao-icon"></i></div>
+                <script>
+                    $(function(){
+                        $(".dianji-xiangqing").click(function(){
+                            //$(".zutuan_detail-down").toggle();
+                            if($(".zutuan_detail-down").css("display") == "block"){
+                                $(".zutuan_detail-down").hide();
+                                $(this).html("查看全部参团详情"+"<i class='sanjiao-icon2'></i>");
+                            }
+                            else{
+                                $(".zutuan_detail-down").show();
+                                $(this).html("收起全部参团详情"+"<i class='sanjiao-icon'></i>");
+                            }
+                        });
+
+                    });
+                </script>
+            </div>
+            <div class="zutuan_detail-down">
+                <img src="<{$weidian_theme}>static/images/sanjiao2.png" width=" 100%">
+                <div class="list-block cantuan-detail border_b">
+                    <ul>
+                        <{$arr_group.tuan_person_html}>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <{include file="weidian/$theme_style/pintuan/block_pintuan_relate_product.html"}>
+        <{include file="weidian/$theme_style/pintuan/block_pintuan_liucheng.html"}>
+
+    </div>
+</div>
+
+<{include file="weidian/$theme_style/block/footer.html"}>

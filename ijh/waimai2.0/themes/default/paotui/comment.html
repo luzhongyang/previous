@@ -1,0 +1,141 @@
+<{assign var='tpl_title' value=L("评价")}>
+<{include file="block/header.html" }>
+<style type="text/css">
+.upload_int{margin-right:0.55rem;}
+.upload_int .img{width: 3.5rem;height: 3.5rem;background: no-repeat center center;background-size: cover; position:relative; z-index: 1; }
+.upload_int .img img{ width: 100%; height: 100%;}
+.mineSet_feedback .upload_int:before, .upload_int:after{ z-index: 0; }
+.mineSet_feedback .upload_int input{ z-index: 2;}
+</style>
+    <div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">评价</h1>
+        </header>
+        <!--头部结束-->
+        <!--底部-->
+        <div class="bar bar-tab ordSubmit_footer">
+        	<div class="fl ml10">评价得<span class="fontcl1"><{$jifen}></span>积分</div>
+            <div class="fr"><a mini-submit="#comment-form" class="pub_btn">提交</a></div>
+        </div>
+        <!--底部结束-->
+        <div class="content">
+        	<form id="comment-form" action="<{link ctl='paotui/order_comment'}>" method="post" enctype="multipart/form-data">
+        	<input type="hidden" name="order_id" value="<{$order_id}>">
+        	<div class="ord_evlut_form">
+            	<div class="list-block media-list top_box">
+                    <ul>
+                      <li>
+                        <div href="#" class="item-content">
+                          <div class="item-media"><img src="<{$pager.img}>/<{$staff.face}>"></div>
+                          <div class="item-inner">
+                            <div class="item-title mt10"><{$staff.account_name}> <{$staff.mobile}></div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+                <p class="txt_center black9">为接单员打分</p>
+                <div class="star_box txt_center">
+	                <span class="starBg txt_left" style="opacity:0.6;">
+	                    <span class="star" style="width:60%;">
+	                        <span class="star_clink" id="staff_score">
+	                            <a href="#" val="1"></a>
+	                            <a href="#" val="2"></a> 
+	                            <a href="#" val="3"></a> 
+	                            <a href="#" val="4"></a> 
+	                            <a href="#" val="5"></a>
+	                            <input type="hidden" id="staff_score" name="data[score]" value="3">
+	                        </span>
+	                    </span>
+	                </span>
+	            </div>
+                
+                <div class="mallord_delt_mask ord_mark pad_t10">
+                    <div class="row selct_box">
+                    <{foreach $titles as $v}>
+                    	<a href="javascript:;" class="fl col-33 qt"><{$v}></a>
+                    <{/foreach}>
+                    	<input type="hidden" name="data[mark]" value="0">
+                        <div class="cl"></div>
+                    </div>
+                </div>
+                <div class="mineSet_feedback">
+                    <div class="list-block">
+                        <ul>
+                          <li class="align-top">
+                            <div class="item-content">
+                              <div class="item-inner">
+                                <div class="item-input">
+                                  <textarea placeholder="写下您对接单员的评价（至少16个字符）" name="data[content]" value=""></textarea>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                    </div>
+					<div class="img_upload">
+                    <script type="text/javascript">
+                        // HTML5图片上传
+                        function fileSelected(obj,num){
+                            var files = obj.files;
+                            for(var i = 0 ; i < files.length; i++){
+                                var rFilter = /^(image\/gif|image\/jpeg|image\/jpg|image\/png)$/i;
+                                if (! rFilter.test(files[i].type)) {                   
+                                    alert("只允许上传JPG、PNG、GIF格式图片");
+                                    return;
+                                }
+                                var reader = new FileReader();
+                                reader.onload = function(e){
+                                    $(".face_img_"+num).attr('src',e.target.result);
+                                }
+                                reader.readAsDataURL(files[i]);
+                            }
+                        }
+	                    </script>
+	                    <div class="upload_int fl">
+	                        <input type="file" name="data[image_file_1]" id="photo1" onChange="fileSelected(this,1)" >
+	                        <div class="img"><img class="face_img_1" src="" width="70" height="70"></div>
+	                    </div>
+	                    <div class="upload_int fl">
+	                        <input type="file" name="data[image_file_2]" id="photo2" onChange="fileSelected(this,2)" >
+	                        <div class="img"><img class="face_img_2" src="" width="70" height="70"></div>
+	                    </div>
+	                    <div class="upload_int fl">
+	                        <input type="file" name="data[image_file_3]" id="photo3" onChange="fileSelected(this,3)" >
+	                        <div class="img"><img class="face_img_3" src="" width="70" height="70"></div>
+	                    </div>
+	                    <div class="upload_int fl">
+	                        <input type="file" name="data[image_file_4]" id="photo4" onChange="fileSelected(this,4)" >
+	                        <div class="img"><img class="face_img_4" src="" width="70" height="70"></div>
+	                    </div>
+	                    <div class="cl"></div>
+	                </div>
+                </div>
+            </div>
+            </form>
+        </div>        
+    <!--内容结束-->   
+    </div>
+<script>
+var mark = [];
+$(document).on('click','.mallord_delt_mask .selct_box .qt',function () {
+	var curr_mark = $(this).text();
+	if($(this).hasClass("active")){
+		removeByValue(mark, curr_mark);
+		$(this).removeClass("active");
+	}else{
+		mark.push(curr_mark);
+		$(this).addClass("active");
+	}
+	$("input[name='data[mark]']").val(mark.join(","));
+});
+
+$(document).off('click','.star_clink a').on('click','.star_clink a',function() {
+    var value = $(this).attr('val');
+    $("#staff_score").val(value);
+    $(this).parent().find('input').val(value);
+    $(this).parent().parent().css('width', value*20+'%').parent().css('opacity',value*0.2);
+})
+</script>
+<{include file="block/footer.html"}>

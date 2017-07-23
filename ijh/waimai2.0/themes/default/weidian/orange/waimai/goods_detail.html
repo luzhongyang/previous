@@ -1,0 +1,247 @@
+<{assign var='tpl_title' value=L("<{$detail.title}>")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<style type="text/css">
+.p_nums.num_operate span.add {
+    background-color: #ff7800;
+    color: #fff;
+}
+.p_nums.num_operate span {
+    border: 0.05rem solid #ff7800;
+    color: #ff7800;
+}
+</style>
+<div class="page page-current"> 
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab dianpu_footer">
+        <div class="dianpu_fot_shop shopping-btn">
+            <div class="fl">
+                <!-- <div class="spcart gouwucart_Ico"><i>0</i></div> -->
+            </div>
+            <div class="fr">
+                <div class="fl mr10 txt_center" style=" margin-top:0.2rem;">
+                    <div class="color1 f_size1">合计：<em class="maincl" id="total_price">￥0</em></div>
+                    <p class="font_size14" style=" color:#a8a8ae;">不含快递费</p>
+                </div>
+                <a href="<{link ctl="weidian_<{$detail.shop_id}>/waimai:get_cart" args=$detail.shop_id}>" class="fr pub_btn external">结算</a> </div>
+            <div class="cl"></div>
+        </div>
+    </nav>
+    <!-- 工具栏结束 --> 
+    <!--主要内容-->
+    <div class="content">
+        <div class="seller_caidelt_top sp_detail_top"> 
+             <{foreach $spec_list as $slk => $slv}>
+                <{if $slv@index==0}>
+                    <img src="<{$pager.img}>/<{$slv.spec_photo}>" width="100%" id="curr_spec_photo">
+                <{/if}>
+            <{foreachelse}>
+            <img src="<{$pager.img}>/<{$detail.photo}>" width="100%">
+            <{/foreach}>
+            <div class="top"> <a href="javascript:history.go(-1);" class="fl"><i class="Ico1"></i></a> <a href="#" class="fr"><i class="Ico2 open-about"></i></a>
+                <div class="cl"></div>
+            </div>
+            <div class="bottom">
+                <p class="fl"><{$detail.title}></p>
+                <div class="fr"><i class="scIco1 <{if $is_collect==1}>scIco2<{/if}>"></i></div>
+                <div class="cl"></div>
+            </div>
+        </div>
+        <div class="sp_detail">
+            <div class="list-block">
+                <ul>
+                    <li class="item-content border_b">
+                        <div class="item-inner f_size1">
+                            <{foreach $spec_list as $slk => $slv}>
+                                <{if $slv@index==0}>
+                                    <div class="item-title maincl"><em class="f_size2" id="curr_spec_price">￥<{$slv.price}></em>/份</div>
+                                <{/if}>
+                            <{foreachelse}>
+                                <div class="item-title maincl"><em class="f_size2">￥<{$detail.price}></em>/份</div>
+                            <{/foreach}>
+                            <div class="item-after">销量：<{$detail.sales}></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <{foreach $spec_list as $kk => $vv}>
+                <div id="p_<{$detail.product_id}>-<{$vv.spec_id}>"
+                     data='{"product_id":"<{$detail.product_id}>","title":"<{$detail.title}>","spec_name":"<{$vv.spec_name}>","price":"<{$vv.price}>", "package":"<{$clv.package_price}>", "sale_type":"<{$clv['sale_type']}>", "sale_sku":"<{$vv.stock}>"}'>
+                    <div class="clearfix" id="i<{$vv@index}>"  val="<{$vv@index}>" <{if $vv@index >0}>style="display:none;"<{/if}>>
+                    <div class="mallord_delt_mask seller_caidelt_box border_b">
+                        <p class="wz">规格选择：</p>
+                        <div class="row selct_box chicun-box" id="select_spec"> 
+                            <{foreach $spec_list as $v}>
+                              <a href="javascript:;" price="<{$v.price}>" skuid="<{$detail.product_id}>-<{$v.spec_id}>" specphoto="<{$v.spec_photo}>" val="<{$v@index}>" class="fl col-<{(int)(100/$spec_count)}> <{if $v@index == 0}>active<{/if}>"><{$v.spec_name}></a>
+                            <{/foreach}>   
+                        </div>
+                        <div class="clearfix mt10">
+                            <div class="fl f_size1">购买数量：</div>
+                            <div class="fr">
+                                <div class="num_operate sp_nums"> 
+                                    <span class="reduce" quantity="-" skuid="<{$detail.product_id}>-<{$vv.spec_id}>">-</span>
+                                    <input type="text" value="0"  class="text_box" productnum="<{$detail.product_id}>-<{$vv.spec_id}>" readonly>
+                                    <span class="add" quantity="+" skuid="<{$detail.product_id}>-<{$vv.spec_id}>">+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <{foreachelse}>
+                <div id="p_<{$detail.product_id}>-0"
+                     data='{"product_id":"<{$detail.product_id}>","title":"<{$detail.title}>","spec_name":"","price":"<{$detail.price}>", "package":"<{$detail.package_price}>", "sale_type":"<{$detail.sale_type}>", "sale_sku":"<{$detail.stock}>"}'>
+                     <div class="mallord_delt_mask seller_caidelt_box border_b">
+                        <div class="clearfix mt10">
+                            <div class="fl f_size1">购买数量：</div>
+                            <div class="fr">
+                                <div class="num_operate p_nums"> 
+                                    <span class="reduce" quantity="-" skuid="<{$detail.product_id}>-0">-</span>
+                                    <input type="text" value="0"  class="text_box" productnum="<{$detail.product_id}>-0" readonly>
+                                    <span class="add" quantity="+" skuid="<{$detail.product_id}>-0">+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <{/foreach}>
+            <!-- <div class="seller_caidelt_box mb10 xinxi">
+                <p><{$detail.intro}></p>
+            </div> -->
+            <div class="sp_xinxi bgcolor_white">
+                <div class="buttons-tab border_b"> 
+                    <a href="#tab1" class="tab-link active button Btn">商品详情</a> 
+                    <!-- <a href="#tab2" class="tab-link button Btn">商品评价(3)</a>  -->
+                </div>
+                <div class="content-block">
+                    <div class="tabs">
+                       <{$detail.intro}>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--主要内容结束--> 
+</div>
+
+<!--分享遮罩层-->
+<div class="popup popup-about share-yun_box">
+    <div class="share-yun close-popup"><img src="%THEME%/weidian/<{$theme_style}>/static/images/share-yun.png"></div>
+</div> 
+
+<script type="text/javascript">
+var shop_id = parseInt(<{$shop.shop_id}>);
+var is_spec = parseInt(<{$detail.is_spec}>);
+window.WDCart = new window.WDCart(shop_id);
+
+function _init_pro_nums() {
+    if(is_spec) {
+        var total_price = 0;
+        var first_spec_skuid = $('.sp_nums .text_box').attr('productnum');
+        refresh_status(first_spec_skuid);
+        <{foreach $spec_list as $v}>
+            total_price += window.WDCart.product_price("<{$detail.product_id}>" +'-' + "<{$v.spec_id}>");
+        <{/foreach}>
+        $('#total_price').html('￥' + total_price);
+    }else {
+        var first_spec_skuid = $('.p_nums .text_box').attr('productnum');
+        refresh_status(first_spec_skuid);
+        $('#total_price').html('￥' + window.WDCart.product_price(first_spec_skuid));
+    }
+}
+_init_pro_nums();
+
+
+// 分享
+$(document).on('click','.open-about', function () {
+    $.popup('.popup-about');
+});
+
+// 收藏
+$(document).ready(function() {
+   
+});
+
+
+$(document).off('click','.scIco1').on('click','.scIco1',function(){
+
+    //$(this).addClass('scIco2');
+    var product_id = parseInt(<{$detail.product_id}>);
+    $.ajax({
+        url: "<{link ctl='weidian/waimai:goods_collect-"+product_id+"'}>",
+        async: true,
+        dataType: 'json',
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error == 0){
+                // 收藏商品成功
+                $.alert('收藏商品成功');
+                $('.scIco1').addClass('scIco2');
+            }else {
+                // 取消收藏成功
+                $.alert('取消收藏成功');
+                $('.scIco1').removeClass('scIco2');
+            }
+            setTimeout(function(){$.closeModal()},4000);
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+
+})
+
+$(document).off('click','#select_spec a').on('click','#select_spec a',function(){
+    $(this).parent().find(".mallord_delt_mask .selct_box a").removeClass("active");
+    $(this).addClass("active");
+    $('#curr_spec_price').html('￥' + $(this).attr('price'));
+    $('#curr_spec_photo').attr('src','<{$pager.img}>/' + $(this).attr('specphoto'));
+
+    refresh_status($(this).attr('skuid'));
+})
+
+function refresh_status(skuid) {
+    var html = ''; 
+    if(window.WDCart.product_num(skuid) > 0) {
+        $.each(window.WDCart.shop_cart,function(index,item){
+            if(skuid == item.sku_id) {
+                html += '<span class="reduce" quantity="-" skuid="'+item.sku_id+'">-</span>';
+                html += '<input type="text" value="'+item.num+'"  class="text_box" productnum="'+item.sku_id+'" readonly>';
+                html += '<span class="add" quantity="+" skuid="'+item.sku_id+'">+</span>';
+            }
+        })
+    }else {
+        html += '<span class="reduce" quantity="-" skuid="'+skuid+'">-</span>';
+        html += '<input type="text" value="0"  class="text_box" productnum="'+skuid+'" readonly>';
+        html += '<span class="add" quantity="+" skuid="'+skuid+'">+</span>';
+    }
+    $('.num_operate').html(html);
+}
+
+//带规格加号、减号点击事件
+$(document).off('click', '[quantity]').on("click", '[quantity]', function(){
+    var skuid = $(this).attr('skuid');
+    if($("#p_"+skuid).size()>0){
+        var info =  JSON.parse($("#p_"+skuid).attr("data")) || {};
+    }else{
+        var info = window.WDCart.product[skuid];
+    }
+    info.status = 1; //商品是否参与结算状态 0不参与 1参与
+    var num = window.WDCart.product_num(skuid);
+    if($(this).attr("quantity") == '-'){
+        if(num < 1){
+            return false;
+        }
+        window.WDCart.add(skuid, -1, info);
+    }else{
+        if(num >= info.sale_sku) {
+            $.alert('商品库存不足');
+            setTimeout(function(){
+                $.closeModal();
+            },4000);
+            return false;
+        }
+        window.WDCart.add(skuid, 1, info);
+    }
+    refresh_status(skuid);
+    _init_pro_nums();
+})
+</script> 
+<{include file="weidian/$theme_style/block/footer.html"}>

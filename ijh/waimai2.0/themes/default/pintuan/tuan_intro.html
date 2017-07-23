@@ -1,0 +1,54 @@
+<{assign var='tpl_title' value=L("拼团流程")}>
+<{include file="block/header.html"}>
+
+<div class="page page-current">
+    <!--头部-->
+    <header class="bar bar-nav"><a class="button button-link button-nav pull-left back"> <span
+            class="iconfont icon-iconfontxiangyou"></span> </a>
+
+        <h1 class="title"><{$register.title}></h1>
+    </header>
+    <!--头部结束-->
+    <div class="content">
+        <div class="mt10 pt_nr">
+            <div class="liucheng pad10 border_t bgcolor_white">
+                <ul class="lc border_b clearfix pad_b10">
+                    <li><span></span>拼团流程</li>
+                </ul>
+                <ul class="nr">
+                    <li>
+                        <div class="fl num">1</div>
+                        <p class="fl list"><span>选择</span><span>心仪商品</span></p>
+
+                        <div class="cl"></div>
+                    </li>
+                    <li>
+                        <div class="fl num">2</div>
+                        <p class="fl list"><span>支付开团</span><span>或参团</span></p>
+
+                        <div class="cl"></div>
+                    </li>
+                    <li>
+                        <div class="fl num">3</div>
+                        <p class="fl list"><span>邀请好友</span><span>参团支付</span></p>
+
+                        <div class="cl"></div>
+                    </li>
+                    <li>
+                        <div class="fl num">4</div>
+                        <p class="fl list"><span>达到人数</span><span>参团成功</span></p>
+
+                        <div class="cl"></div>
+                    </li>
+                </ul>
+                <div class="cl"></div>
+            </div>
+            <div class="serveIntro_nr black9 pad_t10 border_t border_b">
+                <div class="nr">
+                    <{$register.content}>
+            </div>
+        </div>
+    </div>
+</div>
+
+<{include file='block/footer.html'}>

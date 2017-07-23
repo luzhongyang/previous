@@ -1,0 +1,280 @@
+<{assign var='tpl_title' value=L("购物车")}>
+<{include file="weidian/$theme_style/block/header.html"}>
+<div class="page page-current"> 
+    <!--头部-->
+    <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left external" href="<{link ctl='weidian/index/index'}>"> <span class="Ico1"></span> </a>
+        <h1 class="title">购物车</h1>
+    </header>
+    <!--头部结束--> 
+        <!-- 工具栏 --> 
+        <nav class="bar bar-tab dianpu_footer">
+            <div class="dianpu_fot_shop shopping-btn">
+                <div class="fl pad_l10">
+                    <div class="list-block media-list ziLiao1">
+                        <ul>
+                            <li>
+                                <label class="label-checkbox item-content short-bord fl" onclick="_myclick(this)">
+                                <input type="checkbox" name="my-radio" checked="checked" id="all">
+                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                </label>
+                                <div class="f_size1 fl ml10">全选</div>
+                                <div class="cl"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fr">
+                    <div class="fl mr10" style=" margin-top:0.2rem;">
+                        <div class="color1 f_size1" id="total_price">合计：￥0</div>
+                        <p class="font_size14" style=" color:#a8a8ae;">不含快递费</p>
+                    </div>
+                    <a href="javascript:;" class="fr pub_btn" id="goto_checkout">结算 (0)</a>
+                </div>
+                <div class="cl"></div>
+            </div> 
+        </nav>
+        <!-- 工具栏结束 --> 
+        <!--主要内容-->
+        <div class="content">
+       
+        </div>
+        <!--内容结束--> 
+</div>
+<script type="text/javascript">
+var shop_id = parseInt(<{$shop.shop_id}>);
+var min_amount = parseFloat(<{$shop.min_amount}>);//起送价
+// 初始化购物车对象
+window.WDCart = new window.WDCart(shop_id);
+ajax_wdcart_list();
+
+
+// ajax读取购物车物品列表
+function ajax_wdcart_list() {
+    $.ajax({
+        url: "<{link ctl='weidian/waimai:ajax_wdcart_list'}>",
+        async: true,
+        dataType: 'json',
+        data: {"shop_id":shop_id},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error > 0){
+                //Widget.MsgBox.success(ret.message);
+            }else{
+                var html = '';var p_name = '';var pic = '';var intro = ''; var product_id = '';
+                var price = ''; var num = ''; var sku_id='';var spec_id='';var package = '';
+                var sale_sku = ''; var p_id = '';
+                var item_len = GetJsonLen(ret.data.items);
+                if(item_len > 0) {
+                    $.each(ret.data.items,function(index,item){
+                        pic = item.pic; intro = item.intro; price = item.price;product_id = item.product_id;
+                        p_name = item.title;sp_name = item.spec_name;num = item.num;sku_id = item.sku_id;
+                        package = item.package;sale_sku = item.sale_sku;var sale_type = 1; p_id = item.p_id;
+                        html += '<div class="list-block media-list ziLiao2" style=" margin-bottom:0.5rem;" product_id="'+product_id+'"><ul><li id="'+p_id+'"><div class="fl gouwuche_lable">';
+                        html += '<label class="label-checkbox item-content short-bord child_label active" onclick="_subClick(this)" price="'+price*num+'" skuid="'+sku_id+'">';
+                        html += '<input type="checkbox" name="my-radio" checked><div class="item-media">';
+                        html += '<i class="icon icon-form-checkbox"></i></div></label></div><div class="item-content shopping">';
+                        html += '<div class="item-media"><img src="<{$pager.img}>/'+pic+'"></div><div class="item-inner">';
+                        html += '<div class="item-title-row"><div class="item-title color1">【'+p_name+'】</div><div class="item-after" skuid="'+sku_id+'"></div></div>';
+                        html += '<div class="item-text">'+intro+'</div>';
+                        html += '<div class="item-subtitle">';
+                        html += '<div class="fl"> <em class="maincl"><i style=" font-size:0.85rem;">￥'+price+'</i>/份</em>';
+                        html += '<span style="color:#a8a8ae;">'+sp_name+'</span> </div><div class="fr num_operate sp_nums">';
+                        html += '<span class="reduce" quantity="-" skuid="'+sku_id+'" product_id="'+product_id+'" title="'+p_name+'" spec_name="'+sp_name+'" price="'+price+'" package="'+package+'" sale_sku="'+sale_sku+'" sale_type="'+sale_type+'">-</span>';
+                        html += '<input type="text" num_skuid="'+sku_id+'" value="'+num+'" class="text_box">';
+                        html += '<span class="add" quantity="+" skuid="'+sku_id+'" product_id="'+product_id+'" title="'+p_name+'" spec_name="'+sp_name+'" price="'+price+'" package="'+package+'" sale_sku="'+sale_sku+'" sale_type="'+sale_type+'">+</span>';
+                        html += ' </div><div class="cl"></div></div></div></div><div class="cl"></div></li></ul></div>';    
+                    });
+                    $('.content').html("");
+                    $('.content').html(html);
+                    set_product_pay_status();
+                    set_del_pro_pay_price();
+                }else{
+                    //window.location.href = "<{link ctl='weidian/index:index' args=$shop.shop_id}>";
+                }
+                
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+}
+
+// 默认计算全部商品的价格
+function set_del_pro_pay_price() {
+    var total_price = 0; 
+    var total_count = 0;
+    $.each($('.child_label.active'),function(key,val){
+        total_count ++;
+        total_price = total_price + parseFloat($(val).attr('price'));
+    })
+    $('#total_price').html('合计：￥'+total_price);
+    if(FloatSub(total_price, min_amount) > 0) {
+        $('#goto_checkout').html('结算 ('+total_count+')');
+        $('#goto_checkout').removeClass('Btn');
+    }else {
+        $('#goto_checkout').html('还差'+FloatSub(min_amount, total_price)+'元');
+        $('#goto_checkout').addClass('Btn');
+    }
+}
+
+// 设置商品结算状态,默认或刷新本页面都会自动设置结算状态为1
+function set_product_pay_status() {
+    $.each($('.child_label'),function(key,val){
+        if($(val).hasClass('active')) {
+            window.WDCart.set_status($(val).attr('skuid'),1);
+        }else {
+            window.WDCart.set_status($(val).attr('skuid'),0);
+        }
+    })
+}
+
+// 全选checkbox
+function _myclick(that) {
+    var thatc = $(that).children("input[name='my-radio']").get(0);
+    var arrs = document.getElementsByName("my-radio");
+    // 选中，让其他的选框呈现选中状态
+    if (!(thatc.checked)) {       
+        for (var i = 0; i< arrs.length; i++) {
+            if(arrs[i].id !='all') {
+             arrs[i].checked = true;
+            }
+        }
+        $('.child_label').addClass('active');
+        var jieduan_len = arrs.length-1;
+        $('#goto_checkout').html('结算 ('+jieduan_len+')');
+    } else {       
+        for (var i = 0; i< arrs.length; i++) {
+            if(arrs[i].id !='all') {
+             arrs[i].checked = false;
+            }
+        } 
+        $('.child_label').removeClass('active');  
+        $('#goto_checkout').html('结算 (0)'); 
+    }
+    // 实时计算结算价格
+    set_del_pro_pay_price();
+    set_product_pay_status();
+}
+
+// 单选checkbox
+function  _subClick(that) {
+    var thatc = $(that).children("input[name='my-radio']").get(0);
+    var arrs = $("input[name='my-radio']").not("input[id='all']").not(thatc); 
+    if (!thatc.checked) {
+        // 取消选中
+        var checkedLen = 0;
+        for (var i = 0; i< arrs.length; i++) {
+            if (arrs.get(i).checked) {
+                checkedLen++;  
+            }
+        }
+        var checkout_count = checkedLen+1;
+        $('#goto_checkout').html('结算 ('+checkout_count+')');
+        // 说明都选中了，让他“全选”显示选中状态
+        if (arrs.length == checkedLen) {
+            document.getElementById("all").checked = true;
+        }
+    } else {
+        // 选中
+        var checkedLen2 = 0;
+        $.each(arrs,function(index,item){
+            if(item.checked) {
+                checkedLen2 ++;
+            }
+        })
+        document.getElementById("all").checked = false;
+    }    
+    $(that).toggleClass('active');
+    // 实时计算结算价格
+    set_del_pro_pay_price();
+    set_product_pay_status();
+}
+
+// 加号、减号点击事件
+$(document).off('click', '[quantity]').on("click", '[quantity]', function(){
+    var skuid = $(this).attr('skuid');
+    var _product_id = $(this).attr('product_id');
+    var _title = $(this).attr('title');
+    var _spec_name = $(this).attr('spec_name');
+    var _price = $(this).attr('price');
+    var _package = $(this).attr('package');
+    var _sale_sku = $(this).attr('sale_sku');
+    var _sale_type = $(this).attr('sale_type');
+
+    var info = JSON.stringify({"product_id":_product_id,"title":_title,"spec_name":_spec_name,"price":_price,"package":_package,"sale_sku":_sale_sku,"sale_type":_sale_type});
+
+    if($("#p_"+skuid).size()>0){
+        var data = JSON.parse(info) || {};
+    }else{
+        var data = window.WDCart.product[skuid];
+    }
+    data.status = 1; //商品是否参与结算状态 0不参与 1参与
+    var num = window.WDCart.product_num(skuid);
+    if($(this).attr("quantity") == '-'){
+        if(num < 1){
+            return false;
+        }
+        window.WDCart.add(skuid, -1, data);
+    }else{
+        if(num >= data.sale_sku) {
+            $.alert('商品库存不足');
+            setTimeout(function(){
+                $.closeModal();
+            },4000);
+            return false;
+        }
+        window.WDCart.add(skuid, 1, data);
+    }
+    ajax_wdcart_list();
+   
+    // 如果购物车Cookie商品清空则跳转到首页
+    if(JSON.stringify(window.WDCart.shop_cart) == '{}') {
+        setTimeout(function(){
+            window.location.href = "/weidian/index/index-"+shop_id+".html";
+        },1000);
+    }
+})
+
+// 从购物车列表中移除单个商品
+$(document).off('click','.item-after').on('click','.item-after',function(){
+    var skuid = $(this).attr('skuid');
+    $.confirm('确定要删除该商品吗?', '温馨提示',function () {
+            // 点击确认按钮事件
+            window.WDCart.remove(skuid);
+            ajax_wdcart_list();
+            if(JSON.stringify(window.WDCart.shop_cart) == '{}') {
+                setTimeout(function(){
+                    window.location.href = "/weidian_"+shop_id+"/index/index-"+shop_id+".html";
+                },1000);
+            }
+        },function () {
+            // 点击取消按钮事件
+        }
+    );
+    
+})
+
+// 去结算
+$(document).off('click','#goto_checkout').on('click','#goto_checkout',function(){
+    if($('.child_label.active').length == 0) {
+        $.alert('您还没有选择商品哦!');
+        setTimeout(function(){
+            $.closeModal();
+        },4000);
+        return false;
+    }
+    if($(this).hasClass('Btn')) {
+        return;
+    }
+    // 清理上次保存的本地存储数据
+    localStorage.removeItem('weidian_waimai_choose_addr');
+    localStorage.removeItem('weidian_waimai_choosed_addr');
+    localStorage.removeItem('weidian_waimai_order_peitype');
+    localStorage.removeItem('weidian_waimai_order_remarks');
+    localStorage.removeItem('weidian_waimai_order_choose_coupon');
+    localStorage.removeItem('weidian_waimai_order_choosed_coupon');
+    window.location.href = "/weidian_"+shop_id+"/waimai/order_submit-"+shop_id+".html";
+})
+</script>
+<{include file="weidian/$theme_style/block/footer.html"}>

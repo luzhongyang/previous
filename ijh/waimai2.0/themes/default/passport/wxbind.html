@@ -1,0 +1,165 @@
+<{assign var='tpl_title' value=L("绑定微信")}>
+<{include file="block/header.html" }>
+    <div class="page page-current">
+        <!--头部-->
+        <header class="bar bar-nav"> 
+            <a class="button button-link button-nav pull-left back"> 
+                <span class="iconfont icon-iconfontxiangyou"></span> 
+            </a> 
+            <!-- <a class="button button-link button-nav pull-right" href="<{link ctl='passport/login'}>">登录</a> -->
+            <h1 class="title">绑定微信</h1>
+        </header>
+        <!--头部结束-->
+        <{include file="block/navbar.html"}>
+        <div class="content">
+            <div class="login_tab_cont mt10">
+                <div class="list_box">
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="iconfont icon-shouji"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" id="mobile" placeholder="手机号">
+                                        </div>
+                                        <a href="javascript:;" class="yzmget" id="yzmget2">获取验证码</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="iconfont icon-yanzhengma"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text"  id="yzm" placeholder="验证码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="content-block" id="goto_bind"><a class="button button-big button-fill button-success">立即绑定</a></div>
+                </div>
+            </div>            
+        </div>        
+    <!--内容结束-->   
+    </div>
+<<script type="text/javascript" >
+var mobile_timeout2;
+var mobile_count2 = 1;
+var mobile_lock2 = 0;
+
+$(document).off('click','#yzmget2').on('click','#yzmget2',function(){
+    if(!$("#yzmget2").hasClass("graybg")) {
+        if($("#mobile").val()){
+            if (mobile_lock2 == 0) {
+                mobile_count2 = 60;
+                $("#yzmget2").addClass("graybg");
+                $('#yzmget2').attr("disabled", "disabled");
+                verify_pic();
+            }   
+        }else{
+            $.alert("请填写手机号");
+        }
+    }
+    $("#yzmget2").removeClass("graybg");
+})
+
+BtnCount2 = function () {
+    if (mobile_count2 == 0) {
+        $("#yzmget2").removeClass("graybg");
+        $('#yzmget2').removeAttr("disabled");
+        $('#yzmget2').text("重新获取");
+        mobile_lock2 = 0;
+        clearTimeout(mobile_timeout2);
+        $('#yzmget2').removeClass("on");
+    }else if(mobile_count2 == 1) {
+        $("#yzmget2").removeClass("graybg");
+        $('#yzmget2').removeAttr("disabled");
+        $('#yzmget2').text("获取验证码");
+        mobile_lock2 = 0;
+        clearTimeout(mobile_timeout2);
+        $('#yzmget2').removeClass("on");
+    }else {
+        mobile_count2--;
+        $('#yzmget2').text( + mobile_count2.toString() + "重新获取");
+        mobile_timeout2 = setTimeout(BtnCount2, 1000);
+        $('#yzmget2').addClass("on");
+    }
+};
+
+function verify_pic(){
+    var modal = $.modal({
+        title: "<div class='txt_left'>请填写图形验证码</div>",
+        afterText:  "<div class='yzmint'><input type='text' id='pass-verify' value=''><span class='yzmimg'><img verify='#pass-verify' src="+"<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>"+" id='pass-verify'/></span></div>",
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确定',
+                bold: true,
+                onClick: function () {
+                    var verifycode = $("#pass-verify").val();
+                    var mobile = $("#mobile").val();
+                    var link = "<{link ctl='passport/verify_img'}>";
+                     $.post(link,{verifycode:verifycode,mobile:mobile},function(ret){
+                         if(ret.error){
+                                $.alert(ret.message);
+                            }else{
+                                send_sms();
+                            }
+                   },'json');
+                }
+            },
+        ]
+    })
+}
+
+function send_sms(){
+    var mobile = $('#mobile').val(); 
+    var link = "<{link ctl='passport/sendsms'}>";
+    $.post(link,{mobile:mobile},function(ret){
+        if(ret.error == 0){
+            BtnCount2();
+            mobile_lock2 = 1;
+            $(".get_yzm").addClass("on");
+            $('.get_yzm').attr("disabled", "disabled");  
+        }else{
+            $.alert(ret.message);
+            mobile_lock2 = 0;
+        }
+    },'json');
+}
+
+$(document).off('click','#goto_bind').on('click','#goto_bind',function(){
+    var mobile = $('#mobile').val();
+    var yzm = $('#yzm').val();
+    if(mobile=='') {$.alert('请输入手机号');return false;}
+    if(yzm=='') {$.alert('请输入验证码');return false;}
+    $.ajax({  
+        url: "<{link ctl='passport:wxbind'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"mobile": mobile,"yzm": yzm},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){ 
+                $.alert(ret.message);
+            }else{
+                //url_login
+                window.location.href=localStorage['url_login'];
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+        
+    });
+})
+//    alert(localStorage['url_login']);
+</script>
+<{include file="block/footer.html"}>

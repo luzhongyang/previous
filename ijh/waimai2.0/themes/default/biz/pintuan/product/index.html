@@ -1,0 +1,85 @@
+<{include file="biz/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li class="on"><a href="<{link ctl='biz/pintuanproduct:index'}>"><{L('商品管理')}></a></li>
+    </ul>
+    <span class="r"><a href="<{link ctl='biz/pintuanproduct:create'}>" class="btn btn-success"><{L('添加商品')}></a></span>
+</div>
+<div class="ucenter_c">
+    <table cellspacing="0" cellpadding="0" class="table">
+        <tr>
+            <th class="w-50"><{L('商品')}>ID</th>
+            <th class="w-60"><{L('分类')}></th>
+            <th class="w-60"><{L('图片')}></th>
+            <th class="w-150"><{L('标题')}></th>
+
+            <th>团购价</th>
+            <th class="w-80">团类型</th>
+
+
+            <th class="w-200"><{L('团购信息')}></th>
+
+
+            <th>排序</th>
+            <th class="w-50"><{L('是否在售')}></th>
+            <th class="w-150"><{L('操作')}></th>
+        </tr>
+        <{foreach $items as $item}>
+        <tr>
+
+            <td><{$item.pintuan_product_id}></td>
+            <td><{$item.cate_id}></td>
+            <td><img src="<{$pager.img}>/<{$item.photo}>" class="wh-50"/></td>
+            <td>
+                <{$item.title}><br/>
+                <!--总销量:<{$item.sales}><br/>-->
+                佣金:<{$item.money_master}>
+                <!--预付款:<{$item.money_pre}>-->
+            </td>
+
+            <td>
+                团购价: <{$item.tuan_price}><br/>
+                单买价: <{$item.price}><br/>
+
+            </td>
+            <td>
+                <{$item.tuan_type}>: <{$item.user_num}>人团<br/>
+                <{$level_price.<{$item.pintuan_product_id}>}>
+            </td>
+
+            <td>
+
+                满员限购: <{$item.tuan_limit}><br/>
+                购买开团: <{$item.master_need_buy}><br/>
+                单人购买上限: <{$item.item_limit}>件<br/>
+                成团有效期: <{$item.tuan_time}>天<br/>
+
+            </td>
+
+
+            <td><{$item.orderby}></td>
+            <td>
+                <{if $item.is_onsale==1}>
+                <font style="color:green;">在售</font>
+                <{else}>
+                <font style="color:red">下架</font>
+                <{/if}>
+            </td>
+
+            <td><a href="<{link ctl='biz/pintuanproduct/edit' args=$item.pintuan_product_id}>" class="btn btn-success"><{L('修改')}></a>&nbsp;&nbsp;
+                <a href="<{link ctl='biz/pintuanproduct/delete' args=$item.pintuan_product_id}>"
+                   mini-act="confirm:<{L('确认要删除该商品吗')}>?" class="btn btn-success"><{L('删除')}></a>
+            </td>
+        </tr>
+        <{foreachelse}>
+        <tr>
+            <td colspan="20">
+                <div class="alert alert-info"><{L('没有数据')}></div>
+            </td>
+        </tr>
+        <{/foreach}>
+        <tr>
+    </table>
+    <div class="page"><{$pager.pagebar}></div>
+</div>
+<{include file="biz/block/footer.html"}>

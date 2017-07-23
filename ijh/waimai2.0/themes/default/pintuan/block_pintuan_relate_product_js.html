@@ -1,0 +1,34 @@
+<script>
+    function guanzhu_pintuan()
+    {
+        $(".guanzhu").unbind('click').click(function () {
+            this_save = $(this);
+            collect = 'default';
+            ajax_data = {"product_id": this_save.attr('num')};
+            $.post("<{link ctl='pintuan:ajax_collect'}>", ajax_data,
+                    function (res) {
+                        if (1 != res.status) {
+                            $.confirm('立即登录收藏产品?', '', function () {
+                                window.location.href="<{link ctl='passport/login'}>";
+                            });
+                        }
+                        else {
+
+                            if (this_save.hasClass("icon-kongxin")) {
+                                this_save.removeClass("icon-kongxin");
+                                this_save.addClass("icon-xinshi-copy");
+                                collect = 'save';
+                            } else {
+                                this_save.removeClass("icon-xinshi-copy");
+                                this_save.addClass("icon-kongxin");
+                                collect = 'cancel';
+                            }
+                        }
+//                        console.log(res.message + res.status + collect);
+                    }, "json");
+        });
+    }
+    $(document).ready(function () {
+        guanzhu_pintuan();//全局,ajax异步会用到
+    })
+</script>

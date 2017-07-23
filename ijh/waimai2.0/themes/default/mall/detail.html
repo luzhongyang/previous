@@ -1,0 +1,132 @@
+<{include file="block/header.html"}>
+<div class="page page-current"> 
+    <!--头部-->
+    <header class="bar bar-nav"> 
+        <a class="button button-link button-nav pull-left external" id="mall_pro_detail_backurl"> 
+            <span class="iconfont icon-iconfontxiangyou" style="margin-top:-0.2rem;"></span>
+        </a> 
+        <a class="button button-link button-nav pull-right detail_Ico">
+            <span class="bjIco"></span>
+        </a>
+        <h1 class="title">商品详情</h1>
+    </header>
+    <!--头部结束-->
+    <nav class="bar bar-tab dianpu_footer">
+        <div class="dianpu_fot_shop">
+            <a href="<{link ctl='mall/order:cart'}>" >
+                <div class="fl">
+                    <div class="fl spcart iconfont icon-gouwuche">
+                        <i id="total_count"><{$total.count|default:0}></i>
+                    </div>
+                    <div class="fl zjia">
+                        <p class="fontcl1">￥
+                            <span  id="total_price"><{$total.price|default:0}></span>
+                            <span class="black3" style="margin-left:0.5rem" id="total_jifen"><{$total.jifen|default:0}></span>
+                            <span class="black9">积分</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="fr"><a href="<{link ctl='mall/order:cart'}>" class="pub_btn external">选好了</a></div>
+                <div class="cl"></div>
+            </a>
+        </div> 
+    </nav>
+    <div class="content">
+        <div class="card demo-card-header-pic" style="margin:0;">
+            <div valign="bottom" class="card-header color-white no-border no-padding">
+                <img class='card-cover' src="<{$pager.img}>/<{$detail.photo}>" alt="">
+            </div>
+            <div class="card-content">
+                <div class="card-content-inner">
+                    <p class="black3"><{$detail.title}></p>
+                    <p class="color-gray">积分：<span class="black3"><{$detail.jifen}></span><span class="ml10">剩余数量：<span class="black3"><{$detail.sku}></span></span></p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="link"><span class="fontcl1">￥<{$detail.price}></span></a>
+                <a class="cartAdd_btn" style="display:<{if $this_count}>none<{else}>block<{/if}>">加入购物车</a>
+                <a href="#" class="link" id="choose" style="display:<{if $this_count}>block<{else}>none<{/if}>">
+                    <div class="num_operate">
+                        <span class="reduce" pid="<{$detail.product_id}>" quantity="-">-</span>
+                        <input type="text" value="<{$this_count|default:'0'}>" class="text_box" readonly>
+                        <span class="add" pid="<{$detail.product_id}>" quantity="+">+</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <script>
+            function sc_add_to_cart() {
+                var pid = $('.add').attr('pid');
+                var link = "<{link ctl='mall/order:addcart'}>";
+                $.post(link, {pid: pid}, function (ret) {
+                    if (ret.error == 0) {
+                        $('#total_count').html(ret.data.count);
+                        $('#total_price').html(ret.data.price);
+                        $('#total_jifen').html(ret.data.jifen);
+                        var val = $('.text_box').val();
+                        val = parseInt(val, 10) + 1;
+                        $('.text_box').attr('value', val);
+                        $('#choose').css("display", "block");
+                        $('.cartAdd_btn').css("display", "none");
+                    } else {
+                        $.alert(ret.message);
+                    }
+                }, 'json');
+            }
+            $(document).off('click','.add').on('click','.add',function(){
+                sc_add_to_cart();
+            });
+
+            $(document).off('click','.cartAdd_btn').on('click','.cartAdd_btn', function(){
+                sc_add_to_cart();
+            });
+
+            $(document).off('click','.reduce').on('click','.reduce', function(){
+                var pid = $(this).attr('pid');
+                var link = "<{link ctl='mall/order:addcart'}>";
+                var val = $('.text_box').val();
+                val = parseInt(val, 10) - 1;
+                if (val < 0) {
+
+                } else {
+                    $.post(link, {pid: pid, reduce: 1}, function (ret) {
+                        if (ret.error == 0 || ret.error == 244) {
+                            $('#total_count').html(ret.data.count);
+                            $('#total_price').html(ret.data.price);
+                            $('#total_jifen').html(ret.data.jifen);
+
+                            $('.text_box').attr('value', val);
+                        } else {
+                            $.alert(ret.message);
+                        }
+                    }, 'json');
+
+                    if (val == 0) {
+                        $('#choose').css("display", "none");
+                        $('.cartAdd_btn').css("display", "block");
+                    }
+                }
+            });
+
+            
+            if(localStorage['mall_product_detail_backurl']) {
+                $('#mall_pro_detail_backurl').attr('href',localStorage['mall_product_detail_backurl']);
+            }
+           
+        </script>
+        <div class="content-block-title goods-xq-tit border_b">商品详情</div>
+        <div class="card demo-card-header-pic" style="margin:0;">
+            <!-- <div valign="bottom" class="card-header color-white no-border no-padding">
+              <img class='card-cover' src="<{$pager.img}>/<{$detail.photo}>" alt="">
+            </div> -->
+            <div class="card-content">
+                <div class="card-content-inner">
+                    <p class="black3"><{$detail.info}></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<{include file='block/footer.html'}>

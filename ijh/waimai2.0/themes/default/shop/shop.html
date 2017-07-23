@@ -1,0 +1,256 @@
+<{assign var='tpl_title' value=L("商家详情")}>
+<{include file="block/header.html" }>
+<div class="page" id="shop-detail">
+    <div class="content">
+       <div class="dianpu_top">
+       	   <{include file="shop/dianpu_intro.html"}>
+           <div class="buttons-tab fixed-tab">
+                <a href="<{link ctl='shop/detail' arg0=$detail.shop_id}>" class="button back external">菜单</a>
+                <a href="<{link ctl='shop/comment' arg0=$detail.shop_id}>" class="button back external">评价</a>
+                <a href="<{link ctl='shop/shop' arg0=$detail.shop_id}>" class="button active external">商家</a>
+           </div>
+       </div>
+       <div class="mt10"></div>
+       <div class="list-block seller_delt_box">
+          <ul>
+            <li class="item-link item-content" id="couponitems">
+              <div class="item-media"><i class="tag" style="background:#ff518e;">券</i></div>
+              <div class="item-inner">
+                <div class="item-title">店铺优惠券</div>
+                <div class="item-after"><span class="pointcl1">
+                    <{if $detail.coupons>0}><{$detail.coupons}>张优惠券<{else}>暂无优惠券<{/if}>
+                </span></div>
+              </div>
+            </li>
+            <{if $detail.pintuan==1}>
+            <li class="item-link item-content" id="pintuans">
+              <div class="item-media"><i class="tag" style="background:#ff3100;">拼</i></div>
+              <div class="item-inner">
+                <div class="item-title">商家拼团</div>
+                <div class="item-after"><span class="pointcl1">
+                    <{if $detail.pintuans>0}><{$detail.pintuans}>个团<{else}>暂无拼团<{/if}>
+                </span></div>
+              </div>
+            </li>
+            <{/if}>
+            <{if $detail.weidian==1}>
+            <li class="item-link item-content" id="weidian">
+              <div class="item-media"><i class="tag" style="background:#00cdda;">店</i></div>
+              <div class="item-inner">
+                <div class="item-title">商家微店</div>
+                <div class="item-after"><span class="pointcl1"></span></div>
+              </div>
+            </li>
+            <{/if}>
+          </ul>
+        </div>
+        <div class="mt10"></div>
+        <div class="list-block seller_delt_box">
+          <ul>
+            <li class="item-link">
+              <a href="tel:<{if $detail.mobile}><{$detail.mobile}><{else}><{$detail.phone}><{/if}>" class="item-link item-content">
+              <div class="item-media"><i class="iconfont icon-phone-line"></i></div>
+              <div class="item-inner">
+                <div class="item-title">商家电话：<{if $detail.phone}><{$detail.phone}><{else}><{$detail.mobile}><{/if}></div>
+              </div>
+              </a>
+            </li>
+            <li class="item-link item-content" id="shop_addr">
+              <div class="item-media"><i class="iconfont icon-dizhi1"></i></div>
+              <div class="item-inner">
+                <div class="item-title">商家地址：<{mb_substr($detail.addr,0,15,"utf-8")}>...</div>
+              </div>
+            </li>
+            <li class="item-content">
+              <div class="item-media"><i class="iconfont icon-shijian"></i></div>
+              <div class="item-inner">
+                <div class="item-title">营业时间：<{$detail.yy_stime}>-<{$detail.yy_ltime}></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="mt10"></div>
+        <div class="list-block seller_delt_box">
+          <ul>
+            <{if $detail.first_amount > 0}>
+            <li class="item-content">
+              <div class="item-media"><i class="tag" style="background:#ff3333;">首</i></div>
+              <div class="item-inner">
+                <div class="item-title">新用户首次下单立减<{$detail.first_amount}>元</div>
+              </div>
+            </li>
+            <{/if}>
+            <{if $detail.order_youhui}>
+            <li class="item-content">
+              <div class="item-media"><i class="tag" style="background:#ff6f00;">减</i></div>
+              <div class="item-inner">
+                <div class="item-title"><{$detail.youhui_title}>（在线支付专享）</div>
+              </div>
+            </li>
+            <{/if}>
+            <{if in_array($detail.online_pay,array(1,2))}>
+            <li class="item-content">
+              <div class="item-media"><i class="tag" style="background:#ff9900;">付</i></div>
+              <div class="item-inner" style="background-image:;">
+                <div class="item-title">该商家支持在线支付</div>
+              </div>
+            </li>
+            <{/if}>
+          </ul>
+        </div>
+        <div class="mt10"></div>
+        <div class="list-block seller_delt_box">
+          <ul>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-title"><span class="black9">店铺内景（<{if $pic_count>0}><{$pic_count}><{else}>0<{/if}>张）</span></div>
+              </div>
+            </li>
+            <{if $pic_count>0}>
+            <li class="item-content border_t" id="picslide">
+              <div class="img_list">
+                    <ul>
+                    	<{foreach $pics as $v}>
+                        <{if $v@index < 4}>
+                        <li ><img src="<{$pager.img}>/<{$v.photo}>" width="70" height="70"></li>
+                        <{/if}>
+						<{/foreach}>
+                    </ul>
+                    <div class="cl"></div>
+                </div>
+            </li>
+            <{/if}>
+          </ul>
+        </div>
+        <div class="mt10"></div>
+        <div class="list-block seller_delt_box">
+          <ul>
+            <li class="item-link item-content" id="complaint">
+              <div class="item-inner">
+                <div class="item-title">举报商家</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="mt10"></div>
+    </div>
+<!--内容结束-->   
+</div>
+<!--商家公告弹出层-->
+<div class="popup popup-about">
+    <div class="seller_annot">
+        <h1><{$detail.title}></h1>
+        <div class="txt_center"><span class="state"><{if $detail.yy_status_type==0}>打烊<{else}>营业中<{/if}></span></div>
+        <div class="txt_center"><span class="starBg txt_left"><span class="star" style="width:<{$detail['score']/$detail['comments']*20}>%;"></span></span></div>
+        <div class="bt txt_center">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="sid"><hr></td>
+                    <td class="mid"><span>商家公告</span></td>
+                    <td class="sid"><hr></td>
+                </tr>
+            </table>
+        </div>
+        <div class="nr" style="text-align:center;"><{$detail.info}></div>
+        <a href="javascript:;" class="closs close-popup"></a>
+    </div>
+</div> 
+
+<script type="text/javascript">
+var shop_id = parseInt(<{$detail.shop_id}>);
+$(document).off('click','#couponitems').on('click','#couponitems',function() {
+    $.router.load("<{link ctl='shop:coupon-"+shop_id+"'}>",true);
+})
+
+$(document).off('click','#pintuans').on('click','#pintuans',function(){
+    $.router.load("<{link ctl='pintuan:shop-"+shop_id+"'}>", true);
+})
+
+$(document).off('click','#shop_addr').on('click','#shop_addr',function(){
+    $.router.load("<{link ctl='shop:locate-"+shop_id+"'}>", true);
+})
+
+$(document).off('click','#weidian').on('click','#weidian',function(){
+    //window.location.href = "<{link ctl='weidian/index:index-"+shop_id+"'}>";
+})
+
+$(document).off('click','#open-about').on('click','#open-about',function(){
+    $.popup('.popup-about');
+})
+
+// 分享到新浪微博
+$(document).off('click','#share_sinablog').on('click','#share_sinablog',function() {
+    var buttons1 = [
+        {
+            text: "<div style='color:#00cdda;'>分享到新浪微博</div>",
+            onClick: function() {
+                var shareUrl = window.location.href;   //获取当前页面完整的地址栏URL
+                var sharePic = "<{$pager.img}>/<{$detail.logo}>";       // 获取商家logo图片
+                var shareTitle = '这家店不错哦，一起去吧！'+"<{$detail.title}>，"+"<{$detail.addr}>，"+"<{$detail.mobile}>。"+"@<{$CONFIG.site.title}>"; // 内容
+                window.location.href ='http://service.weibo.com/share/share.php?appkey=1550938859'+'&url='+encodeURIComponent(shareUrl)+'&content=utf-8&sourceUrl='+encodeURIComponent(shareUrl)+'&pic='+encodeURIComponent(sharePic)+'&title='+encodeURIComponent(shareTitle);
+            }
+        }
+    ];
+    var buttons2 = [
+        {
+            text: "<div style='color:#00cdda;'>取消</div>",
+        }
+    ];
+    var groups = [buttons1, buttons2];
+    $.actions(groups);
+})
+
+// 收藏
+$(document).off('click','#collects').on('click','#collects',function() {
+    $.ajax({  
+        url: "<{link ctl='shop:collect-"+shop_id+"'}>", 
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error == 0){
+                Widget.MsgBox.success('收藏成功');
+                $('#collects').addClass('active')
+            }else{
+                Widget.MsgBox.error(ret.message);
+                $('#collects').removeClass('active');
+                
+            }
+        },
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },
+    });
+})
+
+$(document).off('click','#complaint').on('click','#complaint',function() {
+    $.router.load("<{link ctl='shop:complaint-"+shop_id+"'}>", true);
+})
+
+
+// 商家店铺内景--图片浏览器
+var myPhoto = $.photoBrowser({
+    photos : [<{foreach $pics as $v}>'<{$pager.img}>/<{$v.photo}>',<{/foreach}>],type: 'popup'
+});
+$(document).off('click','#picslide').on('click','#picslide',function() {
+    //$.router.load("<{link ctl='shop:picslide-"+shop_id+"'}>", true);
+    myPhoto.open();
+    $('.photo-browser-close-link').removeClass('icon-left');
+    $('.photo-browser-close-link').addClass('iconfont icon-iconfontxiangyou');
+    $('.photo-browser-close-link').css("color","#fff");
+    $('.icon-next').addClass('iconfont icon-fangxiangyou');
+    $('.icon-next').removeClass('icon-next');
+    $('.icon-prev').addClass('iconfont icon-iconfontxiangyou');
+    $('.icon-prev.icon-iconfontxiangyou').css("font-size","1.35rem");
+    $('.icon-prev').removeClass('icon-prev');
+    $('.photo-browser-of').text('张');
+    $('.photo-browser-current').before('<span class="photo-browser-of">第 </span>');
+    $('.photo-browser-total').before('<span class="photo-browser-of">共</span>');
+    $('.photo-browser-total').after('<span class="photo-browser-of">张</span>');
+    $('.photo-browser .bar-tab .tab-item .icon').css('margin-bottom', '0.85rem');
+})
+
+$(document)
+</script>
+<{include file="block/footer.html"}>
+ 

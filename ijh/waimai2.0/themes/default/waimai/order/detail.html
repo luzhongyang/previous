@@ -1,0 +1,533 @@
+<{assign var='tpl_title' value=L("订单详情")}>
+ <{include file="block/header.html"}>
+<div class="page page-current">
+        <!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left" id="backto_waimailist" href="<{link ctl='waimai:order'}>"> <span class="iconfont icon-iconfontxiangyou"></span><{$order.shop.title}></a> <div class="button button-link button-nav pull-right"><a href="<{link ctl='waimai/order:complaint' args=$order.order_id}>" class="iconfont tousu"></a><a href="#" class="iconfont icon-callphone-copy whitecl" id="create_contacts"></a></div>
+        </header>
+        <!--头部结束-->
+        <!--工具栏-->
+        <nav class="bar bar-tab ord_footer">
+            <{if $order.order_status==8 || $order.order_status==4 || $order.order_status==-1}>
+            <a href="javascript:;" class="button button-cancel" id="onemore">再来一单</a>
+            <{/if}>
+            <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+            <a href="javascript:;" class="button button-cancel open-slider-modal" id="cancel">取消订单</a>
+            <a href="javascript:;" class="button button-warning" id="payment">去支付</a>
+            <{/if}>
+            <{if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+            <a href="javascript:;" class="button button-cancel open-slider-modal" id="cancel">取消订单</a>
+            <{/if}>
+            <{if in_array($order.order_status,array(1,2,3)) && $order.pei_type!=3}>
+            <a href="javascript:;" class="button button-cancel" id="cuidan">催单</a>
+            <{/if}>
+            <{if in_array($order.order_status,array(3,4))}>
+            <a href="javascript:;" class="button" id="arrived">确认送达</a>
+            <{/if}>
+            <{if in_array($order.order_status,array(1,2,3)) && $order.pei_type==3}>
+            <a href="javascript:;" class="button button-warning" id="zitima">自提码</a>
+            <{/if}>
+            <{if $order.order_status==8 && $order.comment_status==0}>
+            <a href="javascript:;" class="button button-warning" id="comment">评价得积分</a>
+            <{/if}>
+            <{if $order.order_status==8 && $order.comment_status==1}>
+            <a href="javascript:;" class="button button-cancel" id="look_comment">查看评价</a>
+            <{/if}>
+        </nav>
+        <!--工具栏结束-->
+         <div class="content">
+            <div class="buttons-tab fixed-tab" data-offset="44">
+              <a href="<{link ctl='waimai/order:status' args=$order.order_id}>" class="button external">订单状态</a>
+              <a href="javascript:;" class="active button external">订单详情</a>
+            </div>
+            <div class="ord_state">
+                <div class="state_box mt10">
+                    <h3 class="maincl">
+                    <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+                    等待支付
+                    <{else if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==0}>
+                    等待商家接单
+                    <{else if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+                    等待商家接单
+                    <{else if $order.order_status==1 && $order.staff_id==0}>
+                    商家已接单
+                    <{else if in_array($order.order_status,array(1,2)) && $order.pei_type==0}>
+                    商家正在配货
+                    <{else if in_array($order.order_status,array(1,2)) && $order.staff_id>0 && in_array($order.pei_type,array(1,2))}>
+                    骑手正在取餐
+                    <{else if $order.order_status==3 && $order.staff_id>0 && in_array($order.pei_type,array(1,2))}>
+                    骑手正在送餐
+                    <{else if $order.order_status==3 && $order.pei_type==0}>
+                    商家正在送餐
+                    <{else if $order.order_status==-1}>
+                    订单已取消
+                    <{else if $order.order_status==4}>
+                    订单已完成
+                    <{else if $order.order_status==8 && $order.comment_status==0}>
+                    订单已完成
+                    <{else if $order.order_status==8 && $order.comment_status==1}>
+                    订单已完成
+                    <{/if}>
+                    <small class="black9">-<{$order.dateline}>下单</small></h3>
+                    <p class="black9">
+                    <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+                        订单超过30分钟未支付将自动取消
+                    <{else if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==0}>
+                        请耐心等待，商家稍后会进行处理
+                    <{else if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+                        请耐心等待，商家稍后会进行处理
+                    <{else if $order.order_status==1 && $order.pei_type!=3}>
+                        请耐心等待送达
+                    <{else if $order.order_status==1 && $order.pei_type==3}>
+                        请及时上门自提
+                    <{else if in_array($order.order_status,array(1,2)) && $order.staff_id>0}>
+                        请耐心等待送达
+                    <{else if $order.order_status==3 && $order.staff_id>0}>
+                        请耐心等待送达
+                    <{else if $order.order_status==-1 && !$order.source_reason}>
+                        <{$order.logs[0].log}>
+                    <{else if $order.order_status==-1 && $order.source_reason}>
+                        <{$order.source_reason}>
+                    <{else if $order.order_status==8 && $order.comment_status==0}>
+                        等待评价
+                    <{else if $order.order_status==8 && $order.comment_status==1}>
+                        已评价
+                    <{/if}>
+                    </p>
+                    <{if $order.pei_type==3}>
+                    <span class="ziti">自提单</span>
+                    <{/if}>
+                </div>
+            </div>
+            <!--订单详情-->
+            <div class="ordSubmit order_delt_box">
+                <div class="content-block-title black3">订单明细</div>
+                <div class="list-block media-list ordSubmit_list">
+                  <ul>
+                    <li class="item-content item-link shangjianame" id="link_to_shopdetail">
+                      <div class="item-media"><img src="<{$pager.img}>/<{$order.shop.logo}>"></div>
+                      <div class="item-inner">
+                        <div class="item-title black9"><{$order.shop.title}></div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <{foreach $order.waimai_order_product as $v}>
+                        <div class="item-title-row">
+                            <div class="item-title"><{$v.product_name}>
+                                <{if $v.spec_id}>
+                                <span class="font_size14 black9">(<{$order.specs[$v.spec_id]['spec_name']}>)</span>
+                                <{/if}>
+                            </div>
+                            <div class="item-after"><span class="mr10 black9">x<{$v.product_number}></span>￥<{$v.product_price}></div>
+                        </div>
+                        <{/foreach}>
+                      </div>
+                    </li>
+                    <{if $order.first_youhui>0}>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                            <div class="item-title"><span class="fontcl1">首单立减</span></div>
+                            <div class="item-after"><span class="">-￥<{$order.first_youhui}></span></div>
+                        </div>
+                      </div>
+                    </li>
+                    <{/if}>
+                    <{if $order.coupon>0}>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                            <div class="item-title"><span class="fontcl1">优惠券</span></div>
+                            <div class="item-after"><span class="">-￥<{$order.coupon}></span></div>
+                        </div>
+                      </div>
+                    </li>
+                    <{/if}>
+                    <{if $order.order_youhui>0}>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                            <div class="item-title"><span class="fontcl1">满减优惠</span></div>
+                            <div class="item-after"><span class="">-￥<{$order.order_youhui}></span></div>
+                        </div>
+                      </div>
+                    </li>
+                    <{/if}>
+                    <{if $order.hongbao>0}>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                            <div class="item-title"><span class="fontcl1">红包</span></div>
+                            <div class="item-after"><span class="">-￥<{$order.hongbao}></span></div>
+                        </div>
+                      </div>
+                    </li>
+                    <{/if}>
+                    
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                            <div class="item-title"><span class="mr10 pad_r10">总计￥<{$order.total_price}></span>优惠￥<{$order.first_youhui+$order.coupon+$order.order_youhui+$order.hongbao}></div>
+                            <div class="item-after">实付<span class="fontcl1">￥<{$order.amount}></span></div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="content-block-title black3">订单信息<span class="fr black9">订单号：<{$order.order_id}></span></div>
+                <div class="list-block">
+                    <ul>
+                        <{if $order.pei_type==3}>
+                        <li class="item-content">
+                            <div class="item-inner"><p class="black6">自提时间：<{$order.ziti_time|format:'Y-m-d H:i'}></p></div>
+                        </li>
+                        <{else}>
+                        <li class="item-content">
+                            <div class="item-inner"><p class="black6">联系人：<{$order.contact}></p></div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner"><p class="black6">联系电话：<{$order.mobile}></p></div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner"><p class="black6">收货地址：<{$order.addr}><{$order.house}></p></div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner"><p class="black6">送达时间：<{$order.pei_time|format:'Y-m-d H:i'}></p></div>
+                        </li>
+                        <{/if}>
+                        <li class="item-content">
+                            <div class="item-inner"><p class="black6">支付方式：
+                            <{if $order.pay_status==0 && $order.online_pay==1}>
+                            未支付
+                            <{else if $order.pay_status==1 && $order.pay_code=='money' && $order.online_pay==1}>
+                            余额支付
+                            <{else if $order.pay_status==1 && $order.pay_code=='wxpay' && $order.online_pay==1}>
+                            微信支付
+                            <{else if $order.pay_status==1 && $order.pay_code=='alipay' && $order.online_pay==1}>
+                            支付宝支付
+                            <{else if $order.online_pay==0}>
+                            到付
+                            <{/if}>
+                            </p></div>
+                        </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black6">备注信息：<{if $order.intro!=''}><{$order.intro}><{else}>无<{/if}></p></div>
+                      </li>
+                      <{if $order.pei_type==3}>
+                       <li class="item-content">
+                        <div class="item-inner"><p class="black6">提货地址：<{$order.shop.addr}></p></div>
+                      </li>
+                      <{/if}>
+                    </ul>
+                </div>
+                <{if $order.order_status > 0}>
+                <div class="content-block-title black3">配送信息</div>
+                <div class="list-block">
+                    <ul>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black6">配送方式：
+                        <{if $order.pei_type==0}>
+                        商家配送
+                        <{else if $order.pei_type==1}>
+                        第三方配送
+                        <{else if $order.pei_type==2}>
+                        配送员代购
+                        <{else if $order.pei_type==3}>
+                        客户自提
+                        <{/if}>
+                        </p></div>
+                      </li>
+                      <{if $order.staff_id>0}>
+                      <li class="item-content">
+                        <div class="item-inner">
+                        <{if $order.order_status==8}>
+                        <p class="black6">骑手：<{$order.staff.name}> ，<{$order.staff.mobile}></p>
+                        <{else}>
+                        <p class="black6">骑手：<{$order.staff.name}> ，<a href="tel:<{$order.staff.mobile}>" class="maincl"><{$order.staff.mobile}><big class="mt5"><b class="ml10">→</b></big></a></p>
+                        <{/if}>
+                        </div>
+                      </li>
+                      <{/if}>
+                    </ul>
+                </div>
+                <{/if}>
+                <{if $order.pei_type==3 && $order.order_status==8}>
+                <div class="content-block-title black3">自提码</div>
+                <div class="list-block">
+                    <ul>
+                      <li class="txt_center ziticode">
+                        <div class="black9 mb10"><{$order.waimai_order.spend_number}></div>
+                        <div class="img"><img src="<{$order.qrcode}>" width="100" height="100"></div>
+                        <img src="%THEME%/static/images/ziti_no.png" class="state">
+                      </li>
+                    </ul>
+                </div>
+                <{/if}>
+            </div>
+            <!--订单详情结束-->
+            <!-- <a href="javascript:;" class="zixun_fixed"><i></i></a> -->
+        </div>
+        <div class="quxiao_mask">
+            <div class="maskOne">
+                <div class="quxiao-tit border_b">自提码</div>
+                <div class="cont">
+                    <div class="quxiao-tit"><span class="cheng-color"><{$order.waimai_order.spend_number}></span></div>
+                    <div class="img"><img src="<{$order.qrcode}>" width="100" height="100"></div>
+                    <div class="quxiao-tit">待商家核销</div>
+                </div>
+            </div>
+            <div class="mask_bg" ></div>
+        </div>
+    <!--内容结束-->
+    </div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+    if(localStorage['mark_url'])
+    {
+        $("#backto_waimailist").attr('href',localStorage['mark_url']);
+    }
+
+    // 自提码弹出层
+    $(document).off('click','#zitima').on('click','#zitima',function() {
+        if($(".quxiao_mask .maskOne").css("display")=="none"){
+            $(".quxiao_mask .maskOne").show();
+            $(".quxiao_mask .maskOne").parent().find(".mask_bg").show();
+            }
+        else{
+            $(".quxiao_mask .maskOne").hide();
+            $(".quxiao_mask .maskOne").parent().find(".mask_bg").hide();
+            }
+        $(".quxiao_mask .mask_bg").click(function(){
+            $(this).hide();
+            $(this).parent().find(".maskOne").hide();
+        });
+    })
+});
+
+var order_id = parseInt(<{$order.order_id}>);
+
+//取消理由样式
+$(document).on('click','.mallord_delt_mask .selct_box a',function () {
+    $(".mallord_delt_mask .selct_box a").removeClass("active");
+    $(this).addClass("active");
+});
+
+// 检查补充说明字数
+function checkLen(obj) {
+    var len = GetStrLen($(obj).val());
+    if(len <= 120) {
+        var limit = 120-len;
+        $('.txt_right').text('还可输入' + limit + '字');
+    }
+}
+
+// 取消订单
+function cancelanorder(reason_mark) {
+    var reason  = reason_mark;
+    $.ajax({
+        url: "<{link ctl='waimai/order:cancel'}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id,"reason":reason},
+        type: 'POST',
+        success: function (ret) {
+            $.alert(ret.message);
+            if(ret.error == 0 ) {
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                return false;
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+}
+
+// 取消订单modal
+$(document).off('click', '#cancel').on('click','#cancel', function () {
+    var c_html = '';
+    c_html += '<div class="mallord_delt_mask"><div class="row selct_box" id="reason_mark">';
+    <{foreach $order.reason as $v}>
+    c_html += '<a href="javascript:;" class="fl col-33">'+'<{$v}>'+'</a>';
+    <{/foreach}>
+    c_html += '<div class="cl"></div></div><div class="list-block"><div class="item-input"><textarea maxlength="120" id="buchong" placeholder="补充说明" onkeyup="checkLen(this)" ></textarea><p class="txt_right font_size14 black9">还可输入120字</p></div></div></div>';
+
+    var modal = $.modal({
+        title: "<div class='mallord_delt_mask_tit'>取消理由</div>",
+        afterText:c_html,
+        buttons: [
+            {
+                text: "<span class='black6'>取消</span>"
+            },
+            {
+                text: "<span class='maincl'>确定</span>",
+                bold: true,
+                onClick: function () {
+                    var reason_mark = '';
+                    if($('#reason_mark .active').text() == null) {
+                        reason_mark = '取消理由:无';
+                    }else {
+                        reason_mark = '取消理由:' + $('#reason_mark .active').text();
+                    }
+                    if($('#buchong').val() == '') {
+                        reason_mark += ',补充说明:无';
+                    }else {
+                        reason_mark += ',补充说明:' + $('#buchong').val();
+                    }
+                    cancelanorder(reason_mark,order_id);
+                }
+            },
+        ]
+    })
+});
+
+// 查看此单商家详情
+$(document).off('click','#link_to_shopdetail').on('click','#link_to_shopdetail',function() {
+    var shop_id = parseInt(<{$order.shop.shop_id}>);
+    $.router.load("<{link ctl='shop:detail-"+shop_id+"'}>", true);
+})
+
+// 支付订单
+$(document).off('click', '#payment').on('click', '#payment', function() {
+    var link = "<{link ctl='ucenter/order:payment-"+order_id+"'}>";
+    localStorage['payment_backurl'] = window.location.href;
+    $.router.load(link, true);
+});
+
+// 催单
+$(document).off('click','#cuidan').on('click','#cuidan',function() {
+    $.ajax({
+        url: "<{link ctl='waimai/order:cuidan'}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error == 0 ) {
+                Widget.MsgBox.success(ret.message);
+                setTimeout(function(){window.location.reload();},2000);
+            }else {
+                Widget.MsgBox.error(ret.message);
+                return false;
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+// 去评价
+$(document).off('click','#comment').on('click','#comment',function() {
+    $.router.load("<{link ctl='waimai/order:comment-"+order_id+"'}>", true);
+})
+
+// 查看评价
+$(document).off('click','#look_comment').on('click','#look_comment',function() {
+    $.router.load("<{link ctl='waimai/order:lookcomment-"+order_id+"'}>", true);
+})
+
+// 再来一单
+$(document).off('click','#onemore').on('click','#onemore',function() {
+    $.ajax({
+        url: "<{link ctl='waimai/order:onemore'}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{
+                // 取得订单商品表数组加入购物车
+                var ecart = new ECart(parseInt("<{$order.shop.shop_id}>"));
+                ecart.clear();
+                if(ret.product_list) {
+                    $.each(ret.product_list,function(index,value){
+                        ecart.add(index, value.product_number, value);
+                    });
+                    // 跳转到店铺点菜页面
+                    setTimeout(function(){
+                        $.router.load("<{link ctl='waimai/order:order' arg0=$order.shop.shop_id}>",true);
+                    },500);
+                }
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+// 确认送达
+$(document).off('click','#arrived ').on('click','#arrived ',function() {
+    $.ajax({
+        url: "<{link ctl='waimai/order:arrived '}>",
+        async: true,
+        dataType: 'json',
+        data: {"order_id":order_id},
+        type: 'POST',
+        success: function (ret) {
+            if(ret.error > 0){
+                Widget.MsgBox.success(ret.message);
+            }else{
+                Widget.MsgBox.error(ret.message);
+                setTimeout(function(){window.location.reload();},1000);
+            }
+        },
+        error: function (xhr, status, err) {
+            $.alert(err);
+        },
+    });
+})
+
+// 联系商家弹出层
+$(document).off('click','#create_contacts').on('click','#create_contacts',function() {
+    var staff_text = "";
+    var staff_id = parseInt(<{$order.staff_id}>);
+    if(staff_id) {
+        staff_text = "<p style='color:#00cdda;'>联系骑手</p>";
+    }
+    var buttons1 = [
+        {
+            text: "<p style='color:#00cdda;'>联系商家</p>",
+            onClick: function() {
+                window.open('tel:<{$order.shop.mobile}>');
+            }
+        },
+        {
+            text: staff_text,
+            onClick: function() {
+                window.open('tel:<{$order.staff.mobile}>');
+            }
+        },
+        {
+            text: "<p style='color:#00cdda;'>联系客服</p>",
+            onClick: function() {
+                window.open('tel:<{$order.shop.phone}>');
+            }
+        },
+    ];
+    var buttons2 = [
+        {
+            text: "<div style='color:#00cdda;'>取消</div>",
+        }
+    ];
+    var groups = [buttons1, buttons2];
+    $.actions(groups);
+})
+
+
+$(function () {
+    //弹出层消失,点击灰色区域,
+    $(document).on('click', '.modal-overlay', function () {
+        $(this).removeClass('modal-overlay-visible');
+        $('.actions-modal').removeClass('modal-in');
+        $('.actions-modal').css('display', 'none');
+    });
+})
+</script>
+<{include file="block/footer.html"}>

@@ -1,0 +1,112 @@
+<{assign var='tpl_title' value=L("举报商家")}>
+<{include file="block/header.html" }>
+<div class="page page-current">
+	<!--头部-->
+    <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+        <h1 class="title">举报商家</h1>
+    </header>
+<style type="text/css">
+.upload_int{margin-left:0.55rem;}
+.upload_int .img{width: 3.5rem;height: 3.5rem;background: no-repeat center center;background-size: cover; position:relative; z-index: 1; }
+.upload_int .img img{ width: 100%; height: 100%;}
+.mineSet_feedback .upload_int:before, .upload_int:after{ z-index: 0; }
+.mineSet_feedback .upload_int input{ z-index: 2;}
+</style>
+    <!--头部结束-->
+    <div class="content">
+        <div class="seller_report">
+       	<div class="list-block media-list">
+          <ul>
+            <li>
+              <div class="item-content shangjia">
+                <div class="item-media"><i class="ico"></i></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title"><p class="black">举报商家：<{$shop.title}></p></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <{foreach $remarks as $v}>
+            <li>
+              <label class="label-checkbox item-content">
+                <input type="radio" name="my-radio">
+                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title"><{$v}></div>
+                  </div>
+                </div>
+              </label>
+            </li>
+            <{/foreach}>
+          </ul>
+        </div>
+        <div class="mt10"></div>
+        <div class="mineSet_feedback">
+        	<div class="list-block">
+                <ul>
+                  <li class="align-top">
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-input">
+                          <textarea maxlength="120" id="neirong" placeholder="描述详细情况，平台将为您的信息保密..."></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+        </div>
+        <input type="hidden" name="data[title]">
+        <input type="hidden" name="data[content]">
+        <input type="hidden" name="data[shop_id]" value="<{$shop.shop_id|default:0}>">
+        </form>
+        <div class="content-block"> <a class="button button-big button-fill button-success" id="subcomplaint">提交举报</a> </div>
+       </div>
+    </div>        
+<!--内容结束-->   
+</div>
+<script type="text/javascript">
+$(document).off('click','.label-checkbox.item-content').on('click','.label-checkbox.item-content',function(){
+    $('.label-checkbox.item-content').removeClass('active');
+    $(this).toggleClass('active');
+    $("input[name='data[title]']").val($(this).find('.item-title').text());
+});
+
+$(document).off('keyup','#neirong').on('keyup','#neirong',function(){
+    $("input[name='data[content]']").val($(this).val());
+})
+
+$(document).off('click','#subcomplaint').on('click','#subcomplaint',function(){
+    var title = $("input[name='data[title]']").val();
+    var content = $("input[name='data[content]']").val();
+    var shop_id = $("input[name='data[shop_id]']").val();
+    $.ajax({  
+        url: "<{link ctl='shop:subcomplaint'}>", 
+        async: false,  
+        dataType: 'json',  
+        data: {"shop_id":shop_id,"title":title,"content":content},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error == 0) {
+                Widget.MsgBox.success(ret.message);
+                setTimeout(function(){
+                    window.history.go(-1);
+                },1000)
+            }else if(ret.error == 101){
+                Widget.MsgBox.error(ret.message);
+                setTimeout(function(){
+                    window.location.href = "<{link ctl='passport/login'}>";
+                },1000); 
+            }else {
+                Widget.MsgBox.error(ret.message);
+            }
+        }, 
+        error: function (xhr, status, err) { 
+            $.alert(err); 
+        },  
+    });
+})
+</script>
+<{include file="block/footer.html"}>
