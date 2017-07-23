@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>积分商城-商品详情</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a></i>
+    <div class="title">
+    	商品详情
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="mineIntegral_details">
+    	<div class="mineIntegral_details_infor mb10">
+        	<div class="img"><img src="images/banner3.png" width="280" height="200" /></div>
+            <div class="infor">
+            	<p class="bt">冠莲 磨皮莲子200克 湘潭 无芯 湘莲白莲子无熏制</p>
+                <div>
+                	<p class="fl black9"><em></em><span class="pointcl1">600</span> 积分&nbsp;&nbsp;数量：17</p>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <h2 class="black9">商品详情</h2>
+        <div class="details">
+        	
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="long_btn_box" style=" padding:0.1rem;"><a href="#" class="long_btn">立即兑换</a></div>
+</footer>
+</body>
+</html>

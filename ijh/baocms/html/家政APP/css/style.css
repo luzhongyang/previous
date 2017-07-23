@@ -1,0 +1,56 @@
+/* CSS Document */
+/*共用样式开始*/
+header{height: 0.5rem; line-height: 0.5rem; background: #2cca77; color: #FFF; position:fixed; width: 100%; z-index: 999; top: 0;}
+header .title{font-size: 0.18rem; text-align: center;}
+header .title img{ width:1.16rem; height:0.22rem;}
+header i{ position:absolute; display:inline-block; font-style:normal;}
+header i a{ font-size:0.14rem; color:#fff; line-height:0.5rem;}
+header i a .city_ico{ padding:0.08rem 0.05rem; background:url(../images/ico_down.png) no-repeat center center; background-size:contain; margin-left:0.05rem;}
+header .left{ left:0.1rem; top:0;}
+header .right{ right:0.1rem; top:0;}
+header #tel{background:url(../images/ico_tel.png) no-repeat center;background-size:100% auto; padding:0.10rem;}
+header #icon_goback{background:url(../images/icon-back.png) no-repeat center center;background-size:0.26rem 0.26rem; padding:0.13rem; margin-top:0.12rem;}
+
+footer{height: 0.5rem;border-top: 0.01rem #e6e6e6 solid; position: fixed; bottom: 0; z-index: 999; background: #fff; width: 100%;}
+footer>div{width: 33.33%; float: left;}
+footer p{text-align: center; color: #999; font-size: 0.14rem;}
+footer .icon{width: 0.20rem; height: 0.20rem; margin: 0 auto; margin-top: 0.08rem; background-size:100% auto; background-image: url(../images/footer_ico.png);}
+footer>div.on .icon{background-image: url(../images/footer_ico_on.png);}
+footer>div.on p{ color:#2cca77;}
+footer .i-1{ background-position:center top;}
+footer .i-2{background-position:center -0.20rem;}
+footer .i-3{background-position:center -0.40rem;}
+.page_center_box{position: absolute; top: 0.5rem; bottom: 0.5rem; width: 100%;}
+/*共用样式结束*/
+
+/*重复使用样式开始*/
+.banner{ width:100%; height:2rem; overflow:hidden; text-align:center;}
+/*重复使用样式结束*/
+
+/*家政首页开始*/
+#index{}
+#index .project{ border-top:0.01rem solid #e5e5e5; border-bottom:0.01rem solid #e5e5e5; background-color:#fff; overflow:hidden; display:-moz-box; display:-webkit-box; display:-o-box;display:box; margin-bottom:0.1rem;}
+#index .project>div{border-right:0.01rem solid #e5e5e5; height:1rem; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-flex:1; -webkit-box-flex:1; box-flex:1; padding:0.1rem;}
+#index .project>div:last-child{ border-right:none 0rem;}
+#index .headico{ margin-top:0.04rem; width:0.60rem; height:0.60rem;background-image:url(../images/project_ico.png); background-repeat:no-repeat; background-size:100% auto;}
+#index .headico.ico1{background-position:left top;}
+#index .headico.ico2{background-position:left -0.60rem;}
+#index .proFont{ margin-top:0.12rem; margin-left:0.1rem;}
+#index .proFont p{ font-size:0.14rem; line-height:0.24rem; color:#aaa;}
+#index .proFont p:first-child{ font-size:0.18rem;}
+#index .proFont .clor_1{ color:#2cca77;}
+#index .proFont .clor_2{ color:#52c4ff;}
+#index .nav{border-top:0.01rem solid #e5e5e5; background-color:#fff;}
+#index .nav li{ display:block; float:left; width:33.33%; text-align:center; border-right:0.01rem solid #e5e5e5;  border-bottom:0.01rem solid #e5e5e5; box-sizing:border-box; -webkit-box-sizing:border-box; height:1rem;}
+#index .nav li .img{ width:0.4rem; height:0.4rem; margin:0.1rem auto 0.02rem; background:url(../images/nav_ico.png) no-repeat left top; background-size:100% auto;}
+#index .nav li .img.ico_1{ background-position:left top;}
+#index .nav li .img.ico_2{ background-position:left -0.4rem;}
+#index .nav li .img.ico_3{ background-position:left -0.8rem;}
+#index .nav li .img.ico_4{ background-position:left -1.2rem;}
+#index .nav li .img.ico_5{ background-position:left -1.6rem;}
+#index .nav li .img.ico_6{ background-position:left -2rem;}
+#index .nav li .img.ico_7{ background-position:left -2.4rem;}
+#index .nav li .img.ico_8{ background-position:left -2.8rem;}
+#index .nav li .img.ico_9{ background-position:left -3.2rem;}
+#index .nav li p{ color:#aaa; font-size:0.16rem; line-height:0.2rem;}
+/*家政首页结束*/

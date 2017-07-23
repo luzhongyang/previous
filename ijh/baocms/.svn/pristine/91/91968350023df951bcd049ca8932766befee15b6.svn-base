@@ -1,0 +1,41 @@
+<include  file='public:header'/>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">商家管理</a> > <a href="">商城</a> > <a>商品配置</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <form method="post" action="<{:U('goods/index')}>">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">
+            	<{$goods.title}>
+            </div>
+            <div class="right tuan_topfb_r"><a class="radius3 sjgl_an tuan_topbt" target="main_frm" href="<{:U('goods/format_create',array('goods_id'=>$goods['goods_id']))}>">增加配置+</a></div>
+        </div>
+    </div>
+    </form>  
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td>配置ID</td>
+            <td>配置内容</td>
+            <td>市场价格</td>
+            <td>售价</td>
+            <td>操作</td>
+        </tr>
+        <foreach name="formats" item="var">
+            <tr>
+                <td><{$var.id}></td>
+                <td><{$var.format_title}></td>
+                <td><{:round($var['price']/100,2)}></td>
+                <td><{:round($var['mall_price']/100,2)}></td>
+                <td>
+                	<a class="radius3 sy_c1an" href="<{:U('goods/format_detail',array('id'=>$var['id']))}>">编辑</a>
+                	<a class="radius3 sy_c1an" mini='confirm' href="<{:U('goods/format_delete',array('id'=>$var['id']))}>">删除</a>
+                </td>
+            </tr>
+        </foreach>
+    </table>
+</div>
+
+<include  file='public:footer'/>

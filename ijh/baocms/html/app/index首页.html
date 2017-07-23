@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>首页</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="city"><a href="#">合肥</a></i>
+		<div class="title">
+        	<div class="box_search overflow_clear">
+                <a href="#">
+                <i></i>
+                输入商户名/品类/商品词
+                </a>
+            </div>
+        </div>
+		<i class="icon-menu" style="margin-right:0.30rem;"><a href="#">签到</a></i>
+		<i class="icon-menu" id="ico_7"></i>
+	</header>
+	<div id="index" class="page-center-box">
+		<div id="scroll">
+			<!-- 广告 -->
+			<div class="ads">
+            	<script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+				<script src="js/jquery.event.drag-1.5.min.js" type="text/javascript"></script>
+                <script type="text/javascript" src="js/jquery.touchSlider.js"></script>
+				<script type="text/javascript">
+                    $(document).ready(function(){
+                        $(".main_image").touchSlider({
+                            flexible : true,
+                            speed : 200,
+                            btn_prev : $("#btn_prev"),
+                            btn_next : $("#btn_next"),
+                            paging : $(".flicking_con a"),
+                            counter : function (e){
+                                $(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+                            }
+                        });
+                        
+                        $(".main_image").bind("mousedown", function() {
+                            $dragBln = false;
+                        });
+                        
+                        $(".main_image").bind("dragstart", function() {
+                            $dragBln = true;
+                        });
+                        
+                        $(".main_image a").click(function(){
+                            if($dragBln) {
+                                return false;
+                            }
+                        });
+                        
+                        timer = setInterval(function(){
+                            $("#btn_next").click();
+                        }, 5000);
+                        
+                        $(".ele_banner").hover(function(){
+                            clearInterval(timer);
+                        },function(){
+                            timer = setInterval(function(){
+                                $("#btn_next").click();
+                            },5000);
+                        });
+                        
+                        $(".main_image").bind("touchstart",function(){
+                            clearInterval(timer);
+                        }).bind("touchend", function(){
+                            timer = setInterval(function(){
+                                $("#btn_next").click();
+                            }, 5000);
+                        });
+                        
+                    });
+                </script>
+				<div class="ele_banner">
+                    <div class="flicking_con">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                    </div>
+                    <div class="main_image">
+                        <ul>
+                            <li>
+                            	<div class="cate">
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico1.png"></div>
+                                        <p>抢购</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico2.png"></div>
+                                        <p>商家</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico3.png"></div>
+                                        <p>同城优购</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico4.png"></div>
+                                        <p>生活服务</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico5.png"></div>
+                                        <p>外卖</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico6.png"></div>
+                                        <p>订座</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico7.png"></div>
+                                        <p>附近活动</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico8.png"></div>
+                                        <p>优惠券</p></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                            	<div class="cate">
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico9.png"></div>
+                                        <p>社区</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico10.png"></div>
+                                        <p>家政</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico11.png"></div>
+                                        <p>同城卖场</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico12.png"></div>
+                                        <p>积分商城</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico13.png"></div>
+                                        <p>生活信息</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico14.png"></div>
+                                        <p>推广员</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico15.png"></div>
+                                        <p>活动</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico16.png"></div>
+                                        <p>微店</p></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                            	<div class="cate">
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico17.png"></div>
+                                        <p>会员卡</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico18.png"></div>
+                                        <p>榜单</p></a>
+                                    </div>
+                                    <div>
+                                        <a href="#"><div class="icon"><img src="img/fl_ico19.png"></div>
+                                        <p>附近工作</p></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="javascript:;" id="btn_prev"></a>
+            		<a href="javascript:;" id="btn_next"></a>
+                </div>
+			</div>
+			<!-- 分类 -->
+			<div class="index-quick-box">
+			    <div class="fl left">
+                    <div class="index-quick1">
+                        <a href="#"><h3>附近疯抢</h3>
+                        <p>优惠活动快去抢</p>
+                        <div class="img_1"><img src="img/index_img1.jpg"></div></a>
+                    </div>
+			    </div>
+                <div class="fl right">
+                    <div class="index-quick2">
+                        <a href="#"><div class="fl content">
+                        	<h3>快叫外卖</h3>
+                        	<p>一键下单，随叫随到</p>
+                        </div>
+                        <div class="fr info-img"><img src="img/index_img2.jpg"></div></a>
+                    </div>
+                    <div class="index-quick2 index-quick3">
+                        <div class="fl content">
+                        	<a href="#"><h3>新单速递</h3>
+                        	<p>最近出来啥了</p>
+                        </div>
+                        <div class="fr info-img"><img src="img/index_img3.jpg"></div></a>
+                    </div>
+                </div>
+            </div>
+			<!-- 列表 -->
+			<div class="list-have-pic">
+				<div class="title">热门抢购</div>
+				<!-- 循环 -->
+				<div class="list-box">
+                    <a href="">
+    					<div class="list-img">
+    						<img src="img/tp17.png" />
+    					</div>
+    					<div class="list-content">
+                        	<div class="tag"><img src="img/tag.png"></div>
+    						<p>意特利咖啡吧</p>
+    						<p class="c_h h15">仅售50元，价值100元代金券！专业管</p>
+    						<p>
+    						<span class="price">￥25.00</span> <del>￥36.00</del>
+    						<span class="sell">185m</span>
+    						</p>
+    					</div>
+                    </a>
+				</div>
+                <div class="list-box">
+                    <a href="">
+    					<div class="list-img">
+    						<img src="img/tp17.png" />
+    					</div>
+    					<div class="list-content">
+                        	<div class="tag"><img src="img/tag.png"></div>
+    						<p>意特利咖啡吧</p>
+    						<p class="c_h h15">仅售50元，价值100元代金券！专业管</p>
+    						<p>
+    						<span class="price">￥25.00</span> <del>￥36.00</del>
+    						<span class="sell">185m</span>
+    						</p>
+    					</div>
+                    </a>
+				</div>
+                <div class="list-box">
+                    <a href="">
+    					<div class="list-img">
+    						<img src="img/tp17.png" />
+    					</div>
+    					<div class="list-content">
+                        	<div class="tag"><img src="img/tag.png"></div>
+    						<p>意特利咖啡吧</p>
+    						<p class="c_h h15">仅售50元，价值100元代金券！专业管</p>
+    						<p>
+    						<span class="price">￥25.00</span> <del>￥36.00</del>
+    						<span class="sell">185m</span>
+    						</p>
+    					</div>
+                    </a>
+				</div>
+				<!-- 循环 -->
+				
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div>
+			<div class="icon i-1"></div>
+			<p>首页</p>
+		</div>
+		<div>
+			<div class="icon i-2"></div>
+			<p>抢购</p>
+		</div>
+		<div>
+			<div class="icon i-3"></div>
+			<p>关注</p>
+		</div>
+		<div>
+			<div class="icon i-4"></div>
+			<p>我的</p>
+		</div>
+	</footer>
+</body>
+</html>

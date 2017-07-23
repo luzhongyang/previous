@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的关注-私房菜</title>
+<link href="../css/reset.css" rel="stylesheet">
+<link href="../css/wap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="../js/iscroll.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="../js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body id="my_attention">
+
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">私房菜</div>
+		<i class="icon-menu" id="ico_1"></i>
+	</header>
+    
+<div id="seat" class="page-center-box">
+    <div id="scroll">
+    	<div class="my-attention-title">
+        	<h2>微信版商家管理中心上线微信版商家管理中心上线微信版商家管理中心上线</h2>
+            
+            <div class="link">
+                <a href="#" class="fl from">合肥生活宝</a>
+                <a href="#" class="fl attention">关注更多</a>
+                <span class="fr dish_time">7月16日下午16:00</span>
+            </div>
+        </div>
+        <div class="dish_detailBox">
+            <div class="dish_detail">
+                <a href="#"><div class="img"><img src="http://s1.51cto.com/wyfs02/M00/6B/A8/wKioL1U0W3fzC_eLAABjWZf_q5g495.jpg" id="big_pic" /></div>
+                <p>
+                    <b class="black3">私房菜中秋大酬宾啦</b><br /><span class="hui">2015-7-16</span>
+                </p>
+                <p class="rem14" style="font-size:0.14rem;">
+                    私房菜中秋大酬宾啦，满300送红酒一瓶，亲，赶紧来订购吧私房菜中秋大酬宾啦，满300送红酒一瓶...
+                </p></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

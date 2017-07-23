@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>物流配送员登录</title>
+    <link href="css/wl_style.css" type="text/css" rel="stylesheet" />
+    <script src="js/zepto.js"></script>
+    <script type="text/javascript">
+    	
+    </script>
+</head>
+<body style="background-color: #efe8cb;">
+	<div class="wl_login">
+		<div class="bg"></div>
+        <div class="login_content">
+        	<div class="login_title">
+            	<img src="img/login_t.png" width="180" height="">
+            </div>
+            <div class="login_input_box">
+            	<form action="" method="get">
+                	<input type="text" value="账户" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }">
+                    <input type="text" value="密码" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }">
+                </form>
+            </div>
+            <div class="login_input_btn">
+                <input type="submit" value="登 录">
+            </div>
+        </div>
+	</div>
+    <p class="footer_copy">CopyRight@ 合肥生活宝网络科技有限公司 电话:0551-63641901</p>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-粉丝列表</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a id="icon_goback" href="#"></a></i>
+    <div class="title">粉丝列表</div>
+    <i class="right"></i>
+</header>
+
+<section>
+	<div class="sh_search_box">
+        <div class="sh_search_int">
+            <span>输入昵称</span>
+            <input type="text" value="">
+            <input type="button" class="btn" value="搜索">
+        </div>
+    </div>
+    <div class="sh_list_public_box">
+        <ul>
+            <li class="list_box mb10">
+            	<div class="sh_fans_list">
+            	    <div class="fl left">
+                        <div class="nr">
+                            <p><b class="fl">枯木灬龙吟</b><span class="fr">17756570853</span></p>
+                            <p class="grey9"><span class="fl">2014-9-11</span><span class="fr">1100777积分</span></p>
+                        </div>
+                    </div>
+                    <div class="fr right">
+                        <a class="btn" href="#">增加积分</a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
+            <li class="list_box mb10">
+            	<div class="sh_fans_list">
+            	    <div class="fl left">
+                        <div class="nr">
+                            <p><b class="fl">枯木灬龙吟</b><span class="fr">17756570853</span></p>
+                            <p class="grey9"><span class="fl">2014-9-11</span><span class="fr">1100777积分</span></p>
+                        </div>
+                    </div>
+                    <div class="fr right">
+                        <a class="btn" href="#">增加积分</a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
+            <li class="list_box mb10">
+            	<div class="sh_fans_list">
+            	    <div class="fl left">
+                        <div class="nr">
+                            <p><b class="fl">枯木灬龙吟</b><span class="fr">17756570853</span></p>
+                            <p class="grey9"><span class="fl">2014-9-11</span><span class="fr">1100777积分</span></p>
+                        </div>
+                    </div>
+                    <div class="fr right">
+                        <a class="btn" href="#">增加积分</a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+</body>
+</html>

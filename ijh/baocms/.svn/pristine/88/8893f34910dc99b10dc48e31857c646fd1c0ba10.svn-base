@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>店铺详情</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+	$('.guest a.dp').click(function(){
+		$(".dplayer").addClass('current');
+	});
+	$(".dplayer .close").click(function(){
+		$('.dplayer').removeClass('current');
+	});
+});
+</script>
+</head>
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">韩国金釜山烤肉店</div>
+    <i class="right"></i>
+</header>
+<div class="dplayer">
+    <div class="dplayer_cont">
+    <form>
+        <div class="dplayer_close">
+            <a href="#" class="close"><img src="images/close.png"></a>
+        </div> 
+        <textarea placeholder="写下您想要说的话，我们会聆听你的一切语言！"></textarea>
+        <input type="button" class="btn" value="确定提交">
+    </form>
+    </div>
+</div>
+<section id="index" class="page_center_box">
+    <div id="shopDetail">
+        <div class="dist_intro_box">
+            <img src="pic/pic1.jpg">
+            <div class="dist_intro">
+                <div class="fl">
+                    <img src="pic/pic2.jpg">
+                    <p>10000粉丝 <a href="#" class="btn">+关注</a></p> 
+                    <p><em class="coordin_ico"></em>地址：2F 2A 502</p>
+                </div>
+                <div class="fr">
+                    <a href="#" class="pay_btn">优惠买单</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="limit_buy hot_seller mt10">
+            <div class="title">
+                <h3 class="fl">抢购商品</h3>
+            </div>
+            <ul class="list_box">
+                <li class="last">
+                    <div class="fl">
+                        <div class="img"><img src="pic/pic3.jpg"></div>
+                        <p class="bt overflow_clear">台湾糕点零食大礼包1050g </p>
+                        <p><span class="price">¥<b>714</b></span><del>¥1558</del></p>
+                    </div>
+                    <div class="fr">
+                        <a href="#" class="btn">立即购买</a>
+                    </div>
+                </li>
+                <li class="last">
+                    <div class="fl">
+                        <div class="img"><img src="pic/pic3.jpg"></div>
+                        <p class="bt overflow_clear">台湾糕点零食大礼包1050g </p>
+                        <p><span class="price">¥<b>714</b></span><del>¥1558</del></p>
+                    </div>
+                    <div class="fr">
+                        <a href="#" class="btn">立即购买</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="order-shop">
+            <div class="fl left">
+                <p class="title overflow_clear">百年川椒火锅</p>
+                <div class="order-nr">
+                    <p class="fl overflow_clear">关山大道曙光村光谷创意大厦B栋301</p>
+                    <div class="fr">
+                        <i></i>
+                        <span>1km</span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <a class="fr right" href=""><img src="images/telIco.png"></a>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="guest">
+            <div class="title">
+                <h3>抢购详情</h3>
+                <a href="javascript:void(0)" class="fontcl1"><em class="ico_2"></em>分享</a>
+            </div>
+            <div class="para">
+            	<p>百年川椒：消费满100元可用1张券，酒水除外，节假日可用，不预约；节假日可用，不预约；</p>
+                <p>代金券仅限抵扣以上规则内活动，该活动售后由哈乐城物业承担。</p>
+            </div>
+        </div>
+        
+        <div class="guest">
+            <div class="title">
+                <h3>网友点评(12)</h3>
+                <a href="javascript:void(0)" class="fontcl1 dp"><em></em>我要评论</a>
+            </div>
+            <!-- 循环 -->
+            <div class="guest-box">
+                <div class="icon"></div>
+                <div class="guest-box-content">
+                    <p>大耳朵图图<span>2015/07/24</span></p>
+                    <p class="c_h">还真是用丝袜拉出来的奶茶，味道不错，挺正宗的，港式奶茶的感觉，把happy站台不大的店面装修的挺有特色，店家也是用心了，蛋挞和咖喱三宝味道还有提升空间。</p>
+                    <p class="img">
+                        <img src="img/banner.jpg" alt="" />
+                        <img src="img/banner.jpg" alt="" />
+                        <img src="img/banner.jpg" alt="" />
+                    </p>
+                </div>
+            </div>
+            <!-- 循环 -->
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico1"></i>
+        <p>生活宝</p>
+		</a>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico2"></i>
+        <p>关注</p>
+		</a>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico3"></i>
+        <p>我的</p>
+		</a>
+    </div>
+</footer>
+</body>
+</html>

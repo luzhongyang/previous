@@ -1,0 +1,193 @@
+<include  file='public:header'/> 
+<body style=" background-color:#fafafa;">
+    <?php if($is_app&&!$is_android){?><div style="height: 0.2rem; width: 100%; background: #2FBDAA; position: fixed; top: 0rem;"></div><?php }?> 
+    <header>
+        <a href="<{:U('delivery/index/index')}>"><i class="icon-goback"></i></a>
+        <div class="title">订单列表-
+            <eq name="ss" value="0">抢单中</eq>
+            <eq name="ss" value="2">配送中</eq>
+            <eq name="ss" value="8">已完成</eq>
+        </div>
+        <i class="icon-menu"></i>
+    </header>
+    <section>
+        <ul class="wl_order_list_box">
+            <php>$a=1;</php>
+            <volist name="rdv" id="r">
+                <li class="wl_order_list">
+                    <div class="wl_order_bt">
+                        <div class="fl wl_order_bt_number" style="width: auto;">订单ID:<{$r.type_order_id}>
+                            <eq name="r.type" value="0"><span class="c_1">商</span></eq><eq name="r.type" value="1"><span class="c_2">外</span></eq>
+                            <span style="display: inline-block; float: right; color:#2fbdaa;">距离<{$r.d}></span>
+                        </div>
+
+                        <php>
+                            if($r['type'] == 0){ //商品
+                            $o = D('Order');
+                            $res = $o -> where('order_id ='.$r['type_order_id']) -> find();
+                            $t = 0;
+                            $o2 = D('OrderGoods');
+                            $res2 = $o2 -> where('order_id ='.$res['order_id']) ->  select();
+                            $o3 = D('Goods');
+                            foreach($res2 as $key => $val){
+                            $v = $o3->where('goods_id ='.$val['goods_id'])->getField('title');
+                            $res2[$key]['t'] = $v ;
+                            }
+                            }elseif($r['type'] == 1){ //外卖
+                            $o = D('EleOrder');
+                            $res = $o -> where('order_id ='.$r['type_order_id']) -> find();
+                            $t = 1;
+                            $o2 = D('EleOrderProduct');
+                            $res2 = $o2 -> where('order_id ='.$res['order_id']) ->select();
+                            $o3 = D('EleProduct');
+                            foreach($res2 as $key => $val){
+                            $v = $o3->where('product_id ='.$val['product_id'])->getField('product_name');
+                            $res2[$key]['t'] = $v;  
+                            }
+                            }
+                        </php>
+
+
+                        <eq name="r.status" value="0"><div class="fl wl_order_bt_state">抢单中</div></eq>
+                        <eq name="r.status" value="2"><div class="fl wl_order_bt_state">配送中</div></eq>
+                        <eq name="r.status" value="8"><div class="fl wl_order_bt_state">已完成</div></eq>
+
+                        <eq name="t" value="0">
+                        <eq name="res.is_daofu" value="1"><div class="fr wl_order_bt_pay">货到付款</div></eq>
+                        </eq>
+
+                        <eq name="t" value="1">
+                        <eq name="res.is_pay" value="0"><div class="fr wl_order_bt_pay">货到付款</div></eq>
+                        </eq>
+
+
+                    </div>
+
+
+                    <div class="wl_order_nr">
+
+                        <ul>
+                            <volist name="res2" id="res2">
+                                <li>
+                                    <div class="fl wl_order_nr_left"><p><{$res2.t}></p></div>
+                                    <div class="fr wl_order_nr_right">
+                                        <p class="price">￥<php>echo round(($res2['total_price']/$res2['num'])/100,2);</php></p>
+                                        <span class="num">x<{$res2.num}></span>
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <div class="wl_order_total"><{$res.create_time|date='Y-m-d H:i:s',###}><span>总计：￥<{:round($res['total_price']/100,2)}></span></div>
+                    <div class="wl_order_addre">
+                        <p><span>商家：</span><{$r.shop_name}>  <{$r.shop_mobile}></p>
+                        <p><span>地址：</span><{$r.shop_addr}></p>
+                    </div>
+                    <div class="wl_order_addre bg_c1">
+                        <p><span>收件人：</span><{$r.user_name}>  <{$r.user_mobile}></p>
+                        <p><span>地址：</span><{$r.user_addr}></p>
+                    </div>
+                <php>
+                    $delivery_time = $ex[$r['shop_id']]['delivery_time']*60;
+                    $end_time = $r['update_time'] + $delivery_time;
+                    $cha = $end_time - $nowtime;
+                    $endge_time = date('Y/m/d H:i:s',$end_time);
+                </php>
+                    <script type="text/javascript" language="javascript">
+                        setInterval(function () {
+                            var end_time = "<{$endge_time}>";
+                            var EndTime = new Date(end_time); //截止时间 前端路上
+                            var NowTime = new Date();
+                            var t = EndTime.getTime() - NowTime.getTime();
+                            var d = Math.floor(t / 1000 / 60 / 60 / 24);
+                            var h = Math.floor(t / 1000 / 60 / 60 % 24);
+                            var m = Math.floor(t / 1000 / 60 % 60);
+                            var s = Math.floor(t / 1000 % 60);
+                            if (d < 10) {
+                                $('#t<{$a}>').children('#t_d').html('0' + d);
+                            } else {
+                                $('#t<{$a}>').children('#t_d').html(d);
+                            }
+                            if (h < 10) {
+                                $('#t<{$a}>').children('#t_h').html('0' + h);
+                            } else {
+                                $('#t<{$a}>').children('#t_h').html(h);
+                            }
+                            if (m < 10) {
+                                $('#t<{$a}>').children('#t_m').html('0' + m);
+                            } else {
+                                $('#t<{$a}>').children('#t_m').html(m);
+                            }
+                            if (s < 10) {
+                                $('#t<{$a}>').children('#t_s').html('0' + s);
+                            } else {
+                                $('#t<{$a}>').children('#t_s').html(s);
+                            }
+                        }, 1000);
+                    </script>
+                    <div class="wl_order_btn_box">
+                        <if condition="$r.status eq 2">
+                            <if condition="$cha lt 0">
+                                <span style="float: left; color: red; height: 0.3rem; line-height: 0.3rem; font-size: 0.14rem; font-weight: bold; ">已超出商家规定时间</span>
+                                <else/>
+                                
+                            <span style="float: left; height: 0.3rem; line-height: 0.3rem; font-size: 0.16rem; font-weight: bold; color: #2fbdaa" class="radius3 spxq_qgTime" id="t<{$a}>">
+                                    <span class="spxq_qgTimezt spxq_qgTimejx">&nbsp;</span>
+                                    <span id="t_d">00</span>:
+                                    <span id="t_h">00</span>:
+                                    <span id="t_m">00</span>:
+                                    <span id="t_s">00</span>
+                                </span>
+                            </if>
+                        </if>
+                        <eq name="r.status" value="0"><a class="wl_order_btn qiang_btn" href="javascript:void(0);" val="<{$r.order_id}>">抢单</a></eq>
+                        <eq name="r.status" value="1"><a class="wl_order_btn qiang_btn" href="javascript:void(0);" val="<{$r.order_id}>">抢单</a></eq>
+                        <eq name="r.status" value="2"><a class="wl_order_btn ok_btn" href="javascript:void(0);" val="<{$r.order_id}>">完成</a></eq>
+                    </div>
+                </li>
+                <php>$a++;</php>
+            </volist>
+
+            <script type="text/javascript" language="javascript">
+
+                $(document).ready(function () {
+                    $('.qiang_btn').click(function () {
+                        var id = $(this).attr('val');
+                        $.post('<{:U("lists/handle")}>', {order_id: id}, function (result) {
+                            if (result.status == 'success') {
+                                layer.msg(result.message, {icon: 6});
+                                setTimeout(function () {
+                                    location.reload(true);
+                                }, 3000);
+                            } else {
+                                layer.msg(result.message);
+                            }
+                        }, 'json');
+                    })
+
+                    $('.ok_btn').click(function () {
+                        var id = $(this).attr('val');
+                        $.post('<{:U("set_ok")}>', {order_id: id}, function (result) {
+                            if (result.status == 'success') {
+                                layer.msg(result.message, {icon: 6});
+                                setTimeout(function () {
+                                    location.reload(true);
+                                }, 3000);
+                            } else {
+                                layer.msg(result.message);
+                            }
+                        }, 'json');
+                    })
+                })
+
+            </script>
+
+
+
+        </ul>
+    </section>
+
+
+
+
+<include  file='public:footer'/> 

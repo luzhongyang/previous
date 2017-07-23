@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <i onclick="baoapp.helper.goback();" class="icon-goback"></i>
+        <div class="title">我的中心</div>
+    </header>
+<div id="content">
+    <div id="personal" class="page-center-box" style="overflow:hidden;">
+        
+            <div class="list-box" style="overflow:hidden;">
+                <ul>
+                    <li>
+                        <a onclick="baoapp.helper.linkTo('face','face.html')" class="i-1">头像
+                        <i></i></a>
+                    </li>
+                    <li>
+                        <a onclick="baoapp.helper.linkTo('nickname','nickname.html')" class="i-2">昵称
+                        <i></i></a>
+                    </li>
+                    <li>
+                        <a onclick="baoapp.helper.linkTo('password','password.html')" class="i-3">密码
+                        <i></i></a>
+                    </li>
+                    <li>
+                        <a onclick="baoapp.helper.linkTo('addr','addr.html')" class="i-4">地址
+                        <i></i></a>
+                    </li>
+                </ul>
+            </div>
+             <input id="submit" onclick="clean()" ontouchstart="clean();" type="button" class="submit" value="退出当前账号">
+        </div>
+    </div>
+    <footer>
+       <script src='../js/application.footer.js'></script>
+    </footer>
+</body>
+<script>
+function clean(){
+    baoapp.helper.clearlogin();
+              baoapp.helper.toast("退出登录成功!",1500,function(){
+                  //移除缓存头像
+                  appcan.locStorage.remove('PERSON_FACE');
+                  baoapp.helper.linkTo('index','../index.html','',5);
+              },1);
+}
+
+
+appcan.ready(function(){ 
+    var height = baoapp.helper.adapt();
+    if(!baoapp.helper.islogin()){
+            baoapp.helper.toast('登录状态失效,请重新登录',1000,function(){
+                baoapp.helper.linkTo('login','../login.html');
+            },1)
+            return;
+    }
+
+
+});
+</script>
+
+</html>

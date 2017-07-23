@@ -1,0 +1,156 @@
+<include file="public:header"/>
+<body>
+ <?php if(!$is_app){?>
+<header>
+    <a href="<{:AppLink('ding/index')}>"><i class="icon-goback"></i></a>
+    <div class="title"><{$detail.shop_name}></div>
+    <i class="icon-menu3"><a href="#" id="foucsIco"></a><a href="#" id="shareIco" class="ml10"></a></i>
+</header>
+<?php }?>
+<div class="page-center-box">
+    <!--图片轮播-->
+    <div class="banner" style="height:auto; max-height:none;">
+        <div class="flexslider"> 
+            <ul class="slides">
+                <foreach name="photos" item="item">
+                    <li><a href="javascript:void(0);"><img src="__ROOT__/attachs/<{$item.photo}>"  width="100%"/></a></li>
+                </foreach>
+            </ul>  
+        </div>
+    </div>
+    <!--图片轮播end-->
+    <!--btn-->
+    <div class="seatDelt_btn_box mb10">
+        <p class="fl black9"><span class="mr10">口味：<{$detail.kw_score}></span><span class="mr10">环境：<{$detail.hj_score}></span>服务：<{$detail.fw_score}></p>
+        <a href="<{:AppLink('ding/ding',array('shop_id'=>$detail['shop_id']))}>" class="pub_btn bgcl1 fr">在线订座</a>
+    </div>
+    <!--btn结束-->
+    <!--商家详细-->
+    <div class="seatDelt_infor border_t border_b">
+        <em class="ico ico_1 fl"></em>
+        <div class="pub_wz"><{$detail.addr}><span class="black9">（距离<span class="fontcl2"><{$detail.d}>）</span><a href="<{:U('shop/gps',array('shop_id'=>$detail['shop_id']))}>"><em class="linkIco"></em></a></div>
+        <div class="clear"></div>
+    </div>
+    <div class="seatDelt_infor border_b">
+        <em class="ico ico_2 fl"></em>
+        <div class="pub_wz"><{$detail.tel}></div>
+        <div class="clear"></div>
+    </div>
+    <div class="seatDelt_infor border_b">
+        <em class="ico ico_3 fl"></em>
+        <div class="pub_wz">营业时间：<span class="black9 mr10"><{$detail.stime}>-<{$detail.ltime}></span></div>
+        <div class="clear"></div>
+    </div>
+    <p class="font_line24 fontcl1 ml10 mar10">温馨提示：用餐高峰期请提前下单，谢谢！</p>
+    <!--商家详细end-->
+    <!--商家活动-->
+    <div class="seatDelt_hd mt10 mb10">
+        <!--<div class="ding border_t border_b">
+            <span class="tag fl">订</span>
+            <p>本店支持在线订座，满480元送特调果汁一杯，六月特惠，<span class="fontcl2">一定要手机买单</span></p>
+        </div>-->
+        <if condition="$coupon_list">
+            <ul>
+                <foreach name="coupon_list" item="item">
+                    <li class="list">
+                        <div class="pub_img fl"><a href="<{:AppLink('coupon/detail',array('coupon_id'=>$item['coupon_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"><span class="tag">券</span></a></div>
+                        <div class="pub_wz">
+                            <h3 class="overflow_clear"><a href="<{:AppLink('coupon/detail',array('coupon_id'=>$item['coupon_id']))}>"><{:bao_msubstr($item['title'],0,14,false)}></a></h3>
+                            <p class="price fontcl2">剩余<big><{$item.num}></big><span class="fr black9">已下载<{$item.downloads}></span></p>
+                        </div>
+                        <em class="linkIco"></em>
+                    </li>
+                </foreach>
+            </ul>
+        </if>
+        <a href="<{:AppLink('coupon/index')}>" class="seatDelt_more border_b black9">更多优惠&gt;&gt;</a>
+    </div>
+    <!--商家活动end-->
+    <!--本店特色菜-->
+    <div class="seatDelt_tit border_t border_b">
+        <h2 class="fl">本店特色菜</h2>
+    </div>
+    <div class="seatDelt_spcl">
+        <foreach name="menus" item="item">
+            <a href="javascript:void(0);" class="list"><{$item.menu_name}></a>
+        </foreach>
+    </div>
+    <a href="<{:AppLink('ding/menu',array('shop_id'=>$detail['shop_id']))}>" class="seatDelt_more border_b border_t black9">更多特色菜&gt;&gt;</a>
+    <!--本店特色菜end-->
+    <!--评价-->
+    <div class="seatDelt_tit border_t border_b mt10">
+        <h2 class="fl">总体评价：</h2>
+        <div class="fl"><span class="spxq_qgpstarBg"><span class="spxq_qgpstar" style="width:<{$detail['score']*20}>%;"></span></span><span class="fontcl1 ml10"><{$detail.score}>分</span><span class="black9 ml10">高于<{$high_to}>%的同行</span></div>
+    </div>
+    <div>
+        <foreach name="list" item="var">
+            <div class="guest-box" style="margin:0; padding:0.1rem; background:#fff;">
+                <div class="icon" style="background-image: url(__ROOT__/attachs/<{$users[$var['user_id']]['face']|default='default.jpg'}>);"></div>
+                <div class="guest-box-content">
+                    <p><{$users[$var['user_id']]['nickname']}><span><{$var.create_time|date='Y-m-d H:i',###}></span></p>
+                    <div class="spxq_qgpstarBg">
+                        <span class="spxq_qgpstar" style="width:<{$var['score']*20}>%;"></span>
+                    </div>
+                    <p class="c_h"><{$var.contents}></p>
+                    <p class="img">
+                        <volist name="pics" id="pic" key="index">
+                            <eq name="pic.order_id" value="$var['order_id']">
+                                <img <if condition="$index%3 eq 1">class="fst"</if>  src="__ROOT__/attachs/<{$pic.pic|default='default.jpg'}>">
+                            </eq>
+                        </volist>
+                    </p>
+                </div>
+            </div>
+        </foreach>
+    </div>
+    <a href="<{:AppLink('ding/dianping',array('shop_id'=>$detail['shop_id']))}>" class="seatDelt_more border_b maincl">查看全部<{$detail.comments}>条评价&gt;&gt;</a>
+    <!--评价end-->
+    <!--更多服务-->
+    <div class="seatDelt_tit border_t border_b mt10">
+        <h2 class="fl">更多服务</h2>
+    </div>
+    <div class="seatDelt_serv">
+        <div class="list black9"><em class="ico ico_1"></em>提供免费wifi</div>
+        <div class="list black9"><em class="ico ico_2"></em>有停车场</div>
+    </div>
+    <!--更多服务end-->
+    <!--更多商家-->
+    <div class="seatDelt_tit border_t border_b mt10">
+        <h2 class="fl">更多服务</h2>
+        <a href="<{:AppLink('ding/index')}>" class="black9 fr">推广</a>
+    </div>
+    <div class="seat_list_box mb10">
+        <ul>
+            <foreach name="more_list" item="item">
+                <li class="seat_list">
+                    <div class="pub_img fl"><a href="<{:AppLink('ding/detail',array('shop_id'=>$item['shop_id']))}>"><img src="__ROOT__/attachs/<{$item['photo']}>" /></a></div>
+                    <div class="pub_wz">
+                        <h3 class="overflow_clear"><a href="<{:AppLink('ding/detail',array('shop_id'=>$item['shop_id']))}>"><{$item.shop_name}></a></h3>
+                        <div class="star_box">
+                            <p class="fontcl2 fl"><span class="spxq_qgpstarBg"><span class="spxq_qgpstar" style="width:<{$item['score']*20}>%;"></span></span></p>
+                            <p class="black9 fr"><{$item.comments}>人评价</p>
+                        </div>
+                        <p class="price black9">人均：￥<big class="fontcl1"><{$item.price}></big><span class="fr"><span class="fontcl2"><{$item.d}></span></span></p>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+    <!--更多商家end-->
+</div>
+<script src="__TMPL__statics/js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(document).ready(function () {
+        /*轮播幻灯图开始*/
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+            /*slideshow: false,*/
+            /*touch:true,*/
+        });
+        /*轮播幻灯图结束*/
+    });
+</script>   
+</body>
+</html>

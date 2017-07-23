@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>手机广告产品</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">锁阳茶</div>
+		<i class="icon-menu" id="ico_1"></i>
+	</header>
+	<div id="" class="page-center-box">
+		<div class="adverti_detail">
+        	<div class="banner"><img src="images/icn09.png" /></div>
+            <div class="title">
+            	<p><span>广告名称：</span>锁阳茶</p>
+                <p><span>广告词：</span>茶中珍品</p>
+            </div>
+            <div class="intro">
+            	<h3>内容简介</h3>
+                <P>锁阳茶以生物技术锁阳茶以生物技术锁阳茶以生物技术锁阳茶以生物技术锁阳茶以生物技术锁阳茶以生物技术</P>
+            </div>
+            <div class="relation">
+            	<div class="company">
+                	<a href="#">
+                	<img src="images/icn09.png" />
+                    <p>某某有限公司</p>
+                    </a>
+                </div>
+                <div class="contact">
+                	<div class="fl">
+                    	联系电话
+                        <p>18205514976</p>
+                    </div>
+                    <div class="fr">
+                    	<a href="#" class="tel"></a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="contact">
+                	商家地址
+                    <p>安徽省合肥市蜀山区华润五彩国际904</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer-cart">
+		<div class="btn">捡银元</div>
+	</footer>
+</body>
+</html>

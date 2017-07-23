@@ -1,0 +1,57 @@
+<include  file='public:header'/>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">商家管理</a> > <a href="">众筹</a> > <a>产品列表</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">发布众筹需要添加可购买的众筹类型，该众筹：<{$detail.title}></div>
+            <if condition="$detail['audit'] EQ 0">
+            <div class="right tuan_topfb_r"><a class="radius3 sjgl_an tuan_topbt jq_add" rel="1" href="<{:U('crowd/type_create',array('goods_id'=>$detail['goods_id']))}>">新增</a></div>
+            </if>
+        </div>
+    </div> 
+    <div class="tabnr_change  show">
+    	  <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td width="50">ID</td>
+            <td width="150">图片</td>
+            <td width="100">价格</td>
+            <td width="100">限额</td>
+            <td width="200">内容</td>
+            <td width="70">运费</td>
+            <td width="100">发货时间</td>
+            <td width="100">已筹数</td>
+            <td width="70">是否抽奖</td>
+            <td width="150">操作</td>
+        </tr>
+        <foreach name="meals" item="var">
+        <tr>
+            <tr>
+                <td><{$var.type_id}></td>
+                <td><img src="__ROOT__/attachs/<{$var.img}>"  style="width: 160px; margin: 0px auto;" /></td>
+                <td><{$var['price']/100}></td>
+                <td><if condition="$var.max_num EQ 0">无限额<else/><{$var.max_num}>份</if></td>
+                <td><{$var.content}></td>
+                <td><if condition="$var.yunfei EQ 0">免运费<else/><{$var['yunfei']/100}></if></td>
+                <td><{$var.fahuo}></td>
+                <td><{$var.have_num}></td>
+                  <td><eq name="var.choujiang" value="0">否<else/>是</eq></td>
+                <td>
+                    <a href="<{:U('crowd/lists',array('type_id'=>$var['type_id']))}>">参与支持者</a>&nbsp;
+                    <if condition="$detail['audit'] EQ '0'">
+                    <a href="<{:U('crowd/type_edit',array('type_id'=>$var['type_id']))}>">编辑</a>&nbsp;
+                    <a mini='confirm' href="<{:U('crowd/type_delete',array('type_id'=>$var['type_id']))}>">删除</a>
+                    </if>
+                </td>
+            </tr>
+        </tr>
+        </foreach>
+    </table>
+    <div class="paging">
+        <{$page}>
+    </div>
+</div>
+<include  file='public:footer'/>

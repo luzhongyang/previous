@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-抢购优惠-发布抢购</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">发布抢购</div>
+    <i class="right"></i>
+</header>
+
+<section>
+    <script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>商家发布的团购要在后台审核之后才能显示在前台</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    <div class="sh_buy_fabu">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box">
+                   <div class="sh_input_public"><span>抢购名称</span><input type="text" value=""></div> 
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_input_public"><span>抢购简介</span><textarea></textarea></div>
+                </li>
+                <script>
+					$(function(){
+						$(function(){
+							$(".sh_input_public_pull").click(function(){
+								if($(this).find(".sh_input_public_pull_down").css("display")=='block'){
+									$(".sh_input_public_pull_down").hide();
+									$(this).find(".sh_input_public_pull_down").hide();
+								}
+								else{
+									$(".sh_input_public_pull_down").hide()
+									$(this).find(".sh_input_public_pull_down").show();
+								}
+								if($(this).find("i").hasClass("on")){
+									$(".sh_input_public_pull").find("i").removeClass("on");
+									$(this).find("i").removeClass("on");
+								}
+								else{
+									$(".sh_input_public_pull").find("i").removeClass("on");
+									$(this).find("i").addClass("on");
+								}
+							});
+							$(".sh_input_public_pull_down li").click(function(){
+								$(this).parent().find("li").removeClass("on");
+								$(this).addClass("on");
+								$(this).parents(".sh_input_public_pull").find("input").val($(this).find("a").html());
+							});
+						});
+					});
+				</script>
+                <li class="list_box mb10">
+                   <div class="sh_input_public sh_input_public_pull"><span>分类</span><input type="text" value=""><i></i>
+                       <div class="sh_input_public_pull_down">
+                            <ul>
+                                <li><a href="#">品牌一</a></li>
+                                <li><a href="#">品牌二</a></li>
+                            </ul>
+                        </div>
+                   </div>
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_input_public sh_input_public_pull"><span>选择分店</span><input type="text" value=""><i></i>
+                       <div class="sh_input_public_pull_down">
+                            <ul>
+                                <li><a href="#">品牌一</a></li>
+                                <li><a href="#">品牌二</a></li>
+                            </ul>
+                        </div>
+                   </div>
+                </li>
+                <li>
+                	<p class="sh_fans_gold_sm"><em></em>不选择表示多店通用，建议选择，定位更加准确</p>
+                	<div class="sh_buy_upload_btn"><label><input class="btn" type="file" value="上传抢购图"><em></em>上传抢购图</label></div>
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_buy_upload_img"><img src="" width="100" height="100"><p>建议尺寸545X305</p></div>
+                </li>
+                <li>
+                	<div class="sh_buy_upload_btn"><label><input class="btn" type="file" value="上传抢购图"><em></em>上传组图</label></div>
+                </li>
+                <li class="list_box mb10">
+                	<div class="Upload-img">
+                        <div class="list-img"><img src="" width="100" height="100"><p><a href="#">删除</a></p></div>
+                        <div class="list-img"><img src="" width="100" height="100"><p><a href="#">删除</a></p></div>
+                        <div class="list-img"><img src="" width="100" height="100"><p><a href="#">删除</a></p></div>
+                    </div>
+                </li>
+                <li>
+                	<p class="sh_buy_fabu_p">属性</p>
+                </li>
+                <li class="list_box">
+                	<script>
+						$(function(){
+							$(".sh_buy_fabu_check .right label").click(function(){
+								if($(this).hasClass("on")){
+									$(this).removeClass("on");
+								}
+								else{
+									$(this).addClass("on");
+								}
+							});
+						});
+					</script>
+                	<div class="sh_buy_fabu_check">
+                	    <div class="fl left">是否热门</div>
+                        <div class="fr right"><label><input type="checkbox"></label></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li class="list_box">
+                	<div class="sh_buy_fabu_check">
+                	    <div class="fl left">是否精选</div>
+                        <div class="fr right"><label><input type="checkbox"></label></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li class="list_box">
+                	<div class="sh_buy_fabu_check">
+                	    <div class="fl left">是否新单</div>
+                        <div class="fr right"><label><input type="checkbox"></label></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li class="list_box">
+                	<div class="sh_buy_fabu_check">
+                	    <div class="fl left">是否免预约</div>
+                        <div class="fr right"><label><input type="checkbox"></label></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li class="list_box">
+                	<div class="sh_buy_fabu_check">
+                	    <div class="fl left">是否返现1%</div>
+                        <div class="fr right"><label><input type="checkbox"></label></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                	<div class="sh_buy_fabu_check">
+                	    <div class="fl left">是否多店可用</div>
+                        <div class="fr right"><label><input type="checkbox"></label></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li class="list_box">
+                   <div class="sh_input_public"><span>市场价格</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box">
+                   <div class="sh_input_public"><span>抢购价格</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box">
+                   <div class="sh_input_public"><span>结算价格</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box">
+                   <div class="sh_input_public"><span>可使用积分</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box  mb10">
+                   <div class="sh_input_public"><span>库存</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box  mb10">
+                   <div class="sh_input_public"><span>购买须知</span><textarea></textarea></div>
+                </li>
+                <li class="list_box  mb10">
+                   <div class="sh_input_public"><span>商品详情</span><textarea></textarea></div>
+                </li>
+                <li class="list_box">
+                   <div class="sh_input_public"><span>开始时间</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box">
+                   <div class="sh_input_public"><span>结束时间</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_input_public"><span>虚拟物品过期时间</span><input type="text" value=""></div>
+                </li>
+            </ul>
+        </div>
+        <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认发布"></div>
+    </div>
+</section>
+</body>
+</html>

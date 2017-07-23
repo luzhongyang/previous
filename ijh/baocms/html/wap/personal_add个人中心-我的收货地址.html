@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link href="css/css_wxj.css" rel="stylesheet" type="text/css">
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">地址</div>
+		<i class="icon-menu" id="ico_1"></i>
+	</header>
+    <script src="<{:U('app/datas/cab',array('name'=>'cityareas'))}>"></script>  <!-- 获取下拉 -->
+     
+    
+    <script type="text/javascript" language="javascript">
+    	$(document).ready(function(){
+			
+			//添加
+			$('#add_addr').click(function(){
+			
+				layer.open({
+					type: 1,
+					title:'新增收货地址',
+					skin: 'layui-layer-demo', //加上边框
+					area: ['100%', '3.4rem'], //宽高
+					content: '<p class="form">联系人：<br><input type="text" class="add-text" id="name" name="name" value=""><br>地区：<br><select id="city_id" name="city_id" style="width:100px;" class="add-text"><option value="0">请选择...</option></select><select id="area_id" name="area_id" style="width: 100px;" class="add-text"><option value="0">请选择...</option></select><select id="business_id" name="business_id" style="width: 100px;" class="add-text"><option value="0">请选择...</option></select><br>手机号码：<br><input type="text" class="add-text2" name="mobile" id="mobile" value=""><br>收货地址：<br><input type="text" class="add-text2 add-dw" name="addr" id="addr" value=""><br><input type="submit" value="立即添加" id="addr_post" /></p>'
+				});
+
+				get_option();
+				
+				
+				$('#addr_post').click(function(){
+					var name = $('#name').val();
+					var city_id = $('#city_id').val();
+					var area_id = $('#area_id').val();
+					var business_id = $('#business_id').val();
+					var mobile = $('#mobile').val();
+					var addr = $('#addr').val();
+					
+					$.post('<{:U("mobile/addr/add_addr")}>',{name:name,city_id:city_id,area_id:area_id,business_id:business_id,mobile:mobile,addr:addr},function(result){										
+						if(result.status == 'success'){
+							layer.msg(result.msg);
+							setTimeout(function(){
+								location.reload(true);
+							},3000);
+						}else{
+							layer.msg(result.msg,{icon:2});
+						}														
+					},'json');
+				
+				})
+				
+			
+			})
+			
+			
+			
+			//修改
+			$('.edit_addr').click(function(){
+			
+				var val = $(this).attr('val');
+				var a = $(this).attr('a');
+				var b = $(this).attr('b');
+				var c = $(this).attr('c');
+				var n = $(this).attr('n');
+				var m = $(this).attr('m');
+				var addr = $(this).attr('addr');
+				
+				layer.open({
+					type: 1,
+					title:'新增收货地址',
+					skin: 'layui-layer-demo', //加上边框
+					area: ['100%', '3.4rem'], //宽高
+					content: '<p class="form">联系人：<br><input type="text" class="add-text" id="name" name="name" value="'+n+'"><br>地区：<br><select id="city_ids" name="city_id" style="width:100px;" class="add-text"><option value="0">请选择...</option></select><select id="area_ids" name="area_id" style="width: 100px;" class="add-text"><option value="0">请选择...</option></select><select id="business_ids" name="business_id" style="width: 100px;" class="add-text"><option value="0">请选择...</option></select><br>手机号码：<br><input type="text" class="add-text2" name="mobile" id="mobile" value="'+m+'"><br>收货地址：<br><input type="text" class="add-text2 add-dw" name="addr" id="addr" value="'+addr+'"><br><input type="submit" value="立即修改" id="edit_post" val="'+val+'" /></p>'
+				});
+				
+				get_option();
+				
+				changeCAB(c,a,b);
+				
+				$('#edit_post').click(function(){
+					var addr_id = $(this).attr('val');
+					var name = $('#name').val();
+					var city_id = $('#city_ids').val();
+					var area_id = $('#area_ids').val();
+					var business_id = $('#business_ids').val();
+					var mobile = $('#mobile').val();
+					var addr = $('#addr').val();
+					
+					$.post('<{:U("mobile/addr/edit_addr")}>',{name:name,city_id:city_id,area_id:area_id,business_id:business_id,mobile:mobile,addr:addr,addr_id:addr_id},function(result){										
+						if(result.status == 'success'){
+							layer.msg(result.msg);
+							setTimeout(function(){
+								location.reload(true);
+							},3000);
+						}else{
+							layer.msg(result.msg,{icon:2});
+						}														
+					},'json');
+				
+				})
+				
+				
+			})
+			
+
+			
+			
+		})
+    </script>
+    <div id="personal" class="page-center-box">
+        <div id="scroll">
+        	<div class="modify">
+           	    <div class="modify-list-box">
+           	        <ul>
+                    	<li>
+                            <div class="fl left">    
+                                <input style="width: 24px; float: left;" type="radio"  name="addr_id" id="addr_id" value="<{$item['addr_id']}>" checked="checked" />
+                                123,13856258457,123123
+                            </div>
+                            <div class="fr right"><a href="#" style="color:#f56c08;">设为默认</a>
+                            <a href="#" style="color:#2fbdaa;" val="<{$item.addr_id}>" a="<{$item.area_id}>" b="<{$item.business_id}>" c="<{$item.city_id}>" n="<{$item.name}>" m="<{$item.mobile}>" addr="<{$item.addr}>" class="edit_addr">修改地址</a></div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="fl left">    
+                                <input style="width: 24px; float: left;" type="radio"  name="addr_id" id="addr_id" value="<{$item['addr_id']}>" />
+                                123,13856258457,123123
+                            </div>
+                            <div class="fr right"><a href="#" style="color:#f56c08;">设为默认</a>
+                            <a href="#" style="color:#2fbdaa;" val="<{$item.addr_id}>" a="<{$item.area_id}>" b="<{$item.business_id}>" c="<{$item.city_id}>" n="<{$item.name}>" m="<{$item.mobile}>" addr="<{$item.addr}>" class="edit_addr">修改地址</a></div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="fl left">    
+                                <input style="width: 24px; float: left;" type="radio"  name="addr_id" id="addr_id" value="<{$item['addr_id']}>" />
+                                123,13856258457,123123
+                            </div>
+                            <div class="fr right"><a href="#" style="color:#f56c08;">设为默认</a>
+                            <a href="#" style="color:#2fbdaa;" val="<{$item.addr_id}>" a="<{$item.area_id}>" b="<{$item.business_id}>" c="<{$item.city_id}>" n="<{$item.name}>" m="<{$item.mobile}>" addr="<{$item.addr}>" class="edit_addr">修改地址</a></div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                           <div class="fl left"></div>
+                            <div class="fr right"><a href="javascript:void(0);" id="add_addr" style="color:#ff0000;">新增收货地址</a></div>
+                            <div class="clear"></div>
+                        </li>
+       	            </ul>
+           	    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

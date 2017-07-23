@@ -1,0 +1,167 @@
+<include  file='public:header'/>
+<script src="__PUBLIC__/js/my97/WdatePicker.js"></script>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">商家管理</a> > <a href="">众筹</a> > <a>众筹详情</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">
+                <if condition="$goods_crowd['audit'] EQ 0">未开始
+                <else/>
+                    <if condition="$goods_crowd['status'] EQ 0">众筹中
+                    <elseif condition="$goods_crowd['status'] EQ 1"/>成功
+                    <elseif condition="$goods_crowd['status'] EQ 2"/>失败</if>
+                </if>
+            </div>
+            <div class="right tuan_topfb_r"><a class="radius3 sjgl_an tuan_topbt" mini="confirm" href="<{:U('crowd/batch_delivery', array('goods_id'=>$goods_crowd['goods_id']))}>">一键发货</a></div>
+        </div>
+    </div>
+    <div class="hotel_orddtl_box">
+        <div class="title">众筹项目：</div>
+        
+        <div>
+            <div style='width:10%;float:left;padding-top:10px;'><img src="__ROOT__/attachs/<{$goods_crowd.img}>" width='100' height='100' /></div>
+            <div style='width:90%;float:left;'>
+                <div class="hotel_orddtl_infor">
+                    <ul>
+                        <li class="list">项目名称：<span class="fontcl2"><{$goods_crowd.title}></span></li>
+                    </ul>
+                </div>
+                <div class="hotel_orddtl_infor">
+                    <ul>
+                        <li class="list">关注人数：<span class="fontcl2"><{$goods_crowd.follow_num}></span></li>
+                        <li class="list">点赞人数：<span class="fontcl2"><{$goods_crowd.zan_num}></span></li>
+                        <li class="list">众筹总金额：<span class="fontcl2"><{:round($goods_crowd['all_price']/100,2)}></span></li>
+                        <li class="list">已筹金额：<span class="fontcl2"><{:round($goods_crowd['have_price']/100,2)}></span></li>
+                        <li class="list">已参与人数：<span class="fontcl2"><{$goods_crowd.have_num}></span></li>
+                        <li class="list">结束时间：<span class="fontcl2"><{$goods_crowd.ltime|date='Y-m-d H:i:s',###}></span></li>
+                        <li class="list">创建时间：<span class="fontcl2"><{$goods_crowd.dateline|date='Y-m-d H:i:s',###}></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div style='clear:both;'></div>
+        </div>
+    </div>
+    
+
+    <div class="hotel_orddtl_box">
+        <div class="title mb20">众筹产品</div>
+        <div class="hotel_orddtl_tabl mb20">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr class="title">
+                    <th width='60' class="first">产品</th>
+                    <th width='40%'>产品简介</th>
+                    <th width='60'>价格</th>
+                    <th width='80'>限额人数</th>
+                    <th width='60'>目前人数</th>
+                    <th width='60'>产品类型</th>
+                    <th>运费</th>
+                    <th>是否抽奖产品</th>
+                    <th>发货时间</th>
+                    <th>添加时间</th>
+                </tr>
+                <foreach name="typelist" item="item">
+                    <tr>
+                        <td><img src="__ROOT__/attachs/<{$item.img}>" width='50' height='50' /></td>
+                        <td><{$item.content}></td>
+                        <td><{:round($item['price']/100,2)}></td>
+                        <td><{$item.max_num}></td>
+                        <td><{$item.have_num}></td>
+                        <td><eq name='item.choujiang' value='1'>抽奖类<else/>普通</eq></td>
+                        <td><{:round($item['yunfei']/100,2)}></td>
+                        <td><eq name='item.choujiang' value='1'>是<else/>否</eq></td>
+                        <td>结束后<{$item.fahuo}>天</td>
+                        <td><{$item.dateline|date='Y-m-d H:i:s',###}></td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+    </div>
+    
+
+    <div class="hotel_orddtl_box">
+        <div class="title mb20">参与记录</div>
+        <div class="hotel_orddtl_tabl mb20">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr class="title">
+                    <th width="40">ID</th>
+                    <th width="120">支付编号</th>
+                    <th width='60'>用户</th>
+                    <th width='80'>昵称</th>
+                    <th width='60'>产品</th>
+                    <th width='30%'>产品简介</th>
+                    <th>运费</th>
+                    <th>金额</th>
+                    <th>产品类型</th>
+                    <th>是否中奖</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><{$var.list_id}></td>
+                        <td><{$payment_list[$var['list_id']]['log_id']}></td>
+                        <td><img src="__ROOT__/attachs/<{$var.user.face}>" width='50' height='50' /></td>
+                        <td><{$var.user.nickname}></td>
+                        <td>
+                            <img src="__ROOT__/attachs/<{$var.type.img}>" width='50' height='50' />
+                        </td>
+                        <td><{$var.type.content}></td>
+                        <td><{:round($var['type']['yunfei']/100,2)}></td>
+                        <td><{:round($var['type']['price']/100,2)}></td>
+                        <td><eq name='var.type.choujiang' value='1'><span style='color:#ff0000;'>抽奖类</span><else/><span style='color:#999999;'>普通</span></eq></td>
+                        <td><eq name='var.is_zhong' value='1'><span style='color:#ff0000;'>中奖</span><else/>--</eq></td>
+                        <td><{$var.dateline|date='Y-m-d H:i:s',###}></td>
+                        <td>
+                            <eq name='goods_crowd.status' value='0'>--</eq>
+                            <eq name='goods_crowd.status' value='1'>
+                                <if condition="$var['type']['choujiang'] EQ 1">
+                                    <if condition='$var.is_zhong eq 0 and $var.order_status == 0'>
+                                        <a class="radius3 sjgl_an tuan_topbt" style="background:#e85656;border:1px solid #cf3d3d;" mini="confirm" href="<{:U('crowd/set_goodslist',array('list_id'=>$var['list_id'],'params'=>1))}>">设为中奖</a>
+                                    <elseif condition='$var.is_zhong eq 1 and $var.order_status == 0'/>
+                                        <a class="radius3 sjgl_an tuan_topbt" mini="confirm" href="<{:U('crowd/set_goodslist',array('list_id'=>$var['list_id'],'params'=>2))}>">发货</a>
+                                    </if>
+                                <else/>
+                                    <if condition='$var.order_status == 0'>
+                                        <a class="radius3 sjgl_an tuan_topbt" mini="confirm" href="<{:U('crowd/set_goodslist',array('list_id'=>$var['list_id'],'params'=>2))}>">发货</a>
+                                    </if>
+                                </if>
+
+                                <if condition='$var.order_status == 1'>
+                                    <span class="radius3 sjgl_an tuan_topbt" style="background:#3f9f00;border:1px solid #2d7200;">待确认</span>
+                                </if>
+
+                                <if condition='$var.order_status == 2'>
+                                    <span class="radius3 sjgl_an tuan_topbt" style="background:#c9c9c9;border:1px solid #bbbbbb;">已完成</span>
+                                </if>
+                            </eq>
+                            <eq name='goods_crowd.status' value='2'>
+                                <eq name='var.type.choujiang' value='0'>
+                                    <if condition='$var.order_status == -1'>
+                                        <span class="radius3 sjgl_an tuan_topbt" style="background:#c9c9c9;border:1px solid #bbbbbb;">已退款</span>
+                                    </if>
+                                    <if condition='$var.order_status == 0'>
+                                        <a class="radius3 sjgl_an tuan_topbt" style="background:#e85656;border:1px solid #cf3d3d;" mini="confirm" href="<{:U('crowd/set_goodslist',array('list_id'=>$var['list_id'],'params'=>3))}>">退款</a>
+                                    </if>
+                                </eq>
+                                <eq name='var.type.choujiang' value='1'>
+                                <span class="radius3 sjgl_an tuan_topbt" style="background:#c9c9c9;border:1px solid #bbbbbb;">抽奖类不可退款</span>
+                                </eq>
+                            </eq>
+                        </td>
+                    </tr>
+                    <tr class="addr">
+                        <td colspan="11">收货地址：<{$var.addr}>(<{$var.mobile}>，<{$var.name}>)</td>
+                    </tr>
+                </foreach>
+                <tr>
+                    <td colspan='4'><{$page}></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<include  file='public:footer'/>

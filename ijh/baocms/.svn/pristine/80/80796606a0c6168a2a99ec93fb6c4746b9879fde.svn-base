@@ -1,0 +1,117 @@
+<div class="loading-div"></div>
+
+<div class="send-out">
+
+<foreach name="list" item="order">
+
+
+
+    <div class="list-have-pic shop-list">
+
+        <!-- 循环 -->
+
+        <div class="list-box">
+
+            <div class="shop-order">
+
+                <p class="left">订单：<{$order.order_id}> <span>&yen;<{:round($order['total_price']/100,2)}></span></p>
+
+                <p class="right"><a class="order_detail" href="<{:AppLink('eleorder/detail',array('order_id'=>$order['order_id']))}>">查看详情</a><{$order.create_time|date='Y-m-d',###}></p>
+
+            </div>
+
+        </div>
+
+        <foreach name="products" item="product">
+
+        	<if condition="$product['order_id'] eq $order['order_id']">
+
+        	<div class="list-box">
+
+                <div class="list-img">
+
+                    <img width="60" src="__ROOT__/attachs/<{$eleproducts[$product['product_id']]['photo']}>" />
+
+                </div>
+
+                <div class="list-content activ-list-content">
+
+                    <p id="order-title">名称：<{$eleproducts[$product['product_id']]['product_name']}></p>
+
+                    <p class="spread-for">数量：<{$product.num}> 单价：￥<{:round($eleproducts[$product['product_id']]['price']/100,2)}></p>
+
+                    <div class="spread-looker">总计：<span>￥<{:round($product['total_price']/100,2)}></span></div>
+
+                </div>
+
+            </div>
+
+			</if>
+
+        </foreach>
+
+                
+
+        <div class="list-box">
+
+            <div class="activ-list-content shop-button">
+
+                <eq name="order.is_pay" value="1">
+
+                    <eq name="order.status" value="0">
+                        <a href="<{:AppLink('mobile/ele/pay',array('order_id'=>$order['order_id']))}>" target="_blank"><span class="shop-pay">去付款</span></a>
+                    <else />
+                        <a href="javascript:void(0);" class="order_detail"> <{$cfg[$order['status']]}></a>
+                    </eq>
+                <else />
+                         餐到付款&nbsp;&nbsp;<{$cfg[$order['status']]}>
+                </eq>
+                <if condition="$order['status'] eq 1">
+                    <a class="order_detail jq_deletes" rel="<{$order['order_id']}>" style="color: #fff;" href="javascript:void(0);">取消订单</a>
+                </if>
+                <if condition="$order['status'] eq 2">
+                    <a class="order_detail"  href="<{:AppLink('eleorder/yes',array('order_id'=>$order['order_id']))}>">确定收货</a>
+                </if>
+                <eq name="order.status" value="8"><eq name="order.is_dainping" value="1"><a href="javascript:void(0);"  class="order_detail">已点评</a>
+                    <else/><a class="order_detail" href="<{:AppLink('eleorder/dianping',array('order_id'=>$order['order_id']))}>">去点评</a>
+                </eq>
+                </eq>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- 循环 -->
+
+    </div>
+
+
+
+</foreach>
+
+    
+    <script>
+        $(".jq_deletes").click(function () {
+        var order_id = $(this).attr('rel');
+        layer.confirm('您确定要取消订单？', {
+            area: ['150px', '150px'], //宽高
+            btn: ['是的', '不'], //按钮
+            shade: false //不显示遮罩
+        }, function () {
+            $.post("<{:U('eleorder/del')}>", {order_id:order_id}, function (result) {
+                if (result.status == "success") {
+                    layer.msg(result.msg);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    layer.msg(result.msg);
+                }
+            }, 'json');
+        });
+        $('.layui-layer-btn0').css('background','#2fbdaa');
+    });
+    </script>
+</div>

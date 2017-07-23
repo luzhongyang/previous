@@ -1,0 +1,926 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>订座-详情-包厢</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery.flexslider-min.js"></script>
+<script src="../js/js.js"></script>
+<script>
+$(function () {
+	$('#selectBoxInput').click(function(){
+		$('.selectList').toggle(300);
+	});
+	$(".selectList li a").click(function () {
+		$("#selectBoxInput").html($(this).html());
+		$('.selectList').hide();
+	});
+});//头部搜索框js
+</script>
+</head>
+
+<body>
+<div class="topOne">
+    <div class="nr">
+        <div class="left">您好，欢迎访问BAOCMS<a href="#">登陆</a>|<a href="#">注册</a>
+            <div class="topSm"> <span class="topSmt"><em>&nbsp;</em>手机CMS</span>
+                <div class="topSmnr"><img src="../sjimages/login_wx_03.jpg" width="90" height="90" />
+                    <p>扫描下载客户端</p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul>
+            	<li class="liOne"><a class="liOneA" href="#">个人中心<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">抢购管理</a></li>
+                            <li><a href="#">活动管理</a></li>
+                            <li><a href="#">服务管理</a></li>
+                            <li><a href="#">购物管理</a></li>
+                            <li><a href="#">外卖管理</a></li>
+                            <li><a href="#">订座信息</a></li>
+                            <li><a href="#">同城管理</a></li>
+                            <li><a href="#">优惠券管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">我是商家<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">商家登陆</a></li>
+                            <li><a href="#">微信营销</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">快捷导航<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">餐饮频道</a></li>
+                            <li><a href="#">生活资讯</a></li>
+                            <li><a href="#">活动</a></li>
+                            <li><a href="#">积分商城</a></li>
+                            <li><a href="#">购物</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="topTwo">
+    <div class="left">
+        <h1><a href="#"><img src="../sjimages/logo_03.png" width="214" height="53" /></a></h1>
+        <div class="changeCity"> 合肥 <a href="#" class="change">[切换城市]</a> </div>
+    </div>
+    <div class="left center">
+        <div class="searchBox">
+            <div class="selectBox"> <span class="select"  id="selectBoxInput">商家</span>
+                <div  class="selectList">
+                    <ul>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" class="text" value="输入您要搜索的内容" onclick="if(value==defaultValue){value='';this.style.color='#000'}"  onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+            <input type="button" class="submit" value="搜索" />
+        </div>
+        <div class="hotSearch">热门搜索：<a href="#">美食</a><a href="#">酒店</a><a href="#">酒店</a><a href="#">电影</a><a href="#">家政</a><a href="#">洗车</a></div>
+    </div>
+    <div class="right topTwo_b">
+    	<div class="protect">
+            <ul>
+              <li><em>&nbsp;</em><a href="#">随时退</a></li>
+              <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+              <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="nav">
+    <div class="navList">
+    	<!--<div class="navListBg">&nbsp;</div>-->
+        <ul>
+            <li class="navListAll zy_navListAll"><span class="navListAllt">全部抢购分类<em></em></span>
+                <div class="shadowy navAll">
+                	<div class="menu_fllist2">
+                <div class="item2 bo">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">美食</a></div>
+                        <div class="right"><a href="">火锅</a><a href="">自助餐</a><a href="">川菜</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">美食</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">娱乐</a></div>
+                        <div class="right"><a href="">KTV</a><a href="">足疗按</a><a href="">洗浴</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">娱乐</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">酒店</a></div>
+                        <div class="right"><a href="">七天</a><a href="">格力豪泰</a><a href="">锦江</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">酒店</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">电影</a></div>
+                        <div class="right"><a href="">电子通票</a><a href="">选座</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">电影</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">购物</a></div>
+                        <div class="right"><a href="">超市</a><a href="">商场卡</a><a href="">水果</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">购物</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">丽人</a></div>
+                        <div class="right"><a href="">美发</a><a href="">美甲</a><a href="">驾校</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">丽人</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">结婚</a></div>
+                        <div class="right"><a href="">婚庆公司</a><a href="">新娘跟妆</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">结婚</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">生活服务</a></div>
+                        <div class="right"><a href="">汽车服务</a><a href="">装修服务</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">生活服务</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">旅游</a></div>
+                        <div class="right"><a href="">国内游</a><a href="">出境游</a><a href="">周边游</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">旅游</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            		<script type="text/javascript">
+						$('.menu_fllist2 > .item2').hover(function(){
+							var eq = $('.menu_fllist2 > .item2').index(this),				//获取当前滑过是第几个元素
+								h = $('.menu_fllist2').offset().top,						//获取当前下拉菜单距离窗口多少像素
+								s = $(window).scrollTop(),									//获取游览器滚动了多少高度
+								i = $(this).offset().top,									//当前元素滑过距离窗口多少像素
+								item = $(this).children('.menu_flklist2').height(),				//下拉菜单子类内容容器的高度
+								sort = $('.menu_fllist2').height();						//父类分类列表容器的高度
+							
+							if ( item > sort ){												//如果子类的高度小于父类的高度
+								if ( eq == 0 ){
+									$(this).children('.menu_flklist2').css('top', (i-h));
+								} else {
+									$(this).children('.menu_flklist2').css('top', (i-h)+1);
+								}
+							} else {
+								if ( s > h ) {												//判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+									if ( i-s > 0 ){											//则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+										$(this).children('.menu_flklist2').css('top', (s-h)+2 );
+									} else {
+										$(this).children('.menu_flklist2').css('top', (s-h)-(-(i-s))+2 );
+									}
+								} else {
+									$(this).children('.menu_flklist2').css('top', 0 );
+								}
+							}	
+					
+							$(this).addClass('on');
+							$(this).children('.menu_flklist2').css('display','block');
+						},function(){
+							$(this).removeClass('on');
+							$(this).children('.menu_flklist2').css('display','none');
+						});//导航菜单js
+					</script>
+                </div>
+            </li>
+            <li class="navLi"><a class="navA  on" href="#">首页</a></li>
+            <li class="navLi"><a class="navA" href="#">订座</a></li>
+            <li class="navLi"><a class="navA" href="#">今日新单</a></li>
+            <li class="navLi"><a class="navA" href="#">热门疯抢</a></li>
+            <!--<li class="navLi2"><a class="navA" href="#">更多<em></em></a>
+                <div class="indxLi">
+                    <ul>
+                        <li><a href="#">装修&amp;服务</a></li>
+                        <li><a href="#">婚庆&amp;酒店</a></li>
+                        <li><a href="#">家政&amp;服务</a></li>
+                        <li><a href="#">汽车&amp;驾校</a></li>
+                        <li><a href="#">教育培训</a></li>
+                        <li><a href="#">母婴&amp;亲子</a></li>
+                        <li><a href="#">丽人&amp;保养</a></li>
+                        <li><a href="#">餐饮&amp;娱乐</a></li>
+                    </ul>
+                </div>
+            </li>-->
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <div class="spxq_loca"><a href="#">抢购</a>&gt;&gt;<a href="#">美食</a>&gt;&gt;<a href="#">自助餐</a>&gt;&gt;<a href="#">政务区</a>&gt;&gt;<a href="#">2店通用东来顺</a></div>
+    <div class="seat-jj-box">
+        <div class="left seat-jj-box-l">
+        	<script>
+				$(document).ready(function () {
+					$('.seat-jj_slider').flexslider({
+						slideshow: false,
+						controlNav: "thumbnails"
+					});
+				});
+            </script>
+        	<div class="seat-jj_slider">
+                <ul class="slides">
+                    <li class="sy_hotgzLi" data-thumb="../img/qgimg_03.jpg"><img src="../img/qgimg_03.jpg" width="300" height="180" /></li>
+                    <li class="sy_hotgzLi" data-thumb="../img/qgimg_09.jpg"><img src="../img/qgimg_09.jpg" width="300" height="180" /></li>
+                    <li class="sy_hotgzLi" data-thumb="../img/qgimg_11.jpg"><img src="../img/qgimg_11.jpg" width="300" height="180" /></li>
+                    <div class="clear"></div>
+                </ul>
+                
+            </div>
+        </div>
+        <div class="left seat-jj-box-r">
+        	<h2>张府私房菜</h2>
+            <p><span class="spxq_qgpstarBg"><span class="spxq_qgpstar"> </span></span>5694条评论 人均：183元   |   口味：7.6   |   环境：9.1   |   服务：8.5</p>
+            <p>地址： 徐汇区 岳阳路150号(近永嘉路)</p>
+            <p>电话： 021-64660505</p>
+            <p>特色：<span class="seat-jj-bq c1">订</span><span class="seat-jj-bq c2">券</span></p>
+            <p>营业时间： 午餐11:30~14:00, 晚餐18:00~0:00 饮料区全时段营业，饮料区不接受预订</p>
+            <p class="seat-jj-ts">温馨提示：凡在本店预约订座者，本店均收取20元预约定金费用，结帐时归还，还望谅解。</p>
+        </div>
+    </div>
+    <div class="seat-h-box">
+    	<h3>优惠促销</h3>
+        <div class="seat-h-content mb15">
+        	<ul>
+        	    <li class="seat-h-bqli"><span class="seat-jj-bq c1">订</span>本店支持在线订座，满480元送特调果汁出初恋一杯，六月特惠。</li>
+                <li class="seat-h-bqli"><span class="seat-jj-bq c2">券</span>仅30元，价值50元代金券。</li>
+    	    </ul>
+        </div>
+        <div class="seat-h-content seat-h-content2">
+        	<div class="left seat-h-order-l">
+        	    <div class="left date"><input type="text" value="日期" /></div>
+                <div class="left time">
+                	<script>
+						$(function(){
+							$(".seat-h-order-l .time input").click(function(){
+								$(this).parent().find(".seat-h-time-pull").toggle();
+							});
+							$(".seat-h-time-pull li").click(function(){
+								$(this).parents(".time").find("input").val($(this).html());
+								$(".seat-h-time-pull").hide();
+							});
+						});
+                    </script>
+                	<input type="text" value="时间" />
+                    <div class="seat-h-time-pull">
+                    	<ul>
+                            <li>1:00</li>
+                            <li>1:30</li>
+                            <li>2:00</li>
+                            <li>2:30</li>
+                            <li>3:00</li>
+                            <li>3:30</li>
+                            <li>4:00</li>
+                            <li>4:30</li>
+                            <li>5:00</li>
+                            <li>5:30</li>
+                            <li>6:00</li>
+                            <li>6:30</li>
+                            <li>7:00</li>
+                            <li>7:30</li>
+                            <li>8:00</li>
+                            <li>8:30</li>
+                            <li>9:00</li>
+                            <li>9:30</li>
+                            <li>10:00</li>
+                            <li>10:30</li>
+                            <li>11:00</li>
+                            <li>11:30</li>
+                            <li>12:00</li>
+                            <li>12:30</li>
+                            <li>13:00</li>
+                            <li>13:30</li>
+                            <li>14:00</li>
+                            <li>14:30</li>
+                            <li>15:00</li>
+                            <li>15:30</li>
+                            <li>16:00</li>
+                            <li>16:30</li>
+                            <li>17:00</li>
+                            <li>17:30</li>
+                            <li>18:00</li>
+                            <li>18:30</li>
+                            <li>19:00</li>
+                            <li>19:30</li>
+                            <li>20:00</li>
+                            <li>20:30</li>
+                            <li>21:00</li>
+                            <li>21:30</li>
+                            <li>22:00</li>
+                            <li>22:30</li>
+                            <li>23:00</li>
+                            <li>23:30</li>
+                	    </ul>
+                    </div>
+                </div>
+                <div class="left num">
+                	<script>
+						$(function(){
+							$(".seat-h-order-l .num input").click(function(){
+								$(this).parent().find(".seat-h-time-pull").toggle();
+							});
+							$(".seat-h-time-pull li").click(function(){
+								$(this).parents(".num").find("input").val($(this).html());
+								$(".seat-h-time-pull").hide();
+							});
+						});
+                    </script>
+                	<input type="text" value="时间" />
+                	<div class="seat-h-time-pull">
+                    	<ul>
+                            <li>4人</li>
+                            <li>8人</li>
+                	    </ul>
+                    </div>
+                </div>
+                <div class="left room">
+                	<script>
+						$(function(){
+							$(".seat-h-order-l .room label").click(function(){
+								if($(this).find(".state").hide()){
+									$(".seat-h-order-l .room .state").hide();
+									$(this).find(".state").show();
+								}
+								else{
+									$(this).find(".state").hide()
+								}
+							});
+						});
+                    </script>
+                	<label><div class="state"></div><input type="radio" name="room" />大厅(有空位)</label>
+                    <label><div class="state"></div><input type="radio" name="room" />包厢(有空位)</label>
+                </div>
+                <div class="clear"></div>
+        	</div>
+            <div class="right seat-h-order-r"><input class="seat-h-btn" type="submit" value="立即预约" /></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="seat-h-box">
+    	<h3>点包厢</h3>
+        <div class="seat-h-content seat-h-content2">
+        	<script>
+				$(function(){
+					$(".seat-h-tab-room li").each(function(e){
+						$(this).click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+							$(this).parents(".seat-h-content").find(".seat-h-tab-list").find(".seat-h-room").each(function(i){
+								if(e==i){
+									$(this).parents(".seat-h-content").find(".seat-h-tab-list").find(".seat-h-room").hide();
+									$(this).show();
+								}
+								else{
+									$(this).hide();
+								}
+							});
+						});
+					});
+				});
+            </script>
+        	<ul class="seat-h-tab seat-h-tab-room">
+                <li class="on">3-5人</li>
+                <li>5-8人</li>
+                <li>8-10人</li>
+                <li>10-15人</li>
+            </ul>
+            <div class="seat-h-tab-list">
+                <div class="seat-h-room">
+                	<ul>
+                    	<li>
+                        	<div class="seat-h-room-li">
+                            	<div class="img">
+                                	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                	<img src="" width="255" height="170" />
+                                </div>
+                                <div class="nr">
+                                	<div class="left rap">#餐厅鸿德包房#</div>
+                                    <div class="right"><label class="seat-check"><input type="checkbox" /></label></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="seat-h-room-li">
+                            	<div class="img">
+                                	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                	<img src="" width="255" height="170" />
+                                </div>
+                                <div class="nr">
+                                	<div class="left rap">#餐厅鸿德包房#</div>
+                                    <div class="right"><label class="seat-check"><input type="checkbox" /></label></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="seat-h-room-li">
+                            	<div class="img">
+                                	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                	<img src="" width="255" height="170" />
+                                </div>
+                                <div class="nr">
+                                	<div class="left rap">#餐厅鸿德包房#</div>
+                                    <div class="right"><label class="seat-check"><input type="checkbox" /></label></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="seat-h-room-li">
+                            	<div class="img">
+                                	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                	<img src="" width="255" height="170" />
+                                </div>
+                                <div class="nr">
+                                	<div class="left rap">#餐厅鸿德包房#</div>
+                                    <div class="right"><label class="seat-check"><input type="checkbox" /></label></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="seat-h-box">
+    	<h3>点菜单</h3>
+        <div class="seat-h-content seat-h-content2">
+        	<script>
+				$(function(){
+					$(".seat-h-tab-oder li").each(function(e){
+						$(this).click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+							$(this).parents(".seat-h-content").find(".seat-h-tab-list").find(".seat-h-reco").each(function(i){
+								if(e==i){
+									$(this).parents(".seat-h-content").find(".seat-h-tab-list").find(".seat-h-reco").hide();
+									$(this).show();
+								}
+								else{
+									$(this).hide();
+								}
+							});
+						});
+					});
+				});
+            </script>
+            <ul class="seat-h-tab seat-h-tab-oder">
+                <li class="on">推荐菜</li>
+                <li>主菜</li>
+                <li>甜品</li>
+                <li>主食和汤</li>
+                <li>饮料</li>
+                <li>酒水</li>
+            </ul>
+            <div class="seat-h-reco">
+                <div class="title">推荐菜<span>（18）</span></div>
+                <div class="seat-h-reco-content">
+                	<script>
+						$(document).ready(function () {
+							$('.seat-h-reco_flexslider').flexslider({
+								directionNav: true,
+								pauseOnAction: false,
+								controlNav: false,
+								slideshow: false,
+							});
+							
+							
+							$(".seat-check").click(function(){
+								if($(this).hasClass("on")){
+									$(this).removeClass("on");
+								}
+								else{
+									$(this).addClass("on");
+								}
+							});						
+						});
+                    </script>
+                	<div class="seat-h-reco_flexslider">
+                        <ul class="slides">
+                            <li class="sy_hotgzLi">
+                            	<ul>
+                                	<li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="sy_hotgzLi">
+                            	<ul>
+                                	<li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<div class="img">
+                                        	<div class="spxq_bq"><span class="spxq_bq1">荐<em></em></span></div>
+                                        	<img src="../img/sjxc_03.jpg" width="182" height="134" />
+                                        </div>
+                                        <div class="nr">
+                                        	<div class="left nr-l"><label class="seat-check"><input type="checkbox" /></label></div>
+                                            <div class="left nr-r">
+                                            	<p class="rap">笔筒色拉</p>
+                                                <p class="tjj">1771人推荐<span class="right">￥26.80</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="seat-h-tab-list">
+            	<div class="seat-h-reco">
+                    <div class="title">推荐菜<span>（18）</span></div>
+                    <div class="seat-h-tab-list-box">
+                    	<ul>
+                    	    <li>
+                                <div class="seat-h-tab-li">
+                                    <div class="left img">
+                                        <div class="spxq_bq"><span class="spxq_bq1">惠<em></em></span></div>
+                                        <img src="" width="200" height="134" />
+                                    </div>
+                                    <div class="left nr">
+                                        <div><label class="seat-check"><input type="checkbox" /></label></div>
+                                        <p class="rap">京都烤鱼（银鳕鱼）</p>
+                                        <p class="price">￥26.80</p>
+                                        <del>￥36</del>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="seat-h-tab-li">
+                                    <div class="left img">
+                                        <div class="spxq_bq"><span class="spxq_bq1">惠<em></em></span></div>
+                                        <img src="" width="200" height="134" />
+                                    </div>
+                                    <div class="left nr">
+                                        <div><label class="seat-check"><input type="checkbox" /></label></div>
+                                        <p class="rap">京都烤鱼（银鳕鱼）</p>
+                                        <p class="price">￥26.80</p>
+                                        <del>￥36</del>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="seat-h-tab-li">
+                                    <div class="left img">
+                                        <div class="spxq_bq"><span class="spxq_bq1">惠<em></em></span></div>
+                                        <img src="" width="200" height="134" />
+                                    </div>
+                                    <div class="left nr">
+                                        <div><label class="seat-check"><input type="checkbox" /></label></div>
+                                        <p class="rap">京都烤鱼（银鳕鱼）</p>
+                                        <p class="price">￥26.80</p>
+                                        <del>￥36</del>
+                                    </div>
+                                </div>
+                            </li>
+                	    </ul>
+                    </div>
+                </div>
+                <div class="seat-h-reco" style="display:none;">
+                    <div class="title">主菜<span>（18）</span></div>
+                    <div class="seat-h-tab-list-box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footerOut">
+    <div class="footer">
+        <div class="footNav">
+            <div class="left topTwo_b">
+                <div class="tel">0551-63641901<p>周一至周日 9:00-22:00</p><p>客服电话 免长途费</p></div>
+                <div class="protect">
+                    <ul>
+                        <li><em>&nbsp;</em><a href="#">随时退</a></li>
+                        <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+                        <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="center">
+                <div class="footNavLi">
+                    <ul>
+                        <li class="footerLi">
+                        	<h3>公司信息</h3>
+                        	<ul>
+                            	<li><a href="#">关于我们</a></li>
+                                <li><a href="#">联系我们</a></li>
+                                <li><a href="#">人才招聘</a></li>
+                                <li><a href="#">免责声明</a></li>
+                            </ul>
+                        </li>
+                        <li class="footerLi">
+                        	<h3>商户合作</h3>
+                        	<ul>
+                            	<li><a href="#">商家入驻</a></li>
+                                <li><a href="#">广告合作</a></li>
+                                <li><a href="#">商家新闻</a></li>
+                            </ul>
+                        </li>
+                        <li class="footerLi">
+                        	<h3>用户帮助</h3>
+                        	<ul>
+                            	<li><a href="#">服务协议</a></li>
+                                <li><a href="#">退款承诺</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="copy">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有 php微信O2O生活宝门户系统</div>
+            </div>
+            <div class="right"><img src="../sjimages/login_wx_03.jpg" width="149" height="146" /><p>扫一扫关注BAOCMS</p></div>
+        </div>
+    </div>
+</div>
+<div class="topUp">
+    <ul>
+        <li class="topBack"><div class="topBackOn">回到<br />顶部</div></li>
+        <li class="topUpWx"><div class="topUpWxk"><img src="../sjimages/login_wx_03.jpg" /><p>扫描二维码关注微信</p></div></li>
+    </ul>
+</div>
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $(".topUp").show();
+				$(".indexpop").show();
+				
+            } else {
+                $(".topUp").hide();
+				$(".indexpop").hide();
+            }
+        });
+        $(".topUp").click(function () {
+            $("html,body").animate({scrollTop: 0}, 200);
+        });
+    });
+</script>
+</body>
+</html>

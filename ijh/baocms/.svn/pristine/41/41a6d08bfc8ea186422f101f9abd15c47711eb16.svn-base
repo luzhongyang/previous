@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>个人信息</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+	$(".modHead").click(function(){
+		$(".modHead_mask").show();
+	});
+	$(".mask .cancel").click(function(){
+		$(this).parents(".mask").hide();
+	});
+});
+</script>
+</head>
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">个人信息</div>
+    <i class="right"><a href="#" id="icon_code"></a></i>
+</header>
+<div class="mask modHead_mask">
+	<div class="cont">
+        <div class="title">
+        	修改头像
+            <a href="#" class="cancel">X</a>
+        </div>
+		<ul>
+		    <li><a href="#"><em class="ico_1"></em>相册</a></li>
+            <li><a href="#"><em class="ico_2"></em>拍照</a></li>
+	    </ul>
+    </div>
+</div>
+<section id="personal_infor" class="page_center_box">
+    <ul class="form_list_box">
+        <li>
+        	<a class="modHead" href="#">
+            	<div class="fl">头像</div>
+            	<div class="fr"><img src="images/head.jpg"></div>
+            </a>
+        </li>
+        <li class="last">
+        	<a href="#">
+            	<div class="fl">昵称</div>
+            	<div class="fr">小白菜</div>
+            </a>
+        </li>
+    </ul>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico1"></i>
+        <p>生活宝</p>
+		</a>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico2"></i>
+        <p>关注</p>
+		</a>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico3"></i>
+        <p>我的</p>
+		</a>
+    </div>
+</footer>
+</body>
+</html>

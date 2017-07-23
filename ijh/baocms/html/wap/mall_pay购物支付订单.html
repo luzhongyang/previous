@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商城订单</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<a href=""><i class="icon-goback"></i></a>
+		<div class="title">支付订单</div>
+		<a href=""><i class="icon-menu" id="ico_1"></i></a>
+	</header>
+	
+	<div id="seat" class="page-center-box">
+		<div id="scroll" class="pay">
+			<div class="pay-message">
+				<div class="pay-message-two">
+					<span class="pay-img"> <img src="img/tp49.png"> 尤哥 </span>
+					<span> <img src="img/tp50.png"> 1500000000 </span>
+				</div>
+				<div class="pay-message-two pay-address">
+					<p class="pay-img left"> <img src="img/tp53.png">潜山路496号新景花园16栋804</p>
+					<span class="right"><a href=""><img src="img/tp54.png">修改</a></span>
+				</div>
+			</div>
+			<div class="list-have-pic">
+				<div class="pay-xi">订单明细</div>
+				<a href="">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp55.png" />
+						</div>
+						<div class="list-content">
+							<div class="list-pay-order">
+								<span class="left pay-list">优品时尚家居组合优品时尚家居
+								优品时尚家居</span>
+								<div class="right">
+									<p>￥6000</p>
+									<span>x 3</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</a>
+				<a href="">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp56.png" />
+						</div>
+						<div class="list-content">
+							<div class="list-pay-order">
+								<span class="left pay-list">优品时尚家居组合优品时尚家居
+								优品时尚家居</span>
+								<div class="right">
+									<p>￥6000</p>
+									<span>x 3</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</a>
+				<div class="pay-xi">
+					选择优惠：<select>
+									<option>满100送5</option>
+									<option>满80送5</option>
+									<option>满50送5</option>
+							  </select>
+							  <p><input type="checkbox" name=""><span> 使用代金劵-￥1</span></p>
+							  <p><input type="checkbox" name=""><span> 使用代积分-￥1</span></p>
+				</div>
+			</div>
+            <div class="wap-form">
+            	<script>
+					$(function(){
+						$(".seat-check input").click(function(){
+							$(".seat-check").find("label").removeClass("on");
+							$(this).parent("label").addClass("on");
+						});
+					});
+				</script>
+				<ul>
+					<li>支付方式</li>
+                    <li class="pay-li i-1">支付宝<p>推荐已安装支付宝客户端的用户使用</p><div class="seat-check"><label><input name="payWay" type="radio"></label></div></li>
+                    <li class="pay-li i-2">余额支付<p>推荐已安装支付宝客户端的用户使用</p><div class="seat-check"><label><input name="payWay" type="radio"></label></div></li>
+                    <li class="pay-li pay-li i-3">微信支付<p>推荐已安装支付宝客户端的用户使用</p><div class="seat-check"><label><input name="payWay" type="radio"></label></div></li>
+                    <li class="integral pay-li icn-3">货到付款<p>如果您没有网银，可以到店付</p><div class="seat-check"><label><input name="payWay" type="radio"></label></div></li>
+				</ul>
+			</div>
+			<div class="sure-pay-but">
+				<p class="left">总金额：<span>￥960.00</span></p>
+            	<div class="sure-pay right"><a href="#">确认支付</a></div>
+            </div>
+		</div>
+	</div>
+</body>
+</html>

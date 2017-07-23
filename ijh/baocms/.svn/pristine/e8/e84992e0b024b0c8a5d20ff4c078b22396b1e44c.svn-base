@@ -1,0 +1,53 @@
+<include file="public:header"/>
+<body>
+<iframe id="baocms_frm" name="baocms_frm" style="display:none;"></iframe>
+<?php if(!$is_app){?>
+<header>
+    <a href="<{:AppLink('shop/detail',array('shop_id'=>$detail['shop_id']))}>"><i class="icon-goback"></i></a>
+    <div class="title">优惠买单</div>
+</header>
+<?php }?>
+<div class="page-center-box app_page">
+	<div id="scroll" style="padding-bottom:0;">
+    	<div class="youhuiCheck">
+            <form method="post" action="<{:U('shop/breaks',array('shop_id'=>$detail['shop_id']))}>" target="baocms_frm">
+                <div class="youhuiCheck_int mb10">
+                    <table class="youhuiCheck_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>消费金额</th>
+                            <td><input name="amount" id="amount" type="text" placeholder="询问服务员后输入"></td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="youhuiCheck_ts black9">输入不参与优惠金额（酒水、特价菜等）</p>
+            	<div class="youhuiCheck_int mb10">
+                    <table class="youhuiCheck_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>不可优惠金额</th>
+                            <td><input type="text" name="exception" id="exception" placeholder="询问服务员后输入"></td>
+                        </tr>
+                    </table>
+                </div>
+                <input type="button" class="long_btn" value="确认支付">
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('.long_btn').click(function(){
+            var amount  = $('#amount').val();
+            var exception = $('#exception').val();
+            $.post("<{:U('shop/breaks',array('shop_id'=>$detail['shop_id']))}>",{amount:amount,exception:exception}, function (data) {
+                layer.msg(data.msg);
+                if (data.status == 'success') {                    
+                    setTimeout(function () {
+                        window.location.href = data.url;
+                    }, 1000);
+                }
+            }, 'json')
+        })
+    })
+</script>
+</body>
+</html>

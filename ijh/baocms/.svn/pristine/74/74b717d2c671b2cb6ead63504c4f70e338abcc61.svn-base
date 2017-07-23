@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-家政服务</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a id="icon_goback" href="#"></a></i>
+    <div class="title">家政服务</div>
+    <i class="right"></i>
+</header>
+<section>
+	<script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();;
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>家政需要用金块查看用户联系方式滴</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    <div class="sh_search_box">
+        <div class="sh_search_int">
+            <span>输入昵称</span>
+            <input type="text" value="">
+            <input type="button" class="btn" value="搜索">
+        </div>
+    </div>
+    <div class="sh_list_public_box">
+        <ul>
+            <li class="list_box mb10">
+            	<div class="sh_housekeeping_service_list">
+                    <div class="nr">
+                        <p><b class="fl">擦玻璃</b><span class="fr">服务时间：2015-08-12 14:30</span></p>
+                        <p>内容：80平米的室内玻璃需要清洁,擦得要干净</p>
+                        <p>地址：合肥绿地蓝...</p>
+                        <p>限制商家：2/3</p>
+                    </div>
+                    <p class="time"><span class="fl">创建时间：2015-02-02 15:32:38</span><span class="fr">未确认</span></p>
+                    <p class="contact"><span class="fl mr20">姓名：***</span><span class="fl">电话：***********</span></p>
+                    <div class="btn_box"><a class="btn" href="#">花2块金币查看</a></div>
+                </div>
+            </li>
+            <li class="list_box mb10">
+            	<div class="sh_housekeeping_service_list">
+                    <div class="nr">
+                        <p><b class="fl">擦玻璃</b><span class="fr">服务时间：2015-08-12 14:30</span></p>
+                        <p>内容：80平米的室内玻璃需要清洁,擦得要干净</p>
+                        <p>地址：合肥绿地蓝...</p>
+                        <p>限制商家：2/3</p>
+                    </div>
+                    <p class="time"><span class="fl">创建时间：2015-02-02 15:32:38</span><span class="fr">未确认</span></p>
+                    <p class="contact bg1"><span class="fl mr20">姓名：***</span><span class="fl">电话：***********</span></p>
+                    <div class="btn_box"><a class="btn" href="#">已经购买</a></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+</body>
+</html>

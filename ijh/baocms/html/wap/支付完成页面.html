@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>完成支付</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+<style>
+/*新增支付完成页面开始*/
+.payFinish{ font-size:0.14rem;}
+.payFinish .sh_buy_bt{ overflow:hidden; height:auto; background-color:#e4f4f2; font-size:0.14rem; line-height:0.4rem; padding:0px 0.1rem;}
+.payFinish .sh_buy_bt_state{ width:20%; color:#999;}
+.payFinish .sh_buy_bt_order_num{width:60%;}
+.payFinish .sh_waimai_order_nr{ padding:0.05rem 0.1rem;}
+.payFinish .sh_waimai_order_nr li{ font-size:0.14rem; color:#666; line-height:0.24rem; border-bottom:1px dashed #eee; padding:0.05rem 0;}
+.payFinish .sh_waimai_order_nr li:last-child{border-bottom:none 0px;}
+.payFinish .sh_waimai_order_nr li .left{ width:60%; position:relative;}
+.payFinish .sh_waimai_order_nr li .left .payFinish_img{ position:absolute; top:0; left:0;}
+.payFinish .sh_waimai_order_nr li .left .payFinish_wz{ margin-left:0.7rem; height:0.6rem; line-height:0.28rem; overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis;}
+.payFinish .sh_waimai_order_price{border-top:1px solid #dedede; padding:0.05rem;}
+.payFinish .sh_waimai_order_price div{font-size:0.14rem; color:#666; line-height:0.24rem;}
+.payFinish .sh_buy_date{border-bottom:1px solid #dedede; border-top:1px solid #dedede; background-color:#f5f5f5; font-size:0.14rem; color:#666; line-height:0.24rem; text-align:right; padding:0.05rem 0.1rem;}
+.payFinish .ml10{ margin-left:0.1rwem;}
+.payFinish .main_color{color:#2fbdaa !important;}
+/*新增支付完成页面结束*/
+</style>
+</head>
+
+<body>
+<header> <i class="icon-goback"></i>
+    <div class="title"> 完成支付 </div>
+</header>
+
+<div id="index" class="page-center-box">
+    <div id="scroll">
+    	<div class="payFinish">
+            <div class="sh_buy_bt">
+                <div class="fl">订单编号：100315</div>
+                <div class="fr">付款时间：2015-09-02 10:25</div>
+            </div>
+            <div class="sh_waimai_order_nr">
+                <div class="wz">
+                    <ul>
+                        <li>
+                            <div class="fl left">
+                            	<div class="payFinish_img"><img src="img/buy_img.jpg" width="60" height="60"></div>
+                            	<p class="payFinish_wz">【徐家汇】上影国际影城美罗城店（原超极电影世界）</p>
+                            </div>
+                            <div class="fr">1<span class="ml10">x</span><span class="ml10">￥15</span><span class="ml10 main_color">=￥15</span></div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="fl left">
+                            	<div class="payFinish_img"><img src="img/buy_img.jpg" width="60" height="60"></div>
+                            	<p class="payFinish_wz">【徐家汇】上影国际影城美罗城店（原超极电影世界）</p>
+                            </div>
+                            <div class="fr">1<span class="ml10">x</span><span class="ml10">￥15</span><span class="ml10 main_color">=￥15</span></div>
+                            <div class="clear"></div> 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sh_waimai_order_price">
+            	<div class="fl">使用积分</div>
+                <div class="fr"><span class="main_color">100</span></div>
+                <div class="clear"></div>
+            </div>
+            <div class="sh_waimai_order_price">
+            	<div class="fl">付款方式：余额支付</div>
+                <div class="fr">结算价格：<span class="main_color">￥25</span></div>
+                <div class="clear"></div>
+            </div>
+            <div class="sh_waimai_order_price">
+                <div>地址：圣大国际1709</div>
+            </div>
+            <div class="sh_buy_date">下单时间：2015-04-18 08:30:45</div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div>
+        <div class="icon i-1"></div>
+        <p>首页</p>
+    </div>
+    <div>
+        <div class="icon i-2"></div>
+        <p>抢购</p>
+    </div>
+    <div>
+        <div class="icon i-3"></div>
+        <p>关注</p>
+    </div>
+    <div>
+        <div class="icon i-4"></div>
+        <p>我的</p>
+    </div>
+</footer>
+</body>
+</html>

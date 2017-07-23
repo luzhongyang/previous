@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家管理-分类列表</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script>
+$(function(){
+	$(".seller_del").click(function(){
+		$(".mask_seller_delBox").show();
+	});
+	$(".seller_add").click(function(){
+		$(".mask_sellerflBox").show();
+	});
+	$(".mask_clossan").click(function(){
+		$(".mask").hide();
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="sjgl_lead">
+    <ul>
+        <li><em class="sjgl_leadico sjgl_leadico2"></em><a href="#">商家管理</a></li>
+        <li>&gt;<a class="sjgl_leadEnd" href="#">分类列表</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">注意：商家自定义分类列表</div>
+            <div class="right"><a class="radius3 tuan_topbt seller_add" target="main_frm" href="#">添加分类+</a></div>
+        </div>
+    </div>
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td>分类名称</td>
+            <td>排序</td>
+            <td>操作</td>
+        </tr>
+        <tr>
+            <td>娱乐</td>
+            <td>1</td>
+            <td><a class="radius3 tuan_zcan" href="#">编辑</a><a class="radius3 tuan_zcan seller_del" href="#">删除</a></td>
+        </tr> 
+        <tr>
+            <td>娱乐</td>
+            <td>1</td>
+            <td><a class="radius3 tuan_zcan" href="#">编辑</a><a class="radius3 tuan_zcan seller_del" href="#">删除</a></td>
+        </tr> 
+    </table>
+</div>
+<div class="mask mask_seller_delBox">
+    <div class="mask_seller_del">
+        <div class="mask_closs">
+            <div class="left mask_closs_t">提示</div>
+            <div class="right"><span class="mask_clossan">&nbsp;</span></div>
+        </div>
+        <div class="mask_seller_delnr">
+            <div class="mask_seller_delt">确定删除列表？</div>
+            <p>删除后本订单将从订单列表消失，且不能恢复，您将不能再进行申请退款等操作。</p>
+            <a class="radius3 mask_an mask_qd">确定</a><a class="radius3 mask_an">取消</a>
+        </div>
+    </div>
+</div>
+<div class="mask mask_sellerflBox">
+    <div class="radius10 mask_seller_del mask_sellerfl">
+        <div class="mask_closs">
+            <div class="left mask_closs_t">添加分类</div>
+            <div class="right"><span class="radius3 mask_clossan">&nbsp;</span></div>
+        </div>
+        <div class="mask_sellerflnr">
+            <table class="tuanfabu_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="72"><p class="tuanfabu_t">分类名称</p></td>
+                    <td><div class="tuanfabu_nr"><input type="text" class="tuanfabu_int seller_intw" /></div></td>
+                </tr> 
+                <tr>
+                    <td><p class="tuanfabu_t">排序</p></td>
+                    <td><div class="tuanfabu_nr"><input type="text" class="tuanfabu_int seller_intw" /></div></td>
+                </tr>
+            </table>
+            <div class="tuanfabu_an"><a class="radius3 sjgl_an tuan_topbt" href="#">确认添加</a></div>
+        </div>
+    </div>
+    <div class="mask_sellerflBg">&nbsp;</div>
+</div>
+</body>
+</html>

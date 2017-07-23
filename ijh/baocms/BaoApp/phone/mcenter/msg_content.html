@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>消息详情</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+<style type="text/css">
+    #scroll{
+        overflow: auto;
+    }
+    #personal-coupon{
+        overflow: auto;
+    }
+</style>
+
+<script id="rendlist" type="text/templates">
+         <h2>%title%</h2>
+         <p>%intro%</p>
+</script>
+<script>
+   
+   
+    window.readCache=function (key)
+    {
+         //读取缓存
+       var search  = baoapp.helper.getRequest(location.search);
+       window.id = search.id; 
+       var key = KEY.MEMBER_MSG_ID+'_'+window.id;
+         //读取缓存
+        var cached = baoapp.helper.cacheExpireRead(key);
+            cached = JSON.parse(cached);
+        var data     = [];
+        var http_url = baoapp.config.attachs;
+        data = {msg_id:cached['msg_id'],title:cached['title'],intro:cached['intro'],link_url:cached['link_url'],details:cached['details']};
+        renderList(data);
+        
+    }
+    
+    
+    function renderList(datas)
+    {
+       //情况列表容器
+       document.querySelector('#load').innerHTML = '';
+       createNode(datas);        
+    }  
+    function createNode(data)
+    {      
+        with(document){
+            var spanNode = createElement('span'),
+                tmpl     = getElementById('rendlist').innerHTML;
+                for(key in data){
+                   tmpl = tmpl.replace('%'+key+'%',data[key]); 
+                }
+                spanNode.innerHTML = tmpl;
+                querySelector('#load').appendChild(spanNode);
+        }
+    }
+    
+</script>
+
+
+<script>
+    appcan.ready(
+        function(){
+          with(baoapp.helper){
+            window.readCache();
+         }
+    });
+    
+</script>
+
+</head>
+
+<body>  
+    <div id="my-message" class="page-center-box">
+        <div id="scroll">
+            <div class="my-message-details" id="load">
+               
+            </div>
+        </div>
+    </div>
+
+  </body>  
+  </html>

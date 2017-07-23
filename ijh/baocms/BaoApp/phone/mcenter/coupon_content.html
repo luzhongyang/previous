@@ -1,0 +1,451 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>我的优惠券</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+<style type="text/css">
+	#scroll{
+        overflow: auto;
+        height:100%;
+    }
+    #personal-coupon{
+        overflow: auto;
+    }
+    #loading {
+    display: none;
+    height: 0.5rem;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    }
+</style>
+
+<script id="rendlist" type="text/templates">
+       
+       <span id="download%download_id%">
+        <div class="coupon-list"> 
+            <div class="coupon-box">
+                <div class="coupon-box-content">
+                    <div class="fl left">
+                       <div class="bg c-1">
+                           <div class="coupon-dw">券</div>
+                           <img src="../img/personal_coupon_roud_c1.png"> 
+                       </div>
+                       <div class="state /*未使用c-1*/">%is_used%</div>
+                    </div>
+                       <div class="fl center">
+                       <p class="overflow_clear" >%title%</p>
+                       <p>%code%</p>
+                       <p>%usedtime%</p>
+                       </div>
+                       <div class="fl right">
+                           <div class="star"><img src="../img/personal_coupon_star_c1.png"></div>
+                             <p class="c-1">有效期至</p>%expire_date%
+                       </div>
+                            <div class="clear"></div>
+                     </div>
+                <img src="../img/personal_coupon1_bg_c1.png" width="100%" height="100%"> 
+                    </div>
+        </div>
+        <div class="list-box">
+            <div class="activ-list-content coupon-button">
+                    %download%
+               
+                    <a onclick="delCoupon('%download_id%')">
+                        <span class="shop-del">
+                                             删 除
+                            </span>
+                    </a> 
+            </div>
+        </div>
+        
+</script>
+
+<script>
+    //分页数
+    var p = 1;
+    var nomore = false;
+    /**
+     * 删除指定优惠卷
+     * @param download_id,优惠卷ID,为空则
+     * @return
+     */ 
+   function delCoupon(download_id){
+        if(typeof download_id === 'undefined'){
+            baoapp.helper.toast('无法删除该优惠卷!',2000,null,1);
+        }
+        var data = {'download_id' : download_id }; 
+        var url = baoapp.helper.createUrl('mcenter','coupondel',data);
+        
+        appcan.window.confirm('提示','确认删除?',["确定","取消"],function(opId,dataType,data){
+             if(dataType==0){
+                 baoapp.helper.ayscLoad(url,data,'GET','json',function(data){
+                        if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                           baoapp.helper.toast(data.msg,1000,function(){
+                           $("#download"+download_id).remove();
+                           var length = $('.send-out').children().length;
+                           if( length===0 ){
+                                $('.prompt').show();
+                                $('#scroll').hide();
+                           }
+                           },1);
+                        }else{
+                           baoapp.helper.toast(data.msg,1000,null,1);
+                        }
+                    });
+                 }
+        })
+        
+        
+           
+    }
+    
+     
+    /**
+     * 加载分页数据
+     * @param aready,是否使用
+     * @param page,分页数为空则重置为1
+     * @param callback，回调函数，主要为控制LOADING进度条显示
+     * @return
+     */ 
+    function loadpage(aready,page){
+        $('.prompt').hide();
+        $('.send-out').show();
+        with(baoapp.helper){
+        toast('加载中..');
+        if(typeof aready === 'undefined'||aready==''){
+            aready = appcan.locStorage.getVal('aready')||0;
+        }
+        page = page || 1;
+        var data = {'aready':aready,'page':page};
+        var url = createUrl('mcenter','coupon',data);
+        ayscLoad(url,data,'GET','json',function(data){
+            toast(null);
+            if(data==null){ //第一页且返回数据为零
+                   if(page == 1){
+                       $('.prompt').show();
+                       $('#scroll').hide();
+                   }
+                   nomore = true;
+                   return;
+            }
+            if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                $('#scroll').show();
+                if(page > 1){
+                  renderList(data);
+                }else{
+                  p = 1;
+                  nomore = false;
+                  $('.send-out').scrollTop(0);
+                  renderList(data,true);
+                }
+            }else{
+                toast(data.msg,1500,null,1);
+            }
+        });
+        }
+        
+    }
+    
+    
+    function jumpto(shopid){
+        with(baoapp.helper){
+            shopid = shopid || 0;
+            if(shopid==0){
+                toast('无法跳转该商铺');
+            }
+            var data = 'shop_id-'+shopid;
+            linkTo('shop','../shop/details.html',data);
+            
+        }
+    }
+    
+    window.readCache = function(key){
+        key = key || KEY.MCENTER_COUPON;
+     //读取缓存
+        var cached = baoapp.helper.cacheExpireRead(key);
+            cached = JSON.parse(cached);
+        var data     = [];
+        var http_url = baoapp.config.attachs;
+        
+        
+        renderList(cached);
+    }
+    
+    function renderList(cached,reload){
+        reload = reload || false;
+        if(reload){
+            document.querySelector('.send-out').innerHTML = '';
+        }
+        var data = {}
+        if(cached==null){
+             $('.prompt').show();
+             $('#scroll').hide();
+             return;
+        }
+        var list = cached.list;
+        coupon = cached.coupon;
+        var count = 0;
+        for(var index in list){
+            var couponid = list[index]['coupon_id'];
+            list[index]['closed'] = list[index]['closed'] || 0;
+            if(list[index]['usedtime']){
+                list[index]['usedtime'] = '<p>该抢购券已经使用</p>';
+                list[index]['is_used'] ='<div class="state">已使用</div>';
+            }else{
+                list[index]['usedtime'] = '<p>提供密码或商家扫描二维码</p>';
+                list[index]['is_used'] ='<div class="state c-1">未使用</div>';
+            }
+            if(list[index]['closed'] > 0){
+                download = '<a ><span class="shop-pay c-1">不能使用</span></a>'
+            }
+            else{
+                download = '<a onclick="jumpto(' + coupon[list[index].coupon_id].shop_id + ')"><span class="shop-pay ">去使用</span></a>'
+            }
+            data[index] = {coupon_id:couponid,code:list[index]['code'],title:coupon[couponid].title,usedtime:list[index]['usedtime'],is_used:list[index]['is_used'],expire_date:coupon[couponid].expire_date,download:download,download_id:list[index]['download_id']};
+            count++;
+        }
+       
+        
+        
+        for(var i in data)
+        createNode(data[i]);
+        
+    }
+    
+    
+    function createNode(data)
+    {      
+        with(document){
+                tmpl     = getElementById('rendlist').innerHTML;
+               
+                for(key in data){
+                    regExp = new RegExp('%'+key+'%','g');
+                   tmpl = tmpl.replace(regExp,data[key]); 
+                }
+                querySelector('.send-out').innerHTML +=tmpl;
+        }
+    }
+</script>
+<script>
+$(function(){
+        $(".shop-lie li").each(function(e){
+            $(this).click(function(){
+                $(".shop-lie li").removeClass("on");
+                $(this).addClass("on");
+                /*
+                $(".send-out").each(function(s){
+                    if(e==s){
+                        $(".send-out").hide();
+                        $(this).show();
+                    }
+                    else{
+                        $(this).hide();
+                    }
+                });
+                */
+            });
+        });
+    });
+
+</script>
+
+<script>
+    appcan.ready(
+        function(){
+          with(baoapp.helper){
+            if(!islogin()){
+                linkTo('login','../login.html');
+                return;
+            }
+            var url = createUrl('mcenter','coupon');
+            //TODO
+            var backwindow = 'mcenter/coupon.html';
+            var key = KEY.MCENTER_COUPON;
+            var cached = cacheExpireRead(key);
+               if(!cached){
+                        var url = createUrl('mcenter','coupon');
+                         ayscLoad(url,null,'GET','json',function(data){
+                            if(data.status == CONST.BAO_REQUEST_SUCCESS){
+                                 //抓取数据写入缓存
+                                cacheExpireWrite(key,JSON.stringify(data));
+                                window.readCache(key);
+                            }
+                        });
+               }else{
+                   window.readCache(key);
+               }
+            
+            ayscRefresh(
+             '#scroll',function(){
+                if(nomore){
+                    return;
+                }
+                p++;
+                loadpage('',p);
+             });
+             
+             
+             
+            /*
+            var data = loadData();
+            try{
+                 if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                    var list = data.list||0;
+                    var coupon = data.coupon;
+                    var htm = '';
+                    if(list){
+                        for (var i in list) {
+                        htm += '<div id="download' + list[i].download_id + '">';
+                        htm += '<div class="coupon-list"> <div class="coupon-box"><div class="coupon-box-content"><div class="fl left">';
+                        htm += '<div class="bg c-1"><div class="coupon-dw">券</div><img src="../img/personal_coupon_roud_c1.png"> </div>';
+                        if(list[i].is_used>0){
+                            htm += '<div class="state">已使用</div></div>';
+                        }else{
+                            htm += '<div class="state c-1">未使用</div></div>';
+                        }
+                        
+                        htm += '<div class="fl center">';
+                        htm += '<p class="overflow_clear">' + coupon[list[i].coupon_id].title + '</p>';
+                        htm += '<p>密码：' + list[i].code + '</p>';
+                        
+                        if(list[i].usedtime){
+                            htm += '<p>该抢购券已经使用</p>';
+                        }else{
+                            htm += '<p>提供密码或商家扫描二维码</p>';
+                        }
+                        
+                        htm += '</div><div class="fl right"><div class="star"><img src="../img/personal_coupon_star_c1.png"></div>';
+                        htm += '<p class="c-1">有效期至</p>'+coupon[list[i].coupon_id].expire_date +'</div>';
+                        htm += '<div class="clear"></div>';
+                        htm += '</div>';
+                        htm += '<img src="../img/personal_coupon1_bg_c1.png" width="100%" height="100%"> </div></div><div class="list-box">';
+                        htm += '<div class="activ-list-content coupon-button">';
+
+                        var data = {'shop_id':coupon[list[i].coupon_id].shop_id};
+                        if(list[i].closed > 0){
+                            htm += "<a \"><span class=\"shop-pay c-1\">不能使用</span></a>";
+                        }else{
+                            htm += "<a onclick=\"baoapp.helper.linkTo('shop','../shop.html','"+data+"')\"><span class=\"shop-pay\">去使用</span></a>";
+                        }
+                        htm += '<a onclick=\"delCoupon(\''+ list[i].download_id +'\')\"><span class="shop-del">删 除</span></a> </div> </div></div>';
+                        }
+                        $('.send-out').html(htm);
+                    }else{
+                        $('.prompt').show();
+                    }
+                    
+                    
+                    ayscRefresh(
+                     '#scroll',function(){
+                        p++;
+                        loadpage('',p);
+                     }
+                 )     
+                }else{
+                    $('.prompt').show();
+                   // toast(data.msg);
+                    
+                }
+                
+                
+           }catch(e){
+               resourceError();
+           }*/
+        }
+    });
+</script>
+
+</head>
+
+<body>
+<!-- 筛选TAB -->
+<div class="shop-lie">
+    <ul>
+        <li onclick="loadpage('0')" class="on"><span>全部</span></li>
+        <li onclick="loadpage('1')"><span>未使用</span></li>
+        <li onclick="loadpage('2')"><span>已使用</span></li>
+    </ul>
+</div>
+
+
+<div id="personal-coupon" class="page-center-box">
+    <div class="prompt" style="display:none">
+        <div class="img"><img src="../img/coupon.png"></div>
+        <p>亲，您还没有信息呢，快去逛逛最新优惠吧！</p>
+        <a class="btn" onclick="baoapp.helper.linkTo('coupon','../coupon/main.html',5)" href="#">去逛逛~</a>
+    </div>
+    <div id="loading" style="display:none">
+        <div class="bao_loading"></div>
+    </div>
+    
+    <div id="scroll"> 
+        <!-- 列表 -->
+        <div class="send-out">
+            
+            <!--
+            <div class="coupon-list">
+                <div class="coupon-box">
+                    <div class="coupon-box-content">
+                        <div class="fl left">
+                            <div class="bg c-1">
+                                <div class="coupon-dw">券</div>
+                                <img src="../img/personal_coupon_roud_c1.png"> </div>
+                            <div class="state c-1">未使用</div>
+                        </div>
+                        <div class="fl center">
+                            <p class="overflow_clear">仅售9999元，价值16</p>
+                            <p>密码：37270947</p>
+                            <p>提供密码或商家扫描二维码</p>
+                        </div>
+                        <div class="fl right">
+                            <div class="star"><img src="../img/personal_coupon_star_c1.png"></div>
+                            <p class="c-1">有效期至</p>
+                            2015-05-24 </div>
+                        <div class="clear"></div>
+                    </div>
+                    <img src="../img/personal_coupon1_bg_c1.png" width="100%" height="100%"> </div>
+            </div>
+            <div class="list-box">
+                <div class="activ-list-content coupon-button"> <a href=""><span class="shop-pay">去使用</span></a> <a href=""><span class="shop-del">删 除</span></a> </div>
+            </div>
+            <div class="coupon-list">
+                <div class="coupon-box">
+                    <div class="used"><img src="../img/personal_coupon.png"></div>
+                    <div class="coupon-box-content">
+                        <div class="fl left">
+                            <div class="bg c-3">
+                                <div class="coupon-dw">券</div>
+                                <img src="../img/personal_coupon_roud_c3.png"> </div>
+                            <div class="state c-3">已使用</div>
+                        </div>
+                        <div class="fl center">
+                            <p class="overflow_clear">仅售9999元，价值</p>
+                            <p>密码：37270947</p>
+                            <p>该抢购券已经使用</p>
+                        </div>
+                        <div class="fl right">
+                            <div class="star"><img src="../img/personal_coupon_star_c3.png"></div>
+                            <p class="c-3">有效期至</p>
+                            2015-05-24 </div>
+                        <div class="clear"></div>
+                    </div>
+                    <img src="../img/personal_coupon1_bg_c2.png" width="100%" height="100%"> </div>
+            </div>
+            <div class="list-box">
+                <div class="activ-list-content coupon-button"> <a href=""><span class="shop-pay c-1">不能使用</span></a> <a href=""><span class="shop-del">删 除</span></a> </div>
+            </div>
+            -->
+            
+        </div>
+    </div>
+</div>
+</div>

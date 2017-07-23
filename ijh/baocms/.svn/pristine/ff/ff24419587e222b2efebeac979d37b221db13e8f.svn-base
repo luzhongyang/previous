@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-营销-抽奖</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> <i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">抽奖</div>
+    <i class="right"><a class="sh_waimai_cate_add" href="#">+发布抽奖</a></i> </header>
+<section>
+	<script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();;
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>抽奖必须启用后才能使用！</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    
+	<div class="sh_search_box">
+        <div class="sh_search_int">
+            <span>抽奖标题</span>
+            <input type="text" value="">
+            <input type="button" class="btn" value="搜索">
+        </div>
+    </div>
+    
+    <div class="sh_list_public_box">
+        <ul>
+            <li class="list_box mb10">
+                <div>
+                    <div class="sh_micro_nr">
+                        <div class="img"><img src="img/weixin_img.jpg" width="100" height="100"></div>
+                        <div class="wz">
+                            <p>http://www.baocms.cn/mobile/award/index/award_id/4.html</p>
+                        </div>
+                    </div>
+                    <div class="sh_micro_wz">
+                        <p><span class="mr20 black3">抽奖测试</span><span class="mr20">已启用</span></p>
+                        <p>结束时间：2015-08-07</p>
+                    </div>
+                    <div class="btn_box"><a class="btn" href="#">剩余名单</a><a class="btn" href="#">中奖奖品</a></div>
+                </div>
+            </li>
+            <li class="list_box mb10">
+                <div>
+                    <div class="sh_micro_nr">
+                        <div class="img"><img src="img/weixin_img.jpg" width="100" height="100"></div>
+                        <div class="wz">
+                            <p>http://www.baocms.cn/mobile/award/index/award_id/4.html</p>
+                        </div>
+                    </div>
+                    <div class="sh_micro_wz">
+                        <p><span class="mr20 black3">抽奖测试</span><span class="mr20">已启用</span></p>
+                        <p>结束时间：2015-08-07</p>
+                    </div>
+                    <div class="btn_box"><a class="btn" href="#">剩余名单</a><a class="btn" href="#">中奖奖品</a></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+</body>
+</html>

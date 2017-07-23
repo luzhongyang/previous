@@ -1,0 +1,3319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>抢购首页</title>
+<link href="../css/style1.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery.flexslider-min.js"></script>
+<script src="../js/js.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {                                      //回到顶部js
+            var url = "/index/index.html";
+            $(".indexpop ul li").click(function () {
+                var _targetTop = $('.' + $(this).find('code').attr('rel')).offset().top;//获取位置
+                jQuery("html,body").animate({scrollTop: _targetTop}, 300);//跳转
+            });
+        });
+
+$(function(){
+    $(".address_kind li").each(function(e){
+        $(this).click(function(){
+            $(".address_kind li").removeClass("on");
+            $(this).addClass("on");
+            $(".address_letwo").each(function(i){
+                if(e==i){
+                    $(".address_letwo").hide();
+                    $(this).show();
+                }
+            });
+
+        });
+    });
+});
+
+$(function(){
+    $(".address_ultwo li").each(function(e){
+        $(this).click(function(){
+            $(".address_ultwo li").removeClass("on");                           
+            $(this).addClass("on");
+            $(".add").each(function(i){
+                if(e==i){
+                    $(".add").hide();
+                    $(this).show();
+                }
+            });
+
+        });
+    });
+});
+
+$(function(){
+    $(".address_ul2s li").each(function(e){
+        $(this).click(function(){
+            $(".address_ul2s li").removeClass("on");
+            $(this).addClass("on");
+            $(".add_2").each(function(i){
+                if(e==i){
+                    $(".add_2").hide();
+                    $(this).show();
+                }                                                                       
+            });
+
+        });
+    });
+});
+
+$(function(){
+    $(".address_ulthree li").each(function(e){
+        $(this).click(function(){
+            $(".address_ulthree li").removeClass("on");
+            $(this).addClass("on");
+            $(".add_4").each(function(i){
+                if(e==i){
+                    $(".add_4").hide();
+                    $(this).show();
+                }                                               
+            });
+        });
+    });
+});
+
+$(function(){
+    $(".address_ul2cs li").each(function(e){
+        $(this).click(function(){
+            $(".address_ul2cs li").removeClass("on");
+            $(this).addClass("on");
+            $(".add_3").each(function(i){
+                if(e==i){
+                    $(".add_3").hide();
+                    $(this).show();
+                }
+            });
+        });                                                                                         
+    });
+});
+
+$(function(){
+    $(".address_ulfor li").each(function(e){
+        $(this).click(function(){
+            $(".address_ulfor li").removeClass("on");
+            $(this).addClass("on");
+            $(".add_5").each(function(i){
+                if(e==i){
+                    $(".add_5").hide();
+                    $(this).show();
+                }
+            });
+        });
+    });
+});
+
+$(function(){
+    $(".address_ulfive li").each(function(e){
+        $(this).click(function(){
+            $(".address_ulfive li").removeClass("on");
+            $(this).addClass("on");
+            $(".add_6").each(function(i){
+                if(e==i){
+                    $(".add_6").hide();
+                    $(this).show();
+                }
+            });
+        });
+    });
+});
+
+
+$(function(){
+    $(".address_ul li").each(function(){
+        $(this).hover(function(){
+		$(this).parent().find("img").hide();
+        $(this).find("img").show();
+                     
+        });
+    });
+});
+</script>
+<script>
+
+
+</script>
+</head>
+
+<body>
+<div class="topOne">
+    <div class="nr">
+        <div class="left">您好，欢迎访问BAOCMS<a href="#">登陆</a>|<a href="#">注册</a>
+            <div class="topSm"> <span class="topSmt"><em>&nbsp;</em>手机CMS</span>
+                <div class="topSmnr"><img src="../sjimages/login_wx_03.jpg" width="90" height="90" />
+                    <p>扫描下载客户端</p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="liOne"><a class="liOneA" href="#">个人中心<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">抢购管理</a></li>
+                            <li><a href="#">活动管理</a></li>
+                            <li><a href="#">服务管理</a></li>
+                            <li><a href="#">购物管理</a></li>
+                            <li><a href="#">外卖管理</a></li>
+                            <li><a href="#">订座信息</a></li>
+                            <li><a href="#">同城管理</a></li>
+                            <li><a href="#">优惠券管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">我是商家<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">商家登陆</a></li>
+                            <li><a href="#">微信营销</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">快捷导航<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">餐饮频道</a></li>
+                            <li><a href="#">生活资讯</a></li>
+                            <li><a href="#">活动</a></li>
+                            <li><a href="#">积分商城</a></li>
+                            <li><a href="#">购物</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="topTwo">
+    <div class="left">
+        <h1><a href="#"><img src="../sjimages/logo_03.png" width="214" height="53" /></a></h1>
+        <div class="changeCity"> 合肥 <a href="#" class="change">[切换城市]</a> </div>
+    </div>
+    <div class="left center">
+        <div class="searchBox">
+            <div class="selectBox"> <span class="select"  id="selectBoxInput">商家</span>
+                <div  class="selectList">
+                    <ul>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" class="text" value="输入您要搜索的内容" onclick="if(value==defaultValue){value='';this.style.color='#000'}"  onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+            <input type="button" class="submit" value="搜索" />
+        </div>
+        <div class="hotSearch">热门搜索：<a href="#">美食</a><a href="#">酒店</a><a href="#">酒店</a><a href="#">电影</a><a href="#">家政</a><a href="#">洗车</a></div>
+    </div>
+    <div class="right topTwo_b">
+        <div class="protect">
+            <ul>
+                <li><em>&nbsp;</em><a href="#">随时退</a></li>
+                <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+                <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="nav">
+    <div class="navList">
+        <div class="navListBg">&nbsp;</div>
+        <ul>
+            <li class="navListAll"><span class="navListAllt">全部抢购分类</span> 
+                <!--<div class="shadowy navAll">此处显示  class "navAll" 的内容</div>--> 
+            </li>
+            <li class="navLi"><a class="navA  on" href="#">首页</a></li>
+            <li class="navLi"><a class="navA" href="#">身边抢购</a></li>
+            <li class="navLi"><a class="navA" href="#">活动</a></li>
+            <li class="navLi"><a class="navA" href="#">生活服务</a></li>
+            <li class="navLi"><a class="navA" href="#">同城优购</a></li>
+            <li class="navLi"><a class="navA" href="#">外卖</a></li>
+            <li class="navLi"><a class="navA" href="#">订座</a></li>
+            <li class="navLi"><a class="navA" href="#">同城信息</a></li>
+            <li class="navLi"><a class="navA" href="#">优惠券</a></li>
+        </ul>
+    </div>
+</div>
+<div class="top_img"> 
+    <a href=""><img src="../img/tp1.png"></a>
+    <div class="menu_our">
+        <div class="menu_go">
+            <div class="menu_fllist2 menu_fill">
+                <div class="item2 bo">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">美食</a></div>
+                        <div class="right"><a href="">火锅</a><a href="">自助餐</a><a href="">川菜</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">美食</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">娱乐</a></div>
+                        <div class="right"><a href="">KTV</a><a href="">足疗按</a><a href="">洗浴</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">娱乐</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">酒店</a></div>
+                        <div class="right"><a href="">七天</a><a href="">格力豪泰</a><a href="">锦江</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">酒店</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">电影</a></div>
+                        <div class="right"><a href="">电子通票</a><a href="">选座</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">电影</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">购物</a></div>
+                        <div class="right"><a href="">超市</a><a href="">商场卡</a><a href="">水果</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">购物</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">丽人</a></div>
+                        <div class="right"><a href="">美发</a><a href="">美甲</a><a href="">驾校</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">丽人</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">结婚</a></div>
+                        <div class="right"><a href="">婚庆公司</a><a href="">新娘跟妆</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">结婚</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">生活服务</a></div>
+                        <div class="right"><a href="">汽车服务</a><a href="">装修服务</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">生活服务</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">旅游</a></div>
+                        <div class="right"><a href="">国内游</a><a href="">出境游</a><a href="">周边游</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">旅游</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <!-- <div class="address">
+        <div class="left"> <img src="../images/tp_27.png"> &nbsp您要配送的小区是：<span class="address_sp">新城市广场</span><span class="address_sp2">更改配送地址</span> </div>
+        <div class="right">历史地址：财富中心 &nbsp 新城市广场</div>
+    </div> -->
+    <div class="address_2">
+        <div class="left"> 请输入您需要配送的小区/写字楼：
+            <input type="text" value="请输入您所在的楼盘或者街道名称">
+        </div>
+        <div class="left">
+            <button>确 定</button>
+            <span class="address_sp3">取 消</span> </div>
+    </div>
+    <div class="address_3"> <span class="left address_sp4">所有店铺</span>
+        <div class="right">
+            <ul class="address_kind">
+                <li class="on">烤鸭店</li>
+                <li>蛋糕店</li>
+                <li>鲜花店</li>
+                <li>水果店</li>
+                <li>便利店</li>
+                <li>坚果店</li>
+                <li>奶茶店</li>
+                <li>茶叶店</li>
+            </ul>
+            <a href="" class="address_sp5 right">更多>></a> </div>
+    </div>
+    <div class="address_4">
+        <div class="address_left">
+            <div class="address_leone">
+                <div class="address_div"><img src="../images/tp_28.png"> <span class="address_leonesp">热门店铺</span></div>
+                <ul class="address_ul">
+                    <li> <img src="../img/tp2.png">
+                        <div class="left"> <span class="address_num">1</span> <a href="">梦想家装饰</a> </div>
+                        <span class="address_tig right">></span> </li>
+                    <li> <img src="../img/tp2.png" style="display:none;">
+                        <div class="left"> <span class="address_num">2</span> <a href="">名冠装饰</a> </div>
+                        <span class="address_tig right">></span> </li>
+                    <li> <img src="../img/tp2.png" style="display:none;">
+                        <div class="left"> <span class="address_num">3</span> <a href="">聚千装饰</a> </div>
+                        <span class="address_tig right">></span> </li>
+                    <li> <img src="../img/tp2.png" style="display:none;">
+                        <div class="left"> <span class="address_num">4 </span> <a href="">一峰装饰</a> </div>
+                        <span class="address_tig right">></span> </li>
+                    <li> <img src="../img/tp2.png" style="display:none;">
+                        <div class="left"> <span class="address_num">5</span> <a href="">富邦装饰</a> </div>
+                        <span class="address_tig right">></span> </li>
+                    <li> <img src="../img/tp2.png" style="display:none;">
+                        <div class="left"> <span class="address_num">6</span> <a href="">徽铭装饰</a> </div>
+                        <span class="address_tig right">></span> </li>
+                    <li> <img src="../img/tp2.png" style="display:none;">
+                        <div class="left"> <span class="address_num">7</span> <a href="">龙久装饰</a> </div>
+                        <span class="address_tig right">></span> </li>
+                    <li> <img src="../img/tp2.png" style="display:none;">
+                        <div class="left"> <span class="address_num">8</span> <a href="">九星装饰 </a> </div>
+                        <span class="address_tig right">></span> </li>
+                    <li> <img src="../img/tp2.png" style="display:none;">
+                        <div class="left"> <span class="address_num">9</span> <a href="">创实家装饰</a> </div>
+                        <span class="address_tig right">></span> </li>
+                    <li> <img src="../img/tp2.png" style="display:none;">
+                        <div class="left"> <span class="address_num">10</span> <a href="">恒雅建筑装饰</a> </div>
+                        <span class="address_tig right">></span> </li>
+                </ul>
+            </div>
+            <div class="address_letwo">
+                <div class="address_div2 left"> <img src="../img/tp3.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp4.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp5.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp6.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp7.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp8.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+            </div>
+            <div class="address_letwo" style="display:none;">
+                <div class="address_div2 left"> <img src="../img/tp3.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京蛋糕店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp4.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp5.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp6.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp7.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp8.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+            </div>
+            <div class="address_letwo" style="display:none;">
+                <div class="address_div2 left"> <img src="../img/tp3.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京鲜花店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp4.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp5.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp6.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp7.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp8.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+            </div>
+            <div class="address_letwo" style="display:none;">
+                <div class="address_div2 left"> <img src="../img/tp3.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京水果店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp4.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp5.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp6.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp7.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp8.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+            </div>
+            <div class="address_letwo" style="display:none;">
+                <div class="address_div2 left"> <img src="../img/tp3.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京便利店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp4.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp5.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp6.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp7.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp8.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+            </div>
+            <div class="address_letwo" style="display:none;">
+                <div class="address_div2 left"> <img src="../img/tp3.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京坚果店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp4.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp5.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp6.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp7.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp8.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+            </div>
+            <div class="address_letwo" style="display:none;">
+                <div class="address_div2 left"> <img src="../img/tp3.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京奶茶店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp4.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp5.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp6.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp7.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp8.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+            </div>
+            <div class="address_letwo" style="display:none;">
+                <div class="address_div2 left"> <img src="../img/tp3.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京茶叶店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp4.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp5.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp6.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp7.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+                <div class="address_div2 left"> <img src="../img/tp8.png">
+                    <p class="estimate"><img src="../images/tp_31.png" class="left"><span class="left">&nbsp北京烤鸭店</span></p>
+                    <br/>
+                    <p class="left"><img src="../images/tp_32.png" class="left"><span class="left">&nbsp25个赞</span></p>
+                    <span class="right">3029人评价</span> </div>
+            </div>
+        </div>
+        <div class="address_right">
+            <div class="address_div"><img src="../images/tp_28.png"> <span class="address_leonesp">热门店铺</span></div>
+            <ul class="address_ul">
+                <li> <img src="../img/tp2.png">
+                    <div class="left"> <span class="address_num">1</span> <a href="">梦想家装饰</a> </div>
+                    <span class="address_tig right">></span> </li>
+                <li> <img src="../img/tp2.png" style="display:none;">
+                    <div class="left"> <span class="address_num">2</span> <a href="">名冠装饰</a> </div>
+                    <span class="address_tig right">></span> </li>
+                <li> <img src="../img/tp2.png" style="display:none;">
+                    <div class="left"> <span class="address_num">3</span> <a href="">聚千装饰</a> </div>
+                    <span class="address_tig right">></span> </li>
+                <li> <img src="../img/tp2.png" style="display:none;">
+                    <div class="left"> <span class="address_num">4 </span> <a href="">一峰装饰</a> </div>
+                    <span class="address_tig right">></span> </li>
+                <li> <img src="../img/tp2.png" style="display:none;">
+                    <div class="left"> <span class="address_num">5</span> <a href="">富邦装饰</a> </div>
+                    <span class="address_tig right">></span> </li>
+                <li> <img src="../img/tp2.png" style="display:none;">
+                    <div class="left"> <span class="address_num">6</span> <a href="">徽铭装饰</a> </div>
+                    <span class="address_tig right">></span> </li>
+                <li> <img src="../img/tp2.png" style="display:none;">
+                    <div class="left"> <span class="address_num">7</span> <a href="">龙久装饰</a> </div>
+                    <span class="address_tig right">></span> </li>
+                <li> <img src="../img/tp2.png" style="display:none;">
+                    <div class="left"> <span class="address_num">8</span> <a href="">九星装饰 </a> </div>
+                    <span class="address_tig right">></span> </li>
+                <li> <img src="../img/tp2.png" style="display:none;">
+                    <div class="left"> <span class="address_num">9</span> <a href="">创实家装饰</a> </div>
+                    <span class="address_tig right">></span> </li>
+                <li> <img src="../img/tp2.png" style="display:none;">
+                    <div class="left"> <span class="address_num">10</span> <a href="">恒雅建筑装饰</a> </div>
+                    <span class="address_tig right">></span> </li>
+            </ul>
+        </div>
+    </div>
+    <!-- *****************************************优惠专区******************************* -->
+    <div class="address_5"> <span class="left spanOne">优惠专区</span> <a href="" class="right">更多优惠>></a> </div>
+    <div class="address_6">
+        <div class="address_left2">
+            <div class="address_zuo"> <img src="../img/tp9.png"> </div>
+            <div class="address_you">
+                <div class="left onSale"> <img src="../img/tp12.png">
+                    <div class="onSale_1">
+                        <div class="left">
+                            <p class="onSale_p">￥158.00</p>
+                            <del>￥158.00</del> </div>
+                        <div class="right"> 
+                            <a href=""><img src="../images/tp_33.png"></a>
+                            <p class="onSale_p2">>500m</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left onSale"> <img src="../img/tp12.png">
+                    <div class="onSale_1">
+                        <div class="left">
+                            <p class="onSale_p">￥158.00</p>
+                            <del>￥158.00</del> </div>
+                        <div class="right"> 
+                            <a href=""><img src="../images/tp_33.png"></a>
+                            <p class="onSale_p2">>500m</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left onSale"> <img src="../img/tp12.png">
+                    <div class="onSale_1">
+                        <div class="left">
+                            <p class="onSale_p">￥158.00</p>
+                            <del>￥158.00</del> </div>
+                        <div class="right"> 
+                            <a href=""><img src="../images/tp_33.png"></a>
+                            <p class="onSale_p2">>500m</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left onSale"> <img src="../img/tp12.png">
+                    <div class="onSale_1">
+                        <div class="left">
+                            <p class="onSale_p">￥158.00</p>
+                            <del>￥158.00</del> </div>
+                        <div class="right"> 
+                            <a href=""><img src="../images/tp_33.png"></a>
+                            <p class="onSale_p2">>500m</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left onSale"> <img src="../img/tp12.png">
+                    <div class="onSale_1">
+                        <div class="left">
+                            <p class="onSale_p">￥158.00</p>
+                            <del>￥158.00</del> </div>
+                        <div class="right"> 
+                            <a href=""><img src="../images/tp_33.png"></a>
+                            <p class="onSale_p2">>500m</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left onSale"> <img src="../img/tp12.png">
+                    <div class="onSale_1">
+                        <div class="left">
+                            <p class="onSale_p">￥158.00</p>
+                            <del>￥158.00</del> </div>
+                        <div class="right"> 
+                            <a href=""><img src="../images/tp_33.png"></a>
+                            <p class="onSale_p2">>500m</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left onSale"> <img src="../img/tp12.png">
+                    <div class="onSale_1">
+                        <div class="left">
+                            <p class="onSale_p">￥158.00</p>
+                            <del>￥158.00</del> </div>
+                        <div class="right"> 
+                            <a href=""><img src="../images/tp_33.png"></a>
+                            <p class="onSale_p2">>500m</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="left onSale"> <img src="../img/tp12.png">
+                    <div class="onSale_1">
+                        <div class="left">
+                            <p class="onSale_p">￥158.00</p>
+                            <del>￥158.00</del> </div>
+                        <div class="right"> 
+                            <a href=""><img src="../images/tp_33.png"></a>
+                            <p class="onSale_p2">>500m</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right2"> <img src="../img/tp10.png"> <img src="../img/tp11.png"> </div>
+    </div>
+    
+    <!--  *****************************************1F休闲零食*********************** -->
+    <div class="address_7">
+        <div class="left"> <span class="left sock">1F休闲零食</span>
+            <ul class="address_ul2 left address_ultwo">
+                <li class="on">小吃食品</li>
+                <li>饮料纯水</li>
+                <li>美酒佳酿</li>
+            </ul>
+        </div>
+        <ul class="address_ul3 right">
+            <li><a href="">酒类</a></li>
+            <li><a href="">牛奶乳品</a></li>
+            <li><a href="">坚果炒货</a></li>
+            <li><a href="">糖果</a></li>
+            <li><a href="">巧克力</a></li>
+        </ul>
+    </div>
+    <div class="address_8">
+        <div class="address_left3">
+            <div>
+                <ul>
+                    <li><a href="">雪糕冰棒</a></li>
+                    <li><a href="">膨化食品</a></li>
+                    <li><a href="">薯片</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">仙贝米饼</a></li>
+                    <li><a href="">虾条锅巴</a></li>
+                    <li><a href="">爆米花</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">其他膨化</a></li>
+                    <li><a href="">果脯蜜饯</a></li>
+                    <li><a href="">枣制品</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">水果干话梅</a></li>
+                    <li><a href="">酸梅其他果脯</a></li>
+                </ul>
+                <img src="../img/tp13.png"> </div>
+        </div>
+        <div class="address_right3 add">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥156.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥157.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- *********************************************2F营养主食************************* -->
+    <div class="address_7 address_7s">
+        <div class="left"> <span class="left sock sock1">2F营养主食</span>
+            <ul class="address_ul2 left address_ul2s">
+                <li class="on">米面食品</li>
+                <li>蛋品干货</li>
+                <li>方便速食</li>
+            </ul>
+        </div>
+        <ul class="address_ul3 right">
+            <li><a href="">酒类</a></li>
+            <li><a href="">牛奶乳品</a></li>
+            <li><a href="">坚果炒货</a></li>
+            <li><a href="">糖果</a></li>
+            <li><a href="">巧克力</a></li>
+        </ul>
+    </div>
+    <div class="address_8">
+        <div class="address_left3 address_left3s">
+            <div>
+                <ul>
+                    <li><a href="">雪糕冰棒</a></li>
+                    <li><a href="">膨化食品</a></li>
+                    <li><a href="">薯片</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">仙贝米饼</a></li>
+                    <li><a href="">虾条锅巴</a></li>
+                    <li><a href="">爆米花</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">其他膨化</a></li>
+                    <li><a href="">果脯蜜饯</a></li>
+                    <li><a href="">枣制品</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">水果干话梅</a></li>
+                    <li><a href="">酸梅其他果脯</a></li>
+                </ul>
+                <img src="../img/tp14.png"> </div>
+        </div>
+        <div class="address_right3 add_2">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_2" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥258.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_2" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥358.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  *******************************************3F厨房用品********************************* -->
+    <div class="address_7 address_7c">
+        <div class="left"> <span class="left sock sock2">3F厨房用品</span>
+            <ul class="address_ul2 left address_ul2cs">
+                <li class="on">米面食品</li>
+                <li>蛋品干货</li>
+                <li>方便速食</li>
+            </ul>
+        </div>
+        <ul class="address_ul3 right">
+            <li><a href="">酒类</a></li>
+            <li><a href="">牛奶乳品</a></li>
+            <li><a href="">坚果炒货</a></li>
+            <li><a href="">糖果</a></li>
+            <li><a href="">巧克力</a></li>
+        </ul>
+    </div>
+    <div class="address_8">
+        <div class="address_left3 address_left3c">
+            <div>
+                <ul>
+                    <li><a href="">雪糕冰棒</a></li>
+                    <li><a href="">膨化食品</a></li>
+                    <li><a href="">薯片</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">仙贝米饼</a></li>
+                    <li><a href="">虾条锅巴</a></li>
+                    <li><a href="">爆米花</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">其他膨化</a></li>
+                    <li><a href="">果脯蜜饯</a></li>
+                    <li><a href="">枣制品</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">水果干话梅</a></li>
+                    <li><a href="">酸梅其他果脯</a></li>
+                </ul>
+                <img src="../img/tp15.png"> </div>
+        </div>
+        <div class="address_right3 add_3">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥1158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_3" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥2158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_3" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥3158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> <img src="../images/tp_33.png">
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ********************************************4F香烟名酒*************************** -->
+    <div class="address_7 address_7cs">
+        <div class="left"> <span class="left sock sock3">4F香烟名酒</span>
+            <ul class="address_ul2 left address_ulthree">
+                <li class="on">米面食品</li>
+                <li>蛋品干货</li>
+                <li>方便速食</li>
+            </ul>
+        </div>
+        <ul class="address_ul3 right">
+            <li><a href="">酒类</a></li>
+            <li><a href="">牛奶乳品</a></li>
+            <li><a href="">坚果炒货</a></li>
+            <li><a href="">糖果</a></li>
+            <li><a href="">巧克力</a></li>
+        </ul>
+    </div>
+    <div class="address_8">
+        <div class="address_left3 address_left3cs">
+            <div>
+                <ul>
+                    <li><a href="">雪糕冰棒</a></li>
+                    <li><a href="">膨化食品</a></li>
+                    <li><a href="">薯片</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">仙贝米饼</a></li>
+                    <li><a href="">虾条锅巴</a></li>
+                    <li><a href="">爆米花</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">其他膨化</a></li>
+                    <li><a href="">果脯蜜饯</a></li>
+                    <li><a href="">枣制品</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">水果干话梅</a></li>
+                    <li><a href="">酸梅其他果脯</a></li>
+                </ul>
+                <img src="../img/tp16.png"> </div>
+        </div>
+        <div class="address_right3 add_4">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_4" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥258.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> <img src="../images/tp_33.png">
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_4" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥358.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- **********************************************************5F个人护理************************************ -->
+    <div class="address_7 address_7ms">
+        <div class="left"> <span class="left sock sock4">5F个人护理</span>
+            <ul class="address_ul2 left address_ulfor">
+                <li class="on">米面食品</li>
+                <li>蛋品干货</li>
+                <li>方便速食</li>
+            </ul>
+        </div>
+        <ul class="address_ul3 right">
+            <li><a href="">酒类</a></li>
+            <li><a href="">牛奶乳品</a></li>
+            <li><a href="">坚果炒货</a></li>
+            <li><a href="">糖果</a></li>
+            <li><a href="">巧克力</a></li>
+        </ul>
+    </div>
+    <div class="address_8">
+        <div class="address_left3 address_left3ms">
+            <div>
+                <ul>
+                    <li><a href="">雪糕冰棒</a></li>
+                    <li><a href="">膨化食品</a></li>
+                    <li><a href="">薯片</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">仙贝米饼</a></li>
+                    <li><a href="">虾条锅巴</a></li>
+                    <li><a href="">爆米花</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">其他膨化</a></li>
+                    <li><a href="">果脯蜜饯</a></li>
+                    <li><a href="">枣制品</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">水果干话梅</a></li>
+                    <li><a href="">酸梅其他果脯</a></li>
+                </ul>
+                <img src="../img/tp17.png"> </div>
+        </div>
+        <div class="address_right3 add_5">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_5" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥258.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_5" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥358.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> 
+                    </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- *****************************************************6F办公用品******************************** -->
+    <div class="address_7 address_7xs">
+        <div class="left"> <span class="left sock sock5">6F办公用品</span>
+            <ul class="address_ul2 left address_ulfive">
+                <li class="on">米面食品</li>
+                <li>蛋品干货</li>
+                <li>方便速食</li>
+            </ul>
+        </div>
+        <ul class="address_ul3 right">
+            <li><a href="">酒类</a></li>
+            <li><a href="">牛奶乳品</a></li>
+            <li><a href="">坚果炒货</a></li>
+            <li><a href="">糖果</a></li>
+            <li><a href="">巧克力</a></li>
+        </ul>
+    </div>
+    <div class="address_8">
+        <div class="address_left3 address_left3xs">
+            <div>
+                <ul>
+                    <li><a href="">雪糕冰棒</a></li>
+                    <li><a href="">膨化食品</a></li>
+                    <li><a href="">薯片</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">仙贝米饼</a></li>
+                    <li><a href="">虾条锅巴</a></li>
+                    <li><a href="">爆米花</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">其他膨化</a></li>
+                    <li><a href="">果脯蜜饯</a></li>
+                    <li><a href="">枣制品</a></li>
+                </ul>
+                <br/>
+                <ul>
+                    <li><a href="">水果干话梅</a></li>
+                    <li><a href="">酸梅其他果脯</a></li>
+                </ul>
+                <img src="../img/tp18.png"> </div>
+        </div>
+        <div class="address_right3 add_6">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_6" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥258.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="address_right3 add_6" style="display:none;">
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥358.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+            <div class="left onSale onSale_2"> <img src="../img/tp12.png">
+                <div class="onSale_1">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                        <p class="onSale_p2">>500m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer footers">
+    <div class="footNav">
+        <div class="left topTwo_b">
+            <div class="tel"><em>&nbsp;</em>0551-63641901</div>
+            <div class="protect">
+                <ul>
+                    <li><em>&nbsp;</em><a href="#">随时退</a></li>
+                    <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+                    <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="center">
+            <div class="footNavLi">
+                <ul>
+                    <li><a href="#">关于我们</a>&nbsp;|&nbsp;</li>
+                    <li><a href="#">联系我们</a>&nbsp;|&nbsp;</li>
+                    <li><a href="#">媒体合作</a>&nbsp;|&nbsp;</li>
+                    <li><a href="#">人才招聘</a>&nbsp;|&nbsp;</li>
+                    <li><a href="#">广告合作</a>&nbsp;|&nbsp;</li>
+                    <li><a href="#">免责声明</a>&nbsp;|&nbsp;</li>
+                    <li><a href="#">服务协议</a></li>
+                </ul>
+            </div>
+            <div class="copy">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有 php微信O2O生活宝门户系统</div>
+            <div class="footNavLi">
+                <ul>
+                    <li>友情连接：<a href="#"> baocms演示站</a>&nbsp;|&nbsp;</li>
+                    <li><a href="#">江湖家居系统</a>&nbsp;|&nbsp;</li>
+                    <li><a href="#">一团网</a>&nbsp;|&nbsp;</li>
+                    <li><a href="#">400电话</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="right"><img src="../sjimages/login_wx_03.jpg" width="149" height="146" /></div>
+    </div>
+</div>
+<div class="topUp">
+    <ul>
+        <li class="topBack">
+            <div class="topBackOn">回到<br />
+                顶部</div>
+        </li>
+        <li class="topUpWx">
+            <div class="topUpWxk"><img src="../sjimages/login_wx_03.jpg" />
+                <p>扫描二维码关注微信</p>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $(".topUp").show();
+				$(".indexpop").show();
+				
+            } else {
+                $(".topUp").hide();
+				$(".indexpop").hide();
+            }
+        });
+        $(".topUp").click(function () {
+            $("html,body").animate({scrollTop: 0}, 200);
+        });
+    });
+</script>
+</body>
+</html>
+<script type="text/javascript">
+        $('.menu_fllist2 > .item2').hover(function(){
+            var eq = $('.menu_fllist2 > .item2').index(this),               //获取当前滑过是第几个元素
+                h = $('.menu_fllist2').offset().top,                        //获取当前下拉菜单距离窗口多少像素
+                s = $(window).scrollTop(),                                  //获取游览器滚动了多少高度
+                i = $(this).offset().top,                                   //当前元素滑过距离窗口多少像素
+                item = $(this).children('.menu_flklist2').height(),             //下拉菜单子类内容容器的高度
+                sort = $('.menu_fllist2').height();                     //父类分类列表容器的高度
+            
+            if ( item > sort ){                                             //如果子类的高度小于父类的高度
+                if ( eq == 0 ){
+                    $(this).children('.menu_flklist2').css('top', (i-h));
+                } else {
+                    $(this).children('.menu_flklist2').css('top', (i-h)+1);
+                }
+            } else {
+                if ( s > h ) {                                              //判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+                    if ( i-s > 0 ){                                         //则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+                        $(this).children('.menu_flklist2').css('top', (s-h)+2 );
+                    } else {
+                        $(this).children('.menu_flklist2').css('top', (s-h)-(-(i-s))+2 );
+                    }
+                } else {
+                    $(this).children('.menu_flklist2').css('top', 0 );
+                }
+            }   
+    
+            $(this).addClass('on');
+            $(this).children('.menu_flklist2').css('display','block');
+        },function(){
+            $(this).removeClass('on');
+            $(this).children('.menu_flklist2').css('display','none');
+        });//导航菜单js
+</script>

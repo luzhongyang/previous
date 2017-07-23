@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>
+            BAOCMS安装完成
+        </title>
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+        <script src="/Public/js/jquery.js"></script>
+        <link rel="stylesheet" type="text/css" href="/install/template/style.css">
+    </head>
+    <body>
+        <div class="wrap">
+            <?php require './template/header.html';?>
+            <div class="section">
+                <div class="step">
+                    <ul>
+                        <li><em>1</em>检测环境</li>
+                        <li><em>2</em>创建数据</li>
+                        <li class="current"><em>3</em>完成安装</li>
+                    </ul>
+                </div>
+                <div class="server">
+                    <div class="main cc">
+                        <div class="success_tip">
+                            <a class="f16 b" href="<?php echo 'http://'.$_SERVER['SERVER_NAME'];?>">
+                                安装完成，点击进入前台
+                            </a>
+                            <p>
+                                浏览器即将自动跳转入后台
+                            </p>
+                            <script type="text/javascript">
+                                setTimeout("go_houtai()",10000);
+                                /**
+                                 *
+                                 * 跳转到后台
+                                 */
+                                function go_houtai() {
+                                    window.location.href = 'http://<?php echo $_SERVER['SERVER_NAME'];?>/admin/';
+                                } // end func
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; Copyright(c) 2014-2018 baocms <a href="http://www.baocms.com" target="_blank">合肥生活宝网络科技有限公司</a>
+        </div>	
+    </body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>头像上传</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+<body>
+<header>
+        <i class="icon-goback" onclick="baoapp.helper.goback();"></i>
+        <div class="title">上传头像</div>
+    </header>
+    <div id="content">
+        <script>
+ appcan.ready(function(){ 
+        var height = baoapp.helper.adapt();
+    });
+    </script>
+<div id="personal" class="page-center-box">
+<div style="background:#fff; display:block;border-radius:0.35rem; width:1rem; height:1rem; border-radius: 100%; overflow: hidden; margin: 0.2rem auto;">
+                <img style="width:100%; height: 100%;" src="" id="showPic" />       
+</div>
+
+
+<!--<div data-role="button" id="selectPic" ontouchstart="zy_touch('c-m2');" onclick="picSeclet();" class="c-blu2 ui-btn-corner-all ui-btn ui-shadow" style=" text-align:center; margin-bottom: 0.1rem;">
+        <span class="ui-btn-inner ui-btn-corner-all">
+        <span class="ui-btn-text t-wh" style=" display: inline-block; background-color: #2FBDAA; color: #fff; font-size: 0.16rem; width:80%; line-height: 0.34rem; border-radius: 0.05rem;">选择照片</span>
+        </span>
+</div>
+
+<div data-role="button" id="uploadPic" ontouchstart="zy_touch('c-m2');" onClick="upload();" style="display:; text-align: center; margin-bottom: 0.1rem;" class="c-blu2 ui-btn-corner-all ui-btn ui-shadow">
+        <span class="ui-btn-inner ui-btn-corner-all">
+        <span style=" margin:0 auto; display: inline-block; background-color: #2FBDAA; color: #fff; font-size: 0.16rem; width:80%; line-height: 0.34rem; border-radius: 0.05rem;">上传照片</span>
+        
+        </span>
+</div>
+
+<div data-role="button" id="goback" ontouchstart="zy_touch('c-m2');" onclick="uexWindow.close(-1);" class="c-blu2 ui-btn-corner-all ui-btn ui-shadow" style=" text-align:center;">
+        <span class="ui-btn-inner ui-btn-corner-all">
+        <span class="ui-btn-text t-wh" style=" display: inline-block; background-color: #d6902c; color: #fff; font-size: 0.16rem; width:80%; line-height: 0.34rem; border-radius: 0.05rem;">返回</span>
+        </span>
+</div>-->
+
+<div style="position:absolute; bottom:50; left:5%; width:90%; z-index:100;  text-align:center;" id="divPic">
+        <div ontouchstart="zy_touch('c-m2');" data-role="button" onclick="uexImageBrowser.pick();" class="c-blu2 ui-btn-corner-all ui-btn ui-shadow">
+                <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text t-wh" style=" text-align:center; margin-bottom:0.1rem; display: inline-block; background-color: #2FBDAA; color: #fff; font-size: 0.16rem; width:80%; line-height: 0.34rem; border-radius: 0.05rem;">从手机相册选择</span>
+                </span>
+        </div>
+        <div ontouchstart="zy_touch('c-m2');" data-role="button" onclick="uexCamera.open();" class="c-blu2 ui-btn-corner-all ui-btn  ui-shadow">
+                <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text t-wh" style=" text-align:center; margin-bottom:0.1rem; display: inline-block; background-color: #2FBDAA; color: #fff; font-size: 0.16rem; width:80%; line-height: 0.34rem; border-radius: 0.05rem;">拍照</span>
+                </span>
+        </div>
+</div>
+
+<div style="position:absolute; widht:100%; text-align:center;" id="percentage"></div>
+
+</div>
+</div>
+
+
+<script>
+    
+        var uploadHttp = baoapp.helper.createUrl('mcenter','upload');
+
+        function setLog(msg){
+                document.getElementById("msgid").innerHTML = msg;
+        }
+        function upload(){
+                 var data = {'face' : upload_image_url}; 
+                
+                 uexUploaderMgr.createUploader(1,uploadHttp);
+                 
+        }
+        function picSeclet(){
+                document.getElementById("selectPic").style.display = "none";
+                document.getElementById("goback").style.display = "none";
+                document.getElementById("divPic").style.display = "block";
+                document.getElementById("uploadPic").style.display = "none";
+        }
+        function picClose(){
+                document.getElementById("selectPic").style.display = "block";
+                document.getElementById("goback").style.display = "block";
+                document.getElementById("divPic").style.display = "none";
+                document.getElementById("uploadPic").style.display = "none";
+        }
+        var upload_image_url = "";
+        window.uexOnload = function(){
+                with(baoapp.helper){
+                    var url = createUrl('mcenter','member');
+                     ayscLoad(url,null,'GET','json',function(data){
+                        if(data.status == CONST.BAO_REQUEST_SUCCESS){
+                            document.getElementById("showPic").src = baoapp.config.attachs+data['member']['face'];
+                        }
+                    });
+                };
+          
+                uexCamera.cbOpen = function(opCode, dataType, data){
+                        upload_image_url = data;
+                        document.getElementById("showPic").src = data;
+                        upload();
+                       
+                }
+                uexWidgetOne.cbError = function(opCode, errorCode, errorInfo){
+                        setLog(errorInfo);
+                }
+               
+                uexImageBrowser.cbPick=function (opCode,dataType,data){
+    　　　　　　　 
+                    upload_image_url = data;
+    　　　　　　　                     document.getElementById("showPic").src = data;
+                    upload();
+　　                     }
+
+                uexUploaderMgr.cbCreateUploader =function(opCode,dataType,data){
+                        if(data == 0){ 
+                        //        alert("创建成功");
+                        //        alert(document.getElementById('showPic').src);
+                                uexUploaderMgr.uploadFile(1,upload_image_url,"filename",4,600);       
+                                //uexWindow.toast(1,5,"头像上传ing...",0);
+                        }else{
+                            baoapp.helper.toast("创建失败",2000,null,1);
+                              
+                        }
+                       
+                }
+                uexUploaderMgr.onStatus = function(opCode,fileSize,percent,serverPath,status){
+                        switch (status) {
+                            case 0:
+                                    //setLog("上传进度："+percent+"%");
+                                    break;
+                            case 1:
+                                    
+                                    var data = {'face' : serverPath};
+                                    var url = baoapp.helper.createUrl('mcenter','faces',data);
+                                    baoapp.helper.ayscLoad(url,data,'GET','json',function(data){
+                                          if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                                              baoapp.helper.toast(data.msg,500);
+                                          }else{
+                                              baoapp.helper.toast(data.msg,500);
+                                          }
+                                     });
+                                    baoapp.helper.toast("上传成功",2000,null,1);
+                                    uexUploaderMgr.closeUploader(1);
+                                    break;
+                            case 2:
+                                    //setLog("上传出错");
+                                    uexWindow.closeToast();//关闭提示消息框
+                                    baoapp.helper.toast("出错啦~",2000,null,1);
+                                    //uexWindow.closeToast();//关闭提示消息框
+                                    uexUploaderMgr.closeUploader(1);
+                                    break;
+
+                            }
+                           
+                    }
+                
+            }
+       
+</script>
+
+  </body>
+</html>

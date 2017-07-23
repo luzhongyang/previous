@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订餐</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+		$(".shop-lie li").each(function(e){
+			$(this).click(function(){
+				$(".shop-lie li").removeClass("on");
+				$(this).addClass("on");
+				$(".send-out").each(function(s){
+					if(e==s){
+						$(".send-out").hide();
+						$(this).show();
+					}
+				});
+			});
+		});
+	});
+
+</script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">我的订餐</div>
+		<i class=" icon-more"></i>
+	</header>
+	<!-- 筛选TAB -->
+	<div class="shop-lie">
+		<ul>
+			<li class="on"><span>待付款</span></li>
+			<li><span>待审核</span></li>
+			<li><span>已完成</span></li>
+		</ul>
+	</div>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+			<!-- 列表 -->
+			<div class="send-out">
+				<div class="list-have-pic shop-list">
+					<!-- 循环 -->
+					<div class="list-box">
+						<div class="shop-order">
+							<p class="left">订单：2015-7-26 <span>￥60</span></p>
+							<p class="right">2015-7-24 11:18:30</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<div class="activ-list-content shop-button">
+							<a href=""><span class="shop-pay">去付款</span></a>
+							<a href=""><span class="shop-del">删 除</span></a>
+						</div>
+					</div>
+
+					<!-- 循环 -->
+				</div>
+
+				<div class="list-have-pic order-list">
+					<!-- 循环 -->
+					<div class="list-box">
+						<div class="shop-order">
+							<p class="left">订单：2015-7-26 <span>￥60</span></p>
+							<p class="right">2015-7-24 11:18:30</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<div class="activ-list-content shop-button">
+							<span class="shop-pay">去付款</span>
+							<span class="shop-del">删 除</span>
+						</div>
+					</div>
+
+					<!-- 循环 -->
+				</div>
+			</div>
+
+			<div style="display:none;" class="send-out">
+				<div class="list-have-pic shop-list">
+					<!-- 循环 -->
+					<div class="list-box">
+						<div class="shop-order">
+							<p class="left">订单：2015-7-26 <span>￥60</span></p>
+							<p class="right">2015-7-24 11:18:30</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<div class="activ-list-content shop-button">
+							<a href=""><span class="pay-wait">餐到付款</span></a>
+							<a href=""><span class="pay-wait">等待审核</span></a>
+						</div>
+					</div>
+
+					<!-- 循环 -->
+				</div>
+
+				<div class="list-have-pic order-list">
+					<!-- 循环 -->
+					<div class="list-box">
+						<div class="shop-order">
+							<p class="left">订单：2015-7-26 <span>￥60</span></p>
+							<p class="right">2015-7-24 11:18:30</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<div class="activ-list-content shop-button">
+							<a href=""><span class="pay-wait">餐到付款</span></a>
+							<a href=""><span class="pay-wait">等待审核</span></a>
+						</div>
+					</div>
+
+					<!-- 循环 -->
+				</div>
+			</div>
+
+			<div style="display:none;" class="send-out">
+				<div class="list-have-pic shop-list">
+					<!-- 循环 -->
+					<div class="list-box">
+						<div class="shop-order">
+							<p class="left">订单：2015-7-26 <span>￥60</span></p>
+							<p class="right">2015-7-24 11:18:30</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<div class="activ-list-content shop-button">
+							<a href=""><span class="pay-wait">餐到付款</span></a>
+							<a href=""><span class="pay-wait">已完成</span></a>
+						</div>
+					</div>
+
+					<!-- 循环 -->
+				</div>
+
+				<div class="list-have-pic order-list">
+					<!-- 循环 -->
+					<div class="list-box">
+						<div class="shop-order">
+							<p class="left">订单：2015-7-26 <span>￥60</span></p>
+							<p class="right">2015-7-24 11:18:30</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">甜品：女神</p>
+								<p class="spread-for">数量：2 单价：￥10</p>
+								<div class="spread-looker">总计：<span>￥20</span></div>
+							</div>
+						</a>
+					</div>
+					<div class="list-box">
+						<div class="activ-list-content shop-button">
+							<a href=""><span class="pay-wait">餐到付款</span></a>
+							<a href=""><span class="pay-wait">已完成</span></a>
+						</div>
+					</div>
+
+					<!-- 循环 -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>资料中心-评价管理</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script>
+$(function(){
+	$(".eval_czan").click(function(){
+		$(".mask_sellerflBox").show();
+	});
+	$(".mask_clossan").click(function(){
+		$(".mask").hide();
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="sjgl_lead">
+    <ul>
+        <li><em class="sjgl_leadico sjgl_leadico3"></em><a href="#">系统设置</a></li>
+        <li>&gt;<a class="sjgl_leadEnd" href="#">评价管理</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">注意：如果收到恶意评价，可以联系网站客服：0551-63641901</div>
+        </div>
+    </div> 
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#f7f7f7;">
+            <td>用户</td>
+            <td>评分</td>
+            <td>评价内容</td>
+            <td>评价时间</td>
+            <td>操作</td>
+        </tr>
+        <tr>
+            <td>张三</td>
+            <td>5分</td>
+            <td>摄影师技术不错，拍的很好！</td>
+            <td>2015-04-18 08:30:45</td>
+            <td><a class="radius3 tuan_zcan" href="###">删除</a><a class="radius3 tuan_zcan eval_czan" href="###">回复</a></td>
+        </tr>
+    </table>
+</div>
+
+<div class="mask mask_sellerflBox">
+    <div class="radius10 mask_seller_del mask_sellerfl">
+        <div class="mask_closs">
+            <div class="left mask_closs_t">回复</div>
+            <div class="right"><span class="radius3 mask_clossan">&nbsp;</span></div>
+        </div>
+        <div class="mask_sellerflnr">
+          	<textarea class="tuanfabu_int eval_k"></textarea>
+            <div class="tuanfabu_an"><a class="radius3 sjgl_an tuan_topbt" href="#">确认回复</a></div>
+        </div>
+    </div>
+    <div class="mask_sellerflBg">&nbsp;</div>
+</div>
+</body>
+</html>

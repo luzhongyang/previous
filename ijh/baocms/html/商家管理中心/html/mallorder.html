@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商城管理-商城订单</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+</head>
+
+<body>
+<div class="sjgl_lead">
+    <ul>
+        <li><em class="sjgl_leadico sjgl_leadico7"></em><a href="#">商城管理</a></li>
+        <li>&gt;<a class="sjgl_leadEnd" href="#">商城订单</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left">
+            	<span class="tuanorder_top">订单状况：<select class="radius3 tuan_topser tuan_topserw1"><option>全部订单</option></select></span>
+                <span class="tuanorder_top">订单号：<input type="text" class="radius3 tuan_topser tuan_topserw2"/></span>
+                <span>下单时间：从<input type="text" placeholder="2015-06-29" class="radius3 tuan_topser tuan_topserw3"/>到<input type="text" placeholder="2015-07-29" class="radius3 tuan_topser tuan_topserw3"/><input type="button" class="radius3 sjgl_an tuan_topbt" value="搜 索"/></span>      
+            </div>
+        </div>
+    </div>
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli on"><a href="#">等待付款</a></li>
+            <li class="tuanfabu_tabli"><a href="#">已付款</a></li>
+            <li class="tuanfabu_tabli"><a href="#">货到付款</a></li>
+        </ul>
+    </div>
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td width="550">详情</td>
+            <td>单价</td>
+            <td>数量</td>
+            <td>总价</td>
+            <td>状态</td>
+        </tr>
+        <tr style="background-color:#f7e9d7;">
+            <td colspan="5">
+            	<div class="mallorder_tBox">
+                    <span class="mallorder_t">订单ID：<span class="mallorder_jg">100139</span></span>
+                    <span class="mallorder_t">交易时间：<span class="mallorder_jg">2015-06-24 15:26:40</span></span>
+                    <span class="mallorder_t">买家：<span class="mallorder_jg">唐建鹏 15000000000</span></span>
+                    <span class="mallorder_t">总价值：<span class="mallorder_jg">100</span></span>
+                    <span class="mallorder_t">收货地址：<span class="mallorder_jg">瑶海、 逍遥津、 圣大国际1709</span></span>
+                    <span class="mallorder_t">状态：<span class="mallorder_jg">等待付款</span></span>
+             	</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            	<div class="mallorder_xq"><img src="../img/scddimg_03.jpg" /><p>百草味 休闲 零食 鱿鱼丝 80g/袋</p></div>
+            </td>
+            <td><span class="mallorder_jg">￥25</span></td>
+            <td>2</td>
+            <td><span class="mallorder_jg">￥50</span></td>
+            <td><span class="mallorder_jg">未发货</span></td>
+        </tr>
+        <tr>
+            <td>
+            	<div class="mallorder_xq"><img src="../img/scddimg_03.jpg" /><p>百草味 休闲 零食 鱿鱼丝 80g/袋</p></div>
+            </td>
+            <td><span class="mallorder_jg">￥25</span></td>
+            <td>2</td>
+            <td><span class="mallorder_jg">￥50</span></td>
+            <td><span class="mallorder_jg">未发货</span></td>
+        </tr>
+        <tr style="background-color:#f7e9d7;">
+            <td colspan="5">
+            	<div class="mallorder_tBox">
+                    <span class="mallorder_t">订单ID：<span class="mallorder_jg">100139</span></span>
+                    <span class="mallorder_t">交易时间：<span class="mallorder_jg">2015-06-24 15:26:40</span></span>
+                    <span class="mallorder_t">买家：<span class="mallorder_jg">唐建鹏 15000000000</span></span>
+                    <span class="mallorder_t">总价值：<span class="mallorder_jg">100</span></span>
+                    <span class="mallorder_t">收货地址：<span class="mallorder_jg">瑶海、 逍遥津、 圣大国际1709</span></span>
+                    <span class="mallorder_t">状态：<span class="mallorder_jg">等待付款</span></span>
+             	</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            	<div class="mallorder_xq"><img src="../img/scddimg_03.jpg" /><p>百草味 休闲 零食 鱿鱼丝 80g/袋</p></div>
+            </td>
+            <td><span class="mallorder_jg">￥25</span></td>
+            <td>2</td>
+            <td><span class="mallorder_jg">￥50</span></td>
+            <td><span class="mallorder_jg">未发货</span></td>
+        </tr>
+        <tr>
+            <td>
+            	<div class="mallorder_xq"><img src="../img/scddimg_03.jpg" /><p>百草味 休闲 零食 鱿鱼丝 80g/袋</p></div>
+            </td>
+            <td><span class="mallorder_jg">￥25</span></td>
+            <td>2</td>
+            <td><span class="mallorder_jg">￥50</span></td>
+            <td><span class="mallorder_jg">未发货</span></td>
+        </tr>
+    </table>
+    <div class="paging">
+        <span>91 条记录 1/10 页</span>
+        <a class="radius3" href="/shop/index/p/2.html">上一页</a>
+        <a class="radius3" href="/shop/index/p/2.html">下一页</a>
+        <span class="radius3 on">1</span>
+        <a class="radius3" href="/shop/index/p/2.html">2</a>
+        <a class="radius3" href="/shop/index/p/3.html">3</a>
+        <a class="radius3" href="/shop/index/p/4.html">4</a>
+        <a class="radius3" href="/shop/index/p/5.html">5</a>
+        <a class="radius3" href="/shop/index/p/6.html">下5页</a>
+        <a class="radius3" href="/shop/index/p/10.html">最后一页</a>
+    </div>
+</div>
+</body>
+</html>

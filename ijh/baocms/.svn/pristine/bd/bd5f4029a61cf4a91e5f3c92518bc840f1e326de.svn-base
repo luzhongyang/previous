@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订单-确认订单</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a><a href="#" class="">五里香馄饨（芜湖路店）</a></i>
+    <div class="title">
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="order_confirm_infor mb10">
+    	<div class="ico fl"></div>
+        <div class="wz">
+        	<p class="bt">尤哥 15000000000</p>
+            <p>潜山路496号新景花园16栋804室 </p>
+        </div>
+    </div>
+	<div class="minePay">
+        <ul class="form_list_box">
+            <li class="recharge">
+                <label class="radioLabel">
+                    <div class="fl"><p>在线支付</p><div class="order_confirm_tag"><span style="background:#46c3ff;">首单立减5元</span><span style="background:#ff3333;">有2个红包可用</span></div></div>
+                    <span class="fr radioInt on"><input name="recharge" type="radio" checked></span>
+                </label> 
+            </li>
+            <li class="recharge last">
+                <label class="radioLabel">
+                    <p class="fl">货到付款</p>
+                    <span class="fr radioInt"><input name="recharge" type="radio"></span>
+                </label> 
+            </li>
+        </ul>
+    </div>
+	<div class="order_details_nr">
+        <ul class="form_list_box">
+            <li class="list waimaiTime">
+            	<div class="fl"><p class="black6">送达时间</p></div>
+                <div class="fr"><p class="black9">尽快送出<em class="linkIco"></em></p></div>
+            </li>
+            <li class="list">
+            	<div class="fl"><p class="black6">订单备注</p></div>
+                <div class="fr"><p class="black9">添加备注<em class="linkIco"></em></p></div>
+            </li>
+            <li class="list">
+            	<div class="fl"><p class="black6">回锅肉</p></div>
+                <div class="fr"><p class="black9">x1&nbsp;&nbsp;￥10</p></div>
+            </li>
+            <li class="list">
+            	<div class="fl"><p class="black6">回锅肉</p></div>
+                <div class="fr"><p class="black9">x1&nbsp;&nbsp;￥10</p></div>
+            </li>
+            <li class="list">
+            	<div class="fl"><p class="black6">回锅肉</p></div>
+                <div class="fr"><p class="black9">x1&nbsp;&nbsp;￥10</p></div>
+            </li>
+            <li class="list">
+            	<div class="fl"><p class="pointcl1">红包抵扣</p></div>
+                <div class="fr"><p class="pointcl1">-￥10</p></div>
+            </li>
+            <li class="list last">
+            	<div class="fl"><a class="add_btn">再来一份</a></div>
+                <div class="fr"><p class="pointcl1 total">合计  ￥20</p></div>
+            </li>
+        </ul>
+    </div>
+</section>
+<footer>
+    <div class="ord_tousu">
+		<p class="fl">合计：<span class="pointcl1">￥20</span>&nbsp;&nbsp;<span class="black9">已优惠￥10</span></p>
+		<a href="#" class="fr pub_btn">确认下单</a></div>
+</footer>
+<style>
+.waimaiTime_mask ul li{ display:block; padding:0 0.1rem; line-height:0.34rem; font-size:0.14rem; color:#999;}
+</style>
+<div class="mask_box">
+    <div class="maskOne waimaiTime_mask">
+        <div class="title">选择送达时间</div>
+        <div class="cont">
+            <ul>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+            </ul>
+        </div>
+    </div>
+	<div class="mask_bg"></div>
+</div>
+<script>
+$(document).ready(function() {
+	$(".waimaiTime").click(function(){
+		$(".waimaiTime_mask").show();
+		$(".waimaiTime_mask").parent().find(".mask_bg").show();
+	});
+	$(".waimaiTime_mask").find("li").click(function(){
+		$(".waimaiTime_mask").hide();
+		$(".waimaiTime_mask").parent().find(".mask_bg").hide();
+	});
+});
+</script>
+</body>
+</html>

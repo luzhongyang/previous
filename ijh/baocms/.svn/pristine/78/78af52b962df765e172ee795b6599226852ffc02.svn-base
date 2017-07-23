@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+</head>
+
+<body>
+<div class="sjgl_lead">
+    <ul>
+        <li><em class="sjgl_leadico"></em><a href="#">首页</a></li>
+    </ul>
+</div>
+<div class="sy_content">
+	<div class="sy_c1">
+        <ul>
+            <li class="left sy_c1Li">
+                <div class="sy_c1Linr">
+                    <div class="sy_c1Linr_t">统计中心</div>
+                    <div class="sy_c1List">
+                    	<ul>
+                        	<li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLit">今日订单</div>
+                                <div class="left sy_c1nrLit sy_c1nrLis">1个</div>
+                                <div class="right"><a class="radius3 sy_lookan" href="#">查看</a></div>
+                            </li>
+                            <li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLit">总订单</div>
+                                <div class="left sy_c1nrLit sy_c1nrLis">22个</div>
+                                <div class="right"><a class="radius3 sy_lookan" href="#">查看</a></div>
+                            </li>
+                            <li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLit">今日预约</div>
+                                <div class="left sy_c1nrLit sy_c1nrLis">1个</div>
+                                <div class="right"><a class="radius3 sy_lookan" href="#">查看</a></div>
+                            </li>
+                            <li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLit">总预约</div>
+                                <div class="left sy_c1nrLit sy_c1nrLis">22个</div>
+                                <div class="right"><a class="radius3 sy_lookan" href="#">查看</a></div>
+                            </li>
+                            <li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLit">点评消息</div>
+                                <div class="left sy_c1nrLit sy_c1nrLis">22个</div>
+                                <div class="right"><a class="radius3 sy_lookan" href="#">查看</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="left sy_c1Li">
+                <div class="sy_c1Linr">
+                    <div class="sy_c1Linr_t">通知公告</div>
+                    <div class="sy_c1List">
+                    	<ul>
+                        	<li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLip">感谢您入入驻baocms生活通o2o系统平台-公告内容测试</div>
+                                <div class="right sy_c1nrLip">2015-12-23</div>
+                            </li>
+                            <li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLip">感谢您入入驻baocms生活通o2o系统平台-公告内容测试</div>
+                                <div class="right sy_c1nrLip">2015-12-23</div>
+                            </li>
+                            <li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLip">感谢您入入驻baocms生活通o2o系统平台-公告内容测试</div>
+                                <div class="right sy_c1nrLip">2015-12-23</div>
+                            </li>
+                            <li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLip">感谢您入入驻baocms生活通o2o系统平台-公告内容测试</div>
+                                <div class="right sy_c1nrLip">2015-12-23</div>
+                            </li>
+                            <li class="sy_c1nrLi">
+                        	    <div class="left sy_c1nrLip">感谢您入入驻baocms生活通o2o系统平台-公告内容测试</div>
+                                <div class="right sy_c1nrLip">2015-12-23</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="sy_c1">
+        <ul>
+            <li class="left sy_c1Li">
+                <div class="sy_c1Linr">
+                    <div class="sy_c1Linr_t">统计分析</div>
+                    <div class="sy_c2tjnr"><img src="../img/sytj_03.jpg" /></div>
+                </div>
+            </li>
+            <li class="left sy_c1Li">
+                <div class="sy_c1Linr">
+                    <div class="sy_c1Linr_t">销售额分析</div>
+                    <div class="sy_c2tjnr"><img src="../img/sytj_05.jpg" /></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

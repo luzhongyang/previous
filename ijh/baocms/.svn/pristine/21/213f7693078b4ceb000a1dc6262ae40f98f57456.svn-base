@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-外卖-微店资料修改</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> <i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">微店资料修改</div>
+    <i class="right"><a class="sh_waimai_cate_add" href="#"></a></i> </header>
+<section>
+	<script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>微店文字资料介绍微店的基本信息</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    <div class="sh_buy_fabu">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box">
+                   <div class="sh_input_public"><span>您的信息：</span></div> 
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_textarea_public"><textarea>宽大摄影,蜀山区潜山路496号新景花园16栋804室,3,1,1,8:00-9:00</textarea></div> 
+                </li>
+                <li class="mb10">
+                	<p class="sh_fans_gold_sm"><em></em>基本信息不可修改</p>
+                </li>
+                <li class="list_box">
+                   <div class="sh_input_public"><span>微店详情：</span></div> 
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_textarea_public"><textarea></textarea></div> 
+                </li>
+                <li>
+                	<div class="sh_buy_upload_btn"><label><input class="btn" type="file" value="上传形象照"><em></em>上传形象照</label></div>
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_buy_upload_img"><img src="" width="100" height="100"><p>建议尺寸300X300</p></div>
+                </li>
+                <li>
+                	<div class="sh_buy_upload_btn"><label><input class="btn" type="file" value="上传LOGO"><em></em>上传LOGO</label></div>
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_buy_upload_img"><img src="" width="100" height="100"><p>建议尺寸300X300</p></div>
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_input_public sh_shop_addr">
+                        <div class="fl left"><span>经度：</span><input type="text" /></div>
+                        <div class="fr right"><span>纬度：</span><input type="text" /></div>
+                    </div>
+                </li>
+                <li>
+                	<p class="sh_buy_fabu_p">地图</p>
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_input_public"><span>请输入</span><input type="text" value=""></div> 
+                </li>
+                <li>
+                    <div class="sh_shop_addr_map"><img src="img/map.png" width="100%" height=""></div>
+                </li>
+            </ul>
+        </div>
+        <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认保存"></div>
+    </div>
+</section>
+</body>
+</html>

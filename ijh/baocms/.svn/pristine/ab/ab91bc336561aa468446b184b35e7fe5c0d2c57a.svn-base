@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>我的地址</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+<style type="text/css">
+    #scroll{
+        overflow: auto;
+    }
+    #personal-coupon{
+        overflow: auto;
+    }
+</style>
+
+<script id="rendlist" type="text/templates">
+        <li>
+            <div class="fl left"> 
+                <!--<input style="width: 24px; float: left;" type="radio"  name="addr_id" id="addr_id" value="<{$item['addr_id']}>" />-->
+                %name%   %mobile% %addr%  
+            </div>
+            <div class="fr right" ><span id='d%default%'><a onclick="set_moren(%addr_id%)" style="color:#f56c08;">设为默认</a></span>
+            <a href="#" style="color:#2fbdaa;" onclick="edit_addr(%addrid%)"  class="edit_addr">修改地址</a></div>
+            <div class="clear"></div>
+        </li>
+</script>
+<script>
+   
+   
+    window.readCache=function (key)
+    {
+        key = key || KEY.MEMBER_ADDR;
+         //读取缓存
+        var cached = baoapp.helper.cacheExpireRead(key);
+            cached = JSON.parse(cached);
+        var data     = [];
+        var http_url = baoapp.config.attachs;
+        for(index in cached){
+            data[index] = {addr_id:cached[index]['addr_id'],name:cached[index]['name'],mobile:cached[index]['mobile'],addr:cached[index]['addr'],default:cached[index]['is_default'],addrid:cached[index]['addr_id']};
+        }
+        renderList(data);
+        
+    }
+    
+    function renderList(datas)
+    {
+       //情况列表容器
+       document.querySelector('#load').innerHTML = '';
+       for(i in datas){
+           createNode(datas[i]);
+       }         
+    }  
+    
+    function edit_addr(id){
+        var data = {'id' : id }; 
+        var url = baoapp.helper.createUrl('mcenter','addr_detail',data);
+        var detail_key = KEY.MEMBER_ADDR_ID+'_'+id;
+        baoapp.helper.ayscLoad(url,data,'GET','json',function(data){
+            if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                  baoapp.helper.cacheExpireWrite(detail_key,JSON.stringify(data['addr']));
+                  baoapp.helper.linkTo('edit_addr','edit_addr.html?id='+id);
+            }else{
+                baoapp.helper.toast(data.msg,1000,null,1);
+             }
+        });
+         
+    }
+    
+    function set_moren(id){
+        var data = {'addr' : id }; 
+        var url = baoapp.helper.createUrl('mcenter','update_addr',data);
+        
+        baoapp.helper.ayscLoad(url,data,'GET','json',function(data){
+            if(CONST.BAO_REQUEST_SUCCESS === data.status || data.status === 200){
+               baoapp.helper.toast(data.msg,1000,null,1);
+            }else{
+               baoapp.helper.linkTo('add_addr','add_addr.html')
+            }
+        });
+    } 
+   
+   
+    
+  
+    function createNode(data)
+    {      
+        with(document){
+            var spanNode = createElement('span'),
+                tmpl     = getElementById('rendlist').innerHTML;
+                for(key in data){
+                   tmpl = tmpl.replace('%'+key+'%',data[key]); 
+                }
+                spanNode.innerHTML = tmpl;
+                querySelector('#load').appendChild(spanNode);
+                $('#d1').css('display','none'); 
+        }
+    }
+    
+</script>
+
+
+<script>
+    appcan.ready(
+        function(){
+          with(baoapp.helper){
+            /*if(!islogin()){
+                linkTo('login','../login.html');
+                return;
+            }*/
+            var url = createUrl('mcenter','addr');
+            //TODO
+            var backwindow = 'mcenter/addr.html';
+            window.readCache();
+         }
+    });
+    
+</script>
+
+</head>
+
+<body>
+
+<div class="modify">
+    <div class="modify-list-box" id="load">
+        
+        
+    </div>
+</div>
+
+
+    

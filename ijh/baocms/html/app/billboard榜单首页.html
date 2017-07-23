@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>榜单</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">
+        	榜单列表
+        </div>
+		<i class="icon-menu"></i>
+	</header>
+    
+	<div id="billboard" class="page-center-box">
+		<div id="scroll">			
+			<div class="billboard-ad"><a href="#"><img src="img/bill_ad.jpg"></a></div>
+            <div class="billboard-content">
+            	<script>
+					$(function(){
+						$(".billboard-tab li").each(function(e){
+							$(this).click(function(){
+								if($(this).hasClass("on")){
+									$(this).parent().find("li").removeClass("on");
+									$(this).removeClass("on");
+									$(".serch-bar-mask").hide();
+								}
+								else{
+									$(this).parent().find("li").removeClass("on");
+									$(this).addClass("on");
+									$(".serch-bar-mask").show();
+								}
+								$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+									
+									if(e==i){
+										$(this).parent().find(".serch-bar-mask-list").hide();
+										$(this).show();
+									}
+									else{
+										$(this).hide();
+									}
+									$(this).find("li").click(function(){
+										$(this).parent().find("li").removeClass("on");
+										$(this).addClass("on");
+									});
+								});
+							});
+						});
+					});
+				</script>
+            	<div class="billboard-tab">
+                    <ul>
+                        <li><span>分类</span><i></i></li>
+                        <li><span>排序</span><i></i></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask" style="display:none;">
+                    <div class="serch-bar-mask-list">
+                        <ul>
+                            <li class="on"><a href="#">全部分类</a></li>
+                            <li><a href="#">商务宴请</a></li>
+                            <li><a href="#">情侣约会</a></li>
+                            <li><a href="#">家庭聚会</a></li>
+                            <li><a href="#">朋友聚会</a></li>
+                        </ul>
+                    </div>
+                    <div class="serch-bar-mask-list">
+                        <ul>
+                            <li class="on"><a href="#">全部地区</a></li>
+                            <li><a href="#">商务宴请</a></li>
+                            <li><a href="#">情侣约会</a></li>
+                            <li><a href="#">家庭聚会</a></li>
+                            <li><a href="#">朋友聚会</a></li>
+                        </ul>
+                    </div>
+                    <div class="serch-bar-mask-list">
+                        <ul>
+                            <li class="on"><a href="#">全部商圈</a></li>
+                            <li><a href="#">商务宴请</a></li>
+                            <li><a href="#">情侣约会</a></li>
+                            <li><a href="#">家庭聚会</a></li>
+                            <li><a href="#">朋友聚会</a></li>
+                        </ul>
+                    </div>
+                    <div class="serch-bar-mask-list">
+                        <ul>
+                            <li class="on"><a href="#">全部排序</a></li>
+                            <li><a href="#">商务宴请</a></li>
+                            <li><a href="#">情侣约会</a></li>
+                            <li><a href="#">家庭聚会</a></li>
+                            <li><a href="#">朋友聚会</a></li>
+                        </ul>
+                    </div>
+                    <div class="serch-bar-mask-bg"></div>
+                </div>
+                
+                
+                
+                
+                
+                <div class="billboard-list-box">
+                	<div class="billboard-list">
+                    	<div class="title">
+                    	    <div class="fl left"><span class="c_1">[丽人]</span>寻找平价餐厅</div>
+                            <div class="fr right">浏览:<span class="c_1">22</span>人</div>
+                        </div>
+                        <a href="#"><div class="img">
+                        	<div class="billboard-list-bq">1</div>
+                        	<img src="img/bill_img.jpg">
+                        </div>
+                        <div class="wz">
+                            <p>上榜时间：2015-4-46</p>
+                            <p>榜单简介：大家当然迫切想知道哪里的东西能又便宜又好吃...</p>
+                        </div></a>
+                    </div>
+                    <div class="billboard-list">
+                    	<div class="title">
+                    	    <div class="fl left"><span class="c_1">[丽人]</span>寻找平价餐厅</div>
+                            <div class="fr right">浏览:<span class="c_1">22</span>人</div>
+                        </div>
+                        <a href="#"><div class="img">
+                        	<div class="billboard-list-bq">2</div>
+                        	<img src="img/bill_img.jpg">
+                        </div>
+                        <div class="wz">
+                            <p>上榜时间：2015-4-46</p>
+                            <p>榜单简介：大家当然迫切想知道哪里的东西能又便宜又好吃...</p>
+                        </div></a>
+                    </div>
+                    <div class="billboard-list">
+                    	<div class="title">
+                    	    <div class="fl left"><span class="c_1">[丽人]</span>寻找平价餐厅</div>
+                            <div class="fr right">浏览:<span class="c_1">22</span>人</div>
+                        </div>
+                        <a href="#"><div class="img">
+                        	<div class="billboard-list-bq">3</div>
+                        	<img src="img/bill_img.jpg">
+                        </div>
+                        <div class="wz">
+                            <p>上榜时间：2015-4-46</p>
+                            <p>榜单简介：大家当然迫切想知道哪里的东西能又便宜又好吃...</p>
+                        </div></a>
+                    </div>
+                    <div class="billboard-list">
+                    	<div class="title">
+                    	    <div class="fl left"><span class="c_1">[丽人]</span>寻找平价餐厅</div>
+                            <div class="fr right">浏览:<span class="c_1">22</span>人</div>
+                        </div>
+                        <a href="#"><div class="img">
+                        	<img src="img/bill_img.jpg">
+                        </div>
+                        <div class="wz">
+                            <p>上榜时间：2015-4-46</p>
+                            <p>榜单简介：大家当然迫切想知道哪里的东西能又便宜又好吃...</p>
+                        </div></a>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+	<footer>
+		<div>
+			<div class="icon i-1"></div>
+			<p>首页</p>
+		</div>
+		<div>
+			<div class="icon i-2"></div>
+			<p>抢购</p>
+		</div>
+		<div>
+			<div class="icon i-3"></div>
+			<p>关注</p>
+		</div>
+		<div>
+			<div class="icon i-4"></div>
+			<p>我的</p>
+		</div>
+	</footer>
+</body>
+</html>

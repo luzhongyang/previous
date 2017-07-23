@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+	$(".recharge .check_label").click(function(){
+		$(".check_style").removeClass("on");
+		$(this).find(".check_style").addClass("on");
+	});
+	$(".pay_way .check_label").click(function(){
+		$(".list").removeClass("on");
+		$(this).find(".list").addClass("on");
+	});
+});
+</script>
+</head>
+<body>
+<header class="bg_clor">
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">充值</div>
+    <i class="right"></i>
+</header>
+<section id="mine_recharge" class="page_center_box">
+    <ul class="form_list_box mt10">
+        <li>
+           	<p class="account">
+                <span class="fl">充值账户</span>
+                <span class="fr">13515608638</span>
+            </p>
+           	<div class="clear"></div>
+        </li>
+        <li>
+			<div class="recharge">
+            	<label class="check_label">
+                	<p class="fl"><em class="ico_1"></em>充<span class="fontcl1">500</span>元  送<span class="fontcl1">50</span></p>
+                    <span class="fr check_style on"><input name="recharge" type="radio"></span>
+                </label>  
+            </div>
+        </li>
+        <li>
+			<div class="recharge">
+            	<label class="check_label">
+                	<p class="fl"><em class="ico_2"></em>充<span class="fontcl1">2000</span>元  送<span class="fontcl1">250</span></p>
+                    <span class="fr check_style"><input name="recharge" type="radio"></span>
+                </label>  
+            </div>
+        </li>
+        <li class="last">
+			<div class="recharge">
+            	<label class="check_label">
+                	<p class="fl"><em class="ico_3"></em>充<span class="fontcl1">5000</span>元  送<span class="fontcl1">600</span></p>
+                    <span class="fr check_style"><input name="recharge" type="radio"></span>
+                </label>  
+            </div>
+        </li>
+    </ul>
+    <div class="pay_way">
+    	<div class="title">选择支付方式</div>
+        <ul>
+            <li>
+            	<label class="check_label">
+                	<div class="list ico_1 on"><input name="payWay" type="radio"></div>
+                </label>
+            </li>
+            <li>
+            	<label class="check_label">
+                	<div class="list ico_2"><input name="payWay" type="radio"></div>
+                </label>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="long_btn_box"><input class="long_btn" type="button" value="立即充值"></div>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico1"></i>
+        <p>生活宝</p>
+		</a>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico2"></i>
+        <p>关注</p>
+		</a>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico3"></i>
+        <p>我的</p>
+		</a>
+    </div>
+</footer>
+</body>
+</html>

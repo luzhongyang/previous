@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>支付订单</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+	$(".payWay li").click(function(){
+		$(".check_style").removeClass("on");
+		$(this).find(".check_style").addClass("on");
+	});
+	$(".decide").click(function(){
+			if($(this).find(".check").hasClass("on")){
+				$(this).find(".check").removeClass("on");
+			}
+			else{
+				$(this).find(".check").addClass("on");
+			}
+		});
+});
+</script>
+</head>
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">支付订单</div>
+    <i class="right"></i>
+</header>
+<section id="order_pay" class="page_center_box">
+	<ul class="form_list_box">
+    	<li>
+           	<p>
+            	<span class="fl">台湾糕点零食大礼包1050g</span>
+                <span class="fr"><b class="black3">30元</b></span>
+            </p>
+        </li>
+        <li>
+        	<div class="num">
+                <div class="fl">服务数量</div>
+                <div class="fr">
+                    <div class="num_operate">
+                        <span class="reduce" quantity="-">-</span>
+                        <input type="text" value="1" id="cart_product_num">
+                        <span class="add" quantity="+">+</span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </li>
+        <li>
+        	<p>
+            	<span class="fl">可使用积分</span>
+                <span class="fr"><span class="min">（100积分=1元）</span>200积分</span>
+            </p>
+        </li>
+        <li>
+        	<p class="decide">
+                <label><span class="fl">优惠买单</span>
+                <span class="fr"><span class="check on"><input type="checkbox" name=""></span></span></label>
+            </p>
+        </li>
+        <li class="last">
+           	<p>
+            	<span class="fl">总价</span>
+                <span class="fr"><b class="fontcl1">30</b>元</span>
+            </p>
+        </li>
+    </ul>
+    <p class="menu_title">支付方式</p>
+	<ul class="payWay">
+        <li>
+            <label>
+                <div class="fl">
+                    <em class="ico_1"></em>
+                    <p class="overflow_clear">支付宝</p>
+                    <p class="overflow_clear graycl">推荐已安装支付宝客户端的用户使用</p>
+                </div>
+                <div class="fr">
+                    <span class="check_style on"><input type="radio" name="payway"></span>
+                </div>
+                <div class="clear"></div>
+            </label>
+        </li>
+        <li>
+            <label>
+                <div class="fl">
+                    <em class="ico_2"></em>
+                    <p class="overflow_clear">支付宝</p>
+                    <p class="overflow_clear graycl">推荐已安装支付宝客户端的用户使用</p>
+                </div>
+                <div class="fr">
+                    <span class="check_style"><input type="radio" name="payway"></span>
+                </div>
+                <div class="clear"></div>
+            </label>
+        </li>
+        <li>
+            <label>
+                <div class="fl">
+                    <em class="ico_3"></em>
+                    <p class="overflow_clear">支付宝</p>
+                    <p class="overflow_clear graycl">推荐已安装支付宝客户端的用户使用</p>
+                </div>
+                <div class="fr">
+                    <span class="check_style"><input type="radio" name="payway"></span>
+                </div>
+                <div class="clear"></div>
+            </label>
+        </li>
+        <li>
+            <label>
+                <div class="fl">
+                    <em class="ico_4"></em>
+                    <p class="overflow_clear">支付宝</p>
+                    <p class="overflow_clear graycl">推荐已安装支付宝客户端的用户使用</p>
+                </div>
+                <div class="fr">
+                    <span class="check_style"><input type="radio" name="payway"></span>
+                </div>
+                <div class="clear"></div>
+            </label>
+        </li>
+        <li>
+            <label>
+                <div class="fl">
+                    <em class="ico_5"></em>
+                    <p class="overflow_clear">支付宝</p>
+                    <p class="overflow_clear graycl">推荐已安装支付宝客户端的用户使用</p>
+                </div>
+                <div class="fr">
+                    <span class="check_style"><input type="radio" name="payway"></span>
+                </div>
+                <div class="clear"></div>
+            </label>
+        </li>
+        <li>
+            <label>
+                <div class="fl">
+                    <em class="ico_6"></em>
+                    <p class="overflow_clear">支付宝</p>
+                    <p class="overflow_clear graycl">推荐已安装支付宝客户端的用户使用</p>
+                </div>
+                <div class="fr">
+                    <span class="check_style"><input type="radio" name="payway"></span>
+                </div>
+                <div class="clear"></div>
+            </label>
+        </li>
+        <li>
+            <label>
+                <div class="fl">
+                    <em class="ico_7"></em>
+                    <p class="overflow_clear">支付宝</p>
+                    <p class="overflow_clear graycl">推荐已安装支付宝客户端的用户使用</p>
+                </div>
+                <div class="fr">
+                    <span class="check_style"><input type="radio" name="payway"></span>
+                </div>
+                <div class="clear"></div>
+            </label>
+        </li>
+        <li>
+            <label>
+                <div class="fl">
+                    <em class="ico_8"></em>
+                    <p class="overflow_clear">支付宝</p>
+                    <p class="overflow_clear graycl">推荐已安装支付宝客户端的用户使用</p>
+                </div>
+                <div class="fr">
+                    <span class="check_style"><input type="radio" name="payway"></span>
+                </div>
+                <div class="clear"></div>
+            </label>
+        </li>
+    </ul>
+    <div class="door_wash_foot mt10">
+    	<div class="fl">
+        	<p>总金额：<span class="pointcl">￥25</span></p>
+        </div>
+        <div class="fr">
+        	<a href="#" class="btn">确认支付</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico1"></i>
+        <p>生活宝</p>
+		</a>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico2"></i>
+        <p>关注</p>
+		</a>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico3"></i>
+        <p>我的</p>
+		</a>
+    </div>
+</footer>
+<script>
+	//数量加减
+	$("[quantity]").click(function(){
+	var quantity = parseInt($("#cart_product_num").val(), 10);
+	if($(this).attr("quantity") == '+'){
+		quantity += 1;
+	}else{
+		quantity -= 1;
+	}
+	if(quantity < 1){
+		quantity = 1;
+	}
+	$("#cart_product_num").val(quantity);
+	});
+</script>
+</body>
+</html>

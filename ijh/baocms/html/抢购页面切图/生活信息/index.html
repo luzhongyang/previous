@@ -1,0 +1,655 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>生活信息首页</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/js.js"></script>
+<script>
+$(function () {
+	$('#selectBoxInput').click(function(){
+		$('.selectList').toggle(300);
+	});
+	$(".selectList li a").click(function () {
+		$("#selectBoxInput").html($(this).html());
+		$('.selectList').hide();
+	});//头部搜索框j
+});
+</script>
+</head>
+<body>
+<div class="topOne">
+    <div class="nr">
+        <div class="left">您好，欢迎访问BAOCMS<a href="#">登陆</a>|<a href="#">注册</a>
+            <div class="topSm"> <span class="topSmt"><em>&nbsp;</em>手机CMS</span>
+                <div class="topSmnr"><img src="../sjimages/login_wx_03.jpg" width="90" height="90" />
+                    <p>扫描下载客户端</p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul>
+            	<li class="liOne"><a class="liOneA" href="#">个人中心<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">抢购管理</a></li>
+                            <li><a href="#">活动管理</a></li>
+                            <li><a href="#">服务管理</a></li>
+                            <li><a href="#">购物管理</a></li>
+                            <li><a href="#">外卖管理</a></li>
+                            <li><a href="#">订座信息</a></li>
+                            <li><a href="#">同城管理</a></li>
+                            <li><a href="#">优惠券管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">我是商家<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">商家登陆</a></li>
+                            <li><a href="#">微信营销</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">快捷导航<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">餐饮频道</a></li>
+                            <li><a href="#">生活资讯</a></li>
+                            <li><a href="#">活动</a></li>
+                            <li><a href="#">积分商城</a></li>
+                            <li><a href="#">购物</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="topTwo">
+    <div class="left">
+        <h1><a href="#"><img src="../sjimages/logo_03.png" width="214" height="53" /></a></h1>
+        <div class="changeCity"> 合肥 <a href="#" class="change">[切换城市]</a> </div>
+    </div>
+    <div class="left center">
+        <div class="searchBox">
+            <div class="selectBox"> <span class="select"  id="selectBoxInput">商家</span>
+                <div  class="selectList">
+                    <ul>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" class="text" value="输入您要搜索的内容" onclick="if(value==defaultValue){value='';this.style.color='#000'}"  onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+            <input type="button" class="submit" value="搜索" />
+        </div>
+        <div class="hotSearch">热门搜索：<a href="#">美食</a><a href="#">酒店</a><a href="#">酒店</a><a href="#">电影</a><a href="#">家政</a><a href="#">洗车</a></div>
+    </div>
+    <div class="right topTwo_b">
+    	<div class="protect">
+            <ul>
+              <li><em>&nbsp;</em><a href="#">随时退</a></li>
+              <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+              <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="nav">
+    <div class="navList">
+    	<!--<div class="navListBg">&nbsp;</div>-->
+        <ul>
+            <li class="navListAll zy_navListAll"><span class="navListAllt">全部抢购分类<em></em></span>
+                <div class="shadowy navAll">
+                	<div class="menu_fllist2">
+                <div class="item2 bo">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">美食</a></div>
+                        <div class="right"><a href="">火锅</a><a href="">自助餐</a><a href="">川菜</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">美食</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">娱乐</a></div>
+                        <div class="right"><a href="">KTV</a><a href="">足疗按</a><a href="">洗浴</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">娱乐</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">酒店</a></div>
+                        <div class="right"><a href="">七天</a><a href="">格力豪泰</a><a href="">锦江</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">酒店</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">电影</a></div>
+                        <div class="right"><a href="">电子通票</a><a href="">选座</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">电影</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">购物</a></div>
+                        <div class="right"><a href="">超市</a><a href="">商场卡</a><a href="">水果</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">购物</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">丽人</a></div>
+                        <div class="right"><a href="">美发</a><a href="">美甲</a><a href="">驾校</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">丽人</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">结婚</a></div>
+                        <div class="right"><a href="">婚庆公司</a><a href="">新娘跟妆</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">结婚</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">生活服务</a></div>
+                        <div class="right"><a href="">汽车服务</a><a href="">装修服务</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">生活服务</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">旅游</a></div>
+                        <div class="right"><a href="">国内游</a><a href="">出境游</a><a href="">周边游</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">旅游</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            		<script type="text/javascript">
+						$('.menu_fllist2 > .item2').hover(function(){
+							var eq = $('.menu_fllist2 > .item2').index(this),				//获取当前滑过是第几个元素
+								h = $('.menu_fllist2').offset().top,						//获取当前下拉菜单距离窗口多少像素
+								s = $(window).scrollTop(),									//获取游览器滚动了多少高度
+								i = $(this).offset().top,									//当前元素滑过距离窗口多少像素
+								item = $(this).children('.menu_flklist2').height(),				//下拉菜单子类内容容器的高度
+								sort = $('.menu_fllist2').height();						//父类分类列表容器的高度
+							
+							if ( item > sort ){												//如果子类的高度小于父类的高度
+								if ( eq == 0 ){
+									$(this).children('.menu_flklist2').css('top', (i-h));
+								} else {
+									$(this).children('.menu_flklist2').css('top', (i-h)+1);
+								}
+							} else {
+								if ( s > h ) {												//判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+									if ( i-s > 0 ){											//则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+										$(this).children('.menu_flklist2').css('top', (s-h)+2 );
+									} else {
+										$(this).children('.menu_flklist2').css('top', (s-h)-(-(i-s))+2 );
+									}
+								} else {
+									$(this).children('.menu_flklist2').css('top', 0 );
+								}
+							}	
+					
+							$(this).addClass('on');
+							$(this).children('.menu_flklist2').css('display','block');
+						},function(){
+							$(this).removeClass('on');
+							$(this).children('.menu_flklist2').css('display','none');
+						});//导航菜单js
+					</script>
+                </div>
+            </li>
+            <li class="navLi"><a class="navA  on" href="#">首页</a></li>
+            <li class="navLi"><a class="navA" href="#">身边抢购</a></li>
+            <li class="navLi"><a class="navA" href="#">活动</a></li>
+            <li class="navLi"><a class="navA" href="#">生活服务</a></li>
+            <li class="navLi"><a class="navA" href="#">同城优购</a></li>
+            <li class="navLi"><a class="navA" href="#">外卖</a></li>
+            <li class="navLi"><a class="navA" href="#">订座</a></li>
+            <li class="navLi"><a class="navA" href="#">同城信息</a></li>
+            <li class="navLi"><a class="navA" href="#">优惠券</a></li>
+            <!--<li class="navLi2"><a class="navA" href="#">更多<em></em></a>
+                <div class="indxLi">
+                    <ul>
+                        <li><a href="#">装修&amp;服务</a></li>
+                        <li><a href="#">婚庆&amp;酒店</a></li>
+                        <li><a href="#">家政&amp;服务</a></li>
+                        <li><a href="#">汽车&amp;驾校</a></li>
+                        <li><a href="#">教育培训</a></li>
+                        <li><a href="#">母婴&amp;亲子</a></li>
+                        <li><a href="#">丽人&amp;保养</a></li>
+                        <li><a href="#">餐饮&amp;娱乐</a></li>
+                    </ul>
+                </div>
+            </li>-->
+        </ul>
+    </div>
+</div>
+<!--top END-->
+<div class="main" style="width:1200px; margin:0 auto; overflow:hidden; height:auto;">
+    <div class="liveadd"> <a href="#" target="_blank" ><img src="../img/life_ad.jpg"></a> </div>
+    <div class="life-flBox">
+        <div class="newsxx">
+        	<div class="goods_flBox">
+                <ul>
+                    <li class="goods_flList">
+                        <div class="left goods_flList_l">地区：</div>
+                        <div class="left goods_flList_r">
+                            <a class="goods_flListA on" href="#">全部</a>
+                            <a class="goods_flListA" href="#">蜀山区</a>
+                            <a class="goods_flListA" href="#">庐阳区</a>
+                            <a class="goods_flListA" href="#">瑶海区</a>
+                            <a class="goods_flListA" href="#">包河区</a>
+                            <a class="goods_flListA" href="#">经开区</a>
+                            <a class="goods_flListA" href="#">政务区</a>
+                            <a class="goods_flListA" href="#">滨湖区</a>
+                            <a class="goods_flListA" href="#">新站区</a>
+                            <a class="goods_flListA" href="#">高新区</a>
+                            <a class="goods_flListA" href="#">巢湖市</a>
+                            <a class="goods_flListA" href="#">肥东县</a>
+                            <a class="goods_flListA" href="#">肥西县</a>
+                            <a class="goods_flListA" href="#">长丰县</a>
+                            <a class="goods_flListA" href="#">近郊</a>
+                            <a class="goods_flListA" href="#">庐江县</a>
+                        </div>
+                    </li>
+                    
+                    <li class="goods_flList">
+                    新消息：<a href="#">关于2008操作系统部分用户手机搜索不能用的解决方案</a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="newsRight"> <a href="#" target="_blank" > <img src="../img/life_ad2.jpg"></a> </div>
+    </div>
+    <div class="xxfx">
+        <div class="col-one">
+            <h3 class="xx"><em></em>微站 </h3>
+            <h4><a href="#" target="_blank">微站6期PK，奖上加奖</a></h4>
+            <div class="colBOX"> <em><a href="#" target="_blank">免费开通微博</a></em> <em><a href="#" target="_blank">微站论坛</a></em> <em><a href="#" target="_blank">我关注的微站</a></em> <em><a href="#" target="_blank">热门论坛</a></em> </div>
+            <div class="cl"></div>
+            <h3 class="xx"><em class="x2"></em>二手<code></code> </h3>
+            <dl>
+                <dt><a href="#" title="" target="_blank">手机及配件</a></dt>
+                <dd> <a href="#" title=""  target="_blank">苹果</a> <a href="/life/main/cat/1/s2/4.html" title=""  target="_blank">三星</a> <a href="/life/main/cat/1/s2/5.html" title=""  target="_blank">魅族</a> <a href="/life/main/cat/1/s2/6.html" title=""  target="_blank">htc</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/2.html" title="" target="_blank">数码产品</a></dt>
+                <dd> <a href="/life/main/cat/2/s2/34.html" title=""  target="_blank">相机</a> <a href="/life/main/cat/2/s2/35.html" title=""  target="_blank">手机及其配件</a> <a href="/life/main/cat/2/s2/36.html" title=""  target="_blank">MP3/MP4</a> <a href="/life/main/cat/2/s2/37.html" title=""  target="_blank">镜头/配件</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/4.html" title="" target="_blank">家用电器</a></dt>
+                <dd> <a href="/life/main/cat/4/s2/44.html" title=""  target="_blank">空调</a> <a href="/life/main/cat/4/s2/45.html" title=""  target="_blank">冰箱/冰柜</a> <a href="/life/main/cat/4/s2/46.html" title=""  target="_blank">厨房电器</a> <a href="/life/main/cat/4/s2/47.html" title=""  target="_blank">电视机</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/5.html" title="" target="_blank">日常用品</a></dt>
+                <dd> <a href="/life/main/cat/5/s2/70.html" title=""  target="_blank">家居用品</a> <a href="/life/main/cat/5/s2/71.html" title=""  target="_blank">化妆品</a> <a href="/life/main/cat/5/s2/72.html" title=""  target="_blank">家纺</a> <a href="/life/main/cat/5/s2/73.html" title=""  target="_blank">烟酒</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/9.html" title="" target="_blank">笔记本</a></dt>
+                <dd> <a href="/life/main/cat/9/s2/153.html" title=""  target="_blank">Gateway/捷威</a> <a href="/life/main/cat/9/s2/154.html" title=""  target="_blank">QHTF/清华同方</a> <a href="/life/main/cat/9/s2/155.html" title=""  target="_blank">Toshiba/东芝</a> <a href="/life/main/cat/9/s2/156.html" title=""  target="_blank">ASUS/华硕</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/10.html" title="" target="_blank">家具/办公家具</a></dt>
+                <dd> <a href="/life/main/cat/10/s2/184.html" title=""  target="_blank">桌子/椅子/凳子</a> <a href="/life/main/cat/10/s2/185.html" title=""  target="_blank">床/床垫</a> <a href="/life/main/cat/10/s2/186.html" title=""  target="_blank">沙发/茶几</a> <a href="/life/main/cat/10/s2/187.html" title=""  target="_blank">架子</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/11.html" title="" target="_blank">手机号码</a></dt>
+                <dd> <a href="/life/main/cat/11/s2/200.html" title=""  target="_blank">移动</a> <a href="/life/main/cat/11/s2/201.html" title=""  target="_blank">联通</a> <a href="/life/main/cat/11/s2/202.html" title=""  target="_blank">电信</a> <a href="/life/main/cat/11/s2/203.html" title=""  target="_blank">小灵通/固话</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/12.html" title="" target="_blank">母婴/玩具</a></dt>
+                <dd> <a href="/life/main/cat/12/s2/219.html" title=""  target="_blank">婴孩服饰</a> <a href="/life/main/cat/12/s2/220.html" title=""  target="_blank">食品/奶粉</a> <a href="/life/main/cat/12/s2/221.html" title=""  target="_blank">玩具</a> <a href="/life/main/cat/12/s2/222.html" title=""  target="_blank">母婴用品</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/14.html" title="" target="_blank">台式电脑及配件</a></dt>
+                <dd> <a href="/life/main/cat/14/s2/257.html" title=""  target="_blank">Gateway/捷威</a> <a href="/life/main/cat/14/s2/258.html" title=""  target="_blank">QHTF/清华同方</a> <a href="/life/main/cat/14/s2/259.html" title=""  target="_blank">Toshiba/东芝</a> <a href="/life/main/cat/14/s2/260.html" title=""  target="_blank">ASUS/华硕</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/17.html" title="" target="_blank">平板电脑</a></dt>
+                <dd> <a href="/life/main/cat/17/s2/324.html" title=""  target="_blank">纽曼</a> <a href="/life/main/cat/17/s2/325.html" title=""  target="_blank">摩托罗拉</a> <a href="/life/main/cat/17/s2/326.html" title=""  target="_blank">ThinkPad</a> <a href="/life/main/cat/17/s2/327.html" title=""  target="_blank">索尼</a> </dd>
+            </dl>
+            <div class="colBOX"> <em><a href="/life/main/cat/3.html" title="" target="_blank">门票卡券</a></em><em><a href="/life/main/cat/8.html" title="" target="_blank">运动/图书/乐器</a></em><em><a href="/life/main/cat/6.html" title="" target="_blank">办公经营设备</a></em><em><a href="/life/main/cat/7.html" title="" target="_blank">服装/配饰/鞋包</a></em><em><a href="/life/main/cat/13.html" title="" target="_blank">工艺品/收藏品</a></em><em><a href="/life/main/cat/15.html" title="" target="_blank">食品/农产品</a></em><em><a href="/life/main/cat/16.html" title="" target="_blank">设备租赁</a></em><em><a href="/life/main/cat/18.html" title="" target="_blank">工业设备</a></em><em><a href="/life/main/cat/19.html" title="" target="_blank">其他物品</a></em><em><a href="/life/main/cat/20.html" title="" target="_blank">物品回收</a></em> </div>
+        </div>
+        <div class="col-one">
+            <h3 class="xx"><em class="x3"></em>车辆 <code></code> </h3>
+            <dl>
+                <dt><a href="/life/main/cat/21.html" title="" target="_blank">二手轿车</a></dt>
+                <dd> <a href="/life/main/cat/21/s2/397.html" title=""  target="_blank">跑车</a> <a href="/life/main/cat/21/s2/398.html" title=""  target="_blank">MPV/商务车</a> <a href="/life/main/cat/21/s2/399.html" title=""  target="_blank">豪华车</a> <a href="/life/main/cat/21/s2/400.html" title=""  target="_blank">中型车</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/24.html" title="" target="_blank">电动车</a></dt>
+                <dd> <a href="/life/main/cat/24/s2/707.html" title=""  target="_blank">爱玛</a> <a href="/life/main/cat/24/s2/708.html" title=""  target="_blank">新日</a> <a href="/life/main/cat/24/s2/709.html" title=""  target="_blank">绿源</a> <a href="/life/main/cat/24/s2/710.html" title=""  target="_blank">立马</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/25.html" title="" target="_blank">自行车</a></dt>
+                <dd> <a href="/life/main/cat/25/s2/732.html" title=""  target="_blank">捷安特 </a> <a href="/life/main/cat/25/s2/733.html" title=""  target="_blank">美利达 </a> <a href="/life/main/cat/25/s2/734.html" title=""  target="_blank">凤凰 </a> <a href="/life/main/cat/25/s2/735.html" title=""  target="_blank">永久 </a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/26.html" title="" target="_blank">二手货车</a></dt>
+                <dd> <a href="/life/main/cat/26/s2/760.html" title=""  target="_blank">瑞沃奥威 </a> <a href="/life/main/cat/26/s2/761.html" title=""  target="_blank">欧曼 </a> <a href="/life/main/cat/26/s2/762.html" title=""  target="_blank">解放 </a> <a href="/life/main/cat/26/s2/763.html" title=""  target="_blank">江淮 </a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/27.html" title="" target="_blank">摩托车/燃气车</a></dt>
+                <dd> <a href="/life/main/cat/27/s2/799.html" title=""  target="_blank">建设 </a> <a href="/life/main/cat/27/s2/800.html" title=""  target="_blank">雅马哈 </a> <a href="/life/main/cat/27/s2/801.html" title=""  target="_blank">本田 </a> <a href="/life/main/cat/27/s2/802.html" title=""  target="_blank">铃木 </a> </dd>
+            </dl>
+            <div class="col2box"> <span><a href="/life/main/cat/23.html" title="" target="_blank">个人车源</a></span><span><a href="/life/main/cat/28.html" title="" target="_blank">拼车/顺风车</a></span><span><a href="/life/main/cat/29.html" title="" target="_blank">汽车用品/配件</a></span><span><a href="/life/main/cat/30.html" title="" target="_blank">新车优惠/4S店</a></span><span><a href="/life/main/cat/31.html" title="" target="_blank">汽修保养</a></span><span><a href="/life/main/cat/32.html" title="" target="_blank">二手工程车</a></span><span><a href="/life/main/cat/33.html" title="" target="_blank">过户/验车</a></span><span><a href="/life/main/cat/34.html" title="" target="_blank">面包车/客车</a></span><span><a href="/life/main/cat/35.html" title="" target="_blank">拖拉机/收割机</a></span><span><a href="/life/main/cat/36.html" title="" target="_blank">本地下线车</a></span><span><a href="/life/main/cat/37.html" title="" target="_blank">车辆收购/评估</a></span> </div>
+            <h3 class="xx"><em class="x4"></em>求职<code></code> </h3>
+            <div class="col2box"> <span><a href="/life/main/cat/38.html" title="" target="_blank">全职求职意向</a></span><span><a href="/life/main/cat/39.html" title="" target="_blank">兼职求职意向</a></span> </div>
+            <h3 class="xx"><em class="x5"></em>交友<code></code> </h3>
+            <dl>
+                <dt><a href="/life/main/cat/40.html" title="" target="_blank">结伴活动</a></dt>
+                <dd> <a href="/life/main/cat/40/s1/1259.html" title=""  target="_blank">旅游</a> <a href="/life/main/cat/40/s1/1260.html" title=""  target="_blank">运动</a> <a href="/life/main/cat/40/s1/1261.html" title=""  target="_blank">唱歌/泡吧</a> <a href="/life/main/cat/40/s1/1262.html" title=""  target="_blank">创业</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/41.html" title="" target="_blank">征婚</a></dt>
+                <dd> <a href="/life/main/cat/41/s1/1275.html" title=""  target="_blank">女</a> <a href="/life/main/cat/41/s1/1276.html" title=""  target="_blank">男</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/42.html" title="" target="_blank">找女友/找男友</a></dt>
+                <dd> <a href="/life/main/cat/42/s1/1285.html" title=""  target="_blank">女</a> <a href="/life/main/cat/42/s1/1286.html" title=""  target="_blank">男</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/46.html" title="" target="_blank">拼车/顺风车</a></dt>
+                <dd> <a href="/life/main/cat/46/s1/1331.html" title=""  target="_blank">没车</a> <a href="/life/main/cat/46/s1/1332.html" title=""  target="_blank">有车</a> </dd>
+            </dl>
+            <div class="colBOX"> <em><a href="/life/main/cat/43.html" title="" target="_blank">婚介服务</a></em><em><a href="/life/main/cat/44.html" title="" target="_blank">技能交流</a></em><em><a href="/life/main/cat/45.html" title="" target="_blank">找人/寻物</a></em> </div>
+        </div>
+        <div class="col-one">
+            <h3 class="xx"><em class="x6"></em>房屋 <code></code> </h3>
+            <dl>
+                <dt><a href="/life/main/cat/47.html" title="" target="_blank">租房/出租</a></dt>
+                <dd> <a href="/life/main/cat/47/s1/1339.html" title=""  target="_blank">整套出租</a> <a href="/life/main/cat/47/s1/1340.html" title=""  target="_blank">单间出租</a> <a href="/life/main/cat/47/s1/1341.html" title=""  target="_blank">床位出租</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/48.html" title="" target="_blank">个人租房</a></dt>
+                <dd> <a href="/life/main/cat/48/s1/1355.html" title=""  target="_blank">整套出租</a> <a href="/life/main/cat/48/s1/1356.html" title=""  target="_blank">单间出租</a> <a href="/life/main/cat/48/s1/1357.html" title=""  target="_blank">床位出租</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/49.html" title="" target="_blank">二手房出售</a></dt>
+                <dd> <a href="/life/main/cat/49/s1/1371.html" title=""  target="_blank">限70平米以下</a> <a href="/life/main/cat/49/s1/1372.html" title=""  target="_blank">70平米—90平米</a> <a href="/life/main/cat/49/s1/1373.html" title=""  target="_blank">90平米—110平米</a> <a href="/life/main/cat/49/s1/1374.html" title=""  target="_blank">110平米—150平米</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/52.html" title="" target="_blank">求租/求购</a></dt>
+            </dl>
+            <div class="col2box"> <span><a href="/life/main/cat/50.html" title="" target="_blank">商铺出售</a></span><span><a href="/life/main/cat/51.html" title="" target="_blank">店铺转让/出租</a></span><span><a href="/life/main/cat/53.html" title="" target="_blank">写字楼出租</a></span><span><a href="/life/main/cat/54.html" title="" target="_blank">日租/短租</a></span><span><a href="/life/main/cat/55.html" title="" target="_blank">厂房/仓库/土地</a></span><span><a href="/life/main/cat/56.html" title="" target="_blank">写字楼出售</a></span><span><a href="/life/main/cat/57.html" title="" target="_blank">新房出售</a></span> </div>
+            <h3 class="xx"><em class="x7"></em>培训<code></code> </h3>
+            <dl>
+                <dt><a href="/life/main/cat/58.html" title="" target="_blank">中小学教育</a></dt>
+                <dd> <a href="/life/main/cat/58/s1/1540.html" title=""  target="_blank">初中</a> <a href="/life/main/cat/58/s1/1541.html" title=""  target="_blank">高中</a> <a href="/life/main/cat/58/s1/1542.html" title=""  target="_blank">小学</a> <a href="/life/main/cat/58/s1/1543.html" title=""  target="_blank">小升初</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/59.html" title="" target="_blank">职业技能</a></dt>
+                <dd> <a href="/life/main/cat/59/s1/1553.html" title=""  target="_blank">财会/金融</a> <a href="/life/main/cat/59/s1/1554.html" title=""  target="_blank">建筑</a> <a href="/life/main/cat/59/s1/1555.html" title=""  target="_blank">公务员</a> <a href="/life/main/cat/59/s1/1556.html" title=""  target="_blank">美容美发</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/60.html" title="" target="_blank">学历教育</a></dt>
+                <dd> <a href="/life/main/cat/60/s1/1575.html" title=""  target="_blank">自考</a> <a href="/life/main/cat/60/s1/1576.html" title=""  target="_blank">专科/本科</a> <a href="/life/main/cat/60/s1/1577.html" title=""  target="_blank">网络/远程</a> <a href="/life/main/cat/60/s1/1578.html" title=""  target="_blank">成人高考</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/61.html" title="" target="_blank">电脑培训</a></dt>
+                <dd> <a href="/life/main/cat/61/s1/1591.html" title=""  target="_blank">办公自动化</a> <a href="/life/main/cat/61/s1/1592.html" title=""  target="_blank">网络营销</a> <a href="/life/main/cat/61/s1/1593.html" title=""  target="_blank">认证培训</a> <a href="/life/main/cat/61/s1/1594.html" title=""  target="_blank">网络工程/管理</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/63.html" title="" target="_blank">外语培训</a></dt>
+                <dd> <a href="/life/main/cat/63/s1/1626.html" title=""  target="_blank">韩语</a> <a href="/life/main/cat/63/s1/1627.html" title=""  target="_blank">英语</a> <a href="/life/main/cat/63/s1/1628.html" title=""  target="_blank">日语</a> <a href="/life/main/cat/63/s1/1629.html" title=""  target="_blank">俄语</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/64.html" title="" target="_blank">设计培训</a></dt>
+                <dd> <a href="/life/main/cat/64/s1/1642.html" title=""  target="_blank">室内设计</a> <a href="/life/main/cat/64/s1/1643.html" title=""  target="_blank">平面设计</a> <a href="/life/main/cat/64/s1/1644.html" title=""  target="_blank">模具设计</a> <a href="/life/main/cat/64/s1/1645.html" title=""  target="_blank">网页设计</a> </dd>
+            </dl>
+            <div class="col2box"> <span><a href="/life/main/cat/62.html" title="" target="_blank">艺术培训</a></span><span><a href="/life/main/cat/65.html" title="" target="_blank">婴幼儿教育</a></span><span><a href="/life/main/cat/66.html" title="" target="_blank">体育培训</a></span> </div>
+        </div>
+        <div class="col-one">
+            <h3 class="xx"><em class="x8"></em>招聘 <code></code> </h3>
+            <dl>
+                <dt><a href="/life/main/cat/67.html" title="" target="_blank">工人/技工</a></dt>
+                <dd> <a href="/life/main/cat/67/s1/1688.html" title=""  target="_blank">普工</a> <a href="/life/main/cat/67/s1/1689.html" title=""  target="_blank">安装/维修工</a> <a href="/life/main/cat/67/s1/1690.html" title=""  target="_blank">焊工</a> <a href="/life/main/cat/67/s1/1691.html" title=""  target="_blank">电工</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/68.html" title="" target="_blank">销售/金融</a></dt>
+                <dd> <a href="/life/main/cat/68/s1/1712.html" title=""  target="_blank">销售专员</a> <a href="/life/main/cat/68/s1/1713.html" title=""  target="_blank">电话销售</a> <a href="/life/main/cat/68/s1/1714.html" title=""  target="_blank">销售经理/主管</a> <a href="/life/main/cat/68/s1/1715.html" title=""  target="_blank">保险/金融顾问</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/69.html" title="" target="_blank">保健按摩</a></dt>
+                <dd> <a href="/life/main/cat/69/s1/1735.html" title=""  target="_blank">足疗师</a> <a href="/life/main/cat/69/s1/1736.html" title=""  target="_blank">按摩师</a> <a href="/life/main/cat/69/s1/1737.html" title=""  target="_blank">保健师</a> <a href="/life/main/cat/69/s1/1738.html" title=""  target="_blank">其他</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/70.html" title="" target="_blank">美工/设计</a></dt>
+                <dd> <a href="/life/main/cat/70/s1/1747.html" title=""  target="_blank">室内设计</a> <a href="/life/main/cat/70/s1/1748.html" title=""  target="_blank">平面设计</a> <a href="/life/main/cat/70/s1/1749.html" title=""  target="_blank">广告设计</a> <a href="/life/main/cat/70/s1/1750.html" title=""  target="_blank">CAD制图</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/71.html" title="" target="_blank">人事/行政/文员</a></dt>
+                <dd> <a href="/life/main/cat/71/s1/1765.html" title=""  target="_blank">文员</a> <a href="/life/main/cat/71/s1/1766.html" title=""  target="_blank">行政专员/助理</a> <a href="/life/main/cat/71/s1/1767.html" title=""  target="_blank">前台/总机/接待</a> <a href="/life/main/cat/71/s1/1768.html" title=""  target="_blank">人事专员/助理</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/72.html" title="" target="_blank">营业员/促销/零售</a></dt>
+                <dd> <a href="/life/main/cat/72/s1/1789.html" title=""  target="_blank">营业员</a> <a href="/life/main/cat/72/s1/1790.html" title=""  target="_blank">导购员</a> <a href="/life/main/cat/72/s1/1791.html" title=""  target="_blank">促销员</a> <a href="/life/main/cat/72/s1/1792.html" title=""  target="_blank">店长</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/82.html" title="" target="_blank">客服</a></dt>
+                <dd> <a href="/life/main/cat/82/s1/1938.html" title=""  target="_blank">客服专员/助理</a> <a href="/life/main/cat/82/s1/1939.html" title=""  target="_blank">客服经理/主管</a> <a href="/life/main/cat/82/s1/1940.html" title=""  target="_blank">其他</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/84.html" title="" target="_blank">计算机/网络/通信</a></dt>
+                <dd> <a href="/life/main/cat/84/s1/1963.html" title=""  target="_blank">技术支持/维护</a> <a href="/life/main/cat/84/s1/1964.html" title=""  target="_blank">游戏设计/开发</a> <a href="/life/main/cat/84/s1/1965.html" title=""  target="_blank">网络工程师</a> <a href="/life/main/cat/84/s1/1966.html" title=""  target="_blank">网站运营</a> </dd>
+            </dl>
+            <div class="col2box"> <span><a href="/life/main/cat/73.html" title="" target="_blank">服务员/收银员</a></span><span><a href="/life/main/cat/74.html" title="" target="_blank">厨师/切配</a></span><span><a href="/life/main/cat/75.html" title="" target="_blank">送货/快递/仓管</a></span><span><a href="/life/main/cat/76.html" title="" target="_blank">保安</a></span><span><a href="/life/main/cat/77.html" title="" target="_blank">家政/保洁</a></span><span><a href="/life/main/cat/78.html" title="" target="_blank">司机/驾驶员</a></span><span><a href="/life/main/cat/79.html" title="" target="_blank">老师/培训师</a></span><span><a href="/life/main/cat/80.html" title="" target="_blank">财务/会计</a></span><span><a href="/life/main/cat/81.html" title="" target="_blank">淘宝招聘</a></span><span><a href="/life/main/cat/83.html" title="" target="_blank">美容美发</a></span><span><a href="/life/main/cat/85.html" title="" target="_blank">市场/公关/媒介</a></span><span><a href="/life/main/cat/86.html" title="" target="_blank">人才招聘会</a></span><span><a href="/life/main/cat/87.html" title="" target="_blank">翻译</a></span><span><a href="/life/main/cat/88.html" title="" target="_blank">出国劳务</a></span><span><a href="/life/main/cat/89.html" title="" target="_blank">其他招聘</a></span> </div>
+        </div>
+        <div class="col-one">
+            <h3 class="xx"><em class="x9"></em>服务 <code></code> </h3>
+            <dl>
+                <dt><a href="/life/main/cat/90.html" title="" target="_blank">招商加盟</a></dt>
+                <dd> <a href="/life/main/cat/90/s1/2033.html" title=""  target="_blank">产品代理</a> <a href="/life/main/cat/90/s1/2034.html" title=""  target="_blank">服装箱包</a> <a href="/life/main/cat/90/s1/2035.html" title=""  target="_blank">餐饮加盟</a> <a href="/life/main/cat/90/s1/2036.html" title=""  target="_blank">教育培训</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="/life/main/cat/95.html" title="" target="_blank">房屋装修</a></dt>
+                <dd> <a href="/life/main/cat/95/s1/2099.html" title=""  target="_blank">新房装修</a> <a href="/life/main/cat/95/s1/2100.html" title=""  target="_blank">店铺装修</a> <a href="/life/main/cat/95/s1/2101.html" title=""  target="_blank">办公室/写字楼装修</a> <a href="/life/main/cat/95/s1/2102.html" title=""  target="_blank">二手房装修</a> </dd>
+            </dl>
+            <div class="colBOX colBOX2"> <em><a href="/life/main/cat/91.html" title="" target="_blank">担保/贷款</a></em><em><a href="/life/main/cat/92.html" title="" target="_blank">家电维修</a></em><em><a href="/life/main/cat/93.html" title="" target="_blank">建材装饰</a></em><em><a href="/life/main/cat/94.html" title="" target="_blank">公司注册</a></em><em><a href="/life/main/cat/96.html" title="" target="_blank">投资理财</a></em><em><a href="/life/main/cat/97.html" title="" target="_blank">会计/审计</a></em><em><a href="/life/main/cat/98.html" title="" target="_blank">电脑维修</a></em><em><a href="/life/main/cat/99.html" title="" target="_blank">快递/物流</a></em><em><a href="/life/main/cat/100.html" title="" target="_blank">农林牧副渔</a></em><em><a href="/life/main/cat/101.html" title="" target="_blank">设计策划</a></em><em><a href="/life/main/cat/102.html" title="" target="_blank">管道疏通</a></em><em><a href="/life/main/cat/103.html" title="" target="_blank">租车服务</a></em><em><a href="/life/main/cat/104.html" title="" target="_blank">旅游度假</a></em><em><a href="/life/main/cat/105.html" title="" target="_blank">摄像摄影</a></em><em><a href="/life/main/cat/106.html" title="" target="_blank">保洁/清洗</a></em><em><a href="/life/main/cat/107.html" title="" target="_blank">陪驾/代驾</a></em><em><a href="/life/main/cat/108.html" title="" target="_blank">搬家服务</a></em><em><a href="/life/main/cat/109.html" title="" target="_blank">驾校服务</a></em><em><a href="/life/main/cat/110.html" title="" target="_blank">开锁/修锁</a></em><em><a href="/life/main/cat/111.html" title="" target="_blank">休闲娱乐</a></em><em><a href="/life/main/cat/112.html" title="" target="_blank">印刷/喷绘</a></em><em><a href="/life/main/cat/113.html" title="" target="_blank">机票/签证</a></em><em><a href="/life/main/cat/114.html" title="" target="_blank">礼品定制</a></em><em><a href="/life/main/cat/115.html" title="" target="_blank">家具维修</a></em><em><a href="/life/main/cat/116.html" title="" target="_blank">美容纤体</a></em><em><a href="/life/main/cat/117.html" title="" target="_blank">保姆/月嫂</a></em><em><a href="/life/main/cat/118.html" title="" target="_blank">网站建设</a></em><em><a href="/life/main/cat/119.html" title="" target="_blank">鲜花/盆景</a></em><em><a href="/life/main/cat/120.html" title="" target="_blank">婚庆/化妆</a></em><em><a href="/life/main/cat/121.html" title="" target="_blank">庆典/演出</a></em><em><a href="/life/main/cat/122.html" title="" target="_blank">律师服务</a></em><em><a href="/life/main/cat/123.html" title="" target="_blank">外卖/送水</a></em><em><a href="/life/main/cat/124.html" title="" target="_blank">酒店/宾馆</a></em><em><a href="/life/main/cat/125.html" title="本地本地名站信息" target="_blank">本地名站</a></em><em><a href="/life/main/cat/126.html" title="" target="_blank">翻译/速记</a></em><em><a href="/life/main/cat/127.html" title="" target="_blank">整形美容</a></em><em><a href="/life/main/cat/128.html" title="" target="_blank">医疗健康</a></em><em><a href="/life/main/cat/129.html" title="" target="_blank">其他服务</a></em> </div>
+            <div class="cl"></div>
+            <h3 class="xx"><em class="x10"></em>兼职 </h3>
+            <div class="colBOX colBOX2"> <em><a href="/life/main/cat/130.html" title="" target="_blank">其他兼职</a></em><em><a href="/life/main/cat/131.html" title="" target="_blank">家教/老师</a></em><em><a href="/life/main/cat/132.html" title="" target="_blank">派发/促销</a></em><em><a href="/life/main/cat/133.html" title="" target="_blank">模特/礼仪</a></em><em><a href="/life/main/cat/134.html" title="" target="_blank">学生兼职</a></em><em><a href="/life/main/cat/135.html" title="" target="_blank">餐厅/服务员</a></em><em><a href="/life/main/cat/136.html" title="" target="_blank">网站/设计</a></em><em><a href="/life/main/cat/137.html" title="" target="_blank">会计/财务</a></em><em><a href="#" title="" target="_blank">客服</a></em><em><a href="#" title="" target="_blank">市场调查</a></em><em><a href="#" title="" target="_blank">充场/座谈会</a></em><em><a href="/life/main/cat/141.html" title="" target="_blank">演员</a></em> </div>
+            <div class="cl"></div>
+            <h3 class="xx"><em class="x11"></em>宠物<code></code> </h3>
+            <dl>
+                <dt><a href="#" title="" target="_blank">狗狗</a></dt>
+                <dd> <a href="#" title=""  target="_blank">泰迪</a> <a href="#" title=""  target="_blank">金毛</a> <a href="#" title=""  target="_blank">比熊</a> <a href="#" title=""  target="_blank">萨摩耶</a> </dd>
+            </dl>
+            <dl>
+                <dt><a href="#" title="" target="_blank">其它宠物</a></dt>
+                <dd> <a href="#" title=""  target="_blank">其他水族</a> <a href="#" title=""  target="_blank">奇石盆景</a> <a href="#" title=""  target="_blank">玩赏鸟</a> <a href="#" title=""  target="_blank">观赏鱼</a> </dd>
+            </dl>
+            <div class="col2box"> <em><a href="#" title="" target="_blank">宠物免费赠送</a></em><em><a href="#" title="" target="_blank">猫猫</a></em><em><a href="#" title="" target="_blank">宠物服务/配种</a></em><em><a href="#" title="" target="_blank">宠物用品/食品</a></em> </div>
+        </div>
+    </div>
+    <div class="cl"></div>
+    <div class="xxadd"> <a href="#" target="_blank" > <img width="184" height="90" src="../img/life_ad3.jpg"></a> <a href="#" target="_blank" > <img width="184" height="90" src="../img/life_ad4.jpg"></a> </div>
+</div>
+<div class="footerOut">
+    <div class="footer">
+        <div class="footNav">
+            <div class="left topTwo_b">
+                <div class="tel">0551-63641901<p>周一至周日 9:00-22:00</p><p>客服电话 免长途费</p></div>
+                <div class="protect">
+                    <ul>
+                        <li><em>&nbsp;</em><a href="#">随时退</a></li>
+                        <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+                        <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="center">
+                <div class="footNavLi">
+                    <ul>
+                        <li class="footerLi">
+                        	<h3>公司信息</h3>
+                        	<ul>
+                            	<li><a href="#">关于我们</a></li>
+                                <li><a href="#">联系我们</a></li>
+                                <li><a href="#">人才招聘</a></li>
+                                <li><a href="#">免责声明</a></li>
+                            </ul>
+                        </li>
+                        <li class="footerLi">
+                        	<h3>商户合作</h3>
+                        	<ul>
+                            	<li><a href="#">商家入驻</a></li>
+                                <li><a href="#">广告合作</a></li>
+                                <li><a href="#">商家新闻</a></li>
+                            </ul>
+                        </li>
+                        <li class="footerLi">
+                        	<h3>用户帮助</h3>
+                        	<ul>
+                            	<li><a href="#">服务协议</a></li>
+                                <li><a href="#">退款承诺</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="copy">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有 php微信O2O生活宝门户系统</div>
+            </div>
+            <div class="right"><img src="../sjimages/login_wx_03.jpg" width="149" height="146" /><p>扫一扫关注BAOCMS</p></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

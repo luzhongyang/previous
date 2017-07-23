@@ -1,0 +1,100 @@
+<include file="public:header"/>
+<div class="content_right">
+<div class="tgdd">
+    <div class="tgdd_nr">
+        <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <th>ID</th>
+            <th>产品</th>
+            <th width='20%'>产品简介</th>
+            <th>金额</th>
+            <th>运费</th>
+            <th>产品类型</th>
+            <th>是否中奖</th>
+            <th>时间</th>
+            <th>状态</th>
+            <if condition='$goods_crowd.status NEQ 2'><th>操作</th></if>
+        </tr>
+        <foreach name="list" item="var">
+            <tr>
+                <td><{$var.list_id}></td>
+                <td>
+                    <img src="__ROOT__/attachs/<{$var.type.img}>" width='50' height='50' />
+                </td>
+                <td><{$var.type.content}></td>
+                <td>¥<{:round($var['type']['price']/100,2)}></td>
+                <td><if condition="$var['type']['yunfei'] EQ 0">免运费<else/>¥<{:round($var['type']['yunfei']/100,2)}></if></td>
+                <td><eq name='var.type.choujiang' value='1'><span style='color:#ff0000;'>抽奖类</span><else/><span style='color:#999999;'>普通</span></eq></td>
+                <td>
+                    <eq name='var.type.choujiang' value='1'>
+                        <eq name='var.is_zhong' value='1'><span style='color:#ff0000;'>已中奖</span><else/>未中奖</eq>
+                    <else/>
+                        ---
+                    </eq>
+                </td>
+                <td><{$var.dateline|date='Y-m-d H:i',###}></td>
+                <td>
+                    <eq name='goods_crowd.status' value='0'>
+                        <if condition='$var.order_status == 0 and $var.pay_status eq 0'>
+                            <if condition="$var['type']['have_num'] EGT $var['type']['max_num'] and $var['type']['max_num'] NEQ 0">
+                                限额已满(未付款)
+                            <else/>
+                                待付款
+                            </if>
+                        <elseif condition='$var.order_status == 0 and $var.pay_status eq 1'/>
+                            已付款
+                        </if>
+                    </eq>
+                    <eq name='goods_crowd.status' value='1'>
+                        <if condition='$var.order_status == 0 and $var.pay_status eq 0'>
+                            <if condition="$var['type']['have_num'] EGT $var['type']['max_num'] and $var['type']['max_num'] NEQ 0">
+                                限额已满(未付款)
+                            <else/>
+                                待付款
+                            </if>
+                        </if>
+                        <if condition='$var.order_status == 0 and $var.pay_status eq 1'>
+                            等待发货
+                        </if>
+                        <if condition='$var.order_status == 1'>
+                            待收货
+                        </if>
+                        <if condition='$var.order_status == 2'>
+                            <span style='color:#999999;'>已完成</span>
+                        </if>
+                    </eq>
+                    <eq name='goods_crowd.status' value='2'>
+                        <if condition='$var.pay_status == 1'>
+                            <if condition='$var.order_status == -1'>
+                                已退款
+                            <elseif condition='$var.order_status == 0'/>
+                                等待退款
+                            </if>
+                        <else/>
+                            众筹失败
+                        </if>
+                    </eq>
+                </td>
+                <if condition='$goods_crowd.status NEQ 2'>
+                    <td>
+                    <if condition='$var.order_status == 0 and $var.pay_status eq 0'>
+                        <if condition="$var['type']['have_num'] LT $var['type']['max_num'] or $var['type']['max_num'] EQ 0">
+                            <a class="myInfor_sx myInfor_sx_fk" href="<{:U('pchome/mall/crowdpay',array('list_id'=>$var['list_id']))}>" target='_blank'>支付</a>
+                        </if>
+                    <elseif condition='$var.order_status == 1'/>
+                        <a class="myInfor_sx" mini="confirm" href="<{:U('crowd/confirm_goods',array('list_id'=>$var['list_id']))}>">收货</a>
+                    </if>
+                    </td>
+                </if>
+            </tr>
+            <tr class="addr">
+                <td colspan="11">发货地址：<{$var.addr}>(<{$var.mobile}>，<{$var.name}>)</td>
+            </tr>
+        </foreach>
+    </table>
+    </div>
+    </div>
+</div>
+</div>
+</div></div>
+<include file="public:footer"/>

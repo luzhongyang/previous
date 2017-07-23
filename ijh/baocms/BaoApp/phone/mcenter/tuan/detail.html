@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/css_1.css"/>
+<script src="../../js/appcan.js"></script>
+<script src="../../js/appcan.control.js"></script>
+<script src="../../js/zy_control.js"></script>
+<script src="../../js/application.js"></script>
+<script src="../../js/application.init.js"></script>
+</head>
+<body>  
+<header>
+    <i class="icon-goback" onclick="baoapp.helper.goback()"></i>
+    <div class="title">订单详情</div>
+    <i class=" icon-more"></i>
+</header>
+<div id="content">
+<!--模板站位-->
+</div>
+<footer><script src="../../js/application.footer.js"></script></footer>
+</body>
+<script type="text/template" id="tmpl_tuan_detail">
+<div class="order_zt">
+        <div class="left">
+            <p class="order_p">订单编号：%orderNum%</p>
+            <p class="order_p">订单金额：¥%totalPrice%</p>
+        </div>
+        <div class="right">
+            <p class="order_p">下单时间：%createTime%</p>
+            <p class="order_p">订单状态：<a class="myInfor_sx myInfor_sx_fk">%status%</a>
+            </p>
+        </div>
+    </div>
+    <div class="order_ztbg">&nbsp;</div>
+    <div class="orderBox">
+        <div class="order_bg">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr class="order_trt">
+                    <td width="50%">商品</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>总价</td>
+                </tr>
+                <tr class="order_trnr">
+                    <td>%g_name%</td>
+                    <td>&yen;%g_price%</td>
+                    <td>%num%</td>
+                    <td>&yen;%totalPrice%</td>
+                </tr>               
+            </table>
+            <div class="order_mjzt">
+                <ul>
+                    <li class="order_mjp">使用积分：<span>
+                            %use_integral%</span>
+                    </li>
+                    <li class="order_mjp">手机立减：<span>
+                            %mobile_fan%元</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="order_back">
+            	<a class="order_fhan" onclick="handleOrder(%order_id%)" style="background:%bgcolor%">%btn%</a>
+            	<a class="order_fhan" onclick="personal()">返回我的抢购</a>
+            </div>
+        </div>
+    </div>   
+</script>
+
+<script>
+function handleOrder(order_id)
+{
+	if(!order_id){baoapp.helper.toast('~~参数不正确!~~',1500);return false;}
+	if(order_id == 'deal'){baoapp.helper.toast('该订单已经支付了',1500);return false;}
+    with(baoapp.helper){
+        url = createUrl('Mcenter','tuan_detail',{order_id:order_id});
+        toast('订单查询中...');
+        ayscLoad(url,null,'GET','json',function(data){
+            toast(null);
+            if(data.status = CONST.BAO_REQUEST_SUCCESS){
+                    toast('订单查询成功！',1000,function(){
+                        param = '?num='+data.detail.num+'&integral='+data.detail.use_integral+'&addr='+escape('XXXX');
+                        param+= '&totalprice='+(data.detail.total_price/100)+'&price='+(data.tuans.tuan_price/100)+'&order='+data.detail.order_id;
+                        param+= '&gname='+escape(data.tuans.title)+'&mf='+window.mobile_fan+'&addr='+window.addr;
+                        linkTo(KEY.TUAN_PAY,'../../common/pay.html'+param,null,5);
+                    });
+            }else{
+                 toast(data.msg,1000);
+            }
+        });
+    }     
+}
+function personal()
+{
+    appcan.window.close(0);
+    baoapp.helper.linkTo(KEY.MEMBER_TUAN_INDEX, '../../mcenter/tuan/index.html','',2);
+    
+}
+window.createHTML = function(data)
+{
+    with(document){
+        var tmpl = getElementById('tmpl_tuan_detail').innerHTML,
+            html = createElement('section');
+            html.setAttribute('class','sec_pad');
+            for(key in data){
+                regExp = new RegExp('%'+key+'%','g');
+                tmpl = tmpl.replace(regExp, data[key]);
+            }
+            html.innerHTML = tmpl;
+            querySelector('#content').appendChild(html);
+    }
+}
+appcan.ready(function(){
+    var height = baoapp.helper.adapt();
+    with(baoapp.helper){
+        window.order_id = getRequest(location.search)['order_id'];
+        frameOpen(KEY.MEMBER_TUAN_DETAIL,'../../loading.html',height,function(){
+            url = createUrl('Mcenter','tuan_detail',{order_id:window.order_id});
+            ayscLoad(url,null,'GET','json',function(data){
+                if(data.status == 200){
+                    console.log(data);
+                    appcan.frame.close(KEY.MEMBER_TUAN_DETAIL);
+                    _data = {
+                        orderNum:data['detail']['order_id'],
+                        createTime:data['detail']['create_time'],
+                        totalPrice:data['detail']['total_price']/100,
+                        g_name: data['tuans']['title'],
+                        g_price: data['tuans']['tuan_price']/100,
+                        num: data['detail']['num'],
+                        status: (data['detail']['status']==0)?'未支付':'已支付',
+                        use_integral:data['detail']['use_integral'],
+                        order_id: (data['detail']['status']==0)?window.order_id:'deal',
+                        mobile_fan: data['tuans']['mobile_fan'],
+                        bgcolor: (data['detail']['status']==0)?'#2fbdaa':'#CCCCCC',
+                        btn:(data['detail']['status']==0)?'立即支付':'已支付'
+                    };
+                    window.mobile_fan = data['tuans']['mobile_fan'];
+                    window.addr = escape(data.addr);
+                    window.createHTML(_data);
+                }else{
+                    toast(data.msg,2000);
+                }
+            });
+        });
+    }
+});
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link href="css/css_wxj.css" rel="stylesheet" type="text/css">
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">地址</div>
+		<i class="icon-menu" id="ico_1"></i>
+	</header>
+    <div id="personal" class="page-center-box">
+        <div id="scroll">
+        	<div class="address">
+            	<div class="list-box">
+                    <ul>
+                        <li>
+                        	<div><input type="text" placeholder="用户名"></div>
+                        </li>
+                        <li>
+                        	<div><input type="text" placeholder="联系电话"></div>
+                        </li>
+                        <li>
+                        	<div><input type="text" placeholder="地址"></div>
+                        </li>
+                    </ul>
+                </div>                
+                <div class="personal-add-btn">确认</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订餐</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">
+        	<div class="box_search overflow_clear">
+                <a href="#">
+                <i></i>
+                输入商户名/品类/商品词
+                </a>
+            </div>
+        </div>
+		<i class="icon-menu" id="ico_1"></i>
+	</header>
+	<div id="ele" class="page-center-box">
+		<div id="scroll">
+			<!-- 广告 -->
+			<div class="ads">
+            	<script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+				<script src="js/jquery.event.drag-1.5.min.js" type="text/javascript"></script>
+                <script type="text/javascript" src="js/jquery.touchSlider.js"></script>
+				<script type="text/javascript">
+                    $(document).ready(function(){
+                    
+                        
+                        $(".main_image").touchSlider({
+                            flexible : true,
+                            speed : 200,
+                            btn_prev : $("#btn_prev"),
+                            btn_next : $("#btn_next"),
+                            paging : $(".flicking_con a"),
+                            counter : function (e){
+                                $(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+                            }
+                        });
+                        
+                        $(".main_image").bind("mousedown", function() {
+                            $dragBln = false;
+                        });
+                        
+                        $(".main_image").bind("dragstart", function() {
+                            $dragBln = true;
+                        });
+                        
+                        $(".main_image a").click(function(){
+                            if($dragBln) {
+                                return false;
+                            }
+                        });
+                        
+                        timer = setInterval(function(){
+                            $("#btn_next").click();
+                        }, 5000);
+                        
+                        $(".ele_banner").hover(function(){
+                            clearInterval(timer);
+                        },function(){
+                            timer = setInterval(function(){
+                                $("#btn_next").click();
+                            },5000);
+                        });
+                        
+                        $(".main_image").bind("touchstart",function(){
+                            clearInterval(timer);
+                        }).bind("touchend", function(){
+                            timer = setInterval(function(){
+                                $("#btn_next").click();
+                            }, 5000);
+                        });
+                        
+                    });
+                </script>
+				<div class="ele_banner">
+                    <div class="flicking_con">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                    </div>
+                    <div class="main_image">
+                        <ul>
+                            <li><a class="ig_1"></a></li>
+                            <li><a class="ig_2"></a></li>
+                        </ul>
+                    </div>
+                    <a href="javascript:;" id="btn_prev"></a>
+            		<a href="javascript:;" id="btn_next"></a>
+                </div>
+			</div>
+			<!-- 分类 -->
+			<div class="mydate-style shang-style">
+                <ul>
+                    <li><a href="###" >
+                        <span class="mydate-yuan mall-yuan"><img src="img/bz_01.png"></span>
+                        <p>家具</p>
+                    </a></li>
+                    <li><a href="javascript:;">
+                        <span class="mydate-yuan mall-yuan"><img src="img/bz02.png"></span>
+                        <p>家具电器</p>
+                    </a></li>
+                    <li><a href="javascript:;">
+                        <span class="mydate-yuan mall-yuan"><img src="img/bz03.png"></span>
+                        <p>婚庆用品</p>
+                        </a></li>
+                    <li><a href="javascript:;">
+                        <span class="mydate-yuan mall-yuan"><img src="img/bz04.png"></span>
+                        <p>生活用品</p>
+                    </a></li>
+                    <li><a href="javascript:;">
+                        <span class="mydate-yuan mall-yuan"><img src="img/bz05.png"></span>
+                        <p>家具软装</p>
+                    </a></li>
+                    <li><a href="javascript:;">
+                        <span class="mydate-yuan mall-yuan"><img src="img/bz06.png"></span>
+                        <p>食品</p>
+                    </a></li>
+                    <li><a href="javascript:;">
+                        <span class="mydate-yuan mall-yuan"><img src="img/bz07.png"></span>
+                        <p>酒水</p>
+                    </a></li>
+                    <li><a href="javascript:;">
+                        <span class="mydate-yuan mall-yuan"><img src="img/bz08.png"></span>
+                        <p>更多</p>
+                    </a></li>
+                </ul>
+            </div>
+			<!-- 列表 -->
+			<div class="list-have-pic" id="mall-main">
+				<div class="mall-title">
+					<hr class="left">
+					<span class="left">食品</span>
+					<hr class="left">
+				</div>
+				<!-- 循环 -->
+				<div class="list-boxed">
+					<ul>
+						<li>
+							<div class="mall-food">
+                                <a href="">
+    								<img src="img/tp59.png">
+    								<p>台湾糕点零食大礼包1050g</p>
+    								<p><span>￥37</span><del>￥48</del></p>
+                                </a>
+							</div>
+						</li>
+						<li>
+							<div class="mall-food">
+								<a href="">
+                                    <img src="img/tp59.png">
+                                    <p>台湾糕点零食大礼包1050g</p>
+                                    <p><span>￥37</span><del>￥48</del></p>
+                                </a>
+							</div>
+						</li>
+                        <li>
+							<div class="mall-food">
+								<a href="">
+                                    <img src="img/tp59.png">
+                                    <p>台湾糕点零食大礼包1050g</p>
+                                    <p><span>￥37</span><del>￥48</del></p>
+                                </a>
+							</div>
+						</li>
+						<li>
+							<div class="mall-food">
+								<a href="">
+                                    <img src="img/tp59.png">
+                                    <p>台湾糕点零食大礼包1050g</p>
+                                    <p><span>￥37</span><del>￥48</del></p>
+                                </a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+				
+				<!-- 循环 -->
+			</div>
+		</div>
+	</div>
+	<footer class="mall-foot">
+		<div>
+			<a href="">
+				<div class="icon ig-1 on"></div>
+				<p>首页</p>
+			</a>
+		</div>
+		
+		<div>
+			<a href="">
+				<div class="icon ig-2"></div>
+				<p>店铺</p>
+			</a>
+		</div>
+		
+		<div>
+			<a href="">
+				<div class="icon ig-3"></div>
+				<p>商品</p>
+			</a>
+		</div>
+		<div>
+			<a href="">
+				<div class="icon i-4"></div>
+				<p>我的</p>
+			</a>
+		</div>
+	</footer>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+            $(".mall-yuan").each(function(){
+                $(this).click(function(){
+                    $(".mall-yuan").removeClass("on");
+                    $(".mall-yuan").children("img").removeClass("tp-img");
+                    $(this).addClass("on");
+                    $(this).children("img").addClass("tp-img");
+                });
+            });
+        });
+
+</script>

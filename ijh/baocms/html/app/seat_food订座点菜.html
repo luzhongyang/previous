@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订座</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">订座预约 - 点菜</div>
+		<i class="icon-menu" id="ico_1"></i>
+	</header>
+	<div id="seat">
+    	<script>
+			$(function(){
+				$(".seat_order_food").each(function(e){
+					$(this).find("a").click(function(){
+						$(".seat_order_food").removeClass("active");
+						$(this).parent(".seat_order_food").addClass("active");
+						$(".seat_order_food_list").each(function(i){
+							if(e==i){
+								$(".seat_order_food_list").hide();
+								$(this).show();
+							}
+							else{
+								$(this).hide();
+							}
+						});
+					});
+				});
+			});
+        </script>
+		<!-- 分类 -->
+		<div class="frame-set-left">
+			<ul>
+				<li class="seat_order_food active"><a href="#">推荐菜</a></li>
+				<li class="seat_order_food"><a href="#">主菜</a></li>
+				<li class="seat_order_food"><a href="#">甜品</a></li>
+				<li class="seat_order_food"><a href="#">汤类</a></li>
+                <li class="seat_order_food"><a href="#">饮料</a></li>
+				<li class="seat_order_food"><a href="#">酒水</a></li>
+			</ul>
+		</div>
+		<div class="frame-set-right page-center-box">
+			<div id="scroll">
+                <div class="seat_order_food_list">
+                    <div class="list-have-pic">
+                        <!-- 循环 -->
+                        <div class="list-box">
+                            <div class="list-img">
+                                <a href="#"><img src="#" /></a>
+                            </div>
+                            <div class="list-content">
+                                <p class="overflow_clear">香辣虾</p>
+                                <p>
+                                    <span class="price">￥25.00</span> <del>￥36.00</del>
+                                </p>
+                                <div class="num-input">
+                                    <div class="btn">-</div>
+                                    <div class="input"><input type="text" value="0" /></div>
+                                    <div class="btn active">+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-box">
+                            <div class="list-img">
+                                <a href="#"><img src="#" /></a>
+                            </div>
+                            <div class="list-content">
+                                <p class="overflow_clear">香辣虾</p>
+                                <p>
+                                    <span class="price">￥25.00</span> <del>￥36.00</del>
+                                </p>
+                                <div class="num-input">
+                                    <div class="btn">-</div>
+                                    <div class="input"><input type="text" value="0" /></div>
+                                    <div class="btn active">+</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 循环 -->
+                    </div>
+                </div>
+                
+                <div class="seat_order_food_list" style="display:none;">
+                    <div class="list-have-pic">
+                        <!-- 循环 -->
+                        <div class="list-box">
+                            <div class="list-img">
+                                <a href="#"><img src="#" /></a>
+                            </div>
+                            <div class="list-content">
+                                <p class="overflow_clear">香辣虾</p>
+                                <p>
+                                    <span class="price">￥25.00</span> <del>￥36.00</del>
+                                </p>
+                                <div class="num-input">
+                                    <div class="btn">-</div>
+                                    <div class="input"><input type="text" value="0" /></div>
+                                    <div class="btn active">+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-box">
+                            <div class="list-img">
+                                <a href="#"><img src="#" /></a>
+                            </div>
+                            <div class="list-content">
+                                <p class="overflow_clear">香辣虾</p>
+                                <p>
+                                    <span class="price">￥25.00</span> <del>￥36.00</del>
+                                </p>
+                                <div class="num-input">
+                                    <div class="btn">-</div>
+                                    <div class="input"><input type="text" value="0" /></div>
+                                    <div class="btn active">+</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 循环 -->
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+	<footer class="footer-cart">
+		<div class="cart">
+			<div class="cart-num">3</div>
+		</div>
+		<div class="price">￥126.00</div>
+		<div class="btn">提交</div>
+	</footer>
+</body>
+</html>

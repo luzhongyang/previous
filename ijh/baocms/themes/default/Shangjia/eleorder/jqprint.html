@@ -1,0 +1,63 @@
+
+<link href="__TMPL__statics/css/print.css" rel="stylesheet" type="text/css" />
+<link href="__TMPL__statics/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<div class="print" id="print">
+    <h1>#<{$order.order_id}>&nbsp;&nbsp;&nbsp;&nbsp;生活宝外卖</h1>
+    <div><{$shop.shop_name}></div>
+    <div class="hr"></div>
+    <div>订单时间:<{$order.create_time|date='m-d H:i:s',###}></div>
+    <notempty name="pl">
+    <div>支付方式:
+        <eq name="pl.code" value="alipay">支付宝</eq>
+        <eq name="pl.code" value="wxpay">微信支付</eq>
+        <eq name="pl.code" value="tenpay">财付通</eq>
+        <eq name="pl.code" value="money">余额支付</eq>
+        <eq name="pl.code" value="chinapay">中国银联</eq>
+        <eq name="pl.code" value="chinabank">网银在线</eq>
+        <eq name="pl.code" value="paypal">Paypal</eq>
+        <eq name="pl.is_paid" value="1">(已支付)</eq>
+    </div>
+    </notempty>
+    <div class="hr"></div>
+    <div>订单详情</div>
+    <volist name="orderp" id="op">
+        <div><span class="fl"><{$ep[$op['product_id']]['product_name']}>X<{$op.num}></span> <span class="fr"><{:round($op['total_price']/100,2)}></span></div>
+    </volist>
+    <gt name="order.fan_money" value="0">
+    <div>优惠信息:-<{:round($order['fan_money']/100,2)}></div>
+    </gt>
+    <div class="hr"></div>
+    <div>合计:<{:round($order['need_pay']/100,2)}>元</div>
+    <div class="hr"></div>
+    <div>顾客信息：</div>
+    <div>联系人:<{$addr.name}></div>
+    <div>电话:<{$addr.mobile}></div>
+    <div>地址:<{$addr.addr}></div>
+     <div class="hr"></div>
+    <h1>#<{$order.order_id}>&nbsp;&nbsp;&nbsp;&nbsp;生活宝外卖</h1>
+</div>
+
+<input id="num" type="text" name="num" value="1"/>
+<span id="d">立即打印</span>
+
+<script>
+    $(document).ready(function() {   
+        $("#d").click(function(){
+            var jqprint_id = "<{$shop['jqprint_id']}>";
+            if(jqprint_id != 0){
+                var url = "<{:U('eleorder/jq_print',array('order_id'=>$order['order_id']))}>";
+                var num = $("#num").val();
+                $.post(url,{num:num},function(data){
+                    if(data.status == 'success'){
+                        layer.msg(data.msg);
+                        window.parent.$('.dialogBox').dialog("close");
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                },'json')
+            }else if(jqprint_id == 0){
+                window.print();
+            }
+        })   
+    });
+</script>

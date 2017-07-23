@@ -1,0 +1,481 @@
+<include file="public:header" /> 
+<include file="public:top"/>
+<include file="public:nav"/>
+
+<!--首页第一部分幻灯开始-->
+<div class="sy_hotgz">
+    <div class="sy_flexslider">
+        <ul class="slides">
+            <calldata mdl="Ad" where=" closed=0 AND site_id=1 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,3" cache="21600" order="orderby asc">
+                 <li class="list" style="background:url('__ROOT__/attachs/<{$item.photo}>') center center no-repeat;">
+                     <a target="_blank" href="<{$item.link_url}>"></a>
+            </li>
+            </calldata>
+        </ul>
+    </div>
+    <div class="pagewd posit_lr_box">
+        <div class="left posit_l"><include file="public:cate"/></div>
+        <div class="clear"></div>
+    </div>
+    
+</div>
+<!--首页第一部分幻灯结束-->
+
+<!--首页分类部分开始-->
+<div class="sy_cate pagewd">
+    <div class="left">
+        <div class="sy_c1wx">
+            <div class="left"><img src="__PUBLIC__/img/wx.png" width="100" height="103" /></div>
+            <div class="right"><p>扫一扫体验微信O2O</p><img src="__TMPL__statics/images/sywx_03.png" width="64" height="45" /></div>
+        </div>
+    </div>
+    <div class="center">
+    	<div class="sy_cateNr">
+        	<div class="sy_cateNr_list">
+                <div class="left bt"><em class="ico_1"></em>热门团购</div>
+                <div class="left link">
+                	<php>$i=0;</php>
+                    <foreach name="tuancates" item="item">
+                    	<eq name="item.is_hot" value="1">
+                        <php>$i++;if($i<10){</php>
+                        <if condition="$item['parent_id'] eq 0">
+                			<a title="<{$item.cate_name}>" target="_blank" href="<{:U('tuan/index',array('cat'=>$item['cate_id']))}>"><{$item['cate_name']}></a>
+                            <else/>
+                			<a title="<{$item.cate_name}>" target="_blank" href="<{:U('tuan/index',array('cat'=>$item['parent_id'],'cate_id'=>$item['cate_id']))}>"><{$item['cate_name']}></a>
+                        </if>
+                        <php>}</php>
+                    	</eq>
+                    </foreach>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="sy_cateNr_list">
+                <div class="left bt"><em class="ico_2"></em>全部区域</div>
+                <div class="left link">
+                	<php>$i=0;</php>
+                    <foreach name="areas" item="item">
+                    	<php>$i++;if($i<=15&&$item['city_id'] == $city_id){</php>
+                		<a href="<{:U('tuan/index',array('area'=>$item['area_id']))}>"><{$item['area_name']}></a>
+                    	<php>}</php>
+                    </foreach>
+                    <span class="more">更多<em></em></span>
+                </div>
+                <div class="clear"></div>
+                <div class="sy_cateNr_all">
+                	<foreach name="areas" item="item">
+                		<a href="<{:U('tuan/index',array('area'=>$item['area_id']))}>"><{$item['area_name']}></a>
+                    </foreach>
+                </div>
+            </div>
+            <div class="sy_cateNr_list">
+                <div class="left bt"><em class="ico_3"></em>热门商圈</div>
+                <div class="left link">
+                	<php>$i=0;</php>
+                    <foreach name="bizs" item="item">
+                    	<php>if(in_array($item['area_id'],$limit_area)&&$i<=10&&$item['is_hot']=='1'){</php>
+                		<a href="<{:U('tuan/index',array('area'=>$item['area_id'],'business'=>$item['business_id']))}>"><{$bizs[$item['business_id']]['business_name']}></a>
+                        <php>$i++;}</php>
+                    </foreach>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="sy_doldBtn">
+            <a target="_blank" href="<{$CONFIG.site.android}>" class="btn"><em class="ico_1"></em>Android下载</a>
+            <a target="_blank" href="<{$CONFIG.site.ios}>" class="btn"><em class="ico_2"></em>IOS下载</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!--首页分类部分结束-->
+
+<div class="pagewd">
+    <!--首页抢购部分开始-->
+    <div class="sy_FloorBt">
+        <div class="left sy_FloorBtz"><i></i><span class="bt">限时抢购<span class="graycl ml10">/手快有 手慢无</span></span>
+        	<!--<span id="daojishi" rel="7353658">
+            	<span>00</span>:<span>00</span>:<span>00</span>:<span>00</span>
+            </span>-->
+            <span class="sy_buy_tab">
+            	<php>$i=0;</php>
+                <foreach name="tuancates" item="item2">
+                	<eq name="item2.parent_id" value="0"> 
+                    <php>$i++;if($i <= 10){</php>
+                    <a target="_blank" <php>if($i == 1) echo 'class="on"';</php> title="<{$item2.cate_name}>抢购" href="<{:U('tuan/index',array('cat'=>$item2['cate_id']))}>"><{$item2.cate_name}></a>
+                    <php>}</php>    
+                    </eq>
+                </foreach>
+            </span>
+        </div>
+        <div class="right"><a title="更多抢购" target="_blank" href="<{:U('tuan/index')}>">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_buy_nr mb20">
+        <div class="left sy_buy_ad">
+        	<div class="sy_buy_flexslider">
+                <ul class="slides">
+                    <calldata mdl="Ad" where=" closed=0 AND site_id=44 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,2" cache="21600" order="orderby asc">  
+                        <li class="list">
+                    		<a target="_blank" href="<{$item.link_url}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="270" height="392" /><div class="wz"><p class="bt"><{$item.title}></p></div></a>
+                    	</li>
+                    </calldata>
+                </ul>
+            </div>
+        </div>
+        <div class="left sy_buy_list_box">
+        	<php>$i2=0;</php>       
+            <foreach name="tuancates" item="cate">
+                <eq name="cate.parent_id" value="0"> 
+                <php>$i2++;if($i2 <= 10){</php>
+                <ul class="sy_buy_list" <php>if($i2 == 1) echo 'style="display:block;"';</php>>
+                    <php>$cate_ids = D('Tuancate')->getChildren($cate['cate_id']); $cate_ids = join(',',$cate_ids);</php>
+                    <calldata mdl="Tuan" where="audit = 1 AND closed=0 AND city_id=$city_id AND cate_id IN ($cate_ids)" cache="600" order="orderby asc,sold_num desc" limit="0,10">
+                        <li>
+                            <div class="syPub_list">
+                                <a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"  width="200" height="112" /></a>
+                                <h3><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                <p class="overflow_clear graycl"><{:msubstr($item['intro'],0,18)}></p>
+                                <hr style="border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                <div class="btn_box">
+                                    <div class="left price">¥<{:round($item['tuan_price']/100,2)}><del>¥<{:round($item['price']/100,2)}></del></div>
+                                    <div class="right"><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="btn">立即抢购</a></div>
+                                </div>
+                            </div>
+                        </li>
+                    </calldata>
+                </ul>
+
+                <php>}</php> 
+                </eq>
+            </foreach>
+        </div>
+        <div class="right sy_buy_ad">
+        	<div class="sy_buy_flexslider">
+                <ul class="slides">
+                    <calldata mdl="Ad" where=" closed=0 AND site_id=45 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,2" cache="21600" order="orderby asc">  
+                        <li class="list">
+                    		<a target="_blank" href="<{$item.link_url}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="270" height="392" /><div class="wz"><p class="bt"><{$item.title}></p></div></a>
+                    	</li>
+                    </calldata>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页抢购部分结束-->
+    <calldata mdl="Ad" where=" closed=0 AND site_id=2 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,1" cache="21600" order="orderby asc">
+        <div class="AdPosit mb20"><a href="<{$item.link_url}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="1200" height="100"/></a></div>
+    </calldata>
+    <!--首页商城部分开始-->
+    <div class="sy_menuBt sy_menuBt1">
+        <div class="left bt"><i class="ico_1"></i>本地商城</div>
+        <div class="right">
+        	<div class="menuBt">
+            	<ul>
+            	   
+                    
+                    <calldata mdl="Goodscate" where="parent_id = 0" cache="600" order="orderby asc" limit="0,10">
+							<if condition="$index eq 1">
+                            	 <li class="on"><a href="<{:U('mall/index',array('cat'=>$item['cate_id']))}>"><{:msubstr($item['cate_name'],0,4,'utf-8',false)}></a></li>
+                            <else/>
+                            	 <li><a href="<{:U('mall/index',array('cat'=>$item['cate_id']))}>"><{:msubstr($item['cate_name'],0,4,'utf-8',false)}></a></li>
+                            </if>
+                    </calldata>
+                    
+        	    </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="sy_mall mb20">
+        <div class="left sy_mall_ad" style="height:398px;">
+        	
+            <calldata mdl="Ad" where=" closed=0 AND site_id=24 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,1" cache="21600" order="orderby asc">
+                <img src="__ROOT__/attachs/<{$item.photo}>" width="200" height="234" />
+            </calldata>
+            <ul class="sy_mall_ad_list">
+            	
+                 <calldata mdl="Goodscate" where="parent_id != 0" cache="600" order="orderby asc" limit="0,8">
+                       <li class="list"><a href="<{:U('mall/index',array('cat'=>$item['cate_id']))}>"><{:msubstr($item['cate_name'],0,4,'utf-8',false)}></a></li>
+                </calldata>
+            </ul>
+        </div>
+        <div class="left sy_mall_list_box">
+        	 <calldata mdl="Goodscate" where="parent_id = 0" cache="600" order="orderby asc" limit="0,10">
+                   <div class="sy_mall_list" <if condition="$index eq 1"> style="display:block;"</if>>
+                    	<ul>
+                               <php>$temp = $item;$item='';</php>
+                               <php>$cate_ids = D('Goodscate')->getChildren($temp['cate_id']); $cate_ids = join(',',$cate_ids);</php>
+                              
+                               <php>$goods = D('Goods')->where(array('closed'=>'0','audit'=>'1','cate_id' => array('IN', $cate_ids)))->order(array('orderby' => 'asc'))->limit(10)->select();</php>
+                         		<foreach name="goods" item="v">
+                                <li class="list">
+                                    <a href="<{:U('mall/detail',array('goods_id'=>$v['goods_id']))}>">
+                                    <img src="__ROOT__/attachs/<{$v.photo}>" width="189" height="144" />
+                                    <p class="bt"><{:bao_msubstr($v['title'],0,12,false)}></p>
+                                    <p class="price pointcl">¥<{$v.mall_price}></p>
+                                    </a>
+                                </li>
+                             </foreach>
+                          </ul>
+                        <div class="clear"></div>
+                    </div>
+               </calldata>
+        	
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页商城部分结束-->
+    <!--首页友情连接部分开始-->
+    <div class="sy_youqingLink_scroll mb20">
+        <div class="left leftBotton" id="leftArr"><em></em></div>
+        <div class="center Cont" id="isl_Cont_1">
+            <ul>
+             <calldata mdl="Shop" where="city_id=$city_id" cache="600" order="orderby asc" limit="0,20">
+                 <li class="list">
+                 <a href="<{:U('shop/detail',array('shop_id'=>$item['shop_id']))}>">
+                 <img src="__ROOT__/attachs/<{$item.photo}>" width="120" height="60" />
+                 </a>
+                 </li>
+            </calldata>
+            </ul>
+        </div>
+        <div class="right rightBotton" id="rightArr"><em></em></div>
+        <div class="clear"></div>
+    </div>
+    <!--首页友情连接部分结束-->
+    <!--首页外卖部分开始-->
+    <div class="sy_menuBt sy_menuBt2">
+        <div class="left bt"><i class="ico_2"></i>本地外卖</div>
+        <div class="right">
+        	<div class="menuBt">
+            	<ul>
+                     <volist name="elecate" id="item" key="index">
+                     	<if condition="$index eq 1">
+                              <li class="on"><a href="<{:LinkTo('ele/index',array('cate'=>$index))}>"><{$item}></a></li>
+                        <else/>
+                             <li><a href="<{:LinkTo('ele/index',array('cate'=>$index))}>"><{$item}></a></li>
+                        </if>
+                    </volist>
+        	    </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="sy_mall mb20">
+        <div class="left sy_mall_ad">
+        	<calldata mdl="Ad" where=" closed=0 AND site_id=14 AND  city_id=$city_id and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,1" cache="21600" order="orderby asc">
+                <img src="__ROOT__/attachs/<{$item.photo}>" width="200" height="430" />
+            </calldata>
+        </div>
+        <div class="left sy_mall_list_box">
+            <volist name="elecate" id="v" key="k">
+                     <div class="sy_waimai_list" <if condition="$k neq 1"> style="display:none;"</if>>
+                     	<ul>
+                        	<calldata mdl="Eleproduct" where="cate_id=$k and audit=1 and closed=0 AND city_id IN ({$city_ids})" cache="600" limit="0,10">
+                                 <php>$shop = D('Shop')->where(array('shop_id'=>$item['shop_id']))->find();</php>
+                                 <li class="list">
+                                    <a href="<{:U('ele/shop',array('shop_id'=>$item['shop_id']))}>">
+                                    <div class="img"><img src="__ROOT__/attachs/<{$item['photo']}>" width="224" height="150" /><p class="overflow_clear"><{$item.product_name}></p></div>
+                                    <p>商家：<{$shop.shop_name}>&nbsp;&nbsp;<span class="spxq_qgpstarBg"><span class="spxq_qgpstar spxq_qgpstar40"></span></span><{:round($shop['score']/10,1)}>分</p>
+                                    <p>起送：￥<{:round($item['since_money']/100,2)}>&nbsp;&nbsp;配送费：￥<{:round($item['logistics']/100,2)}>&nbsp;&nbsp;月售<{$item.month_num}>单</p>
+                                    </a>
+                                </li>
+                            </calldata>
+                        	
+                        	 
+                         </ul>
+                        <div class="clear"></div>
+                    </div>
+            </volist>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页外卖部分结束-->
+    <!--首页友情连接部分开始-->
+    <div class="sy_youqingLink mb20">
+    	<ul>
+        	<calldata mdl="Ele" where="city_id=$city_id" cache="600" order="orderby asc" limit="0,10">
+                 <php>$shop = D('Shop')->where(array('shop_id'=>$item['shop_id']))->find();</php>
+                 <li class="list">
+                 <a href="<{:U('ele/shop',array('shop_id'=>$item['shop_id']))}>">
+                 <img src="__ROOT__/attachs/<{$shop['photo']}>" width="100" height="40" />
+                 </a>
+                 </li>
+            </calldata>
+    	   
+	    </ul>
+        <div class="clear"></div>
+    </div>
+    <!--首页友情连接部分结束-->
+    <!--首页活动新闻部分开始-->
+    <div class="sy_actvNews">
+        <div class="left">
+        	<div class="sjChannel">
+                <div class="title">
+                    <h2 class="left"><em></em>商家频道</h2>
+                    <a href="<{:U('shop/index')}>" class="right more graycl">+更多</a>
+                </div>
+                <div>
+                    <ul>
+                    	 <callfunc mdl="Shopcate" func="getShopCateNum">
+                             <li class="list">
+                             	<a target="_blank" href="<{:LinkTo('shop/index',array('cat'=>$item['cate_id']))}>">
+                                <div class="left ico ico_<{$index}>"></div>
+                                <div class="wz">
+                                    <h3><{$item.cate_name}></h3>
+                                    <p class="graycl">本类共有商家<span class="pointcl"><{$item.count}>,<{$item.cate_id}>,<{$item.city_id}></span></p>
+                                </div>
+                                </a>
+                            </li>
+                        </callfunc>
+                       
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+        	<div class="sy_youhui">
+            	<div class="title">
+                    <h2 class="left"><em></em>优惠活动</h2>
+                    <a href="<{:U('huodong/index')}>" class="right more graycl">+更多</a>
+                </div>
+                <ul>
+                	<calldata mdl="Activity" where="city_id=$city_id  and audit=1 and closed=0" cache="600" order="orderby asc" limit="0,12">
+                          <li class="list"><a href="<{:U('huodong/detail',array('activity_id'=>$item['activity_id']))}>"><p class="left overflow_clear"><em><{$index}></em><{:bao_msubstr($item['title'],0,15,false)}></p><span class="right date graycl"><{:bao_msubstr($item['sign_end'],5,20,false)}></span></a></li>
+                    </calldata>
+                   
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <div class="sy_coupons">
+            	<div class="tag"></div>
+            	<ul>
+                	<calldata mdl="Coupon" where="city_id=$city_id  and audit=1 and closed=0" cache="600" order="downloads desc" limit="0,2">
+                          <li class="list">
+                                <div class="img"><img src="__ROOT__/attachs/<{$item.photo}>" width="260" height="140" /><p><{:msubstr($item['title'],0,15)}></p></div>
+                                <div class="btn_box"><a href="<{:U('coupon/detail',array('coupon_id'=>$item['coupon_id']))}>" class="btn"><em></em>打印优惠券</a></div>
+                            </li>
+                    </calldata>
+        	    </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页活动新闻部分结束-->
+</div>
+<SCRIPT src="/themes/newone/Pchome/statics/js/ScrollPic.js"></SCRIPT>
+<SCRIPT>
+		<!--//--><![CDATA[//><!--
+		var scrollPic_02 = new ScrollPic();
+		scrollPic_02.scrollContId   = "isl_Cont_1"; //内容容器ID
+		scrollPic_02.arrLeftId      = "leftArr";//左箭头ID
+		scrollPic_02.arrRightId     = "rightArr"; //右箭头ID
+
+		scrollPic_02.frameWidth     = 1046;//显示框宽度
+		scrollPic_02.pageWidth      = 154; //翻页宽度
+
+		scrollPic_02.speed          = 10; //移动速度(单位毫秒，越小越快)
+		scrollPic_02.space          = 10; //每次移动像素(单位px，越大越快)
+		scrollPic_02.autoPlay       = false; //自动播放
+		scrollPic_02.autoPlayTime   = 3; //自动播放间隔时间(秒)
+
+		scrollPic_02.initialize(); //初始化
+							
+		//--><!]]>
+</SCRIPT> 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.sy_flexslider').flexslider({
+            directionNav: false,
+            pauseOnAction: false
+        });//首页轮播js结束
+		
+		$('.sy_buy_flexslider').flexslider({
+            directionNav: false,
+            pauseOnAction: false
+        });//首页抢购广告轮播js结束
+		
+		$(".sy_cateNr_list .more").click(function(){
+			if($(this).hasClass("on")){
+				$(this).removeClass("on");
+				$(this).parents(".sy_cateNr_list").find(".sy_cateNr_all").hide();
+			}
+			else{
+				$(this).addClass("on");
+				$(this).parents(".sy_cateNr_list").find(".sy_cateNr_all").show();
+			}
+		});//首页分类下拉结束
+		
+		function daojishi(id) {
+			var t = Math.floor($("#" + id).attr('rel'));
+			t--;
+			var d = Math.floor(t / 60 / 60 / 24);
+			var h = Math.floor(t / 60 / 60 % 24);
+			var m = Math.floor(t / 60 % 60);
+			var s = Math.floor(t % 60);
+			$("#" + id).attr('rel', t);
+			$("#" + id).html('<span>' + d + '</span>' + ':' + '<span>' + h + '</span>' + ':' + '<span>' + m + '</span>' + ':' + '<span>' + s + '</span>');
+		}
+		setInterval(function () {
+			daojishi("daojishi");
+		}, 1000);//倒计时js部分结束
+		
+		$(".sy_menuBt1 .menuBt li").each(function(e) {
+            $(this).mousemove(function(){
+				$(this).parent().find("li").removeClass("on");
+				$(this).addClass("on");
+				$(".sy_mall_list_box .sy_mall_list").each(function(i) {
+                    if(e==i){
+						$(this).parent().find(".sy_mall_list").hide();
+						$(this).show();
+					}
+					else{
+						$(this).hide();
+					}
+                });
+			});
+        });//本地商城切换结束
+		$(".sy_menuBt2 .menuBt li").each(function(e) {
+            $(this).mousemove(function(){
+				$(this).parent().find("li").removeClass("on");
+				$(this).addClass("on");
+				$(".sy_mall_list_box .sy_waimai_list").each(function(i) {
+                    if(e==i){
+						$(this).parent().find(".sy_waimai_list").hide();
+						$(this).show();
+					}
+					else{
+						$(this).hide();
+					}
+                });
+			});
+        });//本地商城切换结束
+		
+    });
+
+    $(function () {
+        $(".sy_buy_tab a").each(function (e) {
+            $(this).mouseover(function (event) {
+                $(".sy_buy_tab a").removeClass("on");
+                $(this).addClass("on");
+                $(".sy_buy_list_box .sy_buy_list").each(function (i) {
+                    if (e == i)
+                    {
+                        $(this).parent().find(".sy_buy_list").hide();
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });//首页抢购部分结束
+	});
+</script>
+<include file="public:footer"/>
+
+

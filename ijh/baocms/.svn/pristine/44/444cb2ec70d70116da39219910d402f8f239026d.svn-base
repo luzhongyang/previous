@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>优惠</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<a href=""><i class="icon-goback"></i></a>
+		<div class="title">优惠列表</div>
+		<a href=""><i class="icon-menu" id="ico_2"></i></a>
+	</header>
+	<!-- 筛选TAB -->
+    <script>
+		$(function(){
+			$("#search-bar li").each(function(e){
+				$(this).click(function(){
+					if($(this).hasClass("on")){
+						$(this).parent().find("li").removeClass("on");
+						$(this).removeClass("on");
+						$(".serch-bar-mask").hide();
+					}
+					else{
+						$(this).parent().find("li").removeClass("on");
+						$(this).addClass("on");
+						$(".serch-bar-mask").show();
+					}
+					$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+						
+						if(e==i){
+							$(this).parent().find(".serch-bar-mask-list").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						$(this).find("li").click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+						});
+					});
+				});
+			});
+		});
+    </script>
+	<div id="search-bar">
+		<ul>
+			<li><span>全城分类</span><i></i></li>
+			<li style="padding-left:0.2rem;"><span>全城</span><i></i></li>
+			<li><span>默认排序</span><i></i></li>
+		</ul>
+	</div>
+	<div id="ele" class="page-center-box">
+		<div id="scroll">
+        	<div class="serch-bar-mask" style="display:none;">
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全城分类</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全城</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">默认排序</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>            
+                <div class="serch-bar-mask-bg"></div>
+            </div>
+			<!-- 列表 -->
+			<div class="" id="mall-main">
+				<div class="favou-list-box">
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn09.png" /></a>
+                        </div>
+                        <div class="favou-zi left">
+                            <a href="">
+                                <p class="overflow_clear">美丽人生婚礼顾问馆</p>
+                                <p class="c_h h15 overflow_clear">仅售999元，价值1999元尊贵套餐！</p>
+                                <p class="c_h h15">有效期至：2017-10-31</p>
+                                <p class="favou-zai">
+                                    <span class="price left">25人已下载</span>
+                                    <span class="sell right">距离396m</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn09.png" /></a>
+                        </div>
+                        <div class="favou-zi left">
+                            <a href="">
+                                <p class="overflow_clear">美丽人生婚礼顾问馆</p>
+                                <p class="c_h h15 overflow_clear">仅售999元，价值1999元尊贵套餐！</p>
+                                <p class="c_h h15">有效期至：2017-10-31</p>
+                                <p class="favou-zai">
+                                    <span class="price left">25人已下载</span>
+                                    <span class="sell right">距离396m</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn09.png" /></a>
+                        </div>
+                        <div class="favou-zi left">
+                            <a href="">
+                                <p class="overflow_clear">美丽人生婚礼顾问馆</p>
+                                <p class="c_h h15 overflow_clear">仅售999元，价值1999元尊贵套餐！</p>
+                                <p class="c_h h15">有效期至：2017-10-31</p>
+                                <p class="favou-zai">
+                                    <span class="price left">25人已下载</span>
+                                    <span class="sell right">距离396m</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn09.png" /></a>
+                        </div>
+                        <div class="favou-zi left">
+                            <a href="">
+                                <p class="overflow_clear">美丽人生婚礼顾问馆</p>
+                                <p class="c_h h15 overflow_clear">仅售999元，价值1999元尊贵套餐！</p>
+                                <p class="c_h h15">有效期至：2017-10-31</p>
+                                <p class="favou-zai">
+                                    <span class="price left">25人已下载</span>
+                                    <span class="sell right">距离396m</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn09.png" /></a>
+                        </div>
+                        <div class="favou-zi left">
+                            <a href="">
+                                <p class="overflow_clear">美丽人生婚礼顾问馆</p>
+                                <p class="c_h h15 overflow_clear">仅售999元，价值1999元尊贵套餐！</p>
+                                <p class="c_h h15">有效期至：2017-10-31</p>
+                                <p class="favou-zai">
+                                    <span class="price left">25人已下载</span>
+                                    <span class="sell right">距离396m</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <!-- 循环 -->
+                </div>											
+			</div>
+		</div>
+	</div>
+</body>
+</html>

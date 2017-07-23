@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户管理框架</title>
+<link rel="shortcut icon" href="../sjimages/favicon.ico" />
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script>
+$(function () {
+	$('#selectBoxInput').click(function(){
+		$('.selectList').toggle(300);
+	});
+	$(".selectList li a").click(function () {
+		$("#selectBoxInput").html($(this).html());
+		$('.selectList').hide();
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="topOne">
+    <div class="nr">
+        <div class="left">您好，欢迎访问BAOCMS <a href="#">登陆</a>|<a href="#">注册</a>
+            <div class="topSm"> <span class="topSmt"><em><img src="../images/yhzcico_06.png" /></em>手机CMS</span>
+                <div class="topSmnr"><img src="../sjimages/login_wx_03.jpg" width="90" height="90" />
+                    <p>扫描下载客户端</p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="liOne"><a href="#">订座</a></li>
+                <span>|</span>
+                <li class="liOne"><a href="#">会员卡</a></li>
+                <span>|</span>
+                <li class="liOne"><a href="#">购物车0件</a></li>
+                <span>|</span>
+                <li class="liOne"><a href="#">我的本地生活</a></li>
+                <span>|</span>
+                <li class="liOne liOneBg"> <a class="a" href="#">我是商家</a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">商家登陆</a></li>
+                            <li><a href="#">微信营销</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne liOneBg"> <a class="a" href="#">快捷导航</a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">餐饮频道</a></li>
+                            <li><a href="#">生活资讯</a></li>
+                            <li><a href="#">活动</a></li>
+                            <li><a href="#">积分商城</a></li>
+                            <li><a href="#">购物</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="topTwo">
+    <div class="left">
+        <h1><a href="#"><img src="../sjimages/logo_03.png" width="214" height="53" /></a></h1>
+        <div class="changeCity"> 合肥 <a href="#" class="change">[切换城市]</a> </div>
+    </div>
+    <div class="left center">
+        <div class="searchBox">
+            <div class="selectBox"> <span class="select"  id="selectBoxInput">商家</span>
+                <div  class="selectList">
+                    <ul>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" class="text" value="输入您要搜索的内容" onclick="if(value==defaultValue){value='';this.style.color='#000'}"  onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+            <input type="button" class="submit" value="搜索" />
+        </div>
+        <div class="hotSearch">热门搜索：<a href="#">美食</a><a href="#">酒店</a><a href="#">酒店</a><a href="#">电影</a><a href="#">家政</a><a href="#">洗车</a></div>
+    </div>
+    <div class="right"><a class="radius20" href="#">购物车<span class="radius100">1</span></a></div>
+</div>
+<div class="nav">
+    <div class="navList">
+        <ul>
+            <li class="navListAll"><span class="navListAllt">全部抢购分类<em></em></span>
+                <div class="shadowy navAll">此处显示  class "navAll" 的内容</div>
+            </li>
+            <li class="navLi"><a class="navA  on" href="#">首页</a></li>
+            <li class="navLi"><a class="navA" href="#">生活频道</a></li>
+            <li class="navLi"><a class="navA" href="#">活动</a></li>
+            <li class="navLi"><a class="navA" href="#">抢购</a></li>
+            <li class="navLi"><a class="navA" href="#">购物</a></li>
+            <li class="navLi"><a class="navA" href="#">找优惠</a></li>
+            <li class="navLi"><a class="navA" href="#">美食</a></li>
+            <li class="navLi"><a class="navA" href="#">榜单</a></li>
+            <li class="navLi"><a class="navA" href="#">会员卡</a></li>
+            <li class="navLi2"><a class="navA" href="#">更多<em></em></a>
+                <div class="indxLi">
+                    <ul>
+                        <li><a href="#">装修&amp;服务</a></li>
+                        <li><a href="#">婚庆&amp;酒店</a></li>
+                        <li><a href="#">家政&amp;服务</a></li>
+                        <li><a href="#">汽车&amp;驾校</a></li>
+                        <li><a href="#">教育培训</a></li>
+                        <li><a href="#">母婴&amp;亲子</a></li>
+                        <li><a href="#">丽人&amp;保养</a></li>
+                        <li><a href="#">餐饮&amp;娱乐</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main_c">
+    <div class="content_left">
+        <ul>
+            <li class="index_nav clef_user">
+                <div class="clef_usertx"><img src="../img/user_tx_03.jpg" width="52" height="48" />
+                    <p class="user_name">元升子</p>
+                    <p class="user_dj">等级：VIP2</p>
+                </div>
+                <div class="clef_userxx">
+                    <ul>
+                        <li>余额：<span class="user_ye">0,00</span></li>
+                        <li>积分：<span class="user_jf">0</span><a class="user_cz" href="">去充值</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="index_nav">
+                <h3>订单中心</h3>
+                <div class="indexnav_li">
+                    <ul>
+                        <li><a class="on" href="yh_order.html" target="main_frm"><em>·</em>抢购订单<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>订餐订单<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>商城订单<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>我的抢购券<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>优惠券下载<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>我的预约<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>我的兑换<span>&gt;</span></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="index_nav">
+                <h3>会员服务</h3>
+                <div class="indexnav_li">
+                    <ul>
+                        <li><a href="#" target="main_frm"><em>·</em>充值管理<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>我的活动<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>我的信息<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>我的点评<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>我的收藏<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>我的分享<span>&gt;</span></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="index_nav">
+                <h3>账户中心</h3>
+                <div class="indexnav_li">
+                    <ul>
+                        <li><a href="#" target="main_frm"><em>·</em>账户设置<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>收货地址<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>日志管理<span>&gt;</span></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="index_nav">
+                <h3>代理商</h3>
+                <div class="indexnav_li">
+                    <ul>
+                        <li><a href="#" target="main_frm"><em>·</em>商户列表<span>&gt;</span></a></li>
+                        <li><a href="#" target="main_frm"><em>·</em>代理成果<span>&gt;</span></a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="content_right">
+        <div class="content_rightNr">
+            <iframe src="index.html" marginheight="0" marginwidth="0" frameborder="0" scrolling="no" width="100%" height=100% id="iframepage" name="main_frm" onLoad="iFrameHeight()" ></iframe>
+            <script type="text/javascript" language="javascript">
+        
+        function iFrameHeight() {
+        
+        var ifm= document.getElementById("iframepage");
+        
+        var subWeb = document.frames ? document.frames["iframepage"].document :
+        
+        ifm.contentDocument;
+        
+            if(ifm != null && subWeb != null) {
+        
+            ifm.height = subWeb.body.scrollHeight;
+        
+            }
+        
+        }
+        
+        </script> 
+        </div>
+    </div>
+</div>
+</body>
+</html>

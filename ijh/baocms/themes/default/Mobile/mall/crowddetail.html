@@ -1,0 +1,148 @@
+<include  file='public:header'/>    
+<body>
+<?php if(!$is_app){?>
+<header>
+    <a href="<{:U('mall/crowdList')}>"><i class="icon-goback"></i></a>
+    <div class="title">众筹详情</div>
+    <a class="icon-menu share" href="javascript:void(0);" id="share"><i class="icon-menu" id="shareIco"></i></a>
+</header>
+<?php }?>
+<div class="bdcolor">
+        <div class="bdcolor_bg"></div>
+        <div class="bdsharebuttonbox" data-tag="share_1">
+            <a class="bds_weixin" data-cmd="weixin">微信</a>
+            <a class="bds_qzone" data-cmd="qzone" href="#">QQ空间</a>
+            <a class="bds_sqq" data-cmd="sqq">腾讯QQ</a>
+            <a class="bds_tqq" data-cmd="tqq">腾讯微博</a>
+            <a class="bds_tsina" data-cmd="tsina">新浪微博</a>
+            <div class="bd-share-popup-footer">
+                <a class="bd-share-popup-close" onClick="$('.bdcolor').hide();" href="javascript:void(0);">取消</a>
+            </div>
+        </div>
+    </div>
+    
+ <script>
+        $(document).ready(function () {
+            $(".share").click(function () {
+                $(".bdcolor").show();
+            });
+         });
+    </script>
+
+<div class="page-center-box">
+    <!--banner部分-->
+    <div class="mall_crowdDetl_img">
+        <img src="__ROOT__/attachs/<{$detail.img}>" width="100%" />
+    </div>
+    <!--banner部分结束-->
+    <!--内容-->
+	<div class="mall_crowdDetl_top mb10">
+    	<h1><{$detail.title}></h1>
+        <p class="black9 mb10 mt10">已筹到</p>
+        <p>￥<big><{$detail['have_price']/100}></big></p>
+        <div class="bar_bg mt10"><div class="bar" style="width:<{$detail['have_price']/$detail['all_price']*100}>%;"></div></div>
+        <div class="bar_txt mb10">
+            <div class="fl maincl">当前进度 <{$detail['have_price']/$detail['all_price']*100}>%</div>
+            <div class="fr"><{$detail['have_num']}>名支持者</div>
+            <div class="clear"></div>
+        </div>
+        <p class="black9">此项目必须在<span class="fontcl2"><{$detail[ltime]|date='Y-m-d',###}></span>前得到<span class="fontcl2">￥<{$detail['all_price']/100}></span>的支持才可成功！剩余<span class="fontcl2">
+        <if condition="$detail['all_price']-$detail['have_price'] gt '0'">
+        <{$detail['all_price']/100-$detail['have_price']/100}>
+        <else/>
+        0
+        </if>
+        </span>元！</p>
+    </div>
+    <div class="mall_crowdDetl_tab">
+    	<script>
+			$(document).ready(function() {
+				$(".mall_crowdDetl_tab .list").each(function(e) {
+					$(this).click(function(){
+						$(".mall_crowdDetl_tab .list").removeClass("on");
+						$(this).addClass("on");
+						$(".mall_crowdDetl_tab_cont .list_box").each(function(i){
+							if(e==i){
+								$(".mall_crowdDetl_tab_cont .list_box").hide();
+								$(this).show();
+							}
+							else{
+								$(this).hide();
+							}
+						});
+						
+					});
+				});
+			});
+		</script>
+    	<ul>
+    	    <li class="list">支持者</li>
+            <li class="list on">详情</li>
+            <li class="list">进展</li>
+	    </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="mall_crowdDetl_tab_cont">
+    	<div class="list_box everySays" style="display:none;">
+        	
+            <a  href="<{:U('mall/favorites',array('goods_id'=>$detail['goods_id']))}>" class="atent_prjt mb10"><em class="ico"></em>关注项目</a>
+            
+             
+            <div class="topicNew mb10">
+                <ul>
+                    <volist name='goods_list' id='item'>
+                             <li class="list">
+                                <img src="__ROOT__/attachs/<{$users[$item['uid']]['face']|default='default.jpg'}>" width="60" height="60" class="left" />
+                                <div class="pub_wz">
+                                    <p class="name"><{$users[$item['uid']]['nickname']}></p>
+                                    <p class="blackcl6">支持项目<span class="pointcl">￥<{$item['price']/100}>元</span></p>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                    </volist>
+                   
+                </ul>
+            </div>
+           
+        </div>
+        <div class="list_box mall_crowdDetl_infor">            
+            <{$detail.details}>
+        </div>
+        
+        <div class="list_box mall_crowdDetl_progress" style="display:none;">
+        	
+            <ul>
+            	<volist name='project' id='item'>
+                    <li class="list">
+                        <div class="left day"><{$item[dateline]|date='m-d',###}></div>
+                        <div class="pub_wz">
+                            <p><{$item.content}></p>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                </volist>
+            	
+            </ul>
+        </div>
+    </div>
+    <!--内容结束-->
+</div>
+<!--发布与评论弹出层-->
+
+<script>
+$(document).ready(function() {
+    $(".fabu").click(function(){
+		$(".mall_crowdDetl_fabu_mask").show();
+	});
+	$(".mall_crowdDetl_fabu_mask .cancel").click(function(){
+		$(".mall_crowdDetl_fabu_mask").hide();
+	});
+});
+</script>
+<!--发布与评论弹出层end-->
+<footer>
+	<div class="hotelOrd_footer">
+    	
+        <a href="<{:U('mall/support',array('goods_id'=>$detail['goods_id']))}>" class="btn right">去支持</a>
+    </div>
+</footer>

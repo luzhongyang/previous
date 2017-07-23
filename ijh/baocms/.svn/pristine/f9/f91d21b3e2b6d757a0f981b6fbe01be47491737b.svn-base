@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>首页</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/zy_control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+</head>
+<body>
+    <header>
+        <a onclick="baoapp.helper.goback();"><i class="icon-goback"></i></a>
+        <div class="title">抢购详情</div>
+    </header>
+    <div id='content'>
+        
+    </div>
+    <footer>
+        <script src='../js/application.footer.js'></script>
+    </footer>
+</body>
+<script>
+appcan.ready(function(){ 
+   var height = baoapp.helper.adapt();
+   var search  = baoapp.helper.getRequest(location.search);
+   var tuan_id = search.tuan_id;   
+   
+   //每个detai页面缓存Key
+   var detail_key = KEY.TUAN_DETAIL+'_'+tuan_id;
+   with(baoapp.helper){
+        if(!cacheExpireRead(detail_key)){
+             frameOpen('content','../loading.html',height,function(){    
+             var url = createUrl('tuan','detail',{tuan_id:tuan_id});
+                 ayscLoad(url,null,'GET','json',function(data){
+                    if(data.status == 200){
+                         //抓取数据写入缓存
+                        cacheExpireWrite(detail_key, JSON.stringify(data));
+                        frameOpen('content','detail_content.html?tuan_id='+tuan_id,height);
+                    }else{
+                        frameOpen('content','../loading_fail.html',height);
+                    }
+                });    
+            });
+        }else{
+            frameOpen('content','detail_content.html?tuan_id='+tuan_id,height);
+        }
+    } 
+    
+  
+}); 
+
+function goback()
+{
+    //appcan.window.close(16,baoapp.config.close_duration);
+    with(baoapp.helper){
+        goback();
+       // linkTo(KEY.INDEX_NEW,'index.html',null,5);
+    };
+}
+
+</script>
+</html>

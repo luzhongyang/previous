@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>分享-微信端</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body style="background:url(images/wxShare_bg.png) no-repeat center center; background-size:cover;">
+<div class="weixin_Share">
+    <div class="weixin_Share_top">
+   		<img src="images/wxShare1.png" width="46%" height="">
+        <div><span class="wxShare_money"><span class="pointcl1">15</span>元红包</span></div>
+    </div>
+    <div class="weixin_Share_form">
+    	<div class="headPort">
+            <img src="" width="100" height="100" />
+            <P class="userName">元升子</P>
+            <P>正在邀请您使用江湖外卖</P>
+        </div>
+        <div class="form_box">
+            <form>
+                <input type="text" placeholder="请输入手机号" />
+                <input type="button" value="立即领取" class="long_btn" />
+            </form>
+            <p class="maincl">活动说明？</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>检查更新</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<script src="js/appcan.js"></script>
+<script src="js/appcan.control.js"></script>
+<script src="js/application.js"></script>
+<script src="js/application.init.js"></script>
+
+</head>
+    <script id="temp" type="text/templates">
+        <div class="more_check">
+            <p class="title">发现新版本，是否更新？</p>
+            <p>应用名称：%name%</p>
+            <p>版本:%version% </p>
+            <p>时间：%time%</p>
+            <p>%info%</p>
+            <div class="btn_box">
+            <a onclick="baoapp.helper.goback()" class="btn">稍后升级</a>
+            <a href="#" id="update" class="btn">现在升级</a>
+        </div>
+     </div>
+    </script>
+<body>
+    <script type="text/javascript">
+        appcan.ready(function(){
+           var data =  uexWidgetOne.getCurrentWidgetInfo(); //   获取当前widget信息。
+            uexWidgetOne.cbGetCurrentWidgetInfo = checkupdate;
+           // uexWidgetOne.getCurrentWidgetInfo()
+        })
+        function checkupdate(opId,dataType,data){
+            data = eval('('+data+')');
+            var platform = uexWidgetOne.getPlatform();
+            var req = {ver:data.version,platform:platform};
+            var url = baoapp.helper.createUrl('update','check');
+             baoapp.helper.toast('正在检测版本...',30000,null,1);
+             appcan.ajax({
+               url: url,
+               type: 'GET',
+               data: req,
+               dataType: 'json',
+               timeout: 30000,//请求过时30秒
+               appVerify: true,
+               crypto : crypto,
+               password : baoapp.config.crypto_pswd,
+               beforeSend:function(xhr,settings){
+                   console.log('开始请求数据');
+               },
+               complete:function(xhr,status){
+                   console.log('请求数据完成！');
+               },
+               success:function(data,status,requestCode,response,xhr){
+                    baoapp.helper.toast(null);
+                   if(requestCode==CONST.BAO_REQUEST_SUCCESS)
+                   {
+                    var ret = {name:data.name,version:data.version,time:data.time,info:data.info};
+                         createNode(ret);
+                         $('#update').click(
+                              function(){
+                                var platform = uexWidgetOne.getPlatform();
+                                if(platform==0){
+                                  uexWidget.loadApp("","",data.url); 
+                                }else{
+                                 baoapp.helper.openUrl(data.url);
+                                } 
+                              }
+                          ) 
+                   }else
+                      baoapp.helper.toast('网络请求错误!',1500,null,1);
+               },
+               error:function(xhr,errorType,error,msg){
+                   baoapp.helper.toast(null);
+                   baoapp.helper.toast('网络请求错误!',1500,null,1);
+               }
+       });
+            
+            
+        }
+        
+        
+         function createNode(data)
+         {      
+            with(document){
+                tmpl = getElementById('temp').innerHTML;
+                for(key in data){
+                   tmpl = tmpl.replace('%'+key+'%',data[key]); 
+                }
+                querySelector('.mask').innerHTML += tmpl;
+            }
+         }
+        
+    </script>
+<div class="mask">
+    <div class="more_check" id="updated" style="display:none">
+        <div  >
+            <p class="title">软件版本是最新的哦</p>
+                <div class="btn_box">
+                <a onclick="baoapp.helper.goback()" class="btn">返回</a>
+            </div>
+         </div>
+    </div>
+</div>
+</body>
+</html>

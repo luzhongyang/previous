@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    $(function(){
+            $("#search-bar li").each(function(e){
+                $(this).click(function(){
+                    if($(this).hasClass("on")){
+                        $(this).parent().find("li").removeClass("on");
+                        $(this).removeClass("on");
+                        $(".serch-bar-mask").hide();
+                    }
+                    else{
+                        $(this).parent().find("li").removeClass("on");
+                        $(this).addClass("on");
+                        $(".serch-bar-mask").show();
+                    }
+                    $(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+                        
+                        if(e==i){
+                            $(this).parent().find(".serch-bar-mask-list").hide();
+                            $(this).show();
+                        }
+                        else{
+                            $(this).hide();
+                        }
+                        $(this).find("li").click(function(){
+                            $(this).parent().find("li").removeClass("on");
+                            $(this).addClass("on");
+                            $('.serch-bar-mask').hide();
+                        });
+                    });
+                });
+            });
+        });
+</script>
+ <div id="life" class="page-center-box">
+   <div id="scroll">
+  <!-- 列表 -->
+   <div class="list-have-pic">
+         <div class="list-box rush-box">
+             <div id="search-bar" class="rush-bar">
+                <ul>
+                    <li style="width:33.33%;"><span style="margin-left:0.23rem;">全部分类</span><i style="right:0.01rem;"></i></li>
+                    <li style="width:33.33%;"><span>地区</span><i></i></li>
+                    <li style="width:33.33%;"><span>距离</span><i></i></li>
+                </ul>
+             </div>
+    
+            <div class="serch-bar-mask" style="display:none;">
+                <div class="serch-bar-mask-list">
+                    <ul class='cate'>
+                         <li class="on"><a>全部</a></li>
+                         
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list" style="overflow:hidden;">
+                     <ul class='area'>
+                        <li class="on"><a>全部区域</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list" style="overflow:hidden;">
+                    <ul>
+                        <li onclick="refresh(1,'order')"><a>距离优先</a></li>
+                        <li onclick="refresh(2,'order')"><a>推荐排序</a></li>
+                    </ul>
+                </div>
+            </div>
+            <style type="text/css">
+               #load{width:100%;-webkit-box-flex:1;overflow:auto;}
+            </style>
+            <div id="load">
+                
+            </div>
+         </div>       
+   </div>
+  </div>
+</div>
+</body>
+
+<script type="text/template" id="tmpl_detail">
+       <div class="rush-content" onclick="todetail(%tuan_id%)">
+             <div class="list-img">
+                 <a href=""><img src="%photo%" /></a>
+             </div>
+             <div class="list-content">
+                 <a href="">
+                    <p class="overflow_clear">%title%</p>
+                    <p class="c_h h15 overflow_clear">%intro%</p>
+
+                    <p>
+                        <span class="price price-two">%tuan_price%元</span> 
+                        <del>￥%price%</del>&nbsp;
+                        %mobile_fan%
+                    </p>
+            		<p><span class="fl sell">已售:%sold_num%</span><span class="fr rush-long">距离:%d%</span></p>
+                 </a>
+             </div>
+       </div>
+</script>
+
+<script>
+//打开详细页面
+function todetail(tuan_id)
+{
+    appcan.window.close();
+    with(baoapp.helper){
+        
+        linkTo(KEY.TUAN_DETAIL,'detail.html?tuan_id='+tuan_id,null,2);
+    };
+}
+function createNode(data)
+{
+    with(document){
+        tmpl = getElementById('tmpl_detail').innerHTML;
+        for(key in data){
+            regExp = new RegExp('%'+key+'%','g');
+            tmpl = tmpl.replace(regExp,data[key]);
+        }
+        node = createElement('span');
+        node.innerHTML = tmpl;
+        querySelector('#load').appendChild(node);
+        
+    }
+}
+window.renderList = function(data)
+{
+    
+    document.querySelector('#load').innerHTML = '';
+    for(key in data){
+        createNode(data[key]);
+    }
+}
+window.renderFilter = function(o,data,type)
+{
+    liTag = "";
+    with(document){
+        span = createElement('span');
+        for(key in data){
+            var li = "<li onclick=refresh("+data[key]['id']+",'"+type+"')><a>"+data[key]['title']+"</a></li>";
+            liTag += li;
+        }
+        span.innerHTML = liTag;
+        querySelector(o).appendChild(span);
+    }
+}
+//加载更多
+window.loadMore = function()
+{
+    with(baoapp.helper){
+        ayscRefresh('#load',function(){ 
+           url = createUrl('Tuan','index',{city_id:city_id,page:window.page}); 
+            //判断数据是否加载完
+            if(window.page =='null')
+                toast('没有更多数据！',2000,null,1);
+            else{
+                toast('加载中...');
+                ayscLoad(url,null,'GET','json',function(data){
+                   toast(null);
+                    if(data.status == 200){
+                          window.page = data['page'];
+                          var listData = [];
+                          var rpath = baoapp.config.attachs; 
+                          window['list'] = data.data.list;
+                        
+                          for(key in window['list']){
+                          	for(shop_id in window['shops']){
+                          		if(window['list'][key]['shop_id']==shop_id){
+                          			distance = window['shops'][shop_id]['d'];
+                          			break;
+                          		}
+                          	}
+                            listData.push({
+                            	tuan_id:window['list'][key]['tuan_id'],
+                            	photo:rpath+window['list'][key]['photo'],
+                            	title:window['list'][key]['title'],
+                            	intro:window['list'][key]['intro'],
+                            	tuan_price:window['list'][key]['tuan_price']/100,
+                            	price:window['list'][key]['price']/100,
+                            	sold_num:window['list'][key]['sold_num'],
+         	mobile_fan:window['list'][key]['mobile_fan']<=0?'':"<span class='fan-money'>·手机立减"+(window['list'][key]['mobile_fan']/100)+"元·</span>",
+         						d: distance
+                            });
+                          }
+                          window.renderList(listData);
+                    }
+                });
+            }
+        },function(){
+            console.log('滑到顶部');
+        });
+    };
+
+}
+function refresh(id,type)
+{
+    var param = {page:1,city_id:city_id};
+    switch(type){ 
+        case 'cate': param['cat'] = id;break;
+        case 'area': param['area'] = id;break;
+        case 'order': param['order'] = id;break;
+    }
+    with(baoapp.helper){
+        url = createUrl('Tuan','index',param);
+        console.log(url);
+        toast('加载中...');
+        ayscLoad(url,null,'GET','json',function(data){
+            toast(null);
+            if(data.status == 200){
+                window.page = data['page'];
+                var listData = [];
+                var rpath = baoapp.config.attachs; 
+                window['list'] = data.data.list;
+                for(key in window['list']){
+                   for(shop_id in window['shops']){
+                       if(window['list'][key]['shop_id']==shop_id){
+                          distance = window['shops'][shop_id]['d'];
+                          break;
+                       }
+                    }
+                	listData.push({
+                      	tuan_id:window['list'][key]['tuan_id'],
+                       	photo:rpath+window['list'][key]['photo'],
+                       	title:window['list'][key]['title'],
+                       	intro:window['list'][key]['intro'],
+                       	tuan_price:window['list'][key]['tuan_price']/100,
+                       	price:window['list'][key]['price']/100,
+                       	sold_num:window['list'][key]['sold_num'],
+         	mobile_fan:window['list'][key]['mobile_fan']<=0?'':"<span class='fan-money'>·手机立减"+(window['list'][key]['mobile_fan']/100)+"元·</span>",
+         				d: distance
+                    });
+                }
+                window.renderList(listData);
+            }
+        });
+    }
+}
+</script>
+
+<script>
+appcan.ready(function(){
+
+    with(baoapp.helper){
+        window.page = getRequest(window.location.search)['page'];
+        window.cate = JSON.parse(cacheExpireRead('ALL_CATE'));
+        window.list = JSON.parse(cacheExpireRead('TUAN_LIST'));
+        window.shops = JSON.parse(cacheExpireRead('SHOP_LIST'));
+        _area   = appcan.locStorage.getVal(STORAGE.BAO_CACHE_AREAS);
+        _area   = JSON.parse(_area);
+        window.area = [];
+        for(key in _area){
+            if(_area[key]['city_id']==city_id){
+                window.area.push({id:_area[key]['area_id'],title:_area[key]['area_name']});
+            }
+        }
+        window._cate = [];
+        for(key in window['cate']){
+            window._cate.push({id:key,title:window['cate'][key]});
+        }
+       
+    }
+    var listData = [];
+    var rpath = baoapp.config.attachs; 
+    for(key in window['list']){
+         listData.push({
+         	tuan_id:window['list'][key]['tuan_id'],
+         	photo:rpath+window['list'][key]['photo'],
+         	title:window['list'][key]['title'],
+         	intro:window['list'][key]['intro'],
+         	tuan_price:window['list'][key]['tuan_price']/100,
+         	price:window['list'][key]['price']/100,
+         	sold_num:window['list'][key]['sold_num'],
+         	mobile_fan:window['list'][key]['mobile_fan']<=0?'':"<span class='fan-money'>·手机立减"+(window['list'][key]['mobile_fan']/100)+"元·</span>",
+         	d:window['shops'][window['list'][key]['shop_id']]['d']
+        });
+    }
+    window.renderFilter('.cate',window['_cate'],'cate');
+    window.renderFilter('.area',window['area'],'area');
+    window.renderList(listData);
+    window.order = 1;//1 or 2
+    window.cate  = ''//
+    window.area  = '';//
+    
+    window.loadMore();
+});
+</script>
+</html>

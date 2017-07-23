@@ -1,0 +1,83 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">会员</li>
+        <li class="li2">会员日志</li>
+        <li class="li2 li3">短信日志</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <div class="jsglNr">
+        <div class="selectNr" style="margin-top: 0px; border-top:none;">
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('usersmslogs/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <span>手机号：</span>
+                        <input type="text" name="mobile" class="inptText" /><input type="submit" value="   搜索"  class="inptButton" />
+                    </div>
+                </form>
+                <a href="javascript:void(0);" class="searchG">高级搜索</a>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <form method="post" action="<{:U('usersmslogs/index')}>">
+            <div class="selectNr selectNr2">
+                <div class="left">
+                    <div class="seleK">
+                        <label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'});"  class="text" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'});"  class="text" />
+                        </label>
+                        <label>
+                            <span>关键字：</span>
+                            <input type="text" name="keyword" class="inptText" />
+                        </label>
+                    </div>
+                </div>
+                <div class="right">
+                    <input type="submit" value="   搜索"  class="inptButton" />
+                </div>
+        </form>
+        <div class="clear"></div>
+    </div>
+    <form  target="baocms_frm" method="post">
+        <div class="tableBox">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="log_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>手机号</td>
+                    <td>内容</td>
+                    <td>状态</td>
+                    <td>创建IP</td>
+                    <td>创建时间</td>  
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_log_id" type="checkbox" name="log_id[]" value="<{$var.log_id}>" /></td>
+                        <td><{$var['log_id']}></td>
+                        <td><{$var['mobile']}></td>
+                        <td><{$var['content']}></td>
+                        <td>
+                            <if condition="$var['status'] eq 0">
+                                失败
+                            <elseif condition="$var['status'] eq 1"/>
+                                成功
+                            </if>
+                        </td>
+                        <td><{$var['clientip']}></td>
+                        <td><{$var['dateline']|date='Y-m-d H:i:s',###}></td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  

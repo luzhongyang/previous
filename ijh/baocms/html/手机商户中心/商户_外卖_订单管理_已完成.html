@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-外卖-订单管理_已完成</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> 
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">外卖订单管理</div>
+    <i class="right"><a href="#"></a></i> </header>
+<section>
+	<div class="sh_search_box">
+        <script>
+			$(function(){
+				$(".sh_search_more_int .center").click(function(){
+						$(this).find(".sh_search_more_pull").toggle();
+				});
+				$(".sh_search_more_pull li").click(function(){
+						$(".sh_search_more_int .center input").val($(this).html());
+				});
+			});
+		</script>
+        <div class="sh_search_more">
+            <div class="sh_search_more_time mb10">
+                <div class="fl left"><input type="text" value="开始时间" placeholder="开始时间" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }"></div>
+                <div class="fr right"><input type="text" value="结束时间" placeholder="结束时间" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }"></div>
+                <div class="clear"></div>
+            </div>
+            <div class="sh_search_more_int">
+                <div class="fl left"><input type="text" value="订单编号" placeholder="订单编号" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }"></div>
+                <div class="fl center">
+                	<input type="text" value="状态" placeholder="状态">
+                    <div class="sh_search_more_pull" style="display:none;">
+                        <ul>
+                            <li>等待付款</li>
+                            <li>已完成</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fr right"><input class="btn" type="button" value="搜索"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="sh_infor_tab">
+        <ul>
+            <li>待接单</li>
+            <li>待配送</li>
+            <li class="on">已完成</li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="sh_waimai_order_box">
+        <div class="sh_waimai_order_list mb10">
+            <div class="wz">
+            	<div class="fl">
+                	<p class="user">张先生  <span class="fontcl1">13515608638</span></p>
+                    <p class="xinxi"><em class="ico ico_1"></em>2015111212012</p>
+                    <p class="xinxi"><em class="ico ico_2"></em>2015-11-19 12:12下单</p>
+                    <p class="xinxi"><em class="ico ico_3"></em>望江西路555号</p>
+                </div>
+                <div class="fr">
+                	<span class="tel"></span>
+                	<p class="range overflow_clear fontcl1">1000m</p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="sh_waimai_order_list mb10">
+            <div class="wz">
+            	<div class="fl">
+                	<p class="user">张先生  <span class="fontcl1">13515608638</span></p>
+                    <p class="xinxi"><em class="ico ico_1"></em>2015111212012</p>
+                    <p class="xinxi"><em class="ico ico_2"></em>2015-11-19 12:12下单</p>
+                    <p class="xinxi"><em class="ico ico_3"></em>望江西路555号</p>
+                </div>
+                <div class="fr">
+                	<span class="tel"></span>
+                	<p class="range overflow_clear fontcl1">1000m</p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

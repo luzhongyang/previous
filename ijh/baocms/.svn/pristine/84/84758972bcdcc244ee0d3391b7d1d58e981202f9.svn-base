@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-基本信息</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> <i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">商家管理-基本信息</div>
+    <i class="right"><a href="#"></a></i> </header>
+<section>
+    
+    <script>
+		$(function(){
+			$(".sh_infor_tab li").each(function(e){
+				$(this).click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".sh_infor_tab_box").each(function(i){
+						if(e==i){
+							$(".sh_infor_tab_box").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+					});
+				});
+			});
+		});
+    </script>
+    <div class="sh_infor_tab mb10">
+        <ul>
+            <li class="on">密码修改</li>
+            <li>金块充值</li>
+            <li>消费日志</li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="sh_infor_tab_box">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box">
+                <ul>
+                    <li class="list_box mb10">
+                       <div class="sh_input_public"><span>原密码</span><input type="text" value=""></div> 
+                    </li>
+                    <li class="list_box mb10">
+                       <div class="sh_input_public"><span>新密码</span><input type="text" value=""></div> 
+                    </li>
+                    <li class="list_box mb10">
+                       <div class="sh_input_public"><span>确认密码</span><input type="text" value=""></div> 
+                    </li>
+                </ul>
+            </div>
+            <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认修改"></div>
+        </div>
+    </div>
+    <div class="sh_infor_tab_box" style="display:none;">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box">
+                <ul>
+                    <li class="list_box mb10">
+                       <div class="sh_input_public"><span>金块</span><input type="text" value=""></div> 
+                    </li>
+                    <script>
+						$(function(){
+							$(".sh_pay_way_check input").click(function(){
+								$(".sh_pay_way_check").find("label").removeClass("on");
+								$(this).parent("label").addClass("on");
+							});
+						});
+					</script>
+                    <li class="list_box">
+                       <div class="sh_pay_way">
+                           <div class="fl left i_1">
+                           		支付宝<p>推荐已安装支付宝客户端的用户使用</p>
+                           </div>
+                           <div class="fr right">
+                               <div class="sh_pay_way_check"><label><input name="payWay" type="radio"></label></div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                    </li>
+                    <li class="list_box">
+                       <div class="sh_pay_way">
+                           <div class="fl left i_2">
+                           		财付通<p>推荐已安装支付宝客户端的用户使用</p>
+                           </div>
+                           <div class="fr right">
+                               <div class="sh_pay_way_check"><label><input name="payWay" type="radio"></label></div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                    </li>
+                    <li class="list_box">
+                       <div class="sh_pay_way">
+                           <div class="fl left i_3">
+                           		微信支付<p>推荐已安装支付宝客户端的用户使用</p>
+                           </div>
+                           <div class="fr right">
+                               <div class="sh_pay_way_check"><label><input name="payWay" type="radio"></label></div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                    </li>
+                    <li class="list_box">
+                       <div class="sh_pay_way">
+                           <div class="fl left i_4">
+                           		余额支付<p>推荐已安装支付宝客户端的用户使用</p>
+                           </div>
+                           <div class="fr right">
+                               <div class="sh_pay_way_check"><label><input name="payWay" type="radio"></label></div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                    </li>
+                    <li class="list_box">
+                       <div class="sh_pay_way">
+                           <div class="fl left i_5">
+                           		银联支付<p>推荐已安装支付宝客户端的用户使用</p>
+                           </div>
+                           <div class="fr right">
+                               <div class="sh_pay_way_check"><label><input name="payWay" type="radio"></label></div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                    </li>
+                    <li class="list_box">
+                       <div class="sh_pay_way">
+                           <div class="fl left i_6">
+                           		网银在线<p>推荐已安装支付宝客户端的用户使用</p>
+                           </div>
+                           <div class="fr right">
+                               <div class="sh_pay_way_check"><label><input name="payWay" type="radio"></label></div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                    </li>
+                    <li class="list_box">
+                       <div class="sh_pay_way">
+                           <div class="fl left i_7">
+                           		paypal<p>推荐已安装支付宝客户端的用户使用</p>
+                           </div>
+                           <div class="fr right">
+                               <div class="sh_pay_way_check"><label><input name="payWay" type="radio"></label></div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                    </li>
+                    <li class="list_box mb10">
+                       <div class="sh_pay_way">
+                           <div class="fl left i_8">
+                           		货到付款<p>推荐已安装支付宝客户端的用户使用</p>
+                           </div>
+                           <div class="fr right">
+                               <div class="sh_pay_way_check"><label><input name="payWay" type="radio"></label></div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="sh_login_nr"><input class="btn mt30" type="button" value="立刻充值"></div>
+        </div>
+    </div>
+    
+    <div class="sh_infor_tab_box" style="display:none;">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box">
+                <ul>
+                    <li class="list_box mb10">
+                       <div class="sh_infor_log_nr">
+                       		<p><span class="fl left">金块：<span class="c_1">-20</span></span><span class="fr">2015-08-05 15:19:04</span></p>
+                            <p>说明：查看服务0551-63641901查看服务0551-63641</p>
+                       </div> 
+                    </li>
+                    <li class="list_box mb10">
+                       <div class="sh_infor_log_nr">
+                       		<p><span class="fl left">金块：<span class="c_1">-20</span></span><span class="fr">2015-08-05 15:19:04</span></p>
+                            <p>说明：查看服务0551-63641901查看服务0551-63641</p>
+                       </div> 
+                    </li>
+                </ul>
+            </div>
+            <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认修改"></div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

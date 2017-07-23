@@ -1,0 +1,45 @@
+<foreach name="list" item="item">
+    <!-- 循环 -->
+    <div class="list-box">
+        <div class="list-img" style="width: 0.8rem; height: 0.6rem;">
+            <a href="<{:AppLink('mobile/hotel/detail',array('hotel_id'=>$item['hotel_id']))}>"><img src="__ROOT__/attachs/<{$hotels[$item['hotel_id']]['photo']}>"></a>
+        </div>
+        <div class="buy-content" style="margin-left: 0.9rem;">
+            <p class=""><span class="fl overflow_clear" style="width:60%;"><a href="<{:AppLink('mobile/hotel/detail',array('hotel_id'=>$item['hotel_id']))}>"><{$hotels[$item['hotel_id']]['hotel_name']}></a></span><span class="fr"><a class="order_detail" style="margin-right: 0.15rem;" href="<{:AppLink('mcenter/hotel/detail',array('order_id'=>$item['order_id']))}>">详情</a></span></p>
+            <p style="padding-top: 0.03rem;"><span>预订时间：<{$item.stime}>--<{$item.ltime}></span></p>
+            <p><span>订单总额：￥<{$item.amount}></span>&nbsp;&nbsp;<span>房间数量：<{$item['num']}></span></p>
+            <p class="spread-for">
+                <if condition="$item['online_pay'] eq 0">
+                        到店付
+                        <eq name="item.order_status" value="-1">
+                        已取消
+                        </eq>
+                        <eq name="item.order_status" value="2">
+                        已完成
+                            <if condition="$item['comment_status'] eq 1">
+                                <a class="button" href="javascript:void(0);">已点评</a>
+                                <else/>
+                                <a class="order_detail" href="<{:U('hotel/comment',array('order_id'=>$item['order_id']))}>">去点评</a>
+                            </if>
+                        </eq>
+                    <else/>
+                    <if condition="$item['order_status'] eq 0">
+                        <a style="margin-left: 0;" class="order_detail"  href="<{:U('mobile/hotel/pay',array('order_id'=>$item['order_id']))}>">去付款</a>
+                        <elseif condition="$item[order_status] eq 1" />
+                        已付款
+                        <elseif condition="$item[order_status] eq 2" />
+                        已入住
+                        <if condition="$item['comment_status'] eq 1">
+                            <a class="order_detail" href="javascript:void(0);">已点评</a>
+                            <else/>
+                            <a class="order_detail" href="<{:U('hotel/comment',array('order_id'=>$item['order_id']))}>">去点评</a>
+                        </if>
+                        <else/>
+                            已取消
+                    </if>
+                </if>   
+            </p>
+        </div>
+    </div>
+    <!-- 循环 -->
+</foreach>

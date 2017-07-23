@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>优惠券</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<a href=""><i class="icon-goback"></i></a>
+		<div class="title">优惠券详情</div>
+		<a href=""><i class="icon-menu" id="ico_1"></i></a>
+	</header>
+	<div id="sell" class="page-center-box">
+		<div id="scroll">
+			<!-- BANNER图 -->
+			<div class="seat-banner">
+				<a href="javacript:;">
+					<img src="img/icn10.png" width="100%" height="100%"/>
+					<div class="shade"></div>
+					<div class="shade-content">
+						<p>仅售5980，价值7980元浪漫主题套装</p>
+					</div>
+				</a>
+			</div>
+			<!-- 评分 -->
+			<div class="point">
+				<div class="point-left favou-left">
+					<div>下载：43次<span class="mall-num">浏览258人</span></div>
+				</div>
+				<div class="point-right">
+					<a href="#" class="btn">立即领取</a>
+				</div>
+			</div>
+			
+            <div class="mall-our">
+                <span class="mall-fen"><a href=""><img src="img/tp9.png"><span>分 享</span></a></span> 
+                <span class="mall-fen"><a href=""><img src="img/icon-sc.png"><span>收 藏</span></a></span>           
+            </div>
+			<div class="spread-intro">
+				<ul>
+					<li class="spread-tui">优惠券简介</li>
+					<li class="favou-more">
+						专业设备，精湛技术，创新理念，独一无二，为您记录幸福时刻！服务贴心，环境优雅！让您终身难忘！ 主舞台： • 舞台主背景搭建+沙曼布置 • 豪华双轮彩色泡泡机1台 • 爱情香槟塔 • 爱情圣火 • 舞台仪式桌面布置、花瓣装饰 通道： • 路引10个（根据场地的大小选择路引数量） • 路引绢花花头装饰10个 • 红色地毯（其它色系地毯需另支付100元定制费） • 焦点追光灯2台 迎宾区： • 迎宾区主背景搭建+沙曼布置 • 签到桌冰绸+绢花+亮片+花瓣+道具布置 • 地帕2个 人员： • 工程布场人员3名 • 资深婚礼督导师 • 资深婚礼司仪 • 资深						
+					</li>
+				</ul>
+			</div>
+			<div class="spread-intro">
+				<ul>
+					<li class="spread-tui">皇马婚典</li>
+					<li>
+						<P>联系电话：400-64278110</P>
+						<p>公司地点：蜀山区潜山路496号新景花园16栋804室</p>
+					</li>
+					<li>
+                    	<a href="#" class="work-go">到这去<img src="img/tp26.png" class="work-img"></a>	     
+                    	<a href="#" class="work-phone">0551-3657556<img src="img/tp27.png" class="work-img2"></a> 
+                    	<div class="clear"></div>     
+		        	</li>
+				</ul>
+			</div>
+
+			<div class="spread-intro">
+				<ul>
+					<li class="spread-tui">小编精选</li>
+					<li class="favou-image">
+						<div class="fl">
+							<a href="">
+		                    	<img src="img/icn11.png">
+								<p>优惠券一</p>
+							</a>
+						</div>
+						<div class="fl">
+							<a href="">                   	
+		                    	<img src="img/icn11.png">  
+		                    	<p>优惠券二</p>
+		                    </a>	
+                    	</div> 
+                    	<div class="clear"></div> 
+		        	</li>
+				</ul>
+			</div>
+			<div class="spread-intro">
+				<ul>
+					<li class=""><img src="img/icn12.png" class="favou-process"></li>
+				</ul>
+			</div>
+			<!-- 循环 -->
+		</div>
+	</div>
+</body>
+</html>
+
+
+<!-- <p></p> -->

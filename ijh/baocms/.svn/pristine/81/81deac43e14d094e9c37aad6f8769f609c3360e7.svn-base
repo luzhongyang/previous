@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的关注-商家简介</title>
+<link href="Css/reset.css" rel="stylesheet">
+<link href="Css/wap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body id="my_attention">
+
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">详细资料</div>
+		<i class="icon-menu" id="ico_2"></i>
+	</header>
+    
+    <div id="seat" class="page-center-box">
+	<div id="scroll">
+
+    <div class="shop">
+    	<div class="left">
+        	<img src="" />
+        </div>
+        <div class="right">芜湖路米罗咖啡</div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="shop_p">
+    	商家简介：芜湖路米萝咖啡是隶属于美国米萝咖啡，咖啡原料来源于世界五大咖啡种植基地，本店主要经营西式咖啡，中式咖啡，品种丰富，口味多样，欢迎广大顾客来店品尝。
+    </div>
+    
+    <div class="shop_add_btn">确认关注</div>
+    
+    </div>
+    </div>
+
+</body>
+</html>

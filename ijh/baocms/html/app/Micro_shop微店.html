@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>微店</title>
+<link href="Css/reset.css" rel="stylesheet">
+<link href="Css/wap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body id="micro_shop">
+<header> <i class="icon-goback"></i>
+    <div class="title">“鼓楼美洁”的微店</div>
+    <i class="icon-menu" id="ico_2"></i> </header>
+    
+    
+    
+    <!-- 浮动按钮begin -->
+		<script>
+            $(function(){
+                $(".micro_ico").click(function(){
+                    $(".micro_ico_new").toggle();
+                    $(".micro_ico_recommend").toggle();
+                    $(".micro_ico_good").toggle();
+                    if($(".micro_ico_box_bg").css("display")=="block"){
+                        $(".micro_ico_box_bg").hide();
+                    }
+                    else{
+                        $(".micro_ico_box_bg").show();
+                    }
+                });
+            });
+        </script>
+        <div class="micro_ico_box">
+            <div class="micro_ico"><img src="img/micro_ico.png" /></div>
+            <div class="micro_ico_new" style="display:none;"><a href="#"><img src="img/micro_ico_new.png" /></a></div>
+            <div class="micro_ico_recommend" style="display:none;"><a href="#"><img src="img/micro_ico_recommend.png" /></a></div>
+            <div class="micro_ico_good" style="display:none;"><a href="#"><img src="img/micro_ico_good.png" /></a></div>
+        </div>
+        <div class="micro_ico_box_bg" style="display:none;"></div>
+        <!-- 浮动按钮end --> 
+    
+    
+<div id="seat" class="page-center-box">
+    <div id="scroll">
+        <div class="micro_top"><img src="img/micro_top.jpg" /></div>
+        <div class="billboard-content">
+            <script>
+				$(function(){
+					$(".billboard-tab li").each(function(e){
+						$(this).click(function(){
+							if($(this).hasClass("on")){
+								$(this).parent().find("li").removeClass("on");
+								$(this).removeClass("on");
+								$(".serch-bar-mask").hide();
+							}
+							else{
+								$(this).parent().find("li").removeClass("on");
+								$(this).addClass("on");
+								$(".serch-bar-mask").show();
+							}
+							$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+								
+								if(e==i){
+									$(this).parent().find(".serch-bar-mask-list").hide();
+									$(this).show();
+								}
+								else{
+									$(this).hide();
+								}
+								$(this).find("li").click(function(){
+									$(this).parent().find("li").removeClass("on");
+									$(this).addClass("on");
+								});
+							});
+						});
+					});
+				});
+			</script>
+            <div class="billboard-tab">
+                <ul>
+                    <li><span>分类</span><i></i></li>
+                    <li><span>排序</span><i></i></li>
+                    <li><span>排序</span><i></i></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="serch-bar-mask" style="display:none;">
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部分类</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部地区</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部商圈</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部排序</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-bg"></div>
+            </div>
+            <ul class="list">
+                <li>
+                    <div class="img"><img src="" /></div>
+                    <div class="nr">
+                        <div class="title">玻尿酸补水面膜玻尿酸补水面膜...</div>
+                        <div class="price">￥69<em>30</em></div>
+                        <div class="num"> <span class="l">-</span> <span class="m">99</span> <span class="r">+</span> </div>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <div class="img"><img src="" /></div>
+                    <div class="nr">
+                        <div class="title">玻尿酸补水面膜玻尿酸补水面膜...</div>
+                        <div class="price">￥69<em>30</em></div>
+                        <div class="num"> <span class="l">-</span> <span class="m">99</span> <span class="r">+</span> </div>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <div class="img"><img src="" /></div>
+                    <div class="nr">
+                        <div class="title">玻尿酸补水面膜玻尿酸补水面膜...</div>
+                        <div class="price">￥69<em>30</em></div>
+                        <div class="num"> <span class="l">-</span> <span class="m">99</span> <span class="r">+</span> </div>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <div class="img"><img src="" /></div>
+                    <div class="nr">
+                        <div class="title">玻尿酸补水面膜玻尿酸补水面膜...</div>
+                        <div class="price">￥69<em>30</em></div>
+                        <div class="num"> <span class="l">-</span> <span class="m">99</span> <span class="r">+</span> </div>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            </ul>
+        </div> 
+    </div>
+</div>
+
+
+
+
+
+
+<footer class="footer-cart">
+    <div class="cart">
+        <div class="cart-num">3</div>
+    </div>
+    <div class="price">￥126.00</div>
+    <div class="btn">结算</div>
+</footer>
+</html>

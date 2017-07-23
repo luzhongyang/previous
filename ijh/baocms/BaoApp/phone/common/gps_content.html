@@ -1,0 +1,55 @@
+<script src="http://api.map.baidu.com/components?ak=7b92b3afff29988b6d4dbf9a00698ed8&v=1.0"></script>
+<style type="text/css">
+    body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+    #golist {display: none;}
+    .lbs-tag .info-box .info-btn i.icon { margin-right: 4px;position:relative;}
+    .lbs-tag .zoom-btn-container i.icon{position:relative;}
+    @media (max-device-width: 800px){#golist{display: block!important;}}
+</style>
+<span id="map_container"></span>
+<script type="text/template" id="tmpl_map">
+<lbs-map  map-type="static-map" style="height:100%;width:100%" center="%lng%,%lat%">
+        <lbs-poi name="%addr%" location="%lng%,%lat%" addr="%addr%" ></lbs-poi>
+</lbs-map>  
+</script>
+
+<script>
+function getRequest(search)
+{
+   var  params = {};
+   if(search.indexOf('?')!=-1){
+       search = search.replace('?','');
+       search = search.split('&');
+       for(var k in search){
+               var kv= search[k].split('=');
+               params[kv[0]] = unescape(kv[1]);
+       }
+       return params;
+  }
+  return false;
+}
+
+function createMap(data)
+{
+    with(document){
+       // var spanNode = createElement('span')
+            //tmpl     = getElementById('tmpl_map').innerHTML;
+            var tmpl     = getElementById('tmpl_map').innerHTML;
+            for(key in data){
+               regExp = new RegExp('(%'+key+'%)','g');
+               tmpl = tmpl.replace(regExp,data[key]); 
+            }
+            
+            //spanNode.innerHTML = tmpl;
+            querySelector('#map_container').innerHTML+=tmpl;
+    }
+    
+}
+
+void function(){
+   var search  = getRequest(location.search),
+       data    = {addr:unescape(search.addr),lat:search.lat,lng:search.lng};
+       createMap(data);   
+}();
+
+</script>

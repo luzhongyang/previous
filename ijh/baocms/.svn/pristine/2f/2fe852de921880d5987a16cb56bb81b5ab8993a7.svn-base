@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>优惠券</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<a href=""><i class="icon-goback"></i></a>
+		<div class="title">优惠券详情</div>
+		<a href=""><i class="icon-menu" id="ico_9"></i></a>
+	</header>
+	<div id="sell" class="page-center-box">
+		<div id="scroll">
+			<!-- BANNER图 -->
+			<div class="member-ground">
+				<img src="img/icn14.png" class="member-ig">
+				<span class="member-banner">
+					<span class="">一卡通</span>
+					<!-- <img src="img/icn14.png"> -->
+				</span>
+			</div>
+			<div class="spread-intro member-nr">
+				<ul>
+					<li>
+					<p>会员专享享9折</p>
+					<p>温馨提示：您可以在任何一家联盟商家领取一卡通</p>
+					</li>
+				</ul>
+			</div>
+
+			<div class="spread-intro member-nr">
+				<ul>					
+					<li
+						<P>宽大摄影</P>
+						<p>地址：蜀山区潜山路496号新景花园16栋804室</p>
+					</li>
+					<li>
+                    	<a href="#" class="work-go">到这去<img src="img/tp26.png" class="work-img"></a>	     
+                    	<a href="#" class="work-phone">0551-3657556<img src="img/tp27.png" class="work-img2"></a> 
+                    	<div class="clear"></div>     
+		        	</li>
+				</ul>
+			</div>
+
+			<div class="spread-intro">
+				<ul>
+					<li class="spread-tui">使用流程</li>
+					<li class=" member-nr">
+						<p>1.领取会员卡：去联盟商家领取会员卡；</p>
+						<p>2.享受优惠：持卡在任意商铺消费都会享受优惠；</p>
+						<p>3.获取积分：用户消费后商家会返一定的积分；</p>
+						<p>4.兑换商品：用户可以用积分兑换精美礼品。</p>
+		        	</li>
+				</ul>
+			</div>
+			<!-- 循环 -->
+		</div>
+	</div>
+</body>
+</html>
+
+
+<!-- <p></p> -->

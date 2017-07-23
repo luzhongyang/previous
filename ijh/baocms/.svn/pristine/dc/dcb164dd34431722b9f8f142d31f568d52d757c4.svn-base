@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <i class="icon-goback"></i>
+        <div class="title">更换头像</div>
+    </header>
+    <div id="content">
+    <script>
+    appcan.ready(function(){ 
+        var height = baoapp.helper.adapt();
+    });
+    </script>
+    <div id="personal" class="page-center-box">
+        <div id="scroll">
+        	<div class="Upload-img-box">
+            	<div class="Upload-img mb15">
+                	<div class="list-img"><img src=""></div>
+                </div>
+            	<div class="Upload-btn"><input type="file">上传头像</div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer>
+       <script src='../js/application.footer.js'></script>
+    </footer>
+</body>
+</html>

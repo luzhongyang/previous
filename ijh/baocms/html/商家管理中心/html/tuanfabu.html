@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>团购管理-抢购发布</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script>
+$(function(){
+	$(".tabli_change").each(function(e){
+		$(this).find("a").click(function(){
+			$(".tabli_change").removeClass("on");
+			$(this).parent(".tabli_change").addClass("on");
+			$(".tabnr_change").each(function(i){
+				if(e==i)
+				{
+					$(".tabnr_change").hide();
+					$(this).show();
+				}
+				else
+				{
+					$(this).hide();
+				}
+			});
+		});
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="sjgl_lead">
+    <ul>
+        <li><em class="sjgl_leadico sjgl_leadico4"></em><a href="#">抢购管理</a></li>
+        <li>&gt;<a class="sjgl_leadEnd" href="#">抢购发布</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+    	<div class="tuan_top_t">
+            <div class="left tuan_topser_l">注意：商家发布的团购要在后台审核之后才能显示在前台</div>
+            <div class="right"><a class="radius3 tuan_topbt" target="main_frm" href="#">返回列表</a></div>
+        </div>
+    </div>
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli tabli_change on"><a href="#">基本资料</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="#">价格数量</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="#">规格属性</a></li>
+        </ul>
+    </div>
+    <div class="tabnr_change show">
+        <table class="tuanfabu_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="120"><p class="tuanfabu_t"><em>·</em>团购名称：</p></td>
+                <td><div class="tuanfabu_nr"><input type="text" class="tuanfabu_int tuanfabu_intw1" /></div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t"><em>·</em>简短名称：</p></td>
+                <td><div class="tuanfabu_nr"><input type="text" class="tuanfabu_int tuanfabu_intw2" /><span class="tuanfabu_nrts">[用于团购券，邮件，短信，列表展示的显示，字数不得超过20字]</span></div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">团购简介：</p></td>
+                <td><div class="tuanfabu_nr"><textarea class="tuanfabu_int tuanfabu_textarea"></textarea></div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">标签：</p></td>
+                <td>
+                    <div class="tuanfabu_nr">
+                        <span class="tuanfabu_bq"><input type="checkbox" />0元抽奖</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />免预约</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />多套餐</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />可订座</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />折扣券</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />过期退</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />随时退</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />免运费</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />满立减</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t"><em>·</em>分类：</p></td>
+                <td>
+                    <div class="tuanfabu_nr">
+                        <select class="tuanfabu_int tuanfabu_intw2">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">子分类列表：</p></td>
+                <td>
+                    <div class="tuanfabu_nr">
+                        <span class="tuanfabu_bq"><input type="checkbox" />咖啡</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />闽菜</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />东北菜</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />川菜</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />日本料理</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />本帮菜</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />甜点</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />面包</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />烧烤</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />西餐</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t"><em>·</em>支持门店：</p></td>
+                <td>
+                    <div class="tuanfabu_nr">
+                        <span class="tuanfabu_bq"><input type="checkbox" />老王烤鸭馆</span>
+                        <span class="tuanfabu_bq"><input type="checkbox" />阿婆宠物店</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t"><em>·</em>团购缩略图：</p></td>
+                <td>
+                    <div class="tuanfabu_nr">
+                        <div class="left tuanfabu_scimg">
+                        	<div class="scimgBox"><a class="radius3 tuan_topbt" href="#">图片上传</a><input type="file" class="scimg_int" /></div>
+                            <p>建议尺寸300*200</p></div>
+                        <div class="left">
+                            <div class="tuanfabu_sjimg"><img src="../sjimages/scimg_03.jpg" />
+                                <!--<div class="tuanfabu_imgjz"></div>--><!--图片加载-->
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t"><em>·</em>团购图片集：</p></td>
+                <td>
+                    <div class="tuanfabu_nr">
+                        <div class="left tuanfabu_scimg">
+                            <div class="scimgBox"><a class="radius3 tuan_topbt" href="#">图片上传</a><input type="file" class="scimg_int" /></div>
+                            <p>建议尺寸545*305</p>
+                        </div>
+                        <div class="left">
+                            <div class="tuanfabu_sjimg"><img src="../sjimages/scimg_03.jpg" />
+                                <!--<div class="tuanfabu_imgjz"></div>--><!--图片加载-->
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">团购描述：</p></td>
+                <td>
+                    <div class="tuanfabu_nr"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t">团购须知：</p></td>
+                <td>
+                    <div class="tuanfabu_nr"></div>
+                </td>
+            </tr>
+        </table>
+        <div class="tuanfabu_an"><a class="radius3 sjgl_an tuan_topbt" href="#">确认发布</a></div>
+    </div>
+</div>
+</body>
+</html>

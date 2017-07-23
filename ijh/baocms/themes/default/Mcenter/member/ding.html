@@ -1,0 +1,52 @@
+<include  file='public:header'/>    
+<body>
+    <?php if(!$is_app){?>
+    <header> <i class="icon-goback"></i>
+        <div class="title"> 完成支付 </div>
+    </header>
+    <?php }?>
+    <div id="index" class="page-center-box">
+        <div id="scroll">
+            <div class="payFinish">
+                <div class="sh_buy_bt">
+                    <div class="fl">订单编号：<{$order.order_id}></div>
+                    <div class="fr">预约时间：<{$order.ding_date}> &nbsp;<{$order.ding_time}></div>
+                </div>
+                <div class="sh_buy_date" style="border-bottom: none;">支付定金： <{:round($detail['need_pay']/100,1)}> 元 &nbsp;&nbsp; (<if condition="$order['order_status'] eq 1"> 未消费 <elseif condition="$order['order_status'] eq 2"/> 已消费 <elseif condition="$order['order_status'] eq -1"/> 已退款 <else/>未支付</if>)</div>
+                <div class="sh_waimai_order_price">
+                    <div class="fl">付款方式：<{$paytype[$detail['code']]['name']}></div>
+                    <div class="fr">结算价格：<span class="main_color">￥<{:round($detail['need_pay']/100,1)}></span></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="sh_waimai_order_price">
+                    <div>地址：<{$shop.addr}><span style="float: right; display: inline-block;">人数：<{$order.ding_num}></span></div>
+                </div>
+                <div class="sh_waimai_order_price">
+                    <div>联系人: <{$order.name}> &nbsp;（<if condition="$order['sex'] eq 2">女士<else/>先生</if>）<span style="float: right; display: inline-block;">电话：<{$order.mobile}></span></div>
+                </div>
+                <if condition="$dingmenu">
+                    <div class="sh_waimai_order_nr">
+                        <div class="wz">
+                            <ul>
+                                <volist name="dingmenu" id="item">
+                                    <li>
+                                        <div class="fl left">
+                                            <div class="payFinish_img"><img src="__ROOT__/attachs/<{$menus[$item['menu_id']]['photo']}>" width="60" height="60"></div>
+                                            <p class="payFinish_wz"><{$item['menu_name']}></p>
+                                        </div>
+                                        <div class="fr"><{$item.num}><span class="ml10">x</span><span class="ml10">￥<{:round($item['price']/100,1)}></span><span class="ml10 main_color">=￥<{:round($item['amount']/100,1)}></span></div>
+                                        <div class="clear"></div>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </if>
+            </div>
+        </div>
+    </div>
+    <div class="bfix shop-button" >
+        <a href="<{:AppLink('mcenter/ding/detail',array('order_id'=>$order['order_id']))}>"><span class="shop-pay">查看详情</span></a>
+        <a href="<{:AppLink('mobile/ding/index')}>"><span class="shop-del">继续逛逛</span></a>
+    </div>
+<include  file='public:footer'/>    

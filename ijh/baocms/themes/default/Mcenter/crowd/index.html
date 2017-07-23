@@ -1,0 +1,43 @@
+<include  file='public:header'/>  
+<body>
+    <?php if(!$is_app){?>
+    <header>
+        <a href="<{:AppLink('member/index')}>"><i class="icon-goback"></i></a>
+        <div class="title">我的众筹</div>
+        <i class="icon-menu"></i>
+    </header>
+    <?php }?>
+    <!-- 筛选TAB -->
+
+    <div id="life" class="page-center-box">
+
+        <div id="scroll">
+            <div class="list-have-pic shop-list" style="margin:0 0 0.1rem;">
+                <foreach name="goods" item="var">
+                    <div class="list-box border_t">
+                        <div class="shop-order">
+                            <p class="left">众筹ID:<{$var.goods_id}></p>
+                            <p class="right black9">状态：
+                                <eq name='var.status' value='0'>众筹进行中</eq><eq name='var.status' value='1'><b style='color:green;'>众筹成功</b></eq><eq name='var.status' value='2'><b style='color:red;'>众筹失败</b></eq>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="list-box mb10">
+                        <a href="">
+                            <div class="list-content activ-list-content" id="order-title" style="margin-left:0.08rem;">
+                                <p class="activ-title">众筹产品：<{$var.title}></p>
+                                <p class="">总需金额：<{$var['all_price']/100}>元</p>
+                                <p class="">已筹金额：<{$var['have_price']/100}>元</p>
+                                <p class="">过期时间：<{$var.ltime|date='Y-m-d H:i:s',###}></p>
+                                <p class="">是否中奖：<eq name='var.is_zhong' value='1'><b style='color:green;'>中奖</b><else/>--</eq></p>        
+                                <div class="spread-looker">查看详情：<a href="<{:U('mcenter/crowd/detail',array('goods_id'=>$var['goods_id']))}>"  class="shop-pay">详情</a></div>
+                            </div>
+                        </a>
+                    </div>
+                </foreach>
+            </div>
+        </div>
+
+
+    </div>
+<include  file='public:footer'/>

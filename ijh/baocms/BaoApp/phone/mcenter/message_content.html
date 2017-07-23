@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>消息中心</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+<style type="text/css">
+    #scroll{
+        overflow: auto;
+    }
+    #personal-coupon{
+        overflow: auto;
+    }
+</style>
+
+<script id="rendlist" type="text/templates">
+        <div class="list-box">
+			<a onclick ='link(%msg_id%)'>
+			<div class="list-content list-content-small">
+				<p id='utl' style='display:none'>%link_url%</p>
+				<p class="overflow_clear">%title%</p>
+				<p class="c_h h15">%intro%</p>
+			</div></a>
+		</div>
+</script>
+<script>
+   
+   
+    window.readCache=function (key)
+    {
+        key = key || KEY.MEMBER_MSG;
+         //读取缓存
+        var cached = baoapp.helper.cacheExpireRead(key);
+            cached = JSON.parse(cached);
+        var data     = [];
+        var http_url = baoapp.config.attachs;
+        for(index in cached){
+            data[index] = {msg_id:cached[index]['msg_id'],title:cached[index]['title'],intro:cached[index]['intro'],link_url:cached[index]['link_url'],details:cached[index]['details']};
+        }
+        renderList(data);
+        
+    }
+    
+    function link(id){
+        var url = $('#url').html();
+        if(url){
+            baoapp.helper.openUrl(url);
+        }else{
+            var data = {'id' : id }; 
+            baoapp.helper.linkTo('msg_detail','msg_detail.html?id='+id);
+        }
+        
+    }
+    
+    function renderList(datas)
+    {
+       //情况列表容器
+       document.querySelector('#load').innerHTML = '';
+       for(i in datas){
+           createNode(datas[i]);
+       }         
+    }  
+    function createNode(data)
+    {      
+        with(document){
+            var spanNode = createElement('span'),
+                tmpl     = getElementById('rendlist').innerHTML;
+                for(key in data){
+                   tmpl = tmpl.replace('%'+key+'%',data[key]); 
+                }
+                spanNode.innerHTML = tmpl;
+                querySelector('#load').appendChild(spanNode);
+        }
+    }
+    
+</script>
+
+
+<script>
+    appcan.ready(
+        function(){
+          with(baoapp.helper){
+            window.readCache();
+         }
+    });
+    
+</script>
+
+</head>
+
+<body>
+
+<div id="my-message" class="page-center-box">
+		<div id="scroll">
+			<!-- 列表 -->
+			<div class="list-have-pic" id="load">
+				<!-- 循环 -->
+				
+				<!-- 循环 -->
+			</div>
+		</div>
+	</div>
+
+  </body>  
+  </html>

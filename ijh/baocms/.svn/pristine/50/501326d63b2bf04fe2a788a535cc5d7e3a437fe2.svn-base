@@ -1,0 +1,182 @@
+<include file="public:header"/>
+<body>
+    <iframe id="baocms_frm" name="baocms_frm" style="display:none;"></iframe>
+    <?php if(!$is_app){?>
+    <header>
+        <a href="<{:AppLink('mall/index')}>"><i class="icon-goback"></i></a>
+        <div class="title">购物详情</div>
+        <a class="icon-menu share" href="javascript:void(0);" id="share"><i class="icon-menu" id="shareIco"></i></a>
+    </header>
+    <?php }?>
+    <div class="bdcolor">
+        <div class="bdcolor_bg"></div>
+        <div class="bdsharebuttonbox" data-tag="share_1">
+            <a class="bds_weixin" data-cmd="weixin">微信</a>
+            <a class="bds_qzone" data-cmd="qzone" href="#">QQ空间</a>
+            <a class="bds_sqq" data-cmd="sqq">腾讯QQ</a>
+            <a class="bds_tqq" data-cmd="tqq">腾讯微博</a>
+            <a class="bds_tsina" data-cmd="tsina">新浪微博</a>
+            <div class="bd-share-popup-footer">
+                <a class="bd-share-popup-close" onClick="$('.bdcolor').hide();" href="javascript:void(0);">取消</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".share").click(function () {
+                $(".bdcolor").show();
+            });
+            $(".cartadd2").click(function(){
+               var url = "<{:U('mall/cartadd2')}>";
+               var goods_id = "<{$detail.goods_id}>" ;
+               var shop_id = "<{$detail.shop_id}>";
+               var goods_vid = "<{$goods_vid}>";
+               $.post(url,{goods_id:goods_id,shop_id:shop_id, vid: goods_vid},function(data){
+                   if(data.status == 'success'){
+                       layer.msg(data.msg, function () {
+                            setTimeout(function () {
+                                window.location.reload(true);
+                            }, 1000)
+                        });
+                   }else{
+                       layer.msg(data.msg);
+                   }
+               },'json')
+           })
+        });
+        window._bd_share_config = {
+            common: {
+                bdText: '<{$detail.title}>',
+                bdDesc: '<{$detail.title}>',
+                bdUrl: location.href,
+                bdPic: 'http://<{$Think.SERVER.HTTP_HOST}>__ROOT__/attachs/<{$detail.photo|default='default.jpg'}>'
+            },
+            share: [{
+                "bdSize": 32,
+            }],
+        }
+        with (document)
+            0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+    </script>
+    <div id="" class="page-center-box">
+        <div id="scroll">
+            <div class="goodsDetail_intro mb10">
+                <div class="img" style="border-bottom:0.01rem solid #dedede;"><img src="__ROOT__/attachs/<{$detail.photo}>" /></div>
+                <if condition="$detail['rush_ltime'] gt $now_time && $detail['rush_kucun'] gt 0">
+                <h3 class="mall_titleOne" style="background:#fff; border:none; margin:0; padding:0.1rem 0.1rem 0 0.06rem;"><div class="fl time" remaintime="<{$detail.rush_ltime}>"></div><span class="fr black9 time">库存：<{$detail['store']}></span></h3>
+                
+                <script>
+				$(function(){
+					var dateTime = new Date();
+					var difference = dateTime.getTime() - <{$now_time}>*1000;	
+					setInterval(function(){
+					  $("[remaintime]").each(function(){
+						var obj = $(this);
+						var endTime = new Date(parseInt(obj.attr('remaintime')) * 1000);
+						var nowTime = new Date();
+						var nMS=endTime.getTime() - nowTime.getTime() + difference;
+						var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+						var myH=Math.floor(nMS/(1000*60*60)) % 24;
+						var myM=Math.floor(nMS/(1000*60)) % 60;
+						var myS=Math.floor(nMS/1000) % 60;
+						var myMS=Math.floor(nMS/100) % 10;
+						if(myD>= 0){
+							var str = "<span>"+myD+"</span>天"+"<span>"+myH+"</span>时"+"<span>"+myM+"</span>分"+"<span>"+myS+"</span>秒";
+						}else{
+							var str = "真遗憾您来晚了，抢购已经结束。";	
+						}
+						obj.html(str);
+					  });
+					}, 100);
+				});
+				</script>
+                </if>
+                <div class="bt">
+                    <p class="fl"><{$detail.title}></p>
+                </div>
+                <div class="jiadetail">
+                    <div class="fl">
+                    	<span class="price"><small>￥</small>
+                         <if condition="$detail['rush_ltime'] gt $now_time && $detail['rush_kucun'] gt 0">
+                            <{:round($detail['rush_price']/100,2)}>
+                            <else/>
+                             <{:round($detail['mall_price']/100,2)}>
+                            </if>
+                        
+                        <del>￥<{:round($detail['price']/100,2)}></del></span>
+                        <php>
+                            if($detail['rush_ltime'] > $now_time && $detail['rush_kucun'] > 0){
+                                $discount = round(($detail['rush_price']/$detail['price'])*10,1);
+                            }else{
+                                $discount = round(($detail['mall_price']/$detail['price'])*10,1);
+                            }
+                        </php>
+                        <span class="discout"><{$discount}>折</span>
+                    </div>
+                    <div class="fr sale_num">销量<{$detail.sold_num}>件</div>
+                    <div class="clear"></div>
+                </div>
+                <!--选框-->
+                <div class="">
+                	<foreach name='format_list' item='item'>
+                    <div class="xuankuan_box">   
+                        <span class="tit"><{$item.name}></span>
+                        <div class="mall_goods_guige">
+                            <foreach name="item[values]" item="val">
+                            <?php if($val['checked']){ ?> 
+                            <a href="javascript:;" class="current"><{$val.name}><i></i></a>
+                            <?php }else if(isset($val['vid'])){?>                            
+                            <a href="<{:U('mall/detail', array('goods_id'=>$detail['goods_id'],'vid'=>$val['vid']))}>"><{$val.name}><i></i></a>
+                            <?php }else{ ?>
+                            <a href="javascript:;" class="no"><{$val.name}><i></i></a>
+                            <?php } ?>
+                            </foreach>
+                        </div>
+                    </div>
+                    </foreach>
+                </div>
+                <!--选框end-->
+            </div>
+            <div>
+                <ul>
+                    <li class="goodsDetail_shop mb10">
+                        <div class="fl img"><a href="<{:AppLink('shop/detail',array('shop_id'=>$detail['shop_id']))}>"><img src="__ROOT__/attachs/<{$shop.photo}>" /></a></div>
+                        <div class="wz">
+                            <p class="bt"><a href="<{:AppLink('shop/detail',array('shop_id'=>$detail['shop_id']))}>"><{$shop.shop_name}></a></p>
+                            <p>地址：<{$shop.addr}></p>
+                            <div class="btn_box">
+                            	<a href="<{:U('shop/gps',array('shop_id'=>$detail['shop_id']))}>" class="btn togo_btn"><em></em></a>
+                                <if condition="$shop['weidian_id'] gt 0"><a href="<{:AppLink('mart/lists',array('id'=>$shop['weidian_id'],'goods_id'=>$detail['goods_id']))}>" class="btn togo_btn">继续逛逛</a></if>
+                            </div>
+                            
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="goodsDetail_infor mb10">
+                <h1>商品详情</h1>
+                <div class="nr">
+                    <{$detail.details}><!--商品详情和购买须知内容反了-->
+                </div>
+            </div>
+            <div class="goodsDetail_infor mb10">
+                <h1>购买须知</h1>
+                <div class="nr">
+                 <{$detail.instructions}>  
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <footer>
+        <div class="goodsDetail_foot">
+            <div class="fl">
+                <a class="cart" href="<{:AppLink('mall/cart')}>"><span class="cart-num"><{$cartnum}></span></a>
+            </div>
+            <div class="fr"><a class="cartadd2 btn btn1" href="javascript:void(0);">加入购物车</a><a href="<{:AppLink('mall/buy',array('goods_id'=>$detail['goods_id'], 'vid'=>$goods_vid, 'vid'=>$detail['vid']))}>" class="btn">立即购买</a></div>
+            <div class="clear"></div>
+        </div>
+    </footer>
+</body>
+</html>

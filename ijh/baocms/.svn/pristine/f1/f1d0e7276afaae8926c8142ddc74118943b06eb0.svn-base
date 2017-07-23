@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-微店-微店产品</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> <i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">微店产品</div>
+    <i class="right"><a class="sh_waimai_cate_add" href="#">+发布商品</a></i> </header>
+<section>
+	<script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();;
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box" style="display:none;">
+    	<p>捡货单是你怎么捡货的，要在捡货单列表打印配货单进行配送！然后配送完成后 要定时将已经完成的配送的订单ID 整理 给平台！平台将订单完成，资金就会进入商家的流水！</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    
+	<div class="sh_search_box">
+        <div class="sh_search_int">
+            <span>优惠券名称</span>
+            <input type="text" value="">
+            <input type="button" class="btn" value="搜索">
+        </div>
+        
+        <script>
+			$(function(){
+				$(".sh_search_more_int .center").click(function(){
+						$(this).find(".sh_search_more_pull").toggle();
+				});
+				$(".sh_search_more_pull li").click(function(){
+						$(".sh_search_more_int .center input").val($(this).html());
+				});
+			});
+		</script>
+        <div class="sh_search_more" style="display:none;">
+            <div class="sh_search_more_time mb10">
+                <div class="fl left"><input type="text" value="开始时间"></div>
+                <div class="fr right"><input type="text" value="结束时间"></div>
+                <div class="clear"></div>
+            </div>
+            <div class="sh_search_more_int">
+                <div class="fl left"><input type="text" value="订单编号"></div>
+                <div class="fl center">
+                	<input type="text" value="状态">
+                    <div class="sh_search_more_pull" style="display:none;">
+                        <ul>
+                            <li>等待付款</li>
+                            <li>已完成</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fr right"><input class="btn" type="button" value="搜索"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>    
+    
+    <script>
+		$(function(){
+			$(".sh_micro_tab li").each(function(e){
+				$(this).click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".sh_micro_tab_box").each(function(i){
+						if(e==i){
+							$(".sh_micro_tab_box").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						if(e!==0){
+							$(".sh_search_box .sh_search_int").hide();
+							$(".sh_search_box .sh_search_more").show();
+						}
+						else{
+							$(".sh_search_box .sh_search_int").show();
+							$(".sh_search_box .sh_search_more").hide();
+						}
+						if(e==2 || e==3){
+							$(".sh_micro_footer_box").show();
+						}
+						else{
+							$(".sh_micro_footer_box").hide();
+						}
+						if(e==4){
+							$(".sh_prompt_infor_box").show();
+						}
+						else{
+							$(".sh_prompt_infor_box").hide();
+						}
+					});
+				});
+			});
+		});
+    </script>
+    <div class="sh_micro_tab mb10">
+	    <ul>
+	        <li class="on">商城商品</li>
+            <li>卖出商品</li>
+            <li>付款订单</li>
+            <li>货到付款</li>
+            <li>检货单</li>
+            <div class="clear"></div>
+        </ul>
+	</div>
+    <div class="sh_micro_tab_box" style="display:;">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num">创建时间：2015-07-09 15:13:39</div>
+                            <div class="fr sh_micro_state">等待审核</div>
+                        </div>
+                        <div class="sh_micro_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                            <div class="wz">
+                            	<p class="black3">13年世嘉， 超低首付身份证驾驶即可100%通过</p>
+                                <p>商家：宽大摄影</p>
+                            </div>
+                        </div>
+                        <div class="sh_micro_wz">
+                            <p><span class="mr20">市场价：￥55</span><span class="mr20">商城价：￥33</span></p>
+                            <p><span class="mr20">卖出数量：0</span><span class="mr20">浏览量：0</span></p>
+                        </div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a></div>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num">创建时间：2015-07-09 15:13:39</div>
+                            <div class="fr sh_micro_state">正常</div>
+                        </div>
+                        <div class="sh_micro_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                            <div class="wz">
+                            	<p class="black3">13年世嘉， 超低首付身份证驾驶即可100%通过</p>
+                                <p>商家：宽大摄影</p>
+                            </div>
+                        </div>
+                        <div class="sh_micro_wz">
+                            <p><span class="mr20">市场价：￥55</span><span class="mr20">商城价：￥33</span></p>
+                            <p><span class="mr20">卖出数量：0</span><span class="mr20">浏览量：0</span></p>
+                        </div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sh_micro_tab_box" style="display:none;">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num">ID:107  订单编号:100057</div>
+                            <div class="fr sh_micro_state">等待付款 </div>
+                        </div>
+                        <div class="sh_micro_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                            <div class="wz">
+                            	<p class="black3">13年世嘉， 超低首付身份证驾驶即可100%通过</p>
+                                <p><span class="mr20">数量：2</span><span class="mr20">金额：￥150</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_micro_date">2015-07-09 15:13:39<span class="ml10">127.0.0.1</span></div>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num">ID:107  订单编号:100057</div>
+                            <div class="fr sh_micro_state">已经捡货</div>
+                        </div>
+                        <div class="sh_micro_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                            <div class="wz">
+                            	<p class="black3">13年世嘉， 超低首付身份证驾驶即可100%通过</p>
+                                <p><span class="mr20">数量：2</span><span class="mr20">金额：￥150</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_micro_date">2015-07-09 15:13:39<span class="ml10">127.0.0.1</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sh_micro_tab_box" style="display:none;">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num"><span class="sh_checkbox mr10"><label><input name="" type="checkbox"></label></span>订单ID:100001</div>
+                            <div class="fr sh_micro_state">等待发货</div>
+                        </div>
+                        <div class="sh_micro_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                            <div class="wz">
+                            	<p class="black3">欧柏 瓷砖地砖 全抛釉地砖 客厅卧室玻化砖800X800</p>
+                                <p class="sh_micro_price main_color">￥600</p>
+                                <p class="sh_micro_sp_num">3</p>
+                            </div>
+                        </div>
+                        <div class="sh_micro_date">交易时间：2015-8-6 14:40<span class="ml10">总计：￥3600</span></div>
+                        <div class="sh_micro_from">
+                        	<p><span>收件人：</span>李江  15000000000</p>
+							<p><span>收货地址：</span>北京市海淀区金光大道五栋二单元2005室</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num"><span class="sh_checkbox mr10"><label><input name="" type="checkbox"></label></span>订单ID:100001</div>
+                            <div class="fr sh_micro_state">等待发货</div>
+                        </div>
+                        <div class="sh_micro_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                            <div class="wz">
+                            	<p class="black3">欧柏 瓷砖地砖 全抛釉地砖 客厅卧室玻化砖800X800</p>
+                                <p class="sh_micro_price main_color">￥600</p>
+                                <p class="sh_micro_sp_num">3</p>
+                            </div>
+                        </div>
+                        <div class="sh_micro_date">交易时间：2015-8-6 14:40<span class="ml10">总计：￥3600</span></div>
+                        <div class="sh_micro_from">
+                        	<p><span>收件人：</span>李江  15000000000</p>
+							<p><span>收货地址：</span>北京市海淀区金光大道五栋二单元2005室</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="sh_micro_tab_box" style="display:none;">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num"><span class="sh_checkbox mr10"><label><input name="" type="checkbox"></label></span>订单ID:100001</div>
+                            <div class="fr sh_micro_state">等待发货</div>
+                        </div>
+                        <div class="sh_micro_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                            <div class="wz">
+                            	<p class="black3">欧柏 瓷砖地砖 全抛釉地砖 客厅卧室玻化砖800X800</p>
+                                <p class="sh_micro_price main_color">￥600</p>
+                                <p class="sh_micro_sp_num">3</p>
+                            </div>
+                        </div>
+                        <div class="sh_micro_date">交易时间：2015-8-6 14:40<span class="ml10">总计：￥3600</span></div>
+                        <div class="sh_micro_from">
+                        	<p><span>收件人：</span>李江  15000000000</p>
+							<p><span>收货地址：</span>北京市海淀区金光大道五栋二单元2005室</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num"><span class="sh_checkbox mr10"><label><input name="" type="checkbox"></label></span>订单ID:100001</div>
+                            <div class="fr sh_micro_state">等待发货</div>
+                        </div>
+                        <div class="sh_micro_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                            <div class="wz">
+                            	<p class="black3">欧柏 瓷砖地砖 全抛釉地砖 客厅卧室玻化砖800X800</p>
+                                <p class="sh_micro_price main_color">￥600</p>
+                                <p class="sh_micro_sp_num">3</p>
+                            </div>
+                        </div>
+                        <div class="sh_micro_date">交易时间：2015-8-6 14:40<span class="ml10">总计：￥3600</span></div>
+                        <div class="sh_micro_from">
+                        	<p><span>收件人：</span>李江  15000000000</p>
+							<p><span>收货地址：</span>北京市海淀区金光大道五栋二单元2005室</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="sh_micro_tab_box" style="display:none;">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num">ID:14    创建时间：2015-07-23 21:41:48</div>
+                            <div class="fr sh_micro_state"></div>
+                        </div>
+                        <div class="sh_micro_wz">
+                            <p><span class="mr20">捡货单2015-08-05 15:17:25</span><span class="mr20">创建IP:127.0.0.1</span></p>
+                        </div>
+                        <div class="btn_box"><a class="btn" href="#">打印检货单</a><a class="btn" href="#">打印配送单</a></div>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_micro_bt">
+                            <div class="fl sh_micro_num">ID:14    创建时间：2015-07-23 21:41:48</div>
+                            <div class="fr sh_micro_state"></div>
+                        </div>
+                        <div class="sh_micro_wz">
+                            <p><span class="mr20">捡货单2015-08-05 15:17:25</span><span class="mr20">创建IP:127.0.0.1</span></p>
+                        </div>
+                        <div class="btn_box"><a class="btn" href="#">打印检货单</a><a class="btn" href="#">打印配送单</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<script>
+	$(function(){
+		$(".sh_checkbox input").click(function(){
+			if($(".sh_checkbox label").hasClass("on")){
+				$(".sh_checkbox").find("label").removeClass("on");
+			}
+			else{
+				$(this).parent("label").addClass("on");
+			}
+		});
+	});
+</script>
+<footer class="sh_micro_footer_box" style="display:none;">
+    <div class="sh_micro_footer">
+        <div class="fl left"><div class="sh_checkbox"><label><input name="" type="checkbox"></label></div></div>
+        <div class="fr right"><a class="btn" href="#">加入检货列表</a><a class="btn" href="#">清空检货列表</a><a class="btn" href="#">创建检货单</a></div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>积分兑换</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">积分兑换</div>
+		<i class="icon-menu"></i>
+	</header>
+	<div class="integra-ui-content" style="font-size:0.14rem; margin:0.5rem 0px;">
+        <form  action="/mobile/member/addressadd.html" method="post">
+            <ul class="list_tj">
+                
+                <li>地区：<div class="select">
+                        <span  class="selectOption">请选择...</span>
+                        <input type="hidden" id="area_id" name="data[area_id]" value=""/>
+                        <div class="option" id="option">
+                            <ul>
+                                <li rel="1" class="optionLi">瑶海</li><li rel="2" class="optionLi">新站</li><li rel="3" class="optionLi">包河</li><li rel="4" class="optionLi">政务</li><li rel="5" class="optionLi">庐阳</li><li rel="6" class="optionLi">蜀山</li><li rel="7" class="optionLi">滨湖</li><li rel="8" class="optionLi">高新</li><li rel="9" class="optionLi">肥东</li><li rel="10" class="optionLi">肥西</li><li rel="11" class="optionLi">无为</li>                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>商圈：<div  class="select">
+                        <span  class="selectOption">请选择...</span>
+                        <input type="hidden" id="business_id" name="data[business_id]" value=""/>
+                        <div class="option" id="options">
+                            <ul>
+                                <li style="display: none;" rel="19" data="7" class="optionLi">湿地公园</li><li style="display: none;" rel="18" data="7" class="optionLi">滨湖世纪城</li><li style="display: none;" rel="1" data="2" class="optionLi">生态公园</li><li style="display: none;" rel="11" data="5" class="optionLi">逍遥津</li><li style="display: none;" rel="3" data="1" class="optionLi">和平广场</li><li style="display: none;" rel="2" data="1" class="optionLi">胜利广场</li><li style="display: none;" rel="12" data="5" class="optionLi">步行街</li><li style="display: none;" rel="4" data="1" class="optionLi">大东门</li><li style="display: none;" rel="7" data="1" class="optionLi">胜利路</li><li style="display: none;" rel="8" data="1" class="optionLi">七里塘</li><li style="display: none;" rel="5" data="1" class="optionLi">长江批发市场</li><li style="display: none;" rel="6" data="1" class="optionLi">车站</li><li style="display: none;" rel="17" data="6" class="optionLi">国购广场</li><li style="display: none;" rel="9" data="5" class="optionLi">三孝口</li><li style="display: none;" rel="10" data="5" class="optionLi">双岗</li><li style="display: none;" rel="20" data="8" class="optionLi">产业园</li><li style="display: none;" rel="21" data="4" class="optionLi">万达广场</li><li style="display: none;" rel="14" data="4" class="optionLi">天鹅湖</li><li style="display: none;" rel="13" data="6" class="optionLi">安医附院</li><li style="display: none;" rel="15" data="6" class="optionLi">大铺头</li><li style="display: none;" rel="16" data="3" class="optionLi">宁国路</li>   
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <script>
+                    $(document).ready(function () {
+                        $(".selectOption").click(function () {
+                            $(this).parent().find(".option").toggle();
+                        });
+
+                        $("#option li").click(function () {
+                            $(this).parents(".select").find(".selectOption").html($(this).html());
+                            $("#area_id").val($(this).attr('rel'));
+                            var area_id = $(this).attr('rel');
+                            $("#options li").each(function () {
+                                if ($(this).attr('data') == area_id) {
+                                    $(this).show();
+                                }else{
+                                    $(this).hide();
+                                }
+                            });
+                            $(this).parents("#option").hide();
+                        });
+                        
+                        $("#options li").click(function () {
+                            $(this).parents(".select").find(".selectOption").html($(this).html());
+                            $("#business_id").val($(this).attr('rel'));
+                             $(this).parents("#options").hide();
+                            });
+                        
+                    });
+                </script>
+
+                <li>收货人：<input type="text" name="data[name]" value="" class="cjinput" /></li>
+                <li>手机号码：<input type="text" name="data[mobile]" value="" class="cjinput" /></li>
+                <li>具体地址：<input type="text" name="data[addr]" value="" class="cjinput" /></li>
+                <input type="hidden" value="http://hf.baocms.cn/mobile/jifen/exchange/goods_id/1.html" name="backurl" id="backurl" />
+            </ul>
+
+            <div class="span85 radius">
+                <input name="" type="submit" class="aniu" value="确认添加"/>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+
+<!-- <p></p> -->

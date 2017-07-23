@@ -1,0 +1,54 @@
+<include  file='public:header'/>    
+
+<body>
+    <?php if(!$is_app){?>
+    <header> <i class="icon-goback"></i>
+        <div class="title"> 完成支付</div>
+    </header>
+    <?php }?>
+    <div id="index" class="page-center-box">
+        <div id="scroll">
+            <div class="payFinish">
+                <div class="sh_buy_bt">
+                    <div class="fl">订单编号：<{$detail.order_id}></div>
+                    <div class="fr">付款时间：<{$detail.pay_time|date='Y-m-d H:i',###}></div>
+                </div>
+                <div class="sh_waimai_order_nr">
+                    <div class="wz">
+                        <ul>
+                            <li>
+                                <div class="fl left">
+                                    <div class="payFinish_img"><img src="__ROOT__/attachs/<{$type['img']}>" width="60" height="60"></div>
+                                    <p class="payFinish_wz"><{$goods['title']}></p>
+                                </div>
+                                <div class="fr">1 X<span class="ml10"></span><span class="ml10">￥<{:round($list['price']/100,2)}></span><span class="ml10 main_color">=￥<{:round($list['price']/100,2)}></span></div>
+                                <if condition='$type.yunfei EQ 0'>
+                                    <div class="fr"><span class="ml10">免运费</span></div>
+                                <else/>
+                                    <div class="fr"><span class="ml10">运费：</span><span class="ml10 main_color">￥<{:round($type['yunfei']/100,2)}></span></div>
+                                </if>
+                                <div class="clear"></div>
+                                <div class="fl left">产品简介：</div>
+                                <div class="fr"><span class="ml10 main_color"><{$type.content}></span></div>
+                                <div class="clear"></div>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="sh_waimai_order_price">
+                    <div class="fl">付款方式：<{$paytype[$detail['code']]['name']}></div>
+                    <div class="fr">订单总额：<span class="main_color">￥<{:round($detail['need_pay']/100,2)}></span></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="sh_waimai_order_price">
+                    <div>地址：<{$list['addr']}>、<{$list['name']}>、<{$list['mobile']}></div>
+                </div>
+                <div class="sh_buy_date">下单时间：<{$detail.single_time|date='Y-m-d H:i',###}></div>
+            </div>
+        </div>
+    </div>
+    <div class="bfix shop-button" >
+        <a href="<{:AppLink('mcenter/crowd/detail',array('goods_id'=>$list['goods_id']))}>"><span class="shop-pay">查看详情</span></a>
+        <a href="<{:AppLink('mobile/mall/crowdList')}>"><span class="shop-del">继续逛逛</span></a>
+    </div>
+<include  file='public:footer'/>    

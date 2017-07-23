@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>更多</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<script src="js/appcan.js"></script>
+<script src="js/appcan.control.js"></script>
+<script src="js/application.js"></script>
+<script src="js/application.init.js"></script>
+
+</head>
+
+<body>
+<header id="header" > 
+	<a onclick="baoapp.helper.goback()"><i class="icon-goback"></i></a>
+    <div class="title">更多</div>
+    <i></i> 
+</header>
+<script>
+    function cleanCache(){
+         baoapp.helper.clearcache(function(status){
+             if(status==true){
+                 baoapp.helper.toast('缓存清理成功!',500,null,1);
+             }else{
+                 baoapp.helper.toast('缓存清理失败!',500,null,1);
+             }
+         });
+    }
+    appcan.ready(
+        function(){
+            var height = baoapp.helper.adapt();
+        }
+    )
+</script>
+<div id="content">
+<div id="nav_more" class="page-center-box">
+	<div id="scroll">
+    	<ul class="list">
+    	    <li>
+            	 <a onclick="baoapp.helper.linkTo('proto','more_protocol.html')" >
+               	<span class="fl">用户协议</span>
+                    <div class="clear"></div>
+                </a>
+            </li>
+            <!--<li>
+            	 <a onclick="baoapp.helper.linkTo('update','more_check.html')" >
+                	<span class="fl">检查更新</span>
+                    <em class="fr">v6.0</em>
+                    <div class="clear"></div>
+                </a>
+            </li> -->
+            <li>
+            	<a onclick="baoapp.helper.linkTo('about','more_about.html')" >
+                	<span class="fl">关于我们</span>
+                    <div class="clear"></div>
+                </a>
+            </li>
+            <li>
+            	<a onclick="cleanCache()" >
+                	<span class="fl">清除缓存</span>
+                    <div class="clear"></div>
+                </a>
+            </li>
+	    </ul>
+    </div>
+</div>
+</div>
+</body>
+</html>

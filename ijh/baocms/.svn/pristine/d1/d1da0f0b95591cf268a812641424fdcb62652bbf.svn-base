@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>团购管理-抢购订单</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script>
+$(function(){
+	$(".tscloss").click(function(){
+		$(".sjgl_ts").hide();
+	});
+});
+$(function(){
+	$(".tuanorder_del").click(function(){
+		$(".mask_seller_delBox").show();
+	});
+	$(".mask_clossan").click(function(){
+		$(".mask").hide();
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="sjgl_lead">
+    <ul>
+        <li><em class="sjgl_leadico sjgl_leadico4"></em><a href="#">抢购管理</a></li>
+        <li>&gt;<a class="sjgl_leadEnd" href="#">订单管理</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">注意：抢购订单列表</div>
+        </div>
+        <div class="tuan_top_t">
+            <div class="left">
+            	<span class="tuanorder_top">订单状况：<select class="radius3 tuan_topser tuan_topserw1"><option>全部订单</option></select></span>
+                <span class="tuanorder_top">订单号：<input type="text" class="radius3 tuan_topser tuan_topserw2"/></span>
+                <span>下单时间：从<input type="text" placeholder="2015-06-29" class="radius3 tuan_topser tuan_topserw3"/>到<input type="text" placeholder="2015-07-29" class="radius3 tuan_topser tuan_topserw3"/><input type="button" class="radius3 tuan_topbt" value="搜 索"/></span>      
+            </div>
+        </div>
+    </div>
+    <div class="radius5 tuan_top allzcBox">
+    	<div class="tuan_top_t"><input type="checkbox" class="allck" />全选本页 <input type="button" class="radius3 allzc tuanorder_del" value="批量删除订单"/></div>
+    </div>
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td width="120">ID</td>
+            <td width="220">抢购图片</td>
+            <td>抢购产品</td>
+            <td>数量</td>
+            <td>订单金额</td>
+            <td>抢购时间</td>           
+            <td>创建IP</td>
+            <td>状态</td>
+        </tr>
+        <tr>
+            <td><input class="tuanorder_id" type="checkbox" />100053</td>
+            <td><img src="../img/tuanimg_03.jpg" /></td>
+            <td><p>[临平路/和平公园] 【靓灶·民间菜】</p></td>
+            <td>1</td>
+            <td>99</td>
+            <td><p>2015-04-18 08:30:45</p></td>           
+            <td>127.0.0.1</td>
+            <td>已完成</td>
+        </tr>
+        <tr>
+            <td><input class="tuanorder_id" type="checkbox" />100053</td>
+            <td><img src="../img/tuanimg_03.jpg" /></td>
+            <td><p>[临平路/和平公园] 【靓灶·民间菜】</p></td>
+            <td>1</td>
+            <td>99</td>
+            <td><p>2015-04-18 08:30:45</p></td>           
+            <td>127.0.0.1</td>
+            <td>待付款</td>
+        </tr>
+    </table>
+    <div class="paging">
+        <span>91 条记录 1/10 页</span>
+        <a class="radius3" href="/shop/index/p/2.html">上一页</a>
+        <a class="radius3" href="/shop/index/p/2.html">下一页</a>
+        <span class="radius3 on">1</span>
+        <a class="radius3" href="/shop/index/p/2.html">2</a>
+        <a class="radius3" href="/shop/index/p/3.html">3</a>
+        <a class="radius3" href="/shop/index/p/4.html">4</a>
+        <a class="radius3" href="/shop/index/p/5.html">5</a>
+        <a class="radius3" href="/shop/index/p/6.html">下5页</a>
+        <a class="radius3" href="/shop/index/p/10.html">最后一页</a>
+    </div>
+</div>
+<div class="mask mask_seller_delBox">
+    <div class="mask_seller_del">
+        <div class="mask_closs">
+            <div class="left mask_closs_t">提示</div>
+            <div class="right"><span class="mask_clossan">&nbsp;</span></div>
+        </div>
+        <div class="mask_seller_delnr">
+            <div class="mask_seller_delt">确定删除列表？</div>
+            <p>删除后本订单将从订单列表消失，且不能恢复，您将不能再进行申请退款等操作。</p>
+            <a class="radius3 mask_an mask_qd">确定</a><a class="radius3 mask_an">取消</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

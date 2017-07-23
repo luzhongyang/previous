@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-投票功能</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> 
+	<i class="left" id="icon_goback"></i>
+    <div class="title">投票功能</div>
+    <i class="right"><a href="#">+发布投票</a></i> 
+</header>
+
+<section>
+	<script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>新添加的投票要启用之后才能显示在前台！</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    <div class="sh_search_box">
+        <div class="sh_search_int"> <span>投票标题</span>
+            <input type="text" value="">
+            <input type="button" class="btn" value="搜索">
+        </div>
+    </div>
+    
+    <div class="sh_coupon_tab_box">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10" style="border-top:1px solid #dedede;">
+                    <div>
+                        <div class="sh_coupon_nr">
+                            <div class="wz">
+                            	<p><span class="black3 mr20">我发起的活动的活动咋样</span>未启用</p>
+                                <p><span class="mr20">结束时间：2015-08-07</span>5人投票</p>
+                            </div>
+                        </div>
+                        <div class="sh_vote_nr">
+                        	<div class="fl">
+                            	<p>投票banner</p>
+                            	<img src="img/vote_banner.jpg" width="109" height="50">
+                            </div>
+                            <div class="fl">
+                            	<p>二维码</p>
+                            	<img src="img/weixin_img.jpg" width="50" height="50">
+                            </div>
+                            <div class="fl">
+                            	<p>投票结果</p>
+                            	<img src="img/weixin_img.jpg" width="50" height="50">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="sh_buy_date bg1">
+                        	<p>http://www.baocms.cn/mobile/vote/index/vote_id/17.html</p> 
+                        </div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a><a class="btn" href="#">启用投票</a><a class="btn" href="#">设置选项</a><a class="btn" href="#">查看结果</a></div>
+                    </div>
+                </li>
+                <li class="list_box mb10" style="border-top:1px solid #dedede;">
+                    <div>
+                        <div class="sh_coupon_nr">
+                            <div class="wz">
+                            	<p><span class="black3 mr20">我发起的活动的活动咋样</span>未启用</p>
+                                <p><span class="mr20">结束时间：2015-08-07</span>5人投票</p>
+                            </div>
+                        </div>
+                        <div class="sh_vote_nr">
+                        	<div class="fl">
+                            	<p>投票banner</p>
+                            	<img src="img/vote_banner.jpg" width="109" height="50">
+                            </div>
+                            <div class="fl">
+                            	<p>二维码</p>
+                            	<img src="img/weixin_img.jpg" width="50" height="50">
+                            </div>
+                            <div class="fl">
+                            	<p>投票结果</p>
+                            	<img src="img/weixin_img.jpg" width="50" height="50">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="sh_buy_date bg1">
+                        	<p>http://www.baocms.cn/mobile/vote/index/vote_id/17.html</p> 
+                        </div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a><a class="btn" href="#">启用投票</a><a class="btn" href="#">设置选项</a><a class="btn" href="#">查看结果</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>

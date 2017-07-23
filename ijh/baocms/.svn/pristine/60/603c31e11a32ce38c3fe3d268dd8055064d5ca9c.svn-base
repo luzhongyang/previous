@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>资料中心-基础资料</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script>
+$(function(){
+	$(".tabli_change").each(function(e){
+		$(this).find("a").click(function(){
+			$(".tabli_change").removeClass("on");
+			$(this).parent(".tabli_change").addClass("on");
+			$(".tabnr_change").each(function(i){
+				if(e==i)
+				{
+					$(".tabnr_change").hide();
+					$(this).show();
+				}
+				else
+				{
+					$(this).hide();
+				}
+			});
+		});
+	});
+});
+
+
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 100;
+        var mobile_lock = 0;
+        $(function () {
+            $(".data_yzmget").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 100;
+					$(".data_yzmget").addClass("on");
+                    $('.data_yzmget').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".data_yzmget").removeClass("on");
+                $('.data_yzmget').removeAttr("disabled");
+                $('.data_yzmget').text("重新发送");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+            }
+            else {
+                mobile_count--;
+                $('.data_yzmget').text("重新获取(" + mobile_count.toString() + ")秒");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+</head>
+
+<body>
+<div class="sjgl_lead">
+    <ul>
+        <li><em class="sjgl_leadico sjgl_leadico3"></em><a href="#">系统设置</a></li>
+        <li>&gt;<a class="sjgl_leadEnd" href="#">基础资料</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">注意：基础资料包括密码修改、认证管理、金块充值、消费日志</div>
+        </div>
+    </div> 
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli tabli_change on"><a href="#">密码修改</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="#">认证管理</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="#">金块充值</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="#">消费日志</a></li>
+        </ul>
+    </div>
+    <div class="tabnr_change  show">
+    	<table class="tuanfabu_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="120"><p class="tuanfabu_t"><em>·</em>输入原密码：</p></td>
+                <td><div class="tuanfabu_nr"><input type="password" class="tuanfabu_int tuanfabu_intw2" /></div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t"><em>·</em>输入新密码：</p></td>
+                <td><div class="tuanfabu_nr"><input type="password" class="tuanfabu_int tuanfabu_intw2" /></div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t"><em>·</em>确认新密码：</p></td>
+                <td><div class="tuanfabu_nr"><input type="password" class="tuanfabu_int tuanfabu_intw2" /></div></td>
+            </tr>
+        </table>
+        <div class="tuanfabu_an"><a class="radius3 sjgl_an tuan_topbt" href="#">确认修改</a></div>
+    </div> 
+    <div class="tabnr_change">
+    	<table class="tuanfabu_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="120"><p class="tuanfabu_t"><em>·</em>手机号验证：</p></td>
+                <td><div class="tuanfabu_nr"><input type="password" class="tuanfabu_int tuanfabu_intw2" /><span class="radius3 data_yzmget">获取验证码</span><span class="tuanfabu_t"><em>·</em>输入验证码：</span><input type="password" class="tuanfabu_int tuanfabu_intw2" /><a class="radius3 tuan_topbt data_lm" href="#">确认信息</a></div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t"><em>·</em>邮件验证：</p></td>
+                <td><div class="tuanfabu_nr"><input type="password" class="tuanfabu_int tuanfabu_intw2" /><a class="radius3 tuan_topbt data_lm" href="#">确认信息</a></div></td>
+            </tr>
+        </table>
+    </div>
+    <div class="tabnr_change">
+    	<table class="tuanfabu_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="120"><p class="tuanfabu_t"><em>·</em>金块充值：</p></td>
+                <td><div class="tuanfabu_nr"><input type="password" class="tuanfabu_int tuanfabu_intw2" /></div></td>
+            </tr>
+            <tr>
+                <td><p class="tuanfabu_t"><em>·</em>支付方式：</p></td>
+                <td><div class="tuanfabu_nr"><span class="data_spcz"><input type="checkbox"><a href="#"><img src="../img/alipay.png" /></a></span><span class="data_spcz"><input type="checkbox"><a href="#"><img src="../img/tenpay.png" /></a></span></div></td>
+            </tr>
+        </table>
+        <div class="tuanfabu_an"><a class="radius3 sjgl_an tuan_topbt" href="#">立刻充值</a></div>
+    </div>
+    <div class="tabnr_change">
+    	<table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr style="background-color:#f7f7f7;">
+                <td>金块</td>
+                <td>说明</td>
+                <td>时间</td>
+            </tr>
+            <tr>
+                <td>-7</td>
+                <td>置顶信息7天</td>
+                <td>2015-04-18 08:30:45</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

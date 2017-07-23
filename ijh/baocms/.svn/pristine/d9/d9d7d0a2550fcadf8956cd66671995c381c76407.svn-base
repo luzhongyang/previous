@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>首页</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/layer/layer.js"></script>
+        <script src="js/public.js"></script>
+    </head>
+<body>  
+<header>
+    <a href="#"><i class="icon-goback"></i></a>
+    <div class="title">订单详情</div>
+    <i class=" icon-more"></i>
+</header>
+<div id="content">
+<script>
+    appcan.ready(
+        function(){
+              var height = baoapp.helper.adapt();
+        }
+    )
+</script>
+<section class="sec_pad" style="padding:0.5rem 0px;">
+    <div class="order_zt">
+        <div class="left">
+            <p class="order_p">订单编号：100335</p>
+            <p class="order_p">订单金额：¥7</p>
+        </div>
+        <div class="right">
+            <p class="order_p">下单时间：2015-09-06 13:44</p>
+            <p class="order_p">订单状态：<a class="myInfor_sx myInfor_sx_fk" target="_blank" href="#">去付款</a>
+            <!--<eq name="detail.status" value="0">                               
+                
+            <else />
+            <eq name="detail.status" value="-1">       
+            到店付
+            <else />
+            <a class="myInfor_sx" href="javascript:void(0)">已完成</a>
+            <if condition="$detail['dianping_id'] eq 0">
+                <a class="myInfor_sx" href="<{:U('dianping/tuandianping',array('order_id'=>$detail['order_id']))}>">点评</a>     
+                <else/>
+                <a class="myInfor_sx" href="javascript:void(0)">已评价</a>
+            </if>
+            </eq>
+            </eq>--></p>
+        </div>
+    </div>
+    <div class="order_ztbg">&nbsp;</div>
+    <div class="orderBox">
+        <div class="order_bg">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr class="order_trt">
+                    <td width="">商品</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>总价</td>
+                </tr>
+                <tr class="order_trnr">
+                    <td>apple</td>
+                    <td>¥7</td>
+                    <td>1</td>
+                    <td>¥7</td>
+                </tr>               
+            </table>
+            <div class="order_mjzt">
+                <ul>
+                    <li class="order_mjp">使用积分：<span>¥0</span></li>
+                </ul>
+            </div>
+            <div class="order_back"><a class="order_fhan" href="#">返回订单</a></div>
+        </div>
+    </div>
+</section>
+
+</div>
+<footer>
+        <div>
+            <a href="#">
+                <div class="icon i-1"></div>
+                <p>首页</p> 
+            </a>
+        </div>
+        <div>
+            <a href="#">
+                <div class="icon i-2"></div>
+                <p>抢购</p>
+            </a>
+        </div>
+        <div>
+            <a href="#">
+                <div class="icon i-3"></div>
+                <p>优惠券</p>
+            </a>
+        </div>
+        <div>
+            <a href="#">
+                <div class="icon i-4"></div>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>  

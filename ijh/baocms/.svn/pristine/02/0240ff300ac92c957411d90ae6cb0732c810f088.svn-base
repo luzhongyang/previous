@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>会员卡</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">
+        	<div class="box_search overflow_clear">
+                <a href="#">
+                <i></i>
+                输入商户名/品类/商品词
+                </a>
+            </div>
+        </div>
+		<i class="icon-menu" id="ico_1"></i>
+	</header>
+	<!-- 筛选TAB -->
+    <script>
+		$(function(){
+			$("#search-bar li").each(function(e){
+				$(this).click(function(){
+					if($(this).hasClass("on")){
+						$(this).parent().find("li").removeClass("on");
+						$(this).removeClass("on");
+						$(".serch-bar-mask").hide();
+					}
+					else{
+						$(this).parent().find("li").removeClass("on");
+						$(this).addClass("on");
+						$(".serch-bar-mask").show();
+					}
+					$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+						
+						if(e==i){
+							$(this).parent().find(".serch-bar-mask-list").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						$(this).find("li").click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+						});
+					});
+				});
+			});
+		});
+    </script>
+    
+	<div id="search-bar">
+		<ul>
+			<li><span>分类</span><i></i></li>
+			<li><span>地区</span><i></i></li>
+			<li><span>商圈</span><i></i></li>
+			<li><span>排序</span><i></i></li>
+		</ul>
+	</div>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+        	<div class="serch-bar-mask" style="display:none;">
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部地区</a></li>
+                        <li><a href="#">瑶海</a></li>
+                        <li><a href="#">新站</a></li>
+                        <li><a href="#">包河</a></li>
+                        <li><a href="#">政务</a></li>
+                        <li><a href="#">庐阳</a></li>
+                        <li><a href="#">蜀山</a></li>
+                        <li><a href="#">滨湖</a></li>
+                        <li><a href="#">高新</a></li>
+                        <li><a href="#">肥东</a></li>
+                        <li><a href="#">肥西</a></li>
+                        <li><a href="#">无为</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部</a></li>
+                        <li><a href="#">供应</a></li>
+                        <li><a href="#">求购</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部</a></li>
+                        <li><a href="#">苹果</a></li>
+                        <li><a href="#">三星</a></li>
+                        <li><a href="#">魅族</a></li>
+                        <li><a href="#">小米</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部</a></li>
+                        <li><a href="#">500以下</a></li>
+                        <li><a href="#">500-1000元</a></li>
+                        <li><a href="#">1000-2000元</a></li>
+                        <li><a href="#">2000以上</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-bg"></div>
+            </div>
+			<!-- 列表 -->
+			<div class="member-main" id="mall-main">
+				<div class="favou-list-box">
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn13.png" /></a>
+                        </div>
+                        <div class="favou-zi left member-conter">
+                            <a href="">
+                                <p class="overflow_clear">孔家汽车服务有限公司（9折） </p>
+                                <p class="c_h h15 overflow_clear">地址：包河区芜湖路万达广场万达广场</p>
+                                <p class="favou-zai">
+                                    <span class="price left">距离：236m</span>
+                                    <span class="member-button right">领 卡</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn13.png" /></a>
+                        </div>
+                        <div class="favou-zi left member-conter">
+                            <a href="">
+                                <p class="overflow_clear">孔家汽车服务有限公司（9折） </p>
+                                <p class="c_h h15 overflow_clear">地址：包河区芜湖路万达广场万达广场</p>
+                                <p class="favou-zai">
+                                    <span class="price left">距离：236m</span>
+                                    <span class="member-button right">领 卡</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn13.png" /></a>
+                        </div>
+                        <div class="favou-zi left member-conter">
+                            <a href="">
+                                <p class="overflow_clear">孔家汽车服务有限公司（9折） </p>
+                                <p class="c_h h15 overflow_clear">地址：包河区芜湖路万达广场万达广场</p>
+                                <p class="favou-zai">
+                                    <span class="price left">距离：236m</span>
+                                    <span class="member-button right">领 卡</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn13.png" /></a>
+                        </div>
+                        <div class="favou-zi left member-conter">
+                            <a href="">
+                                <p class="overflow_clear">孔家汽车服务有限公司（9折） </p>
+                                <p class="c_h h15 overflow_clear">地址：包河区芜湖路万达广场万达广场</p>
+                                <p class="favou-zai">
+                                    <span class="price left">距离：236m</span>
+                                    <span class="member-button right">领 卡</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn13.png" /></a>
+                        </div>
+                        <div class="favou-zi left member-conter">
+                            <a href="">
+                                <p class="overflow_clear">孔家汽车服务有限公司（9折） </p>
+                                <p class="c_h h15 overflow_clear">地址：包河区芜湖路万达广场万达广场</p>
+                                <p class="favou-zai">
+                                    <span class="price left">距离：236m</span>
+                                    <span class="member-button right">领 卡</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="favou-content">
+                        <div class="favou-img left">
+                            <a href=""><img src="img/icn13.png" /></a>
+                        </div>
+                        <div class="favou-zi left member-conter">
+                            <a href="">
+                                <p class="overflow_clear">孔家汽车服务有限公司（9折） </p>
+                                <p class="c_h h15 overflow_clear">地址：包河区芜湖路万达广场万达广场</p>
+                                <p class="favou-zai">
+                                    <span class="price left">距离：236m</span>
+                                    <span class="member-button right">领 卡</span>
+                                    <div class="clear"></div>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!-- 循环 -->
+                </div>											
+			</div>
+		</div>
+	</div>
+</body>
+</html>

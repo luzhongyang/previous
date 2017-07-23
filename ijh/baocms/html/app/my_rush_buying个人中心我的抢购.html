@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订餐</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".buy-bar span").each(function(e){
+			$(this).click(function(){
+				$(".buy-bar span").removeClass("on");
+				$(this).addClass("on");
+				$(".buy-list").each(function(s){
+					if(e==s){
+						$(".buy-list").hide();
+						$(this).show();
+					}
+				});
+			});
+		});
+	});
+
+</script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">我的抢购</div>
+		<i class="icon-menu"></i>
+	</header>
+	<!-- 筛选TAB -->
+	<div class="buy-bar">
+			<span class="buy-bar-span on">待付款</span>
+			<span class="buy-bar-span2">已完成</span>
+	</div>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+			<!-- 列表 -->
+			<div class="list-have-pic buy-list">
+				<!-- 循环 -->
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png"></a>
+					</div>
+					<div class="buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">待付款</p>
+						<a href="#" class="button">付款</a>
+						<a href="#" class="button2">删除</a>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">待付款</p>
+						<a href="#" class="button">付款</a>
+						<a href="#" class="button2">删除</a>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">待付款</p>
+						<a href="#" class="button">付款</a>
+						<a href="#" class="button2">删除</a>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">待付款</p>
+						<a href="#" class="button">付款</a>
+						<a href="#" class="button2">删除</a>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">待付款</p>
+						<a href="#" class="button">付款</a>
+						<a href="#" class="button2">删除</a>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">待付款</p>
+						<a href="#" class="button">付款</a>
+						<a href="#" class="button2">删除</a>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">待付款</p>
+						<a href="#" class="button">付款</a>
+						<a href="#" class="button2">删除</a>
+					</div>
+				</div>
+				<!-- 循环 -->
+			</div>
+
+			<div class="list-have-pic buy-list" style="display:none;">
+				<!-- 循环 -->
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">已完成</p>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">已完成</p>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">已完成</p>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">已完成</p>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">已完成</p>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">已完成</p>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<a href=""><img src="img/tp12.png" /></a>
+					</div>
+					<div class=" buy-content">
+						<p><a href="">玻尿酸补水面膜玻尿酸补水面膜...</a></p>
+						<p><span class="spread-money">￥69</span><del class="spread-money2">￥88</del><span class="spread-money2">数量：1</span></p>
+						<p class="spread-for">已完成</p>
+					</div>
+				</div>
+				<!-- 循环 -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

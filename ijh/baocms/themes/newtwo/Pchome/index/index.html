@@ -1,0 +1,517 @@
+<include file="public:header" /> 
+<include file="public:top"/>
+<include file="public:nav"/>
+
+<!--首页第一部分幻灯开始-->
+<div class="sy_hotgz mb20">
+    <div class="sy_flexslider">
+        <ul class="slides">
+            <calldata mdl="Ad" where=" closed=0 AND site_id=1 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,3" cache="21600" order="orderby asc">
+                 <li class="list" style="background:url('__ROOT__/attachs/<{$item.photo}>') center center no-repeat;">
+                     <a target="_blank" href="<{$item.link_url}>"></a>
+            </li>
+            </calldata>
+        </ul>
+    </div>    
+</div>
+<!--首页第一部分幻灯结束-->
+
+<div class="pagewd">
+	<calldata mdl="Ad" where=" closed=0 AND site_id=2 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,1" cache="21600" order="orderby asc">
+        <div class="AdPosit"><a href="<{$item.link_url}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="1200" height="100"/></a></div>
+    </calldata>
+    <!--首页抢购部分开始-->
+    <div class="sy_FloorBt">
+        <div class="left sy_FloorBtz"><i></i><span class="bt">限时抢购<span class="graycl ml10">/手快有 手慢无</span></span>
+        	<!--<span id="daojishi" rel="7353658">
+            	<span>00</span>:<span>00</span>:<span>00</span>:<span>00</span>
+            </span>-->
+            <span class="sy_buy_tab">
+                <php>$i=0;</php>
+                <foreach name="tuancates" item="item2">
+                	<eq name="item2.parent_id" value="0"> 
+                    <php>$i++;if($i <= 10){</php>
+                    <a target="_blank" <php>if($i == 1) echo 'class="on"';</php> title="<{$item2.cate_name}>抢购" href="<{:U('tuan/index',array('cat'=>$item2['cate_id']))}>"><{$item2.cate_name}></a>
+                    <php>}</php>    
+                    </eq>
+                </foreach>
+            </span>
+        </div>
+        <div class="right"><a title="更多抢购" target="_blank" href="<{:U('tuan/index')}>">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_buy_nr mb20">
+        <div class="left sy_buy_ad">
+        	<div class="sy_buy_flexslider">
+                <ul class="slides">
+                    <calldata mdl="Ad" where=" closed=0 AND site_id=44 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,2" cache="21600" order="orderby asc">  
+                        <li class="list">
+                    		<a target="_blank" href="<{$item.link_url}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="270" height="392" /><div class="wz"><p class="bt"><{$item.title}></p></div></a>
+                    	</li>
+                    </calldata>
+                </ul>
+            </div>
+        </div>
+        <div class="left sy_buy_list_box">
+            <php>$i2=0;</php>       
+            <foreach name="tuancates" item="cate">
+                <eq name="cate.parent_id" value="0"> 
+                <php>$i2++;if($i2 <= 10){</php>
+                <ul class="sy_buy_list" <php>if($i2 == 1) echo 'style="display:block;"';</php>>
+                    <php>$cate_ids = D('Tuancate')->getChildren($cate['cate_id']); $cate_ids = join(',',$cate_ids);</php>
+                    <calldata mdl="Tuan" where="audit = 1 AND closed=0 AND city_id=$city_id AND cate_id IN ($cate_ids)" cache="600" order="orderby asc,sold_num desc" limit="0,10">
+                        <li>
+                            <div class="syPub_list">
+                                <a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"  width="200" height="112" /></a>
+                                <h3><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="overflow_clear"><{:msubstr($item['title'],0,15)}></a></h3>
+                                <p class="overflow_clear graycl"><{:msubstr($item['intro'],0,18)}></p>
+                                <hr style="border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                <div class="btn_box">
+                                    <div class="left price">¥<{:round($item['tuan_price']/100,2)}><del>¥<{:round($item['price']/100,2)}></del></div>
+                                    <div class="right"><a target="_blank" title="<{$item['title']}>" href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>" class="btn">立即抢购</a></div>
+                                </div>
+                            </div>
+                        </li>
+                    </calldata>
+                </ul>
+
+                <php>}</php> 
+                </eq>
+            </foreach>
+        </div>
+        <div class="right sy_buy_ad">
+        	<div class="sy_buy_flexslider">
+                <ul class="slides">
+                    <calldata mdl="Ad" where=" closed=0 AND site_id=45 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,2" cache="21600" order="orderby asc">  
+                        <li class="list">
+                    		<a target="_blank" href="<{$item.link_url}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="270" height="392" /><div class="wz"><p class="bt"><{$item.title}></p></div></a>
+                    	</li>
+                    </calldata>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--首页抢购部分结束-->
+    <!--首页特卖部分开始-->
+    <div class="sy_FloorBt">
+        <div class="left sy_FloorBtz"><i class="ico_2"></i><span class="bt">今日特卖<span class="graycl ml10">/每天<span class="pointcl">10</span>点 新特卖 错过不再</span></span></div>
+        <div class="right"><a target="_blank" href="#">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_temai">
+    	<ul>
+    	    <!--<li class="list">
+            	<div class="sy_cpList">
+                	<div class="img"><a href="#"><img src="" width="265" height="154" /></a></div>
+                    <h3 class="overflow_clear"><a href="#">【84店通用】嘉和一品粥</a></h3>
+                    <p class="overflow_clear graycl">30元代金券1张，全场通用，可叠加使用</p>
+                    <p class="price">¥25.5<del>¥30</del><span class="right graycl num">已售8776</span></p>
+                    <div class="state_ts">
+                    	<div class="left"><span class="ts">立减15</span></div>
+                        <div class="right graycl num"><span class="spxq_qgpstarBg"><span class="spxq_qgpstar spxq_qgpstar40"></span></span>322人评价</div>
+                    </div>
+                </div>
+            </li>-->
+            
+           
+            <calldata mdl="Tuan" where="is_new = 1 and closed=0 AND audit=1 AND  city_id IN ({$city_ids})" cache="600" order="orderby asc" limit="0,8">
+            	<php>$shop = D('Shop')->where(array('shop_id'=>$item['shop_id']))->find();</php>
+                <php>$count = D('Tuandianping')->where(array('closed' => 0, 'tuan_id'=>$item['tuan_id']))->count();</php>
+                <php>$discount = round(($item['tuan_price']/$item['price'])*10,1);</php>
+            	<li class="list">
+                    <div class="sy_cpList">
+                        <div class="img"><a href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="256" height="144" /></a></div>
+                        <h3 class="overflow_clear"><a href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><{$item.title}></a></h3>
+                        <p class="overflow_clear graycl"><{$item.intro}></p>
+                        <p class="price">¥<{$item['tuan_price']}><del>¥<{$item['price']}></del><span class="right graycl num">已售<{$item.sold_num}></span></p>
+                        <div class="state_ts">
+                            <div class="left"><span class="ts"><{$discount}>折</span></div>
+                            <div class="right graycl num">
+                            <span class="spxq_qgpstarBg"><span class="spxq_qgpstar spxq_qgpstar<{:round($shop['score']/1,1)}>"></span></span><span class="pointcl"><{$count}></span>人评价</div>
+                        </div>
+                    </div>
+                </li>
+            </calldata>
+	    </ul>
+        <div class="clear"></div>
+    </div>    
+    <!--首页特卖部分结束-->
+    <calldata mdl="Ad" where=" closed=0 AND site_id=2 AND  city_id IN ({$city_ids}) and bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,1" cache="21600" order="orderby asc">
+        <div class="AdPosit mb20"><a href="<{$item.link_url}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="1200" height="100"/></a></div>
+    </calldata>
+    <!--首页餐饮美食部分开始-->
+    <div class="sy_menuBt">
+        <div class="left">
+            <span class="bt"><em class="ico_1"></em>餐饮美食</span>
+        </div>
+        <div class="right link_box">
+        	<calldata mdl="Tuancate" where="parent_id = 1" cache="600" order="orderby asc" limit="0,10">
+            		|<a href="<{:U('tuan/index',array('cat'=>$item['cate_id']))}>" class="link"><{:msubstr($item['cate_name'],0,4,'utf-8',false)}></a>
+            </calldata>
+            <a target="_blank" href="<{:U('tuan/index',array('cat'=>1))}>" class="more">更多&gt;&gt;</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="sy_meishi mb20">
+    	<ul>
+    	    <!--<li class="list">
+            	<div class="sy_cpList">
+                	<div class="img"><a href="#"><img src="" width="256" height="144" /></a></div>
+                    <h3 class="overflow_clear"><a href="#">【84店通用】嘉和一品粥</a></h3>
+                    <p class="graycl infor">30元代金券1张，全场通用，可叠加使用30元代金券1张，全场通用，可叠加使用30元代金券1张，全场通用，可叠加使用</p>
+                    <p class="price">¥25.5<del>¥30</del><span class="right graycl num">已售8776</span></p>
+                    <div class="state_ts">
+                    	<div class="left"><span class="graycl num">已售8776</span></div>
+                        <div class="right graycl num"><span class="spxq_qgpstarBg"><span class="spxq_qgpstar"></span></span><span class="pointcl">322</span>人评价</div>
+                    </div>
+                </div>
+            </li>-->
+            
+            
+            <php>$children = D('Tuancate')->getChildren('1');
+            	 $c = implode(',',$children);
+            </php>
+            <calldata mdl="Tuan" where="cate_id IN ({$c}) and closed=0 AND audit=1 AND  city_id IN ({$city_ids})" cache="600" order="orderby asc" limit="0,4">
+            	<php>$shop = D('Shop')->where(array('shop_id'=>$item['shop_id']))->find();</php>
+                <php>$count = D('Tuandianping')->where(array('closed' => 0, 'tuan_id'=>$item['tuan_id']))->count();</php>
+            	<li class="list">
+                    <div class="sy_cpList">
+                        <div class="img"><a href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="256" height="144" /></a></div>
+                        <h3 class="overflow_clear"><a href="#"><{$item.title}></a></h3>
+                        <p class="graycl infor"><{$item.intro}></p>
+                        <p class="price">¥<{$item['tuan_price']}><del>¥<{$item['price']}></del><span class="right graycl num"></span></p>
+                        <div class="state_ts">
+                            <div class="left"><span class="graycl num">已售<{$item.sold_num}></span></div>
+                            <div class="right graycl num">
+                            <span class="spxq_qgpstarBg"><span class="spxq_qgpstar spxq_qgpstar<{:round($shop['score']/1,1)}>"></span></span><span class="pointcl"><{$count}></span>人评价</div>
+                        </div>
+                    </div>
+                </li>
+            </calldata>
+	    </ul>
+        <div class="clear"></div>
+    </div>
+    <!--首页餐饮美食部分结束-->
+    <!--首页休闲娱乐部分开始-->
+    <div class="sy_menuBt">
+        <div class="left">
+            <span class="bt"><em class="ico_2"></em>休闲娱乐</span>
+        </div>
+        <div class="right link_box">
+        	
+            <calldata mdl="Tuancate" where="parent_id = 34" cache="600" order="orderby asc" limit="0,10">
+            		|<a href="<{:U('tuan/index',array('cat'=>$item['cate_id']))}>" class="link"><{:msubstr($item['cate_name'],0,4,'utf-8',false)}></a>
+            </calldata>
+            <a href="<{:U('tuan/index',array('cat'=>34))}>" class="more">更多&gt;&gt;</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="sy_meishi mb20">
+    	<ul>
+    	    <!--<li class="list">
+            	<div class="sy_cpList">
+                	<div class="img"><a href="#"><img src="" width="256" height="144" /></a></div>
+                    <h3 class="overflow_clear"><a href="#">【84店通用】嘉和一品粥</a></h3>
+                    <p class="graycl infor">30元代金券1张，全场通用，可叠加使用30元代金券1张，全场通用，可叠加使用30元代金券1张，全场通用，可叠加使用</p>
+                    <p class="price">¥25.5<del>¥30</del><span class="right graycl num">已售8776</span></p>
+                    <div class="state_ts">
+                    	<div class="left"><span class="graycl num">已售8776</span></div>
+                        <div class="right graycl num"><span class="spxq_qgpstarBg"><span class="spxq_qgpstar"></span></span><span class="pointcl">322</span>人评价</div>
+                    </div>
+                </div>
+            </li>-->
+            <php>$children = D('Tuancate')->getChildren('34');
+            	 $c = implode(',',$children);
+            </php>
+            
+            <calldata mdl="Tuan" where="cate_id IN ({$c}) and closed=0 AND audit=1 AND  city_id IN ({$city_ids})" cache="600" order="orderby asc" limit="0,4">
+            	<php>$shop = D('Shop')->where(array('shop_id'=>$item['shop_id']))->find();</php>
+                <php>$count = D('Tuandianping')->where(array('closed' => 0, 'tuan_id'=>$item['tuan_id']))->count();</php>
+            	<li class="list">
+                    <div class="sy_cpList">
+                        <div class="img"><a href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="256" height="144" /></a></div>
+                        <h3 class="overflow_clear"><a href="#"><{$item.title}></a></h3>
+                        <p class="graycl infor"><{$item.intro}></p>
+                        <p class="price">¥<{$item['tuan_price']}><del>¥<{$item['price']}></del><span class="right graycl num"></span></p>
+                        <div class="state_ts">
+                            <div class="left"><span class="graycl num">已售<{$item.sold_num}></span></div>
+                            <div class="right graycl num">
+                            <span class="spxq_qgpstarBg"><span class="spxq_qgpstar spxq_qgpstar<{:round($shop['score']/1,1)}>"></span></span><span class="pointcl"><{$count}></span>人评价</div>
+                        </div>
+                    </div>
+                </li>
+            </calldata>
+	    </ul>
+        <div class="clear"></div>
+    </div>
+    <!--首页休闲娱乐部分结束-->
+    <!--首页服装部分开始-->
+    <div class="sy_menuBt">
+        <div class="left">
+            <span class="bt"><em class="ico_3"></em>购物</span>
+        </div>
+        <div class="right link_box">
+        	<calldata mdl="Tuancate" where="parent_id = 37" cache="600" order="orderby asc" limit="0,10">
+            		|<a href="<{:U('tuan/index',array('cat'=>$item['cate_id']))}>" class="link"><{:msubstr($item['cate_name'],0,4,'utf-8',false)}></a>
+            </calldata>
+            <a href="<{:U('tuan/index',array('cat'=>37))}>" class="more">更多&gt;&gt;</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="sy_meishi mb20">
+    	<ul>
+    	    <!--<li class="list">
+            	<div class="sy_cpList">
+                	<div class="img"><a href="#"><img src="" width="256" height="144" /></a></div>
+                    <h3 class="overflow_clear"><a href="#">【84店通用】嘉和一品粥</a></h3>
+                    <p class="graycl infor">30元代金券1张，全场通用，可叠加使用30元代金券1张，全场通用，可叠加使用30元代金券1张，全场通用，可叠加使用</p>
+                    <p class="price">¥25.5<del>¥30</del><span class="right graycl num">已售8776</span></p>
+                    <div class="state_ts">
+                    	<div class="left"><span class="graycl num">已售8776</span></div>
+                        <div class="right graycl num"><span class="spxq_qgpstarBg"><span class="spxq_qgpstar"></span></span><span class="pointcl">322</span>人评价</div>
+                    </div>
+                </div>
+            </li>-->
+            
+            <php>$children = D('Tuancate')->getChildren('37');
+            	 $c = implode(',',$children);
+            </php>
+            
+            <calldata mdl="Tuan" where="cate_id IN ({$c}) and closed=0 AND audit=1 AND  city_id IN ({$city_ids})" cache="600" order="orderby asc" limit="0,4">
+            	<php>$shop = D('Shop')->where(array('shop_id'=>$item['shop_id']))->find();</php>
+                <php>$count = D('Tuandianping')->where(array('closed' => 0, 'tuan_id'=>$item['tuan_id']))->count();</php>
+            	<li class="list">
+                    <div class="sy_cpList">
+                        <div class="img"><a href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>" width="256" height="144" /></a></div>
+                        <h3 class="overflow_clear"><a href="#"><{$item.title}></a></h3>
+                        <p class="graycl infor"><{$item.intro}></p>
+                        <p class="price">¥<{$item['tuan_price']}><del>¥<{$item['price']}></del><span class="right graycl num"></span></p>
+                        <div class="state_ts">
+                            <div class="left"><span class="graycl num">已售<{$item.sold_num}></span></div>
+                            <div class="right graycl num">
+                            <span class="spxq_qgpstarBg"><span class="spxq_qgpstar spxq_qgpstar<{:round($shop['score']/1,1)}>"></span></span><span class="pointcl"><{$count}></span>人评价</div>
+                        </div>
+                    </div>
+                </li>
+            </calldata>
+	    </ul>
+        <div class="clear"></div>
+    </div>
+    <!--首页服装部分结束-->
+    <!--首页最后疯抢部分开始-->
+    <div class="sy_FloorBt">
+        <div class="left sy_FloorBtz"><i class="ico_3"></i><span class="bt">最后疯抢<span class="graycl ml10">/特卖即将结束 欲购从速</span></span></div>
+        <div class="right"><a target="_blank" href="#">更多&gt;&gt;</a></div>
+    </div>
+    <div class="sy_fengBuy mb20">
+        <ul>
+            <callfuncw mdl="Tuan" func="getTuanQiang" where='$city_id'>
+            	 <li class="list">
+                        <a href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>">
+                        <img src="__ROOT__/attachs/<{$item.photo}>" width="376" height="158" />
+                        <div class="wz">
+                            <div class="left"><h3><{:bao_msubstr($item['title'],0,20,false)}></h3></div>
+                            <div class="right"><p class="graycl"><big class="pointcl"><{$item.discount}></big>折起</p></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="wz">
+                            <div class="left"><span class="spxq_qgpstarBg"><span class="spxq_qgpstar spxq_qgpstar<{:round($item['score']/1,1)}>"></span></span></div>
+                            <div class="right"><p class="graycl">剩余<span class="time" id="daojishi<{$item.k}>" rel="<{$item.daojishi1}>"></span>结束</p></div>
+                            <div class="clear"></div>
+                        </div>
+                        </a>
+                    </li>
+            </callfuncw>
+        </ul>
+    </div>
+    <!--首页最后疯抢部分结束-->
+    <!--首页同城信息部分开始-->
+    <div class="sy_FloorBt">
+        <div class="left sy_FloorBtz"><i class="ico_4"></i><span class="bt">同城信息</span></div>
+        <div class="right"><a target="_blank" href="#">更多&gt;&gt;</a></div>
+    </div>
+    <div class="cityInfor_nr mb20">
+        <ul class="cityInfor_list" style="display:block;">
+            <li class="nr">
+                <h3>二手</h3>
+                <div class="link">
+                    <div class="left img ico_1"></div>
+                    <ul>
+                        <li><a  href="<{:U('life/index',array('cat'=>1))}>">手机及配件</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>2))}>">数码产品</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>4))}>">家用电器</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>5))}>">日常用品</a></li>
+                    </ul>
+                </div>
+                <a href="<{:U('life/main')}>" class="more">more</a>
+            </li>
+            <li class="nr">
+                <h3>车辆</h3>
+                <div class="link">
+                    <div class="left img ico_2"></div>
+                    <ul>
+                        <li><a href="<{:U('life/index',array('cat'=>21))}>">二手轿车</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>24))}>">电动车</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>25))}>">自行车</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>27))}>">摩托车/燃气车</a></li>
+                    </ul>
+                </div>
+                <a href="<{:U('life/main')}>" class="more">more</a>
+            </li>
+            <li class="nr">
+                <h3>房屋</h3>
+                <div class="link">
+                    <div class="left img ico_3"></div>
+                    <ul>
+                        <li><a href="<{:U('life/index',array('cat'=>47))}>">租房/出租</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>48))}>">个人租房</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>49))}>">二手房出售</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>52))}>">求租/求购</a></li>
+                    </ul>
+                </div>
+                <a href="<{:U('life/main')}>" class="more">more</a>
+            </li>
+            <li class="nr">
+                <h3>招聘</h3>
+                <div class="link">
+                    <div class="left img ico_4"></div>
+                    <ul>
+                        <li><a href="<{:U('life/index',array('cat'=>67))}>">工人/技工</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>68))}>">销售/金融</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>71))}>">人事/行政/文员</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>72))}>">营业员/促销/零售</a></li>
+                    </ul>
+                </div>
+                <a href="<{:U('life/main')}>" class="more">more</a>
+            </li>
+            <li class="nr">
+                <h3>服务</h3>
+                <div class="link">
+                    <div class="left img ico_5"></div>
+                    <ul>
+                        <li><a href="<{:U('life/index',array('cat'=>90))}>">招商加盟</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>95))}>">房屋装修</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>94))}>">公司注册</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>108))}>">搬家服务</a></li>
+                    </ul>
+                </div>
+                <a href="<{:U('life/main')}>" class="more">more</a>
+            </li>
+            <li class="nr">
+                <h3>培训</h3>
+                <div class="link">
+                    <div class="left img ico_6"></div>
+                    <ul>
+                        <li><a href="<{:U('life/index',array('cat'=>58))}>">中小学教育</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>59))}>">职业技能</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>60))}>">学历教育</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>61))}>">电脑培训</a></li>
+                    </ul>
+                </div>
+                <a href="<{:U('life/main')}>" class="more">more</a>
+            </li>
+            <li class="nr">
+                <h3>求职</h3>
+                <div class="link">
+                    <div class="left img ico_7"></div>
+                    <ul>
+                        <li><a href="<{:U('life/index',array('cat'=>38))}>">全职求职意向</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>39))}>">兼职求职意向</a></li>
+
+                    </ul>
+                </div>
+                <a href="<{:U('life/main')}>" class="more">more</a>
+            </li>
+            <li class="nr">
+                <h3>兼职</h3>
+                <div class="link">
+                    <div class="left img ico_8"></div>
+                    <ul>
+                        <li><a href="<{:U('life/index',array('cat'=>131))}>">家教/老师</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>132))}>">派发/促销</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>134))}>">学生兼职</a></li>
+                        <li><a href="<{:U('life/index',array('cat'=>135))}>">餐厅/服务员</a></li>
+                    </ul>
+                </div>
+                <a href="<{:U('life/main')}>" class="more">more</a>
+            </li>
+        </ul>
+
+    </div> 
+    <!--首页同城信息部分结束-->
+    
+    
+    
+    
+    
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.sy_flexslider').flexslider({
+            directionNav: false,
+            pauseOnAction: false
+        });//首页轮播js结束
+		
+		$('.sy_buy_flexslider').flexslider({
+            directionNav: false,
+            pauseOnAction: false
+        });//首页抢购广告轮播js结束
+		
+		function daojishi(id) {
+			var t = Math.floor($("#" + id).attr('rel'));
+			t--;
+			var d = Math.floor(t / 60 / 60 / 24);
+			var h = Math.floor(t / 60 / 60 % 24);
+			var m = Math.floor(t / 60 % 60);
+			var s = Math.floor(t % 60);
+			$("#" + id).attr('rel', t);
+			$("#" + id).html('<span>' + d + '</span>' + ':' + '<span>' + h + '</span>' + ':' + '<span>' + m + '</span>' + ':' + '<span>' + s + '</span>');
+		}
+		setInterval(function () {
+			daojishi("daojishi");
+		}, 1000);//倒计时js部分结束
+		
+		function daojishi2(id) {
+			var t = Math.floor($("#" + id).attr('rel'));
+			t--;
+			var d = Math.floor(t / 60 / 60 / 24);
+			var h = Math.floor(t / 60 / 60 % 24);
+			var m = Math.floor(t / 60 % 60);
+			var s = Math.floor(t % 60);
+			$("#" + id).attr('rel', t);
+			$("#" + id).html(d + '天' + h + '时' + m + '分' + s + '秒');
+		}
+		setInterval(function () {
+			daojishi2("daojishi1");
+			daojishi2("daojishi2");
+			daojishi2("daojishi3");
+			daojishi2("daojishi4");
+			daojishi2("daojishi5");
+			daojishi2("daojishi6");
+			
+		}, 1000);//首页最后疯抢倒计时js部分结束
+		
+		
+    });
+
+    $(function () {
+        $(".sy_buy_tab a").each(function (e) {
+            $(this).mouseover(function (event) {
+                $(".sy_buy_tab a").removeClass("on");
+                $(this).addClass("on");
+                $(".sy_buy_list_box .sy_buy_list").each(function (i) {
+                    if (e == i)
+                    {
+                        $(this).parent().find(".sy_buy_list").hide();
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });//首页抢购部分结束
+	});
+</script>
+<include file="public:footer"/>
+
+

@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订餐</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+			$("#search-bar li").each(function(e){
+				$(this).click(function(){
+					if($(this).hasClass("on")){
+						$(this).parent().find("li").removeClass("on");
+						$(this).removeClass("on");
+						$(".serch-bar-mask").hide();
+					}
+					else{
+						$(this).parent().find("li").removeClass("on");
+						$(this).addClass("on");
+						$(".serch-bar-mask").show();
+					}
+					$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+						
+						if(e==i){
+							$(this).parent().find(".serch-bar-mask-list").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						$(this).find("li").click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+						});
+					});
+				});
+			});
+		});
+</script>
+</head>
+
+<body>
+	<header>
+		<a href=""><i class="icon-goback"></i></a>
+		<div class="title">装修服务</div>
+		<i class="icon-menu"></i>
+	</header>
+	<!-- 筛选TAB -->
+	<div id="search-bar">
+		<ul>
+			<li><span>分类</span><i></i></li>
+			<li><span>地区</span><i></i></li>
+			<li><span>商圈</span><i></i></li>
+			<li><span>距离</span><i></i></li>
+		</ul>
+	</div>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+			<div class="serch-bar-mask" style="display:none;">
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部分类</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部地区</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部商圈</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部距离</a></li>
+                        <li><a href="#">商务宴请</a></li>
+                        <li><a href="#">情侣约会</a></li>
+                        <li><a href="#">家庭聚会</a></li>
+                        <li><a href="#">朋友聚会</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-bg"></div>
+            </div>
+			<!-- 列表 -->
+			<div class="list-have-pic">
+				<!-- 循环 -->
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<div class="list-box">
+					<a href="">
+						<div class="list-img">
+							<img src="#" />
+						</div>
+						<div class="list-content">
+							<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+							<p class="c_h">交易数量：100单</p>
+							<div class="point-star"><div style="width: 0.8rem;"></div></div>
+							<div class="button">立即咨询</div>
+						</div>
+					</a>
+				</div>
+				<!-- 循环 -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

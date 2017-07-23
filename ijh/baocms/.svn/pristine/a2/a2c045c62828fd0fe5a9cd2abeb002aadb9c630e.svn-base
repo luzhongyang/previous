@@ -1,0 +1,103 @@
+<include  file='public:header'/>    
+<body>
+    <?php if(!$is_app){?>
+    <header>
+		<a href="<{:AppLink('mall/detail',array('goods_id'=>$list['goods_id']))}>"><i class="icon-goback"></i></a>
+		<div class="title">支付订单</div>
+		<i class="icon-menu"></i>
+	</header>
+    <?php }?>
+    
+    
+    
+    <div id="seat" class="page-center-box">
+        <?php if(!$is_app){ ?>
+    	<form action="<{:U('mall/crowdpay2',array('list_id'=>$list['list_id']))}>" method="post">
+        <?php }?>
+		<div id="scroll" class="pay">
+			<div class="order-content">
+                <ul class="list">
+                    <li>
+            			<span class="left">众筹名称</span>
+                        <span class="right" style=""><{$goods.title}></span>
+	            		<div class="clear"></div>
+	            	</li>
+            		<li>
+            			<span class="left">产品简介</span>
+	            		<span class="right"><{$type.content}></span>
+	            		<div class="clear"></div>
+	            	</li>
+	            	<li>
+                        <span class="left">价格</span>
+                        <div class=" right">
+                            ¥<{:round($list['price']/100,2)}>
+                        </div>
+                        <div class="clear"></div>
+	            	</li>
+                    <li>
+                        <span class="left">运费</span>
+                        <div class=" right">
+                        <if condition='$type.yunfei EQ 0'>
+                            免运费
+                        <else/>
+                            ¥<{:round($type['yunfei']/100,2)}>
+                        </if>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+	            	<li>
+	            		<span class="left">总价</span>
+	            		<span class="right"><span class="rush-price">¥<{:round($list['total_price']/100,2)}></span></span>
+	            		<div class="clear"></div>
+	            	</li>
+            	</ul>
+            </div>
+            	
+            <div class="wap-form">
+            	 <?php if($is_android){ ?>
+  
+                    <ul>
+                        <li>支付方式</li>
+                        <foreach name="payment" item="var">
+                            <li class="pay-li i-<{$var.payment_id}>">
+                                <label>  <input type="radio"  name="code" value="<{$var.code}>" > <{$var.name}></label>
+                            </li>
+                        </foreach>
+                    </ul>
+
+                    <?php }else if(!$is_app){?>
+                    <script>
+                        $(function () {
+                            $(".seat-check input").click(function () {
+                                $(".seat-check").find("label").removeClass("on");
+                                $(this).parent("label").addClass("on");
+                            });
+                        });
+                    </script>
+                    <ul>
+                        <li>支付方式</li>
+
+                        <foreach name="payment" item="var">
+                            <li class="pay-li i-<{$var.payment_id}>">
+                                <{$var.name}><p>推荐已安装<{$var.name}><{$var.id}>客户端的用户使用</p><div class="seat-check"><label><input type="radio" class="ui-radio" name="code" value="<{$var.code}>" ></label></div>
+                            </li>
+                        </foreach>
+                    </ul>
+                    <?php  }?>
+		
+			</div>
+			<div class="sure-pay-but">
+            	<?php if(!$is_app){ ?><div class="sure-pay right"><input type="submit" class="aniu fsub" value="确认支付" style="border:none;background:none;font-size:0.16rem;width:100%;color:#FFFFFF;"></div>
+                <?php }else{?>
+                <div class="sure-pay right"><input type="button" class="aniu fsub" value="确认支付" style="border:none;background:none;font-size:0.16rem;width:100%;color:#FFFFFF;"></div>
+                <script>
+                    $('.aniu').click(function(){
+                        go_pay("<{$list.list_id}>","<{:round($list['price']/100,2)}>","<{$url}>",'crowd');
+                    })
+                </script>
+                <?php }?>
+            </div>
+		</div>
+        <?php if(!$is_app){ ?></form><?php  }?>
+	</div>
+<include  file='public:footer'/>    

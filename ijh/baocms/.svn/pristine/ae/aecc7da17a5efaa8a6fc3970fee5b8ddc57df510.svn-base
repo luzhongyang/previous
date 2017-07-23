@@ -1,0 +1,51 @@
+<include  file='public:header'/>    
+
+<body>
+    <?php if(!$is_app){?>
+    <header> <i class="icon-goback"></i>
+        <div class="title"> 完成支付</div>
+    </header>
+    <?php }?>
+    <div id="index" class="page-center-box">
+        <div id="scroll">
+            <div class="payFinish">
+                <div class="sh_buy_bt">
+                    <div class="fl">订单编号：<{$detail.order_id}></div>
+                    <div class="fr">付款时间：<{$detail.create_time|date='Y-m-d H:i',###}></div>
+                </div>
+                <div class="sh_waimai_order_nr">
+                    <div class="wz">
+                        <ul>
+                            <li>
+                                <div class="fl left">
+                                    <div class="payFinish_img"><img src="__ROOT__/attachs/<{$room['photo']}>" width="60" height="60"></div>
+                                    <p class="payFinish_wz"><{$room['title']}></p>
+                                </div>
+                                <div class="fr"><{$order.num}>间<span class="ml10"></span><{$order.night_num}>晚<span class="ml10"></span><span class="ml10">￥<{$order.price}></span></div>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sh_waimai_order_price">
+                    <div class="fl">预订时间：</div>
+                    <div class="fr"><{$order.stime}>--<{$order.ltime}></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="sh_waimai_order_price">
+                    <div class="fl">付款方式：<{$paytype[$detail['code']]['name']}></div>
+                    <div class="fr">订单总额：<span class="main_color">￥<{$order['amount']}></span></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="sh_waimai_order_price">
+                    <div>地址：<{$hotel['addr']}></div>
+                </div>
+                <div class="sh_buy_date">下单时间：<{$detail.single_time|date='Y-m-d H:i',###}></div>
+            </div>
+        </div>
+    </div>
+    <div class="bfix shop-button" >
+        <a href="<{:AppLink('mcenter/hotel/detail',array('order_id'=>$order['order_id']))}>"><span class="shop-pay">查看详情</span></a>
+        <a href="<{:AppLink('mobile/hotel/index')}>"><span class="shop-del">继续逛逛</span></a>
+    </div>
+<include  file='public:footer'/>    

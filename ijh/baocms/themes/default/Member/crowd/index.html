@@ -1,0 +1,37 @@
+<include file="public:header"/>
+<div class="content_right">
+<div class="tgdd">
+    <div class="tgdd_nr">
+        <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td width="50">ID</td>
+            <td width="30%" colspan='2' align='left'>众筹产品</td>
+            <td width="80">总需金额</td>
+            <td width="80">已筹金额</td>
+            <td width="100">过期时间</td>
+            <td width="80">项目状态</td>
+            <td width='80'>是否中奖</td>
+            <td width="80">操作</td>
+        </tr>
+        <foreach name="goods" item="var">
+        <tr>
+            <tr>
+                <td><{$var.goods_id}></td>
+                <td><img src="__ROOT__/attachs/<{$var['img']}>" width='50' /></td>
+                <td><{$var.title}></td>
+                <td><{$var['all_price']/100}>元</td>
+                <td><{$var['have_price']/100}>元</td>
+                <td><{$var.ltime|date='Y-m-d H:i:s',###}></td>
+                <td><eq name='var.status' value='0'>众筹进行中</eq><eq name='var.status' value='1'><b style='color:green;'>众筹成功</b></eq><eq name='var.status' value='2'><b style='color:red;'>众筹失败</b></eq></td>
+                <td><eq name='var.is_zhong' value='1'><b style='color:green;'>中奖</b><else/>--</eq></td>
+                <td><a href="<{:U('member/crowd/detail',array('goods_id'=>$var['goods_id']))}>">详情</a></td>
+            </tr>
+        </tr>
+        </foreach>
+    </table>
+    </div>
+    </div>
+</div>
+</div>
+</div></div>
+<include file="public:footer"/>

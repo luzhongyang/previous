@@ -1,0 +1,27 @@
+<div class="list-have-pic">
+    <volist name='itemss' id='item'  key="index">
+
+        <li class="mall_crowd_list">
+            <div class="box">
+                <div class="pub_img"><a href="<{:AppLink('mall/crowdDetail',array('goods_id'=>$item['goods_id']))}>"><img src="__ROOT__/attachs/<{$item.img}>" width="300" height="216"></a></div>
+                <h3 class="overflow_clear txt_center"><a href="<{:AppLink('mall/crowdDetail',array('goods_id'=>$item['goods_id']))}>"><{$item.title}></a></h3>
+                <div class="bar_bg"><div class="bar" style="width:<{$item['have_price']/$item['all_price']*100}>%;"></div></div>
+                <div class="bar_txt txt_center">
+                    <div class="fl">
+                        <p class="black6"><{$item['all_price']/100}></p> 
+                        <p class="black9">总需金额</p>
+                    </div>
+                    <div class="fr">
+                        <p class="black6"><{$item['have_price']/100}></p> 
+                        <p class="black9">已筹金额</p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div><a href="<{:AppLink('mall/crowdDetail',array('goods_id'=>$item['goods_id']))}>" class="btn">立即众筹</a></div>
+            </div>
+        </li>
+
+    </volist>
+</div>
+
+

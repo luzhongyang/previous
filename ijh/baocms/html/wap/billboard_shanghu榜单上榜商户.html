@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>榜单-商户</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">
+        	上榜商户
+        </div>
+		<i class="icon-menu"></i>
+	</header>
+    <script>
+		$(function(){
+			$("#search-bar li").each(function(e){
+				$(this).click(function(){
+					if($(this).hasClass("on")){
+						$(this).parent().find("li").removeClass("on");
+						$(this).removeClass("on");
+						$(".serch-bar-mask").hide();
+					}
+					else{
+						$(this).parent().find("li").removeClass("on");
+						$(this).addClass("on");
+						$(".serch-bar-mask").show();
+					}
+					$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+						
+						if(e==i){
+							$(this).parent().find(".serch-bar-mask-list").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						$(this).find("li").click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+						});
+					});
+				});
+			});
+		});
+    </script>
+    <div id="search-bar">
+		<ul>
+			<li><span>分类</span><i></i></li>
+			<li><span>地区</span><i></i></li>
+			<li><span>商圈</span><i></i></li>
+			<li><span>排序</span><i></i></li>
+		</ul>
+	</div>
+    <div class="serch-bar-mask" style="display:none;">
+        <div class="serch-bar-mask-list">
+            <ul>
+                <li class="on"><a href="#">全部分类</a></li>
+                <li><a href="#">商务宴请</a></li>
+                <li><a href="#">情侣约会</a></li>
+                <li><a href="#">家庭聚会</a></li>
+                <li><a href="#">朋友聚会</a></li>
+            </ul>
+        </div>
+        <div class="serch-bar-mask-list">
+            <ul>
+                <li class="on"><a href="#">全部地区</a></li>
+                <li><a href="#">商务宴请</a></li>
+                <li><a href="#">情侣约会</a></li>
+                <li><a href="#">家庭聚会</a></li>
+                <li><a href="#">朋友聚会</a></li>
+            </ul>
+        </div>
+        <div class="serch-bar-mask-list">
+            <ul>
+                <li class="on"><a href="#">全部商圈</a></li>
+                <li><a href="#">商务宴请</a></li>
+                <li><a href="#">情侣约会</a></li>
+                <li><a href="#">家庭聚会</a></li>
+                <li><a href="#">朋友聚会</a></li>
+            </ul>
+        </div>
+        <div class="serch-bar-mask-list">
+            <ul>
+                <li class="on"><a href="#">全部排序</a></li>
+                <li><a href="#">商务宴请</a></li>
+                <li><a href="#">情侣约会</a></li>
+                <li><a href="#">家庭聚会</a></li>
+                <li><a href="#">朋友聚会</a></li>
+            </ul>
+        </div>
+    </div>
+	<div id="billboard" class="page-center-box">
+		<div id="scroll">
+        				
+			<div class="billboard-shanghu-box">
+			    <div class="billboard-shanghu-list">
+                    <div class="nr">
+                        <div class="img"><img src=""></div>
+                        <div class="wz">
+                            <p class="overflow_clear bt">麻辣过瘾！沪上正宗重庆麻辣火锅</p>
+                            <p>地址: 北京西路1068号食博汇2楼</p>
+                            <p style="padding-top:0.08rem;"><span>票数：2</span><a class="fr btn">投一票</a></p>
+                        </div>
+                    </div>
+                    <div class="reason">上榜理由：沪上火锅界黑马！正宗地道重庆老火锅配合十二生肖铜兽锅还有十二生肖精选特色菜，重庆数十年餐饮经验的厨师长亲子当地选材调配正宗牛油锅底料。周末闺蜜基友聚会走起啊！</div>
+                    <div class="review">
+                        <div class="bt">点评</div>
+                        <p><span class="user">张三：</span>环境很不错，清明节前一天特意花了两个小时沿着南京路长乐路华山路暴走。很有收获。</p>
+                        <p class="time">2015-4-7</p>
+                    </div>
+                </div>
+                <div class="billboard-shanghu-list">
+                    <div class="nr">
+                        <div class="img"><img src=""></div>
+                        <div class="wz">
+                            <p class="overflow_clear bt">麻辣过瘾！沪上正宗重庆麻辣火锅</p>
+                            <p>地址: 北京西路1068号食博汇2楼</p>
+                            <p style="padding-top:0.08rem;"><span>票数：2</span><a class="fr btn on">已投票</a></p>
+                        </div>
+                    </div>
+                    <div class="reason">上榜理由：沪上火锅界黑马！正宗地道重庆老火锅配合十二生肖铜兽锅还有十二生肖精选特色菜，重庆数十年餐饮经验的厨师长亲子当地选材调配正宗牛油锅底料。周末闺蜜基友聚会走起啊！</div>
+                    <div class="review">
+                        <div class="bt">点评</div>
+                        <p><span class="user">张三：</span>环境很不错，清明节前一天特意花了两个小时沿着南京路长乐路华山路暴走。很有收获。</p>
+                        <p class="time">2015-4-7</p>
+                    </div>
+                </div>
+			</div> 
+		</div>
+	</div>
+	<footer>
+		<div>
+			<div class="icon i-1"></div>
+			<p>首页</p>
+		</div>
+		<div>
+			<div class="icon i-2"></div>
+			<p>抢购</p>
+		</div>
+		<div>
+			<div class="icon i-3"></div>
+			<p>关注</p>
+		</div>
+		<div>
+			<div class="icon i-4"></div>
+			<p>我的</p>
+		</div>
+	</footer>
+</body>
+</html>

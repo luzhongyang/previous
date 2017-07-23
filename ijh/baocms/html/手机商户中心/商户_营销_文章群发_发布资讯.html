@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-文章群发-发布资讯</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">发布资讯</div>
+    <i class="right"></i>
+</header>
+
+<section>
+    <script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>商家资讯发布要在后台审核之后才能显示在前台！</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    
+    <div class="sh_buy_fabu">
+        <div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div class="sh_input_public"><span>标题</span><input type="text" value=""></div> 
+                </li> 
+                <li>
+                	<div class="sh_buy_upload_btn"><label><input class="btn" type="file" value="上传缩略图"><em></em>上传缩略图</label></div>
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_buy_upload_img"><img src="" width="100" height="100"><p>建议尺寸545X305</p></div>
+                </li> 
+                <li class="list_box">
+                    <div class="sh_input_public"><span>详细内容：</span></div> 
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_textarea_public"><textarea></textarea></div> 
+                </li>
+            </ul>
+        </div>
+        <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认发布"></div>
+    </div>
+</section>
+</body>
+</html>

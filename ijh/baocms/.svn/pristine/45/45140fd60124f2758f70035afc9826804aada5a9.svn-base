@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>手机找回密码</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script type="text/javascript">
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 100;
+        var mobile_lock = 0;
+        $(function () {
+            $(".baott_yzm_getA").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 100;
+					$(".baott_yzm_getA").addClass("on");
+                    $('.baott_yzm_getA').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".baott_yzm_getA").removeClass("on");
+                $('.baott_yzm_getA').removeAttr("disabled");
+                $('.baott_yzm_getA').text("重新发送");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+            }
+            else {
+                mobile_count--;
+                $('.baott_yzm_getA').text("重新获取(" + mobile_count.toString() + ")秒");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+</head>
+
+<body>
+<div class="login_top">
+    <div class="login_topnr">
+        <div class="left yhzc_top_l"><img src="../sjimages/yhtoplogo.png" /></div>
+        <div class="right yhzc_top_r">
+            
+        </div>
+    </div>
+</div>
+<div class="yhzc_nr">
+	<div class="yhzc_tab">
+	    <ul>
+	        <li><a href="#"><em><img src="../images/yhzcico_03.png" /></em>邮箱找回密码</a></li>
+            <li class="on"><a href="#"><em><img src="../images/yhzcico_06.png" /></em>手机找回密码</a></li>
+        </ul>
+	</div>
+    <div class="yhzc_tableBox">
+    	<table class="register_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="110" style="vertical-align:top;"><p class="register_p">手机号</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="text" class="radius3 tuanfabu_int register_intw" value="" />
+                        <div class="baott_yzm_get"><a class="baott_yzm_getA" href="###">免费获取动态验证码</a></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">短信动态码</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="text" class="radius3 tuanfabu_int register_intw" value="" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" class="radius3 register_intan" value="找回密码" /></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="yhzc_foot">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有</div>
+</body>
+</html>

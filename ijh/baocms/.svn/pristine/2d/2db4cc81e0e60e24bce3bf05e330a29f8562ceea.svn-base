@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-外卖-菜系分类</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> <i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">菜系分类</div>
+    <i class="right"><a class="sh_waimai_cate_add" href="#">+添加菜品</a></i> </header>
+<section>
+	<script>
+		$(function(){
+			$(".sh_waimai_cate_add").click(function(){
+				$(".sh_waimai_cate_add_mask_box").show();
+			});
+			$(".sh_waimai_cate_edit").click(function(){
+				$(".sh_waimai_cate_edit_mask_box").show();
+			});
+		});
+    </script>
+	<div class="sh_mask_box sh_waimai_cate_add_mask_box" style="display:none;">
+	    <div class="sh_mask_nr">
+	        <div class="sh_mask_bt">添加菜系分类</div>
+            <div class="sh_waimai_cate_add_mask">
+            	<div class="sh_waimai_cate_add_input mb10"><span>名称</span><input type="text" value=""></div>
+                <div class="sh_waimai_cate_add_input mb10"><span>排序</span><input type="text" value=""></div>
+            </div>
+            <div class="sh_mask_btn">
+            	<input class="reco" type="button" value="确认">
+                <input class="cancel" type="button" value="取消">
+            </div>
+        </div>
+	</div>
+    <div class="sh_mask_box sh_waimai_cate_edit_mask_box" style="display:none;">
+	    <div class="sh_mask_nr">
+	        <div class="sh_mask_bt">编辑菜系分类</div>
+            <div class="sh_waimai_cate_add_mask">
+            	<div class="sh_waimai_cate_add_input mb10"><span>名称</span><input type="text" value=""></div>
+                <div class="sh_waimai_cate_add_input mb10"><span>排序</span><input type="text" value=""></div>
+            </div>
+            <div class="sh_mask_btn">
+            	<input class="reco" type="button" value="确认">
+                <input class="cancel" type="button" value="取消">
+            </div>
+        </div>
+	</div>
+	<script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>商家可以在后台添加菜系分类</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    <div class="sh_search_box">
+        <div class="sh_search_int"> <span>分类名称</span>
+            <input type="text" value="">
+            <input type="button" class="btn" value="搜索">
+        </div>
+    </div>
+    <div class="sh_buy_fabu">
+        <div class="sh_list_public_box mt10">
+            <ul>
+                <li class="list_box mb10">
+                	<div class="sh_waimai_cate_list">
+                	    <div class="fl left">
+                            <div class="nr">
+                                <p>ID：<span class="black3">1</span></p>
+                                <p>名称：<span class="black3">凉菜</span></p>
+                            </div>
+                        </div>
+                        <div class="fr right"><a href="#" class="btn sh_waimai_cate_edit">编辑</a><a href="#" class="btn">删除</a></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                
+                <li class="list_box mb10">
+                	<div class="sh_waimai_cate_list">
+                	    <div class="fl left">
+                            <div class="nr">
+                                <p>ID：<span class="black3">1</span></p>
+                                <p>名称：<span class="black3">凉菜</span></p>
+                            </div>
+                        </div>
+                        <div class="fr right"><a href="#" class="btn">编辑</a><a href="#" class="btn">删除</a></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>

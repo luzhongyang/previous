@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>生活信息</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">生活信息</div>
+        <i class="icon-menu" style="margin-right:0.30rem;"><a href="#">发布</i>
+		<i class="icon-menu" id="ico_6"></i></a>
+	</header>
+	<!-- 筛选TAB -->
+    <script>
+		$(function(){
+			$("#search-bar li").each(function(e){
+				$(this).click(function(){
+					if($(this).hasClass("on")){
+						$(this).parent().find("li").removeClass("on");
+						$(this).removeClass("on");
+						$(".serch-bar-mask").hide();
+					}
+					else{
+						$(this).parent().find("li").removeClass("on");
+						$(this).addClass("on");
+						$(".serch-bar-mask").show();
+					}
+					$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+						
+						if(e==i){
+							$(this).parent().find(".serch-bar-mask-list").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						$(this).find("li").click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+						});
+					});
+				});
+			});
+		});
+    </script>
+ 	<div id="life_infor_index" class="page-center-box">
+		<div id="scroll">
+				<div class="search_box">
+			    	<form id="form1" name="form1" method="post" action="">
+			    	<div class="search_div">
+			        	<div id="sd_left">
+			                <div id="input">
+			                	<i class="public-ig-1"></i>
+			                	<input name="" type="text" placeholder="输入信息" />
+			                </div>
+			                <div class="clear"></div>
+			            </div>
+			            <div id="sd_right">
+			            	  <input type="submit" name="button" id="button" value="搜索" />
+			            </div>
+			            <div class="clear"></div>
+			        </div>
+			        </form>
+	    		</div>
+			<script>
+				$(function(){
+					$("#life_infor_index ul li.more").click(function(){
+						$(this).parent().children().find(".more-content").toggle();
+						if($(this).hasClass("on")){
+							$(this).removeClass("on");
+							$(this).children().find("span").html("展开更多");
+						}
+						else{
+							$(this).addClass("on");
+							$(this).children().find("span").html("收起");
+						}
+					});
+				});
+			</script>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index01.png" /><span>二手</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index02.png" /><span>车辆</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index03.png" /><span>求职</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index04.png" /><span>交友</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index05.png" /><span>房屋</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index06.png" /><span>培训</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index07.png" /><span>招聘</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index08.png" /><span>服务</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index09.png" /><span>兼职</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+            <ul>
+				<li class="cate_name"><img src="img/life_infor_index10.png" /><span>宠物</span></li>
+				<li><a href="#">手机及配件</a>
+				 	<a href="#">家用电器</a> 
+				 	<a href="#">日常用品</a> 
+			 		<a href="#">手机及配件</a> 			 
+			 		<a href="#">数码产品</a> 
+				 	<a href="#">家用电器</a> 
+			 		<a href="#">日常用品</a>
+                    <span class="more-content" style="display:none;">
+                    	<a href="#">手机及配件</a>
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a> 
+                        <a href="#">手机及配件</a> 			 
+                        <a href="#">数码产品</a> 
+                        <a href="#">家用电器</a> 
+                        <a href="#">日常用品</a>
+                    </span>
+		 		</li>
+		 		<li class="more"><a href="#"><span>展开更多</span><img src="img/arrow_down.png"></a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>手机及配件</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<a href=""><i class="icon-goback"></i></a>
+		<div class="title">
+        	<div class="box_search overflow_clear">
+                <a href="#">
+                <i></i>
+                输入商户名/品类/商品
+                </a>
+            </div>
+        </div>
+		<a href=""><i class="icon-menu" id="ico_1"></i></a>
+	</header>
+	<!-- 筛选TAB -->
+    <script>
+		$(function(){
+			$("#search-bar li").each(function(e){
+				$(this).click(function(){
+					if($(this).hasClass("on")){
+						$(this).parent().find("li").removeClass("on");
+						$(this).removeClass("on");
+						$(".serch-bar-mask").hide();
+					}
+					else{
+						$(this).parent().find("li").removeClass("on");
+						$(this).addClass("on");
+						$(".serch-bar-mask").show();
+					}
+					$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+						
+						if(e==i){
+							$(this).parent().find(".serch-bar-mask-list").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						$(this).find("li").click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+						});
+					});
+				});
+			});
+		});
+    </script>
+    
+	<div id="search-bar">
+		<ul>
+			<li><span>分类</span><i></i></li>
+			<li><span>地区</span><i></i></li>
+			<li><span>商圈</span><i></i></li>
+			<li><span>排序</span><i></i></li>
+		</ul>
+	</div>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+        	<div class="serch-bar-mask" style="display:none;">
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部分类</a></li>
+                        <li><a href="#">餐饮美食</a></li>
+                        <li><a href="#">火锅</a></li>
+                        <li><a href="#">浙江菜</a></li>
+                        <li><a href="#">川菜</a></li>
+                        <li><a href="#">徽菜</a></li>
+                        <li><a href="#">日本料理</a></li>
+                        <li><a href="#">韩国菜</a></li>
+                        <li><a href="#">小吃快餐</a></li>
+                        <li><a href="#">面包糕点</a></li>
+                        <li><a href="#">海鲜</a></li>
+                        <li><a href="#">东北菜</a></li>
+                        <li><a href="#">西餐</a></li>
+                        <li><a href="#">粤菜</a></li>
+                        <li><a href="#">其他</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部地区</a></li>
+                        <li><a href="#">瑶海</a></li>
+                        <li><a href="#">新站</a></li>
+                        <li><a href="#">包河</a></li>
+                        <li><a href="#">政务</a></li>
+                        <li><a href="#">庐阳</a></li>
+                        <li><a href="#">蜀山</a></li>
+                        <li><a href="#">滨湖</a></li>
+                        <li><a href="#">高新</a></li>
+                        <li><a href="#">肥东</a></li>
+                        <li><a href="#">肥西</a></li>
+                        <li><a href="#">无为</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部商圈</a></li>
+                        <li><a href="#">芜湖路商圈</a></li>
+                        <li><a href="#">新地商圈</a></li>
+                        <li><a href="#">淮河路商圈</a></li>
+                        <li><a href="#">滨湖世纪城商圈</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部排序</a></li>
+                        <li><a href="#">距离优先</a></li>
+                        <li><a href="#">推荐排序</a></li>
+                    </ul>
+                </div>
+            </div>
+			<!-- 列表 -->
+			<div class="list-have-pic">
+				<!-- 循环 -->
+					<div class="list-box">
+						<a href="shop_details.html">
+							<div class="list-img">
+								<img src="img/tp47.png" />
+							</div>
+							<div class="list-content">
+								<p>
+									<span class="shop-titles overflow_clear fl">孔家汽车服务有限公司</span> 
+									<img src="img/tp48.png" class="shop-content-img fr">
+								</p>
+								<div class="shop-star">
+									<div class="point-star left">
+										<div style="width: 0.8rem;"></div>							
+									</div>
+									<span class="person-num left"><span>￥120</span>/位</span>
+								</div>
+								<p class="c_h overflow_clear">地址：包河区芜湖路万达广场</p>
+							</div>
+						</a>
+					</div>
+								
+					<div class="list-box">
+						<a href="shop_details.html">
+							<div class="list-img">
+								<img src="img/tp47.png" />
+							</div>
+							<div class="list-content">
+								<p>
+									<span class="shop-titles overflow_clear fl">孔家汽车服务有限公司</span> 
+									<img src="img/tp48.png" class="shop-content-img fr">
+								</p>
+								<div class="shop-star">
+									<div class="point-star left">
+										<div style="width: 0.8rem;"></div>							
+									</div>
+									<span class="person-num left"><span>￥120</span>/位</span>
+								</div>
+								<p class="c_h overflow_clear">地址：包河区芜湖路万达广场</p>
+							</div>
+						</a>
+					</div>
+								
+					<div class="list-box">
+						<a href="shop_details.html">
+							<div class="list-img">
+								<img src="img/tp47.png" />
+							</div>
+							<div class="list-content">
+								<p>
+									<span class="shop-titles overflow_clear fl">孔家汽车服务有限公司</span> 
+									<img src="img/tp48.png" class="shop-content-img fr">
+								</p>
+								<div class="shop-star">
+									<div class="point-star left">
+										<div style="width: 0.8rem;"></div>							
+									</div>
+									<span class="person-num left"><span>￥120</span>/位</span>
+								</div>
+								<p class="c_h overflow_clear">地址：包河区芜湖路万达广场</p>
+							</div>
+						</a>
+					</div>
+								
+					<div class="list-box">
+						<a href="shop_details.html">
+							<div class="list-img">
+								<img src="img/tp47.png" />
+							</div>
+							<div class="list-content">
+								<p>
+									<span class="shop-titles overflow_clear fl">孔家汽车服务有限公司</span> 
+									<img src="img/tp48.png" class="shop-content-img fr">
+								</p>
+								<div class="shop-star">
+									<div class="point-star left">
+										<div style="width: 0.8rem;"></div>							
+									</div>
+									<span class="person-num left"><span>￥120</span>/位</span>
+								</div>
+								<p class="c_h overflow_clear">地址：包河区芜湖路万达广场</p>
+							</div>
+						</a>
+					</div>
+								
+					<div class="list-box">
+						<a href="shop_details.html">
+							<div class="list-img">
+								<img src="img/tp47.png" />
+							</div>
+							<div class="list-content">
+								<p>
+									<span class="shop-titles overflow_clear fl">孔家汽车服务有限公司</span> 
+									<img src="img/tp48.png" class="shop-content-img fr">
+								</p>
+								<div class="shop-star">
+									<div class="point-star left">
+										<div style="width: 0.8rem;"></div>							
+									</div>
+									<span class="person-num left"><span>￥120</span>/位</span>
+								</div>
+								<p class="c_h overflow_clear">地址：包河区芜湖路万达广场</p>
+							</div>
+						</a>
+					</div>
+							
+					<div class="list-box">
+						<a href="shop_details.html">
+							<div class="list-img">
+								<img src="img/tp47.png" />
+							</div>
+							<div class="list-content">
+								<p>
+									<span class="shop-titles overflow_clear fl">孔家汽车服务有限公司</span> 
+									<img src="img/tp48.png" class="shop-content-img fr">
+								</p>
+								<div class="shop-star">
+									<div class="point-star left">
+										<div style="width: 0.8rem;"></div>							
+									</div>
+									<span class="person-num left"><span>￥120</span>/位</span>
+								</div>
+								<p class="c_h overflow_clear">地址：包河区芜湖路万达广场</p>
+							</div>
+						</a>
+					</div>				
+			</div>
+				<!-- 循环 -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

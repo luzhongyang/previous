@@ -1,0 +1,152 @@
+<include file="public:header"/>
+<script src="__PUBLIC__/js/my97/WdatePicker.js"></script>
+<body>
+ <?php if(!$is_app){?>
+<header>
+    <a href="<{:AppLink('hotel/index')}>"><i class="icon-goback"></i></a>
+    <div class="title">
+    	<{$detail.hotel_name}>
+    </div>
+    <i class="icon-menu"><a href="#" class=""></a></i>
+</header>
+ <?php }?>
+<div class="page-center-box">
+    <div class="hotel_detl">
+        <div class="banner" style="max-height: 3rem;">
+            <div class="flexslider"> 
+                <ul class="slides">
+                    <foreach name="pics" item="item">
+                        <li><a href="javascript:void(0);"><img src="__ROOT__/attachs/<{$item.photo}>"  width="100%"/></a></li>
+                    </foreach> 
+                </ul>  
+            </div>
+        </div> 
+        <div class="hotel_evlt">
+            <php>$s = round($detail['score']/$detail['comments'],1);$sc = $s*20;</php>
+        	<p class="left maincl"><span class="spxq_qgpstarBg mr20"><span class="spxq_qgpstar" style="width:<{$sc}>%;"></span></span><{$s}>分</p>
+            <p class="black9 right"><{$detail.comments}>人评价<em class="linkIco"></em></p>
+        </div>
+        <div class="hotel_addr">
+        	<em class="addrIco"></em>
+        	<div class="pub_wz">
+            	<p>地址：<{$detail.addr}></p>
+                <p class="black9">距离：<span class="fontcl2"><{$detail.d}></span></p>
+            </div>
+            <em class="linkIco"></em>
+        </div>
+        <div class="hotel_plan">
+        	<p><span class="mr20">酒店入住：<{$detail.intime}>以后</span>离店时间：<{$detail.outtime}>以前</p>
+                <if condition="$detail['is_zc'] eq 1"><p>膳食安排：<span class="bq">免早餐</span><span class="bq">免中餐</span><span class="bq">免晚餐</span></p></if>
+        </div>
+        <a href="<{:U('hotel/info',array('hotel_id'=>$detail['hotel_id']))}>" class="hotel_more mb10">更多酒店介绍&gt;&gt;</a>
+        <div class="hotel_time">
+            <div class="left"><span class="maincl"><input type="text" value="<{$into_time}>" readonly="readonly" id="ft" class="time_select" onfocus="WdatePicker({onpicked:function(op){test()},dateFmt: 'yyyy-MM-dd',minDate:'%y-%M-{%d}'});" /></span>入住-<span class="maincl"><input type="text" value="<{$out_time}>" readonly="readonly" id="tt" class="time_select" onfocus="WdatePicker({onpicked:function(op){test()},dateFmt: 'yyyy-MM-dd',minDate:$('#ft').val()});" /></span>离店</div>
+            <div class="right maincl">共<span id="night_num"></span>晚<em class="linkIco"></em></div>
+        </div>
+        <div class="hotel_tit border_b">可订房间<span class="black9">（<{$room_count}>间）</span></div>
+        <div class="hotel_ding mb10">
+            <ul>
+                <foreach name="room_list" item="item">
+                    <li class="hotel_list">
+                        <div class="pub_img left"><img src="__ROOT__/attachs/<{$item.photo}>"></div>
+                        <div class="pub_wz">
+                            <h3 class="overflow_clear"><{$item.title}>/<if condition="$item.is_zc eq 1">提供早餐<else/>无早餐</if></h3>
+                            <p class="black9">￥<big class="fontcl2"><b><{$item.price}></b></big>  <!--<del class="ml25">￥166</del> --></p>
+                            <p class="black9">还剩<{$item.sku}>间</p>
+                        </div>
+                        <a href="javascript:void(0);" rel="<{:U('hotel/order',array('room_id'=>$item['room_id']))}>" class="btn query_order">订</a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+        <div class="hotel_tit border_b border_t"><em class="bq">团</em>本店抢购</div>
+        <div class="hotel_tuan mb10">
+            <ul>
+                <if condition="empty($tuan_list)">
+                    暂无抢购
+                <else/>
+                <foreach name="tuan_list" item="item">
+                <li class="hotel_list">
+                    <div class="pub_img left"><a href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"></a></div>
+                    <div class="pub_wz">
+                    	<h3 class="overflow_clear"><a href="<{:U('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><{$item.title}></a></h3>
+                        <p class="black9">￥<big class="fontcl2"><b><{$item.tuan_price}></b></big>  <del class="ml25">￥<{$item.price}></del></p>
+                        <php>$discount = round(($item['tuan_price']/$item['price'])*10,1);</php>
+                        <span class="tag"><{$discount}>折</span>
+                    </div>
+                    <em class="linkIco"></em>
+                </li>
+                </foreach>
+                </if>
+            </ul>
+            <a href="<{:U('tuan/index')}>" class="hotel_more mb10">更多&gt;&gt;</a>
+        </div>
+    </div>
+</div>
+<script>
+        function get_night(stime,ltime){
+            var  aDate,  oDate1,  oDate2,  iDays  
+            oDate1  =  new  Date(stime.replace(/-/g, "/"));
+            oDate2  =  new  Date(ltime.replace(/-/g, "/"));
+            iDays  =  parseInt(Math.abs(oDate1.getTime()  -  oDate2.getTime())  /  1000  /  60  /  60  /24)    //把相差的毫秒数转换为天数 
+            //alert(oDate1);alert(oDate2);
+            return  iDays  
+        }
+    
+        function test() {
+            var price = "<{$detail.price}>";
+            var stime = $("#ft").val();
+            var ltime = $("#tt").val();
+            if(ltime&&stime){
+                if(ltime <= stime){
+                    layer.msg('选择时间不正确');
+                    //return false;
+                }
+                var night_num =  get_night(stime,ltime);
+                $("#night_num").html(night_num);
+            }
+        }
+        
+        $(document).ready(function(){
+            var stime = $("#ft").val();
+            var ltime = $("#tt").val();
+            if(ltime&&stime){
+                var night_num =  get_night(stime,ltime) ||0;
+                $("#night_num").html(night_num);
+            }
+            $(".query_order").click(function(){
+                var ft = $("#ft").val();
+                var tt = $("#tt").val();
+                var url = $(this).attr('rel');
+                SetCookie('into_time',ft);
+                SetCookie('out_time',tt);
+                setTimeout(function () {
+                      window.location.href = url;
+                }, 1000);
+            })
+            
+        })
+        function SetCookie(name, value)//两个参数，一个是cookie的名子，一个是值
+            {
+                var Days = 30; //此 cookie 将被保存 30天
+                var exp = new Date();    //new Date("December 31, 9998");
+                exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+                document.cookie = name + "=" + value + ";expires=" + exp.toGMTString() +";path=/";
+            }
+    </script>
+<script src="__TMPL__statics/js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(document).ready(function () {
+        /*轮播幻灯图开始*/
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+            /*slideshow: false,*/
+            /*touch:true,*/
+        });
+        /*轮播幻灯图结束*/
+    });
+</script>
+
+</body>
+</html>

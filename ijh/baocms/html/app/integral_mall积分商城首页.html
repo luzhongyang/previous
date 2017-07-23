@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>积分商城首页</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+		$(".shop-lie li").each(function(e){
+			$(this).click(function(){
+				$(".shop-lie li").removeClass("on");
+				$(this).addClass("on");
+				$(".send-out").each(function(s){
+					if(e==s){
+						$(".send-out").hide();
+						$(this).show();
+					}
+				});
+			});
+		});
+	});
+
+</script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">积分商城</div>
+		<i class=" icon-more"></i>
+	</header>
+	<!-- 筛选TAB -->
+	<div class="shop-lie">
+		<ul>
+			<li class="on"><span>热门</span></li>
+			<li><span>推荐</span></li>
+			<li><span>全部</span></li>
+		</ul>
+	</div>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+			<!-- 列表 -->
+			<div class="send-out">
+				<div class="list-have-pic shop-list">
+					<!-- 循环 -->
+					<div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">洗衣机</p>
+								<p class="spread-for"><span class="mr25">积分：200</span><span class="mr25">原价:¥3000</span></p>
+                                <div class="integral_mall_sy_btn">
+                                    <p class="spread-for fl"><span class="mr25">数量：14398</span><span class="mr25">已兑:14</span></p>
+                                    <a class="btn" href="">兑换</a>
+                                </div>
+							</div>
+						</a>
+					</div>
+                    <div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">洗衣机</p>
+								<p class="spread-for"><span class="mr25">积分：200</span><span class="mr25">原价:¥3000</span></p>
+                                <div class="integral_mall_sy_btn">
+                                    <p class="spread-for fl"><span class="mr25">数量：14398</span><span class="mr25">已兑:14</span></p>
+                                    <a class="btn" href="">兑换</a>
+                                </div>
+							</div>
+						</a>
+					</div>
+                    <div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">洗衣机</p>
+								<p class="spread-for"><span class="mr25">积分：200</span><span class="mr25">原价:¥3000</span></p>
+                                <div class="integral_mall_sy_btn">
+                                    <p class="spread-for fl"><span class="mr25">数量：14398</span><span class="mr25">已兑:14</span></p>
+                                    <a class="btn" href="">兑换</a>
+                                </div>
+							</div>
+						</a>
+					</div>
+                    <div class="list-box">
+						<a href="">
+							<div class="list-img">
+								<img src="img/tp13.png" />
+							</div>
+							<div class="list-content activ-list-content">
+								<p id="order-title" class="activ-title">洗衣机</p>
+								<p class="spread-for"><span class="mr25">积分：200</span><span class="mr25">原价:¥3000</span></p>
+                                <div class="integral_mall_sy_btn">
+                                    <p class="spread-for fl"><span class="mr25">数量：14398</span><span class="mr25">已兑:14</span></p>
+                                    <a class="btn" href="">兑换</a>
+                                </div>
+							</div>
+						</a>
+					</div>
+					<!-- 循环 -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

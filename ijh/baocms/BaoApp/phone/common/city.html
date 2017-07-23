@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>首页</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+</head>
+<body>
+    <header>
+        <a onclick="baoapp.helper.goback()"><i class="icon-goback"></i></a>
+        <div class="title">城市切换</div>
+    </header>
+    <div id="content">
+    <div class="page-center-box">
+        <div id="scroll">
+            
+            <div class="city_container">
+                <div class="current_city">当前城市：<a href=""><a href="/mobile/index/index.html">合肥</a></a></div>
+                <div class="city_list_all">
+                              
+                 </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script type="text/template" id="tmpl_citys">
+    <div class="city_list_T city_letter">%letter%</div>
+    <ul class="city_list_con" onclick="chose(%city_id%)"><li class="city_list_first" ><a>%city_name%</a></li> </ul>
+   
+
+
+</script>
+
+<script>
+appcan.ready(function(){
+    var height = baoapp.helper.adapt();
+var citys = appcan.locStorage.getVal(STORAGE.BAO_CACHE_CITYS);
+    citys = JSON.parse(citys);
+    var city_map = [];
+    window.city_list = {};
+    var html = '';
+    for(key in citys){
+       
+       if(in_array(city_map,citys[key]['first_letter'])){
+           
+           html+='<ul class="city_list_con" onclick="chose('+citys[key]['city_id']+')"><li class="city_list_first" ><a>'+citys[key]['name']+'</a></li></ul>';
+       }else{
+           html+= '<div class="city_list_T city_letter">'+citys[key]['first_letter']+'</div>';
+           html+='<ul class="city_list_con" onclick="chose('+citys[key]['city_id']+')"><li class="city_list_first" ><a>'+citys[key]['name']+'</a></li></ul>';
+           city_map.push(citys[key]['first_letter']);
+       }
+       document.querySelector('.city_list_all').innerHTML = html;
+        //city_map[citys[key]['first_letter']] = {city_id:citys[key]['city_id'],city_name:citys[key]['name']};
+        //city_map.push({letter:citys[key]['first_letter'],city_id:citys[key]['city_id'],city_name:citys[key]['name']});
+        window.city_list[citys[key]['city_id']] = citys[key]['name'];
+    }
+      
+   // renderList(city_map);
+});
+function in_array (arr,val){
+    for(index in arr){
+        if(arr[index] == val){ 
+           return true;
+        }
+    }
+    return false;
+}
+function chose(city_id)
+{
+    var city_name = window.city_list[city_id];
+    appcan.locStorage.setVal('CURR_CITY_NAME',city_name);
+    appcan.locStorage.setVal('CURR_CITY_ID',city_id);
+    appcan.locStorage.remove(KEY.TUAN_INDEX_NEW);
+    appcan.locStorage.remove(KEY.TUAN_INDEX_TUAN);
+    appcan.locStorage.remove(KEY.TUAN_INDEX_HOT);
+    appcan.window.close(0);
+    with(baoapp.helper){
+        linkTo('index','../index.html');
+    }
+}
+function createNode(data)
+{
+    with(document){
+        html = getElementById('tmpl_citys').innerHTML;
+        div = createElement('div');
+        div.setAttribute('class','item_list_all');
+        for(key in data){
+            regExp = new RegExp('%'+key+'%','g');
+            html = html.replace(regExp, data[key]);
+        }
+        div.innerHTML = html;
+        querySelector('.city_list_all').appendChild(div);
+    }
+}
+function renderList(data)
+{
+    document.querySelector('.city_list_all').innerHTML = '';
+    for(key in data){
+        createNode(data[key]);
+    }
+}
+</script>
+</html>

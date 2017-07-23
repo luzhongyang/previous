@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-外卖-外卖营业设置</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">外卖营业设置</div>
+    <i class="right"></i>
+</header>
+
+<section>
+    <script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>打样状态用户将不能在继续下单</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    <div class="sh_buy_fabu">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box">
+                	<script>
+						$(function(){
+							$(".sh_buy_fabu_check .right label").click(function(){
+								if($(this).hasClass("on")){
+									$(this).removeClass("on");
+								}
+								else{
+									$(this).addClass("on");
+								}
+							});
+						});
+					</script>
+                	<div class="sh_buy_fabu_check">
+                	    <div class="fl left">打样中</div>
+                        <div class="fr right"><label><input type="checkbox"></label></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                <li class="list_box">
+                	<div class="sh_buy_fabu_check">
+                	    <div class="fl left">营业中</div>
+                        <div class="fr right"><label><input type="checkbox"></label></div>
+                        <div class="clear"></div>
+                    </div>
+                </li>               
+            </ul>
+        </div>
+        <div class="sh_login_nr"><input class="btn mt30" type="button" value="立刻更新"></div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的关注-添加</title>
+<link href="Css/reset.css" rel="stylesheet">
+<link href="Css/wap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+	#my_attention ul.list li .li_right{width:60%;float:left;}
+</style>
+</head>
+
+<body id="my_attention">
+
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">添加关注</div>
+		<i class="icon-menu" id="ico_2"></i>
+	</header>
+    
+    <div id="seat" class="page-center-box">
+	<div id="scroll">
+
+
+	<ul class="nav">
+    	<li>推荐</li>
+        <li class="sel">新驻</li>
+        <li>分类</li>
+        <div class="clear"></div>
+    </ul>
+    
+    <ul class="list">
+    	<li>
+        	<div class="li_left"><img src="" width="90" height="90" /></div>
+            <div class="li_right">
+            	<p class="mt15"><em class="fl">芜湖路米罗咖啡</em><span class="fr">2014-7-16</span></p>
+                <p class="mb15 overflow_clear">本店经营各种特色咖啡，有东南亚、巴西、非洲...</p>
+            </div>
+            <div class="li_add">
+            	<span class="add_btn">关注</span>
+            </div>
+        </li>
+        <div class="clear"></div>
+        <li>
+        	<div class="li_left"><img src="" width="90" height="90" /></div>
+            <div class="li_right">
+            	<p class="mt15"><em class="fl">芜湖路米罗咖啡</em><span class="fr">2014-7-16</span></p>
+                <p class="mb15 overflow_clear">本店经营各种特色咖啡，有东南亚、巴西、非洲...</p>
+            </div>
+            <div class="li_add">
+            	<span class="add_btn">关注</span>
+            </div>
+        </li>
+        <div class="clear"></div>
+        <li>
+        	<div class="li_left"><img src="" width="90" height="90" /></div>
+            <div class="li_right">
+            	<p class="mt15"><em class="fl">芜湖路米罗咖啡</em><span class="fr">2014-7-16</span></p>
+                <p class="mb15 overflow_clear">本店经营各种特色咖啡，有东南亚、巴西、非洲...</p>
+            </div>
+            <div class="li_add">
+            	<span class="add_btn">关注</span>
+            </div>
+        </li>
+        <div class="clear"></div>
+        <li>
+        	<div class="li_left"><img src="" width="90" height="90" /></div>
+            <div class="li_right">
+            	<p class="mt15"><em class="fl">芜湖路米罗咖啡</em><span class="fr">2014-7-16</span></p>
+                <p class="mb15 overflow_clear">本店经营各种特色咖啡，有东南亚、巴西、非洲...</p>
+            </div>
+            <div class="li_add">
+            	<span class="add_btn">关注</span>
+            </div>
+        </li>
+        <div class="clear"></div>
+        <li>
+        	<div class="li_left"><img src="" width="90" height="90" /></div>
+            <div class="li_right">
+            	<p class="mt15"><em class="fl">芜湖路米罗咖啡</em><span class="fr">2014-7-16</span></p>
+                <p class="mb15 overflow_clear">本店经营各种特色咖啡，有东南亚、巴西、非洲...</p>
+            </div>
+            <div class="li_add">
+            	<span class="add_btn">关注</span>
+            </div>
+        </li>
+        <div class="clear"></div>
+        <li>
+        	<div class="li_left"><img src="" width="90" height="90" /></div>
+            <div class="li_right">
+            	<p class="mt15"><em class="fl">芜湖路米罗咖啡</em><span class="fr">2014-7-16</span></p>
+                <p class="mb15 overflow_clear">本店经营各种特色咖啡，有东南亚、巴西、非洲...</p>
+            </div>
+            <div class="li_add">
+            	<span class="add_btn">关注</span>
+            </div>
+        </li>
+        <div class="clear"></div>
+        <li>
+        	<div class="li_left"><img src="" width="90" height="90" /></div>
+            <div class="li_right">
+            	<p class="mt15"><em class="fl">芜湖路米罗咖啡</em><span class="fr">2014-7-16</span></p>
+                <p class="mb15 overflow_clear">本店经营各种特色咖啡，有东南亚、巴西、非洲...</p>
+            </div>
+            <div class="li_add">
+            	<span class="add_btn">关注</span>
+            </div>
+        </li>
+        <div class="clear"></div>
+
+    </ul>
+    
+    </div>
+
+</body>
+</html>

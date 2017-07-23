@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>个人中心-抢购券</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+	if ($('#search-bar').length > 0)/*判断是否存在这个html代码*/
+	{
+		$('#search-bar li').width(100 / $('#search-bar li').length + '%');
+		$('.page_center_box').css('top', '0.9rem');
+	}
+});
+</script>
+</head>
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">抢购券</div>
+    <i class="right"></i>
+</header>
+<ul id="search-bar">
+	<li><a href="#" class="on">全部</a></li>
+    <li><a href="#">未使用</a></li>
+    <li><a href="#">已使用</a></li>
+</ul>
+<section id="personal_coupon" class="page_center_box mt10">
+    <ul class="list_box">
+        <li>
+        	<div class="title">
+           		<img src="images/head.jpg"> 
+                <p class="bt">沃美影城套餐</p>
+                <p>有效期至：2015-10-15 23:59</p>
+            </div>
+            <div class="code">
+            	<p>密码：<b>0153 3083 1031</b></p>
+            	<div class="img">
+                	<img src="pic/code.jpg">
+                </div>
+            </div>
+        </li>
+        <li>
+        	<div class="title">
+           		<img src="images/head.jpg"> 
+                <p class="bt">沃美影城套餐</p>
+                <p>有效期至：2015-10-15 23:59</p>
+            </div>
+            <div class="code">
+            	<p>密码：<b>0153 3083 1031</b></p>
+            	<div class="img">
+                	<img src="pic/code.jpg">
+                    <div class="posit">已使用</div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico1"></i>        </a>
+		<ul>
+		    <li><a href="#">生活宝</a></li>
+	    </ul>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico2"></i>        </a>
+        <ul>
+            <li><a href="#">关注</a></li>
+        </ul>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico3"></i>        </a>
+       <ul>
+           <li><a href="#">我的</a></li>
+       </ul>
+    </div>
+</footer>
+</body>
+</html>

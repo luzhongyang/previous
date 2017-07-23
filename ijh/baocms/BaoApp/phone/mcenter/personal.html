@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+</head>
+
+<body>
+    <header >
+        <i class="icon-goback" onclick="baoapp.helper.goback();"></i>
+        <div class="title">我的中心</div>
+    </header>
+<div id="content">
+    <div id="personal" class="page-center-box" >
+        <div id="scroll">
+            <div class="info" onclick="baoapp.helper.linkTo('mybase','base.html')">
+                <a style="display:block" >
+                <div class="info-img"><img src="../img/personal_img.png" id="showPic"></div>
+                <div class="info-content">
+                    <p id="nickname">baoapp.config.member</p>
+                    <p id="account" class="icon">15000000000</p>
+                    <i></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mine-list">
+                <ul>
+                    <li>
+                        <div class="mine-list-content"><p><big id="jifen">2</big>分</p>我的积分</div>
+                    </li>
+                    <li>
+                        <div class="mine-list-content"><p class="c2"><big id="money">0.00</big>元</p>我的余额</div>
+                    </li>
+                    <li>
+                        <div class="mine-list-content"><p class="c3"><big id="order"></big>个</p>我的订单</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-box">
+                <ul>
+                    <li>
+                        <a onclick="baoapp.helper.linkTo(KEY.MEMBER_TUAN_INDEX,'tuan/index.html')" class="i-1">我的抢购
+                        <i></i></a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="#" class="i-2">我的购物
+                        <i></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="i-3">我的订餐
+                        <i></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="i-4">我的订座
+                        <i></i></a>
+                    </li>
+                    -->
+                </ul>
+            </div>
+            <div class="list-box">
+                <ul>
+                    <!--
+                    <li>
+                        <a href="#" class="i-5">我的抢购券
+                        <i></i></a>
+                    </li>-->
+                    <li>
+                        <a onclick="baoapp.helper.linkTo('mycoupon','coupon.html')" class="i-6">我的优惠券
+                        <i></i></a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="#" class="i-7">我的活动
+                        <i></i></a>
+                    </li>
+                    -->
+                    <li>
+                        <a onclick="baoapp.helper.linkTo('message','message.html')" class="i-8">我的信息
+                        <i></i></a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="#" class="i-9">我的收藏
+                        <i>3</i></a>
+                    </li>
+                    -->
+                </ul>
+            </div>
+            <!--
+            <div class="list-box">
+                <ul>
+                    <li>
+                        <a href="#" class="i-10">积分兑换
+                        <i></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="i-11">最近浏览
+                        <i></i></a>
+                    </li>
+                    <li>
+                        <a href="#" class="i-12">提现申请
+                        <i></i></a>
+                    </li>
+                </ul>
+            </div>
+            -->
+           </div>
+    </div>
+    </div>
+    <footer>
+       <script src='../js/application.footer.js'></script>
+    </footer>
+</body>
+<script>
+appcan.ready(function(){ 
+   var height = baoapp.helper.adapt();
+   var user_info = appcan.locStorage.getVal(STORAGE.BAO_USER_INFO);
+   if(user_info){
+       user_info = eval('('+user_info+')');
+       $('#nickname').html(user_info.nickname);
+       $('#account').html(user_info.account);
+       $('#jifen').html(user_info.integral);
+       var money = Math.round((user_info.money)/100,2)
+       $('#money').html(money);
+       with(baoapp.helper){
+       var url = createUrl('mcenter','memberorder');
+       ayscLoad(url,null,'GET','json',function(data){
+           if(data.status===CONST.BAO_REQUEST_SECCUSS){
+               $('#order').html(data.order);
+               return;
+           }
+            $('#order').html(0);
+       });
+       }
+          var install = appcan.locStorage.getVal(STORAGE.BAO_XINGGE_UID);
+          if(install!=='1'){
+               var json={
+                alias:user_info.user_id,//String 设置的别名
+             };
+             var data = JSON.stringify(json);
+              try{
+             uexJPush.setAlias(data);
+             var url = baoapp.helper.createUrl('passport','record');
+             
+             var platform =appcan.locStorage.getVal('platform') || 0;
+             var data = {user_id:user_info.user_id,app_type:platform};
+              baoapp.helper.ayscLoad(url,data,'POST','json',function(data){
+               if(data.status===CONST.BAO_REQUEST_SECCUSS){
+                  appcan.locStorage.setVal(STORAGE.BAO_XINGGE_UID,'1');
+               }
+             });
+             }catch(e){
+                 console.log(e);
+             }
+          }
+   }
+   
+   
+
+   
+   //头像
+   var url = baoapp.helper.createUrl('mcenter','member');
+             baoapp.helper.ayscLoad(url,null,'GET','json',function(data){
+                  if(data.status == CONST.BAO_REQUEST_SUCCESS){
+                     if(data['member']['face']){
+                        document.getElementById("showPic").src = baoapp.config.attachs+data['member']['face'];
+                        baoapp.helper.cacheExpireWrite('PERSON_FACE',data['member']['face']);
+                     }
+                  }
+            });
+            
+});
+</script>
+
+</html>

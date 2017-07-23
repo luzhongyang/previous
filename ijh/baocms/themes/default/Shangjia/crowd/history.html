@@ -1,0 +1,68 @@
+<include  file='public:header'/>
+
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">商家管理</a> > <a href="">众筹</a> > <a>往期众筹</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <form method="post" action="<{:U('crowd/history')}>">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">众筹名称：<input type="text" class="radius3 tuan_topser"  name="keyword" value="<{$keyword}>"/><input type="submit" style="margin-left:10px;" class="radius3 sjgl_an tuan_topbt" value="搜 索"/></div>
+            <div class="right tuan_topfb_r"><a class="radius3 sjgl_an tuan_topbt" target="main_frm" href="<{:U('crowd/create')}>">发布众筹+</a></div>
+        </div>
+    </div>
+    </form>
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli"><a href="<{:U('crowd/index')}>">正在众筹</a></li>
+            <li class="tuanfabu_tabli on"><a href="<{:U('crowd/history')}>">往期众筹</a></li>
+            <li class="tuanfabu_tabli"><a href="<{:U('crowd/fail')}>">失败众筹</a></li>
+        </ul>
+    </div> 
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td width="50">众筹ID</td>
+            <td width="120">众筹图片</td>
+            <td width="250">众筹名称</td>
+            <td width="150">众筹过期时间</td>
+            <td width="80">众筹金额</td>
+            <td width="80">已筹金额</td>
+            <td width="80">审核状态</td>
+            <td width="80">众筹状态</td>
+            <td width="150">操作</td>
+        </tr>
+        <foreach name="list" item="var">
+        <tr>
+            <tr>
+                <td><{$var.goods_id}></td>
+                <td><img src="__ROOT__/attachs/<{$crowd[$var[goods_id]][img]}>"  style="width: 160px; margin: 0px auto;" /></td>
+                <td><{$var.title}></td>
+                <td><{$crowd[$var[goods_id]][ltime]|date='Y-m-d H:i:s',###}></td>
+                <td><{$crowd[$var[goods_id]][all_price]/100}></td>
+                <td style="height: 100px;"><{$crowd[$var[goods_id]][have_price]/100}></td>
+                <td><eq name="var.audit" value="0">等待审核<else/>已审核</eq></td>
+                <td>
+                    <if condition="$var['audit'] EQ 0">未开始
+                    <else/>
+                        <if condition="$crowd[$var['goods_id']]['status'] EQ 0 and $var['audit'] NEQ 0">众筹中
+                        <elseif condition="$crowd[$var['goods_id']]['status'] EQ 1"/>成功
+                        <elseif condition="$crowd[$var['goods_id']]['status'] EQ 2"/>失败</if>
+                    </if>
+                </td>
+                <td>
+                    <a href="<{:U('crowd/ask',array('goods_id'=>$var['goods_id']))}>">话题</a>
+                    <a href="<{:U('crowd/setting',array('goods_id'=>$var['goods_id']))}>">查看众筹</a>
+                    <a href="<{:U('crowd/follow',array('goods_id'=>$var['goods_id']))}>">关注点赞</a>
+                </td>
+            </tr>
+        </tr>
+        </foreach>
+    </table>
+    <div class="paging">
+        <{$page}>
+    </div>
+</div>
+
+<include  file='public:footer'/>

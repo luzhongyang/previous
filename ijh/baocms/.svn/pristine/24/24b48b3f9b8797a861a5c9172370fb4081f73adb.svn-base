@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<title>修改密码</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <i class="icon-goback" onclick="baoapp.helper.goback();"></i>
+        <div class="title">修改密码</div>
+    </header>
+    <script>
+    appcan.ready(function(){
+            $('.submit').click(function(){
+                with(baoapp.helper){
+                    var height = adapt();
+                    if(!islogin()){
+                        toast("登录状态失效,请重新登录!",500,function(){
+                            linkTo('login','../login.html');
+                        },1)
+                        return false;
+                    }
+                    var password_old = $("#password_old").val();
+                    var password = $("#password").val();
+                    var password2 = $("#password2").val();
+                    if(!password_old){
+                        toast("请输入原密码!",1500,null,1);
+                        return false;
+                    }else if(!password){
+                        toast("请输入新密码!",1500,null,1);
+                        return false;
+                    }else if(!password_old){
+                        toast("请重复新密码!",1500,null,1);
+                        return false;
+                    }
+                    var data = {oldpwd:password_old,newpwd:password,pwd2:password2};
+                    var url = createUrl('mcenter','password');
+                    baoapp.helper.ayscLoad(url,data,'GET','json',function(data){
+                            if(CONST.BAO_REQUEST_SECCUSS===data.status){
+                                toast("密码修改成功!",1500,function(){
+                                    clearlogin();
+                                    baoapp.helper.linkTo('login','../login.html');
+                                },1)    
+                            }else if(CONST.BAO_LOGIN_NO_REG===data.status){
+                                clearlogin();
+                                toast("登录状态失效,请重新登录!",1500,function(){
+                                    clearlogin();
+                                    linkTo('login','../login.html');
+                                },1)    
+                            }else{
+                                toast(data.msg,1500,null,1);
+                            }
+                        });
+                }
+            });
+        })
+
+    </script>
+    <div id="content">
+
+    <div id="personal" class="page-center-box">
+        <div id="scroll" >
+            <div id="login-input">
+            <input type="password" id="password_old" placeholder="请输入原密码" name="password_old" />
+            <input type="password" id="password" placeholder="请输入新密码" name="password" />
+            <input type="password" id="password2" placeholder="再次确认新密码" name="password2" />
+            <input type="submit" class="submit" value="立刻修改">
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+ALTER TABLE `bao_weixin_keyword`   
+  CHANGE `type` `type` ENUM('news','text','addon') CHARSET utf8 COLLATE utf8_general_ci DEFAULT 'text'   NULL  COMMENT 'text:普通消息 news图片消息 addon:插件';
+
+  ALTER TABLE `bao_shop_weixin_keyword`   
+  CHANGE `type` `type` ENUM('news','text','addon') CHARSET utf8 COLLATE utf8_general_ci DEFAULT 'text'   NULL  COMMENT 'text:普通消息 news:图片消息 addon:插件';
+
+ALTER TABLE `bao_weixin_coupon`
+ADD COLUMN `keyword_id`  int(10) NULL DEFAULT 0 AFTER `shop_id`;
+
+ALTER TABLE `bao_weixin_scratch`
+ADD COLUMN `keyword_id`  int(10) NULL DEFAULT 0 AFTER `shop_id`;
+
+ALTER TABLE `bao_weixin_lottery`
+ADD COLUMN `keyword_id`  int(10) NULL DEFAULT 0 AFTER `shop_id`;
+
+ALTER TABLE `bao_weixin_goldegg`
+ADD COLUMN `keyword_id`  int(10) NULL DEFAULT 0 AFTER `shop_id`;

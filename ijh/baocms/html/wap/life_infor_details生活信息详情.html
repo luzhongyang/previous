@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>生活信息</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<a href=""><i class="icon-goback"></i></a>
+		<div class="title">生活信息详情</div>
+        <i class="icon-menu" style="margin-right:0.30rem;"><a href="#">发布</i>
+		<i class="icon-menu" id="ico_6"></i></a>
+	</header>
+	<!-- 筛选TAB -->
+    <script>
+		$(function(){
+			$("#search-bar li").each(function(e){
+				$(this).click(function(){
+					if($(this).hasClass("on")){
+						$(this).parent().find("li").removeClass("on");
+						$(this).removeClass("on");
+						$(".serch-bar-mask").hide();
+					}
+					else{
+						$(this).parent().find("li").removeClass("on");
+						$(this).addClass("on");
+						$(".serch-bar-mask").show();
+					}
+					$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+						
+						if(e==i){
+							$(this).parent().find(".serch-bar-mask-list").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						$(this).find("li").click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+						});
+					});
+				});
+			});
+		});
+    </script>
+ 	<div id="life_infor_des" class="page-center-box">
+ 		<div id="scroll">
+ 			<div class="pic_item">
+ 				<a href="">
+	 				<img src="img/des.png" />
+	 				<div class="bottom_item">
+		 				<p>ios系统精仿苹果6 6plus 5S 指纹解锁</p>
+		 				<p><span>21人已浏览</span><span>2015-8-1</span></p>
+	 				</div>
+ 				</a>
+ 				<label class="rush">急</label><label class="top">顶</label>
+ 			</div>
+ 			<div class="intro_01">
+ 				<div class="left_item fl"><p><span>￥3600</span><s>￥5600</s></p><p>尤哥：15000000000</p></div>
+ 				<div class="right_item fl"><div class="inner_box"><a href="#">立刻联系</a></div></div>
+ 			</div>
+ 			<div class="intro_01 intro_02">
+	 			<p>新旧程度: 9成新</p>  
+				<p>区域:瑶海-和平广场</p>          
+				<p>地址:蜀山区潜山路496号新景花园16栋804室</p>
+			</div>
+			<div class="intro_03">
+				<h5>手机及配件描述</h5>
+				<p>感谢您光临深圳赛格恒兴数码通讯，本公司专业手机十年老店???，本公司出售的每一部机器，不敢保证我们的价钱是最低，但我们保证我们的质量做到最好；我们知道，只有诚信经营的店铺，才有长远发展，本公司承诺，只要是在我们公司购买的每部机器，确保原厂规格，有任何问题全额退款！</p>
+
+			</div>
+			<div class="intro_03 intro_04">
+				<h5>相关推荐</h5>
+				<ul>
+					<li>
+						<a href="#">
+						<div class="pic_L fl"><img src="img/tp17.png" /></div>
+						<div class="des_R fl">
+							<h2><span class="overflow_clear">2手苹果6手机出售,只限8月</span><label>急</label><label>顶</label></h2>
+							<p><span>9成新</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>36人浏览</span></p>
+							<p><b>￥6300</b><s>￥5600</s><span></span></p>
+						</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+						<div class="pic_L fl"><img src="img/tp17.png" /></div>
+						<div class="des_R fl">
+							<h2><span class="overflow_clear">2手苹果6手机出售</span><label>急</label><label>顶</label></h2>
+							<p><span>9成新</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>36人浏览</span></p>
+							<p><b>￥6300</b><s>￥5600</s><span></span></p>
+						</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+						<div class="pic_L fl"><img src="img/tp17.png" /></div>
+						<div class="des_R fl">
+							<h2><span class="overflow_clear">2手苹果6手机出售,只限8月</span><label>急</label><label>顶</label></h2>
+							<p><span>9成新</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>36人浏览</span></p>
+							<p><b>￥6300</b><s>￥5600</s><span></span></p>
+						</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+						<div class="pic_L fl"><img src="img/tp17.png" /></div>
+						<div class="des_R fl">
+							<h2><span class="overflow_clear">2手苹果6手机出售</span><label>急</label><label>顶</label></h2>
+							<p><span>9成新</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>36人浏览</span></p>
+							<p><b>￥6300</b><s>￥5600</s><span></span></p>
+						</div>
+						</a>
+					</li>
+				</ul>
+				<div class="more_li"></div>
+			</div>
+
+ 		</div>
+		 
+	</div>
+</body>
+</html>

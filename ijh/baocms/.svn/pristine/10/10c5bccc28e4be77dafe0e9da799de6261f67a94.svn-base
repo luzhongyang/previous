@@ -1,0 +1,43 @@
+<include file="public:header"/>
+<body>
+<?php if(!$is_app){?>
+<header>
+    <a href="<{:U('mcenter/farm/index',array('st'=>0))}>"><i class="icon-goback"></i></a>
+    <div class="title">
+    	订单详情
+    </div>
+    <i class="icon-menu"><a href="#" class=""></a></i>
+</header>
+<?php }?>
+<div class="page-center-box">
+    <div class="hotelOrd">
+        <p class="fontcl2 ts">
+            
+            <if condition="$detail['order_status'] eq -1">
+                已取消
+                <else/>
+               
+                    <if condition="$detail['comment_status'] eq 1">
+                        <a class="order_detail" href="<{:U('farm/comment',array('order_id'=>$detail['order_id']))}>">去点评</a>+
+                    </if>
+
+            </if>
+            
+        </p>
+        <div class="infor">
+        	<h3>订单编号：<{$detail.order_id}></h3>
+        	<h3><{$detail.farm.farm_name}></h3>
+        </div>
+        <div class="box">订单总额：<span class="black9"><{$detail.amount}></span></div>
+        <div class="box">到店时间：<span class="black9"><{$detail.gotime|date='Y-m-d H:i:s',###}></span></div>
+        <div class="box">入住人：<span class="black9"><{$detail.name}></span></div>
+        <div class="box">手机号：<span class="black9"><{$detail.mobile}></span></div>
+        <div class="box">住宿偏好：<span class="black9"><{$detail.note}></span></div>
+	<!--<div class="box mb10">发票收据抬头：<span class="black9">合肥生活宝网络科技有限公司</span></div>-->
+        
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<include  file='public:header'/>
+
+<div class="mainBt">
+    <ul>
+        <li class="li1">商城</li>
+        <li class="li2">商家产品</li>
+        <li class="li2 li3">众筹管理</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>商家必须入住了商城才能发布产品</p>
+    <div class="jsglNr">
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td width="50">ID</td>
+                        <td width="150">用户名</td>
+                        <td width="100">价格</td>
+                        <td width="100">姓名</td>
+                        <td width="150">电话</td>
+                        <td width="300">地址</td>
+                        <td width="100">购买时间</td>
+                        <td width="100">是否中奖</td>
+                        <td width="100">状态</td>
+                    </tr>
+                    <foreach name="meals" item="var">
+                        <tr>
+                            <td ><{$var.list_id}></td>
+                            <td><{$users[$var['uid']]['nickname']}></td>
+                            <td><{$var['price']/100}>元</td>
+                            <td><{$var.name|default=''}></td>
+                            <td><{$var.mobile|default=''}></td>
+                            <td><{$var.addr|default=''}></td>
+                            <td><{$var.dateline|date='Y-m-d H:i:s',###}></td>
+                            <td><if condition="$var[is_zhong] EQ '0'">未中奖<else/>已中奖</if></td>
+                            <td>
+                                <eq name='goods_crowd.status' value='0'>
+                                    <if condition='$var.order_status == 0 and $var.pay_status eq 0'>
+                                        <if condition="$var['type']['have_num'] EGT $var['type']['max_num'] and $var['type']['max_num'] NEQ 0">
+                                            限额已满(未付款)
+                                        <else/>
+                                            待付款
+                                        </if>
+                                    <elseif condition='$var.order_status == 0 and $var.pay_status eq 1'/>
+                                        已付款
+                                    </if>
+                                </eq>
+                                <eq name='goods_crowd.status' value='1'>
+                                    <if condition='$var.order_status == 0 and $var.pay_status eq 0'>
+                                        <if condition="$var['type']['have_num'] EGT $var['type']['max_num'] and $var['type']['max_num'] NEQ 0">
+                                            限额已满(未付款)
+                                        <else/>
+                                            待付款
+                                        </if>
+                                    </if>
+                                    <if condition='$var.order_status == 0 and $var.pay_status eq 1'>
+                                        等待发货
+                                    </if>
+                                    <if condition='$var.order_status == 1'>
+                                        待收货
+                                    </if>
+                                    <if condition='$var.order_status == 2'>
+                                        已完成
+                                    </if>
+                                </eq>
+                                <eq name='goods_crowd.status' value='2'>
+                                    <if condition='$var.pay_status == 1'>
+                                        <if condition='$var.order_status == -1'>
+                                            已退款
+                                        <elseif condition='$var.order_status == 0'/>
+                                            等待退款
+                                        </if>
+                                    <else/>
+                                        众筹失败
+                                    </if>
+                                </eq>
+                            </td>
+                        </tr>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+        </form>
+    </div>
+    <include file='public:footer'/>

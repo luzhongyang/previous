@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>首页</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+</head>
+<body>
+<header>
+   <a onclick="baoapp.helper.goback();"><i class="icon-goback"></i></a>
+   <div class="title">
+      <div class="box_search overflow_clear" ontouchend="find();">
+           <a href="#"><i></i>输入商户名/品类/商品词</a>
+       </div>
+   </div>
+</header>
+
+<div id='content'>
+
+</div>
+   
+<footer>
+   <script src='../js/application.footer.js'></script>
+</footer>    
+<script>
+function find()
+{
+    appcan.window.close(2);
+    with(baoapp.helper){
+        linkTo('COMMON_SEARCH','../common/search.html');
+    }
+}
+appcan.ready(function(){ 
+    //读取缓存
+    var height = baoapp.helper.adapt();
+    with(baoapp.helper){
+      search = getRequest(window.location.search); 
+      param  = {};   
+      param['page']   = 1;
+      param['city_id'] = city_id;
+      if(search['kword'])param['keyword']= unescape(search['kword']);
+      frameOpen('content','../loading.html',height,function(){
+           url = createUrl('Tuan','index',param); 
+           ayscLoad(url,null,'GET','json',function(data){
+               if(data.status == 200){
+                   cacheExpireWrite('ALL_CATE',JSON.stringify(data.cate));
+                   cacheExpireWrite('TUAN_LIST',JSON.stringify(data.data.list));
+                   cacheExpireWrite('SHOP_LIST',JSON.stringify(data.data.shops));
+                   frameOpen('content','cata_content.html?page='+data.page,height);
+               }else{
+                   toast('没有数据',2000);
+               }
+           });
+      });
+    }
+});
+</script>
+</body>
+</html>

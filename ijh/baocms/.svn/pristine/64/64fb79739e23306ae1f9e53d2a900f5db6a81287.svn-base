@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-微信-发布抽奖</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">发布抽奖</div>
+    <i class="right"></i>
+</header>
+
+<section>
+    <script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>抽奖必须启用后才能使用！</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    
+    <div class="sh_buy_fabu">
+        <div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div class="sh_input_public"><span>活动</span><input type="text" value=""></div> 
+                </li> 
+                <script>
+                $(function(){
+                    $(function(){
+                        $(".sh_input_public_pull").click(function(){
+                            if($(this).find(".sh_input_public_pull_down").css("display")=='block'){
+                                $(".sh_input_public_pull_down").hide();
+                                $(this).find(".sh_input_public_pull_down").hide();
+                            }
+                            else{
+                                $(".sh_input_public_pull_down").hide()
+                                $(this).find(".sh_input_public_pull_down").show();
+                            }
+                            if($(this).find("i").hasClass("on")){
+                                $(".sh_input_public_pull").find("i").removeClass("on");
+                                $(this).find("i").removeClass("on");
+                            }
+                            else{
+                                $(".sh_input_public_pull").find("i").removeClass("on");
+                                $(this).find("i").addClass("on");
+                            }
+                        });
+                        $(".sh_input_public_pull_down li").click(function(){
+                            $(this).parent().find("li").removeClass("on");
+                            $(this).addClass("on");
+                            $(this).parents(".sh_input_public_pull").find("input").val($(this).find("a").html());
+                        });
+                    });
+                });
+            </script>
+                <li class="list_box mb10">
+                    <div class="sh_input_public sh_input_public_pull"><span></span><input type="text" value="类型"><i></i>
+                        <div class="sh_input_public_pull_down">
+                            <ul>
+                                <li><a href="#">文字1</a></li>
+                                <li><a href="#">文字2</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li> 
+                <li class="list_box">
+                    <div class="sh_input_public"><span>说明：</span></div> 
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_textarea_public"><textarea></textarea></div> 
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_input_public"><span>结束时间</span><input type="text" value=""></div> 
+                </li>
+            </ul>
+        </div>
+        <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认发布"></div>
+    </div>
+</section>
+</body>
+</html>

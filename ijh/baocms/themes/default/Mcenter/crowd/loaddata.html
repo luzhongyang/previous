@@ -1,0 +1,81 @@
+ 
+<!-- 循环 -->
+<foreach name="list" item="var">
+    <div class="list-box border_t">
+        <div class="shop-order">
+            <p class="left">ID:<{$var.list_id}></p>
+            <p class="right black9">状态：
+                <eq name='goods_crowd.status' value='0'>
+                    <if condition='$var.order_status == 0 and $var.pay_status eq 0'>
+                        <if condition="$var['type']['have_num'] EGT $var['type']['max_num'] and $var['type']['max_num'] NEQ 0">
+                            限额已满
+                        <else/>
+                            待付款
+                        </if>
+                    <elseif condition='$var.order_status == 0 and $var.pay_status eq 1'/>
+                        已付款
+                    </if>
+                </eq>
+                <eq name='goods_crowd.status' value='1'>
+                    <if condition='$var.order_status == 0 and $var.pay_status eq 0'>
+                        <if condition="$var['type']['have_num'] EGT $var['type']['max_num'] and $var['type']['max_num'] NEQ 0">
+                            限额已满
+                        <else/>
+                            待付款
+                        </if>
+                    </if>
+                    <if condition='$var.order_status == 0 and $var.pay_status eq 1'>
+                        等待发货
+                    </if>
+                    <if condition='$var.order_status == 1'>
+                        待收货
+                    </if>
+                    <if condition='$var.order_status == 2'>
+                        已完成
+                    </if>
+                </eq>
+                <eq name='goods_crowd.status' value='2'>
+                    <if condition='$var.pay_status == 1'>
+                        <if condition='$var.order_status == -1'>
+                            已退款
+                        <elseif condition='$var.order_status == 0'/>
+                            等待退款
+                        </if>
+                    <else/>
+                        众筹失败
+                    </if>
+                </eq>
+            </p>
+        </div>
+    </div>
+    <div class="list-box mb10">
+        <a href="">
+            <div class="list-content activ-list-content" id="order-title" style="margin-left:0.08rem;">
+                <p class="activ-title" style='height:auto;'>
+                    众筹产品：<img src="__ROOT__/attachs/<{$var['type']['img']}>" width='40' height='40' />&nbsp;
+                </p>
+                <p class="spread-looker">支持金额：<span><{:round($var['type']['price']/100,2)}></span>元</p>
+                <p class="spread-looker">产品运费：<if condition="$var['type']['yunfei'] EQ 0">免运费<else/><span><{:round($var['type']['yunfei']/100,2)}></span>元</if></p>
+                <p class="">产品类型：<eq name='var.type.choujiang' value='1'><span style='color:#ff0000;'>抽奖类</span><else/><span style='color:#999999;'>普通</span></eq></p>
+                <eq name='var.type.choujiang' value='1'>
+                    <p class="">是否中奖：<eq name='var.is_zhong' value='1'><span style='color:#ff0000;'>中奖</span><else/>未中奖</eq></p>
+                </eq>
+                <p class="">产品简介：<{$var.type.content}></p>
+                <div class="spread-looker">时间：<{$var.dateline|date='Y-m-d H:i:s',###}></div>
+
+                <if condition='$goods_crowd.status NEQ 2'>
+                    <if condition='$var.order_status == 0 and $var.pay_status eq 0'>
+                        <if condition="$var['type']['have_num'] LT $var['type']['max_num'] or $var['type']['max_num'] EQ 0">
+                            <div class="spread-looker">操作：<a href="<{:U('mobile/mall/crowdpay',array('list_id'=>$var['list_id']))}>"  class="shop-pay">去支付</a></div>
+                        </if>
+                    <elseif condition='$var.order_status == 1'/>
+                        <div class="spread-looker">操作：<a href="<{:U('crowd/confirm_goods',array('list_id'=>$var['list_id']))}>"  class="shop-pay">确认收货</a></div>
+                    </if>
+                </if>
+            </div>
+        </a>
+    </div>
+</foreach>
+<!-- 循环 -->
+
+

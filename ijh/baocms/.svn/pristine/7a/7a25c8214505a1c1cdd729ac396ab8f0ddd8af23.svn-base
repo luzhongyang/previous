@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商城</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">购物详情</div>
+		<i class="icon-menu" id="ico_1"></i>
+	</header>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+			<div class="mall-form">
+				<ul>
+					<li class="mall-bt">购买须知</li>
+					<li class="mall-notice">
+						<p>有效期：2013.7.16 至 2015.8.7</p>
+						<p>不可用日期：有效期内周末、法定节假日通用</p>
+						<p>美团券使用时间：09:30-21:30</p>
+						<p>是否预约：无需预约，消费高峰可能需要等位</p>
+						<p>其他优惠：凭美团券到店消费不可同时享受店内其他优惠</p>
+						<p>自定义：每张美团券建议1人使用</p>
+						<p>本单不提供餐巾纸和餐具</p>
+						<p>仅限餐前外带，商家提供免费打包</p>
+						<p>酒水、饮料等问题，请致电商家咨询，以商家反馈为准</p>
+					</li>
+				</ul>
+			</div>
+			<div class="mall-form mall-details">
+				<ul>
+					<li class="mall-bt">本单详情</li>
+					<li class="mall-notice">
+						<ul class="mall-xq">
+							<li>商品名称</li>
+							<li>单价</li>
+							<li>数量/规格</li>
+							<li>小计</li>
+						</ul>
+						<a href="">
+							<ul class="mall-xq mall-xq2">
+								<li>葡式蛋挞</li>
+								<li>￥18</li>
+								<li>1盒/12只</li>
+								<li>￥18</li>
+							</ul>
+						</a>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<img src="img/tp70.png" width="100%">
+						<img src="img/tp70.png" width="100%">
+						<img src="img/tp70.png" width="100%">
+					</li>
+
+				</ul>
+			</div>
+			<div class="mall-form mall-details">
+				<ul>
+					<li class="mall-bt">商家介绍</li>					
+					<li>
+						<a href=""><img src="img/tp71.png" width="100%"></a>
+						<p>老把式蛋挞王蛋挞选自优质原料，当天现做，保证产品新鲜口感，经典美味。虽然店面有点小但就像小小的蛋挞包含大大的美味一样，小店面孕育着大大的美味，专一做蛋挞，便宜又美味。</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<footer class="footer-cart">
+		<a href=""><div class="btn-long">立即购买</div></a>
+	</footer>
+</body>
+</html>

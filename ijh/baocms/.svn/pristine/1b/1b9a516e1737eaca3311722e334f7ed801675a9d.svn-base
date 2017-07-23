@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>关于我们</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<script src="js/appcan.js"></script>
+<script src="js/appcan.control.js"></script>
+<script src="js/application.js"></script>
+<script src="js/application.init.js"></script>
+
+</head>
+
+<body>
+<header id="header"> 
+	<a onclick="appcan.window.close(1,300);" href="#"><i class="icon-goback"></i></a>
+    <div class="title">关于我们</div>
+    <i></i> 
+</header>
+<div id="content">
+<div id="nav_more_about" style="top:0.4rem" class="page-center-box">
+	<div id="scroll">
+    	<div class="img"><img src="img/about_img.png"></div>
+    </div>
+</div>
+<script>
+    appcan.ready(
+        function(){
+            var height = baoapp.helper.adapt();
+        }
+    )
+
+</script>
+</div>
+<footer>
+	<p class="copy">合肥生活宝网络科技有限公司</p>
+	<p>Copyright2012-2112 www.baocms.com</p>
+</footer>
+</body>
+</html>

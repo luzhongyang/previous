@@ -1,0 +1,675 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>定位身边团购</title>
+<link href="../css/style1.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/js.js"></script>
+<script>
+$(function () {
+	$('#selectBoxInput').click(function(){
+		$('.selectList').toggle(300);
+	});
+	$(".selectList li a").click(function () {
+		$("#selectBoxInput").html($(this).html());
+		$('.selectList').hide();
+	});
+});//头部搜索框js
+$(function () {
+	$('.sy_flsxAll').click(function(){
+		$('.sy_flsxAllList').toggle();
+	});
+});
+
+$(function(){
+    $(".minu_zuone li img").each(function(e){
+        $(this).click(function(){
+            $(".minu_zuone li img").removeClass("on");
+            $(this).addClass("on");
+            $(".minu_img").each(function(i){
+                if(e==i){
+                    $(".minu_img").hide();
+                    $(this).show();
+                }
+            });                    
+        });
+    });
+});
+
+</script>
+
+</head>
+
+<body style="background-color:#f7f7f7;">
+<div class="topOne">
+    <div class="nr">
+        <div class="left">您好，欢迎访问BAOCMS<a href="#">登陆</a>|<a href="#">注册</a>
+            <div class="topSm"> <span class="topSmt"><em>&nbsp;</em>手机CMS</span>
+                <div class="topSmnr"><img src="../sjimages/login_wx_03.jpg" width="90" height="90" />
+                    <p>扫描下载客户端</p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul>
+            	<li class="liOne"><a class="liOneA" href="#">个人中心<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">抢购管理</a></li>
+                            <li><a href="#">活动管理</a></li>
+                            <li><a href="#">服务管理</a></li>
+                            <li><a href="#">购物管理</a></li>
+                            <li><a href="#">外卖管理</a></li>
+                            <li><a href="#">订座信息</a></li>
+                            <li><a href="#">同城管理</a></li>
+                            <li><a href="#">优惠券管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">我是商家<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">商家登陆</a></li>
+                            <li><a href="#">微信营销</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">快捷导航<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">餐饮频道</a></li>
+                            <li><a href="#">生活资讯</a></li>
+                            <li><a href="#">活动</a></li>
+                            <li><a href="#">积分商城</a></li>
+                            <li><a href="#">购物</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="topTwo">
+    <div class="left">
+        <h1><a href="#"><img src="../sjimages/logo_03.png" width="214" height="53" /></a></h1>
+        <div class="changeCity"> 合肥 <a href="#" class="change">[切换城市]</a> </div>
+    </div>
+    <div class="left center">
+        <div class="searchBox">
+            <div class="selectBox"> <span class="select"  id="selectBoxInput">商家</span>
+                <div  class="selectList">
+                    <ul>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" class="text" value="输入您要搜索的内容" onclick="if(value==defaultValue){value='';this.style.color='#000'}"  onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+            <input type="button" class="submit" value="搜索" />
+        </div>
+        <div class="hotSearch">热门搜索：<a href="#">美食</a><a href="#">酒店</a><a href="#">酒店</a><a href="#">电影</a><a href="#">家政</a><a href="#">洗车</a></div>
+    </div>
+    <div class="right topTwo_b">
+    	<div class="protect">
+            <ul>
+              <li><em>&nbsp;</em><a href="#">随时退</a></li>
+              <li><em>&nbsp;</em><a href="#">不满意免单</a></li>
+              <li><em>&nbsp;</em><a href="#">过期退款</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="nav">
+    <div class="navList">
+    	<!--<div class="navListBg">&nbsp;</div>-->
+        <ul>
+            <li class="navListAll zy_navListAll"><span class="navListAllt">全部抢购分类<em></em></span>
+                <div class="shadowy navAll">
+                	<div class="menu_fllist2">
+                <div class="item2 bo">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">美食</a></div>
+                        <div class="right"><a href="">火锅</a><a href="">自助餐</a><a href="">川菜</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">美食</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">娱乐</a></div>
+                        <div class="right"><a href="">KTV</a><a href="">足疗按</a><a href="">洗浴</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">娱乐</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">酒店</a></div>
+                        <div class="right"><a href="">七天</a><a href="">格力豪泰</a><a href="">锦江</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">酒店</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">电影</a></div>
+                        <div class="right"><a href="">电子通票</a><a href="">选座</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">电影</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">购物</a></div>
+                        <div class="right"><a href="">超市</a><a href="">商场卡</a><a href="">水果</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">购物</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">丽人</a></div>
+                        <div class="right"><a href="">美发</a><a href="">美甲</a><a href="">驾校</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">丽人</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">结婚</a></div>
+                        <div class="right"><a href="">婚庆公司</a><a href="">新娘跟妆</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">结婚</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">生活服务</a></div>
+                        <div class="right"><a href="">汽车服务</a><a href="">装修服务</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">生活服务</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">旅游</a></div>
+                        <div class="right"><a href="">国内游</a><a href="">出境游</a><a href="">周边游</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">旅游</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            		<script type="text/javascript">
+						$('.menu_fllist2 > .item2').hover(function(){
+							var eq = $('.menu_fllist2 > .item2').index(this),				//获取当前滑过是第几个元素
+								h = $('.menu_fllist2').offset().top,						//获取当前下拉菜单距离窗口多少像素
+								s = $(window).scrollTop(),									//获取游览器滚动了多少高度
+								i = $(this).offset().top,									//当前元素滑过距离窗口多少像素
+								item = $(this).children('.menu_flklist2').height(),				//下拉菜单子类内容容器的高度
+								sort = $('.menu_fllist2').height();						//父类分类列表容器的高度
+							
+							if ( item > sort ){												//如果子类的高度小于父类的高度
+								if ( eq == 0 ){
+									$(this).children('.menu_flklist2').css('top', (i-h));
+								} else {
+									$(this).children('.menu_flklist2').css('top', (i-h)+1);
+								}
+							} else {
+								if ( s > h ) {												//判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+									if ( i-s > 0 ){											//则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+										$(this).children('.menu_flklist2').css('top', (s-h)+2 );
+									} else {
+										$(this).children('.menu_flklist2').css('top', (s-h)-(-(i-s))+2 );
+									}
+								} else {
+									$(this).children('.menu_flklist2').css('top', 0 );
+								}
+							}	
+					
+							$(this).addClass('on');
+							$(this).children('.menu_flklist2').css('display','block');
+						},function(){
+							$(this).removeClass('on');
+							$(this).children('.menu_flklist2').css('display','none');
+						});//导航菜单js
+					</script>
+                </div>
+            </li>
+            <li class="navLi"><a class="navA  on" href="#">首页</a></li>
+            <li class="navLi"><a class="navA" href="#">生活频道</a></li>
+            <li class="navLi"><a class="navA" href="#">活动</a></li>
+            <li class="navLi"><a class="navA" href="#">抢购</a></li>
+            <li class="navLi"><a class="navA" href="#">购物</a></li>
+            <li class="navLi"><a class="navA" href="#">找优惠</a></li>
+            <li class="navLi"><a class="navA" href="#">美食</a></li>
+            <li class="navLi"><a class="navA" href="#">榜单</a></li>
+            <li class="navLi"><a class="navA" href="#">会员卡</a></li>
+            <li class="navLi"><a class="navA" href="#">更多</a></li>
+            <!--<li class="navLi2"><a class="navA" href="#">更多<em></em></a>
+                <div class="indxLi">
+                    <ul>
+                        <li><a href="#">装修&amp;服务</a></li>
+                        <li><a href="#">婚庆&amp;酒店</a></li>
+                        <li><a href="#">家政&amp;服务</a></li>
+                        <li><a href="#">汽车&amp;驾校</a></li>
+                        <li><a href="#">教育培训</a></li>
+                        <li><a href="#">母婴&amp;亲子</a></li>
+                        <li><a href="#">丽人&amp;保养</a></li>
+                        <li><a href="#">餐饮&amp;娱乐</a></li>
+                    </ul>
+                </div>
+            </li>-->
+        </ul>
+    </div>
+</div>
+<div class="content zy_content">
+    <div class="minu_top">
+        <ul>
+            <li>首页>></li>
+            <li>购物>></li>
+            <li class="lei_1">欧柏</li>
+            <li class="lei_1">瓷砖地砖</li>
+            <li class="lei_1">全抛釉地砖</li>
+            <li class="lei_1">客厅卧室</li>
+            <li class="lei_1">防滑地板砖</li>
+            <li class="lei_1">玻化砖 800×800</li>
+        </ul>
+    </div>
+    <div class="minu_center">
+        <div class="minu_left">
+            <div class="minu_zuo">
+                <img src="../img/tp19.png" class="minu_img">
+                <img src="../img/tp21.png" class="minu_img" style="display:none;">
+                <img src="../img/tp22.png" class="minu_img" style="display:none;">
+                <img src="../img/tp23.png" class="minu_img" style="display:none;">
+                <div class="minu_zuone">
+                    <ul>
+                        <li><img src="../img/tp20.png" class="on"></li> 
+                        <li><img src="../img/tp21.png"></li> 
+                        <li><img src="../img/tp22.png"></li> 
+                        <li><img src="../img/tp23.png"></li> 
+                    </ul>
+                </div>
+            </div>
+            <div class="minu_you">
+                <p class="minu_font">欧柏 瓷砖地砖 全抛釉地砖 客厅卧室 防滑地板砖 玻化地板砖 800×800</p>
+                <p><span class="spxq_qgpstarBg"><span class="spxq_qgpstar">&nbsp;</span></span><span class="minu_font3"> 181人评价 </span></p>
+                <p class="minu_font2">价格：<span>￥408.3</span>&nbsp&nbsp<del>￥548</del></p>
+                <p class="minu_font2">商家：合肥庐州太太公司</p>
+                <div class="minu_font4">
+                    <div class="left">数量：<input type="text" value="1" class="minu_ipt"></div>
+                    <div class="left">
+                        <div class="minu_block"></div>
+                        <div class="minu_block2"></div>
+                    </div>
+                    <input type="submit" value="立即购买" class="minu_ipt2">
+                </div>
+                <div class="minu_font5">                 
+                    <ul class="minu_ul">
+                        <li>服务：</li>
+                        <li><img src="../images/tp_36.png"> 随时退</li>
+                        <li><img src="../images/tp_37.png"> 过期退</li>
+                        <li><img src="../images/tp_38.png"> 真实评价</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="minu_right">
+            <img src="../sjimages/tp_24.png" class="minu_img2">
+            <p class="minu_plus">扫描商家微信</p>
+            <p class="minu_plus">轻松购享优惠</p>
+            <p class="minu_plus2"><img src="../images/tp_39.png"> <a href="">收藏本单</a>&nbsp&nbsp<img src="../images/tp_40.png"> <a href="">分享到</a></p>
+        </div>
+    </div>
+    <div class="minu_mian">
+        <div class="minu_leftwo">
+            <div class="minu_shop2">
+                <div class="minu_shop left"></div>
+                <ul class="left">
+                    <li>会员评价</li>
+                </ul>
+            </div>
+
+            <p class="minu_shop3">商品详情</p>
+            <div class="minu_shop6">
+                <img src="../img/tp_13.png"> 
+            </div>
+
+            <!-- <p class="minu_shop3">商家简介</p>
+            <div class="minu_shop7">
+                <div class="minu_leftter">
+                    <img src="../img/tp_14.png">
+                </div>
+                <div class="minu_rightter">
+                    <ul>
+                        <li class="minu_li">合肥庐州太太公司</li>
+                        <li>交通路线：公交车路线：18路 43路 64路 129路 502路到翠澜站下</li>
+                        <li>营业时间：11:00-14:30,17:00-22:00</li>
+                        <li>本店特色：以满足客户需求为主</li>
+                        <li>人均消费：<span class="minu_sp">49元</span></li>
+                        <li>韩膳宫是金釜山川管理有限公司旗下一家菜品丰富的烤肉连锁店，店内供应200多种</li>
+                        <li>佳酿，物超所值！贴心服务、优雅的环境恭候您光临。是提供自助烧烤的连锁餐饮企业。</li>
+                        <li>主消费方式，欢迎您享受200余款美味佳肴。</li>
+                    </ul>
+                    <ul class="minu_ul2">
+                        <li><img src="../images/tp_42.png" class="left"> <span class="left"> 021-63590577</span></li>
+                        <li><img src="../images/tp_43.png" class="left"> <span class="left"> hefei_dls</span></li>
+                        <li><img src="../images/tp_44.png" class="left"> <span class="left"> 1203605498</span></li>
+                    </ul>
+                </div>
+            </div> -->
+
+            <p class="minu_shop3">会员评价</p>
+            <ul class="minu_ul3">
+                <li>全部</li>
+                <li>晒图评价</li>
+            </ul>
+            <div class="minu_our">
+                <!-- <div>
+                    <div class="minu_leftt">
+                        <p>大家都在说:</p>
+                    </div>
+                    <div class="minu_rightt">
+                        <ul class="minu_ul4">
+                            <li>味道很好（34）</li>
+                            <li>服务态度很好（17）</li>
+                            <li>菜量足（7）</li>
+                            <li>环境不错（4）</li>
+                            <li>干净整洁（4）</li>
+                            <li>上菜快（3）</li>
+                        </ul>
+                        <ul class="minu_ul5">
+                            <li>味道一般（6）</li>
+                            <li>菜量一般（3）</li>
+                        </ul>
+                    </div>
+                </div> -->
+                <div class="minu_hour">
+                    <div class="minu_tx">
+                        <img src="../images/tp_45.png" class="minu_img3">
+                        <p>nDr6024587</p>
+                        <img src="../images/tp_46.png" class="minu_img4  ">
+                    </div>
+                    <div class="minu_pj">
+                        <div class="minu_pl">
+                            <p><span class="spxq_qgpstarBg"><span class="spxq_qgpstar">&nbsp;</span></span><span class="minu_span"> 2015-08-11 </span></p>
+                            <p>
+                                <span class="minu_span2">【认真评价】</span>各方面都一般吧！如果我一个人没吃饭的时候可能会去，肉夹馍放的那个青椒真心不喜欢，希望
+                            </p>
+                            <p>老板以后换成生菜之类的，粉丝汤味道比较清淡，大家如果有机会可以尝试一下，我怎么感觉写个评论咋这</p>
+                            <p>么难呢，还差5个字</p>
+                            <img src="../img/tp_4.png">
+                            <img src="../img/tp_5.png">
+                            <img src="../img/tp_6.png">
+                            <img src="../img/tp_7.png">
+                            <p class="minu_span">游子老鸭粉丝汤单人餐</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="minu_hour">
+                    <div class="minu_tx">
+                        <img src="../images/tp_45.png" class="minu_img3">
+                        <p>nDr6024587</p>
+                        <img src="../images/tp_48.png" class="minu_img4  ">
+                    </div>
+                    <div class="minu_pj">
+                        <div class="minu_pl">
+                            <p><span class="spxq_qgpstarBg"><span class="spxq_qgpstar">&nbsp;</span></span><span class="minu_span"> 2015-08-11 </span></p>
+                            <p>去了几次还可以，家门口的必须支持</p>
+                            <img src="../img/tp24.png">
+                            <img src="../img/tp25.png">
+                            <p class="minu_span">游子老鸭粉丝汤单人餐</p>
+                            <p class="minu_hui">商家回复：欢迎再次光临哦！</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="minu_hour">
+                    <div class="minu_tx">
+                        <img src="../images/tp_45.png" class="minu_img3">
+                        <p>nDr6024587</p>
+                        <img src="../images/tp_49.png" class="minu_img4  ">
+                    </div>
+                    <div class="minu_pj">
+                        <div class="minu_pl">
+                            <p><span class="spxq_qgpstarBg"><span class="spxq_qgpstar">&nbsp;</span></span><span class="minu_span"> 2015-08-11 </span></p>
+                            <p>上菜速度很快，量足，味道较清淡，不够辣，加了很多醋，最后基本符合口味了。可能刚开业，位</p>
+                            <P>置还在二楼呢，所以人比较少，感觉冷清环境卫生还行，以后还会来</P>
+                            <p class="minu_span">游子老鸭粉丝汤单人餐</p>
+                            <p class="minu_hui">商家回复：我们会改进的，谢谢！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="minu_rightwo">
+            <div class="minu_shop4">热门商品</div>
+            <div class="minu_shop5">
+                <img src="../img/tp12.png">
+                <div class="onSale_1 minu_save">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right minu_car"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="minu_shop5">
+                <img src="../img/tp12.png">
+                <div class="onSale_1 minu_save">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right minu_car"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="minu_shop5">
+                <img src="../img/tp12.png">
+                <div class="onSale_1 minu_save">
+                    <div class="left">
+                        <p class="onSale_p">￥158.00</p>
+                        <del>￥158.00</del> </div>
+                    <div class="right minu_car"> 
+                        <a href=""><img src="../images/tp_33.png"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+  <div class="footNav">
+    <div class="left topTwo_b">
+      <div class="tel"><em>&nbsp;</em>0551-63641901</div>
+      <div class="protect">
+        <ul>
+          <li><em>&nbsp;</em><a href="#">随时退</a></li>
+          <li><em>&nbsp;</em><a href="#">不满意免单</a></li>
+          <li><em>&nbsp;</em><a href="#">过期退款</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="center">
+      <div class="footNavLi">
+        <ul>
+          <li><a href="#">关于我们</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">联系我们</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">媒体合作</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">人才招聘</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">广告合作</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">免责声明</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">服务协议</a></li>
+        </ul>
+      </div>
+      <div class="copy">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有 php微信O2O生活宝门户系统</div>
+      <div class="footNavLi">
+        <ul>
+          <li>友情连接：<a href="#"> baocms演示站</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">江湖家居系统</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">一团网</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">400电话</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="right"><img src="../sjimages/login_wx_03.jpg" width="149" height="146" /></div>
+  </div>
+</div>
+<div class="topUp">
+    <ul>
+        <li class="topBack">
+            <div class="topBackOn">回到<br />
+                顶部</div>
+        </li>
+        <li class="topUpWx">
+            <div class="topUpWxk"><img src="../sjimages/login_wx_03.jpg" />
+                <p>扫描二维码关注微信</p>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $(".topUp").show();
+				$(".indexpop").show();
+				
+            } else {
+                $(".topUp").hide();
+				$(".indexpop").hide();
+            }
+        });
+        $(".topUp").click(function () {
+            $("html,body").animate({scrollTop: 0}, 200);
+        });
+    });
+</script>
+</body>
+</html>

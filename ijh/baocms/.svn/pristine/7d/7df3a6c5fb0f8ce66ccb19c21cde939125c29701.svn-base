@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-优惠券</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> <i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">发布优惠券</div>
+    <i class="right"><a href="#">+发布优惠券</a></i> </header>
+<section>
+    <div class="sh_search_box">
+        <div class="sh_search_int"> <span>优惠券名称</span>
+            <input type="text" value="">
+            <input type="button" class="btn" value="搜索">
+        </div>
+    </div>
+    <script>
+		$(function(){
+			$(".sh_coupon_tab li").each(function(e){
+				$(this).click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".sh_coupon_tab_box").each(function(i){
+						if(e==i){
+							$(".sh_coupon_tab_box").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+					});
+				});
+			});
+		});
+    </script>
+    <div class="sh_coupon_tab mb10">
+        <ul>
+            <li class="on">优惠券列表</li>
+            <li>优惠券下载</li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="sh_coupon_tab_box">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_buy_bt_order_num">过期日：2015-05-21</div>
+                            <div class="fr sh_coupon_bt_state">是否审核：正常</div>
+                        </div>
+                        <div class="sh_buy_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="148" height="100"></div>
+                            <div class="wz">
+                            	<p>[临平路/和平公园] 【靓灶·民间菜】</p>
+                                <p><span class="mr20">下载量：0</span><span class="mr20">浏览量：6</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date">创建时间：2015-05-26 16:21:47</div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a></div>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_buy_bt_order_num">过期日：2015-05-21</div>
+                            <div class="fr sh_coupon_bt_state">是否审核：正常</div>
+                        </div>
+                        <div class="sh_buy_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="148" height="100"></div>
+                            <div class="wz">
+                            	<p>[临平路/和平公园] 【靓灶·民间菜】</p>
+                                <p><span class="mr20">下载量：0</span><span class="mr20">浏览量：6</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date">创建时间：2015-05-26 16:21:47</div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="sh_coupon_tab_box" style="display:none;">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_coupon_bt_time">创建时间：2015-07-23 21:41:48</div>
+                            <div class="fr sh_coupon_bt_state">未使用</div>
+                        </div>
+                        <div class="sh_coupon_nr">
+                            <div class="wz">
+                            	<p>仅售299元，价值1280元婚纱礼服租赁套系！</p>
+                                <p><span class="mr20">用户手机：15056989640</span><span class="mr20">创建IP:127.0.0.1</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_coupon_bt_time">创建时间：2015-07-23 21:41:48</div>
+                            <div class="fr sh_coupon_bt_state">未使用</div>
+                        </div>
+                        <div class="sh_coupon_nr">
+                            <div class="wz">
+                            	<p>仅售299元，价值1280元婚纱礼服租赁套系！</p>
+                                <p><span class="mr20">用户手机：15056989640</span><span class="mr20">创建IP:127.0.0.1</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>物流订单列表</title>
+    <link href="css/wl_style.css" type="text/css" rel="stylesheet" />
+    <script src="js/zepto.js"></script>
+    <script type="text/javascript">
+    	
+    </script>
+</head>
+<body style=" background-color:#fafafa;">
+<header>
+    <i></i>
+    <div class="title">订单列表-已完成</div>
+    <i class="icon-menu"></i>
+</header>
+<section>
+	<ul class="wl_order_list_box">
+	    <li class="wl_order_list">
+        	<div class="wl_order_bt">
+            	<div class="fl wl_order_bt_number">订单ID:1022<span class="c_1">商</span></div>
+                <div class="fl wl_order_bt_state">已完成</div>
+                <div class="fr wl_order_bt_pay">货到付款</div>
+            </div>
+            <div class="wl_order_nr">
+            	<ul>
+            	    <li>
+                    	<div class="fl wl_order_nr_left"><p>欧柏 瓷砖地砖 全抛釉地砖 客厅卧室玻化</p></div>
+                        <div class="fr wl_order_nr_right">
+                        	<p class="price">￥600</p>
+                            <span class="num">x3</span>
+                        </div>
+                    </li>
+                    <li>
+                    	<div class="fl wl_order_nr_left"><p>欧柏 瓷砖地砖 全抛釉地砖 客厅卧室玻化</p></div>
+                        <div class="fr wl_order_nr_right">
+                        	<p class="price">￥600</p>
+                            <span class="num">x3</span>
+                        </div>
+                    </li>
+        	    </ul>
+            </div>
+            <div class="wl_order_total">2015-8-6 14:40<span>数量：6</span><span>总计：￥3600</span></div>
+            <div class="wl_order_addre">
+                <p><span>商家：</span>张华  13515620358</p>
+                <p><span>地址：</span>合肥蜀山区玉兰大道555号</p>
+            </div>
+            <div class="wl_order_addre bg_c1">
+                <p><span>收件人：</span>李江  13515620358</p>
+                <p><span>地址：</span>北京市海淀区金光大道五栋二单元2005室</p>
+            </div>
+        </li>
+        
+        <li class="wl_order_list">
+        	<div class="wl_order_bt">
+            	<div class="fl wl_order_bt_number">订单ID:1022<span class="c_2">外</span></div>
+                <div class="fl wl_order_bt_state">已完成</div>
+                <div class="fr wl_order_bt_pay">货到付款</div>
+            </div>
+            <div class="wl_order_nr">
+            	<ul>
+            	    <li>
+                    	<div class="fl wl_order_nr_left"><p>欧柏 瓷砖地砖 全抛釉地砖 客厅卧室玻化</p></div>
+                        <div class="fr wl_order_nr_right">
+                        	<p class="price">￥600</p>
+                            <span class="num">x3</span>
+                        </div>
+                    </li>
+        	    </ul>
+            </div>
+            <div class="wl_order_total">2015-8-6 14:40<span>数量：6</span><span>总计：￥3600</span></div>
+            <div class="wl_order_addre">
+                <p><span>商家：</span>张华  13515620358</p>
+                <p><span>地址：</span>合肥蜀山区玉兰大道555号</p>
+            </div>
+            <div class="wl_order_addre bg_c1">
+                <p><span>收件人：</span>李江  13515620358</p>
+                <p><span>地址：</span>北京市海淀区金光大道五栋二单元2005室</p>
+            </div>
+        </li>
+        
+        <li class="wl_order_list">
+        	<div class="wl_order_bt">
+            	<div class="fl wl_order_bt_number">订单ID:1022<span class="c_3">抢</span></div>
+                <div class="fl wl_order_bt_state">已完成</div>
+                <div class="fr wl_order_bt_pay">货到付款</div>
+            </div>
+            <div class="wl_order_nr">
+            	<ul>
+            	    <li>
+                    	<div class="fl wl_order_nr_left"><p>欧柏 瓷砖地砖 全抛釉地砖 客厅卧室玻化</p></div>
+                        <div class="fr wl_order_nr_right">
+                        	<p class="price">￥600</p>
+                            <span class="num">x3</span>
+                        </div>
+                    </li>
+        	    </ul>
+            </div>
+            <div class="wl_order_total">2015-8-6 14:40<span>数量：6</span><span>总计：￥3600</span></div>
+            <div class="wl_order_addre">
+                <p><span>商家：</span>张华  13515620358</p>
+                <p><span>地址：</span>合肥蜀山区玉兰大道555号</p>
+            </div>
+            <div class="wl_order_addre bg_c1">
+                <p><span>收件人：</span>李江  13515620358</p>
+                <p><span>地址：</span>北京市海淀区金光大道五栋二单元2005室</p>
+            </div>
+        </li>
+    </ul>
+</section>
+</body>
+</html>

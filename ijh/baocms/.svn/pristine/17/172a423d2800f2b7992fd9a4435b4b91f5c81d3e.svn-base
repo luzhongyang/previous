@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script>
+$(function(){
+	$(".mask_clossan").click(function(){
+		$(".mask").hide();
+	});
+});
+$(function(){
+	$(".yh_logintab li").each(function(e){
+		$(this).click(function(){
+			$(".yh_logintab li").removeClass("on");
+			$(this).addClass("on");
+			$(".yhdl_tableBox").each(function(i){
+				if(e==i){
+					$(".yhdl_tableBox").hide();
+					$(this).show();
+				}
+				else{
+					$(this).hide();
+				}
+			});
+		});
+	});
+});
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 100;
+        var mobile_lock = 0;
+        $(function () {
+            $(".yhdl_yzm").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 100;
+					$(".yhdl_yzm").addClass("on");
+                    $('.yhdl_yzm').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".yhdl_yzm").removeClass("on");
+                $('.yhdl_yzm').removeAttr("disabled");
+                $('.yhdl_yzm').text("重新发送");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+            }
+            else {
+                mobile_count--;
+                $('.yhdl_yzm').text("重新获取(" + mobile_count.toString() + ")秒");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+</head>
+
+<body>
+<div class="mask mask_sellerflBox" style="display:block;">
+    <div class="radius10 mask_seller_del mask_sellerfl">
+        <div class="mask_closs yh_logint">
+            <div class="left mask_closs_t">会员登录</div>
+            <div class="right yh_logint_r"><span class="radius3 mask_clossan">&nbsp;</span></div>
+        </div>
+        <div class="yh_loginnr">
+            <div class="yh_logintab">
+                <ul>
+                    <li class="left on"><em><img src="../images/yh_dlico_03.png" /></em>普通方式登录</li>
+                    <li class="left"><em><img src="../images/yh_dlico_05.png" /></em>手机动态码登录</li>
+                </ul>
+            </div>
+            <div class="yhdl_tableBox" style="">
+            	<table class="yh_login_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="80">用户名</td>
+                        <td>
+                            <div class="register_intw register_intBox">
+                                <input type="text" class="radius3 tuanfabu_int yhdl_intw" value="请输入用户名/邮箱/手机号" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" />
+                                <div class="left int_tsk yhdl_tsk"  style="display:none;">
+                                    <p class="tsk_error">账号不存在，请重新输入</p>
+                                </div>
+                                <div class="left int_tsk yhdl_tsk">
+                                    <p class="tsk_error tsk_correct">&nbsp;</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密码</td>
+                        <td>
+                            <div class="register_intw register_intBox">
+                                <input type="text" class="radius3 tuanfabu_int yhdl_intw" value="请输入密码" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" /><a class="yhdl_a" href="">忘记密码？</a>
+                                <div class="left int_tsk yhdl_tsk yhdl_tsk2"  style="display:none;">
+                                    <p class="tsk_error">密码错误</p>
+                                </div>
+                                <div class="left int_tsk yhdl_tsk yhdl_tsk2">
+                                    <p class="tsk_error tsk_correct">&nbsp;</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>图片验证码</td>
+                        <td>
+                            <div class="register_intw register_intBox">
+                                <input type="text" class="radius3 tuanfabu_int register_yzw" value="请输入图片文字" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" />
+                                <span class="login_yzm register_yzm"><a href=""><img src="../img/register_yz.jpg" width="96" height="34" /></a></span><a class="yhdl_a" href="">换一张</a>
+                                <div class="left int_tsk yhdl_tsk yhdl_tsk2"  style="display:none;">
+                                    <p class="tsk_error">验证码错误</p>
+                                </div>
+                                <div class="left int_tsk yhdl_tsk yhdl_tsk2">
+                                    <p class="tsk_error tsk_correct">&nbsp;</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input class="radius3 mask_an mask_qd login_dl" type="button" value="登 录" /><input class="radius3 mask_an login_dl" type="button" value="注册" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="yhdl_tableBox" style="display:none;">
+            	<table class="yh_login_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="80">手机号</td>
+                        <td>
+                            <div class="register_intw register_intBox">
+                                <input type="text" class="radius3 tuanfabu_int yhdl_intw" value="请输入手机号" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" />
+                                <div class="left int_tsk yhdl_tsk"  style="display:none;">
+                                    <p class="tsk_error">账号不存在，请重新输入</p>
+                                </div>
+                                <div class="left int_tsk yhdl_tsk">
+                                    <p class="tsk_error tsk_correct">&nbsp;</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>验证码</td>
+                        <td>
+                            <div class="register_intw register_intBox">
+                                <input type="text" class="radius3 tuanfabu_int register_yzw" value="请输入验证码" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" /><span class="tuanfabu_int register_yzmhq yhdl_yzm">发送验证码</span>
+                                <div class="left int_tsk yhdl_tsk"  style="display:none;">
+                                    <p class="tsk_error">验证码错误</p>
+                                </div>
+                                <div class="left int_tsk yhdl_tsk">
+                                    <p class="tsk_error tsk_correct">&nbsp;</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input class="radius3 mask_an mask_qd login_dl" type="button" value="登 录" /><input class="radius3 mask_an login_dl" type="button" value="注册" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="qqlinkBox">
+            	<ul class="left qqlink">
+                    <li class="qqlink_wz">其他账号登录：</li>
+                    <li>
+                    <a href="/passport/qqlogin.html"></a>
+                    </li>
+                    <li class="li2">
+                    <a href="/passport/wxlogin.html"></a>
+                    </li>
+                    <li class="li3">
+                    <a href="/passport/wblogin.html"></a>
+                    </li> 
+                </ul>
+                <div class="right yhdl_wx"><img src="../sjimages/login_wx_03.jpg" width="90" height="90" /><p>扫描下载客户端</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="mask_sellerflBg">&nbsp;</div>
+</div>
+</body>
+</html>

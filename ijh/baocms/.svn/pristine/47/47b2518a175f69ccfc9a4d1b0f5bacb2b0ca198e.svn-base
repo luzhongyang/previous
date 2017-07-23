@@ -1,0 +1,128 @@
+<include  file='public:header'/> 
+<style>
+    input[type="radio"]{padding: 5px;margin-right:5px;border:1px solid #ccc;} 
+</style>   
+<body>
+    <?php if(!$is_app){?>
+    <header>
+        <a href="javascript:history.back(-1);"><i class="icon-goback"></i></a>
+        <div class="title">充值金额</div>
+        <i class="icon-menu"></i>
+    </header>
+    <?php }?>
+    <div id="seat" class="page-center-box">
+
+        <form method="post" action="<{:U('money/moneypay')}>" >
+            <div id="scroll" class="pay">
+
+                <div class="shop-lie" style="position:relative;top:0;">
+                    <ul>
+                        <li class="on"><a href="<{:U('money/index')}>" >余额充值</a></li>
+                        <li><a href="<{:U('money/recharge')}>" >代金券充值</a></li>
+                        <li><a href="<{:U('money/gold')}>" >金块充值</a></li>
+                    </ul>
+                </div>
+
+                <div class="order-content">
+                    <ul class="list">
+                        <li >
+                            <span class="left">当前余额</span><span class="right" sytle="color:red;">
+                                <{:round($MEMBER['money']/100,2)}>元
+                            </span>
+                            <div class="clear"></div>
+                        </li>
+                        <li >
+                            <span class="left">充值金额</span>
+                            <span class="right">
+                                <input style="width:140px;" class="Confirm" type="text" id="money" name="money" />
+                                <input id="backurl" type="hidden" name="back_url" value=""/>
+                            </span>
+                            <div class="clear"></div>
+                        </li>
+                        <?php if(!$is_app){?>
+                        <li>
+                            <span class="left" style=" width:100px;">支付方式</span>
+                            <span class="right">
+
+
+
+                                <foreach name="payment" item="var">
+                                    <eq name="var.is_open" value="1">
+                                    <php>
+                                        if(IS_WEIXIN){
+
+                                    </php>
+                                    <if condition="($var['code'] neq 'money') && ($var['code'] neq 'alipay') ">
+                                        <label style=" padding: 5px; margin-left: 5px; float: left;"><input value="<{$var.code}>" name="code" type="radio" /><img src="__PUBLIC__/images/<{$var.logo}>" /></label>
+                                    </if>
+                                    <php>
+
+                                        }else{
+
+                                    </php>
+                                    <if condition="($var['code'] neq 'money') && ($var['code'] neq 'weixin') ">
+                                        <label style="padding: 5px;  margin-left: 5px;float: left;"><input  value="<{$var.code}>" name="code" type="radio" /><img src="__PUBLIC__/images/<{$var.logo}>" /></label>
+                                    </if>
+                                    <php>}</php>
+
+                                    </eq>
+                                </foreach>
+
+                            </span>
+                            <div class="clear"></div>
+                        </li>
+                        <?php  }?>
+                    </ul>
+                </div>
+
+
+                <div class="sure-pay-but">
+                    <p class="left"></p>
+
+                    <?php if($is_app){?>
+                    <div class="sure-pay right"><input type="button" class="aniu" value="确认支付" style="border:none;background:none;font-size:0.16rem;width:100%;color:#FFFFFF;"></div>
+                    <?php }else{?>
+                    <div class="sure-pay right"><input type="submit" class="aniu" value="确认支付" style="border:none;background:none;font-size:0.16rem;width:100%;color:#FFFFFF;"></div>
+                    <?php }?>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <?php if($is_app){?>
+    <script>
+        $('.aniu').click(function () {
+
+            var money = parseInt($('#money').val());
+            if (!money) {
+                layer.msg('余额没有填写!');
+                return false;
+            }
+
+            $.post("<{:U('mcenter/money/app_moneypay')}>", {money: money}, function (data) {
+                if (data.status == "success") {
+                    //getNewWebView(data.url);
+                    <?php if($is_android){ ?>
+                        window.jsObj.go_recharge(data.order_id, data.amount, data.url, 'money');
+                        <?php }else{?>
+                        go_recharge(data.order_id, data.amount, data.url, 'money');
+                      <?php }?>
+                    
+                } else {
+                    layer.msg(data.message);
+                }
+
+            },'json');
+        })
+    </script>
+    <?php }?>
+
+    <script>
+        $(document).ready(function () {
+            var back_url = localStorage.getItem("back_url");
+            $("#backurl").val(back_url);
+        })
+    </script>
+<include file="public:footer"/>

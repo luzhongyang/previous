@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/zy_control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+<body>
+<div id="sell" class="page-center-box">
+        <div id="scroll">
+           <!--模板数据-->          
+        </div>
+</div>
+<style>
+.popWin{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:10;
+    background:rgba(0,0,0,0.5);
+    display:none;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+}
+.popWin .ctr{
+    width:74%;
+    height:auto;
+    padding:0 0.1rem 1% 0.1rem;
+    box-shadow:0 0 0.1rem #333;
+    background:rgb(255,255,255);
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+}
+.popWin .ctr .title{
+    width:100%;
+    height:0.35rem;
+    line-height:0.35rem;
+    color:#333333;
+    font-size: 0.13rem;
+    border-bottom:solid 0.008rem #555555;
+    margin-bottom: 0.1rem;
+}
+.popWin .ctr .gezi{
+    width:80%;
+    height:auto;
+    padding: 0 6%;
+    /*display:-webkit-box;
+    -webkit-box-orient:horizontal;*/
+   overflow: hidden;
+}
+.popWin .ctr .gezi span{
+    display:block;
+    width:33%;
+    height:0.5rem;
+    line-height:0.5rem;
+    padding-top:0.43rem;
+    float: left;
+    text-align: center;
+    margin-bottom: 0.1rem;
+    font-size:0.13rem;
+}
+.weixin{
+    background: url('../img/share01.png') no-repeat center top;
+    background-size: 0.62rem auto; 
+}
+.qq{
+    background: url('../img/share02.png') no-repeat center top;
+    background-size: 0.62rem auto; 
+}
+.wxf{
+    background: url('../img/share04.png') no-repeat center top;
+    background-size: 0.62rem auto; 
+}
+</style>
+
+</body>
+  <div class="popWin" onclick="popEvent(this,event);">
+    <div class='ctr'>
+        <p class="title">分享到</p>
+        <div class="gezi">
+            <span class='wxf' onclick="share_wx(0);">微信</span>
+            <span class='weixin' onclick="share_wx(1);">微信朋友圈</span>
+            <span class='qq' onclick="share_qq();">QQ空间</span>
+        </div>
+    </div>
+</div>    
+<!--自定义模板-->    
+<script type='text/template' id="tmpl_tuan_detail">
+            <div class="seat-banner">
+                    <img src="%photo%" width="100%" height="100%"/>
+                    <div class="shade"></div>
+                    <div class="shade-content order-ti">
+                        <p><span class="left overflow_clear">%intro%</span><span class="right order-font">已售%sold_num%</span></p>
+                    </div>
+            </div>
+
+            <div class="point">
+                <div class="point-left">
+                    <div>
+                        <span class="mall-price order-money">￥%tuan_price% </span> 
+                        <del> ￥%price%</del>
+                        <span class="order-fan">折%discount% </span>                     
+                    </div>
+                </div>
+                <div class="point-right">
+                    <a href="javascript:gobuy(%tuan_id%)" class="btn">立即购买</a>
+                </div>
+            </div>
+            <div class="order-style">
+                <ul>
+                    <li><i class="rush-ig-10"></i><span>支持随时退</span></li>
+                    <li><i class="rush-ig-11"></i><span>过期自动退</span></li>
+                    <li><i class="rush-ig-10"></i><span>免预约</span></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+
+            <div class="order-adress">
+                <div class="order-shop">
+                    <div>
+                        <a href=""><span class="left order-name">%title%</span></a>
+                        <div class="point-star order-star left"><div style="width: 0.7rem;"></div></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="order-nr">
+                       <span class="left overflow_clear order-dz">%addr%</span>
+                        <div class="right">
+                            <i class="rush-ig-13"></i>
+                            <!-- <span class="order-km">1km</span>
+                            <a href=""><img src="img/tp103.png"></a> -->
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="mall-our">                  
+                    <span class="mall-fen" onclick="gps(%shop_id%)"><a ><img src="../img/tp104.png"><span>到这去</span></a></span>  
+                    <span class="mall-fen" onclick="share()"><a ><img src="../img/tp9.png"><span >分享</span></a></span>          
+                </div>
+            </div>
+            
+              
+            <div class="spread-intro">
+                <ul>
+                    <li class="spread-tui">团购详情</li>
+                    <li>
+                        %details%
+                    </li>
+                </ul>
+            </div>
+            <div class="spread-intro">
+                <ul>
+                    <li class="spread-tui">购买须知</li>
+                    <li>
+                        %instructions%
+                    </li>
+                </ul>
+            </div>
+</script>
+
+
+<script>
+function share()
+{
+    $('.popWin').css({display:'-webkit-box'});
+    $('.popWin').click(function(event){
+        var e = event || window.event;
+        e.stopPropagation();        
+        $(this).hide();
+
+    });
+}
+function popEvent(o,event)
+{
+    var e = event || window.event;
+    e.stopPropagation();
+    $(o).hide();
+}
+function share_qq()
+{
+    var url = baoapp.config.tuan_url+window.tuan_id+'.html';
+    var data = {title:window.title, summary:window.intro, targetUrl:url, imageUrl:[window.thumb]};
+        data = JSON.stringify(data);
+        baoapp.qq(data);
+}
+function share_wx(scene)
+{
+    //scene:1朋友圈,0会话场景
+    var url = baoapp.config.tuan_url+window.tuan_id+'.html';
+    //thumbImg,wedpageUrl,scene 1,title,description
+    var data = {thumbImg:window.thumb,wedpageUrl:url,scene:scene,title:window.title,description:window.intro};
+        data = JSON.stringify(data);
+        uexWeiXin.shareLinkContent(data);
+      // baoapp.shareLink(data);
+}
+
+function createTag(_data)
+{   
+    http_attach = baoapp.config.attachs;
+
+    data = {
+        photo:       http_attach+_data.detail.photo,
+        discount:   _data.detail.discount,
+        intro:      _data.detail.intro,
+        sold_num:   _data.detail.sold_num,
+        tuan_price: _data.detail.tuan_price,
+        price:      _data.detail.price,
+        tuan_id:    _data.detail.tuan_id,
+        title:      _data.detail.title,
+        addr:       _data.shop.addr,
+        shop_id:    _data.shop.shop_id,
+        details:    _data.tuandetails.details,
+    instructions:   _data.tuandetails.instructions
+    }; 
+    with(document){
+        var spanNode = createElement('span'),
+            tmpl     = getElementById('tmpl_tuan_detail').innerHTML;
+           
+            for(key in data){
+               tmpl = tmpl.replace('%'+key+'%',data[key]); 
+            }
+            spanNode.innerHTML = tmpl;
+            querySelector('#scroll').appendChild(spanNode);
+            $(".spread-intro img").each(function () {
+            DrawImage(this, $(window).width()-20);  
+        }); 
+    }
+}
+
+function DrawImage(ImgD, FitWidth) {  
+    var image = new Image();  
+    image.src = ImgD.src; 
+    image.onload = function(){        
+        if (image.width > FitWidth) {  
+            
+            ImgD.width = FitWidth;  
+            ImgD.height = (image.height * FitWidth) / image.width;  
+        }           
+    }
+
+}
+
+function gps(shop_id)
+{
+    with(baoapp.helper){
+        linkTo(KEY.COMMON_GPS,'../common/gps.html?shop_id='+shop_id+'&tuan_id='+window.tuan_id,null,5);
+    };
+}
+
+function gobuy(tuan_id)
+{
+    with(baoapp.helper){
+        if(islogin()){
+            param = '?tuan_id='+tuan_id+'&price='+window.tuan_price+'&title='+escape(window.title)+'&mf='+window.mobile_fan;
+            linkTo(KEY.TUAN_BUY,'../common/buy.html'+param, null, 5);
+        }else{
+            linkTo(KEY.PERSONAL_INDEX,'../login.html',null,5);
+        }
+    };
+}
+
+
+</script>
+
+
+<script>
+    appcan.ready(function(){ 
+       try{
+           baoapp.registerApp();
+       }catch(e){
+        
+       }
+       $(".spread-intro").css({"width":$(window).width(),"overflow-x":"hidden"});
+       var search  = baoapp.helper.getRequest(location.search);
+       window.tuan_id = search.tuan_id; 
+       var detail_key = KEY.TUAN_DETAIL+'_'+window.tuan_id;
+       with(baoapp.helper){
+           var data = cacheExpireRead(detail_key);
+               data = JSON.parse(data);
+               window.tuan_price = data.detail.tuan_price;
+               window.title      = data.detail.title;
+               window.intro      = data.detail.intro;
+               window.tuan_id    = data.detail.tuan_id;
+               window.thumb      = baoapp.config.attachs+data.detail.photo;
+               window.mobile_fan = data.detail.mobile_fan;
+               createTag(data);
+       };   
+    }); 
+</script>
+</html>

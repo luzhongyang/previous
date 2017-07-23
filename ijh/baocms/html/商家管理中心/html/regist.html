@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>入驻</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script type="text/javascript">
+function clearInput() {
+	document.getElementById('phone_int').value = '';
+	showClaer();
+}
+function showClaer() {
+	var inObj = document.getElementById('phone_int');
+	if (inObj.value != '') {
+		document.getElementById('clearint').style.display = 'block';
+	} else {
+		document.getElementById('clearint').style.display = 'none';
+	}
+}
+</script>
+</head>
+
+<body>
+<div class="login_top">
+    <div class="login_topnr">
+        <div class="left login_topt">BAOCMS商户管理中心</div>
+        <div class="right">
+            <ul>
+            	<li class="left login_topli"><a href="#">回到首页</a></li>
+                <li class="left login_topli sjgl_toplixl"><span>下载商户中心手机客户端<em></em></span>
+                	<div class="shadow login_topxl"><img src="../sjimages/login_wx_03.jpg" /><p>扫一扫，更方便</p></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="register_nr">
+    <table class="register_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="380"><p class="register_p">公司名称</p></td>
+            <td>
+                <div class="register_intw register_intBox">
+                    <input type="text" id="phone_int" onKeyUp="showClaer()" class="radius3 tuanfabu_int register_intw" value="公司名称" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" /><a class="clearint" id="clearint" href="javascript:;" onClick="clearInput()" title="清空"></a>
+                    <div class="left int_tsk" style="display:none;">
+                    	<p class="tsk_error"></p>
+                    </div>
+                    <div class="left int_tsk">
+                        <p class="tsk_error tsk_correct">&nbsp;</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">法人姓名</p></td>
+            <td>
+                <div class="register_intw register_intBox">
+                    <select class="radius3 tuanfabu_int register_intw">
+                    	<option>法人姓名</option>
+                    </select>
+                    <div class="left int_tsk" style="display:none;">
+                    	<p class="tsk_error"></p>
+                    </div>
+                    <div class="left int_tsk">
+                        <p class="tsk_error tsk_correct">&nbsp;</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">所属分类</p></td>
+            <td>
+                <div class="register_intw register_intBox">
+                    <select class="radius3 tuanfabu_int register_intw">
+                    	<option>餐饮服务业</option>
+                    </select>
+                    <div class="left int_tsk" style="display:none;">
+                    	<p class="tsk_error"></p>
+                    </div>
+                    <div class="left int_tsk">
+                        <p class="tsk_error tsk_correct">&nbsp;</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">所属城市</p></td>
+            <td>
+                <div class="register_intw register_intBox">
+                    <select class="radius3 tuanfabu_int register_intw">
+                    	<option>合肥</option>
+                    </select>
+                    <div class="left int_tsk" style="display:none;">
+                    	<p class="tsk_error"></p>
+                    </div>
+                    <div class="left int_tsk">
+                        <p class="tsk_error tsk_correct">&nbsp;</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">公司地址</p></td>
+            <td>
+                <div class="register_intw register_intBox">
+                    <input type="text" class="radius3 tuanfabu_int register_intw" value="请输入公司地址" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" />
+                    <div class="left int_tsk" style="display:none;">
+                    	<p class="tsk_error"></p>
+                    </div>
+                    <div class="left int_tsk">
+                        <p class="tsk_error tsk_correct">&nbsp;</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">公司电话</p></td>
+            <td>
+                <div class="register_intw register_intBox">
+                    <input type="text" class="radius3 tuanfabu_int register_intw" value="请输入公司电话" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" />
+                    <div class="left int_tsk" style="display:none;">
+                    	<p class="tsk_error"></p>
+                    </div>
+                    <div class="left int_tsk">
+                        <p class="tsk_error tsk_correct">&nbsp;</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">营业时间</p></td>
+            <td>
+                <div class="register_intw register_intBox">
+                    <input type="text" class="radius3 tuanfabu_int register_intw" value="请输入营业时间" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" />
+                    <div class="left int_tsk" style="display:none;">
+                    	<p class="tsk_error"></p>
+                    </div>
+                    <div class="left int_tsk">
+                        <p class="tsk_error tsk_correct">&nbsp;</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">商户商标</p></td>
+            <td>
+               <div class="tuanfabu_nr">
+                    <div class="left tuanfabu_scimg">
+                        <div class="scimgBox"><a class="radius3 sjgl_an" href="#">选择图片</a><input type="file" class="scimg_int" /></div>
+                        <p>请上传小于292kb</p></div>
+                    <div class="left">
+                        <div class="tuanfabu_sjimg"><img src="../sjimages/scimg_03.jpg" />
+                            <!--<div class="tuanfabu_imgjz"></div>--><!--图片加载-->
+                        </div>
+                    </div>
+                </div> 
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">门店图片</p></td>
+            <td>
+                <div class="tuanfabu_nr">
+                    <div class="left tuanfabu_scimg">
+                        <div class="scimgBox"><a class="radius3 sjgl_an" href="#">选择图片</a><input type="file" class="scimg_int" /></div>
+                        <p>请上传小于292kb</p></div>
+                    <div class="left">
+                        <div class="tuanfabu_sjimg"><img src="../sjimages/scimg_03.jpg" />
+                            <!--<div class="tuanfabu_imgjz"></div>--><!--图片加载-->
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">开户银行户名</p></td>
+            <td>
+              <input type="text" class="radius3 tuanfabu_int register_intyhw" value="请留下真实银行转账结算信息，该信息不会在网站上公开" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" />  
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">开户银行名称</p></td>
+            <td>
+              <input type="text" class="radius3 tuanfabu_int register_intyhw" value="请留下真实银行转账结算信息，该信息不会在网站上公开" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" />  
+            </td>
+        </tr>
+        <tr>
+            <td><p class="register_p">开户银行帐号</p></td>
+            <td>
+              <input type="text" class="radius3 tuanfabu_int register_intyhw" value="请留下真实银行转账结算信息，该信息不会在网站上公开" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" />  
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" class="radius3 register_intan" value="提 交" /></td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

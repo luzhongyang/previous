@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>地址新增与修改-定位</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a></i>
+    <div class="title">
+    	<div class="searchBox">
+        	<input type="text" placeholder="小区" />
+        </div>
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="orderAddr_page">
+        <div class="map"><img src="pic/map.png" /></div>
+        <div>
+        	<ul>
+        	    <li class="orderAddr_map_list">
+                	<div class="fl ico"></div>
+                    <div class="wz">
+                    	<p class="maincl">[当前]创景花园</p>
+                        <p class="black3">曙光路与绩溪路交口555号</p>
+                    </div>
+                </li>
+                <li class="orderAddr_map_list">
+                	<div class="fl ico"></div>
+                    <div class="wz">
+                    	<p class="black3">[当前]创景花园</p>
+                        <p class="black9">曙光路与绩溪路交口555号</p>
+                    </div>
+                </li>
+                <li class="orderAddr_map_list">
+                	<div class="fl ico"></div>
+                    <div class="wz">
+                    	<p class="black3">[当前]创景花园</p>
+                        <p class="black9">曙光路与绩溪路交口555号</p>
+                    </div>
+                </li>
+                <li class="orderAddr_map_list">
+                	<div class="fl ico"></div>
+                    <div class="wz">
+                    	<p class="black3">[当前]创景花园</p>
+                        <p class="black9">曙光路与绩溪路交口555号</p>
+                    </div>
+                </li>
+    	    </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>

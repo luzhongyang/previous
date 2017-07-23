@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>地址新增与修改</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a></i>
+    <div class="title">
+    	新增地址 <!--修改信息-->
+    </div>
+    <i class="right"><a class="delIco addrDel" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<form>
+    <div class="orderAddr">
+        <div class="orderAddr_list">
+            <div class="fl"><i class="ico_1"></i></div>
+            <div class="orderAddr_int">
+                <input type="text" placeholder="请输入姓名">
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="orderAddr_list">
+            <div class="fl"><i class="ico_2"></i></div>
+            <div class="orderAddr_int">
+                <input type="text" placeholder="请输入手机号">
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="orderAddr_list">
+            <div class="fl"><i class="ico_3"></i></div>
+            <div class="orderAddr_int">
+                <input type="text" placeholder="小区">
+                <a href="#" class="link"><em class="linkIco"></em></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="orderAddr_list">
+            <div class="fl" style="border:none 0;"></div>
+            <div class="orderAddr_int">
+                <input type="text" placeholder="请输入详细收货地址（如门牌号）">
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="orderAddr_list">
+            <div class="fl" style="border:none 0; width:0.6rem;">默认地址</div>
+            <div class="orderAddr_int orderAddr_int_default">
+                <input type="text" placeholder="">
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="long_btn_box">
+            <input class="long_btn" type="button" value="确定">
+        </div>
+     </div>
+    </form>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico_1"></i>
+        <p>外卖</p>
+		</a>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico_2"></i>
+        <p>订单</p>
+		</a>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico_3"></i>
+        <p>发现</p>
+		</a>
+    </div>
+    <div class="list">
+       <a href="#">
+        <i class="ico_4"></i>
+        <p>我的</p>
+		</a>
+    </div>
+</footer>
+<div class="mask_box">
+    <div class="maskOne orderAddr_int_default_mask">
+        <div class="title">是否选择默认地址</div>
+        <div class="cont">
+        	<label><input type="radio" name="default" />是</label>
+            <label><input type="radio" name="default" />否</label>
+        </div>
+    </div>
+	<div class="mask_bg"></div>
+</div>
+
+<div class="mask_box">
+    <div class="maskOne addrDel_mask">
+        <div class="title">删除地址</div>
+        <div class="cont">
+        	<p class="black9">删除该收货地址</p>
+            <div class="btn_box"><input type="button" class="pub_btn graybg cancel" value="取消" /><input type="button" class="pub_btn confirm" value="确定" /></div>
+        </div>
+    </div>
+	<div class="mask_bg"></div>
+</div>
+<script>
+$(document).ready(function() {
+    $(".orderAddr_int_default").click(function(){
+		$(".orderAddr_int_default_mask").show();
+		$(".orderAddr_int_default_mask").parent().find(".mask_bg").show();
+	});
+	$(".orderAddr_int_default_mask").parent().find(".mask_bg").click(function(){
+		$(".orderAddr_int_default_mask").hide();
+		$(".orderAddr_int_default_mask").parent().find(".mask_bg").hide();
+	});
+});
+
+$(document).ready(function() {
+    $(".addrDel").click(function(){
+		$(".addrDel_mask").show();
+		$(".addrDel_mask").parent().find(".mask_bg").show();
+	});
+	$(".addrDel_mask").find(".cancel").click(function(){
+		$(".addrDel_mask").hide();
+		$(".addrDel_mask").parent().find(".mask_bg").hide();
+	});
+	$(".addrDel_mask").find(".confirm").click(function(){
+		$(".addrDel_mask").hide();
+		$(".addrDel_mask").parent().find(".mask_bg").hide();
+	});
+});
+</script>
+</body>
+</html>

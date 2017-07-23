@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>头部与左部菜单框架</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".leftMenu_a").click(function(){ 
+			$(".leftMenu_a").removeClass("on");
+			$(this).addClass("on");
+			$(".leftNav2").hide();
+			$(this).parent().find(".leftNav2").show();  
+		});
+		$(".leftNav2 li").click(function(){
+			$(".leftNav2 li a").removeClass('on');
+			$(this).find('a').addClass('on');
+		});
+	});
+</script>
+</head>
+
+<body>
+<div class="sjgl_top">
+    <div class="left sjgl_toplogo"><img src="../sjimages/toplogo_03.png" alt="" />BAOCMS生活服务系统——商家后台</div>
+    <div class="right sjgl_top_r">
+        <ul>
+            <li class="left sjgl_topli sjgl_toplixl"><a href="#">张三，您好！</a>
+            	<div class="sjgl_topxl">
+                    <div class="sjgl_topcz">
+                        <div class="left"><p class="sjgl_topyet">帐户余额</p><p class="sjgl_topyet sjgl_topye">￥<big>0</big></p></div>
+                        <div class="right"><a class="radius5 sjgl_topczA" href="#">立即充值</a></div>
+                    </div>
+                    <a class="sjgl_topA sjgl_topA1" target="main_frm" href="data.html">去资料中心>></a>
+                    <a class="sjgl_topA" href=""><em>&nbsp;</em>退出</a>
+                </div>
+            </li>
+            <li class="left sjgl_topli"><a href="#"><em class="toptc"><img src="../images/toptc_03.png" /></em>退出</a></li>
+        </ul>
+    </div>
+</div>
+<div class="sjglBox">
+    <div class="left sjgl_leftmenu">
+        <ul>
+            <li class="leftMenu_li"><a class="leftMenu_a on" target="main_frm" href="index.html"><em>&nbsp;</em>首页</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a2"  target="main_frm" href="seller.html"><em>&nbsp;</em>商家管理</a>
+                <div class="leftNav2">
+                    <ul>
+                        <li><a class="on" target="main_frm" href="seller.html"><em>&nbsp;</em>分类列表</a></li>
+                        <li><a target="main_frm" href="#"><em>&nbsp;</em>添加分类</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a3" target="main_frm" href="datamanage.html"><em>&nbsp;</em>系统设置</a>
+            	<div class="leftNav2">
+                    <ul>
+                        <li><a class="on" target="main_frm" href="datamanage.html"><em>&nbsp;</em>店铺管理</a></li>
+                        <li><a target="main_frm" href="data.html"><em>&nbsp;</em>基础资料</a></li>
+                        <li><a target="main_frm" href="eval.html"><em>&nbsp;</em>评价管理</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a4" target="main_frm" href="tuan.html"><em>&nbsp;</em>抢购管理</a>
+            	<div class="leftNav2">
+                    <ul>
+                        <li><a class="on" target="main_frm" href="tuan.html"><em>&nbsp;</em>正在抢购</a></li>
+                        <li><a target="main_frm" href="tuanorder.html"><em>&nbsp;</em>订单管理</a></li>
+                        <li><a target="main_frm" href="tuaned.html"><em>&nbsp;</em>抢购订单</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a5" href="###"><em>&nbsp;</em>预约管理</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a6" href="###"><em>&nbsp;</em>餐饮管理</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a7" target="main_frm" href="mallorder.html"><em>&nbsp;</em>商城管理</a>
+            	<div class="leftNav2">
+                    <ul>
+                        <li><a class="on" target="main_frm" href="mallorder.html"><em>&nbsp;</em>商城订单</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a8" href="###"><em>&nbsp;</em>家政服务</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a9" href="###"><em>&nbsp;</em>外卖管理</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a10" href="###"><em>&nbsp;</em>生活信息</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a11" target="main_frm" href="coupons.html"><em>&nbsp;</em>优惠券管理</a>
+            	<div class="leftNav2">
+                    <ul>
+                        <li><a class="on" target="main_frm" href="coupons.html"><em>&nbsp;</em>优惠券列表</a></li>
+                        <li><a target="main_frm" href="couponsdl.html"><em>&nbsp;</em>优惠券下载</a></li>
+                        <li><a target="main_frm" href="couponsfabu.html"><em>&nbsp;</em>优惠券发布</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a12" href="###"><em>&nbsp;</em>招聘管理</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a13" href="###"><em>&nbsp;</em>结算管理</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a14" target="main_frm" href="marketing.html"><em>&nbsp;</em>营销管理</a>
+            	<div class="leftNav2">
+                    <ul>
+                        <li><a class="on" target="main_frm" href="marketing.html"><em>&nbsp;</em>购买服务</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a15" href="###"><em>&nbsp;</em>微信营销</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a16" href="###"><em>&nbsp;</em>软文营销</a></li>
+            <li class="leftMenu_li"><a class="leftMenu_a leftMenu_a17" href="###"><em>&nbsp;</em>插件投票</a></li>
+        </ul>
+    </div>
+    <div id="sjgl_right" style="padding-left:200px; height:100%;">
+        <div class="sjgl_main" style="height:1000px;">
+            <iframe src="index.html" marginheight="0" marginwidth="0" frameborder="0" width="100%" height=100% id="main_frm" name="main_frm" onLoad="iFrameHeight()" ></iframe>
+            <!--<script type="text/javascript" language="javascript">
+			function iFrameHeight() {
+			
+			var ifm= document.getElementById("main_frm");
+			
+			var subWeb = document.frames ? document.frames["main_frm"].document :
+			
+			ifm.contentDocument;
+			
+				if(ifm != null && subWeb != null) {
+			
+				ifm.height = subWeb.body.scrollHeight;
+			
+				}
+			
+			}
+			</script>--> 
+        </div>
+    </div>
+</div>
+</body>
+</html>

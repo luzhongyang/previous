@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>社区</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<a href=""><i class="icon-goback"></i></a>
+		<div class="title">全城<i class="icon-con"  id="icon-con-1"></i></div>		
+	</header>
+	<!-- 筛选TAB -->
+    <script>
+    	$(document).ready(function(){
+ 			 $(".title").click(function(){
+  				$(".serch-bar-mask").toggle();
+ 	 		});
+
+ 			 $(".commu-qy li a").each(function(){
+ 			 	$(".commu-qy li a").click(function(){
+ 			 		$(".commu-qy li a").removeClass("on");
+ 			 		$(this).addClass("on");
+ 			 	})
+ 			 })
+		});
+    </script>
+ 	<div id="commu-quyu" class="page-center-box">
+		<div id="scroll">
+			<div class="serch-bar-mask"  style="display:none;">
+				<div class="commu-city">
+						<div>
+							<p><img src="img/tp87.png"> 当前城市:<span> 合肥</span></p>					
+							<ul class="commu-qy">
+								<li><a href="javascript:;" class="on">全城</a></li>
+								<li><a href="javascript:;">瑶海区</a></li>
+								<li><a href="javascript:;" class="commu-qu">瑶海区</a></li>
+								<div class="clear"></div>
+							</ul>
+						</div>
+						<div>
+							<ul class="commu-qy">
+								<li><a href="javascript:;">全城</a></li>
+								<li><a href="javascript:;">瑶海区</a></li>
+								<li><a href="javascript:;" class="commu-qu">瑶海区</a></li>
+								<div class="clear"></div>
+							</ul>
+						</div>
+						<div>
+							<ul class="commu-qy">
+								<li><a href="javascript:;">全城</a></li>
+								<li><a href="javascript:;">瑶海区</a></li>
+								<li><a href="javascript:;" class="commu-qu">瑶海区</a></li>
+								<div class="clear"></div>
+							</ul>
+						</div>
+						<div>
+							<ul class="commu-qy">
+								<li><a href="javascript:;">全城</a></li>
+								<li><a href="javascript:;">瑶海区</a></li>
+								<li><a href="javascript:;" class="commu-qu">瑶海区</a></li>
+								<div class="clear"></div>
+							</ul>
+						</div>
+						<div>
+							<ul class="commu-qy">
+								<li><a href="javascript:;">全城</a></li>
+								<li><a href="javascript:;">瑶海区</a></li>
+								<li><a href="javascript:;" class="commu-qu">瑶海区</a></li>
+								<div class="clear"></div>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="search_box">
+			    	<form id="form1" name="form1" method="post" action="">
+			    	<div class="search_div">
+			        	<div id="sd_left">
+			                <div id="input">
+			                	<input name="" type="text" placeholder="输入关键词" />
+			                </div>
+			                <div class="clear"></div>
+			            </div>
+			            <div id="sd_right">
+			            	  <input type="submit" name="button" id="button" value="搜索" />
+			            </div>
+			            <div class="clear"></div>
+			        </div>
+			        </form>
+	    		</div>
+	    		<div class="commu-place">
+	    			<div class="commu-ads">
+	    				<a href="">
+		    				<p>
+		    					<span class="fl commu-name overflow_clear">滁州路小学宿舍</span>
+		    					<span class="fr">202米</span>
+		    					<div class="clear"></div>
+		    				</p>
+		    				<P>滁州路201号</P>
+	    				</a>
+	    			</div>
+	    			<div class="commu-ads">
+	    				<a href="">
+		    				<p>
+		    					<span class="fl commu-name overflow_clear">滁州路小学宿舍</span>
+		    					<span class="fr">202米</span>
+		    					<div class="clear"></div>
+		    				</p>
+		    				<P>滁州路201号</P>
+	    				</a>
+	    			</div>
+	    			<div class="commu-ads">
+	    				<a href="">
+		    				<p>
+		    					<span class="fl commu-name overflow_clear">滁州路小学宿舍</span>
+		    					<span class="fr">202米</span>
+		    					<div class="clear"></div>
+		    				</p>
+		    				<P>滁州路201号</P>
+	    				</a>
+	    			</div>
+	    			<div class="commu-ads">
+	    				<a href="">
+		    				<p>
+		    					<span class="fl commu-name overflow_clear">滁州路小学宿舍</span>
+		    					<span class="fr">202米</span>
+		    					<div class="clear"></div>
+		    				</p>
+		    				<P>滁州路201号</P>
+	    				</a>
+	    			</div>
+	    			<div class="commu-ads">
+	    				<a href="">
+		    				<p>
+		    					<span class="fl commu-name overflow_clear">滁州路小学宿舍</span>
+		    					<span class="fr">202米</span>
+		    					<div class="clear"></div>
+		    				</p>
+		    				<P>滁州路201号</P>
+	    				</a>
+	    			</div>
+	    			<div class="commu-ads">
+	    				<a href="">
+		    				<p>
+		    					<span class="fl commu-name overflow_clear">滁州路小学宿舍</span>
+		    					<span class="fr">202米</span>
+		    					<div class="clear"></div>
+		    				</p>
+		    				<P>滁州路201号</P>
+	    				</a>
+	    			</div>
+	    			<div class="commu-ads">
+	    				<a href="">
+		    				<p>
+		    					<span class="fl commu-name overflow_clear">滁州路小学宿舍</span>
+		    					<span class="fr">202米</span>
+		    					<div class="clear"></div>
+		    				</p>
+		    				<P>滁州路201号</P>
+	    				</a>
+	    			</div>
+	    			<div class="commu-ads">
+	    				<a href="">
+		    				<p>
+		    					<span class="fl commu-name overflow_clear">滁州路小学宿舍</span>
+		    					<span class="fr">202米</span>
+		    					<div class="clear"></div>
+		    				</p>
+		    				<P>滁州路201号</P>
+	    				</a>
+	    			</div>
+	    			<div class="commu-ads">
+	    				<a href="">
+		    				<p>
+		    					<span class="fl commu-name overflow_clear">滁州路小学宿舍</span>
+		    					<span class="fr">202米</span>
+		    					<div class="clear"></div>
+		    				</p>
+		    				<P>滁州路201号</P>
+	    				</a>
+	    			</div>
+	    		</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<include  file='public:header'/>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">商家管理</a> > <a href="">营销管理</a> > <a>优惠券</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <form method="post" action="<{:U('coupon/index')}>">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">
+           优惠券
+            </div>
+            <div class="right tuan_topfb_r"><a class="radius3 sjgl_an tuan_topbt" target="main_frm" href="<{:U('coupon/create')}>">发布优惠券+</a></div>
+        </div>
+    </div>
+    </form>
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td>优惠券ID</td>
+            <td>标题</td>
+            <td>关键字</td>
+            <td>二维码图片</td>
+            <td>二维码链接</td>
+            <td>优惠金额</td>
+            <td>开始时间</td>
+            <td>结束时间</td>
+            <td>浏览量</td>
+            <td>数量</td>
+            <td>操作</td>
+        </tr>
+        <foreach name="list" item="var">
+            <tr>
+                <td><{$var.coupon_id}></td>
+                <td><{$var.title}></td>
+                <td><{$var.keyword}></td>
+		<td style="height: 140px;"><img src="__ROOT__/attachs/<{$var.file|default='default.jpg'}>"  style="width: 120px; margin: 0px auto;" /></td>
+		<td><{$var.url}></td>
+                <td><{$var.end_tips}></td>
+                <td><{$var.stime}></td>
+                <td><{$var.ltime}></td>
+                <td><{$var.views}></td>
+                <td><{$var.num}></td>
+                <td>
+                    <a class="radius3 sjgl_an tuan_topbt" href="<{:U('coupon/edit',array('coupon_id'=>$var['coupon_id']))}>">编辑</a>
+                    <a class="radius3 sjgl_an tuan_topbt" href="<{:U('coupon/sn',array('coupon_id'=>$var['coupon_id']))}>">成员</a>
+                    <a mini='confirm' class="radius3 sjgl_an tuan_topbt" href="<{:U('coupon/delete',array('coupon_id'=>$var['coupon_id']))}>">删除</a>
+                </td>
+            </tr>
+        </foreach>
+    </table>
+    <{$page}>
+</div>
+
+<include  file='public:footer'/>

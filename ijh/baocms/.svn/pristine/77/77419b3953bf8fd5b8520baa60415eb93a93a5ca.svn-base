@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-分店地址</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> 
+	<i class="left" id="icon_goback"></i>
+    <div class="title">分店地址</div>
+    <i class="right"><a href="#">+添加分店</a></i> 
+</header>
+
+<section>
+	<script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>分店没有被审核不能在前台展示</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    <div class="sh_search_box">
+        <div class="sh_search_int"> <span>分店名称/地址</span>
+            <input type="text" value="">
+            <input type="button" class="btn" value="搜索">
+        </div>
+    </div>
+    
+    <div class="sh_coupon_tab_box">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10" style="border-top:1px solid #dedede;">
+                    <div>
+                        <div class="sh_coupon_nr">
+                            <div class="wz">
+                            	<p class="black3">红星美凯龙</p>
+                                <p><span class="mr20">合肥 瑶海 和平广场</p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date bg1">
+                        	<p>2015-02-02 15:32:38<span>正常</span></p>
+                            <p class="addr"><span class="fl">和平路与岳西路交口向东100米</span><span class="fr">42分</span>
+                            	<div class="clear"></div>
+                            </p>
+                        </div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a><a class="btn" href="#">删除</a><a class="btn" href="#">设置口令</a><a class="btn" href="#">管理地址</a></div>
+                    </div>
+                </li>
+                <li class="list_box mb10" style="border-top:1px solid #dedede;">
+                    <div>
+                        <div class="sh_coupon_nr">
+                            <div class="wz">
+                            	<p class="black3">红星美凯龙</p>
+                                <p><span class="mr20">合肥 瑶海 和平广场</p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date bg1">
+                        	<p>2015-02-02 15:32:38<span>正常</span></p>
+                            <p class="addr"><span class="fl">和平路与岳西路交口向东100米</span><span class="fr">42分</span>
+                            	<div class="clear"></div>
+                            </p>
+                        </div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a><a class="btn" href="#">删除</a><a class="btn" href="#">设置口令</a><a class="btn" href="#">管理地址</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>

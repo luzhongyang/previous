@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>优惠列表</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+        <script src="../js/appcan.js"></script>
+        <script src="../js/appcan.control.js"></script>
+        <script src="../js/application.js"></script>
+        <script src="../js/application.init.js"></script>
+    </head>
+<body>
+	<header id="header">
+		<a onclick="baoapp.helper.goback()"><i class="icon-goback"></i></a>
+		<div class="title">优惠列表</div>
+		<a href=""><i class="icon-menu" onclick="find()" id="ico_2"></i></a>
+	</header>
+	<div id="content">
+	    
+    </div>
+	<footer>
+         <script src='../js/application.footer.js'></script>            
+    </footer>
+</body>
+<script>
+function find()
+{
+    appcan.window.close(2);
+    with(baoapp.helper){
+        linkTo('COMMON_SEARCH','../common/search.html');
+    }
+}
+
+appcan.ready(function(){ 
+  with(baoapp.helper)
+   {
+       var cat_id = appcan.locStorage.getVal('cat_id')||0;
+       var area_id = appcan.locStorage.getVal('area_id')||0;
+       var coupon_order = appcan.locStorage.getVal('coupon_order')||0;
+       var req = {'area_id':area_id,'cat':cat_id,'order':coupon_order};
+       var url = createUrl('Coupon','Data',req);
+              
+       var height = baoapp.helper.adapt();
+       frameOpen('content','../loading.html',height,function(){
+            ayscLoad(url,'','GET','json',function(data){
+                if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                    cacheExpireWrite(KEY.COUPON_INDEX,JSON.stringify(data));
+                    frameOpen('content','index_content.html',height);
+                }else{
+                    frameOpen('content','../loading_fail.html',height);
+                }
+            });
+       });
+
+    }
+});
+
+
+
+</script>

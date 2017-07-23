@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>生活信息发布1</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery.flexslider-min.js"></script>
+<script src="../js/js.js"></script>
+<script>
+$(function () {
+	$('#selectBoxInput').click(function(){
+		$('.selectList').toggle(300);
+	});
+	$(".selectList li a").click(function () {
+		$("#selectBoxInput").html($(this).html());
+		$('.selectList').hide();
+	});
+});//头部搜索框js
+</script>
+</head>
+
+<body>
+<div class="topOne">
+    <div class="nr">
+        <div class="left">您好，欢迎访问BAOCMS<a href="#">登陆</a>|<a href="#">注册</a>
+            <div class="topSm"> <span class="topSmt"><em>&nbsp;</em>手机CMS</span>
+                <div class="topSmnr"><img src="../sjimages/login_wx_03.jpg" width="90" height="90" />
+                    <p>扫描下载客户端</p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul>
+            	<li class="liOne"><a class="liOneA" href="#">个人中心<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">抢购管理</a></li>
+                            <li><a href="#">活动管理</a></li>
+                            <li><a href="#">服务管理</a></li>
+                            <li><a href="#">购物管理</a></li>
+                            <li><a href="#">外卖管理</a></li>
+                            <li><a href="#">订座信息</a></li>
+                            <li><a href="#">同城管理</a></li>
+                            <li><a href="#">优惠券管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">我是商家<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">商家登陆</a></li>
+                            <li><a href="#">微信营销</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">快捷导航<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">餐饮频道</a></li>
+                            <li><a href="#">生活资讯</a></li>
+                            <li><a href="#">活动</a></li>
+                            <li><a href="#">积分商城</a></li>
+                            <li><a href="#">购物</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="topTwo">
+    <div class="left">
+        <h1><a href="#"><img src="../sjimages/logo_03.png" width="214" height="53" /></a></h1>
+        <div class="changeCity"> 合肥 <a href="#" class="change">[切换城市]</a> </div>
+    </div>
+    <div class="left center">
+        <div class="searchBox">
+            <div class="selectBox"> <span class="select"  id="selectBoxInput">商家</span>
+                <div  class="selectList">
+                    <ul>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" class="text" value="输入您要搜索的内容" onclick="if(value==defaultValue){value='';this.style.color='#000'}"  onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+            <input type="button" class="submit" value="搜索" />
+        </div>
+        <div class="hotSearch">热门搜索：<a href="#">美食</a><a href="#">酒店</a><a href="#">酒店</a><a href="#">电影</a><a href="#">家政</a><a href="#">洗车</a></div>
+    </div>
+    <div class="right topTwo_b">
+    	<div class="protect">
+            <ul>
+              <li><em>&nbsp;</em><a href="#">随时退</a></li>
+              <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+              <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="nav">
+    <div class="navList">
+    	<!--<div class="navListBg">&nbsp;</div>-->
+        <ul>
+            <li class="navListAll zy_navListAll"><span class="navListAllt">全部抢购分类<em></em></span>
+                <div class="shadowy navAll">
+                	<div class="menu_fllist2">
+                <div class="item2 bo">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">美食</a></div>
+                        <div class="right"><a href="">火锅</a><a href="">自助餐</a><a href="">川菜</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">美食</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">娱乐</a></div>
+                        <div class="right"><a href="">KTV</a><a href="">足疗按</a><a href="">洗浴</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">娱乐</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">酒店</a></div>
+                        <div class="right"><a href="">七天</a><a href="">格力豪泰</a><a href="">锦江</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">酒店</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">电影</a></div>
+                        <div class="right"><a href="">电子通票</a><a href="">选座</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">电影</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">购物</a></div>
+                        <div class="right"><a href="">超市</a><a href="">商场卡</a><a href="">水果</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">购物</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">丽人</a></div>
+                        <div class="right"><a href="">美发</a><a href="">美甲</a><a href="">驾校</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">丽人</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">结婚</a></div>
+                        <div class="right"><a href="">婚庆公司</a><a href="">新娘跟妆</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">结婚</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">生活服务</a></div>
+                        <div class="right"><a href="">汽车服务</a><a href="">装修服务</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">生活服务</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">旅游</a></div>
+                        <div class="right"><a href="">国内游</a><a href="">出境游</a><a href="">周边游</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">旅游</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            		<script type="text/javascript">
+						$('.menu_fllist2 > .item2').hover(function(){
+							var eq = $('.menu_fllist2 > .item2').index(this),				//获取当前滑过是第几个元素
+								h = $('.menu_fllist2').offset().top,						//获取当前下拉菜单距离窗口多少像素
+								s = $(window).scrollTop(),									//获取游览器滚动了多少高度
+								i = $(this).offset().top,									//当前元素滑过距离窗口多少像素
+								item = $(this).children('.menu_flklist2').height(),				//下拉菜单子类内容容器的高度
+								sort = $('.menu_fllist2').height();						//父类分类列表容器的高度
+							
+							if ( item > sort ){												//如果子类的高度小于父类的高度
+								if ( eq == 0 ){
+									$(this).children('.menu_flklist2').css('top', (i-h));
+								} else {
+									$(this).children('.menu_flklist2').css('top', (i-h)+1);
+								}
+							} else {
+								if ( s > h ) {												//判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+									if ( i-s > 0 ){											//则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+										$(this).children('.menu_flklist2').css('top', (s-h)+2 );
+									} else {
+										$(this).children('.menu_flklist2').css('top', (s-h)-(-(i-s))+2 );
+									}
+								} else {
+									$(this).children('.menu_flklist2').css('top', 0 );
+								}
+							}	
+					
+							$(this).addClass('on');
+							$(this).children('.menu_flklist2').css('display','block');
+						},function(){
+							$(this).removeClass('on');
+							$(this).children('.menu_flklist2').css('display','none');
+						});//导航菜单js
+					</script>
+                </div>
+            </li>
+            <li class="navLi"><a class="navA  on" href="#">首页</a></li>
+            <li class="navLi"><a class="navA" href="#">身边抢购</a></li>
+            <li class="navLi"><a class="navA" href="#">活动</a></li>
+            <li class="navLi"><a class="navA" href="#">生活服务</a></li>
+            <li class="navLi"><a class="navA" href="#">同城优购</a></li>
+            <li class="navLi"><a class="navA" href="#">外卖</a></li>
+            <li class="navLi"><a class="navA" href="#">订座</a></li>
+            <li class="navLi"><a class="navA" href="#">同城信息</a></li>
+            <li class="navLi"><a class="navA" href="#">优惠券</a></li>
+            <!--<li class="navLi2"><a class="navA" href="#">更多<em></em></a>
+                <div class="indxLi">
+                    <ul>
+                        <li><a href="#">装修&amp;服务</a></li>
+                        <li><a href="#">婚庆&amp;酒店</a></li>
+                        <li><a href="#">家政&amp;服务</a></li>
+                        <li><a href="#">汽车&amp;驾校</a></li>
+                        <li><a href="#">教育培训</a></li>
+                        <li><a href="#">母婴&amp;亲子</a></li>
+                        <li><a href="#">丽人&amp;保养</a></li>
+                        <li><a href="#">餐饮&amp;娱乐</a></li>
+                    </ul>
+                </div>
+            </li>-->
+        </ul>
+    </div>
+</div>
+<div class="content">
+    
+    <div class="main">
+        <ul class="fbMenu">
+            <li class="cur">选择类目</li>
+            <li>填写信息</li>
+            <li>完成发布</li>
+        </ul>
+        <ul class="faNav">
+            <li class="fa1" rel="1"><a href="javascript:void(0);">二手</a></li><li class="fa2" rel="2"><a href="javascript:void(0);">车辆</a></li><li class="fa3" rel="3"><a href="javascript:void(0);">求职</a></li><li class="fa4" rel="4"><a href="javascript:void(0);">交友</a></li><li class="fa5" rel="5"><a href="javascript:void(0);">房屋</a></li><li class="fa6" rel="6"><a href="javascript:void(0);">培训</a></li><li class="fa7" rel="7"><a href="javascript:void(0);">招聘</a></li><li class="fa8" rel="8"><a href="javascript:void(0);">服务</a></li><li class="fa9" rel="9"><a href="javascript:void(0);">兼职</a></li><li class="fa10" rel="10"><a href="javascript:void(0);">宠物</a></li>    </ul>
+        <script>
+            $(document).ready(function(){
+                $(".faNav li").mouseover(function(){
+                   $(".faNav li a").removeClass('cur');
+                   $(this).find('a').addClass('cur'); 
+                   $(".faBox ul").hide();
+                   $(".jq_fabu_"+$(this).attr('rel')).show();
+                });
+                $(".faNav li").eq(0).mouseover();
+            });
+        </script>
+    
+        <div class="faBox">
+    
+            <ul class="jq_fabu_1">
+                    <li><a href="#">手机及配件</a></li><li><a href="#">数码产品</a></li><li><a href="#">家用电器</a></li><li><a href="#">日常用品</a></li><li><a href="#">笔记本</a></li><li><a href="#">家具/办公家具</a></li><li><a href="#">手机号码</a></li><li><a href="#">母婴/玩具</a></li><li><a href="#">台式电脑及配件</a></li><li><a href="#">平板电脑</a></li><li><a href="#">门票卡券</a></li><li><a href="#">运动/图书/乐器</a></li><li><a href="#">办公经营设备</a></li><li><a href="#">服装/配饰/鞋包</a></li><li><a href="#">工艺品/收藏品</a></li><li><a href="#">食品/农产品</a></li><li><a href="#">设备租赁</a></li><li><a href="#">工业设备</a></li><li><a href="#">其他物品</a></li><li><a href="#">物品回收</a></li>
+            </ul>
+            <ul class="jq_fabu_2">
+            	<li><a href="#">二手轿车</a></li><li><a href="#">电动车</a></li><li><a href="#">自行车</a></li><li><a href="#">二手货车</a></li><li><a href="/life/create/cat/27.html">摩托车/燃气车</a></li><li><a href="#">个人车源</a></li><li><a href="#">拼车/顺风车</a></li><li><a href="#">汽车用品/配件</a></li><li><a href="#">新车优惠/4S店</a></li><li><a href="#">汽修保养</a></li><li><a href="#">二手工程车</a></li><li><a href="#">过户/验车</a></li><li><a href="#">面包车/客车</a></li><li><a href="#">拖拉机/收割机</a></li><li><a href="#">本地下线车</a></li><li><a href="#">车辆收购/评估</a></li>            
+            </ul>
+            <ul class="jq_fabu_3">
+                    <li><a href="#">全职求职意向</a></li><li><a href="#">兼职求职意向</a></li>         
+            </ul>
+            <ul class="jq_fabu_4">
+            	<li><a href="#">结伴活动</a></li><li><a href="#">征婚</a></li><li><a href="#">找女友/找男友</a></li><li><a href="#">拼车/顺风车</a></li><li><a href="#">婚介服务</a></li><li><a href="#">技能交流</a></li><li><a href="#">找人/寻物</a></li>            
+            </ul>
+            <ul class="jq_fabu_5">
+            	<li><a href="#">租房/出租</a></li><li><a href="#">个人租房</a></li><li><a href="#">二手房出售</a></li><li><a href="#">求租/求购</a></li><li><a href="#">商铺出售</a></li><li><a href="#">店铺转让/出租</a></li><li><a href="#">写字楼出租</a></li><li><a href="#">日租/短租</a></li><li><a href="#">厂房/仓库/土地</a></li><li><a href="#">写字楼出售</a></li><li><a href="#">新房出售</a></li>            
+            </ul>
+            <ul class="jq_fabu_6">
+            	<li><a href="#">中小学教育</a></li><li><a href="#">职业技能</a></li><li><a href="#">学历教育</a></li><li><a href="#">电脑培训</a></li><li><a href="#">外语培训</a></li><li><a href="#">设计培训</a></li><li><a href="#">艺术培训</a></li><li><a href="#">婴幼儿教育</a></li><li><a href="#">体育培训</a></li>            
+            </ul>
+            <ul class="jq_fabu_7">
+            	<li><a href="#">工人/技工</a></li><li><a href="#">销售/金融</a></li><li><a href="#">保健按摩</a></li><li><a href="#">美工/设计</a></li><li><a href="#">人事/行政/文员</a></li><li><a href="#">营业员/促销/零售</a></li><li><a href="#">客服</a></li><li><a href="#">计算机/网络/通信</a></li><li><a href="#">服务员/收银员</a></li><li><a href="#">厨师/切配</a></li><li><a href="#">送货/快递/仓管</a></li><li><a href="#">保安</a></li><li><a href="#">家政/保洁</a></li><li><a href="#">司机/驾驶员</a></li><li><a href="#">老师/培训师</a></li><li><a href="#">财务/会计</a></li><li><a href="#">淘宝招聘</a></li><li><a href="#">美容美发</a></li><li><a href="#">市场/公关/媒介</a></li><li><a href="#">人才招聘会</a></li><li><a href="#">翻译</a></li><li><a href="#">出国劳务</a></li><li><a href="#">其他招聘</a></li>            
+            </ul>
+            <ul class="jq_fabu_8">
+            	<li><a href="#">招商加盟</a></li><li><a href="#">房屋装修</a></li><li><a href="#">担保/贷款</a></li><li><a href="#">家电维修</a></li><li><a href="#">建材装饰</a></li><li><a href="#">公司注册</a></li><li><a href="#">投资理财</a></li><li><a href="#">会计/审计</a></li><li><a href="#">电脑维修</a></li><li><a href="#">快递/物流</a></li><li><a href="#">农林牧副渔</a></li><li><a href="#">设计策划</a></li><li><a href="#">管道疏通</a></li><li><a href="#">租车服务</a></li><li><a href="#">旅游度假</a></li><li><a href="#">摄像摄影</a></li><li><a href="#">保洁/清洗</a></li><li><a href="#">陪驾/代驾</a></li><li><a href="#">搬家服务</a></li><li><a href="#">驾校服务</a></li><li><a href="#">开锁/修锁</a></li><li><a href="#">休闲娱乐</a></li><li><a href="#">印刷/喷绘</a></li><li><a href="#">机票/签证</a></li><li><a href="#">礼品定制</a></li><li><a href="#">家具维修</a></li><li><a href="#">美容纤体</a></li><li><a href="#">保姆/月嫂</a></li><li><a href="#">网站建设</a></li><li><a href="#">鲜花/盆景</a></li><li><a href="#">婚庆/化妆</a></li><li><a href="#">庆典/演出</a></li><li><a href="#">律师服务</a></li><li><a href="#">外卖/送水</a></li><li><a href="#">酒店/宾馆</a></li><li><a href="#">本地名站</a></li><li><a href="#">翻译/速记</a></li><li><a href="#">整形美容</a></li><li><a href="#">医疗健康</a></li><li><a href="#">其他服务</a></li>            
+            </ul>
+            <ul class="jq_fabu_9">
+            	<li><a href="#">学生兼职</a></li><li><a href="#">其他兼职</a></li><li><a href="#">家教/老师</a></li><li><a href="#">派发/促销</a></li><li><a href="#">模特/礼仪</a></li><li><a href="#">餐厅/服务员</a></li><li><a href="#">网站/设计</a></li><li><a href="#">会计/财务</a></li><li><a href="#">客服</a></li><li><a href="#">市场调查</a></li><li><a href="#">充场/座谈会</a></li><li><a href="#">演员</a></li>            
+            </ul>
+            <ul class="jq_fabu_10">
+                    <li><a href="#">狗狗</a></li><li><a href="#">宠物用品/食品</a></li><li><a href="#">其它宠物</a></li><li><a href="#">宠物免费赠送</a></li><li><a href="#">猫猫</a></li><li><a href="#">宠物服务/配种</a></li>            
+            </ul>
+        </div> 
+    </div>
+    
+</div>
+<div class="footerOut">
+    <div class="footer">
+        <div class="footNav">
+            <div class="left topTwo_b">
+                <div class="tel">0551-63641901<p>周一至周日 9:00-22:00</p><p>客服电话 免长途费</p></div>
+                <div class="protect">
+                    <ul>
+                        <li><em>&nbsp;</em><a href="#">随时退</a></li>
+                        <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+                        <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="center">
+                <div class="footNavLi">
+                    <ul>
+                        <li class="footerLi">
+                        	<h3>公司信息</h3>
+                        	<ul>
+                            	<li><a href="#">关于我们</a></li>
+                                <li><a href="#">联系我们</a></li>
+                                <li><a href="#">人才招聘</a></li>
+                                <li><a href="#">免责声明</a></li>
+                            </ul>
+                        </li>
+                        <li class="footerLi">
+                        	<h3>商户合作</h3>
+                        	<ul>
+                            	<li><a href="#">商家入驻</a></li>
+                                <li><a href="#">广告合作</a></li>
+                                <li><a href="#">商家新闻</a></li>
+                            </ul>
+                        </li>
+                        <li class="footerLi">
+                        	<h3>用户帮助</h3>
+                        	<ul>
+                            	<li><a href="#">服务协议</a></li>
+                                <li><a href="#">退款承诺</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="copy">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有 php微信O2O生活宝门户系统</div>
+            </div>
+            <div class="right"><img src="../sjimages/login_wx_03.jpg" width="149" height="146" /><p>扫一扫关注BAOCMS</p></div>
+        </div>
+    </div>
+</div>
+<div class="topUp">
+    <ul>
+        <li class="topBack"><div class="topBackOn">回到<br />顶部</div></li>
+        <li class="topUpWx"><div class="topUpWxk"><img src="../sjimages/login_wx_03.jpg" /><p>扫描二维码关注微信</p></div></li>
+    </ul>
+</div>
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $(".topUp").show();
+				$(".indexpop").show();
+				
+            } else {
+                $(".topUp").hide();
+				$(".indexpop").hide();
+            }
+			
+			
+			if ($(window).scrollTop() > 800) {
+                $(".spxq_xqTFixed").show();
+				
+            } else {
+                $(".spxq_xqTFixed").hide();
+            }
+			
+        });
+        $(".topUp").click(function () {
+            $("html,body").animate({scrollTop: 0}, 200);
+        });
+    });
+</script>
+</body>
+</html>

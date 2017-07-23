@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>消息详情</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+
+<script>
+   appcan.ready(function(){ 
+   var height = baoapp.helper.adapt();
+   with(baoapp.helper)
+   {
+       if(!islogin()){
+            //linkTo('login','../login.html');
+            return;
+        }
+        
+       var search  = baoapp.helper.getRequest(location.search);
+       window.id = search.id; 
+       var key = KEY.MEMBER_MSG_ID+'_'+window.id;
+       var data = {'msg_id' : window.id }; 
+       //有缓存数据读缓存,没有网络读取
+       if(!cacheExpireRead(key)){
+          frameOpen('content','../loading.html',height,function(){
+                var url = createUrl('mcenter','msgshow',data);
+                 ayscLoad(url,null,'GET','json',function(data){
+                    if(data.status == 200){
+                         //抓取数据写入缓存
+                        cacheExpireWrite(key,JSON.stringify(data['detail']));
+                        frameOpen('content','msg_content.html?id='+id,height);
+                    }else if(data.status == CONST.BAO_LOGIN_NO_REG){
+                        clearlogin();
+                        toast('登录状态失效,请重新登录',1000,function(){
+                            linkTo('login','../login.html');
+                        },1)
+                        return;
+                    }else{
+                        frameOpen('content','../loading_fail.html',height);
+                    }
+                });          
+          });
+       }else{
+            frameOpen('content','msg_content.html?id='+id,height);
+       }
+
+   };
+});
+
+</script>
+
+</head>
+<body>
+    <header id="header">
+        <i class="icon-goback" onclick="baoapp.helper.goback();"></i>
+        <div class="title">消息详情</div>
+    </header>
+    <div id="content"></div>
+    <footer>
+       <script src='../js/application.footer.js'></script>
+    </footer>
+</body>
+ 

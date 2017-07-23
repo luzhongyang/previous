@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>优惠券详情</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+        <script src="../js/appcan.js"></script>
+        <script src="../js/appcan.control.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/application.js"></script>
+        <script src="../js/application.init.js"></script>
+    </head>
+
+<body>
+	<header id="header">
+		<i class="icon-goback" ontouchend="appcan.window.open('index','wgtroot://coupon/main.html',2,0)"></i>
+		<div class="title">优惠券详情</div>
+	</header>
+	
+	<div id="content">
+    </div>
+	
+    <footer>
+         <script src='../js/application.footer.js'></script>            
+    </footer>
+</body>
+<script>
+appcan.ready(function(){ 
+   with(baoapp.helper)
+   {
+       var coupon_id = appcan.locStorage.getVal('coupon_id')||0;
+       if(coupon_id == 0){
+           resourceError();
+       }
+       var postdata = { 'coupon_id':coupon_id };
+       var url = createUrl('Coupon', 'detail', postdata);
+       var height = baoapp.helper.adapt();
+       frameOpen('content','../loading.html',height,function(){
+            ayscLoad(url,'','GET','json',function(data){
+                if(CONST.BAO_REQUEST_SUCCESS==data.status){
+                    appcan.locStorage.setVal('data',data);
+                    frameOpen('content','detail_content.html',height);
+                }else{
+                    frameOpen('content','../loading_fail.html',height);
+                }
+                });
+       });
+       
+      
+   };
+});
+
+
+
+</script>

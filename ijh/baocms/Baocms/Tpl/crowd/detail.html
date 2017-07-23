@@ -1,0 +1,50 @@
+<include  file='public:header'/>
+<div class="mainBt">
+    <ul>
+        <li class="li1">商城</li>
+        <li class="li2">商家产品</li>
+        <li class="li2 li3">众筹管理</li>
+    </ul>
+</div>
+<div class="main-jsgl main-sc">
+    <p class="attention"><span>注意：</span>商家必须入住了商城才能发布产品</p>
+    <div class="jsglNr">
+        <div class="selectNr" style="margin-top: 0px; border-top:none;">
+        </div>
+        <form  target="baocms_frm" method="post">
+            <div class="tableBox">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td width="50">ID</td>
+                        <td width="150">图片</td>
+                        <td width="100">价格</td>
+                        <td width="100">限额</td>
+                        <td width="200">内容</td>
+                        <td width="70">运费</td>
+                        <td width="100">发货时间</td>
+                        <td width="100">已筹数</td>
+                        <td width="70">产品类型</td>
+                        <td width="150">操作</td>
+                    </tr>
+                    <foreach name="meals" item="var">
+                        <tr>
+                            <td><{$var.type_id}></td>
+                            <td><img src="__ROOT__/attachs/<{$var.img}>"  style="width: 160px; margin: 0px auto;" /></td>
+                            <td><{$var['price']/100}></td>
+                            <td><if condition="$var.max_num EQ 0">无限额<else/><{$var.max_num}>份</if></td>
+                            <td><{$var.content}></td>
+                            <td><if condition="$var.yunfei EQ 0">免运费<else/><{$var['yunfei']/100}></if></td>
+                            <td><{$var.fahuo}></td>
+                            <td><{$var.have_num}></td>
+                              <td><eq name="var.choujiang" value="0">普通<else/>抽奖类</eq></td>
+                            <td>
+                                <{:BA('crowd/lists',array("type_id"=>$var["type_id"]),'参与支持者','','remberBtn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+        </form>
+    </div>
+    <include file='public:footer'/>

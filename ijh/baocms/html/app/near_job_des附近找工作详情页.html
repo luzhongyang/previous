@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>附近工作</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".buy-bar span").each(function(e){
+			$(this).click(function(){
+				$(".buy-bar span").removeClass("on");
+				$(this).addClass("on");
+				$(".work").each(function(s){
+					if(e==s){
+						$(".work").hide();
+						$(this).show();
+					}
+				});
+			});
+		});
+	});
+
+</script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">详情介绍</div>
+		<i class="icon-menu"></i>
+	</header>
+	<!-- 筛选TAB -->
+	<div class="buy-bar">
+			<span class="buy-bar-span on">职位详情</span>
+			<span class="buy-bar-span2">公司简介</span>
+	</div>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+			<!-- 列表 -->
+			<div class="work">
+				<div>
+					<div class="work-here work-post"><b>职位名称：销售经理</b></div>
+		            <div class="work-message">
+	                    <p>宽大摄影</p>
+	                    <p>蜀山区潜山路496号新景花园16栋804室</p>
+	                    <p>薪资情况：5000-10000元/月</p>
+	                    <p>招聘人数：3</p>
+	                    <p>发布时间：2015-06-14</p>
+		            </div>
+	            </div>
+	            <div>
+					<div class="work-here"><b>职位描述：</b></div>
+		            <div class="work-message work-font">
+	                    <p>岗位要求：</p>
+	                    <p>销售经验8年以上，业绩良好，渠道资源丰富，能够独当一面，能够担负起区域、大区、或做过全国市场的人员。5年以上销售一线工作经验，对市场营销有深刻认知，有良好的市场开拓能力及判断能力，以及极强的组织管理能力。</p>
+	                    <p>工作时间：早九晚五</p>
+		            </div>
+	            </div>
+            </div>
+            <div class="work" style="display:none;">
+				<div>
+					<div class="work-here work-post"><b>公司名称：宽大摄影</b></div>
+		            <div class="work-message">
+	                    <p>联系电话：400-64278110</p>
+	                    <p>公司地点：蜀山区潜山路496号新景花园16栋864室</p>
+		            </div>
+		            <div class="work-message">
+                    	<a href="#" class="work-go">到这去<img src="img/tp26.png" class="work-img"></a>	     
+                    	<a href="#" class="work-phone">0551-3657556<img src="img/tp27.png" class="work-img2"></a>        
+		            </div>
+	            </div>
+	            <div>
+					<div class="work-here"><b>公司描述：</b></div>
+		            <div class="work-message work-font">
+	                    <p>维硕科技有限公司于2004年在苏州市新区工业区投资成立，母公司和硕联合科技股份有限公司为台湾华硕电脑股份有限公司之关系企业，目前和硕集团在新区已注册三家公司，构成“和联/永硕华东营运中心”，总投资6.27亿美元，包括昌硕科技（上海）有限公司，主要从事笔记本电脑、手机等电子信息产品的研发与制造，是全球五大笔记本电脑生产企业之一；钧硕电子科技（上海）有限公司，主要从事电子信息产品相关精密模具的设计与制造；华谦商贸（上海）有限公司，主要从事IT相关产品的内销服务。现苏州开设分公司成立。</p>
+		            </div>
+	            </div>
+            </div>
+		</div>
+	</div>
+</body>
+</html>

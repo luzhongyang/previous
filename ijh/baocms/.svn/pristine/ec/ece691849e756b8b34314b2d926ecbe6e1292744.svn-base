@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-微信</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">微信营销</div>
+    <i class="right"><a href="#">+添加关键字</a></i>
+</header>
+
+<section>
+    <script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p class="sh_weinxin_prompt">如果您申请的是订阅号就一定要选择订阅号，因为服务号的功能一般订阅号都是没有办法使用的！您需要在https://weixin.qq.com注册</p>
+        <p class="sh_weinxin_prompt" style="display:none;">必须是服务号才能使用微信自定义菜单！暂时只支持URL连接</p>
+        <p class="sh_weinxin_prompt" style="display:none;">关键字必须要开通微信合作和配置好微信内容才能生效</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    
+    <script>
+		$(function(){
+			$(".sh_infor_tab li").each(function(e){
+				$(this).click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".sh_infor_tab_box").each(function(i){
+						if(e==i){
+							$(".sh_infor_tab_box").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+					});
+					
+					$(".sh_weinxin_prompt").each(function(a){
+						if(e==a){
+							$(".sh_weinxin_prompt").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+					});
+				});
+			});
+		});
+    </script>
+    <div class="sh_infor_tab mb10">
+        <ul>
+            <li class="on">绑定公众账号</li>
+            <li>自定义菜单</li>
+            <li>关键字回复</li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="sh_infor_tab_box" style="display:none;">
+        <div class="sh_buy_fabu">
+            <div class="sh_list_public_box">
+                <ul>
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>URL(服务器地址):</span><input type="text" value=""></div> 
+                    </li>
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>TOKEN</span><input type="text" value=""></div> 
+                    </li>  
+                    <li class="list_box">
+                        <script>
+						$(function(){
+							$(".sh_buy_fabu_check .right label").click(function(){
+								if($(this).hasClass("on")){
+									$(this).removeClass("on");
+								}
+								else{
+									$(this).addClass("on");
+								}
+							});
+						});
+					</script>
+                        <div class="sh_buy_fabu_check">
+                            <div class="fl left">服务号</div>
+                            <div class="fr right"><label><input type="checkbox"></label></div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="list_box">
+                        <div class="sh_buy_fabu_check">
+                            <div class="fl left">订阅号</div>
+                            <div class="fr right"><label><input type="checkbox"></label></div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>AppID(应用ID)</span><input type="text" value=""></div> 
+                    </li>
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>AppSecret(应用密钥)</span><input type="text" value=""></div> 
+                    </li> 
+                    <script>
+					$(function(){
+						$(function(){
+							$(".sh_input_public_pull").click(function(){
+								if($(this).find(".sh_input_public_pull_down").css("display")=='block'){
+									$(".sh_input_public_pull_down").hide();
+									$(this).find(".sh_input_public_pull_down").hide();
+								}
+								else{
+									$(".sh_input_public_pull_down").hide()
+									$(this).find(".sh_input_public_pull_down").show();
+								}
+								if($(this).find("i").hasClass("on")){
+									$(".sh_input_public_pull").find("i").removeClass("on");
+									$(this).find("i").removeClass("on");
+								}
+								else{
+									$(".sh_input_public_pull").find("i").removeClass("on");
+									$(this).find("i").addClass("on");
+								}
+							});
+							$(".sh_input_public_pull_down li").click(function(){
+								$(this).parent().find("li").removeClass("on");
+								$(this).addClass("on");
+								$(this).parents(".sh_input_public_pull").find("input").val($(this).find("a").html());
+							});
+						});
+					});
+				</script>
+                    <li class="list_box mb10">
+                        <div class="sh_input_public sh_input_public_pull"><span></span><input type="text" value="关注时回复内容形式"><i></i>
+                            <div class="sh_input_public_pull_down">
+                                <ul>
+                                    <li><a href="#">文字1</a></li>
+                                    <li><a href="#">文字2</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li> 
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>回复内容：</span></div> 
+                    </li>
+                    <li class="list_box mb10">
+                        <div class="sh_textarea_public"><textarea></textarea></div> 
+                    </li>
+                </ul>
+            </div>
+            <div class="sh_login_nr"><input class="btn mt30" type="button" value="保 存"></div>
+        </div>
+    </div>
+    
+    <div class="sh_infor_tab_box" style="display:none;">
+        <div class="sh_buy_fabu">
+            <div class="sh_list_public_box">
+                <ul>
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>BUTTON1 关于</span></div> 
+                    </li>
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>子菜单1</span><input type="text" value="手机菜单  http://www.baocms.cn/mobile"></div> 
+                    </li>
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>子菜单2</span><input type="text" value="手机菜单  http://www.baocms.cn/mobile"></div> 
+                    </li>
+                    <li class="list_box mb10">
+                        <div class="sh_input_public"><span>子菜单3</span><input type="text" value="手机菜单  http://www.baocms.cn/mobile"></div> 
+                    </li>
+                    
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>BUTTON2 功能</span></div> 
+                    </li>
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>子菜单1</span><input type="text" value="手机菜单  http://www.baocms.cn/mobile"></div> 
+                    </li>
+                    <li class="list_box">
+                        <div class="sh_input_public"><span>子菜单2</span><input type="text" value="手机菜单  http://www.baocms.cn/mobile"></div> 
+                    </li>
+                    <li class="list_box mb10">
+                        <div class="sh_input_public"><span>子菜单3</span><input type="text" value="手机菜单  http://www.baocms.cn/mobile"></div> 
+                    </li> 
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sh_infor_tab_box">
+        <div class="sh_buy_fabu">
+            <div class="sh_list_public_box">
+                <ul>
+                    <li class="list_box mb10">
+                        <div>
+                            <div class="sh_micro_wz" style="border-top:none 0px;">
+                                <p><span class="mr20">关键字：<span class="black3">1001</span></span><span class="mr20"><span class="black3">类型：text</span></span></p>
+                                <p>内容:你说的是1001么你说的是1001么</p>
+                            </div>
+                            <div class="btn_box"><a class="btn" href="#">编辑</a><a class="btn" href="#">删除</a></div>
+                        </div>
+                    </li>
+                    <li class="list_box mb10">
+                        <div>
+                            <div class="sh_micro_wz" style="border-top:none 0px;">
+                                <p><span class="mr20">关键字：<span class="black3">1001</span></span><span class="mr20"><span class="black3">类型：text</span></span></p>
+                                <p>内容:你说的是1001么你说的是1001么</p>
+                            </div>
+                            <div class="btn_box"><a class="btn" href="#">编辑</a><a class="btn" href="#">删除</a></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

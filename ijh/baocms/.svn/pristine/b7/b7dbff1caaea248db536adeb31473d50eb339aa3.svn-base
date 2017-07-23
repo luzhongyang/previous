@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>需求发布</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body id="life_service">
+	<header>
+		<a href=""><i class="icon-goback"></i></a>
+		<div class="title">意见反馈</div>
+		<a href=""><i class="icon-menu" id="ico_1"></i></a>
+	</header>
+	<div class="page-center-box">
+		<div class="scroll">
+			<div class="idea-form" style="margin-bottom:0.5rem;">
+				<ul>
+					<li>主题</li>
+					<li><textarea name="" class="idea-text"></textarea></li>
+					<li>留言</li>
+					<li><textarea name="" placeholder="在这里留下您的意见吧..." class="idea-text2"></textarea></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<footer class="idea-input">
+		<input type="submit" value="提 交" class="idea-sub">
+		<input type="button" value="重 置" class="idea-but">
+	</footer>
+       
+</body>
+</html>

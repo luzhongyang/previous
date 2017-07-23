@@ -1,0 +1,2854 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>抢购首页</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery.flexslider-min.js"></script>
+<script src="../js/js.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.sy_flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+			/*slideshow: false,*/
+			manualControlEvent:"hover",
+        });
+		$('.syfq_flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });
+		$('.hottj_flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false
+        });
+		
+    });//首页轮播js
+</script>
+<script>
+$(function () {
+	$('#selectBoxInput').click(function(){
+		$('.selectList').toggle(300);
+	});
+	$(".selectList li a").click(function () {
+		$("#selectBoxInput").html($(this).html());
+		$('.selectList').hide();
+	});//头部搜索框j
+});
+$(function () {
+	$('.sy_flsxAll').click(function(){
+		$('.sy_flsxAllList').toggle();
+	});
+});
+$(function () {
+	$('.sy_hottjTab li').each(function(e){
+		$(this).hover(function(){
+			$(".sy_hottjTab li").removeClass("on");
+			$(this).addClass("on");
+			$(".sy_hottj").each(function(i){
+				if(e==i){
+					$(".sy_hottj").hide();
+					$(this).show();
+				}
+				else{
+					$(this).hide();
+				}
+			});
+		});
+	});
+});//首页js
+</script>
+</head>
+
+<body>
+<div class="topOne">
+    <div class="nr">
+        <div class="left">您好，欢迎访问BAOCMS<a href="#">登陆</a>|<a href="#">注册</a>
+            <div class="topSm"> <span class="topSmt"><em>&nbsp;</em>手机CMS</span>
+                <div class="topSmnr"><img src="../sjimages/login_wx_03.jpg" width="90" height="90" />
+                    <p>扫描下载客户端</p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul>
+            	<li class="liOne"><a class="liOneA" href="#">个人中心<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">抢购管理</a></li>
+                            <li><a href="#">活动管理</a></li>
+                            <li><a href="#">服务管理</a></li>
+                            <li><a href="#">购物管理</a></li>
+                            <li><a href="#">外卖管理</a></li>
+                            <li><a href="#">订座信息</a></li>
+                            <li><a href="#">同城管理</a></li>
+                            <li><a href="#">优惠券管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">我是商家<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">商家登陆</a></li>
+                            <li><a href="#">微信营销</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">快捷导航<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">餐饮频道</a></li>
+                            <li><a href="#">生活资讯</a></li>
+                            <li><a href="#">活动</a></li>
+                            <li><a href="#">积分商城</a></li>
+                            <li><a href="#">购物</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="topTwo">
+    <div class="left">
+        <h1><a href="#"><img src="../sjimages/logo_03.png" width="214" height="53" /></a></h1>
+        <div class="changeCity"> 合肥 <a href="#" class="change">[切换城市]</a> </div>
+    </div>
+    <div class="left center">
+        <div class="searchBox">
+            <div class="selectBox"> <span class="select"  id="selectBoxInput">商家</span>
+                <div  class="selectList">
+                    <ul>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                        <li><a href="#">商家商家</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" class="text" value="输入您要搜索的内容" onclick="if(value==defaultValue){value='';this.style.color='#000'}"  onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+            <input type="button" class="submit" value="搜索" />
+        </div>
+        <div class="hotSearch">热门搜索：<a href="#">美食</a><a href="#">酒店</a><a href="#">酒店</a><a href="#">电影</a><a href="#">家政</a><a href="#">洗车</a></div>
+    </div>
+    <div class="right topTwo_b">
+    	<div class="protect">
+            <ul>
+              <li><em>&nbsp;</em><a href="#">随时退</a></li>
+              <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+              <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="nav">
+    <div class="navList">
+    	<div class="navListBg">&nbsp;</div>
+        <ul>
+            <li class="navListAll"><span class="navListAllt">全部抢购分类</span>
+                <!--<div class="shadowy navAll">此处显示  class "navAll" 的内容</div>-->
+            </li>
+            <li class="navLi"><a class="navA  on" href="#">首页</a></li>
+            <li class="navLi"><a class="navA" href="#">身边抢购</a></li>
+            <li class="navLi"><a class="navA" href="#">活动</a></li>
+            <li class="navLi"><a class="navA" href="#">生活服务</a></li>
+            <li class="navLi"><a class="navA" href="#">同城优购</a></li>
+            <li class="navLi"><a class="navA" href="#">外卖</a></li>
+            <li class="navLi"><a class="navA" href="#">订座</a></li>
+            <li class="navLi"><a class="navA" href="#">同城信息</a></li>
+            <li class="navLi"><a class="navA" href="#">优惠券</a></li>
+            <!--<li class="navLi2"><a class="navA" href="#">更多<em></em></a>
+                <div class="indxLi">
+                    <ul>
+                        <li><a href="#">装修&amp;服务</a></li>
+                        <li><a href="#">婚庆&amp;酒店</a></li>
+                        <li><a href="#">家政&amp;服务</a></li>
+                        <li><a href="#">汽车&amp;驾校</a></li>
+                        <li><a href="#">教育培训</a></li>
+                        <li><a href="#">母婴&amp;亲子</a></li>
+                        <li><a href="#">丽人&amp;保养</a></li>
+                        <li><a href="#">餐饮&amp;娱乐</a></li>
+                    </ul>
+                </div>
+            </li>-->
+        </ul>
+    </div>
+</div>
+<div class="content" id="index-gun">
+    <div class="sy_content1">
+        <div class="left sy_content1_l">
+        	<div class="menu_fllist2">
+                <div class="item2 bo">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">美食</a></div>
+                        <div class="right"><a href="">火锅</a><a href="">自助餐</a><a href="">川菜</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">美食</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">娱乐</a></div>
+                        <div class="right"><a href="">KTV</a><a href="">足疗按</a><a href="">洗浴</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">娱乐</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">酒店</a></div>
+                        <div class="right"><a href="">七天</a><a href="">格力豪泰</a><a href="">锦江</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">酒店</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">电影</a></div>
+                        <div class="right"><a href="">电子通票</a><a href="">选座</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">电影</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">购物</a></div>
+                        <div class="right"><a href="">超市</a><a href="">商场卡</a><a href="">水果</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">购物</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">丽人</a></div>
+                        <div class="right"><a href="">美发</a><a href="">美甲</a><a href="">驾校</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">丽人</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">结婚</a></div>
+                        <div class="right"><a href="">婚庆公司</a><a href="">新娘跟妆</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">结婚</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">生活服务</a></div>
+                        <div class="right"><a href="">汽车服务</a><a href="">装修服务</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">生活服务</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="item2">
+                    <h3>
+                        <div class="left"><span>&nbsp;</span><a class="menu_flt" href="#">旅游</a></div>
+                        <div class="right"><a href="">国内游</a><a href="">出境游</a><a href="">周边游</a>&gt;</div>
+                    </h3>
+                    <div class="menu_flklist2">
+                        <div class="menu_fl2t">旅游</div>
+                        <div class="menu_fl2nr">
+                            <ul>
+                                <li class="menu_fl2nrli">
+                                    <ul>
+                                        <li><a href="#">代金券</a></li>
+                                        <li><a href="#">火锅</a></li>
+                                        <li><a href="#">自助餐</a></li>
+                                        <li><a href="#">聚餐宴请</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+				$('.menu_fllist2 > .item2').hover(function(){
+					var eq = $('.menu_fllist2 > .item2').index(this),				//获取当前滑过是第几个元素
+						h = $('.menu_fllist2').offset().top,						//获取当前下拉菜单距离窗口多少像素
+						s = $(window).scrollTop(),									//获取游览器滚动了多少高度
+						i = $(this).offset().top,									//当前元素滑过距离窗口多少像素
+						item = $(this).children('.menu_flklist2').height(),				//下拉菜单子类内容容器的高度
+						sort = $('.menu_fllist2').height();						//父类分类列表容器的高度
+					
+					if ( item > sort ){												//如果子类的高度小于父类的高度
+						if ( eq == 0 ){
+							$(this).children('.menu_flklist2').css('top', (i-h));
+						} else {
+							$(this).children('.menu_flklist2').css('top', (i-h)+1);
+						}
+					} else {
+						if ( s > h ) {												//判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+							if ( i-s > 0 ){											//则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+								$(this).children('.menu_flklist2').css('top', (s-h)+2 );
+							} else {
+								$(this).children('.menu_flklist2').css('top', (s-h)-(-(i-s))+2 );
+							}
+						} else {
+							$(this).children('.menu_flklist2').css('top', 0 );
+						}
+					}	
+			
+					$(this).addClass('on');
+					$(this).children('.menu_flklist2').css('display','block');
+				},function(){
+					$(this).removeClass('on');
+					$(this).children('.menu_flklist2').css('display','none');
+				});//导航菜单js
+			</script>
+        </div>
+        <div class="center sy_content1_c">
+            <div class="sy_flsx">
+                <ul>
+                    <li>
+                        <div class="left sy_flsx_l"><span class="sy_flsxt">热门抢购</span>
+                        	<a href="#">电影</a>
+                            <a href="#">自助餐</a>
+                            <a href="#">KTV</a>
+                            <a href="#">火锅</a>
+                            <a href="#">蛋糕</a>
+                            <a href="#">酒店</a>
+                            <a href="#">小吃</a>
+                            <a href="#">快餐</a>
+                            <a href="#">西餐</a>
+                            <a href="#">川菜</a>
+                            <a href="#">家居</a>
+                            <a href="#">家纺</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="left sy_flsx_l"><span class="sy_flsxt">全部区域</span>
+                        	<a href="#">蜀山区</a>
+                            <a href="#">庐阳区</a>
+                            <a href="#">瑶海区</a>
+                            <a href="#">包河区</a>
+                            <a href="#">经开区</a>
+                            <a href="#">政务区</a>
+                            <a href="#">滨湖区</a>
+                            <a href="#">新站区</a>
+                            <a href="#">高新区</a>
+                            <a href="#">巢湖市</a>
+                            <a href="#">肥东县</a>
+                        </div>
+                        <div class="right"><span class="sy_flsxAll">全部<em>&nbsp;</em></span></div>
+                        <div class="sy_flsxAllList">
+                        	<a href="#">蜀山区</a>
+                            <a href="#">庐阳区</a>
+                            <a href="#">瑶海区</a>
+                            <a href="#">包河区</a>
+                            <a href="#">经开区</a>
+                            <a href="#">政务区</a>
+                            <a href="#">滨湖区</a>
+                            <a href="#">新站区</a>
+                            <a href="#">高新区</a>
+                            <a href="#">巢湖市</a>
+                            <a href="#">肥东县</a>
+                            <a href="#">蜀山区</a>
+                            <a href="#">庐阳区</a>
+                            <a href="#">瑶海区</a>
+                            <a href="#">包河区</a>
+                            <a href="#">经开区</a>
+                            <a href="#">政务区</a>
+                            <a href="#">滨湖区</a>
+                            <a href="#">新站区</a>
+                            <a href="#">高新区</a>
+                            <a href="#">巢湖市</a>
+                            <a href="#">肥东县</a>
+                       </div>
+                    </li>
+                    <li>
+                        <div class="left sy_flsx_l"><span class="sy_flsxt">热门商圈</span>
+                        	<a href="#">步行街</a>
+                            <a href="#">之心城</a>
+                            <a href="#">白水坝</a>
+                            <a href="#">万达广场</a>
+                            <a href="#">1912街区</a>
+                            <a href="#">长江西路</a>
+                            <a href="#">华联大铺头</a>
+                            <a href="#">大唐国际乐购</a>
+                            <a href="#">贵池路美食街</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="sy_hotgz">
+                <div class="sy_hotgzT">热门关注</div>
+                <div class="sy_hotgzNr">
+                	<div class="sy_flexslider">
+                        <ul class="slides">
+                            <li class="sy_hotgzLi">
+                            	<ul>
+                                	<li><a target="_blank" href="#"><img src="../img/sy_c1_08.jpg" /></a></li>
+                                    <li><a target="_blank" href="#"><img src="../img/sy_c1_03.jpg" /></a></li>
+                                    <li><a target="_blank" href="#"><img src="../img/sy_c1_05.jpg" /></a></li>
+                                </ul>
+                            </li>
+                            <li class="sy_hotgzLi">
+                            	<ul>
+                                	<li><a target="_blank" href="#"><img src="../img/sy_c1_08.jpg" /></a></li>
+                                    <li><a target="_blank" href="#"><img src="../img/sy_c1_08.jpg" /></a></li>
+                                    <li><a target="_blank" href="#"><img src="../img/sy_c1_05.jpg" /></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right sy_content1_r">
+            <div class="sy_hotfq">
+            	<div class="syfq_flexslider">
+                    <ul class="slides">
+                        <li class="sy_hotgzLi"><a target="_blank" href="#"><img src="../img/sy_c1_09.jpg" /></a></li>
+                        <li class="sy_hotgzLi"><a target="_blank" href="#"><img src="../img/sy_c1_09.jpg" /></a></li>
+                    </ul>
+                </div>
+                <div class="sy_hotfqT"><img src="../img/hott_03.jpg" /></div>
+            </div>
+            <div class="sy_c1wx">
+                <div class="left"><img src="../sjimages/login_wx_03.jpg" width="100" height="103" /></div>
+                <div class="right"><p>扫一扫关注微信</p><img src="../img/sywx_03.png" width="64" height="45" /></div>
+            </div>
+        </div>
+    </div>
+    <div class="sy_content2">
+    	<div class="sy_hottjTab">
+    	    <ul>
+    	        <li class="on">今日新单</li>
+                <li>最热抢购</li>
+	        </ul>
+    	</div>
+    	<div class="sy_hottj" style="display:block;">
+            <div class="hottj_flexslider">
+                <ul class="slides">
+                    <li class="sy_hotgzLi">
+                        <ul>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_03.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_05.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_07.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_09.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_11.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sy_hotgzLi">
+                        <ul>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_03.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_03.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_07.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_09.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_11.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sy_hottj">
+            <div class="hottj_flexslider">
+                <ul class="slides">
+                    <li class="sy_hotgzLi">
+                        <ul>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_05.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_05.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_07.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_09.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_11.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sy_hotgzLi">
+                        <ul>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_07.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_05.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_07.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_09.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                            <li>
+                                <div class="sy_hottjList"><a target="_blank" href="#"><img src="../img/syc2_11.jpg" />
+                                	<p class="sy_hottjbt">【2店通用】东来顺</p>
+                                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                                    <p class="sy_hottjJg"><span class="left">¥78<del>¥100</del></span><span class="right">已售14595</span></p>
+                                </a></div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="radius3 sy_FloorBt" id="one-lou">           <!-- 增加id “one-lou” 以下同是 -->
+        <div class="left sy_FloorBtz"><span>1F</span><span class="sy_FloorBtl">美食</span></div>
+        <div class="center">
+        	<a href="#">火锅</a>
+            <a href="#">自助餐</a>
+            <a href="#">午市套餐</a>
+            <a href="#">下午茶</a>
+            <a href="#">日韩料理</a>
+            <a href="#">江浙菜</a>
+            <a href="#">西餐</a>
+            <a href="#">蛋糕</a>
+            <a href="#">甜品饮料</a>
+            <a href="#">海鲜</a>
+            <a href="#">小吃</a>
+            <a href="#">快餐汤/粥/炖菜</a>
+        </div>
+		<div class="right"><a href="#">查看全部>></a></div>
+    </div>
+    <div class="sy_FloorNr">
+        <ul>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li> 
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="radius3 sy_FloorBt" id="two-lou">       <!--  增加ID "two-lou" -->
+        <div class="left sy_FloorBtz"><span>2F</span><span class="sy_FloorBtl">娱乐</span></div>
+        <div class="center">
+        	<a href="#">KTV</a>
+            <a href="#">温泉</a>
+            <a href="#">滑雪公园/游乐园</a>
+            <a href="#">景点/郊游</a>
+            <a href="#">密室逃脱</a>
+            <a href="#">桌游/电玩/网吧</a>
+            <a href="#">酒吧</a>
+            <a href="#">足疗按摩</a>
+            <a href="#">洗浴/汗蒸</a>
+            <a href="#">电影</a>
+            <a href="#">私人影院</a>
+        </div>
+		<div class="right"><a href="#">查看全部>></a></div>
+    </div>
+    <div class="sy_FloorNr">
+        <ul>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li> 
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="radius3 sy_FloorBt" id="three-lou">           <!--  增加ID "three-lou" -->
+        <div class="left sy_FloorBtz"><span>3F</span><span class="sy_FloorBtl">酒店</span></div>
+        <div class="center">
+        	<a href="#">经济/客栈</a>
+            <a href="#">三星/舒适</a>
+            <a href="#">四星/精品</a>
+            <a href="#">五星/豪华</a>
+        </div>
+		<div class="right"><a href="#">查看全部>></a></div>
+    </div>
+    <div class="sy_FloorNr">
+        <ul>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li> 
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="radius3 sy_FloorBt" id="four-lou">
+        <div class="left sy_FloorBtz"><span>4F</span><span class="sy_FloorBtl">电影</span></div>
+        <div class="center">
+        	<a href="#">找电影院</a>
+            <a href="#">热映电影</a>
+            <a href="#">电影团购</a>
+        </div>
+		<div class="right"><a href="#">查看全部>></a></div>
+    </div>
+    <div class="sy_FloorNr">
+        <ul>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li> 
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="radius3 sy_FloorBt" id="five-lou">
+        <div class="left sy_FloorBtz"><span>5F</span><span class="sy_FloorBtl">购物</span></div>
+        <div class="center">
+        	<a href="#">服饰鞋包</a>
+            <a href="#">生活家居</a>
+            <a href="#">食品饮料</a>
+            <a href="#">母婴用品</a>
+            <a href="#">数码家电</a>
+            <a href="#">个护化妆</a>
+            <a href="#">钟表</a>
+            <a href="#">眼镜</a>
+            <a href="#">水果</a>
+            <a href="#">生鲜</a>
+            <a href="#">影音</a>
+            <a href="#">书刊</a>
+        </div>
+		<div class="right"><a href="#">查看全部>></a></div>
+    </div>
+    <div class="sy_FloorNr">
+        <ul>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li> 
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="radius3 sy_FloorBt" id="six-lou">
+        <div class="left sy_FloorBtz"><span>6F</span><span class="sy_FloorBtl">丽人</span></div>
+        <div class="center">
+        	<a href="#">美发</a>
+            <a href="#">美甲</a>
+            <a href="#">美容/SPA</a>
+            <a href="#">个性写真</a>
+            <a href="#">瘦身纤体</a>
+            <a href="#">瑜珈/舞蹈</a>
+            <a href="#">其他</a>
+        </div>
+		<div class="right"><a href="#">查看全部>></a></div>
+    </div>
+    <div class="sy_FloorNr">
+        <ul>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li> 
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="radius3 sy_FloorBt" id="seven-lou">
+        <div class="left sy_FloorBtz"><span>7F</span><span class="sy_FloorBtl">结婚</span></div>
+        <div class="center">
+        	<a href="#">婚纱摄影</a>
+            <a href="#">旅游婚纱照</a>
+            <a href="#">婚纱礼服</a>
+            <a href="#">成衣定制</a>
+            <a href="#">婚庆公司</a>
+            <a href="#">婚戒首饰</a>
+            <a href="#">婚礼小商品</a>
+            <a href="#">彩妆造型</a>
+            <a href="#">司仪主持</a>
+            <a href="#">婚礼跟拍</a>
+            <a href="#">其他结婚</a>
+        </div>
+		<div class="right"><a href="#">查看全部>></a></div>
+    </div>
+    <div class="sy_FloorNr">
+        <ul>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li> 
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="radius3 sy_FloorBt" id="eight-lou">
+        <div class="left sy_FloorBtz"><span>8F</span><span class="sy_FloorBtl">生活</span></div>
+        <div class="center">
+        	<a href="#">汽车服务</a>
+            <a href="#">体检</a>
+            <a href="#">保健</a>
+            <a href="#">培训课程</a>
+            <a href="#">鲜花婚庆</a>
+            <a href="#">照片冲印</a>
+            <a href="#">家具建材</a>
+            <a href="#">装修设计</a>
+            <a href="#">婚纱摄影</a>
+            <a href="#">个性写真</a>
+            <a href="#">儿童摄影</a>
+            <a href="#">母婴亲子</a>
+        </div>
+		<div class="right"><a href="#">查看全部>></a></div>
+    </div>
+    <div class="sy_FloorNr">
+        <ul>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li> 
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="radius3 sy_FloorBt" id="nine-lou">
+        <div class="left sy_FloorBtz"><span>9F</span><span class="sy_FloorBtl">旅游</span></div>
+        <div class="center">
+        	<a href="#">景点门票</a>
+            <a href="#">当地/周边游</a>
+            <a href="#">国内游</a>
+            <a href="#">出境游</a>
+        </div>
+		<div class="right"><a href="#">查看全部>></a></div>
+    </div>
+    <div class="sy_FloorNr">
+        <ul>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li> 
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="sy_FloorLi">
+                <div class="sy_sjcpLi">
+                	<img src="../img/sjcp_03.jpg" />
+                    <p class="sy_hottjbt">【2店通用】东来顺</p>
+                    <p class="sy_hottjp">仅售78元！价值100元的代金券 可叠</p>
+                    <hr style=" border:none 0px; border-bottom: 1px solid #e0e0e0; margin-top:6px;" />
+                    <p class="sy_hottjJg sy_sjcpJg"><span class="left">¥78<del>¥100</del></span><span class="right"><a class="sy_hottjJd" href="">立即进店</a></span></p>
+                    <div class="sy_sjcpBq"><span class="sy_sjcpBq1">免预约</span><span class="sy_sjcpBq2">多套餐</span><span class="sy_sjcpBq3">代金券</span></div>
+                    <div class="sy_sjcpLiDw">
+                        <div class="sy_sjcpDwBox">
+                        	<div class="sy_sjcpDwNr">
+                            	<p>此商家已有<span>20</span>个粉丝</p>
+                                <div class="sy_sjcpwx"><img src="../sjimages/login_wx_03.jpg" width="135" height="139" /></div>
+                                <div class="sy_sjcpCz">
+                                	<a class="radius3 sy_sjcpCzA" href="">商家<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">团购<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href="">门店<em>&nbsp;</em></a>
+                                    <a class="radius3 sy_sjcpCzA" href=""><em>&nbsp;</em></a>
+                                </div>
+                            </div>
+                            <div class="sy_sjcpDwBg">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- 改动，加了a链接 开始-->
+<div class="indexpop" id="fox-food">
+    <ul>
+        <li><a href="#one-lou" class="cur"><div class="floorico">&nbsp;</div>美食</a></li>
+        <li><a href="#two-lou"><div class="floorico">&nbsp;</div>娱乐</a></li>
+        <li><a href="#three-lou"><div class="floorico">&nbsp;</div>酒店</a></li>
+        <li><a href="#four-lou"><div class="floorico">&nbsp;</div>电影</a></li>
+        <li><a href="#five-lou"><div class="floorico">&nbsp;</div>购物</a></li>
+        <li><a href="#six-lou"><div class="floorico">&nbsp;</div>丽人</a></li>
+        <li><a href="#seven-lou"><div class="floorico">&nbsp;</div>结婚</a></li>
+        <li><a href="#eight-lou"><div class="floorico">&nbsp;</div>生活</a></li>
+        <li><a href="#nine-lou"><div class="floorico">&nbsp;</div>旅游</a></li>
+</div>
+<!-- 改动，加了a链接 结束-->
+
+<!-- <div class="indexpop">
+    <ul>
+        <li><code rel="sy_FloorBt:nth-child(2n+1)"><div class="floorico">&nbsp;</div>美食</code></li>
+        <li><code rel="sy_FloorBt:nth-child(4n+1)"><div class="floorico">&nbsp;</div>娱乐</code></li>
+        <li><code rel="sy_FloorBt:nth-child(6n+1)"><div class="floorico">&nbsp;</div>酒店</code></li>
+        <li><code rel="sy_FloorBt:nth-child(8n+1)"><div class="floorico">&nbsp;</div>电影</code></li>
+        <li><code rel="sy_FloorBt:nth-child(10n+1)"><div class="floorico">&nbsp;</div>购物</code></li>
+        <li><code rel="sy_FloorBt:nth-child(12n+1)"><div class="floorico">&nbsp;</div>丽人</code></li>
+        <li><code rel="sy_FloorBt:nth-child(14n+1)"><div class="floorico">&nbsp;</div>结婚</code></li>
+        <li><code rel="sy_FloorBt:nth-child(16n+1)"><div class="floorico">&nbsp;</div>生活</code></li>
+        <li><code rel="sy_FloorBt:nth-child(18n+1)"><div class="floorico">&nbsp;</div>旅游</code></li>
+    </ul>
+    <script>
+		$(function () { 
+            if(document.all){
+			$('.indexpop ul li:nth-child(2) .floorico').css('background-position','center -63px')
+			$('.indexpop ul li:nth-child(3) .floorico').css('background-position','center -126px')
+			$('.indexpop ul li:nth-child(4) .floorico').css('background-position','center -196px')
+			$('.indexpop ul li:nth-child(5) .floorico').css('background-position','center -260px')
+			$('.indexpop ul li:nth-child(6) .floorico').css('background-position','center -328px')
+			$('.indexpop ul li:nth-child(7) .floorico').css('background-position','center -396px')
+			$('.indexpop ul li:nth-child(8) .floorico').css('background-position','center -463px')
+			$('.indexpop ul li:nth-child(9) .floorico').css('background-position','center -529px')
+			
+			
+			$('.menu_fllist2 .item2:nth-child(2) span').css('background-position','center -31px')
+			$('.menu_fllist2 .item2:nth-child(3) span').css('background-position','center -75px')
+			$('.menu_fllist2 .item2:nth-child(4) span').css('background-position','center -123px')
+			$('.menu_fllist2 .item2:nth-child(5) span').css('background-position','center -171px')
+			$('.menu_fllist2 .item2:nth-child(6) span').css('background-position','center -217px')
+			$('.menu_fllist2 .item2:nth-child(7) span').css('background-position','center -264px')
+			$('.menu_fllist2 .item2:nth-child(8) span').css('background-position','center -310px')
+			$('.menu_fllist2 .item2:nth-child(9) span').css('background-position','center -357px')
+			}
+        });
+	</script>
+    <script>
+        $(document).ready(function () {
+            var url = "/index/index.html";
+            $(".indexpop ul li").click(function () {
+                var _targetTop = $('.' + $(this).find('code').attr('rel')).offset().top;//获取位置
+                jQuery("html,body").animate({scrollTop: _targetTop}, 300);//跳转
+            });
+        });
+    </script>
+</div> -->
+<div class="footerOut">
+	<div class="foot_yqlj">
+    	友情链接：<a href="#">baocms演示站</a><a href="#">江湖家居系统</a><a href="#">一团网</a><a href="#">400电话</a>
+    </div>
+    <div class="footer">
+        <div class="footNav">
+            <div class="left topTwo_b">
+                <div class="tel">0551-63641901<p>周一至周日 9:00-22:00</p><p>客服电话 免长途费</p></div>
+                <div class="protect">
+                    <ul>
+                        <li><em>&nbsp;</em><a href="#">随时退</a></li>
+                        <li class="protectLi2"><em>&nbsp;</em><a href="#">不满意免单</a></li>
+                        <li class="protectLi3"><em>&nbsp;</em><a href="#">过期退款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="center">
+                <div class="footNavLi">
+                    <ul>
+                        <li class="footerLi">
+                        	<h3>公司信息</h3>
+                        	<ul>
+                            	<li><a href="#">关于我们</a></li>
+                                <li><a href="#">联系我们</a></li>
+                                <li><a href="#">人才招聘</a></li>
+                                <li><a href="#">免责声明</a></li>
+                            </ul>
+                        </li>
+                        <li class="footerLi">
+                        	<h3>商户合作</h3>
+                        	<ul>
+                            	<li><a href="#">商家入驻</a></li>
+                                <li><a href="#">广告合作</a></li>
+                                <li><a href="#">商家新闻</a></li>
+                            </ul>
+                        </li>
+                        <li class="footerLi">
+                        	<h3>用户帮助</h3>
+                        	<ul>
+                            	<li><a href="#">服务协议</a></li>
+                                <li><a href="#">退款承诺</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="copy">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有 php微信O2O生活宝门户系统</div>
+            </div>
+            <div class="right"><img src="../sjimages/login_wx_03.jpg" width="149" height="146" /><p>扫一扫关注BAOCMS</p></div>
+        </div>
+    </div>
+</div>
+<div class="topUp">
+    <ul>
+        <li class="topBack"><div class="topBackOn">回到<br />顶部</div></li>
+        <li class="topUpWx"><div class="topUpWxk"><img src="../sjimages/login_wx_03.jpg" /><p>扫描二维码关注微信</p></div></li>
+    </ul>
+</div>
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $(".topUp").show();
+				$(".indexpop").show();
+				
+            } else {
+                $(".topUp").hide();
+				$(".indexpop").hide();
+            }
+        });
+        $(".topUp").click(function () {
+            $("html,body").animate({scrollTop: 0}, 200);
+        });
+    });
+
+
+    $(document).ready(function(){
+    	$(window).scroll(function(){
+			var top = $(document).scrollTop();          //定义变量，获取滚动条的高度
+			var menu = $("#fox-food");                      //定义变量，抓取#menu
+			var items = $("#index-gun").find(".sy_FloorBt");    //定义变量，查找.item
+	
+			var curId = "";                             //定义变量，当前所在的楼层item #id 
+	
+			items.each(function(){
+				var m = $(this);                        //定义变量，获取当前类
+				var itemsTop = m.offset().top;        //定义变量，获取当前类的top偏移量
+				if(top > itemsTop-120){
+					curId = "#" + m.attr("id");
+				}else{
+					return false;
+				}
+			});
+	
+			//给相应的楼层设置cur,取消其他楼层的cur
+			var curLink = menu.find(".cur");
+			if( curId && curLink.attr("href") != curId ){
+				curLink.removeClass("cur");
+				menu.find( "[href=" + curId + "]" ).addClass("cur");
+			}
+			// console.log(top);
+		});
+	});
+</script>
+</body>
+</html>
+

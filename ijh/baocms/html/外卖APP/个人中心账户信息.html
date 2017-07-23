@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>个人中心账户信息</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="bellIco"><span class="num">0</span></a></i>
+    <div class="title">
+    	账户信息
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="accountInfor">
+        <ul class="form_list_box">
+            <li class="mineHome_list accountInfor_headX">
+            	<p class="fl">头像</p>
+                <div class="fr">
+                    <div class="img"><img src="" width="100" height="100"/></div>
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li class="mineHome_list last">
+            	<a href="#">
+            	<p class="fl">用户名</p>
+                <div class="fr"><span class="black9">franckver</span><em class="linkIco"></em></div>
+                <div class="clear"></div>
+                </a>
+            </li>
+            <li class="mineHome_list"><p class="black9">账户设置</p></li>
+            <li class="mineHome_list">
+            	<a href="#">
+            	<p class="fl"><em class="ico_8"></em>手机</p>
+                <div class="fr"><span class="black9">135****8638</span><em class="linkIco"></em></div>
+                <div class="clear"></div>
+                </a>
+            </li>
+            <li class="mineHome_list last">
+            	<a href="#">
+            	<p class="fl"><em class="ico_9"></em>微信</p>
+                <div class="fr"><span class="maincl">未绑定</span><em class="linkIco"></em></div>
+                <div class="clear"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico_1"></i>
+        <p>外卖</p>
+		</a>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico_2"></i>
+        <p>订单</p>
+		</a>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico_3"></i>
+        <p>发现</p>
+		</a>
+    </div>
+    <div class="list">
+       <a href="#">
+        <i class="ico_4"></i>
+        <p>我的</p>
+		</a>
+    </div>
+</footer>
+<div class="mask_box">
+    <div class="maskOne accountInfor_headX_mask">
+        <div class="title">上传图像</div>
+        <div class="cont">
+            <div class="btn_box">
+            	<label class="btn"><input type="file" />从手机相册选择</label>
+            	<label class="btn"><input type="button" />拍照</label>
+            </div>
+        </div>
+    </div>
+	<div class="mask_bg"></div>
+</div>
+<script>
+$(document).ready(function() {
+	$(".accountInfor_headX").click(function(){
+		$(".accountInfor_headX_mask").show();
+		$(".accountInfor_headX_mask").parent().find(".mask_bg").show();
+	});
+	$(".accountInfor_headX_mask").parent(".mask_box").find(".mask_bg").click(function(){
+		$(".accountInfor_headX_mask").hide();
+		$(".accountInfor_headX_mask").parent().find(".mask_bg").hide();
+	});
+
+});
+</script>
+</body>
+</html>

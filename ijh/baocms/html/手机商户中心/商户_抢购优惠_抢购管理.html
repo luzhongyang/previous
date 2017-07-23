@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-抢购优惠-抢购管理</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">抢购管理</div>
+    <i class="right"><a href="#">+发布抢购</a></i>
+</header>
+
+<section>
+    <div class="sh_search_box">
+        <div class="sh_search_int">
+            <span>优惠券名称</span>
+            <input type="text" value="">
+            <input type="button" class="btn" value="搜索">
+        </div>
+        <script>
+			$(function(){
+				$(".sh_search_more_int .center").click(function(){
+						$(this).find(".sh_search_more_pull").toggle();
+				});
+				$(".sh_search_more_pull li").click(function(){
+						$(".sh_search_more_int .center input").val($(this).html());
+				});
+			});
+		</script>
+        <div class="sh_search_more" style="display:none;">
+            <div class="sh_search_more_time mb10">
+                <div class="fl left"><input type="text" value="开始时间"></div>
+                <div class="fr right"><input type="text" value="结束时间"></div>
+                <div class="clear"></div>
+            </div>
+            <div class="sh_search_more_int">
+                <div class="fl left"><input type="text" value="订单编号"></div>
+                <div class="fl center">
+                	<input type="text" value="状态">
+                    <div class="sh_search_more_pull" style="display:none;">
+                        <ul>
+                            <li>等待付款</li>
+                            <li>已完成</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fr right"><input class="btn" type="button" value="搜索"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();;
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box" style="display:none;">
+    	<p>每个里面输入一个！到店付的也就是没有在平台付钱，商家自行收取消费</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    <script>
+		$(function(){
+			$(".sh_buy_tab li").each(function(e){
+				$(this).click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".sh_buy_tab_box").each(function(i){
+						if(e==i){
+							$(".sh_buy_tab_box").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						if(e==2){
+							$(".sh_search_box .sh_search_int").hide();
+							$(".sh_search_box .sh_search_more").show();
+						}
+						else{
+							$(".sh_search_box .sh_search_int").show();
+							$(".sh_search_box .sh_search_more").hide();
+						}
+						if(e==3){
+							$(".sh_search_box").hide();
+							$(".sh_prompt_infor_box").show();
+						}
+						else{
+							$(".sh_search_box").show();
+							$(".sh_prompt_infor_box").hide();
+						}
+					});
+				});
+			});
+		});
+    </script>
+	<div class="sh_buy_tab mb10">
+	    <ul>
+	        <li class="on">正在抢购</li>
+            <li>往期抢购</li>
+            <li>订单管理</li>
+            <li>抢购券管理</li>
+            <div class="clear"></div>
+        </ul>
+	</div>
+    <div class="sh_buy_tab_box" style="display:;">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_buy_bt_ID">ID:1022</div>
+                            <div class="fl sh_buy_bt_state">等待审核</div>
+                            <div class="fr sh_buy_bt_volume">销量：30  浏览：60</div>
+                        </div>
+                        <div class="sh_buy_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="148" height="100"></div>
+                            <div class="wz">
+                            	<p>13年世嘉， 超低首付身份证驾驶即可100%通过</p>
+                                <p><span class="mr20">原价：￥56</span><span class="mr20">抢购价：￥40</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date">2015-8-6 14:40<span>数量：6</span><span>总计：￥3600</span></div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a><a class="btn" href="#">设置套餐</a></div>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_buy_bt_ID">ID:1022</div>
+                            <div class="fl sh_buy_bt_state">等待审核</div>
+                            <div class="fr sh_buy_bt_volume">销量：30  浏览：60</div>
+                        </div>
+                        <div class="sh_buy_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="148" height="100"></div>
+                            <div class="wz">
+                            	<p>13年世嘉， 超低首付身份证驾驶即可100%通过</p>
+                                <p><span class="mr20">原价：￥56</span><span class="mr20">抢购价：￥40</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date">2015-8-6 14:40<span>数量：6</span><span>总计：￥3600</span></div>
+                        <div class="btn_box"><a class="btn" href="#">编辑</a><a class="btn" href="#">设置套餐</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sh_buy_tab_box" style="display:none;">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10" style="border-bottom:none 0px;">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_buy_bt_time">开始时间：2015-07-20</div>
+                            <div class="fr sh_buy_bt_time">结束时间：2016-01-20</div>
+                        </div>
+                        <div class="sh_buy_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="148" height="100"></div>
+                            <div class="wz">
+                            	<p>13年世嘉， 超低首付身份证驾驶即可100%通过</p>
+                                <p><span class="mr20">原价：￥56</span><span class="mr20">抢购价：￥40</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date">售出数：30<span>等待审核</span></div>
+                    </div>
+                </li>
+                <li class="list_box mb10" style="border-bottom:none 0px;">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_buy_bt_time">开始时间：2015-07-20</div>
+                            <div class="fr sh_buy_bt_time">结束时间：2016-01-20</div>
+                        </div>
+                        <div class="sh_buy_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="148" height="100"></div>
+                            <div class="wz">
+                            	<p>13年世嘉， 超低首付身份证驾驶即可100%通过</p>
+                                <p><span class="mr20">原价：￥56</span><span class="mr20">抢购价：￥40</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date">售出数：30<span>等待审核</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sh_buy_tab_box" style="display:none;">
+    	<div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10" style="border-bottom:none 0px;">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_buy_bt_order_num">订单ID:100057</div>
+                            <div class="fr sh_buy_bt_state">等待审核</div>
+                        </div>
+                        <div class="sh_buy_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="148" height="100"></div>
+                            <div class="wz">
+                            	<p>[临平路/和平公园] 【靓灶·民间菜】</p>
+                                <p><span class="mr20">数量：6</span><span class="mr20">订单金额：￥37</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date">创建时间：2015-04-18 08:30:45<span>IP:127.0.0.1</span></div>
+                    </div>
+                </li>
+                <li class="list_box mb10" style="border-bottom:none 0px;">
+                    <div>
+                    	<div class="sh_buy_bt">
+                            <div class="fl sh_buy_bt_order_num">订单ID:100057</div>
+                            <div class="fr sh_buy_bt_state">已完成</div>
+                        </div>
+                        <div class="sh_buy_nr">
+                        	<div class="img"><img src="img/buy_img.jpg" width="148" height="100"></div>
+                            <div class="wz">
+                            	<p>[临平路/和平公园] 【靓灶·民间菜】</p>
+                                <p><span class="mr20">数量：6</span><span class="mr20">订单金额：￥37</span></p>
+                            </div>
+                        </div>
+                        <div class="sh_buy_date">创建时间：2015-04-18 08:30:45<span>IP:127.0.0.1</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sh_buy_tab_box" style="display:none;">
+    	<div class="sh_buy_content">
+        	<div class="sh_buy_add_btn"><input class="btn" type="button" id="add" value="新增+"></div>
+            <div class="sh_list_public_box" id="jq_code">
+                <ul>
+                    <li class="list_box mb10 tuaned_int" style="border-top:1px solid #dedede;">
+                        <div class="sh_buy_add_int">
+                        	<input name="code[1]" class="text" type="text" value="">
+                            <input class="sh_buy_add_int_del" type="button" value="移除">
+                        </div>
+                    </li>
+                    <li class="list_box mb10 tuaned_int" style="border-top:1px solid #dedede;">
+                        <div class="sh_buy_add_int">
+                        	<input name="code[1]" class="text" type="text" value="">
+                            <input class="sh_buy_add_int_del" type="button" value="移除">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认消费"></div>
+        </div>
+    </div>
+</section>
+<script>
+var code_num = 1;
+$(document).ready(function (e) {
+	$(document).on('click', '.sh_buy_add_int_del', function () {
+		$(this).parents(".tuaned_int").remove();
+	});
+	$("#add").click(function () {
+		code_num++;
+		var str = '<li class="list_box mb10 tuaned_int" style="border-top:1px solid #dedede;"><div class="sh_buy_add_int">';
+		str += '<input name="code[' + code_num + ']" class="text" type="text" value="" />';
+		str += '<input class="sh_buy_add_int_del" type="button" value="移除"></div></li>';
+		$("#jq_code ul").append(str);
+	});
+	$('#submit').click(function () {
+		$('form').submit()
+	});
+});
+</script>
+</body>
+</html>

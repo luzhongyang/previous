@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户注册</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".yhzc_tab li").each(function(e){
+		$(this).click(function(){
+			$(".yhzc_tab li").removeClass("on");
+			$(this).addClass("on");
+			$(".yhzc_tableBox").each(function(i){
+				if(e==i){
+					$(".yhzc_tableBox").hide();
+					$(this).show();
+				}
+				else{
+					$(this).hide();
+				}
+			});
+		});
+	});
+});
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 100;
+        var mobile_lock = 0;
+        $(function () {
+            $(".baott_yzm_getA").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 100;
+					$(".baott_yzm_getA").addClass("on");
+                    $('.baott_yzm_getA').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".baott_yzm_getA").removeClass("on");
+                $('.baott_yzm_getA').removeAttr("disabled");
+                $('.baott_yzm_getA').text("重新发送");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+            }
+            else {
+                mobile_count--;
+                $('.baott_yzm_getA').text("重新获取(" + mobile_count.toString() + ")秒");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+</head>
+
+<body>
+<div class="login_top">
+    <div class="login_topnr">
+        <div class="left yhzc_top_l"><img src="../sjimages/yhtoplogo.png" /></div>
+        <div class="right yhzc_top_r">
+           已有baocms账号？<a href="" class="radius3 yhzc_top_dl">登录</a> 
+        </div>
+    </div>
+</div>
+<div class="yhzc_nr">
+	<div class="yhzc_tab">
+	    <ul>
+	        <li class="on"><em><img src="../images/yhzcico_03.png" /></em>邮箱注册</li>
+            <li><em><img src="../images/yhzcico_06.png" /></em>手机注册</li>
+        </ul>
+	</div>
+    <div class="yhzc_tableBox">
+    	<table class="register_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="110" style="vertical-align:top;"><p class="register_p">邮箱</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="text" class="radius3 tuanfabu_int register_intw" value="" />
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请填写邮箱地址</p>
+                            <p class="tsk_error" style="display:none;">邮箱格式错误，请重新输入</p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">用户名</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="text" class="radius3 tuanfabu_int register_intw" value="" />
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请填写用户名</p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align:top;"><p class="register_p">创建密码</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="password" class="radius3 tuanfabu_int register_intw" value="" />
+                        <div class="baott_yzm_get">
+                            <ul>
+                                <li class="yhzc_mm on">弱</li>
+                                <li class="yhzc_mm">中</li>
+                                <li class="yhzc_mm">强</li>
+                            </ul>
+                        </div>
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请填写密码</p>
+                            <p class="tsk_error" style="display:none;"></p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">确认密码</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="password" class="radius3 tuanfabu_int register_intw" value="" />
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请再次输入密码</p>
+                            <p class="tsk_error" style="display:none;"></p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">所在城市</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <select class="radius3 tuanfabu_int yhzc_selw">
+                            <option>--省--</option>
+                        </select>
+                        <select class="radius3 tuanfabu_int yhzc_selw">
+                            <option>--市--</option>
+                        </select>
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请选择省份</p>
+                            <p class="tsk_error" style="display:none;"></p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">验证码</p></td>
+                <td>
+                   <input type="text" class="radius3 tuanfabu_int register_yzw" /><span class="login_yzm register_yzm"><a href=""><img src="../img/register_yz.jpg" width="96" height="34" /></a></span><a class="register_yzmwz" href="">看不清，换一张？</a> 
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" class="radius3 register_intan" value="确认信息" /></td>
+            </tr>
+        </table>
+    </div>
+    
+    
+    
+    <div class="yhzc_tableBox" style="display:none;">
+    	<table class="register_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="110" style="vertical-align:top;"><p class="register_p">手机号</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="text" class="radius3 tuanfabu_int register_intw" value="" />
+                        <div class="baott_yzm_get"><a class="baott_yzm_getA" href="###">免费获取动态验证码</a></div>
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请输入您的手机号码</p>
+                            <p class="tsk_error" style="display:none;">手机号格式错误，请重新输入</p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">短信动态码</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="text" class="radius3 tuanfabu_int register_intw" value="" />
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请输入短信动态码</p>
+                            <p class="tsk_error" style="display:none;"></p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">创建密码</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="password" class="radius3 tuanfabu_int register_intw" value="" />
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请填写密码</p>
+                            <p class="tsk_error" style="display:none;"></p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">确认密码</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="password" class="radius3 tuanfabu_int register_intw" value="" />
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请再次输入密码</p>
+                            <p class="tsk_error" style="display:none;"></p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">所在城市</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <select class="radius3 tuanfabu_int yhzc_selw">
+                            <option>--省--</option>
+                        </select>
+                        <select class="radius3 tuanfabu_int yhzc_selw">
+                            <option>--市--</option>
+                        </select>
+                        <div class="left int_tsk">
+                            <p class="tsk_error" style="">请选择省份</p>
+                            <p class="tsk_error" style="display:none;"></p>
+                            <p class="tsk_error tsk_correct" style="display:none;">&nbsp;</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" class="radius3 register_intan" value="确认信息" /></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="yhzc_foot">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有</div>
+</body>
+</html>

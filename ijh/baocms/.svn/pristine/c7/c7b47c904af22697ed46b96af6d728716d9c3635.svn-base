@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>邮箱找回密码2</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+</head>
+
+<body>
+<div class="login_top">
+    <div class="login_topnr">
+        <div class="left yhzc_top_l"><img src="../sjimages/yhtoplogo.png" /></div>
+        <div class="right yhzc_top_r">
+            
+        </div>
+    </div>
+</div>
+<div class="yhzc_nr">
+	<div class="yhzc_tab">
+	    <ul>
+	        <li class="on"><a href="#"><em><img src="../images/yhzcico_03.png" /></em>邮箱找回密码</a></li>
+            <li><a href="#"><em><img src="../images/yhzcico_06.png" /></em>手机找回密码</a></li>
+        </ul>
+	</div>
+    <div class="yh_mail2">
+        <div class="yh_mailnr1">
+        	<p class="register_cgt">邮件已发送</p>
+            <p class="register_cgwz">请到<span class="mail_dz">109*****28@qq.com</span>查阅邮件，点击邮件中的连接，重设您的登录密码！</p>
+            <div class="yh_mailsjBox"><a href="" class="radius3 yh_mailsj">去邮箱收信</a><a class="yh_mailback" href="" class="">上一步</a></div>
+        </div>
+        <div class="yh_mailnr2">
+            <div class="yh_mailtst">没有收到邮件？</div>
+            <ul class="yh_mailcf">
+                <li>请先检查是否垃圾邮件中。如果还未收到，请重新发送邮件。
+                	<div><a class="yh_mailcfan" href="###">重新发送邮件</a></div>
+                </li>
+                <li>还是没收到？请选择<a href="" class="other">其他找回方式</a></li>
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div class="yhzc_foot">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有</div>
+</body>
+</html>

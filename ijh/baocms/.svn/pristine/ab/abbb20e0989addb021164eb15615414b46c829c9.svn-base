@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>首页</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<script src="js/appcan.js"></script>
+<script src="js/appcan.control.js"></script>
+<script src="js/zy_control.js"></script>
+<script src="js/application.js"></script>
+<script src="js/application.init.js"></script>
+</head>
+<body>
+    <header>
+            <a onclick="baoapp.helper.goback()"><i class="icon-goback"></i></a>
+        <div class="title">绑定账号</div>
+    </header>
+    <div id="content">
+    <div class="forget_sub_area" style="font-size:0.14rem;">
+        <a onclick="tabchang('1',$(this))" class="findmm_tab u_mobile on"  class="ui-btn-active">已有账号绑定</a>
+        <a onclick="tabchang('2',$(this))" class="findmm_tab  u_email" >没有帐号注册</a>
+    </div>
+    <script>
+        function getRequest(search)
+        {
+           var  params = {};
+           if(search.indexOf('?')!=-1){
+               search = search.replace('?','');
+               search = search.split('&');
+               for(var k in search){
+                       var kv= search[k].split('=');
+                       params[kv[0]] = unescape(kv[1]);
+               }
+               return params;
+          }
+          return false;
+        }
+    
+        var type = 1;
+        function tabchang(key,obj){
+            obj.parent().find('.findmm_tab').removeClass('on');
+            obj.addClass('on');
+            key = key || 1;
+            type = key;
+            switch(key){
+                case '1':
+                   $('#scroll').show();
+                   $('#scroll2').hide();
+                break;
+                case '2':
+                   $('#scroll').hide();
+                   $('#scroll2').show();
+                break;
+            }
+        }
+        
+        function checklogin(){
+            with(baoapp.helper){
+                 var phone = $('.account').val(), pswd = $('.password').val();    
+                 if(!/^(13|15|17|18)\d{9}$/.test(phone)){
+                     toast('手机号码不正确！',1000, null ,1);
+                     return false;
+                 }else if(!pswd){
+                     toast('登录密码不能为空！',1000,null,1);
+                     return false;
+                 }
+             }
+        }
+        
+        
+        function checkreg(){
+             var phone = $('.telphone').val(), pswd = $('.pwd').val(),pswd2 = $('.pwd1').val(),nickname = $('.nickname').val();           
+            if(phone.length==0){
+                 baoapp.helper.toast('手机号码不能为空！',1500,null,1);
+                 return false;
+             }else if(!/^(13|15|17|18)\d{9}$/.test(phone)){
+                 baoapp.helper.toast('手机号码不正确！',1500,null,1);
+                 return false;
+             }else if(!nickname){
+                 baoapp.helper.toast('昵称不能为空！',1500,null,1);
+                 return false;
+             }else if(!pswd){
+                 baoapp.helper.toast('登录密码不能为空！',1500,null,1);
+                 return false;
+             }else if(!pswd2){
+                 baoapp.helper.toast('重复密码不能为空！',1500,null,1);
+                 return false;
+             }else if(pswd!==pswd2){
+                 baoapp.helper.toast('两次输入密码不一致',1500,null,1);
+                 return false;
+             }
+            
+        }
+        
+        
+        function bind(){
+            with(baoapp.helper){
+            var p_type = getRequest(location.search);
+                if(p_type.type=='qq'){
+                     var openid = appcan.locStorage.getVal('qq_openid');
+                     var token = appcan.locStorage.getVal('qq_token');
+                }else if(p_type.type=='weixin'){
+                     var openid = appcan.locStorage.getVal('wx_openid');
+                     var token = appcan.locStorage.getVal('wx_token');
+                }
+                if(type==1){
+                    if(!checklogin()){
+                         var account = $('.account').val();
+                         var password = $('.password').val();
+                         var data = {
+                            type:type,
+                            p_type:p_type.type,
+                            openid:openid,
+                            token:token,
+                            account:account,
+                            password:password
+                            };
+                    }
+                }else{
+                    if(!checkreg()){
+                        var account = $('.telphone').val();
+                        var nickname = $('.nickname').val();
+                        var pwd = $('.pwd').val();
+                        var pwd1 = $('.pwd1').val();
+                        var data = {
+                            type:type,
+                            p_type:p_type.type,
+                            openid:openid,
+                            token:token,
+                            account:account,
+                            password:pwd,
+                            nickname:nickname,
+                            password2:pwd1
+                            };
+                    }
+                }
+                var url = baoapp.helper.createUrl('passport','bind');
+                 toast('登录中...');
+                 ayscLoad(url,data,'POST','json',function(data){
+                      toast(null);
+                     if(data.status === CONST.BAO_LOGIN_SUCCESS){
+                         //appcan.locStorage.setVal('user_token',data.user_token);
+                        // appcan.locStorage.setVal('user_info',data.user_info);
+                         loginlog(data.user_token.token,data.user_info.user_id,data.user_info);
+                         toast('登录成功！',1000,function(){
+                             goback();
+                         },1);
+                          
+                     }else{
+                         toast(data.msg,1000,null,1);
+                         goback();
+                     }
+                 });
+             }    
+        }
+        
+        
+        appcan.ready(
+            function(){
+                 var height = baoapp.helper.adapt();
+            }
+        )
+        
+        
+        
+        
+        
+    </script>
+    
+    <div id="login" class="page-center-box">
+            <div id="scroll">
+                <div id="login-input">
+                    <input type="text" name="account" class='account' placeholder="用户名" />
+                    <input type="password" name="password" class='password' placeholder="密码" />
+                </div>
+                
+                <input type="submit" onclick="bind()" class="submit" value="立刻绑定"/>
+             </div>
+    
+            <div id="scroll2" style="display:none">
+                <div id="login-input">
+                    <input type="text" name="telphone" class='telphone' placeholder="手机" />
+                    <input type="nickname" name="nickname" class='nickname' placeholder="昵称" />
+                    <input type="password" name="password" class='pwd'  placeholder="密码" />
+                    <input type="password1" name="password1" class='pwd1' placeholder="确认密码" />
+                </div>
+                <input type="submit" onclick="bind()" class="submit" value="立刻绑定"/>
+               </div>
+    </div>
+    
+    
+    </div>
+    
+    
+</body>
+</html>

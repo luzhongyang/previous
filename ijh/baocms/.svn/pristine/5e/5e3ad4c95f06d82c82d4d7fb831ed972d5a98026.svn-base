@@ -1,0 +1,387 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="target-densitydpi=device-dpi,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订餐</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+</head>
+<style>
+.popWin{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:10;
+    background:rgba(0,0,0,0.5);
+    display:none;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+}
+.popWin .ctr{
+    width:74%;
+    height:auto;
+    padding:0 0.1rem 1% 0.1rem;
+    box-shadow:0 0 0.1rem #333;
+    background:rgb(255,255,255);
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+}
+.popWin .ctr .title{
+    width:100%;
+    height:0.35rem;
+    line-height:0.35rem;
+    color:#333333;
+    font-size: 0.13rem;
+    border-bottom:solid 0.008rem #555555;
+    margin-bottom: 0.1rem;
+}
+.popWin .ctr .gezi{
+    width:80%;
+    height:auto;
+    padding: 0 6%;
+    /*display:-webkit-box;
+    -webkit-box-orient:horizontal;*/
+   overflow: hidden;
+}
+.popWin .ctr .gezi span{
+    display:block;
+    width:33%;
+    height:0.5rem;
+    line-height:0.5rem;
+    padding-top:0.43rem;
+    float: left;
+    text-align: center;
+    margin-bottom: 0.1rem;
+    font-size:0.13rem;
+}
+.weixin{
+    background: url('../img/share01.png') no-repeat center top;
+    background-size: 0.62rem auto; 
+}
+.qq{
+    background: url('../img/share02.png') no-repeat center top;
+    background-size: 0.62rem auto; 
+}
+.wxf{
+    background: url('../img/share04.png') no-repeat center top;
+    background-size: 0.62rem auto; 
+}
+</style>
+<script id="detail" type="text/template">
+            <div class="seat-banner">
+                <img src="%photo%" width="100%" height="100%"/>
+                <div class="shade"></div>
+                <div class="shade-content">
+                    <p>%shop_name% / 人均：<span>￥%price%</span></p>
+                </div>
+            </div>
+            <!-- 评分 -->
+            <div class="point">
+                <div class="point-left">
+                    <div class="point-star point-star-sell"><div style="width: 0.%stars%rem;"></div></div>
+                    <div class="guest-num">%totalnum%条评论</div>
+                    <div class="tag">%tag1%/%tag2%</div>
+                </div>
+                <div class="point-right">
+                    <a onclick="love('%shop_id%')"class="btn">关注商家</a>
+                </div>
+            </div>
+            <div class="point">
+                <div class="point-left brn">
+                    <span>口味：%kouwei%</span>
+                    <span>环境：%huanjing%</span>
+                    <span>服务：%fuwu%</span>
+                </div>
+                <div class="point-right share"><a href="#" class="share_btn">分享</a></div>
+            </div>
+            <!-- 地址 -->
+            <div class="address">
+                <ul>
+                    <li class="address-here">%addr%</li>
+                    <li><a href="#" onclick="jump('%shop_id%')" class="b-1">到这去<i></i></a></li>
+                    <li><a href="tel:%tel%" class="b-2">%tel%<i></i></a></li>
+                </ul>
+            </div>
+            <!-- 商家信息 -->
+            <div class="info">
+                <ul>
+                    <li class="title">商家信息</li>
+                    <li>营业时间： %business_time%</li>
+                    <li class="other">%rsb%</li>
+                </ul>
+            </div>
+</script>
+<script id="tuans" type="text/template">
+    <div>
+        <a onclick="tuan('%tuan_id%')">
+        <img src="%photo%" width="100%" height="100%" />
+        <div class="shade"></div>
+        <div class="shade-content"><em>%title%</em><span>￥%price%</span></div>
+        </a>
+    </div>
+    
+</script>
+<script id="dianping" type="text/template">
+<div class="guest-box">
+        <div class="icon" style="background-image: url(%face%);"></div>
+        <div class="guest-box-content">
+            <p>%nickname%<span>%create_time%</span></p>
+            <div class="point-star"><div style="width: 0.%stars%rem;"></div></div>
+            <p class="c_h">%contents%</p>
+            <p class="img">
+                %imgs%
+            </p>
+        </div>
+    </div>
+</script>
+
+<div class="popWin" onclick="popEvent(this,event);">
+    <div class='ctr'>
+        <p class="title">分享到</p>
+        <div class="gezi">
+            <span class='wxf' onclick="share_wx(0);">微信</span>
+            <span class='weixin' onclick="share_wx(1);">微信朋友圈</span>
+            <span class='qq' onclick="share_qq();">QQ空间</span>
+        </div>
+    </div>
+</div> 
+<body>
+    <script>
+        function share()
+        {
+            $('.popWin').css({display:'-webkit-box'});
+            $('.popWin').click(function(event){
+                var e = event || window.event;
+                e.stopPropagation();        
+                $(this).hide();
+        
+            });
+        }
+        function popEvent(o,event)
+        {
+            var e = event || window.event;
+            e.stopPropagation();
+            $(o).hide();
+        }
+        function share_qq()
+        {
+            var url = baoapp.config.shop_url+window.shop_id+'.html';
+            var data = {title:window.title, summary:window.intro, targetUrl:url, imageUrl:[window.thumb]};
+                data = JSON.stringify(data);
+                baoapp.qq(data);
+        }
+        function share_wx(scene)
+        {
+            //scene1朋友圈,0会话场景
+            var url = baoapp.config.shop_url+window.shop_id+'.html';
+            //thumbImg,wedpageUrl,scene 1,title,description
+            var data = {thumbImg:window.thumb,wedpageUrl:url,scene:scene,title:window.title,description:window.intro};
+                data = JSON.stringify(data);
+                uexWeiXin.shareLinkContent(data);
+              // baoapp.shareLink(data);
+        }
+    
+    
+        function renderList(cached,reload){
+            reload = reload || false;
+            if(reload){
+                document.querySelector('#scroll').innerHTML = '';
+            }
+            for(tplid in cached) 
+             for(i in cached[tplid])
+                createNode(tplid,cached[tplid][i]);
+            
+        }
+                    
+        function createNode(tplid,data)
+        {      
+            with(document){
+                var spanNode = createElement('span'),
+                tmpl     = getElementById(tplid).innerHTML;
+               
+                for(key in data){
+                   tmpl = tmpl.replace(eval("/%"+key+"%/g"),data[key]); 
+                }
+                getElementById(tplid+'_content').innerHTML +=tmpl;
+            }
+        }
+    
+        function jump(shop_id){
+            baoapp.helper.linkTo('gps','../common/gps.html?shop_id='+shop_id);
+        }
+    
+    
+    
+        function love(shop_id){
+            with(baoapp.helper){
+            shop_id = shop_id||0;
+                if(shop_id===0){
+                    toast('无法关注该商家',1000);    
+                }else{
+                    var data = {shop_id:shop_id};
+                     var url = createUrl('shop','favorites',data);
+                     ayscLoad(url,null,'GET','json',function(data){
+                         if(data.status===CONST.BAO_REQUEST_SECCUSS){
+                             toast("关注商家成功!",1000);
+                         }else{
+                             toast("关注商家失败!",1000);
+                         }
+                        });    
+                }
+            }
+        }
+        
+        function branch(shop_id){
+            with(baoapp.helper){
+                if(shop_id===0){
+                    toast('无法关注该商家',1000);    
+                }else{
+                    var data = 'shop_id-'+shop_id;
+                    linkTo('shop_branch','branch.html',data);
+                }
+            
+            }
+            
+        }
+        
+        function tuan(tuan_id){
+            with(baoapp.helper){
+                if(shop_id===0){
+                    toast('无法关注该商家',1000);    
+                }else{
+                    var data = 'tuan_id-'+tuan_id;
+                    linkTo('tuan','../tuan/detail.html',data);
+                }
+            }
+            
+        }
+        function getLocalTime(nS) {     
+           return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
+        }     
+        
+        
+        
+    
+        appcan.ready(
+            function(){
+                with(baoapp.helper){
+                        $(".share").click(function () {
+                            $(".popWin").show();
+                        });
+                         baoapp.registerApp();
+                         var cached      = baoapp.helper.cacheExpireRead(KEY.SHOP_DETAIL);
+                             cached      = JSON.parse(cached);
+                         var detail      = cached.detail;
+                         window.thumb    = baoapp.config.attachs + detail.photo;
+                         window.shop_id  = detail.shop_id;
+                         window.title    = detail.shop_name;
+                         window.intro    = detail.shop_name;
+                         
+                         var ex          = cached.ex;
+                         var attachs     = baoapp.config.attachs;
+                         var tuans       = cached.tuans;
+                         var shopcates   = baoapp.config.shopcates;
+                         var tag1        = shopcates[shopcates[detail.cate_id]['parent_id']]['cate_name'];
+                         var tag2        = shopcates[detail.cate_id]['cate_name'];
+                         var stars       = parseInt(detail.score_num/5.5) ;
+                         if(stars>9){
+                             stars = 9;
+                         }
+                         var kouwei      = Math.round(detail.d1/10,1);
+                         var huanjing    = Math.round(detail.d2/10,1);
+                         var fuwu        = Math.round(detail.d3/10,1);
+                         var data        = [];
+                         data.detail     = []
+                         if(cached.rsb=='0'){
+                             var rsb = '';
+                         }else{
+                             var rsb= '<a onclick="branch('+detail.shop_id+')">查看其他'+cached.rsb+'家分店&gt;&gt;</a>';
+                         }
+                         data.detail[0] = {shop_id:detail.shop_id,photo:baoapp.config.attachs + detail.photo,shop_name:detail.shop_name,price:ex.price,totalnum:cached.totalnum,stars:stars,tag1:tag1,tag2:tag2,kouwei:kouwei,huanjing:huanjing,fuwu:fuwu,addr:detail.addr,tel:detail.tel,business_time:ex.business_time,rsb:rsb};
+                         
+                         var tuans = cached.tuans;
+                         data.tuans = [];
+                         for(var i in tuans){
+                             var photo  = attachs + tuans[i].photo;
+                             data.tuans[i] = {tuan_id:tuans[i].tuan_id,price:tuans[i].price,title:tuans[i].title,photo:photo};                            
+                         }
+                        
+                         var list = cached.list;
+                         var users = cached.users;
+                         var pics = cached.pics;
+                         data.dianping = [];
+                         for(var j in list){
+                             var stars = parseInt(list[j].score/5.5)*1.8 ;
+                             if(stars>9){
+                                 stars =9;
+                             }
+                             var create_time =list[j].create_time;
+                             var pic = '';
+                             var count = 0;
+                             for(var i in pics){
+                                    if(pics[i].dianping_id===list[j].dianping_id){
+                                        if(count%3==1){
+                                           pic+='<img class="fst" src="'+attachs+pics[i].pic+'" alt="" />'; 
+                                        }else{
+                                           pic+='<img  src="'+attachs+pics[i].pic+'" alt="" />'; 
+                                        }
+                                        count++;
+                                    }
+                             }
+                             if(typeof users[list[j].user_id] ==='undefined'||users[list[j].user_id].face == null||users[list[j].user_id].face.length==0){
+                                 var face = '../img/icon-my.png';
+                             }else{
+                                 var face = attachs + users[list[j].user_id].face;
+                             }
+                             create_time = getLocalTime(create_time);
+                             data.dianping[j] = {face:face,nickname:users[list[j].user_id].nickname,create_time:create_time,imgs:pic,contents:list[j].contents,stars:stars};
+                         }
+                         
+                         $('#allping').html('网友点评('+cached.all_ping+')');
+                         
+                         renderList(data);
+                         
+                }
+            }
+        )
+        
+    </script>
+	<div id="sell" class="page-center-box">
+		<div id="scroll">
+		    <div id="detail_content"></div>
+            
+            
+            <!-- 商家抢购 -->
+            <div class="buy">
+                <div class="title">商家抢购<a href="#">更多抢购&gt;&gt;</a></div>
+                <div class="buy-box">
+                <!-- 循环 -->
+                <div id="tuans_content"></div>
+                <!-- 循环 -->
+                </div>
+                <div class="clear"></div>
+            </div>
+            <!-- 点评 -->
+            <div class="guest">
+                <div class="title">
+                    <span id="allping">网友点评(12)</span>
+                    <!--<a href="shop_add_comment.html" class="guest-add">我要评论</a>
+                    <em><a href="shop_comments.html">全部评论&gt;&gt;</a></em>-->
+                </div>
+                <!-- 循环 -->
+                <div id="dianping_content"></div>
+               
+            </div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-外卖-订单管理</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> 
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">外卖订单管理</div>
+    <i class="right"><a href="#"></a></i> </header>
+<section>
+	<div class="sh_search_box">
+        <script>
+			$(function(){
+				$(".sh_search_more_int .center").click(function(){
+						$(this).find(".sh_search_more_pull").toggle();
+				});
+				$(".sh_search_more_pull li").click(function(){
+						$(".sh_search_more_int .center input").val($(this).html());
+				});
+			});
+		</script>
+        <div class="sh_search_more">
+            <div class="sh_search_more_time mb10">
+                <div class="fl left"><input type="text" value="开始时间" placeholder="开始时间" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }"></div>
+                <div class="fr right"><input type="text" value="结束时间" placeholder="结束时间" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }"></div>
+                <div class="clear"></div>
+            </div>
+            <div class="sh_search_more_int">
+                <div class="fl left"><input type="text" value="订单编号" placeholder="订单编号" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }"></div>
+                <div class="fl center">
+                	<input type="text" value="状态" placeholder="状态">
+                    <div class="sh_search_more_pull" style="display:none;">
+                        <ul>
+                            <li>等待付款</li>
+                            <li>已完成</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fr right"><input class="btn" type="button" value="搜索"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+		$(function(){
+			$(".sh_infor_tab li").each(function(e){
+				$(this).click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".sh_infor_tab_box").each(function(i){
+						if(e==i){
+							$(".sh_infor_tab_box").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+					});
+				});
+			});
+		});
+    </script>
+    <div class="sh_infor_tab mb10">
+        <ul>
+            <li class="on">确认订单</li>
+            <li>配送订单</li>
+            <li>已完成订单</li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="sh_infor_tab_box" style="display:;">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box">
+                <ul>
+                    <li class="list_box mb10">
+                        <div>
+                            <div class="sh_buy_bt">
+                                <div class="fl sh_buy_bt_order_num">ID:100057</div>
+                                <div class="fr sh_buy_bt_state">等待付款</div>
+                            </div>
+                            <div class="sh_waimai_order_nr">
+                                <div class="wz">
+                                	<ul>
+                                    	<li><div class="fl left overflow_clear">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                        <li><div class="fl">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div class="fl">总价（含送餐费）：￥27</div>
+                                <div class="fr">结算价格：￥25</div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div>王楠  13525635698</div>
+                            </div>
+                            <div class="sh_buy_date" style="border-bottom:none 0px;">下单时间：2015-04-18 08:30:45</div>
+                        </div>
+                    </li>
+                    
+                    <li class="list_box mb10">
+                        <div>
+                            <div class="sh_buy_bt">
+                                <div class="fl sh_buy_bt_order_num">ID:100057</div>
+                                <div class="fr sh_buy_bt_state">等待付款</div>
+                            </div>
+                            <div class="sh_waimai_order_nr">
+                                <div class="wz">
+                                	<ul>
+                                    	<li><div class="fl left overflow_clear">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                        <li><div class="fl">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div class="fl">总价（含送餐费）：￥27</div>
+                                <div class="fr">结算价格：￥25</div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div>王楠  13525635698</div>
+                            </div>
+                            <div class="sh_buy_date" style="border-bottom:none 0px;">下单时间：2015-04-18 08:30:45</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sh_infor_tab_box" style="display:none;">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box">
+                <ul>
+                    <li class="list_box mb10">
+                        <div>
+                            <div class="sh_buy_bt">
+                                <div class="fl sh_buy_bt_order_num">ID:100057</div>
+                                <div class="fr sh_buy_bt_state">等待付款</div>
+                            </div>
+                            <div class="sh_waimai_order_nr">
+                                <div class="wz">
+                                	<ul>
+                                    	<li><div class="fl left overflow_clear">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                        <li><div class="fl">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div class="fl">总价（含送餐费）：￥27</div>
+                                <div class="fr">结算价格：￥25</div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div>王楠  13525635698</div>
+                            </div>
+                            <div class="sh_buy_date" style="border-bottom:none 0px;">下单时间：2015-04-18 08:30:45</div>
+                        </div>
+                    </li>
+                    
+                    <li class="list_box mb10">
+                        <div>
+                            <div class="sh_buy_bt">
+                                <div class="fl sh_buy_bt_order_num">ID:100057</div>
+                                <div class="fr sh_buy_bt_state">等待付款</div>
+                            </div>
+                            <div class="sh_waimai_order_nr">
+                                <div class="wz">
+                                	<ul>
+                                    	<li><div class="fl left overflow_clear">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                        <li><div class="fl">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div class="fl">总价（含送餐费）：￥27</div>
+                                <div class="fr">结算价格：￥25</div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div>王楠  13525635698</div>
+                            </div>
+                            <div class="sh_buy_date" style="border-bottom:none 0px;">下单时间：2015-04-18 08:30:45</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sh_infor_tab_box" style="display:none;">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box">
+                <ul>
+                    <li class="list_box mb10">
+                        <div>
+                            <div class="sh_buy_bt">
+                                <div class="fl sh_buy_bt_order_num">ID:100057</div>
+                                <div class="fr sh_buy_bt_state">已完成</div>
+                            </div>
+                            <div class="sh_waimai_order_nr">
+                                <div class="wz">
+                                	<ul>
+                                    	<li><div class="fl left overflow_clear">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                        <li><div class="fl">牛肉火锅</div><div class="fr">x1<span class="ml10 main_color">￥15</span></div>
+                                    	<div class="clear"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div class="fl">总价（含送餐费）：￥27</div>
+                                <div class="fr">返现：￥2</div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div>结算价格：￥25</div>
+                            </div>
+                            <div class="sh_waimai_order_price">
+                            	<div>王楠  13525635698</div>
+                            </div>
+                            <div class="sh_buy_date" style="border-bottom:none 0px;">下单时间：2015-04-18 08:30:45</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>生活宝网络</title>
+<link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/css_1.css"/>
+<script type="text/javascript" src="../../js/appcan.js"></script>
+<script type="text/javascript" src="../../js/application.js"></script>
+</head>  
+<body>
+<header>
+  <a onclick="baoapp.helper.goback();"><i class="icon-goback"></i></a>
+   <div class="title">我的抢购</div>
+</header>
+<div id="content"></div>
+
+
+<footer><script src='../../js/application.footer.js'></script></footer>
+</body>
+<script>
+appcan.ready(function(){
+    var height = baoapp.helper.adapt();
+    with(baoapp.helper){
+       frameOpen('content','../../loading.html',height,function(){
+           var url = createUrl('Mcenter','tuan',{aready:0,page:1});
+            ayscLoad(url,null,'GET','json',function(data){
+                if(data.status = CONST.BAO_REQUEST_SUCCESS){
+                    cacheExpireWrite(KEY.MEMBER_TUAN_INDEX,JSON.stringify(data));
+                    frameOpen('content','index_content.html',height);
+                }else{
+                    frameOpen('content','../../loading_fail.html',height);
+                }
+            });
+       });
+   }
+});    
+</script>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>营销管理-购买服务</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+</head>
+
+<body>
+<div class="sjgl_lead">
+    <ul>
+        <li><em class="sjgl_leadico sjgl_leadico14"></em><a href="#">营销管理</a></li>
+        <li>&gt;<a class="sjgl_leadEnd" href="#">购买服务</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">注意： 每个服务都对应了不同功能的权限！每次最多购买一年的服务！购买10个月等于购买一年（买10个月送2个月）！ </div>
+        </div>
+    </div>  
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td width="160">图片</td>
+            <td>项目</td>
+            <td width="258">说明</td>
+            <td width="140">价格</td>
+            <td>服务到期</td>
+            <td>购买时间</td>
+            <td>操作</td>
+        </tr>  
+        <tr>
+            <td><span class="radius20 markrting_img">微</span></td>
+            <td>微信服务</td>
+            <td><p class="markrting_sm">微信服务是指，微信公共账号的管理，及微信二维码的宣传！商家微网站的接入等等！</p></td>
+            <td><p class="markrting_sm">30金块/月</p><p class="markrting_sm">300金块/年</p></td>
+            <td>2020-01-31</td>
+            <td>
+            	<select>
+                	<option>1个月</option>
+                    <option>2个月</option>
+                    <option>3个月</option>
+                </select>
+            </td>
+            <td><a class="radius3 sy_c1an" href="#">立刻购买</a></td>
+        </tr>
+        <tr>
+            <td><span class="radius20 markrting_img">预</span></td>
+            <td>预约服务</td>
+            <td><p class="markrting_sm">如果没有开通预约管理的话，用户预约后那么查看不到用户的电话和用户的联系方式！</p></td>
+            <td><p class="markrting_sm">30金块/月</p><p class="markrting_sm">300金块/年</p></td>
+            <td>2017-10-04</td>
+            <td>
+            	<select>
+                	<option>1个月</option>
+                    <option>2个月</option>
+                    <option>3个月</option>
+                </select>
+            </td>
+            <td><a class="radius3 sy_c1an" href="#">立刻购买</a></td>
+        </tr>
+        <tr>
+            <td><span class="radius20 markrting_img">卡</span></td>
+            <td>会员卡</td>
+            <td><p class="markrting_sm">如果没有开通会员卡功能，那么您将赠送不了积分给会员！也不能在商家联盟中显示</p></td>
+            <td><p class="markrting_sm">30金块/月</p><p class="markrting_sm">300金块/年</p></td>
+            <td>2016-09-23</td>
+            <td>
+            	<select>
+                	<option>1个月</option>
+                    <option>2个月</option>
+                    <option>3个月</option>
+                </select>
+            </td>
+            <td><a class="radius3 sy_c1an" href="#">立刻购买</a></td>
+        </tr>
+        <tr>
+            <td><span class="radius20 markrting_img">保</span></td>
+            <td>保障商铺</td>
+            <td><p class="markrting_sm">这个会影响商家的排名及使用商家自助建站的权限！</p></td>
+            <td><p class="markrting_sm">30金块/月</p><p class="markrting_sm">300金块/年</p></td>
+            <td>2015-08-22</td>
+            <td>
+            	<select>
+                	<option>1个月</option>
+                    <option>2个月</option>
+                    <option>3个月</option>
+                </select>
+            </td>
+            <td><a class="radius3 sy_c1an" href="#">立刻购买</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

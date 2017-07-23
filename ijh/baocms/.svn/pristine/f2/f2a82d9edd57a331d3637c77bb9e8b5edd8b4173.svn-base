@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <a onclick="goback();"><i class="icon-goback"></i></a>
+        <div class="title">地图    </div>
+    </header>
+    <div id="content">
+        
+    </div>
+    <footer>
+        <script src='../js/application.footer.js'></script>
+    </footer>
+</body>
+    
+<script>
+appcan.ready(function(){
+    var height = baoapp.helper.adapt();
+    console.log(location);
+    var top = $('header').offset().height;
+    var search  = baoapp.helper.getRequest(location.search);
+    var shop_id = search.shop_id;  
+    window.tuan_id = search.tuan_id;
+    var url = baoapp.helper.createUrl('tuan','gps',{shop_id:shop_id});
+         baoapp.helper.ayscLoad(url,null,'GET','json',function(data){
+            if(data.status == 200){
+                param = '?addr='+escape(data.shop.addr)+'&lat='+data.shop.lat+'&lng='+data.shop.lng;
+                var height = $(window).height();
+                var width = $(window).width();
+                baoapp.helper.mapopen(data.shop.lng,data.shop.lat,0,top,width,height-top);
+               // baoapp.helper.frameOpen('content','gps_content.html'+param,height);
+            }else{
+                baoapp.helper.frameOpen('content','../loading_fail.html',height);
+                }
+             });    
+});
+function goback()
+{
+        //baoapp.helper.mapclose();
+        baoapp.helper.goback();
+        uexBaiduMap.close();
+
+}
+</script>
+</html>

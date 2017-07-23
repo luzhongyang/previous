@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+<script>
+function psw(el) {
+        if (el.value == '密码') {
+            el.value = '';
+            el.type = 'password';
+        }
+    }
+function txt(el) {
+	if (!el.value) {
+		el.type = 'text';
+		el.value = '密码';
+	}
+}
+</script>
+</head>
+
+<body>
+<div class="login_top">
+    <div class="login_topnr">
+        <div class="left login_topt">BAOCMS商户管理中心</div>
+        <div class="right">
+            <ul>
+            	<li class="left login_topli"><a href="#">回到首页</a></li>
+                <li class="left login_topli sjgl_toplixl"><span>下载商户中心手机客户端<em></em></span>
+                	<div class="shadow login_topxl"><img src="../sjimages/login_wx_03.jpg" /><p>扫一扫，更方便</p></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="login_nr">
+    <div class="left login_nr_l"><img src="../sjimages/loginimg_03.png" /></div>
+    <div class="left login_nr_r">
+        <div class="radius3 login_intnr">
+            <div class="login_t">商家登录</div>
+            <div class="login_intBox">
+                <div class="login_intyz">
+                    <input type="text" value="支持QQ号/邮箱/手机号登录" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" class="radius3 tuanfabu_int loginintw" />
+                </div>
+                <div class="login_intyz">
+                    <input type="text" value="密码" onfocus="psw(this)" onblur="txt(this)" class="radius3 tuanfabu_int loginintw" />
+                </div>
+                <div class="login_intyz"><input type="text" value="验证码" onblur="if (!value) { value = defaultValue; this.style.color = '#999' }" onclick="if (value == defaultValue) { value = ''; this.style.color = '#000' }" class="radius3 tuanfabu_int loginintw loginintw2" /><span class="login_yzm"><a href="#"><img src="../img/login_yzm_06.jpg" width="75" height="36" /></a></span></div>
+                <div class="login_intyz">
+                    <input class="radius3 mask_an mask_qd login_dl" type="button" value="登 录" /><input class="radius3 mask_an login_dl" type="button" value="入 驻" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<include  file='public:header'/>
+<script src = "__TMPL__statics/js/elecart.js?v=20150822" ></script>
+<script>
+    $(function () {
+        if ($('#shangjia_tab').length > 0)/*判断是否存在这个html代码*/
+        {
+            $('#shangjia_tab li').width(100 / $('#shangjia_tab li').length + '%');
+            $('.page-center-box').css('top', '0.9rem');
+        }//头部切换tab结束
+        if ($('.elePrompt').length > 0 && $('#shangjia_tab').length > 0)/*判断是否存在这个html代码*/
+        {
+            $('#shangjia_tab').css('top', '0.9rem');
+            $('.page-center-box').css('top', '1.3rem');
+        } else if ($('.elePrompt').length > 0 || $('#shangjia_tab').length > 0) {
+            $('.page-center-box').css('top', '0.9rem');
+        }//头部提示结束
+        $(".frame-set-left ul li").click(function(){
+            $(".frame-set-left ul li").removeClass('active');
+            $(this).addClass('active');
+            var cate = $(this).attr('rel');
+            if(cate == 'all'){
+                $('.list-box').show();
+            }else{
+                $('.list-box').hide();
+                $('.'+ cate).show();
+            }
+        }); 
+    });
+</script>
+<?php if(!$is_app){?>
+<header>
+    <a <if condition="!$goods_id">href="<{:AppLink('index/index')}>"<else/>href="<{:AppLink('mall/detail',array('goods_id'=>$goods_id))}>"</if> ><i class="icon-goback"></i></a>
+    <div class="title"><{$detail.weidian_name}></div>
+</header>
+<?php }?>
+<!--头部切换开始-->
+<ul id="shangjia_tab">
+    <li><a href="<{:AppLink('mart/lists',array('id'=>$detail['id']))}>" class="on">商品</a></li>
+    <li><a href="<{:AppLink('mart/shopdetail',array('id'=>$detail['id']))}>">详情</a></li>
+    <li><a href="<{:AppLink('mart/dianping',array('id'=>$detail['id']))}>">评价</a></li>
+</ul>
+<!--头部切换结束-->
+<div id="app_nav" class="page-center-box mt10">
+    <div class="frame-set-left">
+        <ul>
+            <li class="active" rel="all"><a href="javascript:void(0);">全部分类</a></li>
+            <foreach name="autocates" item="item">
+                <li rel="cate_<{$item.cate_id}>"><a href="javascript:void(0);"><{$item.cate_name}></a></li>
+            </foreach>
+        </ul>
+    </div>
+    <div class="frame-set-right">
+        <div id="scroll">
+            <div class="list-have-pic">
+                <div class="eleList_box">
+                    <foreach name="list" item="var">
+                        <php>$save = $var['price'] - $var['mall_price'];</php>
+                        <div class="list-box cate_<{$var.shopcate_id}>">
+                            <div class="list-img">
+                                <img src="__ROOT__/attachs/<{$var.photo}>">
+                            </div>
+                            <div class="list-content">
+                                <p class="overflow_clear"><{$var.title}></p>
+                                <p class="overflow_clear">下单立减<{:round($save/100,2)}>元</p>
+                                <p class="price fontcl1"><{:round($var['mall_price']/100,2)}>元<del><{:round($var['price']/100,2)}>元</del></p>
+                                <div class="num-input">
+                                    <div class="btn" val="<{:round($var['mall_price']/100,2)}>" gid="<{$var.goods_id}>" onclick="dec(this);">-</div>
+                                    <div class="input"><input type="text" readonly="readonly" class="ordernum" value="<{$var.cart_num|default='0'}>" /></div>
+                                    <div class="btn active jq_addcart" val="<{:round($var['mall_price']/100,2)}>" gid="<{$var.goods_id}>" onclick="addcart(this);" >+</div>
+                                </div>
+                            </div>
+                        </div>
+                    </foreach>
+                </div>
+                
+            </div>                
+        </div>
+    </div>
+</div>
+<footer class="footer-cart eleFooter-cart">
+    <div class="cart">
+        <a href="<{:AppLink('mart/cart',array('id'=>$detail['id'],'goods_id'=>$goods_id))}>"><div class="cart-num" id="num"></div></a>
+    </div>
+    <div class="price">￥<span id="total_price"></span></div>
+    <div class="btn"><a href="<{:AppLink('mart/cart',array('id'=>$detail['id']))}>" style="color:#FFFFFF;">确认下单</a></div>
+</footer>
+</body>
+<!--JS 购物车-->
+<script type="text/javascript">
+    function addcart(o) {
+        var data = {}, shop_id = "<{$detail['shop_id']}>";
+        data['goods_id'] = $(o).attr('gid');
+        data['price'] = $(o).attr('val');
+        var v = $(o).parent().find(".ordernum").val();
+        if(v < 99){
+            v++;
+            $(o).parent().find(".ordernum").val(v);
+        }
+        window.mall.addcart(shop_id, data);
+        $("#num").text(window.mall.count(shop_id));
+        $("#total_price").html(parseFloat(window.mall.totalprice(shop_id)).toFixed(2));
+    }
+    
+    function dec(e) {
+        var goods_id = $(e).attr('gid'), shop_id = "<{$detail['shop_id']}>";
+        window.mall.dec(shop_id, goods_id);
+        var v = $(e).parent().find(".ordernum").val();
+        if(v > 0){
+            v--;
+            $(e).parent().find(".ordernum").val(v);
+        }
+        $("#num").text(window.mall.count(shop_id));
+        $("#total_price").html(parseFloat(window.mall.totalprice(shop_id)).toFixed(2));
+    }
+//初始化购物城数据
+    ~function () {
+        var count = window.mall.count("<{$detail['shop_id']}>");
+        var totalprice = parseFloat(window.mall.totalprice("<{$detail['shop_id']}>")).toFixed(2);
+        $("#num").text(count);
+        $("#total_price").html(totalprice);
+    }();
+</script>
+</html>

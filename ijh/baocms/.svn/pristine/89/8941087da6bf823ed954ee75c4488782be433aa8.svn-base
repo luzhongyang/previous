@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>微店-商品详情</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body id="micro_shop">
+<header> <i class="icon-goback"></i>
+    <div class="title">商品详情</div>
+    <i class="icon-menu" id="ico_1"></i> 
+</header>
+<div id="sell" class="page-center-box">
+    <div id="scroll">
+        <!-- BANNER图 -->
+        <div class="seat-banner">
+            <a href="javacript:;">
+                <img src="img/tp62.png" width="100%" height="100%"/>
+                <div class="shade"></div>
+                <div class="shade-content">
+                    <p>纯棉布麻布桌艺 小清新简</p>
+                </div>
+            </a>
+        </div>
+        <!-- 评分 -->
+        <div class="point">
+            <div class="point-left">
+                <div><span class="mall-price">￥12 </span> <del> ￥20</del><span class="mall-num">已售：14</span></div>
+            </div>
+            <div class="point-right">
+                <a href="#" class="btn">立即购买</a>
+            </div>
+        </div>
+        <div class="mall-point">
+            <h4>老把式蛋挞王</h4>
+            <p>仅售12.8元！价值18元的老把式蛋挞王美味葡式蛋挞1盒（12个装） 。</p>
+        </div>
+        <!-- 地址 -->
+        <div class="mall-style">
+            <ul>
+                <li><img src="img/tp63.png"></li>
+                <li><img src="img/tp64.png"></li>
+                <li><img src="img/tp65.png"></li>
+            </ul>
+            <ul>
+                <li>支持配送到家</li>
+                <li>支持随时退</li>
+                <li>过期自动退</li>
+            </ul>
+        </div>
+        <div class="mall-our">
+            <span class="mall-fen"><a href=""><img src="img/tp9.png"><span>分享</span></a></span> 
+            <span class="mall-fen"><a href=""><img src="img/icon-sc.png"><span>收藏</span></a></span>           
+        </div>
+        <div class="mall-our">
+            <a href="" class="mall-more">查看商品详情>></a>        
+        </div>
+        <div class="spread-intro">
+            <ul>
+                <li class="spread-tui">商品详情</li>
+                <li>
+                    <div class="micro_shop_xq">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>商品名称</td>
+                                <td>单价</td>
+                                <td>数量/规格</td>
+                                <td>小计</td>
+                            </tr>
+                            <tr>
+                                <td>葡式蛋挞</td>
+                                <td>¥18</td>
+                                <td>1盒/12只</td>
+                                <td>¥18</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="spread-intro">
+            <ul>
+                <li>
+					<div class="micro_shop_xqImg"><img src="img/tp70.png" /></div>
+                </li>
+            </ul>
+        </div>
+        <div class="spread-intro">
+            <ul>
+                <li class="spread-tui">购买须知</li>
+                <li>
+                	<div class="micro_shop_xqXz">
+                    	<p>有效期：2013.7.16 至 2015.8.7</p>
+                        <p>不可用日期：有效期内周末、法定节假日通用</p>
+                        <p>美团券使用时间：09:30-21:30</p>
+                        <p>是否预约：无需预约，消费高峰可能需要等位</p>
+                        <p>其他优惠：凭美团券到店消费不可同时享受店内其他优惠</p>
+                        <p>自定义：每张美团券建议1人使用</p>
+                        <p>本单不提供餐巾纸和餐具</p>
+                        <p>仅限餐前外带，商家提供免费打包</p>
+                        <p>酒水、饮料等问题，请致电商家咨询，以商家反馈为准</p>
+                    </div>   
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

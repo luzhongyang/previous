@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>添加地址</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <i class="icon-goback" onclick="baoapp.helper.goback();"></i>
+        <div class="title">添加地址</div>
+    </header>
+    <script>
+    appcan.ready(function(){
+            var height = baoapp.helper.adapt();
+            get_city();
+            $('#submit').click(function(){
+                with(baoapp.helper){
+                    if(!islogin()){
+                        toast("登录状态失效,请重新登录!",500,function(){
+                            linkTo('login','../login.html');
+                        },1)
+                        return false;
+                    }
+                    var name = $("#name").val();
+                    var mobile = $("#mobile").val();
+                    var addr = $("#addr").val();
+                    var city_id = $("#city_id").val();
+                    var area_id = $("#area_id").val();
+                    var business_id = $("#business_id").val();
+                    if(!name){
+                        toast("请输入用户名!",1500,null,1);
+                        return false;
+                    }else if(!mobile){
+                        toast("请输入手机号码!",1500,null,1);
+                        return false;
+                    }else if(!addr){
+                        toast("请输入地址!",1500,null,1);
+                        return false;
+                    }
+                    var data = {name:name,mobile:mobile,addr:addr,city_id:city_id,area_id:area_id,business_id:business_id};
+                    var url = createUrl('mcenter','add_addr');
+                    baoapp.helper.ayscLoad(url,data,'GET','json',function(data){
+                            if(CONST.BAO_REQUEST_SECCUSS===data.status || data.status === 200){
+                                toast("地址添加成功!",1500,function(){
+                                    linkTo('addr','addr.html','',5);
+                                },1)    
+                            }else if(CONST.BAO_LOGIN_ERROR===data.status){
+                                toast("地址添加失败",1500,null,1)   ;
+                            }else{
+                                toast(data.msg,1500,null,1);
+                                linkTo('addr','addr.html','',5);
+                            }
+                        });
+                }
+            });
+        })
+
+    </script>
+  <div id="content">
+
+	<div id="personal" class="page-center-box">
+        <div id="scroll">
+        	<div class="address">
+            	<div class="list-box">
+                    <ul id="login-input">
+                    	<li>
+                        	<select name="data[city_id]" id="city_id" class="manageSelect">
+                                <option value="0">请选择...</option>
+                            </select>
+                        </li>
+                        <li>
+                        	<select name="data[area_id]" id="area_id" class="manageSelect">
+                                <option value="0">请选择...</option>
+                            </select>
+                        </li>
+                        <li>
+                        	<select name="data[business_id]" id="business_id" class="manageSelect">
+                                <option value="0">请选择...</option>
+                            </select>
+                        </li>
+                        <li>
+                        	<div><input id="name" type="text" placeholder="姓名"></div>
+                        </li>
+                        <li>
+                        	<div><input id="mobile" type="tel" placeholder="联系电话"></div>
+                        </li>
+                        <li>
+                        	<div><input id="addr" type="text" placeholder="地址"></div>
+                        </li>
+                    </ul>
+                </div>                
+                <div type="submit" class="personal-add-btn" id='submit'>确认</div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer>
+       <script src='../js/application.footer.js'></script>
+    </footer>
+</body>
+</html>
+
+<script>
+    function get_city(){
+        var cached = baoapp.helper.cacheExpireRead(KEY.GET_CITY);
+        var data = {'name' : 'cityareas'}; 
+        var url = baoapp.helper.createUrl('datas','cab_app',data);
+        if(!cached){
+            //baoapp.helper.toast('正在加载中...');
+            baoapp.helper.ayscLoad(url,data,'GET','json',function(data){
+                if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                      baoapp.helper.cacheExpireWrite(KEY.GET_CITY,JSON.stringify(data['cityareas']));
+                      get_citys(KEY.GET_CITY);
+                }
+            });
+         }else{
+            get_citys(KEY.GET_CITY);
+         }
+    }
+    
+</script>
+
+
+<script>
+    function get_citys(key){
+        var cityareas = baoapp.helper.cacheExpireRead(key);
+        cityareas = JSON.parse(cityareas);
+        
+        var city_id = 1;
+        var area_id = 0;
+        var business_id = 0;
+        var city_str = ' <option value="0">请选择...</option>';
+        for (a in cityareas.city) {
+            if (city_id == cityareas.city[a].city_id) {
+                city_str += '<option selected="selected" value="' + cityareas.city[a].city_id + '">' + cityareas.city[a].name + '</option>';
+            } else {
+                city_str += '<option value="' + cityareas.city[a].city_id + '">' + cityareas.city[a].name + '</option>';
+            }
+        }
+        $("#city_id").html(city_str);
+
+        $("#city_id").change(function () {
+            if ($("#city_id").val() > 0) {
+                city_id = $("#city_id").val();
+                var area_str = ' <option value="0">请选择...</option>';
+                for (a in cityareas.area) {
+                    if (cityareas.area[a].city_id == city_id) {
+                        if (area_id == cityareas.area[a].area_id) {
+                            area_str += '<option selected="selected" value="' + cityareas.area[a].area_id + '">' + cityareas.area[a].area_name + '</option>';
+                        } else {
+                            area_str += '<option value="' + cityareas.area[a].area_id + '">' + cityareas.area[a].area_name + '</option>';
+                        }
+                    }
+                }
+                $("#area_id").html(area_str);
+                $("#business_id").html('<option value="0">请选择...</option>');
+            } else {
+                $("#area_id").html('<option value="0">请选择...</option>');
+                $("#business_id").html('<option value="0">请选择...</option>');
+            }
+
+        });
+
+        if (city_id > 0) {
+            var area_str = ' <option value="0">请选择...</option>';
+            for (a in cityareas.area) {
+                if (cityareas.area[a].city_id == city_id) {
+                    if (area_id == cityareas.area[a].area_id) {
+                        area_str += '<option selected="selected" value="' + cityareas.area[a].area_id + '">' + cityareas.area[a].area_name + '</option>';
+                    } else {
+                        area_str += '<option value="' + cityareas.area[a].area_id + '">' + cityareas.area[a].area_name + '</option>';
+                    }
+                }
+            }
+            $("#area_id").html(area_str);
+        }
+
+
+        $("#area_id").change(function () {
+            if ($("#area_id").val() > 0) {
+                area_id = $("#area_id").val();
+                var business_str = ' <option value="0">请选择...</option>';
+                for (a in cityareas.business) {
+                    if (cityareas.business[a].area_id == area_id) {
+                        if (business_id == cityareas.business[a].business_id) {
+                            business_str += '<option selected="selected" value="' + cityareas.business[a].business_id + '">' + cityareas.business[a].business_name + '</option>';
+                        } else {
+                            business_str += '<option value="' + cityareas.business[a].business_id + '">' + cityareas.business[a].business_name + '</option>';
+                        }
+                    }
+                }
+                $("#business_id").html(business_str);
+            } else {
+                $("#business_id").html('<option value="0">请选择...</option>');
+            }
+
+        });
+
+        if (area_id > 0) {
+            var business_str = ' <option value="0">请选择...</option>';
+            for (a in cityareas.business) {
+                if (cityareas.business[a].area_id == area_id) {
+                    if (business_id == cityareas.business[a].business_id) {
+                        business_str += '<option selected="selected" value="' + cityareas.business[a].business_id + '">' + cityareas.business[a].business_name + '</option>';
+                    } else {
+                        business_str += '<option value="' + cityareas.business[a].business_id + '">' + cityareas.business[a].business_name + '</option>';
+                    }
+                }
+            }
+            $("#business_id").html(business_str);
+        }
+        $("#business_id").change(function () {
+            business_id = $(this).val();
+        });
+        
+    }
+    
+    
+</script>

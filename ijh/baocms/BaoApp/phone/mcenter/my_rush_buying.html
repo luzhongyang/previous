@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>首页</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/layer/layer.js"></script>
+        <script src="js/public.js"></script>
+    </head>  
+<body>
+    <header>
+        <a href="#"><i class="icon-goback"></i></a>
+        <div class="title">我的抢购</div>
+        <i class="icon-menu"></i>
+    </header>
+    <!-- 筛选TAB -->
+    <script type="text/javascript">
+		$(function(){
+			$(".buy-bar span").each(function(e){
+				$(this).click(function(){
+					$(".buy-bar span").removeClass("on");
+					$(this).addClass("on");
+					$(".buy-list").each(function(s){
+						if(e==s){
+							$(".buy-list").hide();
+							$(this).show();
+						}
+					});
+				});
+			});
+		});
+	   appcan.ready(function{
+	       var height = baoapp.helper.adapt();
+	   })
+	</script>
+    <div class="buy-bar">
+        <a href="#"><span class="buy-bar-span2 on">待付款</span></a>
+        <a href="#"><span class="buy-bar-span">已完成</span></a>
+    </div>
+    <div id="life" class="page-center-box">
+
+        <div id="scroll">
+
+            <div class="list-have-pic buy-list">
+            	<!-- 循环 -->
+                <div class="list-box">
+                    <div class="list-img">
+                        <a href="#"><img src="img/tp17.png" /></a>
+                    </div>
+                    <div class="buy-content">
+                        <p><span class="fl overflow_clear" style=" width:60%;"><a href="#">[临平路/和平公园] 【靓灶·民间菜】</a></span><span class="fr"><a class="order_detail" href="#">详情</a></span></p>
+                        <p><span class="spread-money">总价：￥60</span><span class="spread-money2">数量：2</span></p>
+                        <p class="spread-for">
+                            等待付款
+                        </p>
+                        <a style="color:#fff;"  href="#" class="button">取消</a>
+                        <a style="color:#fff;"  href="#" class="button2">付款</a>
+                    </div>
+                </div>
+                <!-- 循环 -->
+            </div>
+			<div class="list-have-pic buy-list" style="display:none;">
+            	<!-- 循环 -->
+                <div class="list-box">
+                    <div class="list-img">
+                        <a href="#"><img src="img/tp17.png" /></a>
+                    </div>
+                    <div class="buy-content">
+                        <p><span class="fl overflow_clear" style=" width:60%;"><a href="#">[临平路/和平公园] 【靓灶·民间菜】</a></span><span class="fr"><a class="order_detail" href="#">详情</a></span></p>
+                        <p><span class="spread-money">总价：￥60</span><span class="spread-money2">数量：2</span></p>
+                        <p class="spread-for">
+                           已完成 
+                        </p>
+                    </div>
+                </div>
+                <!-- 循环 -->
+            </div>
+        </div>
+    </div>
+	<footer>
+        <div>
+            <a href="#">
+                <div class="icon i-1"></div>
+                <p>首页</p> 
+            </a>
+        </div>
+        <div>
+            <a href="#">
+                <div class="icon i-2"></div>
+                <p>抢购</p>
+            </a>
+        </div>
+        <div>
+            <a href="#">
+                <div class="icon i-3"></div>
+                <p>优惠券</p>
+            </a>
+        </div>
+        <div>
+            <a href="#">
+                <div class="icon i-4"></div>
+                <p>我的</p>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+	$(".share").click(function(){
+		$(".share_mask").show();
+	});
+	$(".mask .cancel").click(function(){
+		$(this).parents(".mask").hide();
+	});
+});
+</script>
+</head>
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">我的</div>
+    <i class="right"><a href="#" id="icon_code"></a></i>
+</header>
+<div class="mask share_mask">
+	<div class="cont">
+        <div class="nr">
+            <h3>分享到</h3>
+            <ul>
+                <li>
+                	<a href="#">
+                    	<i class="ico_1"></i>
+                    	<p>微信</p>
+                    </a>
+                </li>
+                <li>
+                	<a href="#">
+                    	<i class="ico_2"></i>
+                    	<p>QQ空间</p>
+                    </a>
+                </li>
+                <li>
+                	<a href="#">
+                    	<i class="ico_3"></i>
+                    	<p>腾讯QQ</p>
+                    </a>
+                </li>
+                <li>
+                	<a href="#">
+                    	<i class="ico_4"></i>
+                    	<p>腾讯微博</p>
+                    </a>
+                </li>
+                <li>
+                	<a href="#">
+                    	<i class="ico_5"></i>
+                    	<p>新浪微博</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <a href="#" class="cancel">取消</a>
+    </div>
+</div>
+<section id="personal" class="page_center_box">
+	<div class="infor">
+    	<div class="img"></div>
+        <p>13515608638</p>
+    </div>
+    <ul class="infor_list mb10">
+        <li>
+        	<a href="#">
+            	12
+            	<p><em class="ico_1"></em>余额</p>
+           	</a>
+        </li>
+        <li>
+        	<a href="#">
+            	12
+            	<p><em class="ico_2"></em>积分</p>
+           	</a>
+        </li>
+        <li>
+        	<a href="#">
+            	12
+            	<p><em class="ico_3"></em>关注</p>
+           	</a>
+        </li>
+    </ul>
+    <ul class="list_box">
+        <li>
+        	<a href="#"><em class="ico_1"></em>抢购券</a>
+        </li>
+        <li>
+        	<a href="#"><em class="ico_2"></em>充值</a>
+        </li>
+        <li>
+        	<a href="#" class="share"><em class="ico_3"></em>分享</a>
+        </li>
+        <li>
+        	<a href="#"><em class="ico_4"></em>我的关注</a>
+        </li>
+        <li>
+        	<a href="#"><em class="ico_5"></em>我的订单</a>
+        </li>
+        <li>
+        	<a href="#"><em class="ico_6"></em>个人信息</a>
+        </li>
+    </ul>
+    <a href="#" class="long_btn">退出登录</a>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico1"></i>
+        <p>生活宝</p>
+		</a>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico2"></i>
+        <p>关注</p>
+		</a>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico3"></i>
+        <p>我的</p>
+		</a>
+    </div>
+</footer>
+</body>
+</html>

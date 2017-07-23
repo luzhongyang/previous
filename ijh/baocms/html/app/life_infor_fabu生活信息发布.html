@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>生活信息发布</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body id="life_add">
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">生活信息发布</div>
+        <i class="icon-menu" style="margin-right:0.30rem;"><a href="#">发布</i>
+		<i class="icon-menu" id="ico_6"></i></a>
+	</header>
+	<div class="page-center-box">
+		<div class="scroll">
+        	<div class="Upload-img-box">
+            	<div class="Upload-btn"><input type="file">上传图片</div>
+                <div class="Upload-img">
+                	<div class="list-img"><img src=""></div>
+                    <div class="list-img"><img src=""></div>
+                    <div class="list-img"><img src=""></div>
+                </div>
+            </div>
+			<div id="login-input">
+                <input type="text" placeholder="标题" />
+                <input type="text" placeholder="新旧程度" />
+                <input type="text" placeholder="原价" />
+                <input type="text" placeholder="现价" />
+            </div>
+            <script>
+				$(function(){
+					$(function(){
+						$(".life-infor-pull").click(function(){
+							if($(this).find(".seat-btn-pull-down").css("display")=='block'){
+								$(".seat-btn-pull-down").hide();
+								$(this).find(".seat-btn-pull-down").hide();
+							}
+							else{
+								$(".seat-btn-pull-down").hide()
+								$(this).find(".seat-btn-pull-down").show();
+							}
+							if($(this).find("i").hasClass("on")){
+								$(".life-infor-pull").find("i").removeClass("on");
+								$(this).find("i").removeClass("on");
+							}
+							else{
+								$(".life-infor-pull").find("i").removeClass("on");
+								$(this).find("i").addClass("on");
+							}
+						});
+						$(".seat-btn-pull-down li").click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+							$(this).parents(".life-infor-pull").find("input").val($(this).find("a").html());
+						});
+					});
+				});
+			</script>
+            <div id="login-input">
+                <div class="regist-code life-infor-pull"><input type="text" placeholder="供求" value="" /><i></i>
+                	<div class="seat-btn-pull-down">
+                        <ul>
+                            <li><a href="#">供应</a></li>
+                            <li><a href="#">求购</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="login-input">
+                <div class="regist-code life-infor-pull"><input type="text" placeholder="品牌" value="" /><i></i>
+                	<div class="seat-btn-pull-down">
+                        <ul>
+                            <li><a href="#">品牌一</a></li>
+                            <li><a href="#">品牌二</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="login-input">
+                <div class="regist-code life-infor-pull"><input type="text" placeholder="价格" value="" /><i></i>
+                	<div class="seat-btn-pull-down">
+                        <ul>
+                            <li><a href="#">0-100元</a></li>
+                            <li><a href="#">100-500元</a></li>
+                            <li><a href="#">500-1000元</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="login-input">
+                <div class="regist-code life-infor-pull"><input type="text" placeholder="所在区域" value="" /><i></i>
+                	<div class="seat-btn-pull-down">
+                        <ul>
+                            <li><a href="#">瑶海区</a></li>
+                            <li><a href="#">包河区</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="login-input">
+                <div class="regist-code life-infor-pull"><input type="text" placeholder="所在商圈" value="" /><i></i>
+                	<div class="seat-btn-pull-down">
+                        <ul>
+                            <li><a href="#">淮河路步行街</a></li>
+                            <li><a href="#">芜湖路万达</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="life-infor-p">所在坐标</p>
+            <div id="login-input" class="life-infor-float">
+                <div class="left"><span>经度：</span><input type="text" /></div>
+                <div class="right"><span>纬度：</span><input type="text" /></div>
+            </div>
+            <p class="life-infor-p">所在坐标</p>
+            <div class="life-infor-float">
+            	
+            </div>
+            <div class="wap-form">
+				<ul>
+                    <script>
+						$(function(){
+							$(".seat-check input").click(function(){
+								$(this).parents(".seat-check").find("label").removeClass("on");
+								$(this).parent("label").addClass("on");
+							});
+						});
+                    </script>
+					<li><input type="text" placeholder="联系人" /><div class="seat-check"><label class="on"><input checked name="sex" type="radio"></label>男<label><input name="sex" type="radio"></label>女</div></li>
+                    <li><input type="text" placeholder="电话" /></li>
+                    <li><input type="text" placeholder="QQ" /></li>
+                    <li><input type="text" placeholder="地址" /></li>
+                    <li class="integral"><textarea name="" placeholder="详细描述.."></textarea></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<footer class="footer-cart">
+		<a href="#" class="btn-long">免费发布</a>
+	</footer>
+    
+   
+</body>
+</html>

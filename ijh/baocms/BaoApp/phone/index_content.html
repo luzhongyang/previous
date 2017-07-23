@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<script src="js/appcan.js"></script>
+<script src="js/appcan.control.js"></script>
+<script src="js/zy_control.js"></script>
+<script src="js/application.js"></script>
+</head>
+<body>
+
+<div id="index" class="page-center-box">
+        
+        <div id="scroll">
+            <!-- 广告 -->
+            <div class="ads">
+                <script src="js/jquery-1.7.1.min.js"></script>
+                <script type="text/javascript" src="js/jquery.event.drag-1.5.min.js"></script>
+                <script type="text/javascript" src="js/jquery.touchSlider.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $(".main_image").touchSlider({
+                            flexible : true,
+                            speed : 200,
+                            btn_prev : $("#btn_prev"),
+                            btn_next : $("#btn_next"),
+                            paging : $(".flicking_con a"),
+                            counter : function (e){
+                                $(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+                            }
+                        });
+                        
+                        $(".main_image").bind("mousedown", function() {
+                            $dragBln = false;
+                        });
+                        
+                        $(".main_image").bind("dragstart", function() {
+                            $dragBln = true;
+                        });
+                        
+                        $(".main_image a").click(function(){
+                            if($dragBln) {
+                                return false;
+                            }
+                        });
+                        
+                        timer = setInterval(function(){
+                            $("#btn_next").click();
+                        }, 5000);
+                        
+                        $(".ele_banner").hover(function(){
+                            clearInterval(timer);
+                        },function(){
+                            timer = setInterval(function(){
+                                $("#btn_next").click();
+                            },5000);
+                        });
+                        
+                        $(".main_image").bind("touchstart",function(){
+                            clearInterval(timer);
+                        }).bind("touchend", function(){
+                            timer = setInterval(function(){
+                                $("#btn_next").click();
+                            }, 5000);
+                        });
+                        
+                    });
+                </script>
+                
+                <div class="ele_banner">
+                    <div class="flicking_con">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                    </div>
+                    <div class="main_image">
+                        <ul>
+                            <li>
+                                <div class="cate">
+                                    <div onclick="window.cat(1);">
+                                        <a ><div class="icon"><img src="img/fl_ico_1.png"></div>
+                                        <p>美食</p></a>
+                                    </div>
+                                    <div onclick="window.cat(34);">
+                                        <a ><div class="icon"><img src="img/fl_ico_2.png"></div>
+                                        <p>休闲</p></a>
+                                    </div>
+                                    <div onclick="window.cat(35);">
+                                        <a ><div class="icon"><img src="img/fl_ico_3.png"></div>
+                                        <p>酒店</p></a>
+                                    </div>
+                                    <div onclick="window.cat(37);">
+                                        <a><div class="icon"><img src="img/fl_ico_4.png"></div>
+                                        <p>购物</p></a>
+                                    </div>
+                                    <div onclick="window.cat(39);">
+                                        <a ><div class="icon"><img src="img/fl_ico_5.png"></div>
+                                        <p>生活</p></a>
+                                    </div>
+                                    <div onclick="window.cat(36);">
+                                        <a ><div class="icon"><img src="img/fl_ico_6.png"></div>
+                                        <p>丽人</p></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cate">
+                                    <div onclick="window.cat(40);">
+                                        <a ><div class="icon"><img src="img/fl_ico_7.png"></div>
+                                        <p>亲子</p></a>
+                                    </div>
+                                    <div onclick="window.cat(41);">
+                                        <a ><div class="icon"><img src="img/fl_ico_8.png"></div>
+                                        <p>结婚</p></a>
+                                    </div>
+                                    <div onclick="window.cat('all');">
+                                        <a><div class="icon"><img src="img/fl_ico_9.png"></div>
+                                        <p>全部</p></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <a id="btn_prev"></a>
+                    <a id="btn_next"></a>
+                </div>
+            </div>
+
+
+            <!-- 列表 -->
+            <div class="list-have-pic">
+                <div class='title'>热门抢购</div>
+                <!-- 循环 -->
+                <div class="list-box rush-box">
+                    <div>
+                        <div id="load">
+                           
+                            <!--列表-->
+                            
+                            <!--Node-->  
+                                   
+                        </div>           
+                    </div>
+                    <!-- 循环 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!--自定义模板-->    
+<script type='text/template' id="tmpl_index_list">
+    <div class="rush-content" onclick="todetail(%tuan_id%)">
+        <div class="list-img">
+           <a href="#"><img src="%thumb%"></a>
+        </div>
+        <div class="list-content">
+          <a href="#">
+            <p class="overflow_clear">%title%</p>
+            <p class="c_h h15 overflow_clear">%info%</p>
+            <p>
+                <span class="price price-two">%tuan_price%元</span>
+                <del>&yen;%price%</del>
+                %mobile_fan%
+                
+            </p>
+            <p><span class="fl sell">已售:%sold_num%</span><span class="fr rush-long">距离:%d%</span></p>
+          </a>
+        </div>
+    </div>
+</script>
+
+<!--自定义方法-->
+<script>
+function createNode(data)
+{      
+    with(document){
+        var spanNode = createElement('span'),
+            tmpl     = getElementById('tmpl_index_list').innerHTML;
+           
+            for(key in data){
+               regExp = new RegExp('%'+key+'%', 'g');
+               tmpl = tmpl.replace(regExp, data[key]); 
+            }
+            spanNode.innerHTML = tmpl;
+            querySelector('#load').appendChild(spanNode);
+    }
+}
+/*
+ * 填充数据,渲染列表
+ */
+function renderList(datas)
+{
+   //情况列表容器
+   document.querySelector('#load').innerHTML = '';
+   for(i in datas){
+       createNode(datas[i]);
+   }
+}
+
+//打开详细页面
+function todetail(tuan_id)
+{
+    with(baoapp.helper){
+        linkTo(KEY.TUAN_DETAIL,'tuan/detail.html?tuan_id='+tuan_id,null,5);
+    };
+}
+//分类跳转
+window.cat = function(cat_id)
+{
+    with(baoapp.helper){
+        linkTo(KEY.TUAN_CAT,'tuan/cata.html',null,2);
+    };
+}
+</script>
+
+<script>
+appcan.ready(function(){ 
+     //读取缓存
+    var cached = baoapp.helper.cacheExpireRead(KEY.INDEX_TUAN);
+        cached = JSON.parse(cached);
+
+    var data     = [];
+    var http_url = baoapp.config.attachs;
+ 
+    for(index in cached){
+        data[index] = {
+        	tuan_id: cached[index]['tuan_id'],
+        	thumb: http_url+cached[index]['photo'],
+        	info: cached[index]['intro'],
+        	price: cached[index]['price']/100,
+        	tuan_price: cached[index]['tuan_price']/100,
+        	mobile_fan: cached[index]['mobile_fan']==0?'':"<span class='fan-money'>·手机立减"+(cached[index]['mobile_fan']/100)+"元·</span>",
+        	title: cached[index]['title'],
+        	d: cached[index]['d'],
+        	sold_num: cached[index]['sold_num']
+        };
+    }
+    
+    renderList(data);
+    
+    
+});    
+ 
+</script>
+</html>
+

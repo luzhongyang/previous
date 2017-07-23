@@ -1,0 +1,125 @@
+<foreach name="shops" item="var">
+
+    <div class=" rush-box">
+        <div>
+            <div class="rush-title" style="border-bottom: none 0;">
+                <span class="fl"><a title="<{$var.shop_name}>" href="<{:AppLink('shop/detail',array('shop_id'=>$var['shop_id']))}>"><{$var.shop_name}></a></span>
+                <span class="fr rush-long"><{$var.d}></span>
+                <div class="clear"></div>
+            </div>
+
+            <!--<foreach name="list" item="item">
+                <eq name="item.shop_id" value="$var['shop_id']">
+                <div class="rush-content">
+                    <div class="list-img">
+                        <a href="<{:AppLink('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>" /></a>
+                    </div>
+                    <div class="list-content">
+                        <p class="overflow_clear margin_b"><a href="<{:AppLink('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><{$item.title}></a></p>
+                        <p class="c_h h15 margin_b overflow_clear"><{:$item['intro']}></p>
+                        <if condition="$item['mobile_fan'] gt 0">
+                            <p class="c_h h15 margin_b overflow_clear">手机下单立减￥<{:round($item['mobile_fan']/100,2)}></p>
+                        </if>
+                        <p>
+                            <span class="price price-two">￥<{:round($item['tuan_price']/100,2)}></span> <del>￥<{:round($item['price']/100,2)}></del>
+                            <span class="sell">已售：<{$item.sold_num}></span>
+                        </p>
+                    </div>
+                </div>
+                </eq>
+            </foreach> -->
+            <script>
+                function daojishi(id) {
+                    var t = Math.floor($("#" + id).attr('rel'));
+                    t--;
+                    var d = Math.floor(t / 60 / 60 / 24);
+                    var h = Math.floor(t / 60 / 60 % 24);
+                    var m = Math.floor(t / 60 % 60);
+                    var s = Math.floor(t % 60);
+                    if (d < 10) {
+                        d = '0' + d;
+                    }
+                    if (h < 10) {
+                        h = '0' + h;
+                    }
+                    if (m < 10) {
+                        m = '0' + m;
+                    }
+                    if (s < 10) {
+                        s = '0' + s;
+                    }
+                    $("#" + id).attr('rel', t);
+                    $("#" + id).html(d + ':' + h + ':' + m + ':' + s);
+                }
+            </script>
+            <div id="index">
+                <div class="limit_buy mb10">
+                    <ul class="list_box">
+                        <foreach name="list" item="item">
+                            <eq name="item.shop_id" value="$var['shop_id']">
+                            <php>
+                                $time = time();
+                                $end_date = strtotime($item['end_date']);
+                                $bg_date = strtotime($item['bg_date']);
+                                if($bg_date <= time() && $end_date > time()){
+
+                                $tt = strtotime($item['end_date'])-time();
+                                $item['djs_time'] = $tt;
+                                $item['djs_str'] = '距结束';
+
+                                }elseif($bg_date >time()){
+                                $tt = strtotime($item['bg_date'])-time();
+                                $item['djs_time'] = $tt;
+                                $item['djs_str'] = '距开始';
+
+                                }
+                            </php>
+                            <script type="text/javascript" language="javascript">
+                                setInterval(function () {
+                                    daojishi("daojishi_<{$item.tuan_id}>");
+                                }, 1000);
+                            </script>
+                            <li>
+                                <a href="<{:AppLink('tuan/detail',array('tuan_id'=>$item['tuan_id']))}>">
+                                    <div class="fl">
+                                        <div class="img"><img src="__ROOT__/attachs/<{$item.photo}>"></div>
+                                        <p class="bt overflow_clear"><{$item.title}></p>
+                                        <if condition="!empty($item['djs_time'])">
+                                            <p><em class="clock_ico"></em><{$item['djs_str']}>
+                                                <span id="daojishi_<{$item.tuan_id}>"  rel="<{$item['djs_time']}>" >00:00:00:00</span>
+                                            </p>
+                                        </if>
+                                        </span>
+                                        <p>已售<{$item.sold_num}><span class="price">￥<b><{:round($item['tuan_price']/100,2)}></b></span><del>￥<{:round($item['price']/100,2)}></del></p>
+                                    </div>
+                                </a>
+                                <div class="fr">
+
+                                    <if condition="$end_date egt $time and $bg_date elt $time and $item['num'] gt 0">
+                                        <div class="state bg_1">
+                                            <p>正在抢</p>
+                                            剩余<b><{$item.num}></b>份
+                                        </div>
+                                        <elseif condition="$end_date egt $time and $bg_date elt $time and $item['num'] eq 0"/>
+                                        <div class="state bg_3">
+                                            <p>已抢光</p>
+                                            剩余<b><{$item.num}></b>份
+                                        </div>
+                                        <else/>
+                                        <div class="state bg_2">
+                                            <p>即开抢</p>
+                                            总份<b><{$item.num}></b>份
+                                        </div>
+                                    </if>
+                                </div>
+                            </li>
+                            </eq>
+                        </foreach>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</foreach>

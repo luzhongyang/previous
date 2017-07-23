@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>城市切换</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">城市切换</div>
+		<i class="icon-menu"></i>
+	</header>
+	<div class="page-center-box">
+		<div id="scroll">
+        	<div>
+                <div class="search_container">
+                    <div class="search_box">
+                        <form method="post"  action="" id="form1" class="form1">
+                            <input name="keyword" value="" placeholder="输入城市或字母" >
+                            <input type="submit" class="search_btn" value="搜索">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="city_container">
+                <div class="current_city">当前城市：<a href="">合肥</a></div>
+                <div class="city_list_hot">
+                    <div class="city_list_T">国内热门城市</div>
+                    <ul class="hot_city">
+                        <li  ><a href="#">合肥</a></li><li  ><a href="#">上海</a></li><li class="city_m0" ><a href="#">成都</a></li><li  ><a href="#">深圳</a></li><li  ><a href="#">广州</a></li>            
+                    </ul>
+                </div>
+                <div class="city_list_all">
+                    <div class="item_list_all">
+                        <div class="city_list_T city_letter">C</div>
+                        <ul class="city_list_con">
+                            <li class="city_list_first" ><a href="#">成都</a></li>
+                        </ul>
+                    </div>
+                    <div class="item_list_all">
+                        <div class="city_list_T city_letter">G</div>
+                        <ul class="city_list_con">
+                            <li class="city_list_first" ><a href="#">广州</a></li>
+                        </ul>
+                    </div>
+                    <div class="item_list_all">
+                        <div class="city_list_T city_letter">H</div>
+                        <ul class="city_list_con">
+                            <li class="city_list_first" ><a href="#">合肥</a></li>
+                        </ul>
+                    </div>
+                    <div class="item_list_all">
+                        <div class="city_list_T city_letter">S</div>
+                        <ul class="city_list_con">
+                            <li class="city_list_first" ><a href="#">上海</a></li>
+                            <li><a href="#">深圳</a></li>
+                        </ul>
+                    </div>
+                 </div>
+            </div>
+		</div>
+	</div>
+</body>
+</html>

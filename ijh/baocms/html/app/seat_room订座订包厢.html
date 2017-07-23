@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订座</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">订座预约 - 点包厢</div>
+		<i class="icon-menu" id="ico_1"></i>
+	</header>
+	<!-- 筛选TAB -->
+    <script>
+		$(function(){
+			$(".seat_order_room").each(function(e){
+				$(this).find("a").click(function(){
+					$(".seat_order_room").removeClass("active");
+					$(this).parent(".seat_order_room").addClass("active");
+					$(".seat_order_room_list").each(function(i){
+						if(e==i){
+							$(".seat_order_room_list").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+					});
+				});
+			});
+		});
+	</script>
+	<div id="tab-bar">
+		<ul>
+			<li class="seat_order_room active"><a href="#">1-3人</a></li>
+			<li class="seat_order_room"><a href="#">3-5人</a></li>
+			<li class="seat_order_room"><a href="#">5-10人</a></li>
+			<li class="seat_order_room"><a href="#">10人+</a></li>
+		</ul>
+	</div>
+	<div id="seat" class="page-center-box">
+		<div id="scroll">
+            <div class="seat_order_room_list">
+                <div class="list-pic">
+                    <!-- 循环 -->
+                    <div class="box">
+                        <i></i>
+                        <div><img src="img/banner.jpg" width="100%" height="100%" /><div class="seat-p">消费满480送红酒一瓶红酒一瓶</div></div>
+                        <p>黄山厅</p>
+                        <script>
+						$(function(){
+							$(".check-label input").click(function(){
+								$(this).parent().toggleClass("on");
+							});
+						});
+                    </script>
+                        <label class="check-label"><input type="checkbox"></label>
+                    </div>
+                    <div class="box">
+                        <i></i>
+                        <div><img src="img/banner.jpg" width="100%" height="100%" /><div class="seat-p">消费满480送红酒一瓶红酒一瓶</div></div>                        <p>黄山厅</p>
+                        <label class="check-label"><input type="checkbox"></label>
+                    </div>
+                    <div class="box">
+                        <i></i>
+                        <div><img src="img/banner.jpg" width="100%" height="100%" /><div class="seat-p">消费满480送红酒一瓶红酒一瓶</div></div>                        <p>黄山厅</p>
+                        <label class="check-label"><input type="checkbox"></label>
+                    </div>
+                    <div class="box">
+                        <i></i>
+                        <div><img src="img/banner.jpg" width="100%" height="100%" /><div class="seat-p">消费满480送红酒一瓶红酒一瓶</div></div>                        <p>黄山厅</p>
+                        <label class="check-label"><input type="checkbox"></label>
+                    </div>
+                    <!-- 循环 -->
+                </div>
+            </div>
+            
+            <div class="seat_order_room_list">
+                <div class="list-pic">
+                    <!-- 循环 -->
+                    <div class="box">
+                        <i></i>
+                        <div><img src="img/banner.jpg" width="100%" height="100%" /><div class="seat-p">消费满480送红酒一瓶红酒一瓶</div></div>                        <p>黄山厅</p>
+                        <label class="check-label"><input type="checkbox"></label>
+                    </div>
+                    <div class="box">
+                        <i></i>
+                        <div><img src="img/banner.jpg" width="100%" height="100%" /><div class="seat-p">消费满480送红酒一瓶红酒一瓶</div></div>                        <p>黄山厅</p>
+                        <label class="check-label"><input type="checkbox"></label>
+                    </div>
+                    <div class="box">
+                        <i></i>
+                        <div><img src="img/banner.jpg" width="100%" height="100%" /><div class="seat-p">消费满480送红酒一瓶红酒一瓶</div></div>                        <p>黄山厅</p>
+                        <label class="check-label"><input type="checkbox"></label>
+                    </div>
+                    <div class="box">
+                        <i></i>
+                        <div><img src="img/banner.jpg" width="100%" height="100%" /><div class="seat-p">消费满480送红酒一瓶红酒一瓶</div></div>                        <p>黄山厅</p>
+                        <label class="check-label"><input type="checkbox"></label>
+                    </div>
+                    <!-- 循环 -->
+                </div>
+            </div>
+		</div>
+	</div>
+	<footer class="footer-cart">
+		<div class="btn">直接提交</div>
+		<div class="btn">去点菜</div>
+	</footer>
+</body>
+</html>

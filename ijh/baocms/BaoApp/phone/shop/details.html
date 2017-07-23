@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="target-densitydpi=device-dpi,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订餐</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+</head>
+    
+<body>
+    <script>
+        appcan.ready(function(){
+            with(baoapp.helper){
+            var height = baoapp.helper.adapt();
+           //有缓存数据读缓存,没有网络读取
+             // var url = 'http://www.baocms.cn/index.php?g=app&m=index&a=push&lat=31.836499&lng=117.256057';
+              frameOpen('content','../loading.html',height,function(){
+                     var shop_id = appcan.locStorage.getVal('shop_id')||'';
+                     var data = {shop_id:shop_id};
+                     var url = createUrl('shop','detail',data);
+                     ayscLoad(url,null,'GET','json',function(data){
+                        if(data.status == 200){
+                             //抓取数据写入缓存
+                            cacheExpireWrite(KEY.SHOP_DETAIL, JSON.stringify(data));
+                            frameOpen('content','details_content.html',height);
+                        }else{
+                            frameOpen('content','../loading_fail.html',height);
+                        }
+                    });          
+              });
+           }
+           }
+        )
+    </script>
+	<header id="header" >
+		<a onclick="baoapp.helper.goback();"><i class="icon-goback"></i></a>
+		<div class="title">商家详情</div>
+	</header>
+	<div id="content"></div>
+</body>
+</html>

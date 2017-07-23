@@ -1,0 +1,39 @@
+<foreach name="list" item="item">
+    <!-- 循环 -->
+    <div class="list-box">
+        <div class="list-img">
+            <a href="<{:AppLink('mobile/tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><img src="__ROOT__/attachs/<{$tuans[$item['tuan_id']]['photo']}>"></a>
+        </div>
+        <div class="buy-content">
+            <p class=""><span class="fl overflow_clear" style="width:60%;"><a href="<{:AppLink('mobile/tuan/detail',array('tuan_id'=>$item['tuan_id']))}>"><{$tuans[$item['tuan_id']]['title']}></a></span><span class="fr"><a class="order_detail" href="<{:AppLink('tuan/detail',array('order_id'=>$item['order_id']))}>">详情</a></span></p>
+            <p><span class="spread-money">总价：￥<{:round($item['total_price']/100,2)}></span><span class="spread-money2">数量：<{$item['num']}></span></p>
+            <p class="spread-for">
+                <eq name="item.status" value="0">
+                等待付款
+            <else /> 
+            已付款
+            </eq>
+            </p>
+            <eq name="item.status" value="0">
+            <a style="color:#fff;"  href="<{:AppLink('tuan/delete',array('order_id'=>$item['order_id']))}>" class="button">取消</a>
+            <a style="color:#fff;"  href="<{:AppLink('mobile/tuan/pay',array('order_id'=>$item['order_id']))}>" class="button2">付款</a>
+            <else /> 
+            <php>
+                $tc = D('TuanCode');
+               $rtc = $tc -> where(array('order_id'=>$item['order_id'],'is_used'=>1))->find();
+            </php>
+            <if condition="!empty($rtc)">
+                <a href="javascript:void(0)">已完成</a>
+                <eq name="item.is_dianping" value="0">
+                    <a  href="<{:AppLink('tuan/dianping',array('order_id'=>$item['order_id']))}>">点评</a>
+                <else/>
+                    <a href="javascript:void(0)">已评价</a>
+                </eq>
+            <else/>
+                <a style="color:#fff;" href="javascript:void(0)">已付款</a><a style="color:#fff;" href="javascript:void(0)">未消费</a>
+            </eq>
+            </if>
+        </div>
+    </div>
+    <!-- 循环 -->
+</foreach>

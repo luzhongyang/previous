@@ -1,0 +1,118 @@
+@media screen and (min-width: 240px) and (max-width: 319px){
+    html{font-size:12px;}
+}
+@media screen and (min-width: 320px) and (max-width: 479px){
+    html{font-size:20px;}
+}
+@media screen and (min-width: 480px) and (max-width: 639px){
+    html{font-size:30px;}
+}
+@media screen and (min-width: 640px) and (max-width: 719px){
+    html{font-size:40px;}
+}
+@media screen and (min-width: 720px) and (max-width:967px){
+    html{font-size:48px;}
+}
+
+#test{
+    width:100%
+    height:100%
+     display: -webkit-box;
+     -webkit-box-orient: vertical;
+}
+header{
+     width: 100%;
+     height: 2rem;
+     background:#2FBDAA;
+     display: -webkit-box;
+     -webkit-box-orient: horizontal;
+}
+header .a{display:block;
+    width:2rem;
+    background:#089885; }
+header .b{
+    -webkit-box-flex: 1;
+    display:block;
+    text-align:center;
+    line-height: 2rem;
+    font-size: 0.8rem;
+    color: #FFFFFF;
+}    
+.list{
+    position:absolute;
+    width:99%;
+    top:8rem;
+    bottom:0;
+    padding:0.2rem 0;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    background: #EEEEEE;
+    padding-left:1%; 
+    overflow:auto;
+}
+.list .item{
+    width:100%;
+    height:3rem;
+    display:-webkit-box;
+    -webkit-box-orient:horizontal;
+    padding:0.1rem 0;
+    border-bottom:dashed 0.05rem #DDDDDD;
+}
+.list .item:active{
+    background:#DDDDDD;
+}
+.list .item img{
+    width: 3rem;
+    height:3rem;
+    padding-right:0.1rem;
+}
+.list .item .b{
+    width:2rem;
+}
+.list .item .a{
+    height:3rem;
+    -webkit-box-flex:1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.list .item .a span{
+    display:block;
+    height:1rem;
+    line-height:1rem;
+    padding:0;
+    font-size: 0.6rem;}
+
+.slider-gallery{
+    width:100%;
+    height:6rem;
+    overflow: hidden;
+}
+.slider-gallery .gallery{
+    display:-webkit-box;
+    -webkit-box-orient: horizontal;
+    height:100%;
+}
+.slider-gallery a{
+    display: block;
+    /*width:100%;*/
+    height:100%;
+    text-decoration: none;
+}
+.slider-gallery a img{
+    width:100%;
+    height:100%;
+} 
+.slider-gallery .radio{
+    height: 0.5rem;
+    width: auto;
+    padding:0 1rem;
+    margin-top: -2rem;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+}
+.slider-gallery .radio span{
+    display: block;
+    width:0.5rem;
+    height:0.5rem;
+    background: #FF5555;
+}

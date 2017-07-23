@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-人才招聘-发布招聘</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> <i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">发布招聘</div>
+    <i class="right"></i></header>
+<section>
+    <div class="sh_buy_fabu">
+    	<div class="sh_list_public_box mt10">
+            <ul>
+                <li class="list_box mb10">
+                   <div class="sh_input_public"><span>标题</span><input type="text" value=""></div> 
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_input_public"><span>招聘人数</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_input_public"><span>薪资范围</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_input_public"><span>工作时间</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_input_public"><span>招聘有效期</span><input type="text" value=""></div>
+                </li>
+                <li class="list_box mb10">
+                   <div class="sh_input_public"><span>岗位说明</span><textarea></textarea></div>
+                </li>
+            </ul>
+        </div>
+        <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认发布"></div>
+    </div>
+</section>
+</body>
+</html>

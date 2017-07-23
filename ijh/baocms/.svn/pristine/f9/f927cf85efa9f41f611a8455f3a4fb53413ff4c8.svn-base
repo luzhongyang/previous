@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>
+            BAOCMS安装环境监测
+        </title>
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+        <script src="/Public/js/jquery.js"></script>
+        <link rel="stylesheet" type="text/css" href="/install/template/style.css">
+    </head>
+    <body>
+        <div class="wrap">
+                       <?php require './template/header.html';?>
+			<div class="section">
+                <div class="step">
+                    <ul>
+                        <li class="current"><em>1</em>检测环境</li>
+                        <li><em>2</em>创建数据</li>
+                        <li><em>3</em>完成安装</li>
+                    </ul>
+                </div>
+                <div class="server">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td class="td1">环境检测</td>
+                                <td width="35%" class="td1">当前状态</td>
+                                <td width="25%" class="td1">最低要求</td>
+                            </tr>
+                            <tr>
+                                <td>操作系统</td>
+                                <td>
+                                    <span class="correct_span">√</span><?php echo $sys;?>							</td>
+                                <td>不限制</td>
+                            </tr>
+                            <tr>
+                                <td>web服务器</td>
+                                <td><span class="correct_span">√</span><?php echo $web_server;?></td>
+                                <td>php>=5.3</td>
+                            </tr>
+                            <?php if($PHP_GD){?>
+                            <tr>
+                                <td>支持GD</td>
+                                <td> <span class="correct_span">√</span>
+                                    <?php echo $PHP_GD;?>
+                                </td>
+                                <td>支持</td>
+                            </tr>
+                            <?php }else{ ?>
+                            <tr>
+                                <td>不支持GD</td>
+                                <td> <span class="error_span">X</span>
+
+                                </td>
+                                <td>支持</td>
+                            </tr>
+
+                            <?php }?>
+                            <?php if($CURL){?>    
+                            <tr>
+                                <td>支持CURL</td>
+                                <td><span class="correct_span">√</span>支持								</td>
+                                <td>支持</td>
+                            </tr>
+                            <?php }else{ ?>
+
+
+                            <tr>
+                                <td>支持CURL</td>
+                                <td><span class="error_span">X</span>								</td>
+                                <td>支持</td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td class="td1">目录、文件权限检查</td>
+                                <td width="35%" class="td1">当前状态</td>
+                                <td width="25%" class="td1">所需状态</td>
+                            </tr>
+                            <?php foreach($result as $k=>$v){?>
+                            <tr>
+                                <td><?php echo $k;?></td>
+                                <td><?php if($v){?>
+                                    <span class="correct_span">√</span>
+                                    <?php }else{?>
+                                    <span class="error_span">X</span>
+                                    <?php }?>
+                                </td>
+                                <td>读写</td>
+                            </tr>
+                            <?php }?>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <?php if($is_through ==false) {?>
+                <div style="text-align: center; margin:0 0 15px; color: red;">环境检测失败，请修复以上检测不通过项，再进行下一步安装。</div>
+                <?php }else{?>
+                <div class="bottom tac">
+                    <a href="index.php?action=2" class="btn">重新检测</a>
+
+                    <a href="index.php" class="btn">上一步</a>
+
+                    <a href="index.php?action=3" class="btn">下一步</a>
+                </div>
+                <?php }?>
+            </div>
+        </div>
+        <div class="footer">
+	&copy; Copyright(c) 2014-2018 baocms <a href="http://www.baocms.com" target="_blank">合肥生活宝网络科技有限公司</a>
+        </div>	
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<title>昵称修改</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+
+</head>
+
+<body>
+    <header id="header">
+        <i class="icon-goback" onclick="baoapp.helper.goback();"></i>
+        <div class="title">昵称修改</div>
+        <i></i>
+    </header>
+    <div id="content">
+
+    <div id="personal" class="page-center-box">
+        <div id="scroll" >
+            <div id="login-input">
+            <input type="text" id='nickname' id='nickname'  placeholder="昵称">
+            <input type="submit" class="submit"  onclick="change()" value="立刻修改">
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    <footer>
+       <script src='../js/application.footer.js'></script>
+    </footer>
+</body>
+<script>
+
+ function change(){
+        var nickname = $("#nickname").val();
+        if(!nickname){
+            nickname.helper.toast('昵称不能为空!',1500,null,1);
+        }
+        var data = {'nickname' : nickname }; 
+        var url = baoapp.helper.createUrl('mcenter','nickname',data);
+        
+        baoapp.helper.ayscLoad(url,data,'GET','json',function(data){
+            if(CONST.BAO_REQUEST_SUCCESS == data.status){
+               baoapp.helper.toast(data.msg,3000,function(){
+                    baoapp.helper.linkTo('base','base.html','',5);
+               },1);
+            }else{
+               baoapp.helper.toast(data.msg,1500,null,1);
+            }
+        });
+           
+    }
+
+
+appcan.ready(function(){ 
+   var height = baoapp.helper.adapt();
+ 
+   with(baoapp.helper)
+   {
+       if(!islogin()){
+            //linkTo('login','../login.html');
+            return;
+        }
+        var url = createUrl('mcenter','member');
+         ayscLoad(url,null,'GET','json',function(data){
+            if(data.status == CONST.BAO_REQUEST_SUCCESS){
+                document.getElementById("nickname").value = data['member']['nickname'];
+            }
+        });
+   }
+});
+
+</script>
+
+</html>

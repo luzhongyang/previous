@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>邮箱找回密码3</title>
+<link href="../css/newstyle.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/newjs.js"></script>
+</head>
+
+<body>
+<div class="login_top">
+    <div class="login_topnr">
+        <div class="left yhzc_top_l"><img src="../sjimages/yhtoplogo.png" /></div>
+        <div class="right yhzc_top_r">
+            
+        </div>
+    </div>
+</div>
+<div class="yhzc_nr">
+	<div class="yhzc_tab">
+	    <ul>
+	        <li class="on"><a href="#"><em><img src="../images/yhzcico_03.png" /></em>邮箱找回密码</a></li>
+            <li><a href="#"><em><img src="../images/yhzcico_06.png" /></em>手机找回密码</a></li>
+        </ul>
+	</div>
+    <div class="yh_mail3">
+        <div class="yh_mail3nr1">
+        	<p class="register_cgt">您的验证已经成功通过，请立即修改您的登录密码</p>
+        </div>
+        <table class="register_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="110" style="vertical-align:top;"><p class="register_p">新的登录密码</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="password" class="radius3 tuanfabu_int yhdl_intw" value="" />
+                        <div class="baott_yzm_get">
+                            <ul>
+                                <li class="yhzc_mm on">弱</li>
+                                <li class="yhzc_mm">中</li>
+                                <li class="yhzc_mm">强</li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="register_p">确认登录密码</p></td>
+                <td>
+                    <div class="register_intw register_intBox">
+                        <input type="password" class="radius3 tuanfabu_int yhdl_intw" value="" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" class="radius3 yh_mailsj" value="确认提交" /></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+<div class="yhzc_foot">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有</div>
+</body>
+</html>

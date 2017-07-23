@@ -1,0 +1,74 @@
+<include file="public:header"/>
+<body>
+<?php if(!$is_app){?>
+<header>
+    <a href="<{:U('mcenter/hotel/index',array('st'=>1))}>"><i class="icon-goback"></i></a>
+    <div class="title">
+    	订单详情
+    </div>
+    <i class="icon-menu"><a href="#" class=""></a></i>
+</header>
+<?php }?>
+<div class="page-center-box">
+    <div class="hotelOrd">
+        <p class="fontcl2 ts">
+            <eq name="detail.online_pay" value="1">
+            <if condition="!$detail['order_status']">
+                <small class="black9">已预约</small><a href="<{:AppLink('mcenter/hotel/cancel',array('order_id'=>$detail['order_id']))}>" class="btn right">取消订单</a>
+            <elseif condition="$detail['order_status'] eq -1"/>
+                订单已取消
+            <else/>
+                订单已完成
+                <eq name="detail.comment_status" value="0">
+                    <a href="<{:AppLink('mcenter/hotel/comment',array('order_id'=>$detail['order_id']))}>" class="btn right">去评价</a>
+                <else/>
+                    已评价
+                </eq>
+            </if>
+        <else/>
+            到店付
+            <if condition="$detail['order_status'] eq -1">
+                &nbsp;&nbsp;订单已取消
+            <elseif condition="$detail['order_status'] eq 2" />
+                 &nbsp;&nbsp;订单已完成
+                 <eq name="detail.comment_status" value="0">
+                    <a href="<{:AppLink('mcenter/hotel/comment',array('order_id'=>$detail['order_id']))}>" class="btn right">去评价</a>
+                <else/>
+                    已评价
+                </eq>
+            <else/>
+            <if condition="$detail['room']['is_cancel'] eq 1">
+                <a href="<{:AppLink('mcenter/hotel/cancel',array('order_id'=>$detail['order_id']))}>" class="btn right">取消订单</a>
+            </if>
+            </if>
+        </eq>
+    </p>
+        <div class="infor">
+        	<h3>订单编号：<{$detail.order_id}></h3>
+        	<h3><{$detail.hotel.hotel_name}><span class="bq">团</span></h3>
+        	<p class="black9">入住：<{$detail.stime}><span class="ml25">离店：<{$detail.ltime}></span></p>
+                <p class="black9">酒店房型：<{$roomtype[$detail['room']['type']]}><if condition="$room['is_zc'] eq 1">-有早餐</if></p>
+            <p class="black9">酒店地址：<{$detail.hotel.addr}></p>
+        </div>
+        <div class="box">单价：<span class="black9">￥<{$detail['room']['price']}></span></div>
+        <div class="box">房间数：<span class="black9"><{$detail.num}></span></div>
+        <div class="box">订单总额：<span class="black9"><{$detail.amount}></span></div>
+        <div class="box">到店时间：<span class="black9"><{$detail.last_time}></span></div>
+        <div class="box">入住人：<span class="black9"><{$detail.name}></span></div>
+        <div class="box">手机号：<span class="black9"><{$detail.mobile}></span></div>
+        <div class="box">住宿偏好：<span class="black9"><{$detail.note}></span></div>
+	<!--<div class="box mb10">发票收据抬头：<span class="black9">合肥生活宝网络科技有限公司</span></div>-->
+        
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#pay_btn").click(function(){
+            var url = "<{:AppLink('mobile/hotel/pay',array('order_id'=>$detail['order_id']))}>";
+            window.location.href = url;
+        })
+    })
+</script>
+</body>
+</html>

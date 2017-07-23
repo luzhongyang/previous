@@ -1,0 +1,8 @@
+1、THINKPHP 3.1.2开发手册:
+
+http://doc.thinkphp.cn/mobile/
+
+2、Baocms后台管理手册
+
+http://www.baocms.com/manual/
+

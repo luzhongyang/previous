@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>动态详情页</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+	$('.dp_list_tit a.dp').click(function(){
+		$(".dplayer").addClass('current');
+	});
+	$(".dplayer .close").click(function(){
+		$('.dplayer').removeClass('current');
+	});
+});
+</script>
+</head>
+<body>
+<header> <i class="left"><a href="#" id="icon_goback"></a></i>
+	<div class="title">动态详情页</div>
+	<i class="right"></i> </header>
+<section id="personal_order" class="page_center_box mt10">
+	<div class="art_detail">
+		<div class="center"> <img src="pic/pic4.jpg">
+			<h1>周杰伦粉丝歌友会</h1>
+			<p class="graycl">2015-06-12 13：00 |合肥之心城</p>
+		</div>
+		<div class="article"> 周杰伦出席公益活动代言，他做爱心已长达五年，捐款总共帮助了1350为孩童完成基础学业，当天他现身与学童互动，让在场的小小粉丝们兴奋不已。
+			学童们特地绘制卡片道谢，也有拍摄感谢影片，不过年届35岁的周杰伦，当场被学童们称"周叔叔"，天真的模样让周董脸色铁青，实在好气又好笑。不过周杰伦当然不服老，赶紧纠正大家叫回"杰伦哥哥"，以免真的被越叫越老。
+			周杰伦曾参加选秀节目，进而被吴宗宪挖掘出道，他在现场特地与学童们分享这段心路历程。不过小粉丝们似乎是初次看见大明星，太过兴奋了就连话也说不清楚，站在杰伦身旁，面红耳赤的甚至紧张到结巴，模样相当可爱。 </div>
+	</div>
+	<div class="dp_list">
+		<div class="dp_list_tit">
+			<div class="fl">
+			网友点评
+			</div>
+			<div class="fr">
+			<a href="javascript:void(0)" class="fontcl1 dp"><em></em>我要点评</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="dp_list_content">
+			<ul>
+				<li>
+					<img src="images/head.jpg" class="pic fl">
+					<div class="text">
+						<h4>傅小棠</h4>
+						<p>还真是用丝袜拉出来的奶茶，味道不错，挺正宗的，港式奶茶的感觉，把happy站台不大的店面装修的挺</p>
+					</div>
+					<div class="clear"></div>
+				</li>
+			</ul>
+		</div>
+		<div class="dplayer">
+		<div class="dplayer_cont">
+		<form>
+			<div class="dplayer_close">
+				<a href="#" class="close"><img src="images/close.png"></a>
+			</div> 
+			<textarea placeholder="写下您想要说的话，我们会聆听你的一切语言！"></textarea>
+			<input type="button" class="btn" value="确定提交">
+		</form>
+		</div>
+	</div>
+	</div>	
+	
+</section>
+<footer>
+	<div class="list on"> <a href="#"> <i class="ico1"></i>
+		<p>生活宝</p>
+		</a> </div>
+	<div class="list"> <a href="#"> <i class="ico2"></i>
+		<p>关注</p>
+		</a> </div>
+	<div class="list"> <a href="#"> <i class="ico3"></i>
+		<p>我的</p>
+		</a> </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>baocms官网</title>
+<link rel="stylesheet" type="text/css" href="css/public.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".menuSide_list h2").click(function(){
+			if($(this).parent(".menuSide_list").hasClass("on")){
+				$(this).parent(".menuSide_list").removeClass("on");
+				$(this).parent().find(".menuSide_list_child").hide();
+			}
+			else{
+				$(this).parent(".menuSide_list").addClass("on");
+				$(this).parent().find(".menuSide_list_child").show();
+			}
+		});
+		$(".menuSide_list_child .list").click(function(){
+			$(".menuSide_list_child .list").removeClass('on');
+			$(this).addClass('on');
+		});
+	});
+</script>
+</head>
+<body>
+<div class="clasrFix">
+    <div class="top_nav">
+        <div class="box">
+            <div class="left"> <a tilte="BAOCMS首页" href="http://www.baocms.com/?act=index"><img src="/themes/default/statics/images/logo.png" /></a> </div>
+            <div class="right">
+                <ul class="nav">
+                    <li class="child  active "><a tilte="" href="#">系统</a></li>
+                    <li class="child   has-child"><a title="" href="#">设置</a></li>
+                    <li class="child  "><a title="" href="#">会员</a></li>
+                    <li class="child  "><a title="" href="#">商家</a></li>
+                    <li class="child  "><a title="" href="#"> 模块</a></li>
+                    <li class="child  "><a title=""  href="#">运营</a></li>
+                    <li class="nav_login"><a title="" style="background-color: #0E86D5;" href="#">登录</a></li>
+                    <li class="nav_regist"><a title="" style="background-color: #ff6d00" href="#">注册</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> 
+    <div class="pagewd">
+        <div class="step_hot">
+            <h3>热门功能：</h3>
+            <a href="#">模块装修</a><a href="#">系统设置</a><a href="#">分销专题</a><a href="#">发布商品</a><a href="#">商品分组</a><a href="#">模块装修</a><a href="#">系统设置</a><a href="#">分销专题</a><a href="#">发布商品</a><a href="#">商品分组</a><a href="#">模块装修</a><a href="#">系统设置</a><a href="#">分销专题</a><a href="#">发布商品</a><a href="#">商品分组</a> </div>
+        <div class="cl"></div>
+    </div>
+</div>
+
+<div class="pagewd content">
+	<!--左侧菜单部分开始-->
+	<div class="menuSide_cont lt">
+		<ul class="menuSide">
+			<li class="menuSide_list on">
+				<h2>店铺装修操作 </h2>
+				<ul class="menuSide_list_child" style="display:block;">
+					<li class="list on"><a href='#'>主页装修</a></li>
+					<li class="list"><a href='#'>模块装修</a></li>
+				</ul>
+            </li>
+			<li class="menuSide_list">
+				<h2>商品管理</h2>
+				<ul class="menuSide_list_child">
+					<li class="list"><a  href='#'>发布商品</a></li>
+					<li class="list"><a  href='#'>出售中的商品</a></li>
+					<li class="list"><a  href='#'>仓库中的商品</a></li>
+					<li class="list"><a  href='#'>已售罄的商品</a></li>
+					<li class="list"><a  href='#'>商品分组</a></li>
+					<li class="list"><a  href='#'>淘宝商品</a></li>
+					<li class="list"><a  href='#'>数据包导入</a></li>
+					<li class="list"><a  href='#'>启分销导入商品</a></li>
+					<li class="list"><a  href='#'>1688商品导入</a></li>
+					<li class="list"><a  href='#'>备份商品导入</a></li>
+				</ul></li>
+			<li class="menuSide_list">
+				<h2>营销活动 </h2>
+				<ul class="menuSide_list_child">
+					<li class="list"> <a  href='#'>幸运大转盘</a></li>
+					<li class="list"> <a  href='#'>疯狂砸金蛋</a></li>
+					<li class="list"> <a  href='#'>好运翻翻看</a></li>
+					<li class="list"> <a  href='#'>骰子大王</a></li>
+				</ul>
+			</li>
+			<li class="menuSide_list">
+				<h2>微信群发 </h2>
+				<ul class="menuSide_list_child">
+					<li class="list"> <a  href='#'>微信群发</a></li>
+					<li class="list"> <a  href='#'>群发统计</a></li>
+					<li class="list"> <a  href='#'>APP群发</a></li>
+					<li class="list"> <a  href='#'>APP群发统计</a></li>
+					<li class="list"> <a  href='#'>短信群发</a></li>
+				</ul>
+			</li>
+			<li class="menuSide_list">
+				<h2>微商城会员操作</h2>
+				<ul class="menuSide_list_child">
+					<li class="list"> <a  href='#'>会员主页</a></li>
+					<li class="list"> <a  href='#'>分销申请</a></li>
+					<li class="list"> <a  href='#'>分销商会员主页</a></li>
+					<li class="list"> <a  href='#'>分销商品</a></li>
+				</ul>
+				</li>
+			<li class="menuSide_list">
+				<h2>短信</h2>
+				<ul class="menuSide_list_child">
+					<li class="list"> <a  href='#'>短信发送记录</a></li>
+					<li class="list"> <a  href='#'>短信充值</a></li>
+					<li class="list"> <a  href='#'>短信充值记录</a></li>
+				</ul>
+				</li>
+			<li class="menuSide_list">
+				<h2>管理员及权限</h2>
+				<ul class="menuSide_list_child">
+					<li class="list"> <a  href='#'>管理员</a></li>
+					<li class="list"> <a  href='#'>权限角色</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+    <!--左侧菜单部分结束-->
+	<div class="wrap_content rt">
+		<h3>概述</h3>
+        <div class="wrapBox">
+			<p>模块添加分为富文本、标题、自定义模块、商品、商品列表、商品搜索、文本导航、图片导航、图片广告、分割线、辅助空模块添加分为富文本、标题、自定义模块、商品、商品列表、<a href="#">商品搜索、</a>文本导航、图片导航、图片广告、分割线、辅助空模块添加分为富文本、标题、自定义模块、商品、商品列表、商品搜索、文本导航、图片导航、图片广告、分割线、辅助空</p>
+            <p>模块添加分为富文本、标题、自定义模块、商品、商品列表、商品搜索、文本导航、图片导航、图片广告、分割线、辅助空</p>
+		</div>
+        <h3>注意事项</h3>
+        <div class="wrapBox">
+        	<h4>1、小标题部分内容</h4>
+			<p class="indent0">模块添加分为富文本、标题、自定义模块、商品、商品列表、商品搜索、文本导航、图片导航、图片广告、分割线、辅助空</p>
+            <h4>2、小标题部分内容</h4>
+			<p class="indent0">模块添加分为富文本、标题、自定义模块、商品、商品列表、商品搜索、文本导航、图片导航、图片广告、分割线、辅助空</p>
+            <h4>3、小标题部分内容</h4>
+			<p class="indent0">模块添加分为富文本、标题、自定义模块、商品、商品列表、商品搜索、文本导航、图片导航、图片广告、分割线、辅助空</p>
+		</div>
+        <h3>操作步骤</h3>
+		<div class="wrapBox">
+        	<h4>1、小标题部分内容</h4>
+			<p class="indent0"><img src="" width="600" height="400"></p>
+            <h4>2、小标题部分内容</h4>
+			<p class="indent0"><img src="" width="600" height="400"></p>
+            <h4>3、小标题部分内容</h4>
+			<p class="indent0"><img src="" width="600" height="400"></p>
+		</div>
+	</div>
+	<div class="cl"></div>
+</div>
+<!---底部内容开始-->
+<div class="footer">
+    <div class="pagewd">
+        <div class="footer_left lt">
+            <p class="link"> <a href="http://www.baocms.com/contact/about">关于我们</a> |<a href="http://www.baocms.com/o2o/"> O2O生活门户系统</a>  |<a href="http://www.baocms.com/help/">帮助中心</a> |<a href="http://www.baocms.com/vip/">O2O量身定制</a> |<a href="http://www.baocms.com/news/">新闻动态</a> |<a title="解决方案" href="http://www.baocms.com/plan/">解决方案</a> </p>
+            <p><i class="fotIco addIco"></i>地　址：合肥市蜀山区 华润五彩国际905室</p>
+            <p><i class="fotIco emailIco"></i>邮  箱：youge@baocms.com</p>
+            <p>All Rights Reserved ICP备案：皖ICP备14015149号</p>
+            <p> Copyright2012-2112 www.baocms.com</p>
+        </div>
+        <div class="footer_mid lt ">
+            <h2>销售热线</h2>
+            <div class="tel"><i class="fotIco telIco"></i> 400-009-8862<small>(9:00 - 18:00)</small> </div>
+            <div class="openqq"><i class="fotIco qqIco"></i> <a href="javascript:;" id="kefu_qqZixun_footer" class="icon-qq white" title="在线QQ客服" onClick="_hmt.push(['_trackEvent', 'qqEvent', 'clickQQ', 'footer'])">800026911</a> </div>
+            <h2>售后服务</h2>
+            <div class="tel"><i class="fotIco telIco"></i>0551-68156253<small>(9:00 - 18:00)</small> </div>
+        </div>
+        <div class="footer_weixin rt">
+            <div class="clearfix"><img src="/themes/default/statics/images/ewm.jpg"></div>
+            <p>微信扫一扫</p>
+            <p>免费为您服务</p>
+        </div>
+    </div>
+    <div class="cl"></div>
+</div>
+<!---底部内容结束--> 
+</body>
+</html>

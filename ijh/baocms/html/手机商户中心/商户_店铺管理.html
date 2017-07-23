@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-店铺管理</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header> <i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">店铺管理</div>
+    <i class="right"><a href="#"></a></i> </header>
+<section>
+    <script>
+		$(function(){
+			$(".sh_shop_tab li").each(function(e){
+				$(this).click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".sh_shop_tab_box").each(function(i){
+						if(e==i){
+							$(".sh_shop_tab_box").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+					});
+				});
+			});
+		});
+    </script>
+    <div class="sh_shop_tab mb10">
+        <ul>
+            <li class="on">文字资料</li>
+            <li>形象图</li>
+            <li>LOGO</li>
+            <li>环境图</li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="sh_shop_tab_box">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box mt10">
+                <ul>
+                    <li class="list_box mb10">
+                       <div class="sh_input_public"><span>店铺地址</span><input type="text" value=""></div> 
+                    </li>
+                    <li class="list_box mb10">
+                       <div class="sh_input_public"><span>联系人</span><input type="text" value=""></div>
+                    </li>
+                    <li class="list_box mb10">
+                       <div class="sh_input_public"><span>店铺附近坐标</span><input type="text" value=""></div>
+                    </li>
+                    <li class="list_box mb10">
+                       <div class="sh_input_public"><span>营业时间</span><input type="text" value=""></div>
+                    </li>
+                    <li class="list_box mb10">
+                       <div class="sh_input_public"><span>详情</span><textarea></textarea></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认保存"></div>
+        </div>
+    </div>
+    
+    <div class="sh_shop_tab_box" style="display:none;">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box mt10">
+                <ul>
+                    <li>
+                        <div class="sh_buy_upload_btn"><label><input class="btn" type="file" value="上传图片"><em></em>上传图片</label></div>
+                    </li>
+                    <li class="list_box mb10">
+                        <div class="sh_buy_upload_img"><img src="" width="100" height="100"><p>建议尺寸300X300</p></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认保存"></div>
+        </div>
+    </div>
+    
+    <div class="sh_shop_tab_box" style="display:none;">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box mt10">
+                <ul>
+                    <li>
+                        <div class="sh_buy_upload_btn"><label><input class="btn" type="file" value="上传LOGO"><em></em>上传LOGO</label></div>
+                    </li>
+                    <li class="list_box mb10">
+                        <div class="sh_buy_upload_img"><img src="" width="100" height="100"><p>建议尺寸300X300</p></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="sh_login_nr"><input class="btn mt30" type="button" value="确认保存"></div>
+        </div>
+    </div>
+    
+    <div class="sh_shop_tab_box" style="display:none;">
+    	<div class="sh_buy_fabu">
+            <div class="sh_list_public_box mt10">
+                <ul>
+                    <li>
+                        <div class="sh_buy_upload_btn"><label class="fl"><input class="btn" type="file" value="上传图片"><em></em>上传图片</label><p class="sh_shop_upload_img_p fl">建议尺寸300X300</p>
+                        	<div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="list_box mb10">
+                        <div>
+                            <div class="sh_shop_nr">
+                                <div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                                <div class="wz">
+                                    <div class="sh_input_public mb10"><span>标题</span><input type="text" value=""></div>
+                                    <div class="sh_input_public mb10"><span>排序</span><input type="text" value=""></div>
+                                </div>
+                            </div>
+                            <div class="btn_box" style="border-top:1px solid #dedede;"><a class="del_btn" href="#"><em></em>删除</a></div>
+                        </div>
+                    </li>
+                    <li class="list_box mb10">
+                        <div>
+                            <div class="sh_shop_nr">
+                                <div class="img"><img src="img/buy_img.jpg" width="100" height="100"></div>
+                                <div class="wz">
+                                    <div class="sh_input_public mb10"><span>标题</span><input type="text" value=""></div>
+                                    <div class="sh_input_public mb10"><span>排序</span><input type="text" value=""></div>
+                                </div>
+                            </div>
+                            <div class="btn_box" style="border-top:1px solid #dedede;"><a class="del_btn" href="#"><em></em>删除</a></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

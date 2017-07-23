@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>手机及配件</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_wxj.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">手机及配件</div>
+        <i class="icon-menu" style="margin-right:0.30rem;"><a href="#">发布</i>
+		<i class="icon-menu" id="ico_6"></i></a>
+	</header>
+	<!-- 筛选TAB -->
+    <script>
+		$(function(){
+			$("#search-bar li").each(function(e){
+				$(this).click(function(){
+					if($(this).hasClass("on")){
+						$(this).parent().find("li").removeClass("on");
+						$(this).removeClass("on");
+						$(".serch-bar-mask").hide();
+					}
+					else{
+						$(this).parent().find("li").removeClass("on");
+						$(this).addClass("on");
+						$(".serch-bar-mask").show();
+					}
+					$(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+						
+						if(e==i){
+							$(this).parent().find(".serch-bar-mask-list").hide();
+							$(this).show();
+						}
+						else{
+							$(this).hide();
+						}
+						$(this).find("li").click(function(){
+							$(this).parent().find("li").removeClass("on");
+							$(this).addClass("on");
+						});
+					});
+				});
+			});
+		});
+    </script>
+    
+	<div id="search-bar">
+		<ul>
+			<li><span>区域</span><i></i></li>
+			<li><span>供求</span><i></i></li>
+			<li><span>品牌</span><i></i></li>
+			<li><span>价格</span><i></i></li>
+		</ul>
+	</div>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+        	<div class="serch-bar-mask" style="display:none;">
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部地区</a></li>
+                        <li><a href="#">瑶海</a></li>
+                        <li><a href="#">新站</a></li>
+                        <li><a href="#">包河</a></li>
+                        <li><a href="#">政务</a></li>
+                        <li><a href="#">庐阳</a></li>
+                        <li><a href="#">蜀山</a></li>
+                        <li><a href="#">滨湖</a></li>
+                        <li><a href="#">高新</a></li>
+                        <li><a href="#">肥东</a></li>
+                        <li><a href="#">肥西</a></li>
+                        <li><a href="#">无为</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部</a></li>
+                        <li><a href="#">供应</a></li>
+                        <li><a href="#">求购</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部</a></li>
+                        <li><a href="#">苹果</a></li>
+                        <li><a href="#">三星</a></li>
+                        <li><a href="#">魅族</a></li>
+                        <li><a href="#">小米</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-list">
+                    <ul>
+                        <li class="on"><a href="#">全部</a></li>
+                        <li><a href="#">500以下</a></li>
+                        <li><a href="#">500-1000元</a></li>
+                        <li><a href="#">1000-2000元</a></li>
+                        <li><a href="#">2000以上</a></li>
+                    </ul>
+                </div>
+                <div class="serch-bar-mask-bg"></div>
+            </div>
+			<!-- 列表 -->
+			<div class="list-have-pic">
+				<!-- 循环 -->
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="life_infor_liBq">顶</span> <span class="life_infor_liBq">急</span></p>
+						<p class="life_infor_liP">联系：15000000000尤哥; 蜀山区潜山路496号新景花园16栋804室</p>
+                        <p class="life_infor_liP"><span>原价:59900</span><span>现价:49000</span> 一个月前</p>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+						<p class="c_h">交易数量：100单</p>
+						<div class="point-star"><div style="width: 0.8rem;"></div></div>
+						<div class="button">立即咨询</div>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+						<p class="c_h">交易数量：100单</p>
+						<div class="point-star"><div style="width: 0.8rem;"></div></div>
+						<div class="button">立即咨询</div>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+						<p class="c_h">交易数量：100单</p>
+						<div class="point-star"><div style="width: 0.8rem;"></div></div>
+						<div class="button">立即咨询</div>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+						<p class="c_h">交易数量：100单</p>
+						<div class="point-star"><div style="width: 0.8rem;"></div></div>
+						<div class="button">立即咨询</div>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+						<p class="c_h">交易数量：100单</p>
+						<div class="point-star"><div style="width: 0.8rem;"></div></div>
+						<div class="button">立即咨询</div>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+						<p class="c_h">交易数量：100单</p>
+						<div class="point-star"><div style="width: 0.8rem;"></div></div>
+						<div class="button">立即咨询</div>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+						<p class="c_h">交易数量：100单</p>
+						<div class="point-star"><div style="width: 0.8rem;"></div></div>
+						<div class="button">立即咨询</div>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+						<p class="c_h">交易数量：100单</p>
+						<div class="point-star"><div style="width: 0.8rem;"></div></div>
+						<div class="button">立即咨询</div>
+					</div>
+				</div>
+				<div class="list-box">
+					<div class="list-img">
+						<img src="#" />
+					</div>
+					<div class="list-content">
+						<p>孙家花园民国主题餐厅<span class="range">2.2KM</span></p>
+						<p class="c_h">交易数量：100单</p>
+						<div class="point-star"><div style="width: 0.8rem;"></div></div>
+						<div class="button">立即咨询</div>
+					</div>
+				</div>
+				<!-- 循环 -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

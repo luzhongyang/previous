@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>
+<script src="../js/zy_control.js"></script>
+<script src="../js/application.js"></script>
+<script src="../js/application.init.js"></script>
+</head>
+<body>
+
+<div id="index" class="page-center-box">
+        <div id="scroll">        
+            <!-- 列表 -->
+            <div class="list-have-pic">
+                <!-- 循环 -->
+                <div class="list-box rush-box">
+ 
+                        <div class="rush-top">
+                            <ul>
+                              <li class="on" onclick="tabChange('1',this)">今日新单</li><li onclick="tabChange('2',this)">
+                                                                                                最热抢购</li><li onclick="tabChange('3',this)">热门关注
+                               </li>
+                            </ul>
+                        </div>
+                        <style type="text/css">
+                            #load{width:100%;-webkit-box-flex:1;overflow:auto;}
+                        </style>
+                        <div id="load">
+                           
+                            <!--列表-->
+                            
+                            <!--Node-->  
+                                   
+                        </div>           
+                    <!-- 循环 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!--自定义模板-->    
+<script type='text/template' id="tmpl_index_list">
+    <div class="rush-content" onclick="todetail(%tuan_id%)">
+        <div class="list-img">
+           <a href="#"><img src="%thumb%"></a>
+        </div>
+        <div class="list-content">
+          <a href="#">
+            <p class="overflow_clear">%title%</p>
+            <p class="c_h h15 overflow_clear">%info%</p>
+            <p>
+                <span class="price price-two">%tuan_price%元</span>
+                 <del>&yen;%price%</del>&nbsp;
+                 %mobile_fan%
+            </p>
+            <p><span class="fl sell">已售:%sold_num%</span><span class="fr rush-long">距离:%d%</span></p>
+          </a>
+        </div>
+    </div>
+</script>
+
+<!--自定义方法-->
+<script>
+function createNode(data)
+{      
+    with(document){
+        var spanNode = createElement('span'),
+            tmpl     = getElementById('tmpl_index_list').innerHTML;
+           
+            for(key in data){
+            	regExp = new RegExp('%'+key+'%', 'g');
+               tmpl = tmpl.replace(regExp, data[key]); 
+            }
+            spanNode.innerHTML = tmpl;
+            querySelector('#load').appendChild(spanNode);
+    }
+}
+/*
+ * 填充数据,渲染列表
+ */
+function renderList(datas)
+{
+   //情况列表容器
+   document.querySelector('#load').innerHTML = '';
+   for(i in datas){
+       createNode(datas[i]);
+   }         
+}   
+//读取缓存数据
+window.readCache=function (key)
+{
+    key = key || KEY.TUAN_INDEX_NEW;
+     //读取缓存
+    var cached = baoapp.helper.cacheExpireRead(key);
+        cached = JSON.parse(cached);
+    var data     = [];
+    var http_url = baoapp.config.attachs;
+
+    for(index in cached){
+        data[index] = {
+        	tuan_id:cached[index]['tuan_id'],
+        	thumb:http_url+cached[index]['photo'],
+        	info:cached[index]['intro'],
+        	tuan_price:(cached[index]['tuan_price']/100),
+        	price: cached[index]['price']/100,
+        	title:cached[index]['title'],
+        	d:cached[index]['d'],
+        	mobile_fan: cached[index]['mobile_fan']<=0?'':"<span class='fan-money'>·手机立减"+(cached[index]['mobile_fan']/100)+"元·</span>",
+        	sold_num: cached[index]['sold_num']
+        };
+    }
+    renderList(data);
+    
+}
+//Tab切换
+function tabChange(index,o)
+{           
+    $('.rush-top .on').removeClass('on');
+    $(o).addClass('on');
+    var page=window.page[index];
+    window.tabIndex = index;
+    switch(index){
+        
+        case '1':key=KEY.TUAN_INDEX_NEW; break;
+        
+        case '2':key=KEY.TUAN_INDEX_HOT;  break;
+        
+        case '3':key=KEY.TUAN_INDEX_TUAN;break;
+        
+        default:key=KEY.TUAN_INDEX_NEW; break;
+    }
+       //有缓存数据读缓存,没有网络读取
+       var cached = baoapp.helper.cacheExpireRead(key);
+       if(!cached){
+                baoapp.helper.toast('正在加载中...');
+                var url = baoapp.helper.createUrl('tuan','items',{aready: index, city_id:city_id, page:page});
+                 baoapp.helper.ayscLoad(url,null,'GET','json',function(data){
+                    baoapp.helper.toast(null);
+                    if(data.status == 200){
+                        console.log(data);
+                        window.page[index]=data['page'];
+                         //抓取数据写入缓存
+                        baoapp.helper.cacheExpireWrite(key,JSON.stringify(data['tuan_list']));
+                        window.readCache(key);
+                    }
+                 });
+       }else{
+           window.readCache(key);
+       }
+}
+//打开详细页面
+function todetail(tuan_id)
+{
+    with(baoapp.helper){
+        linkTo(KEY.TUAN_DETAIL,'detail.html?tuan_id='+tuan_id,null,5);
+    };
+}
+//加载更多
+window.loadMore = function()
+{
+        baoapp.helper.ayscRefresh('#load',function(){            
+
+            var url = baoapp.helper.createUrl('tuan','items',{aready: window.tabIndex, city_id:city_id, page:window.page[window['tabIndex']]});
+            //判断数据是否加载完
+            if(window.page[window['tabIndex']]=='null')
+                baoapp.helper.toast('没有更多数据！',2000,null,1);
+            else{
+                baoapp.helper.toast('加载中...');
+                baoapp.helper.ayscLoad(url,null,'GET','json',function(data){
+                    baoapp.helper.toast(null);
+                    if(data.status == 200){
+                        window.page[window['tabIndex']]=data['page'];
+                        //抓取数据写入缓存
+                        baoapp.helper.cacheExpireWrite(key,JSON.stringify(data['tuan_list']));
+                        window.readCache(key);
+                    }
+                });
+            }
+            
+        },function(){
+            console.log('滑到顶部');
+        });
+
+}
+
+
+</script>
+
+<script>
+appcan.ready(function(){ 
+    
+    //分页
+    window.page = {1:2,2:1,3:1};
+    //初始数据
+    window.readCache();
+    //Tab索引
+    window.tabIndex = 1;
+    //滑动加载
+    window.loadMore();
+});    
+ 
+</script>
+</html>

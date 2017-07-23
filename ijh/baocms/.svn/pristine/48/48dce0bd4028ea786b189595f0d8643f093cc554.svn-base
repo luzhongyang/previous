@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>抢购美食</title>
+<link href="../css/style1.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/js.js"></script>
+</head>
+
+
+<script type="text/javascript">
+
+$(function(){
+    $(".jia").click(function(){
+        var t=$(this).parent().find('input[class*=spinner]');
+        t.val(parseInt(t.val())+1)
+        setTotal();
+    })
+    $(".jian").click(function(){
+        var t=$(this).parent().find('input[class*=spinner]');
+        t.val(parseInt(t.val())-1)
+        if(parseInt(t.val())<0){
+            t.val(0);
+        }
+        setTotal();
+    })
+    function setTotal(){
+        var s=0;
+        $(".tab").each(function(){
+            s+=parseInt($(this).find('input[class*=spinner]').val())*parseFloat($(this).find('span[class*=price]').text());
+        });
+    $(".money").html(s.toFixed(2));
+    $(".money2").html(s.toFixed(2));
+    }
+    setTotal();
+
+})
+
+</script>
+
+<body>
+<div class="topOne">
+    <div class="nr">
+        <div class="left">您好，欢迎访问BAOCMS<a href="#">登陆</a>|<a href="#">注册</a>
+            <span class="topSm"> <span class="topSmt"><em>&nbsp;</em>手机CMS</span>
+                <div class="topSmnr"><img src="../sjimages/login_wx_03.jpg" width="90" height="90" />
+                    <p>扫描下载客户端</p>
+                </div>
+            </span>
+        </div>
+        <div class="right">
+            <ul>
+            	<li class="liOne"><a class="liOneA" href="#">个人中心<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">抢购管理</a></li>
+                            <li><a href="#">活动管理</a></li>
+                            <li><a href="#">服务管理</a></li>
+                            <li><a href="#">购物管理</a></li>
+                            <li><a href="#">外卖管理</a></li>
+                            <li><a href="#">订座信息</a></li>
+                            <li><a href="#">同城管理</a></li>
+                            <li><a href="#">优惠券管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">我是商家<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">商家登陆</a></li>
+                            <li><a href="#">微信营销</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <span>|</span>
+                <li class="liOne"> <a class="liOneA" href="#">快捷导航<em>&nbsp;</em></a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#">餐饮频道</a></li>
+                            <li><a href="#">生活资讯</a></li>
+                            <li><a href="#">活动</a></li>
+                            <li><a href="#">积分商城</a></li>
+                            <li><a href="#">购物</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="between">
+    <div class="bet_bj">
+        <div class="all">
+            <div class="all_2">
+                <ul>
+                    <li class="on">1.提交订单<em>&nbsp;</em></li>
+                    <li>2.去支付<em>&nbsp;</em></li>
+                    <li>3.完成<em>&nbsp;</em></li>
+                </ul>
+            </div>
+            <div class="all_3">
+                <ul class="ul_3">
+                    <li><img src="../images/tp_5.png"><p>随时退</p></li>
+                    <li><img src="../images/tp_6.png"><p>不满意免单</p></li>
+                    <li><img src="../images/tp_7.png"><p>过期退</p></li>
+                </ul>
+            </div>
+        </div>
+        <div class="order-addres">
+            <div class="left">
+                <span>寄送至</span>&nbsp
+                <input type="radio" name="1">&nbsp
+                <span>安徽省 合肥市 蜀山区 西园街道 潜山路382号安徽邮电职业技术学院（XX蓝 收）15395091245 </span>
+            </div>
+            <div class="right">
+                <a href="" class="order-mr">默认地址</a>
+                <a href="" class="order-xg">修改地址</a>
+            </div>
+        </div>
+        <div class="order-addres order-chace">
+            <div class="left">
+               <input type="checkbox" />&nbsp
+               <span>全选 </span>
+            </div>
+            <div class="right">
+                <a href=""><img src="../images/tp_53.png"></a>
+            </div>
+        </div>
+        <div class="order-box">
+            <table class="tab" width="100%">
+                <tr style="background-color:#fafafa">
+                    <td width="200"><div class="order-ele-tip"><input type="checkbox" />2015-07-29 16:24:18</div></td>
+                    <td>订单ID: 100156</td>
+                    <td>餐厅：有米超市</td>
+                    <td>总计：<span>￥<big>398</big></span></td>
+                    <td><a href=""><img src="../images/tp_53.png"></a></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="tab_nr">
+                            <div class="left tab_img"><img src="../images/tp_2.png" class="img_3"></div>
+                            <div class="left tab_wz">
+                                <p class="tab_nr1">[合肥银泰君亭酒店]单人自助餐！提供免费WIFI！</p>
+                                <img src="../images/tp_3.png" class="img_4">
+                            </div>
+                        </div>
+                    </td>
+                    <td width="115"><div class="tab_price">￥<span class="price">98.00</span></div></td>               
+                    <td width="116">
+                        <div class="ko">
+                            <span class="jian">—</span>
+                            <input type="text" value="1" class="spinner">
+                            <span class="jia">+</span>
+                        </div>
+                    </td>
+                    <td><span class="money2"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="tab_nr">
+                            <div class="left tab_img"><img src="../images/tp_2.png" class="img_3"></div>
+                            <div class="left tab_wz">
+                                <p class="tab_nr1">[合肥银泰君亭酒店]单人自助餐！提供免费WIFI！</p>
+                                <img src="../images/tp_3.png" class="img_4">
+                            </div>
+                        </div>
+                    </td>
+                    <td width="115"><div class="tab_price">￥<span class="price">98.00</span></div></td>               
+                    <td width="116">
+                        <div class="ko">
+                            <span class="jian">—</span>
+                            <input type="text" value="1" class="spinner">
+                            <span class="jia">+</span>
+                        </div>
+                    </td>
+                    <td><span class="money2"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="tab_nr">
+                            <div class="left tab_img"><img src="../images/tp_2.png" class="img_3"></div>
+                            <div class="left tab_wz">
+                                <p class="tab_nr1">[合肥银泰君亭酒店]单人自助餐！提供免费WIFI！</p>
+                                <img src="../images/tp_3.png" class="img_4">
+                            </div>
+                        </div>
+                    </td>
+                    <td width="115"><div class="tab_price">￥<span class="price">98.00</span></div></td>               
+                    <td width="116">
+                        <div class="ko">
+                            <span class="jian">—</span>
+                            <input type="text" value="1" class="spinner">
+                            <span class="jia">+</span>
+                        </div>
+                    </td>
+                    <td><span class="money2"></span></td>
+                </tr>
+            </table>
+            <table class="tab" width="100%">
+                <tr style="background-color:#fafafa">
+                    <td width="200"><div class="order-ele-tip"><input type="checkbox" />2015-07-29 16:24:18</div></td>
+                    <td>订单ID: 100156</td>
+                    <td>餐厅：有米超市</td>
+                    <td>总计：<span>￥<big>398</big></span></td>
+                    <td><a href=""><img src="../images/tp_53.png"></a></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="tab_nr">
+                            <div class="left tab_img"><img src="../images/tp_2.png" class="img_3"></div>
+                            <div class="left tab_wz">
+                                <p class="tab_nr1">[合肥银泰君亭酒店]单人自助餐！提供免费WIFI！</p>
+                                <img src="../images/tp_3.png" class="img_4">
+                            </div>
+                        </div>
+                    </td>
+                    <td width="115"><div class="tab_price">￥<span class="price">98.00</span></div></td>               
+                    <td width="116">
+                        <div class="ko">
+                            <span class="jian">—</span>
+                            <input type="text" value="1" class="spinner">
+                            <span class="jia">+</span>
+                        </div>
+                    </td>
+                    <td><span class="money2"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="tab_nr">
+                            <div class="left tab_img"><img src="../images/tp_2.png" class="img_3"></div>
+                            <div class="left tab_wz">
+                                <p class="tab_nr1">[合肥银泰君亭酒店]单人自助餐！提供免费WIFI！</p>
+                                <img src="../images/tp_3.png" class="img_4">
+                            </div>
+                        </div>
+                    </td>
+                    <td width="115"><div class="tab_price">￥<span class="price">98.00</span></div></td>               
+                    <td width="116">
+                        <div class="ko">
+                            <span class="jian">—</span>
+                            <input type="text" value="1" class="spinner">
+                            <span class="jia">+</span>
+                        </div>
+                    </td>
+                    <td><span class="money2"></span></td>
+                </tr>
+            </table>
+            <div class="opp">
+                <div class="chance">
+                    <div class="cha">
+                        <span>选择优惠：</span>
+                        <select class="sel">
+                            <option>满120减12</option>
+                        </select>
+                    </div>
+                    <div class="checkk">
+                        <input type="checkbox" class="check_1"> <span class="djj">使用代金卷 -￥1</span><br>
+                        <input type="checkbox" class="check_2"> <span class="jf">使用积分 -￥1</span>
+                    </div>
+                    
+                    <p class="money_1">应付总额：<span class="rmb">￥</span><label class="money"></label></p>
+                    <div class="cha cha_1"><a href="" class="back">返回上一步</a><input type="submit" value="确认" class="sub"></div>
+                </div>       
+                <div class="admin">              
+                </div>   
+            </div>
+        </div>   
+    </div>
+</div>
+<div class="footer">
+  <div class="footNav">
+    <div class="left topTwo_b">
+      <div class="tel"><em>&nbsp;</em>0551-63641901</div>
+      <div class="protect">
+        <ul>
+          <li><em>&nbsp;</em><a href="#">随时退</a></li>
+          <li><em>&nbsp;</em><a href="#">不满意免单</a></li>
+          <li><em>&nbsp;</em><a href="#">过期退款</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="center">
+      <div class="footNavLi">
+        <ul>
+          <li><a href="#">关于我们</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">联系我们</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">媒体合作</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">人才招聘</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">广告合作</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">免责声明</a>&nbsp;|&nbsp;</li>
+          <li><a href="#">服务协议</a>&nbsp;|&nbsp;</li>
+        </ul>
+      </div>
+      <div class="copy">copyright 2013-2113 www.baocms.cn All Rights Reserved 宝CMS版权所有 php微信O2O生活宝门户系统</div>
+    </div>
+    <div class="right"><img src="../sjimages/login_wx_03.jpg" width="149" height="146" /></div>
+  </div>
+</div>
+</body>
+</html>

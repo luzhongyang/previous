@@ -1,0 +1,60 @@
+<include file='public:header'/>
+<div class="sjgl_lead">
+    <ul>
+        <li><a href="#">其他</a> > <a href="">外卖设置</a> > <a>外卖打印机状态</a></li>
+    </ul>
+</div>
+<div class="tuan_content">
+    <div class="radius5 tuan_top">
+        <div class="tuan_top_t">
+            <div class="left tuan_topser_l">易连云打印机参数配置，只有正确完整的设置好打印机参数才可以正常打印</div>
+            <div class="right tuan_topfb_r"><a class="radius3 sjgl_an tuan_topbt" mini='confirm' href="<{:U('ele/jqprint_local')}>">设为本地打印机</a>
+            <a class="radius3 sjgl_an tuan_topbt" target="main_frm" href="<{:U('ele/jqprint_create')}>">添加打印机+</a></div>
+        </div>
+    </div> 
+    <div class="tuanfabu_tab">
+        <ul>
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('ele/index')}>">外卖营业状态</a></li>
+            <li class="tuanfabu_tabli tabli_change on"><a href="<{:U('ele/setting')}>">设置打印机</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('eleorder/index')}>">确认订单</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('eleorder/wait')}>">配送订单</a></li>
+            <li class="tuanfabu_tabli tabli_change"><a href="<{:U('eleorder/over')}>">已完成订单</a></li>
+        </ul>
+    </div>
+    <table class="tuan_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr style="background-color:#eee;">
+            <td>ID</td>
+            <td>打印机型号</td>
+            <td>API 密钥</td>
+            <td>终端密钥</td>
+            <td>用户ID</td>
+            <td>终端号</td>  
+            <td>是否自动打印</td>
+            <td>自动打印页数</td>
+            <td>操作</td>
+        </tr>
+    <foreach name="list" item="var">
+        <tr>
+            <td><{$var.set_id}></td>
+            <td><{$var.type}></td>
+            <td><{$var.apiKey}></td>
+            <td><{$var.mKey}></td>
+            <td><{$var.partner}></td>
+            <td><{$var.machine_code}></td>
+            <td><eq name="var.auto_print" value="0">否</eq>
+                <eq name="var.auto_print" value="1">是</eq>
+            </td>
+            <td><{$var.num}></td>
+            <td>
+            <neq name="shop.jqprint_id" value="$var['set_id']">
+                <a mini='confirm' href="<{:U('ele/jqprint_set',array('set_id'=>$var['set_id']))}>">设为打印机</a>&nbsp;
+            </neq>
+                <a href="<{:U('ele/jqprint_edit',array('set_id'=>$var['set_id']))}>">编辑</a>&nbsp;
+                <a mini='confirm' href="<{:U('ele/jqprint_delete',array('set_id'=>$var['set_id']))}>">删除</a>
+            </td>
+        </tr>
+    </foreach>
+    </table>
+    <{$page}>
+</div>
+<include file='public:footer'/>

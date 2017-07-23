@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>生活宝网络</title>
+<link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/css_1.css"/>
+<script type="text/javascript" src="../../js/appcan.js"></script>
+<script type="text/javascript" src="../../js/application.js"></script>
+</head>  
+<body>
+
+<div id="life" class="page-center-box">
+    <div id="scroll">
+        <div class="list-have-pic buy-list">
+            <div class="list-box rush-box">
+                 <!-- 筛选TAB -->
+                <div class="buy-bar">
+                    <span class="buy-bar-span2 on" onclick="tabChange(this,0)">待付款</span>
+                    <span class="buy-bar-span " onclick="tabChange(this,1)">已完成</span>
+                </div>
+                <style type="text/css">
+                   #load{width:100%;-webkit-box-flex:1;overflow:auto;}
+                   .nodata{width:100%;height:2rem;line-height:2rem;text-align:center;color:#AAAAAA;}
+                </style>
+               <div id="load">
+                    <!--列表-->
+                            
+                    <!--Node-->  
+               </div>   
+            </div>           
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/template" id="tmpl_tuan">
+    <div class="list-img" ontouchend="detail(%order_id%);">
+        <a>
+            <img src="%thumb%"/>
+        </a>
+    </div>
+    <div class="buy-content" ontouchend="detail(%order_id%);">
+        <p><span class="fl overflow_clear" style="width:60%;"><a>%title%</a></span><span class="fr"><a class="order_detail" onclick="detail(%order_id%)">详情</a></span></p>
+        <p><span class="spread-money">总价：￥%totalprice%</span><span class="spread-money2">数量：%num%</span></p>
+        <p class="spread-for">%word%</p>
+        <!--<a style="color:#fff;" class="button" onclick="cancleOrder(%order_id%)">取消</a>-->
+        <!--<a style="color:#fff;" class="button2" onclick="handleOrder(%order_id%)">付款</a>-->
+    </div>
+</script>
+<script type="text/template" id="tmpl_tuan_nodata">
+<span>~没有数据！~</span>
+</script>
+<script>
+window.nodata = function ()
+{
+     with(document){
+        var divTag   = createElement('div'),
+            tmpl     = getElementById('tmpl_tuan_nodata').innerHTML;
+            divTag.setAttribute('class','nodata');
+           
+            divTag.innerHTML = tmpl;
+            querySelector('#load').innerHTML = '';
+            querySelector('#load').appendChild(divTag);
+    }
+}
+function createNode(data)
+{
+    with(document){
+        var divTag   = createElement('div'),
+            tmpl     = getElementById('tmpl_tuan').innerHTML;
+            divTag.setAttribute('class','rush-content');
+            for(key in data){
+               regExp = new RegExp('%'+key+'%','g'); 
+               tmpl   = tmpl.replace(regExp,data[key]); 
+            }
+            divTag.innerHTML = tmpl;
+            querySelector('#load').appendChild(divTag);
+    }
+}
+function handleOrder(order_id)
+{
+    with(baoapp.helper){
+        url = createUrl('Mcenter','tuan_detail',{order_id:order_id});
+        toast('订单查询中...');
+        ayscLoad(url,null,'GET','json',function(data){
+            toast(null);
+            if(data.status = CONST.BAO_REQUEST_SUCCESS){
+                console.log(data);
+                    toast('订单查询成功！',1000,function(){
+                        param = '?num='+data.detail.num+'&integral='+data.detail.use_integral+'&addr='+escape('XXXX');
+                        param+= '&totalprice='+data.detail.total_price+'&price='+data.tuans.tuan_price+'&order='+data.detail.order_id;
+                        param+= '&gname='+escape(data.tuans.title);
+                        linkTo(KEY.TUAN_PAY,'../../common/pay.html'+param,null,5);
+                    });
+            }else{
+                 toast(data.msg,1000);
+            }
+        });
+    }     
+}
+
+function cancleOrder(order_id)
+{
+    with(baoapp.helper){
+        confirm({title:'提示',content:'确定取消订单吗',buttons:['确定','取消'],callback:function(err,data,dataType,optId){
+            if(data==0)
+            {
+                toast('处理中...');
+                url = createUrl('Mcenter','tuan_delete',{order_id:order_id});
+                ayscLoad(url,null,'GET','json',function(data){
+                    toast(null);
+                    if(data.status == 200){
+                        window.data = data;
+                        toast('订单取消成功!',1500,function(){
+                            var url = createUrl('Mcenter','tuan',{aready:0,page:1});
+                            toast('列表刷新中...');
+                            ayscLoad(url,null,'GET','json',function(data){
+                                toast(null);
+                                if(data.status = CONST.BAO_REQUEST_SUCCESS){
+                                    if(data.list == null){
+                                        window.nodata();
+                                        return false;
+                                    }
+                                    _data = [];
+                                    for(index in data['list']){
+                                        _data.push({
+                                            order_id:data['list'][index]['order_id'],
+                                            title:data['tuans'][data['list'][index]['tuan_id']]['title'],
+                                            num  :data['list'][index]['num'],
+                                            totalprice:data['list'][index]['total_price']/100,
+                                            thumb:baoapp.config.attachs+data['tuans'][data['list'][index]['tuan_id']]['photo']
+                                        });
+                                    }
+                                    window.renderList(_data);
+                                }else{
+                                    toast('没有数据可加载...',1500);
+                                }
+                            });
+                        });      
+                    }else{
+                        toast(data.msg, 1500);
+                    }
+                });
+            }else{
+                return false;
+            }
+        }});        
+    }
+}
+function detail(order_id)
+{
+    order_id = order_id || alert('参数不正确！');
+    with(baoapp.helper){
+        linkTo(KEY.MEMBER_TUAN_DETAIL,'detail.html?order_id='+order_id,null,2);
+    };
+}
+window.renderList = function(data)
+{
+    data = data || '';
+    //先清空列表再渲染
+    document.querySelector('#load').innerHTML = '';
+    for(index in data){
+        createNode(data[index]);
+    }
+}
+window.tabRequest = function (param)
+{
+     param = param || 0;
+     word  = param?'已付款':'等待付款';
+     with(baoapp.helper){
+           var url = createUrl('Mcenter','tuan',{aready:param,page:1});
+           toast('加载中...');
+            ayscLoad(url,null,'GET','json',function(data){
+                toast(null);
+                if(data.status = CONST.BAO_REQUEST_SUCCESS){
+                    if(data.list == null){
+                        window.nodata();
+                        return false;
+                    }
+                    _data = [];
+                    for(index in data['list']){
+                        _data.push({
+                            order_id:data['list'][index]['order_id'],
+                            title:data['tuans'][data['list'][index]['tuan_id']]['title'],
+                            num  :data['list'][index]['num'],
+                            totalprice:data['list'][index]['total_price']/100,
+                            thumb:baoapp.config.attachs+data['tuans'][data['list'][index]['tuan_id']]['photo'],
+                            word:word
+                        });
+                    }
+                    window.renderList(_data);
+                }else{
+                    toast('没有数据可加载...',1500);
+                }
+            });
+    }
+}
+function tabChange(o,param)
+{
+    if($('.on').length>0)$('.on').removeClass('on');
+    $(o).addClass('on');
+    window['tabIndex'] = param;
+    window.tabRequest(param);
+}
+
+//加载更多
+window.loadMore = function()
+{
+        baoapp.helper.ayscRefresh('#load',function(){
+            var url = baoapp.helper.createUrl('Mcenter','tuan',{aready:window['tabIndex'],page:window.page[window['tabIndex']]});
+            var word  = window['tabIndex']?'已付款':'等待付款';
+            //判断数据是否加载完
+            if(window['page'][window['tabIndex']]=='null')
+                baoapp.helper.toast('没有更多数据！',2000,null,1);
+            else{
+                baoapp.helper.toast('加载中...');
+                baoapp.helper.ayscLoad(url,null,'GET','json',function(data){
+                    baoapp.helper.toast(null);
+                    if(data.status == 200){
+                        window.page[window['tabIndex']]=data['page'];
+                         _data = [];
+                         for(index in data['list']){
+                                 _data.push({
+                                     order_id:data['list'][index]['order_id'],
+                                     title:data['tuans'][data['list'][index]['tuan_id']]['title'],
+                                     num  :data['list'][index]['num'],
+                                     totalprice:data['list'][index]['total_price']/100,
+                                     thumb:baoapp.config.attachs+data['tuans'][data['list'][index]['tuan_id']]['photo'],
+                                     word:word
+                                 });
+                         }
+                        window.renderList(_data);
+                    }
+                });
+            }
+        },function(){
+            console.log('滑到顶部');
+        });
+}
+</script>
+<script>
+appcan.ready(function(){
+        window.page = {0:1,1:1};
+        window.tabIndex = 0;
+        var data  = baoapp.helper.cacheExpireRead(KEY.MEMBER_TUAN_INDEX);
+        data  = JSON.parse(data);
+        window.page[window['tabIndex']] = data.page;
+        var _data = [];
+        for(index in data['list']){
+            _data.push({
+                order_id:data['list'][index]['order_id'],
+                title:data['tuans'][data['list'][index]['tuan_id']]['title'],
+                num  :data['list'][index]['num'],
+                totalprice:data['list'][index]['total_price']/100,
+                thumb:baoapp.config.attachs+data['tuans'][data['list'][index]['tuan_id']]['photo'],
+                word:'等待付款'
+            });
+        }
+        window.renderList(_data);
+        window.loadMore();
+        /*++++++导航跳转+++++++*/
+        baoapp.helper.trigger('#f_index', function(){ 
+            appcan.window.close(0);
+            baoapp.helper.linkTo('index','../../index.html','',2);
+        },'click');
+        baoapp.helper.trigger('#f_tuan', function(){ 
+            appcan.window.close(0);
+            baoapp.helper.linkTo('tuan_index','../../index.html','',2);
+        },'click');
+        baoapp.helper.trigger('#f_coupon',function(){ 
+            appcan.window.close(0);
+            baoapp.helper.linkTo('coupon_main','../../coupon/main.html','',2);
+        },'click');  
+        baoapp.helper.trigger('#f_personal_other',function(){ 
+            appcan.window.close(0);
+            baoapp.helper.linkTo('more','../../more.html','',2);
+        },'click'); 
+        /*++++++导航跳转+++++++*/
+});
+</script>
+
+
+</html>

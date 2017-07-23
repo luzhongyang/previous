@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的活动</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_1.css"/>
+<link rel="stylesheet" type="text/css" href="css/css_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/wap.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/baocms.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".buy-bar span").each(function(e){
+			$(this).click(function(){
+				$(".buy-bar span").removeClass("on");
+				$(this).addClass("on");
+				$(".buy-list").each(function(s){
+					if(e==s){
+						$(".buy-list").hide();
+						$(this).show();
+					}
+				});
+			});
+		});
+	});
+
+</script>
+</head>
+
+<body>
+	<header>
+		<i class="icon-goback"></i>
+		<div class="title">我的约会</div>
+		<i class="icon-menu"  id="ico_8"></i>
+	</header>
+	<!-- 筛选TAB -->
+	<div class="buy-bar">
+			<span class="buy-bar-span on">我参加的</span>
+			<span class="buy-bar-span2">我发布的</span>
+	</div>
+	<div id="life" class="page-center-box">
+		<div id="scroll">
+			<!-- 列表 -->
+			<div class="list-have-pic buy-list">
+				<!-- 循环 -->
+				<div class="mydate">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp15.png" />
+						</div>
+						<div class="buy-content">
+							<p>[美食吃货]周末江汀绿洲野外休</p>
+							<p><span class="date-time">时间：2015-05-26 7:00-18:00</span></p>
+							<p class="spread-for">地点：蜀山天鹅湖...</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<div class=" date-content">
+							<div class="left">
+								<p class="date-look left">4人看过</p>
+								<div class="date-sex-boy">
+									<img src="img/tp16.png">
+									<span class="right">男 生</span>
+								</div>
+							</div>
+							<div class="right date-content-right">
+								<img src="img/tp8.png" class="left">
+								<span class="right">4</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mydate">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp15.png" />
+						</div>
+						<div class="buy-content">
+							<p>[美食吃货]周末江汀绿洲野外休</p>
+							<p><span class="date-time">时间：2015-05-26 7:00-18:00</span></p>
+							<p class="spread-for">地点：蜀山天鹅湖...</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<div class=" date-content">
+							<div class="left">
+								<p class="date-look left">4人看过</p>
+								<div class="date-sex-boy">
+									<img src="img/tp16.png">
+									<span class="right">男 生</span>
+								</div>
+							</div>
+							<div class="right date-content-right">
+								<img src="img/tp8.png" class="left">
+								<span class="right">4</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mydate">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp15.png" />
+						</div>
+						<div class="buy-content">
+							<p>[美食吃货]周末江汀绿洲野外休</p>
+							<p><span class="date-time">时间：2015-05-26 7:00-18:00</span></p>
+							<p class="spread-for">地点：蜀山天鹅湖...</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<div class=" date-content">
+							<div class="left">
+								<p class="date-look left">4人看过</p>
+								<div class="date-sex-boy">
+									<img src="img/tp16.png">
+									<span class="right">男 生</span>
+								</div>
+							</div>
+							<div class="right date-content-right">
+								<img src="img/tp8.png" class="left">
+								<span class="right">4</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mydate">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp15.png" />
+						</div>
+						<div class="buy-content">
+							<p>[美食吃货]周末江汀绿洲野外休</p>
+							<p><span class="date-time">时间：2015-05-26 7:00-18:00</span></p>
+							<p class="spread-for">地点：蜀山天鹅湖...</p>
+						</div>
+					</div>
+					<div class="list-box">
+						<div class=" date-content">
+							<div class="left">
+								<p class="date-look left">4人看过</p>
+								<div class="date-sex-boy">
+									<img src="img/tp16.png">
+									<span class="right">男 生</span>
+								</div>
+							</div>
+							<div class="right date-content-right">
+								<img src="img/tp8.png" class="left">
+								<span class="right">4</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 循环 -->
+			</div>
+
+			<div class="list-have-pic buy-list" style="display:none;">
+				<!-- 循环 -->
+				<div class="mydate">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp17.png" />
+						</div>
+						<div class="buy-content">
+							<p>[美食吃货]周末江汀绿洲野外休</p>
+							<p><span class="date-time">时间：2015-05-26 7:00-18:00</span></p>
+							<p class="spread-for">地点：蜀山天鹅湖...</p>
+							<div class="sign-up">报名详情</div>
+						</div>
+					</div>
+					<div class="list-box">
+						<div class=" date-content">
+							<div class="left">
+								<p class="date-look left">4人看过</p>
+								<div class="date-sex-boy">
+									<img src="img/tp16.png">
+									<span class="right">男 生</span>
+								</div>
+							</div>
+							<div class="right date-content-right">
+								<img src="img/tp8.png" class="left">
+								<span class="right">4</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mydate">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp17.png" />
+						</div>
+						<div class="buy-content">
+							<p>[美食吃货]周末江汀绿洲野外休</p>
+							<p><span class="date-time">时间：2015-05-26 7:00-18:00</span></p>
+							<p class="spread-for">地点：蜀山天鹅湖...</p>
+							<div class="sign-up">报名详情</div>
+						</div>
+					</div>
+					<div class="list-box">
+						<div class=" date-content">
+							<div class="left">
+								<p class="date-look left">4人看过</p>
+								<div class="date-sex-girl">
+									<img src="img/tp18.png">
+									<span class="right">女 生</span>
+								</div>
+							</div>
+							<div class="right date-content-right">
+								<img src="img/tp8.png" class="left">
+								<span class="right">4</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mydate">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp17.png" />
+						</div>
+						<div class="buy-content">
+							<p>[美食吃货]周末江汀绿洲野外休</p>
+							<p><span class="date-time">时间：2015-05-26 7:00-18:00</span></p>
+							<p class="spread-for">地点：蜀山天鹅湖...</p>
+							<div class="sign-up">报名详情</div>
+						</div>
+					</div>
+					<div class="list-box">
+						<div class=" date-content">
+							<div class="left">
+								<p class="date-look left">4人看过</p>
+								<div class="date-sex-boy">
+									<img src="img/tp16.png">
+									<span class="right">男 生</span>
+								</div>
+							</div>
+							<div class="right date-content-right">
+								<img src="img/tp8.png" class="left">
+								<span class="right">4</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mydate">
+					<div class="list-box">
+						<div class="list-img">
+							<img src="img/tp17.png" />
+						</div>
+						<div class="buy-content">
+							<p>[美食吃货]周末江汀绿洲野外休</p>
+							<p><span class="date-time">时间：2015-05-26 7:00-18:00</span></p>
+							<p class="spread-for">地点：蜀山天鹅湖...</p>
+							<div class="sign-up">报名详情</div>
+						</div>
+					</div>
+					<div class="list-box">
+						<div class=" date-content">
+							<div class="left">
+								<p class="date-look left">4人看过</p>
+								<div class="date-sex-girl">
+									<img src="img/tp18.png">
+									<span class="right">女 生</span>
+								</div>
+							</div>
+							<div class="right date-content-right">
+								<img src="img/tp8.png" class="left">
+								<span class="right">4</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 循环 -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<include  file='public:header'/>  
+<body>
+    <?php if(!$is_app){?>
+    <header>
+        <a href="javascript:history.back(-1);"><i class="icon-goback"></i></a>
+        <div class="title">充值金额</div>
+        <i class="icon-menu"></i>
+    </header>
+    <?php }?>
+    <div id="seat" class="page-center-box">
+
+        <form method="post" action="<{:U('money/moneypay')}>" >
+        <div id="scroll" class="pay recharge_new">
+        
+             <div class="shop-lie" style="position:relative;top:0;">
+                <ul>
+                    <li class="on"><a href="<{:U('money/index')}>" >余额充值</a></li>
+                    <li><a href="<{:U('money/recharge')}>" >代金券充值</a></li>
+                    <li><a href="<{:U('money/gold')}>" >金块充值</a></li>
+                </ul>
+            </div>
+        
+            <div class="order-content">
+                <ul class="list">
+                    <li >
+                        <span class="left">当前余额</span><span class="right" sytle="color:red;">
+                            <{:round($MEMBER['money']/100,2)}>元
+                        </span>
+                        <div class="clear"></div>
+                    </li>
+                    <li >
+                        <span class="left">充值金额</span><span class="right"><input class="Confirm sum" type="text" name="money" placeholder="请输入充值金额"/></span>
+                        <div class="clear"></div>
+                    </li>
+            </div>
+            
+            <div class="wap-form">
+                    <ul>
+                        <li>支付方式</li>
+                        <foreach name="payment" item="var">
+                            <?php if($var['code'] != 'money'){ ?>
+                            <li class="pay-li i-<{$var.payment_id}>">
+                                <{$var.name}><p>推荐已安装<{$var.name}><{$var.id}>客户端的用户使用</p><div class="seat-check"><label><input type="radio" class="ui-radio" name="code" value="<{$var.code}>" ></label></div>
+                            </li>
+                            <?php }?>
+                        </foreach>
+                    </ul>
+                    <script>
+                        $(function () {
+                            $(".seat-check input").click(function () {
+                                $(".seat-check").find("label").removeClass("on");
+                                $(this).parent("label").addClass("on");
+                            });
+                            $(".seat-check input").first().trigger("click");
+                        });
+                    </script>
+             </div>
+            
+            <div class="sure-pay-but">
+                <div class="sure-pay"><input type="submit" class="aniu" value="确认支付"></div>
+            </div>
+        </div>
+        </form>
+    </div>
+<include file="public:footer"/>

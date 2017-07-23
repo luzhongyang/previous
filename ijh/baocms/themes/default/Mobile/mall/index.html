@@ -1,0 +1,179 @@
+<include  file='public:header'/>    
+<body>
+<?php if(!$is_app){?>
+<header>
+    <a href="<{:AppLink('index/index')}>"><i class="icon-goback"></i></a>
+    <div class="title">购物</div>
+    <i class="icon-menu"></i>
+</header>
+<?php }?>
+<div class="page-center-box">
+    <!--banner部分-->
+    <div class="banner mb10">
+        <div class="flexslider"> 
+            <ul class="slides">
+                <if condition="!empty($ads)">
+                    <foreach name="ads" item="item">
+                        <li><a href="<{$item.link_url}>"><img style="height:auto;" src="__ROOT__/attachs/<{$item.photo}>" width="100%" height="auto" /></a></li>  
+                    </foreach>
+                    <else/>
+                    <calldata mdl="Ad" where=" closed=0 AND site_id=33 AND city_id IN ({$city_ids}) AND bg_date ELT '{$today}' AND end_date EGT '{$today}' " limit="0,5" cache="43200" order="orderby asc">
+                        <li><a href="<{$item.link_url}>"><img style="height:auto;" src="__ROOT__/attachs/<{$item.photo}>" width="100%" height="auto" /></a></li>  
+                    </calldata>
+                </if>
+            </ul>  
+        </div>
+    </div>
+    <!--banner部分结束-->
+    <!--内容-->
+    <div class="mall_crowd mb10 border_t">
+        <h3 class="mall_titleOne">火爆众筹 <a href="<{:U('mall/crowdList')}>" class="more fr black6">更多&gt;&gt;</a></h3>
+        <div class="mall_crowd_list_box mt10">
+            <ul>
+            	<volist name='itemss' id='item'>
+                    <eq name='item.status' value='0'>
+                         <li class="mall_crowd_list">
+                            <div class="box">
+                                <div class="pub_img"><a href="<{:AppLink('mall/crowdDetail',array('goods_id'=>$item['goods_id']))}>"><img src="__ROOT__/attachs/<{$item.img}>"></a></div>
+                                <h3 class="overflow_clear txt_center"><a href="<{:AppLink('mall/crowdDetail',array('goods_id'=>$item['goods_id']))}>"><{$item.title}></a></h3>
+                                <div class="bar_bg"><div class="bar" style="width:<{$item['have_price']/$item['all_price']*100}>%;"></div></div>
+                                <div class="bar_txt txt_center">
+                                    <div class="fl">
+                                        <p class="black6"><{:round($item['have_price']/100,2)}></p> 
+                                        <p class="black9">已筹金额</p>
+                                    </div>
+                                    <div class="fr">
+                                        <p class="black6"><{:round($item['all_price']/100,2)}></p> 
+                                        <p class="black9">总需金额</p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div><a href="<{:AppLink('mall/crowdDetail',array('goods_id'=>$item['goods_id']))}>" class="btn">立即众筹</a></div>
+                            </div>
+                        </li>
+                    </eq>
+            	</volist>
+               
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+    <div class="mall_crowd mb10 border_t">
+        <h3 class="mall_titleOne">新品上架 <a href="<{:AppLink('mall/items')}>" class="more fr black6">更多&gt;&gt;</a></h3>
+        <div class="mall_crowd_list_box mt10">
+            <ul>
+            	<volist name='new' id='item'>
+                    
+                    <li class="mall_crowd_list mall_newGds_list">
+                        <div class="box">
+                            <div class="pub_img"><span class="bq">新品</span><a href="<{:AppLink('mall/detail',array('goods_id'=>$item['goods_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"></a></div>
+                            <h3 class="overflow_clear"><a href="<{:AppLink('mall/detail',array('goods_id'=>$item['goods_id']))}>"><{:bao_msubstr($item['title'],0,12,false)}></a></h3>
+                            <div class="btn_box"><p class="fl price fontcl2">￥<{:round($item['mall_price']/100,2)}></p><a href="<{:AppLink('mall/detail',array('goods_id'=>$item['goods_id']))}>" class="btn fr">立即购买</a></div>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+    <div class="mall_crowd mb10 border_t">
+        <h3 class="mall_titleOne">热门推荐 <a href="<{:AppLink('mall/items')}>" class="more fr black6">更多&gt;&gt;</a></h3>
+        <div class="mall_crowd_list_box mt10">
+            <ul>
+            	<volist name='tuijian' id='item'>
+                     <li class="mall_crowd_list mall_newGds_list">
+                        <div class="box">
+                            <div class="pub_img"><span class="bq bq2">推荐</span><a href="<{:AppLink('mall/detail',array('goods_id'=>$item['goods_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"></a></div>
+                            <h3 class="overflow_clear"><a href="<{:AppLink('mall/detail',array('goods_id'=>$item['goods_id']))}>"><{:bao_msubstr($item['title'],0,12,false)}></a></h3>
+                            <div class="btn_box"><p class="price fontcl2">￥<{$item['mall_price']/100}><small><del class="black9 ml10">￥<{$item['price']/100}></del></small></p></div>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+    <div class="mall_crowd mb10 border_t">
+        <h3 class="mall_titleOne"><span class="fl mr10">限时抢购</span><div class="fl time" remaintime="1442400030"></div> <a href="<{:U('mall/items')}>" class="more fr black6">更多&gt;&gt;</a></h3>
+        <script>
+        $(function(){
+            var dateTime = new Date();
+            var difference = dateTime.getTime() - 1442200030*1000;	
+            setInterval(function(){
+              $("[remaintime]").each(function(){
+                var obj = $(this);
+                var endTime = new Date(parseInt(obj.attr('remaintime')) * 1000);
+                var nowTime = new Date();
+                var nMS=endTime.getTime() - nowTime.getTime() + difference;
+                var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+                var myH=Math.floor(nMS/(1000*60*60)) % 24;
+                var myM=Math.floor(nMS/(1000*60)) % 60;
+                var myS=Math.floor(nMS/1000) % 60;
+                var myMS=Math.floor(nMS/100) % 10;
+                if(myD>= 0){
+                    var str = "<span>"+myD+"</span>天"+"<span>"+myH+"</span>时"+"<span>"+myM+"</span>分"+"<span>"+myS+"</span>秒";
+                }else{
+                    var str = "真遗憾您来晚了，抢购已经结束。";	
+                }
+                obj.html(str);
+              });
+            }, 100);
+        });
+        </script>
+        <div class="mall_lmtBuy_box mt10">
+            <ul>
+            	<volist name='xianshi' id='item'>
+                    <li class="mall_lmtBuy_list">
+                        <div class="box"><a href="<{:AppLink('mall/detail',array('goods_id'=>$item['goods_id']))}>">
+                            <img src="__ROOT__/attachs/<{$item.photo}>">
+                            <p><{:bao_msubstr($item['title'],0,12,false)}></p>
+                            <p class="fontcl2"><del class="black9">￥<{$item['price']/100}></del>&nbsp; ￥<{$item['rush_price']/100}> </p>
+                            </a>
+                        </div>
+                    </li>
+                </volist>
+                
+                
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+    <div class="mall_crowd mb10 border_t">
+        <h3 class="mall_titleOne">热门商品 <a href="<{:AppLink('mall/items')}>" class="more fr black6">更多&gt;&gt;</a></h3>
+        <div class="mall_like_box border_t mt10">
+            <ul>
+            	<volist name='like' id='item'>
+                     
+                     <li class="mall_like_list">
+                        <div class="pub_img fl"><a href="<{:AppLink('mall/detail',array('goods_id'=>$item['goods_id']))}>"><img src="__ROOT__/attachs/<{$item.photo}>"></a></div>
+                        <div class="pub_wz">
+                            <h3 class="overflow_clear"><a href="<{:AppLink('mall/detail',array('goods_id'=>$item['goods_id']))}>"><{:bao_msubstr($item['title'],0,12,false)}></a></h3>
+                            <p class="fontcl2 price">￥<{$item['mall_price']/100}><small><del class="black9 ml10">￥<{$item['price']/100}></del></small> <span class="fr black6">已售：<{$item['sold_num']}></span></p>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                </volist>
+            </ul>
+        </div>            
+    </div>
+    <!--内容结束-->
+</div>
+<script src="__TMPL__statics/js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	$(document).ready(function () {
+		/*轮播幻灯图开始*/
+		$('.flexslider').flexslider({
+			directionNav: true,
+			pauseOnAction: false,
+			/*slideshow: false,*/
+			/*touch:true,*/
+		});
+		/*轮播幻灯图结束*/
+
+	});
+</script>
+<include  file='public:footer'/>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>优惠列表</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/css_1.css"/>
+        <script src="../js/appcan.js"></script>
+        <script src="../js/appcan.control.js"></script>
+        <script src="../js/application.js"></script>
+        <script src="../js/application.init.js"></script>
+    </head>
+    <style>
+        #loading {
+            display: none;
+            height: 0.5rem;
+            position: fixed;
+            bottom: 0;
+            z-index: 999;
+            width: 100%;
+        }
+        #coupons_content{
+            overflow: auto;
+        }
+    </style>
+<body>
+
+    <script id="area" type="text/template">
+      <li class='%selectd%' onclick="loadpage('','%area_id%','')">
+         <a title='%area_name%' >%area_name%</a></li>
+      </li>
+    </script>
+
+    </script>
+    <script id="coupons" type="text/template">
+         <div class="favou-content">
+            <div class="favou-img">
+                <a title="" onclick="jumpto('%coupon_id%')" href="">
+                    <img id="photo%coupon_id%" src='%photo%'/>
+                </a>
+            </div>
+            <div class='favou-zi'>
+                <a title=''  onclick="jumpto('%coupon_id%')" >
+                <p class='overflow_clear'>%title%</p>
+                <p class='c_h h15 overflow_clear'>%intro%</p>
+                <p class="c_h h15">有效期至：%expire_date%</p>
+                </a>
+                <p class="favou-zai">
+                <a title="" href=""><span class="price left">%downloads%人已下载</span></a>
+                <a class="coupon_upload" onclick="downloadCoupon('%coupon_id%')">立即下载</a>
+                </p>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+    </script>
+    
+    
+    
+    <!-- 筛选TAB -->
+    <script>
+        var p = 1;  //列表页
+        var nomore = false; //无更多数据
+        /**
+         * 下载指定优惠卷
+         * @param coupon_id,优惠卷ID,为空则抛出异常
+         * @return
+         */ 
+        function downloadCoupon(coupon_id){
+              coupon_id = coupon_id||0;
+              if(coupon_id==0){
+                  baoapp.helper.toast('无法下载该优惠卷!',1000,null,1);
+                  return;
+              }
+              var data = {'coupon_id':coupon_id};
+              var url = baoapp.helper.createUrl('coupon','download');
+              baoapp.helper.ayscLoad(url,data,'GET','json',function(data){
+               if(!data){
+                      //TODO
+                   linkTo('loading_fail','../loading_fail.html');
+                   return;
+               }
+               if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                  baoapp.helper.toast(data.msg,1000,null,1);
+                  baoapp.helper.linkTo('mcenter/coupon','../mcenter/coupon.html');
+               }else if(CONST.BAO_LOGIN_ERROR == data.status){
+                      //TODO
+                  baoapp.helper.linkTo('login','../login.html');
+               }else{
+                   baoapp.helper.toast(data.msg,2000,null,1);
+               }
+            });
+        }
+            
+            
+        /**
+         * 根据筛选加载分页数据
+         * @param cat_id,商铺类型ID,为空则获取缓存数据
+         * @param area_id,地区ID,为空则获取缓存数据
+         * @param coupon_order,排序,默认以下载数倒序
+         * @param page,页面page数,不填则重置p变量
+         * @return
+         */ 
+        function loadpage(cat_id,area_id,coupon_order,page){
+           // $('#loading').show();
+             baoapp.helper.toast('加载中...');
+            if(typeof cat_id === 'undefined'||cat_id=='')
+             cat_id = appcan.locStorage.getVal('cat_id')||0;
+            if(typeof area_id === 'undefined'||area_id=='')
+             area_id = appcan.locStorage.getVal('area_id')||0;
+            if(typeof coupon_order === 'undefined'||coupon_order=='')
+            coupon_order = appcan.locStorage.getVal('coupon_order')||0;
+            //分页加载
+            page = page || 1;
+            
+    
+            var req = {'area_id':area_id,'cat':cat_id,'order':coupon_order,'p':page};
+            var requrl = baoapp.helper.createUrl('Coupon','Data',req);
+            appcan.locStorage.setVal('area_id',area_id);
+            appcan.locStorage.setVal('cat_id',cat_id);
+            appcan.locStorage.setVal('coupon_order',coupon_order);
+            
+            catreload(cat_id);
+            
+            $(".serch-bar-mask").hide();  
+            $("#search-bar ul li").removeClass('on');
+            
+            baoapp.helper.ayscLoad(requrl,req,'GET','json',function(data){  
+                baoapp.helper.toast(null);
+               if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                //TO
+                    var coupons = data.coupons;
+                    
+                    if(page <= 1){
+                        //重置page数
+                        p = 1; 
+                        nomore = false;
+                        $('#mall-main').scrollTop('0')
+                        $('#coupons_content').html('');
+                    }
+                    var imgs = {};
+                    var count = 0;
+                    for(var i in coupons){
+                        /*
+                        baoapp.helper.getImgCache(coupons[i].photo,function(status,path){
+                        });*/
+                        imgs[count++] = {id:coupons[i].coupon_id,photo:coupons[i].photo};
+                        var data = {coupon_id:coupons[i].coupon_id,photo:coupons[i].photo,title:coupons[i].title,intro:coupons[i].intro,expire_date:coupons[i].expire_date,downloads:coupons[i].downloads}
+                        createNode('coupons',data);
+                    }
+                    var id = 'photo';
+                    baoapp.helper.getImgCache(id,imgs,null);
+              }else if(data==0){
+                  if(p==1)
+                  $('#coupons_content').html('');
+                  nomore = true;
+                  //TODO
+              }
+            });
+            
+        }
+        
+        function catreload(cat_id){
+           shopcache =  baoapp.config.shopcates;
+           
+           var htm = '<ul>';
+           (cat_id==0)?htm += '<li class="on" onclick="loadpage(\'0\',\'0\',\'0\')">' : htm += '<li onclick="loadpage(\'0\',\'0\',\'0\')">';
+           htm+='<a>全部</a></li>';
+           
+           if(cat_id>0){
+               cat_id = parseInt(cat_id);
+               htm += '<li  class="on"><a>'+shopcache[cat_id]['cate_name']+'</a></li>';
+           }
+           for(var i in shopcache){
+               if(shopcache[i]['parent_id'] == cat_id){
+                   if(shopcache[i]['cate_id'] == cat_id){
+                       htm += '<li class="on">';
+                   }else{
+                       htm += "<li onclick=\"loadpage('"+shopcache[i]['cate_id']+"','','')\">";
+                   }
+                       htm += "<a title='"+shopcache[i]['cate_name']+"' >"+shopcache[i]['cate_name']+"</a></li>";
+                       htm += "</li>";
+                }
+           }
+           htm += '</ul>';
+           $("#cates_content").html(htm);
+        }
+        
+         //加载LOADING数据
+        window.readCache = function(key){
+            key = key || KEY.COUPON_INDEX;
+         //读取缓存
+            var cached = baoapp.helper.cacheExpireRead(key);
+                cached = JSON.parse(cached);
+            var data     = [];
+            var http_url = baoapp.config.attachs;
+            var shopcates = baoapp.config.shopcates;
+            var areacache =  baoapp.config.areas;
+            //shopcate
+            var coupons = cached.coupons;
+            data.coupons = [];
+            for(var i in coupons){
+                //存入缓存
+                var photo = coupons[i].photo;
+                data.coupons[i] = {coupon_id:coupons[i].coupon_id,photo:photo,title:coupons[i].title,intro:coupons[i].intro,expire_date:coupons[i].expire_date,downloads:coupons[i].downloads}
+            }
+            
+            data.area = [];
+            var area_id = appcan.locStorage.getVal('area_id')||0;
+            if(area_id == 0){
+                data.area[0] = {selectd:'on',area_id:0,area_name:'全部'};
+            }else{
+                data.area[0] = {selectd:'',area_id:0,area_name:'全部'};
+            }
+            for(var i in areacache){
+                if(area_id == areacache[i].area_id){
+                   data.area[i] = {selectd:'on',area_id:areacache[i].area_id,area_name:areacache[i].area_name};
+                }else{
+                   data.area[i] = {selectd:'',area_id:areacache[i].area_id,area_name:areacache[i].area_name};
+                }
+            }
+
+            renderList(data);
+        }
+                    
+                    
+        function renderList(cached,reload){
+            reload = reload || false;
+            if(reload){
+                document.querySelector('#rendlist').innerHTML = '';
+            }
+            for(tpl in cached)
+              for(i in cached[tpl])
+              {
+                  createNode(tpl,cached[tpl][i]);
+              }
+              var coupon = cached['coupons'];
+              var imgs = {};
+              var count=0;
+              for(i in coupon){
+                    imgs[count] = {id:coupon[i].coupon_id,photo:coupon[i].photo};
+                    count++;
+              }
+              var id = 'photo';
+              baoapp.helper.getImgCache(id,imgs,null);
+        }
+        
+        
+        function createNode(readid,data)
+        {      
+            with(document){
+                //var spanNode = createElement('span'),
+                tmpl     = getElementById(readid).innerHTML;
+                
+                for(key in data){
+                   tmpl = tmpl.replace(eval("/%"+key+"%/g"),data[key]); 
+                    
+                   
+                }
+                //spanNode.innerHTML = tmpl;
+                getElementById(readid+"_content").innerHTML+=tmpl
+            }
+        }
+        
+        function jumpto(id,key)
+        {
+            id = id || 0;
+            var data = '';
+          //  appcan.window.close();
+            baoapp.helper.linkTo(KEY.COUPON_DETAIL,'detail.html','coupon_id-'+id,5,'index.html');
+        }
+            
+    </script>
+    <script>
+        $(function(){
+            $("#search-bar li").each(function(e){
+                $(this).click(function(){
+                    if($(this).hasClass("on")){
+                        $(this).parent().find("li").removeClass("on");
+                        $(this).removeClass("on");
+                        $(".serch-bar-mask").hide();
+                    }
+                    else{
+                        $(this).parent().find("li").removeClass("on");
+                        $(this).addClass("on");
+                        $(".serch-bar-mask").show();
+                    }
+                    $(".serch-bar-mask .serch-bar-mask-list").each(function(i){
+                        
+                        if(e == i){
+                            $(this).parent().find(".serch-bar-mask-list").hide();
+                            $(this).show();
+                        }
+                        else{
+                            $(this).hide();
+                        }
+                        $(this).find("li").click(function(){
+                            $(this).parent().find("li").removeClass("on");
+                            $(this).addClass("on");
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+    
+    <div class="serch-bar-mask" style="display:none;">   
+           <div  class="serch-bar-mask-list">
+               <ul id="cates_content">
+               </ul>
+           </div>
+           <div  class="serch-bar-mask-list">
+               <ul id="area_content">
+               </ul>
+           </div>
+           <div id="orders" style="height:auto" class="serch-bar-mask-list">
+               <ul>
+                   <li class="on" >
+                       <a onclick="loadpage('','','2')">下载次数</a>
+                   </li>
+                   <li >
+                       <a onclick="loadpage('','','1')">推荐排序</a>
+                   </li>
+               </ul>
+           </div>
+        </div>
+        <style>
+            .rush-box{display: -webkit-box; -webkit-box-orient: vertical; width: 100%; height: 100%;}
+            #mall-main{width: 100%; -webkit-box-flex: 1; overflow: auto}
+        </style>
+        <div id="ele" class="page-center-box">
+        <div id="scroll">
+            <!-- 列表 -->
+            <div class="rush-box">
+                <div id="search-bar">
+                    <ul>
+                        <li style="width:33.33%;"><span>全城分类</span><i></i></li>
+                        <li style="width:33.33%;"><span>全部区域</span><i></i></li>
+                        <li style="width:33.33%;"><span>默认排序</span><i></i></li>
+                    </ul>
+                </div>
+                <div class="" id="mall-main">
+                    <div class="favou-list-box" id="coupons_content">
+                        <!-- 循环 -->   
+                    </div>                                          
+                </div>
+            </div>
+        </div>
+        <div id="loading" style="">
+            <div class="bao_loading" ></div>
+        </div>
+    </div>
+</body>
+<script>
+           appcan.ready(function(){ 
+               with(baoapp.helper){
+                var cat_id = appcan.locStorage.getVal('cat_id')||0;
+                var area_id = appcan.locStorage.getVal('area_id')||0;
+                var coupon_order = appcan.locStorage.getVal('coupon_order')||1;
+                var req = {'area_id':area_id,'cat':cat_id,'order':coupon_order};
+                var key = KEY.COUPON_INDEX;
+                
+                try {
+                   var url = createUrl('coupon','data',req); 
+                   var cached = cacheExpireRead(key);
+                   if(!cached){
+                         ayscLoad(url,null,'GET','json',function(data){
+                            if(CONST.BAO_REQUEST_SUCCESS == data.status){
+                                 //抓取数据写入缓存
+                                cacheExpireWrite(key,JSON.stringify(data));
+                                window.readCache(key);
+                            }
+                        });
+                   }else{
+                       window.readCache(key);
+                   }
+                 }catch(e){
+                     console.log(e);
+                     resourceError();
+                 }
+                 catreload(cat_id);
+               
+                 
+                 ayscRefresh(
+                      '#mall-main',function(){
+                          if(!nomore){
+                              p++;
+                          }else{
+                              return;
+                          }
+                         loadpage('','','',p,function(){
+                             // $('#loading').hide();
+                         });
+                      }
+                  )           
+                /*++++++导航跳转+++++++*/
+                 }
+             });
+
+</script>

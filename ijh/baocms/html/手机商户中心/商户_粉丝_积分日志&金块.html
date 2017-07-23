@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商户-粉丝-金块积分</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/js.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" id="icon_goback"></a></i>
+    <div class="title">粉丝-金块积分</div>
+    <i class="right"><a href="#">充值</a></i>
+</header>
+
+<section>
+	<script>
+		$(function(){
+			$(".sh_prompt_infor_closs").click(function(){
+				$(".sh_prompt_infor_box").hide();;
+			});
+		});
+    </script>
+	<div class="sh_prompt_infor_box">
+    	<p>目前积分只能使用金块兑换，如果您没有金块的话可以在金块管理充值金块！</p>
+        <div class="sh_prompt_infor_closs"></div>
+    </div>
+    <script>
+		$(function(){
+			$(".sh_fans_log_tab a").each(function(e){
+				$(this).click(function(){
+					$(this).parent().find("a").removeClass("on");
+					$(this).addClass("on");
+					$(".sh_fans_log_tab_box").each(function(i){
+						if(e==i){
+							$(".sh_fans_log_tab_box").hide();
+							$(this).show();
+						}
+					});
+				});
+			});
+			
+		});
+    </script>
+    <div class="sh_fans_log_tab mb10">
+    	<div><a href="#" class="on">金块换积分</a><a href="#">积分日志</a></div>
+    </div>
+    <div class="sh_fans_log_tab_box">
+    	<p class="sh_fans_gold_ts">您当前共有：98322金块,1009446积分</p>
+        <div class="sh_input_public"><span>兑换</span><input type="text" value=""></div>
+        <p class="sh_fans_gold_sm"><em></em>一金块兑换100积分;</p>
+        <div class="sh_login_nr"><input class="btn mt30" type="button" value="立刻兑换"></div>
+    </div>
+    <div class="sh_fans_log_tab_box" style="display:none;">
+        <div class="sh_list_public_box">
+            <ul>
+                <li class="list_box mb10">
+                    <div class="sh_fans_log_list">
+                        <p class="sh_fans_log_border"><span class="fl">积分：<big>-200</big></span><span class="fr">时间：<time>2015-08-11 18:30:29</time></span></p>
+                        <p>说明：订单100114积分抵用</p>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_fans_log_list">
+                        <p class="sh_fans_log_border"><span class="fl">积分：<big>-200</big></span><span class="fr">时间：<time>2015-08-11 18:30:29</time></span></p>
+                        <p>说明：订单100114积分抵用</p>
+                    </div>
+                </li>
+                <li class="list_box mb10">
+                    <div class="sh_fans_log_list">
+                        <p class="sh_fans_log_border"><span class="fl">积分：<big>-200</big></span><span class="fr">时间：<time>2015-08-11 18:30:29</time></span></p>
+                        <p>说明：订单100114积分抵用</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+</body>
+</html>

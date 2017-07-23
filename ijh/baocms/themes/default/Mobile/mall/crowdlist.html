@@ -1,0 +1,23 @@
+<include  file='public:header'/>    
+<body>
+
+<?php if(!$is_app){?>
+	<header>
+		<a href="<{:AppLink('mall/index')}>"><i class="icon-goback"></i></a>
+		<div class="title">众筹列表</div>
+		<i class="icon-menu"></i>
+	</header>
+<?php }?>
+
+	<div id="app_nav" class="page-center-box">
+		<div id="scroll">
+
+		</div>
+        <script>
+        $(document).ready(function () {
+            loaddata('<{$nextpage}>', $("#scroll"), true);
+        });
+    </script>
+	</div>
+	
+<include  file='public:footer'/>

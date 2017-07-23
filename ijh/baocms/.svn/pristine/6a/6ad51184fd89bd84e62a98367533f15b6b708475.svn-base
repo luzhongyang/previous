@@ -1,0 +1,145 @@
+<include  file='public:header'/>   
+
+<body id="my_attention">
+    <?php if(!$is_app){?>
+    <header>
+        <a href="<{:AppLink('favorites/index')}>"><i class="icon-goback"></i></a>
+        <div class="title"><{$detail.shop_name}></div>
+        <a href="<{:AppLink('favorites/cancle',array('shop_id'=>$detail['shop_id']))}>"> <i class="icon-menu" id="foucsIco"></i></a>
+    </header>
+<?php }?>
+
+    <div id="seat" class="page-center-box">
+        <div id="scroll">
+            <?php foreach($news as $k=>$val){?>
+            <div class="dish_time_box">
+                <span class="dish_time"><?php echo date('m月d日 H:i',$val['create_time']);?></span>
+            </div>
+            <div class="dish_detailBox">
+                <div class="dish_detail">
+                    <a href="<{:AppLink('favorites/read',array('news_id'=>$val['news_id']))}>"><div class="img"><img src="__ROOT__/attachs/<{$val['photo']}>"  /></div>
+                        <p>
+                            <b class="black3"><{:msubstr($val['title'],0,18)}></b><br /><span class="hui"><{$val.create_time|date='Y-m-d',###}></span>
+                        </p>
+                        <p class="rem14" style="font-size:0.14rem;">
+                            <{:bao_msubstr($val['details'],0,60)}>
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <?php }?>
+       
+        </div>
+
+    </div>
+    <footer class="footer-switch footer-cart">
+        <div class="fl left"><span class="switch-btn"></span></div>
+        <div class="fl right">
+            <script>
+                $(function () {
+                    $(".footer-switch .switch-btn").click(function () {
+                        if ($(".footer-switch .menu").css("display") == 'block') {
+                            $(".footer-switch .menu").hide();
+                            $(".footer-switch .input-box").show(200);
+                        }
+                        else {
+                            $(".footer-switch .menu").show();
+                            $(".footer-switch .input-box").hide(200);
+                        }
+                    });
+                    $(".footer-switch .menu-list").click(function () {
+                        if ($(this).find(".menu-pull").css("display") == 'block') {
+                            $(".footer-switch .menu-pull").hide();
+                            $(this).find(".menu-pull").hide();
+                        }
+                        else {
+                            $(".footer-switch .menu-pull").hide();
+                            $(this).find(".menu-pull").show();
+                        }
+                    });
+
+                    var t = 6000;
+                    setInterval(function () {
+                        var url = "<{:U('favorites/reply')}>";
+                        var shop_id = "<{$detail.shop_id}>";
+                        $.post(url, {shop_id: shop_id, t: t}, function (result) {
+                            if (result.status == 'success') {
+                                var str = '';
+                                var logo = result.logo;
+                                if(result.res){
+                                    $.each(result.res, function (n, value) {
+                                        str += '<div class="speak_box">';
+                                        str += '<div class="dish_face fl"><img src="__ROOT__/attachs/' + logo +'" class="fl" /></div>';
+                                        str += '<div class="dish_speak fl">';
+                                        str += '<div class="fl">'+value.content+'<span class="posl"></span></div>';
+                                        str += '</div><div class="clear"></div></div>';
+                                    });
+                                    $("#scroll").append(str);
+                                }
+                            }
+                             $("html,body").animate({scrollTop: document.body.clientHeight}, 200);
+                        }, 'json');
+                    }, t)
+
+                    $("#jq_send").click(function () {
+                        if ($("#word").val() != '') {
+                            var word = $("#word").val();
+                            var str = '<div class="speak_box"> <div class="dish_face fr"><img src="__ROOT__/attachs/<{$MEMBER.face|default="default.jpg"}>" class="fr" /></div> <div class="dish_speak fr"><div class="dish_speak_background fr">' + word + '<span class="posr"></span></div> </div>  <div class="clear"></div></div>';
+                            $("#scroll").append(str);
+                            $("#word").val('');
+                            $("html,body").animate({scrollTop: document.body.clientHeight}, 200);
+                            $.post('<{:U("favorites/send",array("shop_id"=>$detail["shop_id"]))}>', "word=" + word, function (data) {
+                                if (data.ret == 1) {
+                                    switch (data.type) {
+                                        case 'text':
+                                            var str = '<div class="speak_box"> <div class="dish_face fl"><img src="' + data.face + '" class="fl" /></div> <div class="dish_speak fl"><div class="fl"><span class="posl"></span>' + data.contents + '</div></div> <div class="clear"></div> </div>';
+                                            $("#scroll").append(str);
+                                            break;
+                                        case  'news':
+                                            var str = '  <div class="dish_detailBox">';
+                                            str += '<div class="dish_detail">';
+                                            str += ' <a href="' + data.url + '"><div class="img"><img src="' + data.photo + '"  /></div>';
+                                            str += ' <p> <b class="black3">' + data.title + '</b> </p>';
+                                            str += '<p class="rem14" style="font-size:0.14rem;">' + data.intro;
+                                            str += '</p> </a> </div></div>';
+                                            $("#scroll").append(str);
+                                            break;
+
+                                    }
+                                }
+
+                                $("html,body").animate({scrollTop: document.body.clientHeight}, 200);
+                            }, 'json');
+                        }
+                    });
+                });
+            </script>
+            <div class="menu">
+                <ul>
+                    <?php  foreach($weixin['button']  as $k=>$v){?>
+                    <li class="menu-list"><span class="menu-listA" href="javascript:void(0);"><{$v}></span>
+                        <div class="menu-pull">
+                            <ul>
+                                <?php foreach($weixin['child'][$k] as $key=>$val){?>
+                                <li><a href="<{$val.url}>"><{$val.name}></a></li>
+                                <?php }?>
+                            </ul>
+                        </div>
+                    </li>
+                    <?php }?>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="input-box" style="display:none;">
+
+                <input name="word" id="word" type="text" class="text black3" />
+                <input type="button" id="jq_send" class="submit" value="发送" />
+
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </footer>
+
+</body>
+</html>

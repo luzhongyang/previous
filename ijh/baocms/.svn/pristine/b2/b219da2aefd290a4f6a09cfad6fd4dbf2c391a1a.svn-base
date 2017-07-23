@@ -1,0 +1,53 @@
+<div class="listBox clfx">
+    <div class="menuManage">
+        <form  target="baocms_frm" action="<{:U('pcfunction/edit',array('function_id' => $detail['function_id']))}>" method="post">
+            <div class="mainScAdd">
+                <div class="tableBox">
+                    <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                        <tr>
+                            <td class="lfTdBt">标题：</td>
+                            <td class="rgTdBt">
+                                <input name="data[title]" type="text" value="<{$detail['title']}>" class="scAddTextName w200" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lfTdBt">链接：</td>
+                            <td class="rgTdBt">
+                                <input name="data[url]" type="text" value="<{$detail['url']}>" class="scAddTextName w200" />
+                            </td>
+                        </tr>
+                        <tr>
+                        <td class="lfTdBt">是否显示：</td>
+                        <td class="rgTdBt">
+                            <label style="display: inline-block;"><input name="data[is_show]" type="radio" value="1" <eq name="detail.is_show" value="1">checked="checked"</eq> />是</label>
+                            <label style="display: inline-block; margin-left: 20px;"><input name="data[is_show]" type="radio" value="0" <eq name="detail.is_show" value="0">checked="checked"</eq> />否</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lfTdBt">导航显示：</td>
+                        <td class="rgTdBt">
+                            <label style="display: inline-block;"><input name="data[is_nav]" type="radio" value="1" <eq name="detail.is_nav" value="1">checked="checked"</eq> />是</label>
+                            <label style="display: inline-block; margin-left: 20px;"><input name="data[is_nav]" type="radio" value="0" <eq name="detail.is_nav" value="0">checked="checked"</eq> />否</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lfTdBt">是否新功能：</td>
+                        <td class="rgTdBt">
+                            <label style="display: inline-block;"><input name="data[is_new]" type="radio" value="1" <eq name="detail.is_new" value="1">checked="checked"</eq> />是</label>
+                            <label style="display: inline-block; margin-left: 20px;"><input name="data[is_new]" type="radio" value="0" <eq name="detail.is_new" value="0">checked="checked"</eq> />否</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lfTdBt">排序：</td>
+                        <td class="rgTdBt">
+                            <input name="data[orderby]" type="text" value="<{$detail['orderby']}>" class="scAddTextName w200" />
+                        </td>
+                    </tr>
+                    </table>
+                </div>
+                <div class="smtQr"><input type="submit" value="确认编辑" class="smtQrIpt" /></div>
+            </div>
+        </form>
+    </div>
+</div>
+
