@@ -1,0 +1,173 @@
+<?php
+/**
+ * Copy Right IJH.CC
+ * Each engineer has a duty to keep the code elegant
+ * $Id$
+ */
+
+if(!defined('__CORE_DIR')){
+    exit("Access Denied");
+}
+
+return array (
+  'complaint_id' => 
+  array (
+    'field' => 'complaint_id',
+    'label' => 'ID',
+    'pk' => true,
+    'add' => false,
+    'edit' => false,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'int',
+    'comment' => '',
+    'default' => '',
+    'SO' => '=',
+  ),
+  'from' => 
+  array (
+    'field' => 'from',
+    'label' => '类型',
+    'pk' => false,
+    'add' => true,
+    'edit' => false,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'text',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+  'staff_id' => 
+  array (
+    'field' => 'staff_id',
+    'label' => '服务人员',
+    'pk' => false,
+    'add' => true,
+    'edit' => false,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'int',
+    'comment' => '',
+    'default' => '',
+    'SO' => '=',
+  ),
+  'order_id' => 
+  array (
+    'field' => 'order_id',
+    'label' => '订单号',
+    'pk' => false,
+    'add' => true,
+    'edit' => false,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'int',
+    'comment' => '',
+    'default' => '',
+    'SO' => '=',
+  ),
+  'content' => 
+  array (
+    'field' => 'content',
+    'label' => '内容',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'text',
+    'comment' => '',
+    'default' => '',
+    'SO' => 'like',
+  ),
+  'photos' => 
+  array (
+    'field' => 'photos',
+    'label' => '图片',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'textarea',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+  'replay' => 
+  array (
+    'field' => 'replay',
+    'label' => '回复',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'text',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+  'replay_time' => 
+  array (
+    'field' => 'replay_time',
+    'label' => '回复时间',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'unixtime',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+  'clientip' => 
+  array (
+    'field' => 'clientip',
+    'label' => '客户IP',
+    'pk' => false,
+    'add' => false,
+    'edit' => false,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'clientip',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+  'dateline' => 
+  array (
+    'field' => 'dateline',
+    'label' => '添加时间',
+    'pk' => false,
+    'add' => false,
+    'edit' => false,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'dateline',
+    'comment' => '',
+    'default' => '',
+    'SO' => 'betweendate',
+  ),
+);

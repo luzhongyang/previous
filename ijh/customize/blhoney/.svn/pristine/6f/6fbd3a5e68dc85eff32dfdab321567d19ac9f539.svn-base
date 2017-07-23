@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+
+    <body>
+        <header>
+            <i class="left"><a href="<{link ctl='shop/detail' args=$detail.shop_id}>" class="gobackIco"></a><a href="<{link ctl='shop/detail' args=$detail.shop_id}>" class=""></a></i>
+            <div class="title">
+                提交订单
+            </div>
+            <i class="right"><a class="" href="#"></a></i>
+        </header>
+        <form id="form_post" method="post">
+            <input type="hidden" name="params[products]" value="<{$products}>"/>
+            <input type="hidden" name="params[shop_id]" value="<{$detail.shop_id}>"/>
+            <input type="hidden" name="params[online_pay]" value="1"/>
+            <section class="page_center_box">
+                <div class="order_details_nr">
+                    <ul class="form_list_box form_list_box_specil">
+                        <li class="list waimaiTime set_time" style="border-bottom: 0.01rem solid #dedede; margin-bottom: 0.1rem;margin-top:0.1rem;line-height:0.5rem;">
+                            <div class="fl"><p class="black6" style="color:#333;">选择预约时间</p></div>
+                                <input type="hidden" name="params[ordered_time]" id="select_time" value="" />
+                                <span style="margin-left:1rem;color:#901872;width:2rem;" id="service_time" week="" hour="">
+                                    
+                                </span>
+                            
+                            <div class="fr set_time">
+                                <p class="black6" style="color:#333;">
+                                    <span></span>
+                                    <em class="linkIco"></em>
+                                </p>
+                            </div>
+                        </li>
+                        
+                        <{foreach $product_list as $item}>
+                        <li class="list" style="line-height:0.6rem;border-bottom: 0.01rem solid #dedede;">
+                            <div class="fl"><p class="black6" style="color:#333;"><{$item.title}></p></div>
+                            <div class="fr"><p class="black9" style="color:#901872;">￥<{$item['price']}>&nbsp;&nbsp;<font color="#999">起</font></p></div>
+                        </li>
+                        <{/foreach}>
+
+                        <{if $hongbao}>
+                        <a href="<{link ctl='ucenter/hongbao/lists' money=$yh_price}>">
+                            <li class="list" id="hongbao" style="border-top: 0.01rem solid #dedede; margin-top:0.1rem;line-height: 0.5rem;">
+                                <input type="hidden" name="params[hongbao_id]" id="hongbao_id" value="<{$hongbao['hongbao_id']}>"/>
+                                <div class="fl"><p class="pointcl1" style="color:#333;">在线支付红包抵扣</p></div>
+                                <div class="fr"><p class="pointcl1 " style="color:#333;">-￥<span class="hongbao_amount"><{$hongbao['amount']}></span></p></div>
+                            </li>
+                        </a>
+                        <{else}>
+                        <li class="list" id="hongbao" style="border-top: 0.01rem solid #dedede; margin-top:0.1rem;line-height: 0.5rem;">
+                            <div class="fl"><p class="pointcl1" style="color:#333;">在线支付红包抵扣</p></div>
+                            <div class="fr"><p class="pointcl1" style="color:#333;">暂无可用红包</p></div>
+                        </li>
+                        <{/if}>
+                        <li class="list last" style="line-height: 0.5rem;">
+                            <div class="fl"></div>
+                            <div class="fr"><p class="pointcl1 total" style="color:#333;">合计&nbsp;&nbsp;<span class="jq_total" style="color:#901872;"><{$total_price}>元</span></p></div>
+                        </li>
+                        <!-- <li class="list last" id="use_money">
+                            <span class="radioInt" style="float:left;margin-top:5px;"><input type="checkbox"></span>
+                            <div class="wz" style="float:left;margin-top:5px;">
+                                <h3>&nbsp;是否使用余额快捷支付</h3>
+                            </div></br>
+                             <p class="" style="line-height:0.2rem;clear:both;margin-top:10px;">余额信息&nbsp;&nbsp;&nbsp;<{if $mymoney>0}><font size="2" color="#ff2121">我的余额&nbsp;<{$mymoney}>&nbsp;可抵扣&nbsp;<{if $mymoney<=$total_price}><{$mymoney}><{/if}><{if $mymoney>$total_price}><{$total_price}>.00<{/if}></font><{/if}></p>
+                            <div class="figure_password">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="70">支付密码</td>
+                                        <td><span><input type="password" name="params[passwd]" id="figure_password_int" class="password_int" placeholder="请输入密码" value=""></span></td>
+                                        <td width="40"><label style="margin-top:0.12rem;" class="tab_int" id='tb2'></label></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </section>
+        </form>
+        <footer>
+            <div class="ord_tousu">
+                <p class="fl" style="margin-top:0.12rem;">支付:<span class="pointcl1" style="color:#901872;"><span class="jq_total">&nbsp;&nbsp;<{$total_price}>元</span></span>&nbsp;&nbsp;<span id="is_youhui" class="black9">已优惠￥<span class="jq_youhui"></span></span></p>
+                <a href="javascript:create_order();" class="fr pub_btn">提交</a></div>
+        </footer>
+       
+        <script>
+            $(document).ready(function () {
+                $('.jq_youhui').text(parseFloat("<{$total_youhui}>").toFixed(2));
+            });
+            $('.figure_password').hide();
+
+            $(document).off('click','.radioInt').on('click','.radioInt',function(){
+                if($(this).hasClass("on")){
+                    $(this).removeClass("on");
+                    $('.figure_password').hide();
+                } else{
+                    $(this).addClass("on");
+                    $('.figure_password').show();
+                }
+            })
+            var week_array = []; 
+            <{foreach $week as $k=>$v}>week_array.push({"d":"<{$v.d}>","w":"<{$v.w}>"});<{/foreach}>
+
+            $('.set_time').click(function(){
+                select_yuyue_time(week_array);
+                //dateScroll(this);
+            })
+
+            function dateScroll(obj) {
+                var date = new Date();
+                var curr = new Date().getFullYear(),
+                d = date.getDate(),
+                m = date.getMonth();
+
+                // datetime
+                /*$(obj).mobiscroll().datetime({
+                    preset: 'datetime',            //日期类型--datatime --time,
+                    theme: "android-ics light",    //皮肤其他参数
+                    mode: "scroller",
+                    lang: 'zh',
+                    display: "bottom",
+                    animate: "slideup",
+                    rows: 5,
+                    setText: '确定',                //确认按钮名称
+                    cancelText: '取消',             //取消按钮名籍我
+                    stepMinute: 15,
+                    dateFormat: 'yyyy年mm月dd日',  // 日期格式
+                    dateOrder: 'mmddDD',             //面板中日期排列格
+                    dayNames: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                    dayNamesShort: ['日', '一', '二', '三', '四', '五', '六'],
+                    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                    monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    timeFormat: 'HH:ii',
+                    timeWheels: 'HH-ii',
+                    yearText: '年',
+                    monthText: '月',
+                    dayText: '日',
+                    hourText: '时',
+                    minuteText: '分',
+                    secText: '秒',
+                    startYear: (new Date()).getFullYear(), //开始年份
+                    endYear: (new Date()).getFullYear() + 9, //结束年份
+                });*/
+
+                //  datehour 
+                $(obj).scroller('destroy').scroller({
+                    preset: 'datehour',
+                    minDate: new Date(curr, m, d, 8, 00),
+                    maxDate: new Date(curr, m, d + 7),
+                    invalid: [{d: new Date(), start: '00:00', end: (date.getHours()) + ':' + date.getMinutes()}],
+                    theme: "android-ics light",
+                    mode: "scroller",
+                    lang: 'zh',
+                    display: "bottom",
+                    animate: "slideup",
+                    stepMinute: 15,
+                    dateOrder: 'MMDdd',
+                    timeWheels: 'HH-ii',
+                    setText:'确定',
+                    cancelText:'取消',
+                    rows: 3
+                })    
+            }
+
+            function create_order() {
+                localStorage['order_pay'] = "<{link ctl='ucenter/order:items'}>";
+                var url = "<{link ctl='order:create'}>";
+                $.post(url, $("#form_post").serialize(), function (ret) {
+                    if (ret.error > 0) {
+                        layer.open({content: ret.message, time: 2});
+                        if (ret.error >= 221 && ret.error < 224) {
+                            setTimeout(function () {
+                                window.location.href = "<{link ctl='index/index'}>";
+                            }, 1000);
+                        }
+                        if(ret.error == 101) {
+                            setTimeout(function () {
+                                window.location.href = "<{link ctl='passport:login'}>";
+                            }, 1000);
+                        }
+                    } else {
+                        layer.open({content: ret.message});
+                        var order_id = ret.order_id;
+                        var pay_status = ret.pay_status;  
+                        var link_pay = "<{link ctl='order/pay' args=oooo}>";
+                        var link_item = "<{link ctl='ucenter/order:items' args=oooo}>";
+                        window.beauty.removeby("<{$detail.shop_id}>");
+                        setTimeout(function () {
+                            if(pay_status == 1){
+                                window.location.href = link_item.replace('oooo', order_id);
+                            }else{
+                                window.location.href = link_pay.replace('oooo', order_id);
+                            }
+                        }, 1000);
+                    }
+                }, 'json');
+            }
+
+        </script>
+    </body>
+</html>

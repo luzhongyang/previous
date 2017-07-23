@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+</head>
+
+<body><div style='margin:0 auto;display:none;'>
+        <img src='<{$pager.img}>/<{$CONFIG.site.logo}>' />
+    </div>
+<header>
+	<i class="left"><a href="<{link ctl='ucenter/order:items'}>" class="gobackIco"></a></i>
+    <div class="title">
+    	订单详情
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+    <div class="ty-daizhifu-tit pad_l10 bder_b">
+    <{if $item.order_status==0 && $item.pay_status==0}>
+    订单待支付
+    <{else if $item.order_status==0 && $item.pay_status==1 }>
+    订单已支付
+    <{else if $item.order_status==1 && $item.pay_status==1 }>
+    商家已接单
+    <{else if $item.order_status==8 && $item.comment_status==0}>
+    订单待评价
+    <{else if $item.order_status==8 &&$item.comment_status==1}>
+    订单已评价
+    <{else if $item.order_status==-1}>
+    订单已取消
+    <{/if}>
+    <span class="black9 font_size14">-<{$item.ordered_time}></span></div>
+    <div class="meiye-dan mt10 ">
+        <div class="pad_l10 pad_r10 meiye-tit">
+            <div class="tu-logo fl"><img src="<{$pager.img}>/<{$item.shop.logo}>" width="45" height="45"></div>
+            <div class="mingzi"><{$item.shop.title}></div>
+            <div class="clear"></div>
+            <a href="javascript:shopdetail(<{$item.shop_id}>);" class="linkIco youxiang"></a>
+        </div>
+        <{if $item.pay_status==1}>
+        <{if $item.spend_status==0}>
+        <div class="yanzheng pad_l10 pad_r10 bder_b mb10">
+            <p class="weihe">验证码：<span class="chengse"><{$item.spend_number}></span></p>
+            <div class="erweima "><div id="qrcodeTable" ></div></div>
+            <a href="#" class="dan-daihexiao"></a>
+        </div>
+        <{/if}>
+        <{if $item.spend_status==1}>
+        <div class="yanzheng pad_l10 pad_r10 bder_b mb10">
+            <p class="yihe black9">验证码：<{$item.spend_number}></p>
+            <div class="erweima "><div id="qrcodeTable" ></div></div>
+            <a href="#" class="dan-yihexiao"></a>
+        </div>
+        <{/if}>
+        <{/if}>
+        <div class="ding-danjia">
+            <{foreach $item.products as $v}>
+            <div class="meifa-cont pad_l10 pad_r10 "> 
+                   <div class="fl"><{$v.product_name}></div>
+                   <div class="fr">￥<{$v.product_price}></div>
+                   <div class="clear"></div>
+            </div>
+            <{/foreach}>
+            <{if $item.hongbao > 0}>
+            <div class="meifa-cont pad_l10 pad_r10"> 
+               <div class="fl">红包抵扣</div>
+               <div class="fr hongse">-<{$item.hongbao}>元</div>
+               <div class="clear"></div>
+            </div>
+            <{/if}>
+            <{if $item.first_youhui > 0}>
+            <div class="meifa-cont pad_l10 pad_r10"> 
+                   <div class="fl">首单优惠</div>
+                   <div class="fr hongse">-<{$item.first_youhui}>元</div>
+                   <div class="clear"></div>
+            </div>
+            <{/if}>
+            <div class="meifa-cont pad_l10 pad_r10"> 
+                   <div class="fl">合计</div>
+                   <div class="fr zise"><{$item.amount}>元</div>
+                   <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <!--订单详情-->
+    <div class="dan-xiangqing mt10 pad_l10 pad_r10 bder_b">
+        <div class="thetit ">订单详情</div>
+        <div class="danhao ">订单号：<{$item.order_id}></div>
+        <div class="danhao ">联系人：<{$item.contact}>&nbsp;&nbsp;<{$item.mobile}></div>
+        <!--<div class="danhao ">联系地址：合肥蜀山区往前路交口222号</div>-->
+        <div class="danhao bb-non">支付方式：<{$item.pay_method}></div>
+    </div>
+</section>
+<{if $item.order_status==(-1) || ($item.order_status==8 && $item.comment_status==1)}>
+<div class="shanchu_foot">
+	<a href="javascript:delorder(<{$item.order_id}>)" class="shanchucont"><em class="throw"></em><span class="black9 shandiao">删除订单</span></a>
+</div>
+<{/if}>
+<{if $item.order_status==8 && $item.comment_status==0}>
+<div class="queren_foot">
+    <a href="javascript:set(<{$item.order_id}>,'comment');" class="queren_huo">评价订单</a>
+</div>
+<{/if}>
+<{if $item.order_status==0 && $item.pay_status==0}>
+<div class="daizhifu_foot ">
+    <div class="pad_l10 pad_r10">
+        <a href="javascript:set(<{$item.order_id}>,'chargeback');" class="daizhifu_xiao fl">取消订单</a>
+        <a href="javascript:set(<{$item.order_id}>,'pay');" class="daizhifu_fu fr">支付订单</a>
+        <div class="clear"></div>
+    </div>
+</div>
+<{/if}>
+
+</body>
+</html>
+<script>
+
+function set(order_id, type) {
+    var link = "<{link ctl='order:"+type+"' args=temp}>";
+    if(type == 'chargeback') {
+        jQuery.ajax({        
+            url: link.replace("temp",order_id), 
+            async: true,  
+            dataType: 'json',
+            type: 'POST',   
+            success: function (ret) { 
+                if(ret.error > 0){
+                    layer.open({content: ret.message,time: 2});
+                }else{
+                    layer.open({content: ret.message,time: 2});
+                    setTimeout(function(){window.location.reload();},1500);
+                }
+            }, 
+        });
+    }else {
+        if(type == 'comment') {
+            localStorage['order_comment'] = window.location.href;
+        }
+        window.location.href = link.replace("temp",order_id);
+    }
+    
+}
+
+function delorder(order_id) {
+    layer.open({
+        title: '提示',
+        content: '您确定要删除订单吗？',
+        btn: ['确定', '不了'],
+        yes: function(index){
+            var link = "<{link ctl='order:delorder' args=temp}>";
+            jQuery.ajax({        
+                url: link.replace("temp",order_id), 
+                async: true,  
+                dataType: 'json',
+                type: 'POST',   
+                success: function (ret) { 
+                    if(ret.error > 0){
+                        layer.open({content: ret.message,time: 2});
+                    }else{
+                        layer.open({content: ret.message,time: 2});
+                        setTimeout(function(){window.location.href = "<{link ctl='ucenter/order:items'}>";},1000);
+                    }
+                    layer.close(index);
+                }, 
+                error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                    alert(errorThrown); 
+                },  
+            });
+        }
+    });
+}
+
+function shopdetail(shop_id) {
+    var link = "<{link ctl='shop:detail' args='temp'}>";
+    localStorage['shop_detail'] = window.location.href;
+    window.location.href = link.replace('temp', shop_id);
+}
+
+
+$('#qrcodeTable').qrcode({
+    render: "canvas",            //渲染方式 table 和 canvas两种
+    width: 160,                  //设置宽度  
+    height: 160,                 //设置高度  
+    typeNumber: -1,              //计算模式 
+    correctLevel: 0,             //纠错等级  0,1,2,3 默认为2
+    background: "#ffffff",       //背景颜色  
+    foreground: "#000000",       //前景颜色 
+    text    : '<{$item.spend_number}>'
+}); 
+
+</script>

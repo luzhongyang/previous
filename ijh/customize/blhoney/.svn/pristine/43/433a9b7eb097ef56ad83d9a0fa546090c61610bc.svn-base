@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+    <body>
+<{if !$request.IN_APP_CLIENT}>
+        <header>
+            <i class="left"><a href="<{link ctl='index'}>" class="gobackIco"></a></i>
+            <div class="title">
+                视频秀
+            </div>
+            <i class="right"><a class=""></a></i>
+        </header>
+<{else}>
+<style type="text/css">.page_center_box{top:0;}</style>
+<{/if}>
+        <section class="page_center_box">
+        	<div class="shipin">
+                <!--banner部分-->
+                <div class="banner mb10">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <{foreach $banners as $v}>
+                            <li class="list">
+                            	<img src="<{$pager.img}>/<{$v.thumb}>">
+                                <a href="<{link ctl='video:detail' args=<{$v.article_id}>}>">
+                                <div class="video_mask">
+                            	<table width="100%" height="100%" border="0" align="center">
+                                	<tr>
+                                    	<td valign="middle"><img src="%THEME%/static/images/video/vedio_icon1.png"/></td>
+                                    </tr>
+                                </table>		
+                                </div>
+                                </a>
+                            </li>
+                            <{/foreach}>
+                        </ul>
+                    </div>
+                </div>
+                <!--banner部分结束-->
+                <!--视频列表-->
+                <div class="video_list_box">
+                	<ul>
+                        <{foreach $items as $v}>
+                        <li class="video_list">
+                            <div class="box">
+                            	<img src="<{$pager.img}>/<{$v.thumb}>"/>
+                                <a href="<{link ctl='video:detail' args=<{$v.article_id}>}>">
+                                <div class="nr">
+                                	<table width="100%" height="100%" border="0" align="center">
+                                        <tr>
+                                            <td valign="middle">
+                                            	<p><{$v.title}></p>
+                                            	<img src="%THEME%/static/images/video/vedio_icon1.png" class="ico"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                </a>
+                            </div>
+                        </li>
+                        <{/foreach}>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <!--视频列表end-->
+            </div>
+        </section>
+    <{if !$request.IN_APP_CLIENT}>
+    <{include file="block/sfooter.html"}>
+    <{else}>
+    <style type="text/css">.page_center_box{bottom:0;}</style>
+    <{/if}>
+    </body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//轮播js结束
+    });
+</script>

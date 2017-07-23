@@ -1,0 +1,60 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="hongbao/hongbao:index" priv="hidden" class="button"}></td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data">
+    <form action="?hongbao/hongbao-edit.html" mini-form="hongbao-form" method="post" >
+        <table width="100%" border="0" cellspacing="0" class="table-data form">
+            <input type="hidden" name="hongbao_id" value="<{$detail.hongbao_id}>"/>
+            <tr>
+                <th><span class="red">*</span>标题：</th>
+                <td><input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="input w-150"/><br /></td>
+            </tr>
+            <tr>
+                <th>选择用户：</th>
+                <td>
+                    <input type="hidden" name="data[uid]" value="<{$detail.uid}>" id="hongbao_member_id" />
+                    <input type="text" value="<{$user.nickname}>" id="hongbao_member_uname" class="input w-150"/>
+                    <{link ctl="member/member:dialog" title="选择用户" select="mini:#hongbao_member_id,#hongbao_member_uname/N/选择用户" class="button"}>
+                </td>
+            </tr>
+            <tr>
+                <th><span class="red">*</span>满多少使用：</th>
+                <td><input type="text" name="data[min_amount]" value="<{$detail.min_amount|default:''}>" class="input w-150"/><span class="tip-comment">满足使用条件</span></td>
+            </tr>
+            <tr>
+                <th><span class="red">*</span>红包价值：</th>
+                <td><input type="text" name="data[amount]" value="<{$detail.amount|default:''}>" class="input w-150"/><span class="tip-comment">红包价值</span></td>
+            </tr>
+            <tr>
+                <th class="w-100"><span class="red">*</span>类型：</th>
+                    <td>
+                        <select name="data[type]" class="w-150">
+                            <{foreach $types as $k => $val}>
+                            <option value="<{$k}>" <{if $detail['type'] == $k}>selected="selected"<{/if}> ><{$val}></option>
+                            <{/foreach}>
+                        </select>
+                    </td>
+            </tr>
+            <tr><th>失效时间：</th>
+                <td>
+                    <input type="text" name="data[ltime]" value="<{if $detail.ltime}><{$detail.ltime|format:'Y-m-d'}><{/if}>" datetime="ltime" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});" class="input w-150"/>
+                    <span class="tip-comment">红包过期时间</span>
+                </td>
+            </tr>
+            <tr>
+                <th class="clear-th-bottom"></th>
+                <td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<{include file="admin:common/footer.html"}>

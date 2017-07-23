@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+</head>
+
+<body><div style='margin:0 auto;display:none;'>
+        <img src='<{$pager.img}>/<{$CONFIG.site.logo}>' />
+    </div>
+<header>
+	<i class="left"><a href="<{link ctl='index'}>" class="gobackIco"></a></i>
+    <div class="title">
+    	我的订单
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<style type="text/css">
+.tuan_no{ margin:0.3rem 0; text-align:center; line-height:0.3rem;}
+.tuan_no h2{ font-weight:normal; font-size:0.18rem;}
+.tuan_no .iconBg{width:0.8rem; height:0.8rem; margin:0.1rem 0; background:#F7F7F7; border:0.02rem solid #F7F7F7; display:inline-block; border-radius:0.8rem; text-align:center;}
+</style>
+<section class="page_center_box">
+    <{foreach $items as $v}>
+    <div class="daizhifu mineOrd_state_box mt10">
+        <div class="daizhifu-cont">
+            <div class="daizhifu-tit pad_l10">
+            <{if $v.order_status==0 && $v.pay_status==0}>
+            订单待支付
+            <{else if $v.order_status==0 && $v.pay_status==1 }>
+            订单已支付
+            <{else if $v.order_status==1 && $v.pay_status==1 }>
+            商家已接单
+            <{else if $v.order_status==8 && $v.comment_status==0}>
+            订单待评价
+            <{else if $v.order_status==8 &&$v.comment_status==1}>
+            订单已评价
+            <{else if $v.order_status==-1}>
+            订单已取消
+            <{/if}>
+            <span class="black9 font_size14">-<{$v.ordered_time}></span>
+            <{if $v.comment_status==1}><a href="javascript:delorder(<{$v.order_id}>);" class="tong fr"></a><{/if}>
+            </div>
+            <ul>
+                <li class="daizhifu-list pad_l10 pad_r10 pad_b10">
+                    <div class="fl tupian"><img src="<{$pager.img}>/<{$v.shop.logo}>"/></div>
+                    <div class="wenzi ">
+                        <a href="<{link ctl='shop:detail' args=<{$v.shop.shop_id}>}>" class="font_size14"><{$v.shop.title}></a>
+                        <div class="font_size14 mt10">
+                            <div class="fl black9"><{$v.product_number}>项服务</div>
+                            <div class="fr black9"><span class="maincl">￥<big><{$v.amount}></big></span>起</div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            </ul>
+            <div class="pad_l10 chulidingdan pad_r10">
+                <div class="chuli-list ">
+                    <{if $v.pay_status==0 && $v.order_status==0}>
+                    <a href="javascript:set(<{$v.order_id}>,'chargeback');" class="btn">取消订单</a>
+                    <{/if}>
+                    <a href="javascript:set(<{$v.order_id}>,'detail');" class="btn">查看订单</a>
+                    <{if $v.order_status==0 && $v.pay_status==0}>
+                    <a href="javascript:set(<{$v.order_id}>,'pay');" class="btn buton">支付订单</a>
+                    <{/if}>
+                    <{if $v.order_status==8 && $v.comment_status==0}>
+                    <a href="javascript:set(<{$v.order_id}>,'comment');" class="btn buton">评价订单</a>
+                    <{/if}>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <{foreachelse}>
+        <div class="tuan_no"><div class="iconBg"><i class="ico2"></i> </div><h2>你暂无预约订单</h2></div>
+    <{/foreach}>
+
+</section>
+<{include file="block/sfooter.html"}>
+</body>
+</html>
+<script>
+$('.list').removeClass('on');
+$('#l2').addClass('on');
+function set(order_id, type) {
+    var link = "<{link ctl='order:"+type+"' args=temp}>";
+    if(type == 'chargeback') {
+        jQuery.ajax({        
+            url: link.replace("temp",order_id), 
+            async: true,  
+            dataType: 'json',
+            type: 'POST',   
+            success: function (ret) { 
+                if(ret.error > 0){
+                    layer.open({content: ret.message,time: 2});
+                }else{
+                    layer.open({content: ret.message,time: 2});
+                    setTimeout(function(){window.location.reload();},1000);
+                }
+            }, 
+        });
+    }else {
+        if(type == 'comment') {
+            localStorage['order_comment'] = window.location.href;
+        }
+        window.location.href = link.replace("temp",order_id);
+    }
+    
+}
+
+function delorder(order_id) {
+    layer.open({
+        title: '提示',
+        content: '您确定要删除订单吗？',
+        btn: ['确定', '不了'],
+        yes: function(index){
+            var link = "<{link ctl='order:delorder' args=temp}>";
+            jQuery.ajax({        
+                url: link.replace("temp",order_id), 
+                async: true,  
+                dataType: 'json',
+                type: 'POST',   
+                success: function (ret) { 
+                    if(ret.error > 0){
+                        layer.open({content: ret.message,time: 2});
+                    }else{
+                        layer.open({content: ret.message,time: 2});
+                        setTimeout(function(){window.location.reload();},1000);
+                    }
+                    layer.close(index);
+                }, 
+                error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                    alert(errorThrown); 
+                },  
+            });
+        }
+    });
+}
+
+</script>

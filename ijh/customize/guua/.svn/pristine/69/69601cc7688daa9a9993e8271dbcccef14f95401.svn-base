@@ -1,0 +1,48 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="paotui/paotui:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?paotui/paotui-create.html" mini-form="paotui-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th><span class="red">*</span>paotui_id：</th><td><input type="text" name="data[paotui_id]" value="<{$detail.paotui_id|default:''}>" class="input w-300"/><span class="tip-comment">跑腿订单ID</span></td></tr>
+<tr><th><span class="red">*</span>用户UID：</th><td><input type="text" name="data[uid]" value="<{$detail.uid|default:''}>" class="input w-300"/><span class="tip-comment">用户UID</span></td></tr>
+<tr><th><span class="red">*</span>地址：</th><td><input type="text" name="data[addr]" value="<{$detail.addr|default:''}>" class="input w-300"/><span class="tip-comment">收件人地址</span></td></tr>
+<tr><th><span class="red">*</span>门号：</th><td><input type="text" name="data[house]" value="<{$detail.house|default:''}>" class="input w-300"/><span class="tip-comment">收件人门号</span></td></tr>
+<tr><th><span class="red">*</span>收件人：</th><td><input type="text" name="data[contact]" value="<{$detail.contact|default:''}>" class="input w-300"/><span class="tip-comment">收件人</span></td></tr>
+<tr><th><span class="red">*</span>收件电话：</th><td><input type="text" name="data[mobile]" value="<{$detail.mobile|default:''}>" class="input w-300"/><span class="tip-comment">收件人电话</span></td></tr>
+<tr><th><span class="red">*</span>收件纬度：</th><td><input type="text" name="data[lat]" value="<{$detail.lat|default:''}>" class="input w-300"/><span class="tip-comment">收件人纬度坐标</span></td></tr>
+<tr><th><span class="red">*</span>收件经度：</th><td><input type="text" name="data[lng]" value="<{$detail.lng|default:''}>" class="input w-300"/><span class="tip-comment">收件人经度坐标</span></td></tr>
+<tr><th><span class="red">*</span>取件址：</th><td><input type="text" name="data[o_addr]" value="<{$detail.o_addr|default:''}>" class="input w-300"/><span class="tip-comment">取件/购买地址</span></td></tr>
+<tr><th><span class="red">*</span>取件门号：</th><td><input type="text" name="data[o_house]" value="<{$detail.o_house|default:''}>" class="input w-300"/><span class="tip-comment">取件/购买门号</span></td></tr>
+<tr><th><span class="red">*</span>取件人：</th><td><input type="text" name="data[o_contact]" value="<{$detail.o_contact|default:''}>" class="input w-300"/><span class="tip-comment">取件/购买联系人</span></td></tr>
+<tr><th><span class="red">*</span>取件电话：</th><td><input type="text" name="data[o_mobile]" value="<{$detail.o_mobile|default:''}>" class="input w-300"/><span class="tip-comment">取件/购买电话</span></td></tr>
+<tr><th><span class="red">*</span>取件经度：</th><td><input type="text" name="data[o_lng]" value="<{$detail.o_lng|default:''}>" class="input w-300"/><span class="tip-comment">取件/购买经度坐标</span></td></tr>
+<tr><th><span class="red">*</span>取件纬度：</th><td><input type="text" name="data[o_lat]" value="<{$detail.o_lat|default:''}>" class="input w-300"/><span class="tip-comment">取件/购买纬度坐标</span></td></tr>
+<tr><th><span class="red">*</span>描述：</th><td><input type="text" name="data[intro]" value="<{$detail.intro|default:''}>" class="input w-300"/><span class="tip-comment">描述</span></td></tr>
+<tr><th><span class="red">*</span>图片：</th><td><input type="text" name="data[photo]" value="<{$detail.photo|default:''}>" class="input w-300"/><span class="tip-comment">图片</span></td></tr>
+<tr><th><span class="red">*</span>语音：</th><td><input type="text" name="data[voice]" value="<{$detail.voice|default:''}>" class="input w-300"/><span class="tip-comment">语音</span></td></tr>
+<tr><th><span class="red">*</span>跑腿费用：</th><td><input type="text" name="data[paotui_amount]" value="<{$detail.paotui_amount|default:'0.00'}>" class="input w-300"/><span class="tip-comment">跑腿费用</span></td></tr>
+<tr><th><span class="red">*</span>担保托管金额：</th><td><input type="text" name="data[danbao_amount]" value="<{$detail.danbao_amount|default:'0.00'}>" class="input w-300"/><span class="tip-comment">担保托管金额</span></td></tr>
+<tr><th><span class="red">*</span>结算金额：</th><td><input type="text" name="data[jiesuan_amount]" value="<{$detail.jiesuan_amount|default:'0.00'}>" class="input w-300"/><span class="tip-comment">结算金额</span></td></tr>
+<tr><th><span class="red">*</span>类型：</th><td><input type="text" name="data[type]" value="<{$detail.type|default:'song'}>" class="input w-300"/><span class="tip-comment">类型</span></td></tr>
+<tr><th><span class="red">*</span>配送员ID：</th><td><input type="text" name="data[staff_id]" value="<{$detail.staff_id|default:''}>" class="input w-300"/><span class="tip-comment">配送员ID</span></td></tr>
+<tr><th><span class="red">*</span>订单状态：</th><td><input type="text" name="data[order_status]" value="<{$detail.order_status|default:''}>" class="input w-300"/><span class="tip-comment">订单状态 0:未处理，1:已接单,</span></td></tr>
+<tr><th><span class="red">*</span>支付状态：</th><td><input type="text" name="data[pay_status]" value="<{$detail.pay_status|default:''}>" class="input w-300"/><span class="tip-comment">支付状态 0:未支付，1:已支付</span></td></tr>
+<tr><th><span class="red">*</span>支付时间：</th><td><input type="text" name="data[pay_time]" value="<{$detail.pay_time|default:''}>" class="input w-300"/><span class="tip-comment">支付时间UNIXTIME 当pay_status=1时有值</span></td></tr>
+<tr><th><span class="red">*</span>支付类型：</th><td><input type="text" name="data[pay_code]" value="<{$detail.pay_code|default:''}>" class="input w-300"/><span class="tip-comment">支付类型 wxpay:微信, alipay:支付宝, money:余额</span></td></tr>
+<tr><th><span class="red">*</span>支付IP：</th><td><input type="text" name="data[pay_ip]" value="<{$detail.pay_ip|default:''}>" class="input w-300"/><span class="tip-comment">支付IP</span></td></tr>
+<tr><th><span class="red">*</span>日期Ymd：</th><td><input type="text" name="data[day]" value="<{$detail.day|default:''}>" class="input w-300"/><span class="tip-comment">日期Ymd</span></td></tr>
+<tr><th><span class="red">*</span>下单IP：</th><td><input type="text" name="data[clientip]" value="<{$detail.clientip|default:''}>" class="input w-300"/><span class="tip-comment">下单IP</span></td></tr>
+<tr><th><span class="red">*</span>下单时间：</th><td><input type="text" name="data[dateline]" value="<{$detail.dateline|default:''}>" class="input w-300"/><span class="tip-comment">下单时间 UNIXTIME</span></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

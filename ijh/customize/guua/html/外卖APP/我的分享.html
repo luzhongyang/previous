@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的分享</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a></i>
+    <div class="title">
+    	分享
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="sharePage">
+    	<p class="black9">累计邀请赚取</p>
+        <p class="black9">￥<big class="pointcl1">10</big></p>
+        <div class="share_bag">
+            <div class="fl maincl">邀请<br>红包</div>
+            <p class="maincl fr">￥<big class="pointcl1">10</big></p>
+        </div>
+        <p class="black3">点击邀请好友，免费送他<span class="pointcl1">10</span>元红包，</p>
+        <p class="black3">当好友下单成功，你也将获得<span class="pointcl1">10</span>元红包！</p>
+        <div><a href="#" class="see_details maincl">查看详情&gt;&gt;</a></div>
+    </div>
+</section>
+<footer>
+    <div class="long_btn_box" style="padding:0.1rem;"><input type="button" class="long_btn sharePage_btn" value="邀请好友" /></div>
+</footer>
+<div class="mask_box">
+	<div class="maskOne pressCode_mask">
+        <div class="cont">
+        	<img src="" width="100" height="100">
+            <p>扫一扫上面的二维码图案，分享好友</p>
+            <p>或点击<span class="pointcl1">右上角</span>分享，获得红包</p>
+        </div>
+        <a href="javascript:;" class="cancel">知道了</a>
+    </div>
+    <!--<div class="maskOne sharePage_mask">
+        <div class="cont">
+            <ul>
+                <li><a href="#"><em class="ico_1"></em><p>微信</p></a></li>
+                <li><a href="#"><em class="ico_2"></em><p>微信</p></a></li>
+                <li><a href="#"><em class="ico_3"></em><p>微信</p></a></li>
+                <li><a href="#"><em class="ico_4"></em><p>微信</p></a></li>
+                <li><a href="#"><em class="ico_5"></em><p>微信</p></a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <a href="javascript:;" class="cancel">取消</a>
+    </div>-->
+	<div class="mask_bg"></div>
+</div>
+<script>
+$(document).ready(function() {
+    $(".sharePage_btn").click(function(){
+		$(".pressCode_mask").show();
+		$(".pressCode_mask").parent().find(".mask_bg").show();
+	});
+	$(".pressCode_mask").find(".cancel").click(function(){
+		$(".pressCode_mask").hide();
+		$(".pressCode_mask").parent().find(".mask_bg").hide();
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+    <body>
+    <div style='margin:0 auto;display:none;'>
+        <img src='<{$pager.img}>/<{$CONFIG.site.logo}>' />
+    </div>
+        <header>
+            <i class="left"><a href="<{link ctl='ucenter'}>"  link-load="" link-type="right" class="gobackIco"></a></i>
+            <div class="title">
+                我的收藏
+            </div>
+            <i class="right"><a class="" href="#"></a></i>
+        </header>
+        <section class="page_center_box">
+            <div class="waimaiList" id="wrapper" style="height:600px;">
+                <ul>
+
+                </ul>
+            </div>
+        </section>
+        <script id="data_list" type="text/x-jquery-tmpl">
+        <li class="list">
+            <div class="img fl"><img src="<{$pager.img}>/${logo}" width="100" height="100" /></div>
+            <div class="wz">
+                <div class="nr1">
+                    <div class="fl">
+                        <p class="bt overflow_clear"><a href="javascript:shopdetail(${shop_id});">${title}</a></p>
+                        <div><span class="starBg"><span class="star" style="width:${score}%;"></span></span></div>
+                        <p class="black6">已售${orders}份</p>
+                    </div>
+                    <div class="fr">
+                        <p class="black3"><span class="fontcl1">￥<b>${min_amount}</b></span>起</p>
+                        <p class="black6">${formatDistance(juli)}</p>
+                    </div>
+                </div>
+                <div class="nr2">
+                    {{if first_amount>0}}
+                    <p class="black9"><em style="background:#46c3ff;">首</em>新用户首次下单立减${first_amount}元</p>
+                    {{/if}}
+                    {{if youhui_title}}
+                    <p class="black9"><em style="background:#ff6900;">减</em>${youhui_title}</p>
+                    {{/if}}
+                    {{if online_pay == 1}}
+                    <p class="black9"><em style="background:#f57f8c;">付</em>商家支持在线支付</p>
+                    {{/if}}
+                </div>
+            </div>
+        </li>
+        </script>
+        <script>
+            var page = 1;
+            var wapper = document.querySelector("#wrapper ul");
+            var url = "<{link ctl='ucenter/collect/items'}>";
+            build_refresher_items(url,{page:1},"#data_list",wapper,'%THEME%');
+            refresher.init({
+                id: "wrapper",
+
+                pullDownAction: function () {
+                    post_json = {page: 1};
+                    $("#wrapper ul").html("");
+                    $("#pullUp").hide();
+                    build_refresher_items(url, post_json, '#data_list',wapper);
+                    page = 1;
+                    myScroll.refresh();
+                },
+                pullUpAction: function () {
+                    page++;
+                    post_json = {page: page};
+                    build_refresher_items(url, post_json, '#data_list', wapper);
+                    myScroll.refresh();
+                },
+            });
+        </script>
+
+
+        <{include file="block/sfooter.html"}>
+    </body>
+</html>
+<script>
+function shopdetail(shop_id) {
+    var link = "<{link ctl='shop:detail' args='temp'}>";
+    localStorage['shop_detail'] = window.location.href;
+    window.location.href = link.replace('temp', shop_id);
+}
+</script>

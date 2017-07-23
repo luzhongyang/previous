@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+<body><div style='margin:0 auto;display:none;'>
+        <img src='<{$pager.img}>/<{$CONFIG.site.logo}>' />
+    </div>
+<{if !$request.IN_APP_CLIENT}>
+<header>
+    <i class="left"><a href="<{link ctl='help/index'}>" class="gobackIco"></a></i>
+    <div class="title" style="overflow;hidden;">
+        <{$detail.title}>
+    </div>
+</header>
+<{else}>
+<style type="text/css">.page_center_box{top:0;}</style>
+<{/if}>
+<section class="page_center_box">
+    <div class="message_list_details"><{$detail.content|nl2br}></div>
+</section>
+<{if !$request.IN_APP_CLIENT}>
+<{include file="block/sfooter.html"}>
+<{/if}>
+<script>
+$('.list').removeClass('on');
+$('#l5').addClass('on');
+</script>
+</body>
+</html>

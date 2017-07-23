@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+    <body>
+    <div style='margin:0 auto;display:none;'>
+        <img src='<{$pager.img}>/<{$CONFIG.site.logo}>' />
+    </div>
+        <header>
+            <i class="left"><a href="javascript:history.go(-1);" class="gobackIco"></a></i>
+            <div class="title">
+                我的红包
+            </div>
+        </header>
+        <section class="page_center_box">
+            <div>
+                <{foreach $items as $item}>
+                <div class="redBag_list" rel="<{$item.hongbao_id}>">
+                    <div class="redBag_top" style="background:#1ec0be;">
+                        <div class="fl"><small>￥</small><big class="amount_<{$item.hongbao_id}>"><{$item.amount}></big></div>
+                        <div class="fl">
+                            <h4><{$item.title}></h4>
+                            <p>满<{$item.min_amount}>元可用</p>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="redBag_bg"></div>
+                    </div>
+                    <div class="redBag_bottom">
+                        <p>此红包限手机尾号<{$MEMBER['mobile']|substr:-4}>的用户使用</p>
+                        <p>有效期至：<{$item.ltime|format:'Y.m.d'}></p>
+                    </div>
+                </div>
+                <{/foreach}>
+            </div>
+        </section>
+        <script>
+            var shop_id = localStorage.getItem('shop_id');
+            $('.redBag_list').click(function () {
+                var hongbao_id = $(this).attr('rel');
+                var amount = $(".amount_" + $(this).attr('rel')).html();
+                localStorage.setItem('hongbao_id', hongbao_id);
+                localStorage.setItem('amount', amount);
+                var link = "<{link ctl='order/order' args='oooo'}>";
+                var url = link.replace('oooo', shop_id);
+                setTimeout(function () {
+                    window.location.href = url;
+                }, 500);
+            })
+        </script>
+    </body>
+</html>

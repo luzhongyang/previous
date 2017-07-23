@@ -1,0 +1,70 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.form.js"></script>
+<script>
+    function fileSelected(obj, type) {
+        var files = obj.files;
+        for (var i = 0; i < files.length; i++) {
+            var tag = '';
+            var rFilter = /^(image\/gif|image\/jpeg|image\/jpg|image\/png)$/i;
+            if (!rFilter.test(files[i].type)) {
+                alert("<{L('只允许上传')}>JPG、PNG、GIF<{L('格式图片')}>");
+                return false;
+            }
+            var reader = new FileReader();
+            reader.onloadstart = function (e) {
+                $(".loading").show();
+            }
+            reader.onload = function (e) {
+                //$('#photo').hide();
+                $("#img").attr("src", e.target.result).show();  //图片编码字符串
+            }
+            reader.readAsDataURL(files[i]);
+        }
+    }
+</script>
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <!--个人资料-->
+        <div class="prslCenter_acont">
+            <h2>修改图像</h2>
+            <div class="infor">
+                <form action="<{link ctl='web/ucenter/member/upload_face' }>" mini-form="car-form" id="face_form" method="post">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>头像</th>
+                            <td>
+                                <div class="uplod_img fl"><input type="file" name="avatar" id="photo" onChange="fileSelected(this, 1)" value="<{L('上传')}>"   /><{if $MEMBER.face}><img width="130" id="img" height="130" src="<{$pager.img}>/<{$MEMBER.face}>"/><{else}><img src="" id="img" style="display:none;" width="100%" height="100%" /><{/if}></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td><input type="submit" id="face_submit" class="pub_btn face_btn" value="确定"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <!--个人资料end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#face_form").ajaxForm({"target": "#face_submit", "type": "post", "dataType": "json", "success": function (ret) {
+            if (ret.error == 0) {
+                layer.msg('修改图像成功');
+                setTimeout(function () {
+                    window.location.href = "<{link ctl='web/ucenter/member/index'}>";
+                }, 2000);
+            } else {
+                layer.msg(ret.message);
+                return false;
+            }
+        }});
+    })
+</script>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

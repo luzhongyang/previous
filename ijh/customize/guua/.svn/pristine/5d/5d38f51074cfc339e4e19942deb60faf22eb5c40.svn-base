@@ -1,0 +1,95 @@
+<{include file="biz/block/header.html"}>
+
+<div class="ucenter_c">
+    <table cellspacing="0" cellpadding="0" class="form">
+        <tr>
+            <td colspan="2">
+                <div class="tableBox">
+                    <div id="week_chart">
+                    </div>
+                    <div id="month_chart">
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<{include file="biz/block/footer.html"}>
+<script>
+$(function () {
+    $('#week_chart').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: "<{L('近一周订单来源饼状图')}>"
+        },
+        tooltip: {
+    	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: "<{L('订单来源')}>",
+            data: [
+                ["<{L('微信')}>",   <{$week_weixin}>],
+                ['IOS',   <{$week_ios}>],
+                ["<{L('安卓')}>",   <{$week_android}>],
+                ["<{L('手机')}>",   <{$week_wap}>],
+                ["<{L('网页')}>",   <{$week_www}>]
+            ]
+        }]
+    });
+
+    $('#month_chart').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+			 text: "<{L('近一月订单来源饼状图')}>"
+        },
+        tooltip: {
+    	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: "<{L('订单来源')}>",
+            data: [
+                ["<{L('微信')}>",   <{$month_weixin}>],
+                ['IOS',   <{$month_ios}>],
+                ["<{L('安卓')}>",   <{$month_android}>],
+                ["<{L('手机')}>",   <{$month_wap}>],
+                ["<{L('网页')}>",   <{$month_www}>]
+            ]
+        }]
+    });
+});
+</script>

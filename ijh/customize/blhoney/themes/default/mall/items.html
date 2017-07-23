@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+
+<body><div style='margin:0 auto;display:none;'>
+        <img src='<{$pager.img}>/<{$CONFIG.site.logo}>' />
+    </div>
+<header>
+    <i class="left"><a href="<{link ctl='mall/index'}>" link-load="" link-type="right" class="gobackIco"></a></i>
+    <div class="title">
+    	美币商城列表
+    </div>
+    <i class="right"><a class="menuIco" href="javascript:;" id="header_menu"></a></i>
+</header>
+<div class="mineIntegral_pull">
+    <div class="list_box">
+        <ul>
+            <li <{if empty($cate_id)}>class="on"<{/if}> ><a href="<{link ctl='mall/items'}>">全部</a></li>
+            <{foreach $cates as $val}>
+            <li <{if $val['cate_id'] == $cate_id}>class="on"<{/if}> ><a href="<{link ctl='mall/items' cate_id=$val['cate_id']}>"><{$val['title']}></a></li>
+            <{/foreach}>
+        </ul>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#l4').addClass('on');
+		/*头部下来分类开始*/
+		$("#header_menu").click(function(){
+			$(".mineIntegral_pull").find(".list_box").toggle();
+			$(".mineIntegral_pull").find(".mask_bg").toggle();
+		});
+		$(".mineIntegral_pull .list_box li").click(function(){
+			$(this).parent().find("li").removeClass("on");
+			$(this).addClass("on");
+			$(".mineIntegral_pull").find(".list_box").hide();
+			$(".mineIntegral_pull").find(".mask_bg").hide();
+		});
+		/*头部下来分类开始*/
+	});
+</script>
+<section class="page_center_box">
+
+	<div class="mineIntegral_list_box mt10">
+        <ul>
+         	<{foreach $items as $v}>
+            <li class="mineIntegral_list">
+                <div class="nr">
+                    <div class="pub_img"><a href="<{link ctl='mall:detail' args=$v.product_id}>"><img src="<{$pager.img}>/<{$v.photo}>" width="280" height="200" /><span class="tag"><{$v.jifen}>美币</span></a></div>
+                    <div class="pub_wz">
+                        <p class="bt"><{$v.title}></p>
+                        <p class="black9">支付<span class="maincl"><{$v.price}>元</span><a href="javacript:;" class="pub_btn fr add" quantity="+" pid="<{$v.product_id}>" title="<{$v.title}>" price="<{$v.price}>" jifen="<{$v.jifen}>" sku="<{$v.sku}>" photo="<{$v.photo}>" onClick="addcart(this);">+</a></p>
+           
+                    </div>
+                </div>
+            </li>  
+        </ul>
+        <{/foreach}>
+	    </ul>
+        <div class="clear"></div>
+    </div>
+</section>
+<section class="dianpu_footer">
+    <div class="dianpu_fot_shop">
+        <div class="fl">
+            <div class="fl spcart"><i id='number'>0</i></div>
+            <div class="fl zjia" >合计：<span class="maincl big" id='total1'></span></div>
+        </div>
+        <div class="fr"><a href="javascript:ordersub();" class="pub_btn">立即购买</a></div>
+        <div class="clear"></div>
+    </div>
+    <div class="dianpu_spin none">
+        <h2><a href="javascript:void(0);" class="empty black9" >关闭</a></h2>
+        <div></div>
+    </div>
+    <div class="dianpu_shop_zzc"></div>
+</section>
+<!--JS 购物车-->
+<script type="text/javascript">
+$(".radioInt").click(function(){
+	if($(this).hasClass("on")){
+		$(this).removeClass("on");
+	}
+	else{
+		$(this).addClass("on");
+	}
+});
+
+//初始化购物车
+~function () {
+    window.mall.init();
+    var count = parseInt(window.mall.count(),10);
+    $("#number").text(count);
+    $('#total1').text(window.mall.totalprice()+'元');
+}();
+
+function ordersub() {
+    localStorage['mall_ordersub'] = window.location.href;
+    window.location.href = "<{link ctl='mall:ordersub'}>";
+}
+
+$(document).off('click','.spcart').on('click','.spcart',function(){
+    localStorage['mall_ordersub'] = window.location.href;
+    window.location.href = "<{link ctl='mall:ordersub'}>";
+})
+
+// 添加商品到购物车
+function addcart(o) {
+    var data = {}; 
+    data['product_id'] = $(o).attr('pid');
+    data['title'] = encodeURIComponent($(o).attr('title'));
+    data['price'] = $(o).attr('price');
+    data['jifen'] = $(o).attr('jifen');
+    data['sku'] = sku = parseInt($(o).attr('sku'));
+    data['photo'] = $(o).attr('photo');
+    if(data['sku'] < 1) {
+        layer.open({content: "商品库存不足",time: 2});
+        return false;
+    }
+    window.mall.addcart(data);
+    $("#number").text(window.mall.count());
+    $('#total1').text(window.mall.totalprice()+'元');
+}
+</script>    
+</body>
+</html>

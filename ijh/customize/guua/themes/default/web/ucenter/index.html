@@ -1,0 +1,89 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <div class="prslCenter_idx_top mb20">
+            <div class="fl infor">
+                <div class="pub_img fl"><a href="<{link ctl='web/ucenter/member/info'}>"><img src="<{$pager.img}>/<{$MEMBER.face|default:'face.png'}>"></a></div>
+                <div class="pub_wz">
+                    <p class="name"><{$time_str}>好，<span class="maincl"><{$MEMBER.nickname}></span></p>
+                    <p>账户安全：<span class="maincl">高</span></p>
+                    <a href="<{link ctl='web/ucenter/member/info'}>" class="black9">【查看详情】</a>
+                </div>
+            </div>
+            <div class="fr">
+                <div class="state">
+                    <p>我的红包</p>
+                    <p class="num pointcl"><{$hongbao_num}><small>个</small></p>
+                    <a href="<{link ctl='web/ucenter/hongbao/index'}>" class="pub_btn">查看红包</a>
+                </div>
+                <div class="state">
+                    <p>账户余额</p>
+                    <p class="num fontcl2"><{$MEMBER.money}><small>元</small></p>
+                    <a href="<{link ctl='web/ucenter/member/account'}>" class="pub_btn">充值</a>
+                </div>
+                <div class="state">
+                    <p>我的积分</p>
+                    <p class="num fontcl3"><{$MEMBER.jifen}><small>分</small></p>
+                    <a href="javascript:void(0);" onClick="layer.msg('手机APP访问，立即兑换');" class="pub_btn bg2 app_2">兑换礼品
+                        <!--<div class="app_box">
+                            <div class="box">
+                                <p>手机APP访问立即兑换</p>
+                                <img src="<{$pager.img}>/<{$site.weixinqr}>">
+                            </div>
+                        </div>-->
+                    </a>
+                </div>
+                <div class="cl"></div>
+            </div>
+        </div>
+        <!--最近订单列表start-->
+        <div class="prslCenter_ord_box" style="position: relative; z-index: 1;">
+            <h3 class="black9">最近订单 <a href="<{link ctl='web/ucenter/order/index'}>" class="more black9 fr">查看全部订单&gt;</a></h3>
+            <ul>
+                <{foreach $orders as $item}>
+                <li class="prslCenter_ord_list">
+                    <div class="fl infor">
+                        <a href="<{link ctl='web/menu/index' args=$item.shop_id}>"><img src="<{$pager.img}>/<{$shops[$item['shop_id']]['logo']}>" width="64" height="64" class="fl"></a>
+                        <div class="pub_wz">
+                            <h4 class="overflow_clear"><a href="<{link ctl='web/menu/index' args=$item.shop_id}>"><{$shops[$item['shop_id']]['title']}></a></h4>
+                            <p class="overflow_clear black9">
+                                <{foreach $item['product'] as $val}>
+                                <{if $val@index <=1}>
+                                <{if $val@index == 1}>
+                                /<{$val.product_name}><{$val.product_number}>份
+                                <{else}>
+                                <{$val.product_name}><{$val.product_number}>份
+                                <{/if}>
+                                <{/if}>
+                                <{/foreach}>  
+                            </p>
+                            <p class="black9">共<span class="pointcl"><{$item.product_number}></span>个菜品&gt;</p>
+                        </div>
+                    </div>
+                    <div class="fr">
+                        <div class="state fl">
+                            <p><{$item.dateline|format:'y-m-d'}></p>
+                            <small><{$item.dateline|format:'H:i'}></small>
+                        </div>
+                        <div class="state fl">
+                            <p>￥<{$item.amount+$item.money}></p>
+                            <small class="black9"><{if $item.online_pay == 1}>在线支付<{else}>货到付款<{/if}></small>
+                        </div>
+                        <div class="state fl">
+                            <p><{$item.order_status_label}></p>
+                            <a href="<{link ctl='web/ucenter/order/detail' args=$item.order_id}>" class="maincl">订单详情</a>
+                        </div>
+                    </div>
+                </li>
+                <{/foreach}>
+            </ul>
+        </div>
+        <!--最近订单列表end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

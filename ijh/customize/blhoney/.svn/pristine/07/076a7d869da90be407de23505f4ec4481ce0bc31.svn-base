@@ -1,0 +1,558 @@
+<!DOCTYPE HTML>
+
+<html>
+
+    <head>
+
+        <{include file="block/sheader.html"}>
+
+        <script src="%THEME%/static/js/jquery.fly.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="%THEME%/static/js/requestAnimationFrame.js" type="text/javascript" charset="utf-8"></script>
+
+    </head>
+
+    <body>
+
+        <header>
+
+            <i class="left"><a href="" link-load="" link-type="right" class="gobackIco"></a></i>
+
+            <div class="title">
+
+                选择预约服务
+
+            </div>
+
+            <i class="right"><a class=""></a></i>
+
+        </header>
+
+        <section class="page_center_box" style="bottom:0.50rem; padding-bottom:0;">
+
+            <div class="dianpu_cont">
+
+          
+
+                <div class="dianpu_left fl">
+
+                    <{foreach $items as $v}>
+
+                    <div class="box"><h3><{$v.title}></h3>
+
+                        <ul>
+
+                            <{if $v.childrens}>
+
+                            <{foreach $v.childrens as $vv}>
+
+                            <li class="bt <{if $v@index==0 && $vv@index==0}>on<{/if}>" cateid="<{$vv.cate_id}>"> <a href="javascript:void(0);"><{$vv.title}></a></li>
+
+                            <{/foreach}>
+
+                            <{/if}>
+
+                        </ul>
+
+                    </div>
+
+                   <{/foreach}>
+
+                </div>
+
+        
+
+                <div id="product_items" class="dianpu_right fr">
+
+                    <{foreach $items as $v}>
+
+                    <{foreach $v.childrens as $vv}>
+
+                    <div class="dianpu_list_box" >
+
+                        <h2 class="dianpu_list_bt" id="list_title"><{$v.title}>-<{$vv.title}></h2>
+
+                        <{foreach $product_list as $vvv}>
+
+                        <{if $vvv.cate_id == $vv.cate_id}>
+
+                        <div class="dianpu_list">
+
+                            <div class="img fl"><a href="javascript:;"><img src="<{$pager.img}>/<{$vvv.photo}>" width="100" height="100" /></a></div>
+
+                            <div class="wz">
+
+                                <h3><{$vvv.title}></h3>
+
+                                <p class="black9"><span class="maincl">￥<big><{$vvv.price}></big></span>起</p>
+
+                                <span class="radioInt"  pid="<{$vvv.product_id}>" cateid="<{$vvv.cate_id}>" price="<{$vvv.price}>" title="<{$vvv.title}>" ><input type="checkbox"></span>
+
+                            </div>
+
+                        </div>
+
+                        <{/if}>
+
+                        <{/foreach}>
+
+                    </div>
+
+                    <{/foreach}>                        
+
+                    <{/foreach}>
+
+                </div>
+
+                <div class="clear"></div>
+
+            </div>
+
+        </section>
+
+        <section class="dianpu_footer">
+
+            <div class="dianpu_fot_shop">
+
+                <div class="fl">
+
+                    <div class="fl spcart"><i id="num">0</i></div>
+
+                    <div class="fl zjia" >
+
+                        合计：<span class="maincl big"><sbeauty>￥</sbeauty><span id="total_price">0</span></span>
+
+                    </div>
+
+                </div>
+
+                <div class="fr jiesuan"><a id="cart" href="javascript:void(0);" class="pub_btn">立即预约</a></div>
+
+                <div class="clear"></div>
+
+            </div>
+
+            <div class="dianpu_spin none">
+
+                <h2><a href="#" class="empty black9"><em></em>清空所有</a></h2>
+
+                <div>
+
+                    
+
+                </div>
+
+            </div>
+
+            <div class="dianpu_shop_zzc"></div>
+
+            
+
+        </section>
+
+<!--JS 购物车-->
+
+<script type="text/javascript">
+
+    $('.dianpu_fot_shop .spcart').click(function(){
+
+        $('.dianpu_footer .dianpu_spin').slideToggle();
+
+        if($('.dianpu_footer .dianpu_shop_zzc').css('display')=='none'){
+
+            $('.dianpu_shop_zzc').show();
+
+        }
+
+        else{
+
+            $('.dianpu_shop_zzc').hide();
+
+        }
+
+    });//底部购物车弹出窗结束
+
+    $('.dianpu_shop_zzc').click(function(){
+
+        $('.dianpu_footer .dianpu_spin').hide();
+
+        $('.dianpu_shop_zzc').hide();
+
+    });//底部购物车弹出窗结束
+
+    
+
+</script>
+
+<script>
+
+    $(document).ready(function(e) {
+
+        var  public_top = $('.dianpu_left').offset().top; //这个滚动一个条件
+
+        var  list = Array();
+
+        
+
+        $(".dianpu_list_bt").each(function(a){
+
+            list[a] = $(this).offset().top;
+
+        });
+
+        
+
+        var num =  $(".dianpu_left .bt").length;
+
+        
+
+        function gundong(){
+
+            for(i=0;i<num;i++){
+
+                if($(".dianpu_list_bt").eq(i).offset().top <=public_top ){
+
+                    $(".dianpu_left .bt").removeClass('on');
+
+                    $(".dianpu_left .bt").eq(i).addClass('on');
+
+                }
+
+            }       
+
+        }           
+
+        $('.dianpu_right').scroll(function () {  
+
+            gundong();
+
+        });
+
+        
+
+        $('.dianpu_left li').click(function(){
+
+            $(".dianpu_left li").removeClass("on");
+
+            $(this).addClass("on");
+
+        });
+
+        
+
+
+
+        
+
+        $(".dianpu_left li").click(function(){              
+
+            var index = $(this).index(".bt");
+
+            $(".dianpu_right").animate({scrollTop: list[index]-public_top+'px'}, 200);
+
+			$(".dianpu_left li").removeClass("on");
+
+			$(this).addClass("on");
+
+        });
+
+        
+
+        $('.dianpu_left .box h3').click(function(){
+
+            var $li = $(this).parent().find('ul li:first');
+
+            var index = $li.index(".bt");
+
+            $(".dianpu_right").animate({scrollTop: list[index]-public_top+'px'}, 200);                        
+
+        });
+
+    });
+
+    if(localStorage['shop_ordered']) {
+        $('.gobackIco').attr('href',localStorage['shop_ordered']);
+    }
+
+    var shop_id = "<{$detail['shop_id']}>";
+
+
+
+    // 选择服务事件
+
+    $(".dianpu_list_box .radioInt").click(function(){
+
+        if($(this).hasClass("on")){
+
+            $(this).parents(".dianpu_list_box").find(".radioInt").removeClass("on");
+
+            $(this).removeClass("on");
+
+        }
+
+        else{
+
+            $(this).parents(".dianpu_list_box").find(".radioInt").removeClass("on");
+
+            $(this).addClass("on");
+
+        }
+
+        addcart(this);
+
+    });
+
+    
+
+    // 设置底部购物车价格、数量值
+
+    function set_status() {
+
+        var min_amount = "<{$detail['min_amount']}>";
+
+        var total = window.beauty.totalprice(shop_id);
+
+        if (total == 0) {
+
+            $('#cart').removeClass("pub_btn");
+
+            $('#cart').attr('href', "javascript:void(0);");
+
+            $('#cart').html("￥" + min_amount + "起");
+
+        } else if (total < min_amount) {
+
+            $('#cart').removeClass("pub_btn");
+
+            $('#cart').attr('href', "javascript:void(0);");
+
+            $('#cart').html("还差￥" + parseFloat(min_amount - total).toFixed(2) + "起");
+
+        } else {
+
+            $('#cart').attr('href', "<{link ctl='order/order' args=$detail['shop_id']}>");
+
+            $('#cart').addClass('pub_btn');
+
+            $('#cart').html("立即预约");
+
+        }
+
+        var count = parseInt(window.beauty.count(shop_id),10);
+
+        var totalprice = parseFloat(total).toFixed(2);
+
+        $("#num").text(count);
+
+        $("#total_price").html(totalprice);
+
+    }
+
+    
+
+    // 添加物品到购物车
+
+    function addcart(o) {
+
+        var data = {};
+
+        var count = 0;
+
+        $("#product_items").find(".radioInt.on").each(function(name, value){
+
+            var index = $(value).attr('pid');
+
+            data[index] = {};
+
+            data[index]['product_id'] =  index;
+
+            data[index]['cate_id']    =  $(value).attr('cateid');
+
+            data[index]['price']      =  $(value).attr('price');
+
+            data[index]['title']      =  encodeURIComponent($(value).attr('title'));
+
+            count += 1;
+
+        }); 
+
+        window.beauty.addcart(shop_id, data, count);
+
+        //alert(window.beauty.count(shop_id));
+
+        $("#num").text(count);
+
+        $("#total_price").html(parseFloat(window.beauty.totalprice(shop_id)).toFixed(2));
+
+        set_status();
+
+        get_list();
+
+        cate_list();
+
+    }
+
+   
+
+    // 清空购物车
+
+    $(".empty").click(function () {
+
+        layer.open({
+
+            title: '温馨提示',
+
+            content: '确定要清空购物车吗？',
+
+            btn: ['确认', '取消'],
+
+            shadeClose: false,
+
+            yes: function () {
+
+                window.beauty.removeby(shop_id);
+
+                $("#num").text(0);
+
+                $("#total_price").html(parseFloat(window.beauty.totalprice(shop_id)).toFixed(2));
+
+                $(".ordernum").val(0);
+
+                set_status();
+
+                get_list();
+
+                cate_list();
+
+                layer.closeAll();
+
+                $('.dianpu_footer .dianpu_spin').slideToggle();
+
+                $('.dianpu_shop_zzc').hide();
+
+                $("#product_items").find(".radioInt.on").removeClass('on');
+
+            }, no: function () {
+
+
+
+            }
+
+        });
+
+    })
+
+
+
+    function cate_list() {
+
+        var cates = window.beauty.catecount("<{$detail['shop_id']}>");
+
+        var str = "";
+
+        $("[id^='cate_num']").find("em").hide();
+
+        for (var cate_id in cates) {
+
+            if (cates[cate_id] > 0) {
+
+                $("#cate_num_" + cate_id + " em").html(cates[cate_id]).show();
+
+            }
+
+        }
+
+    }
+
+
+
+    // 获取cookie购物车列表
+
+    function get_list() {
+
+        var goods = window.beauty.getcart();
+
+        var str = "";
+
+        $(".dianpu_spin div").html("");
+
+        goods[shop_id] = goods[shop_id] || {};
+
+        if (typeof (goods[shop_id]['undefined']) == 'undefined') {
+
+            goods[shop_id]['undefined'] = [];
+
+        }else {
+
+            for(var sid in goods) {
+
+                if(sid == shop_id) {
+
+                    for(var index in goods[sid]['undefined']) {
+
+                        if (goods[sid]['undefined']['num'] > 0) {
+
+                            if(goods[sid]['undefined'] != 'num') {
+
+                                if(goods[sid]['undefined'][index]["spec_name"] != undefined) {
+
+                                     str += '<div class="dianpu_list dianpu_list_bt">';
+
+                                    str += '<h3>'+goods[sid]['undefined'][index]["spec_name"]+'<span class="maincl">￥'+goods[sid]['undefined'][index]["price"]+'</span></h3></div>';
+
+                                    //str += '<span class="radioInt"><input type="checkbox"></span></div>';
+
+                                    // 设置已选中的服务高亮
+
+                                    $("#product_items").find(".radioInt").each(function(name, value){
+
+                                        if($(value).attr('spec_id') == goods[sid]['undefined'][index]["spec_id"]) {
+
+                                           $(value).context.className = "radioInt on";
+
+                                        }
+
+                                    });
+
+                                }
+
+                            }
+
+                        } 
+
+                    }
+
+                }
+
+            }
+
+            $(".dianpu_spin div").html(str); 
+
+        }
+
+    }
+
+
+
+    //初始化购物车数据
+
+    ~function () {
+
+        window.beauty.init();
+
+        var count = window.beauty.count(shop_id);
+
+        set_status();
+
+        get_list();
+
+        cate_list();
+
+    }();
+
+    </script>
+
+    </body>
+
+</html>
+

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<{assign var='tpl_title' value='待评价订单'}>
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="" class="gobackIco"></a></i>
+    <div class="title">
+    	待评价订单
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<div class="switchTab_box">
+	<!--<div class="switchTab"><a href="<{link ctl='order:index'}>" class="link">待处理</a><a href="javascript:;" class="link on">已完成</a></div>-->
+</div>
+<section class="page_center_box">
+	<ul class="order_list_box">
+  
+            <{foreach $orders as $order}>
+                <{if $order.closed !=1 }>
+                <{if $order.order_status==8}>
+                <li class="order_list">
+                    <a href="<{link ctl='order:work' args=<{$order.order_id}>}>">
+                    <div class="fl">
+                    	<p class="state black9"><span class=""><{if $order.order_status==8}>订单已完成<{/if}>
+                        </span>-<{$order.dateline|format:'Y-m-d H:i'}></p>
+                    	<div class="nr">
+                            <div class="img fl"><img src="<{$pager.img}>/<{$shops[$order['shop_id']]['logo']}>" /></div>
+                            <div class="wz">
+                            	<p class="bt black3"><{$shops[$order['shop_id']]['title']}></p>
+                                <p class="black9"><{$order.count}>份 ￥<{$order.amount}></p>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <div class="fr">
+                    	
+                        <{if $order.order_status==8 && $order.pay_status==1 && $order.comment_status==0}>
+                    	    <a href="javascript:comment(<{$order.order_id}>);" class="pub_btn">评价得积分</a>
+                        <{/if}>
+                        <{if $order.order_status==8 && $order.pay_status==1 && $order.comment_status==1}>
+                            <a href="javascript:;" class="pub_btn" style="background:#ccc;">已评价</a>
+                        <{/if}>
+                        <{if $order.order_status==-1}>
+                            
+                        <{/if}>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                <{/if}>
+                <{/if}>
+            <{foreachelse}> 
+                <div class="youhui_no">
+                    <div class="iconBg"><i class="ico1"></i> </div>
+                    <h2>暂无已完成订单</h2>
+                </div>
+            <{/foreach}>
+
+    </ul>
+</section>
+<footer>
+   <{include file="block/sfooter.html"}>
+</footer>
+
+<script>
+$(document).ready(function() {
+    localStorage['linktips'] = 'orderwell';
+    localStorage['pinjiatips'] = "orderwell";
+
+    if(localStorage['order_orderwell']) {
+        $(".gobackIco").attr("href", localStorage['order_orderwell']);
+    }
+});
+
+
+
+function delorder(orderid) {
+    var link = "<{link ctl='order:delorder' args=id}>";
+    jQuery.ajax({  
+        url: link.replace('id', orderid), 
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{ 
+                layer.open({content: ret.message,time: 2});
+                setTimeout(function(){window.location.reload();},1000);  
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+        
+    });
+}
+
+function comment(order_id) {
+    localStorage['order_comment'] = window.location.href;
+    var link = "<{link ctl='order:comment' args=temp}>";
+    window.location.href = link.replace('temp', order_id);
+}
+
+</script>
+</body>
+</html>

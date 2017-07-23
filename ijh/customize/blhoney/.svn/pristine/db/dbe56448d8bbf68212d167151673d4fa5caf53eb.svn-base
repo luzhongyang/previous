@@ -1,0 +1,474 @@
+<?php
+/**
+ * Copy Right IJH.CC
+ * Each engineer has a duty to keep the code elegant
+ * $Id$
+ */
+if(!defined('__CORE_DIR')){
+    exit("Access Denied");
+}
+class Ctl_Order extends Ctl
+{
+
+    public function index($params)
+    {
+        $this->items($params);
+    }
+    
+    // 订单列表
+    public function items($params)
+    {
+        $this->check_login();
+        $filter = array();
+        if(in_array($params['status'], array(0,1,2))){
+            switch ($params['status']){
+            case 2:
+                $filter['order_status'] = array(-1,5,6,7,8);
+                if(in_array($params['comment_status'], array(0,1))){
+                   $filter['comment_status'] = $params['comment_status'];
+                   if($filter['comment_status'] == 0) {
+                       $filter['order_status'] = 8;
+                   }
+                }
+              break;
+            case 1:
+                $filter['order_status'] = array(0,1,2,3,4);
+                break;
+            }
+        }
+        if(in_array($params['pay_status'], array(0,1))){
+            $filter['pay_status'] = $params['pay_status'];
+        }
+        $filter['uid'] = $this->uid;
+        $filter['closed'] = 0;
+        $page = max((int)$params['page'], 1);
+        $limit = 10;
+        if($order_list = K::M('order/order')->items($filter, array('order_id'=>'DESC'), $page, $limit, $count)){
+            $shop_ids = array();
+            foreach($order_list as $k=>$val){
+                $shop_ids[$val['shop_id']] = $val['shop_id'];
+            }
+            if($shop_list = K::M('shop/shop')->items_by_ids($shop_ids)){
+                foreach($shop_list as $k=>$v){
+                    $v = $this->filter_fields('shop_id,title,phone,logo',$v);
+                    $shop_list[$k] = $v;
+                }
+            }
+            $items = array();
+            foreach($order_list as $k=>$val){            
+                $items[$k] = $this->filter_fields('order_id,product_number,amount,order_status,pay_status,comment_status,ordered_time', $val);
+                if($shop_list[$val['shop_id']]){
+                    $items[$k]['shop'] = $shop_list[$val['shop_id']];
+                }else{
+                    $items[$k]['shop'] = array('shop_id'=>'0', 'shop_title'=>'', 'photo'=>'', 'logo'=>'default/shop_logo.png');
+                }
+            }
+        }else{
+            $items = array();
+        }
+        if($jifen = K::M('system/config')->find(array('k'=>'jifen'))) {
+            if($jifen_v = unserialize(stripslashes($jifen['v']))) {
+                $jifen = $jifen_v['jifen_ratio'];
+            }
+        }else {
+            $jifen = 0;
+        }
+        $this->msgbox->add('success');
+        $this->msgbox->set_data('data', array('items'=>array_values($items),'page'=>$page,'jifen'=>$jifen));
+    }
+    
+    // 提交订单
+    public function preinfo($params)
+    {
+        $this->check_login();
+        if(!$shop_id = (int)$params['shop_id']){
+            $this->msgbox->add('商家不存在', 211);
+        }else if(!$shop = K::M('shop/shop')->detail($shop_id)){
+            $this->msgbox->add('商家不存在或已被删除', 212);
+        }else if(empty($shop['audit'])){
+            $this->msgbox->add('商户审核中不可下单',213);
+        }else{
+            // 首单优惠
+            if($shop['first_amount'] && !(K::M('order/order')->find(array('uid'=>$this->uid)))) {
+                $data['first_youhui'] = $shop['first_amount'];
+            }else {
+                $data['first_youhui'] = 0;
+            }
+
+            $first_price = (float)$params['amount'] - (float)$data['first_youhui'];
+            // 满减优惠
+            /*if($youhui_detail = K::M('shop/youhui')->order_youhui($shop_id, ){
+                $data['order_youhui'] = $youhui_detail['youhui_amount'];
+            }*/
+            foreach($shop['order_youhui'] as $k=>$v) {
+                if($v['order_amount'] <= $first_price) {
+                    $data['order_youhui'][] = $v; 
+                }
+            }
+
+            // 红包
+            $hongbao_id = $hongbao_count = 0;
+            $hongbao = array();
+            if($amount = (float)$params['amount']){
+                $filter = array('uid'=>$this->uid,'min_amount'=>'<=:'.$amount,'ltime'=>'>=:'.__TIME,'order_id'=>0);
+                if($hb_list = K::M('hongbao/hongbao')->items($filter, array('amount'=>'DESC'), 1, 1, $count)){
+                    $hongbao = array_shift($hb_list);
+                    $hongbao_id = $hongbao['hongbao_id'];
+                }else{
+                    $hongbao = array('hongbao_id'=>0, 'title'=>'', 'min_amount'=>'', 'amount'=>'','type'=>'', 'uid'=>'0', 'stime'=>'0', 'ltime'=>'','order_id'=>'0','used_time'=>'0','dateline'=>'');
+                }
+            }
+            $data['yy_stime'] = (int)substr($shop['yy_stime'],0,2);
+            $data['yy_ltime'] = (int)substr($shop['yy_ltime'],0,2);
+            $data['hongbao'] = $hongbao;
+            $data['amount'] = (float)$params['amount'];
+            $this->msgbox->set_data('data', $data);
+        }
+    }
+
+    // 创建订单
+    public function create($params)
+    {
+        $this->check_login();
+        if(!$shop_id = (int) $params['shop_id']){
+            $this->msgbox->add('商家不存在', 221);
+        }else if(!$shop_detail = K::M('shop/shop')->detail($shop_id)){
+            $this->msgbox->add('商家不存在或已被删除', 222);
+        }else if($shop_detail['audit']!=1 || $shop_detail['closed']!=0){
+            $this->msgbox->add('商家不存在或已被删除', 223);
+        }else if(!$ordered_time = $params['ordered_time']){  
+            $this->msgbox->add('请选择预约时间', 224);
+        }else if($ordered_time <= __TIME){  
+            $this->msgbox->add('服务预约时间不正确', 225);
+        }else if(!$products = $params['products'] ) {  
+            $this->msgbox->add('你未选择预约服务', 226);
+        }else {        
+            $product_ids = $order_product_list = array(); 
+            $product_ids = explode(',',$products);
+
+            $product_price = $product_number = $hongbao_amount = $first_youhui = $youhui_amount = $money = $amount = 0;
+            $pros = K::M('product/product')->items(array('product_id'=>$product_ids));
+            $pro_cate = K::M('product/cate')->items(array('shop_id'=>$shop_id));
+            foreach($pro_cate as $kcate=>$vcate) {
+                if($vcate['parent_id'] == 0) {
+                    $title = $vcate['title']; 
+                }
+            }
+
+            foreach($pros as $k=>$v){
+                if($v['shop_id'] != $shop_detail['shop_id']){
+                    $this->msgbox->add('商品不是同一家商家的',202)->response();
+                }else{
+                    $_pamount = $v['price'] * 1;
+                    $order_product_list[$k] = array(
+                        'product_id'=>$v['product_id'],
+                        'product_number'=>1,
+                        'product_name'=>$title.'-'.$pro_cate[$pros[$v['product_id']]['cate_id']]['title'].'-'.$pros[$v['product_id']]['title'],
+                        'product_price'=>$v['price'],
+                        'package_price'=>0,
+                        'amount'=> $_pamount
+                    );
+                    $product_number += 1;
+                    $product_price += $v['price'] * 1;
+                    $package_price += 0;
+                }
+            }
+
+            /*if($product_price < $shop_detail['min_amount']){
+                $this->msgbox->add('没有达到预约要求',212)->json();
+            }*/
+            $freight = 0;
+            $data = array(
+                'shop_id' => $shop_id,
+                'city_id' => $shop_detail['city_id'],
+                'uid' => $this->uid,
+                'product_number' => $product_number,
+                'product_price' => $product_price,
+                'package_price' => $package_price,
+                'freight'=>$freight,
+                'amount' => $product_price+$package_price+$freight,
+                'contact' => $this->MEMBER['nickname'],
+                'mobile' => $this->MEMBER['mobile'],
+                'addr' => '',
+                'house' => '',
+                'lng' => '',
+                'lat' => '',
+                'online_pay' => 1,
+                'ordered_time' => date('Y-m-d H:i:s', $ordered_time), //预约时间
+                'note' => '',
+                'order_from'=>strtolower(CLIENT_OS),
+                'pei_type'=>0,
+                'pei_amount'=>0,
+            );
+
+            // 如果用户在本店是首单则享受首单优惠
+            if($shop_detail['first_amount'] && !(K::M('order/order')->find(array('uid'=>$this->uid)))) {
+                $data['first_youhui'] = $first_youhui = $shop_detail['first_amount'];
+            }
+
+            // 满减优惠
+            if($youhui_detail = K::M('shop/youhui')->order_youhui($shop_id, $product_price - $first_youhui)){
+                $data['order_youhui'] = $youhui_amount = $youhui_detail['youhui_amount'];
+            }
+            
+            if($hongbao_id = (int)$params['hongbao_id']){
+                if(!$hongbao_detail = K::M('hongbao/hongbao')->detail($hongbao_id)){
+                    $this->msgbox->add('红包不存在',203)->response();
+                }else if($hongbao_detail['uid'] != $this->uid){
+                    $this->msgbox->add('红包信息不正确',204)->response();
+                }else if($hongbao_detail['order_id']){
+                    $this->msgbox->add('该红包已经使用',205)->response();
+                }else if($hongbao_detail['ltime'] < __TIME){
+                    $this->msgbox->add('红包已过期不能使用',244)->response();
+                }else if($hongbao_detail['min_amount'] > ($product_price-$first_youhui)){
+                    $this->msgbox->add('该红包不满足使用条件',205)->response();
+                }else{
+                    $data['hongbao_id'] = $hongbao_id;
+                    $data['hongbao'] = $hongbao_amount = $hongbao_detail['amount'];
+                }
+            }
+            $data['amount'] = $amount = $product_price + $package_price + $freight - $youhui_amount - $first_youhui - $hongbao_amount;
+            
+            // 如果由于某些优惠的原因导致支付价格为0则直接支付成功
+            if($data['amount'] == 0) {
+                $data['pay_status'] = 1;
+            }
+            
+            // 服务订单创建
+            if($order_id = K::M('order/order')->create($data)){
+                foreach ($order_product_list as $k=>$val){
+                    $val['order_id'] = $order_id;
+                    K::M('order/product')->create($val);
+                    K::M('product/spec')->update_count($val['product_id'], 'sale_count', $val['product_number']);  
+                }
+
+                if($hongbao_detail){
+                    K::M('hongbao/hongbao')->update($hongbao_id, array('order_id'=>$order_id,'used_time'=>__TIME,'used_ip'=>__IP));
+                }
+                if($youhui_detail){
+                    K::M('shop/youhui')->update_count($youhui_detail['youhui_id'], 'use_count', 1);
+                }
+                K::M('shop/shop')->update_count($shop_id, 'orders', 1);
+                K::M('member/member')->update_count($this->uid, 'orders', 1);
+                K::M('order/log')->create(array('order_id'=>$order_id,'from'=>'member','log'=>'服务订单已提交成功','type'=>1));
+                if($data['pay_status']){
+                    K::M('order/log')->create(array('order_id'=>$order_id,'from'=>'payment','log'=>'服务订单余额支付成功','type'=>2));
+                }
+                // 预约服务订单下单成功生成消费码
+                $spend_number = K::M('order/order')->create_number();
+                K::M('order/order')->update($order_id, array('spend_number'=>$spend_number,'spend_status'=>0));
+                $this->msgbox->add('success');
+                $this->msgbox->set_data('data', array('order_id'=>$order_id, 'amount'=>$data['amount']));
+            }else{
+                if($money){ //下单失败退回余额
+                    K::M('member/member')->update_money($this->uid, $money, '服务订单创建失败退回余额');
+                }
+                $this->msgbox->add('服务订单创建失败', 411);
+            }
+        }
+    }
+    
+    // 查看订单详情
+    public function detail($params)
+    {
+        $this->check_login();
+        if(!$order_id = (int)$params['order_id']){
+            $this->msgbox->add('订单不存在',211);
+        }else if(!$order = K::M('order/order')->detail($order_id)){
+            $this->msgbox->add('订单不存在',212);
+        }else if($order['uid'] != $this->uid){
+            $this->msgbox->add('非法操作',213);
+        }else{
+            $order = $this->filter_fields('order_id,shop_id,contact,mobile,order_status,pay_status,comment_status,ordered_time,hongbao,first_youhui,amount,paycode,online_pay,spend_status,spend_number,pay_code',$order);
+            if(isset($order['pay_code']) && $order['pay_status']==1) {
+                $payments = K::M('order/order')->get_payments();
+                $order['pay_method'] = $payments[$order['pay_code']];
+            }else {
+                $order['pay_method'] = '未支付';
+            }
+            if(!$shop = K::M('shop/shop')->detail($order['shop_id'])){
+                $order['shop'] = array('shop_id'=>'0','title'=>'','min_amount'=>'','logo'=>'default/shop_logo.png');
+            }else{
+                $shop = $this->filter_fields('shop_id,title,logo,min_amount',$shop);
+                $order['shop'] = $shop;
+            }
+
+            if($product_list = K::M('order/product')->items(array('order_id'=>$order_id))){
+                foreach($product_list as $k=>$v) {
+                    $product[$k] = $this->filter_fields('pid,product_id,product_price',$v);
+                }
+            }else {
+                $product_list = array();
+            }
+            if($comment_detail = K::M('shop/comment')->find(array('order_id'=>$order_id,'uid'=>$this->uid))) {
+                $comment_detail = $this->filter_fields('comment_id,score_fuwu,score_price,content,reply,reply_time',$comment_detail);
+                if($photo_list = K::M('shop/photo')->items(array('comment_id'=>$comment_detail['comment_id']), null, 1, 5)) {
+                    foreach($photo_list as $k=>$v){
+                        $comment_detail['photo_list'][] = $v['photo'];
+                    }
+                } 
+            }else {
+                $comment_detail = array('comment'=>"");
+            }
+
+            $order['products'] = array_values($product_list);
+            $this->msgbox->add('success');
+            $this->msgbox->set_data('data', array('order'=>$order, 'comment'=>$comment_detail));
+        }
+    }
+
+    // 取消订单
+    public function cancel($params)
+    {
+        $this->check_login();
+        if(!$order_id = (int)$params['order_id']){
+            $this->msgbox->add('订单不存在',211);
+        }else if(!$order = K::M('order/order')->detail($order_id)){
+            $this->msgbox->add('订单不存在',212);
+        }else if($order['uid'] != $this->uid){
+            $this->msgbox->add('非法操作',213);
+        }else if($order['order_status'] < 0){
+            $this->msgbox->add('订单已经取消，无需重复取消',214);
+        }else if($order['order_status']==0 && $order['pay_status']==0){
+            if(K::M('order/order')->cancel($order_id, $order, 'member')) {
+                $this->msgbox->add('success');
+            }  
+        }else{
+            $this->msgbox->add('当前订单是不可取消的状态',215);  
+        }
+    }
+
+    // 删除订单
+    public function delete($params)
+    {
+        $this->check_login();
+        if(!$order_id = (int)$params['order_id']){
+            $this->msgbox->add('错误的订单ID',211);
+        }else if(!$order = K::M('order/order')->detail($order_id)){
+            $this->msgbox->add('不存在的订单',212);
+        }else if($order['uid'] != $this->uid){
+            $this->msgbox->add('你没有权限操作',213);
+        }else if($order['order_status'] == (-1) || $order['order_status'] == 8){
+            if(K::M('order/order')->delete($order_id)) {
+                K::M('order/order')->update($order_id, array('lasttime'=>__TIME));
+                $this->msgbox->add('success');
+            }
+        }else{
+            $this->msgbox->add('订单为不可删除状态',214);
+        }
+    }
+
+
+    //用户申请退单，需要商家/管理员同意后才能取消订单
+    public function tuidan($params)
+    {
+
+    }
+
+    public function cuidan($params)
+    {
+        $this->check_login();
+        if(!$order_id = (int)$params['order_id']){
+            $this->msgbox->add('订单不存在',211);
+        }else if(!$order = K::M('order/order')->detail($order_id)){
+            $this->msgbox->add('订单不存在',212);
+        }else if($order['uid'] != $this->uid){
+            $this->msgbox->add('非法操作',213);
+        }else if($order['order_status'] == 8){
+            $this->msgbox->add('订单已完成可催单',214);
+        }else if(!in_array($order['order_status'], array(1, 2, 3, 4))){
+            $this->msgbox->add('未接单不可催单',214);
+        }else if($order['cui_time']>(__TIME-900)){
+            $this->msgbox->add('您已经催单了,请再耐心等等',214);
+        }else if(K::M('order/order')->update($order_id, array('cui_time'=>__TIME), true)){
+            if($order['pei_type'] < 2 && $order['shop_id']){
+                $a = array(
+                    'shop_id'=>$order['shop_id'], 
+                    'type'=>1, 
+                    'order_id'=>$order_id,
+                    'title'=>'催单消息', 
+                    'content'=>sprintf('用户于%s催单了(单号：%s，手机号：%s)', date("Y-m-d H:i", __TIME), $order_id, $order['mobile']),
+                );
+                K::M('shop/msg')->create($a);
+            }
+            if($order['staff_id']){
+                $a = array(
+                    'staff_id'=>$order['staff_id'], 
+                    'title'=>'催单消息', 
+                    'content'=>sprintf('用户于%s催单了(单号：%s，手机号：%s)', date("Y-m-d H:i", __TIME), $order_id, $order['mobile']),
+                );
+                K::M('staff/msg')->create($a);
+            }
+            $this->msgbox->add('success');
+        }     
+    }
+
+    public function confirm($params)
+    {
+        $this->check_login();
+        if(!$order_id = (int)$params['order_id']){
+            $this->msgbox->add('订单不存在',211);
+        }else if(!$order = K::M('order/order')->detail($order_id)){
+            $this->msgbox->add('订单不存在',212);
+        }else if($order['uid'] != $this->uid){
+            $this->msgbox->add('非法操作',213);
+        }else if($order['order_status'] == 8){
+            $this->msgbox->add('订单已经确认,无需重复确认',214);
+        }else if(!in_array($order['order_status'], array(3, 4))){
+            $this->msgbox->add('商家还未配送完成不可确认',215);
+        }else if(K::M('order/order')->confirm($order_id, $order, 'member')){
+            $this->msgbox->add('success');
+        }else{
+            $this->msgbox->add('订单确认完成失败',216);
+        }
+    }
+
+    // 订单投诉
+    public function complaint($params)
+    {
+        $this->check_login();
+        if(!$order_id = (int)$params['order_id']){
+            $this->msgbox->add('订单不存在',211);
+        }else if(!$order_detail = K::M('order/order')->detail($order_id)){
+            $this->msgbox->add('订单不存在',212);
+        }else if($order_detail['uid'] !=$this->uid){
+            $this->msgbox->add('非法操作',213);
+        }else if(!$title = $params['title']){
+            $this->msgbox->add('投诉类型不能为空',214);
+        }else if(!$content = $params['content']){
+            $this->msgbox->add('投诉内容不能为空',214);
+        }else{
+            $data = array(
+                'order_id' => $order_detail['order_id'],
+                'uid'      => $this->uid,
+                'shop_id'  => $order_detail['shop_id'],
+                'staff_id' => $order_detail['staff_id'],
+                'title'    => $title,
+                'content'  => $content
+            );
+            if($complaint_id = K::M('order/complaint')->create($data)){
+                $data2 = array(
+                    'shop_id' => $order_detail['shop_id'],
+                    'title'   => sprintf('用户(%s)投诉了订单(ID:%s)', $order_detail['contact'], $order_detail['order_id']),
+                    'content' => $content,
+                    'is_read' => 0,
+                    'type'    => 3,
+                    'order_id'=> $order_detail['order_id'],
+                    );
+                K::M('shop/msg')->create($data2);
+                if($staff = $order_detail['staff_id']) {
+                    $data3 = array(
+                        'staff_id'  => $staff,
+                        'title'     => sprintf('用户(%s)投诉了订单(ID:%s)', $order_detail['contact'], $order_detail['order_id']),
+                        'content'   => $content,
+                        'is_read'   => 0,
+                        );
+                    K::M('staff/msg')->create($data3);
+                }
+                $this->msgbox->add('success');
+                $this->msgbox->set_data('data', array('complaint_id'=>$complaint_id));
+            }
+        }
+    }
+    
+}

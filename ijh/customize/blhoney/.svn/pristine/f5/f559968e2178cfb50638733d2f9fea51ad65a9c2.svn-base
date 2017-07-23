@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+        <meta name="description" content="这家店不错哦，一起去吧！<{$detail.title}>，<{$detail.addr}>，<{$detail.mobile}>" />
+    </head>
+    <body>
+<{if !$request.IN_APP_CLIENT}>
+        <header>
+            <i class="left"><a href="javascript:history.go(-1);"  link-load="" link-type="right" class="gobackIco"></a></i>
+            <div class="title">
+            	商家详情
+            </div>
+            <i class="right"><a class="<{if $detail.collect==1}>collectrue<{else}>atentIco<{/if}>" href="javascript:collect(<{$detail.shop_id}>);"></a> <a class="shareIco share_show ml10"></a></i>
+        </header>
+<{else}>
+<style type="text/css">.page_center_box{top:0;}</style>
+<{/if}>
+        <section class="page_center_box">
+            <div class="shangjia">
+                <!--详情轮播-->
+                <div class="banner mb10">
+                    <div class="flexslider">  
+                        <ul class="slides">  
+                            <{foreach $pics as $v}>
+                            <li><img src="<{$pager.img}>/<{$v.photo}>" width="100%" /></li>
+                            <{foreachelse}>
+                            <li><img src="<{$pager.img}>/<{$detail.logo}>" width="100%"/></li>
+                            <{/foreach}>
+                        </ul>  
+                    </div>
+                </div>
+                <script type="text/javascript">
+					$(document).ready(function () {
+						$('.flexslider').flexslider({
+							directionNav: true,
+							pauseOnAction: false,
+						});//首页轮播js结束
+					});
+				</script>
+                <!--详情轮播end-->            
+                <div class="nrBox mb10">
+                    <h3><span class="title">店铺公告</span></h3>
+                    <div class="nr">
+                        <p class="black9"><{$detail.info}></p>
+
+                    </div>
+                </div>
+                <div class="nrBox mb10">
+                    <h3><span class="title">店铺信息</span></h3>
+                    <div class="waimaiList">
+                    	<style>
+                        .waimaiList .list:last-child { margin-bottom: 0;}
+                        </style>
+                        <ul>
+                            <li class="list">
+                                <div class="img fl"><img src="<{$pager.img}>/<{$detail.logo}>" width="100" height="100" /></div>
+                                <div class="wz">
+                                    <div class="nr1">
+                                        <div class="fl">
+                                            <p class="bt overflow_clear"><a href="javascript:void(0);"><{$detail.title}></a></p>
+                                            <div><span class="starBg" style="vertical-align:super;"><span class="star" style="width:<{$detail.score*20}>%;"></span></div>
+                                            
+                                        </div>
+                                        <div class="fr">
+                                            <p class="black9"><span class="maincl">￥<b><{$detail.min_amount}></b></span></p>
+                                            <p class="black9">已售<{$detail.orders}>份</p>
+                                        </div>
+                                    </div>   
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul>
+                        <li class="shangjia_hd_list"><p class="black9"><em class="ico ico_1"></em>营业时间：周一至周五  <{$detail.yy_stime}>-<{$detail.yy_ltime}></p></li>
+                        <li class="shangjia_hd_list"><p class="black9 mr10 pad_r10"><em class="ico ico_2"></em><{$detail.addr}></p></li>
+                        <li class="shangjia_hd_list"><p class="black9 mr10 pad_r10"><a href="tel:<{$detail.phone}>" class="ico ico_3"></a><{$detail.phone}></p></li>
+                    </ul>
+                </div>
+                <!--评价-->
+                <div class="nrBox mb10">
+                    <h3><span class="title">评价</span><span class="black9">（全部<{$comments}>条）</span><a href="<{link ctl='shop/comment' args=<{$detail.shop_id}>}>" class="fr linkIco mt10"></a></h3>
+                    <style>
+                    .evaluate_list:first-child {border-top:0;}
+                    </style>
+                    <ul>
+                    <{foreach $comment_items as $v}>
+                        <li class="evaluate_list">
+                            <div class="tx fl"><img src="<{$pager.img}>/<{$v.face}>" width="100" height="100" /></div>
+                            <div class="wz">
+                                <p><{$v.nickname}></p>
+                                <div><span class="starBg"><span class="star" style="width:<{($v.score_fuwu+$v.score_price)/2*20}>%;"></span></span></div>
+                                <p><{$v.content}></p>
+                                <div class="img_list">
+                                    <ul>
+                                        <{foreach $v.photo as $kk=>$vv}>
+                                        <li><img src="<{$pager.img}>/<{$vv.photo}>" width="100" height="100" /></li>
+                                        <{/foreach}>
+                                    </ul>
+                                    <div class="clear"></div>
+                                </div>
+                                <p class="black9"><{$v.dateline|format:"Y-m-d H:i:s"}></p>
+                                <{if $v.reply}>
+                                <div class="evaluate_reply">
+                                    <p><{$v.reply}></p>
+                                    <p class="time black9"><{$v.reply_time|format:"Y-m-d H:i:s"}></p>
+                                </div>
+                                <{/if}>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                    <{/foreach}>
+                    </ul>  
+                </div>
+                <!--评价end-->
+            </div>
+        </section>
+<{if !$request.IN_APP_CLIENT}>
+        <footer>
+            <div class="ord_tousu">
+                <!-- <p class="fl black9 pad_t10"><span class="maincl">￥<big><b><{$detail.min_amount}></b></big></span>起</p> -->
+                <a href="<{link ctl='shop:ordered' args=<{$detail.shop_id}>}>" class="fr pub_btn">立即预约</a></div>
+        </footer>
+<{else}>
+<style type="text/css">.page_center_box{bottom:0;}</style>
+<{/if}>
+<!--分享弹出层-->
+<div>
+    <div class="maskOne sharePage_mask">
+        <div class="cont">
+            <ul>
+                <!--<li><a href="#"><em class="ico_1"></em><p>微信</p></a></li>
+                <li><a href="#"><em class="ico_2"></em><p>微信</p></a></li>
+                <li><a href="#"><em class="ico_3"></em><p>微信</p></a></li>
+                <li><a href="#"><em class="ico_4"></em><p>微信</p></a></li>-->
+                <li><a href="javascript:shareblog();"><em class="ico_5"></em><p style="color:#901872;">新浪微博</p></a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <a href="javascript:;" class="cancel" style="color:#901872;">取消</a>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<script>
+$(document).ready(function() {
+    $(".share_show").click(function(){
+		$(".sharePage_mask").show();
+		$(".sharePage_mask").parent().find(".mask_bg").show();
+	});
+	$(".sharePage_mask").find(".cancel").click(function(){
+		$(".sharePage_mask").hide();
+		$(".sharePage_mask").parent().find(".mask_bg").hide();
+	});
+});
+</script>
+<!--分享弹出层end-->
+
+    </body>
+</html>
+<script>
+if(localStorage['shop_detail']) {
+    $('.gobackIco').attr('href', localStorage['shop_detail']);
+}
+
+function collect(shop_id) {
+    var link = "<{link ctl='ucenter/collect:keepstatus' args='temp'}>";
+    jQuery.ajax({        
+        url: link.replace("temp",shop_id), 
+        async: true,  
+        dataType: 'json',
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0) {
+                layer.open({content: ret.message,time: 2});
+                setTimeout(function(){
+                    window.location.href = "<{link ctl='passport:login'}>";
+                },2000);
+            }else {
+                layer.open({content: ret.message,time: 2});
+            }
+            window.location.reload();
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+    });
+}
+
+function shareblog() {
+    var shareUrl = window.location.href;                   
+    var sharePic = "<{$pager.img}>/<{$detail.logo}>";       
+    var shareTitle = "在"+"<{$CONFIG.site.title}>"+"发现一个不错的美发哦，您也来看看吧。"+ "{$detail.info}>"; // 内容
+    window.location.href ='http://service.weibo.com/share/share.php?appkey=1550938859'+'&url='+encodeURIComponent(shareUrl)+'&content=utf-8&sourceUrl='+encodeURIComponent(shareUrl)+'&pic='+encodeURIComponent(sharePic)+'&title='+encodeURIComponent(shareTitle);
+}
+</script>

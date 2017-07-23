@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+<body>
+<{if !$request.IN_APP_CLIENT}>
+<header>
+    <i class="left"><a href="<{link ctl='help/index'}>" class="gobackIco"></a></i>
+    <div class="title" style="overflow;hidden;">
+        <{$detail.title}>
+    </div>
+</header>
+<{else}>
+<style type="text/css">.page_center_box{top:0;}</style>
+<{/if}>
+<section class="page_center_box">
+    <div class="message_list_details"><{$detail.content}></div>
+</section>
+<{if !$request.IN_APP_CLIENT}>
+<{include file="block/sfooter.html"}>
+<{/if}>
+<script>
+    $(document).ready(function(){    
+        $('#l5').addClass('on');     
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+@charset "utf-8";
+/* CSS Document */
+html{height:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-font-smoothing:antialiased;font-size:100px;}
+body{margin:0;padding:0;min-height:100%;font-family:"MICROSOFT YAHEI"; font-size: 0.14rem; color:#333; background: #f7f7f7;}  
+h1,h2,h3,h4,h5,h6,p,figure,form{margin:0;}  
+table{border-collapse:collapse;border-spacing:0;}  
+img{border:0;vertical-align:middle;-ms-interpolation-mode: bicubic;}  
+a{text-decoration:none;color:#333;-webkit-tap-highlight-color:rgba(0,0,0,0);}  
+a:focus{outline:none;-moz-outline:none;}  
+a:visited{outline:none;-moz-outline:none;}  
+ul,li,ol,dl,dt,dd{margin: 0;padding:0;list-style: none outside none;}
+table,tr,th,td,input{margin: 0;padding:0; border-collapse: collapse; border-spacing: 0;}
+table{ width:100%;}
+ol li{list-style:none;}  
+em{font-style:normal;}
+ul.inline-style li{float:left;display:inline;}
+button,input,select,textarea{font-size:0.875em;margin: 0;outline: 0 none;vertical-align: baseline;*vertical-align: middle;font-family:"MICROSOFT YAHEI";-webkit-tap-highlight-color:rgba(0,0,0,0); border:0.01rem solid #dedede;}  
+textarea{overflow: auto;vertical-align: top;resize:none;}  
+button,input{line-height: normal;}  
+button,  
+html input[type="button"],   
+input[type="reset"],  
+input[type="submit"]{-webkit-appearance: button;cursor: pointer;*overflow: visible;}  
+button[disabled],
+input[disabled],
+input[type="checkbox"],
+input[type="radio"]{box-sizing: border-box;padding: 0;*height: 0.13rem;*width: 0.13rem;} 
+button::-moz-focus-inner,  
+input::-moz-focus-inner{border: 0;padding: 0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display: block;}  
+audio,canvas,video{display: inline-block;*display: inline;*zoom: 1;}  
+audio:not([controls]){display: none;height: 0;}  
+input[type="search"]{-webkit-appearance: textfield;-moz-box-sizing: content-box;-webkit-box-sizing: content-box;box-sizing: content-box; box-sizing: border-box;}  
+input:-moz-placeholder{color: #999;}  
+input::-webkit-input-placeholder{color:#999;}
+.none{ display:none;}
+
+.mt10{margin-top:0.10rem;}
+.mb10{margin-bottom:0.10rem;}
+.mr10{margin-right:0.10rem;}
+.ml10{margin-left:0.10rem;}
+
+.fontcl{ color:#2cca77;}
+.pointcl{ color:#ff2121;}
+.graycl{ color:#999;}
+.black3{color:#333333;}
+.black{color:#000000;}
+
+.btn{ display:inline-block;opacity:1;cursor:pointer; text-align:center; color:#fff; border-radius:0.03rem; outline:none;-webkit-appearance: none; border:none; background-color:#2cca77; height:0.4rem;  line-height:0.4rem; font-size:0.14rem;}
+.btn:hover{opacity:0.9;filter:alpha(opacity=90); color:#fff; text-decoration:none;}
+
+.overflow_clear{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}/*css溢出省略*/
+.fl{float:left;}
+.fr{float:right;}
+.clear{clear:both; font-size: 0; height: 0; line-height: 0;}
+
+.login_cont{ width:80%;border:0.01rem solid #eee;height:auto; background:#fff; margin:0.4rem auto 0;}
+.login{ width:90%; margin:0 auto; padding:0.2rem 0;}
+.login h2{ font-size:0.24rem; margin-bottom:0.4rem; line-height:0.3rem; height:0.3rem; font-weight:normal; color:#466FAE;}
+.login form input.text{ width:100%; margin-bottom:0.15rem; border:0.01rem solid #eee; padding:0.05rem 0px 0.05rem 0.1rem; height:0.4rem; line-height:0.4rem;}
+.login .login_link{ font-size:0.14rem; margin:-0.05rem 0 0.25rem 0;}
+.login form input.btn{ width:100%; border:none; height:0.4rem; line-height:0.4rem; background:#466FAE; color:#fff; font-size:0.16rem;}
+.login form .yanzheng input.short{ width:75%;}
+.login form .yanzheng .hqyzm{ float:right; display:inline-block; height:0.38rem; line-height:0.38rem; border:0.01rem solid #eee; width:23%; text-align:center; background:#f8f8f8;color:#134a9f;}
+.login .bottom_link{ text-align:center; margin-top:0.2rem;}
+.login .bottom_link a{text-decoration:underline; color:#134a9f;  font-size:0.14rem;}
+
+.register_cont { top:10%;}
+.register_cont .register form input,.register_cont .register form select{ margin-bottom:0.08rem;}
+.register_cont .register h2{ margin-bottom:0.2rem;}
+.register_cont .register form select.text{ width:100%; border:0.01rem solid #eee; padding:0.05rem 0 0.05rem 0.1rem; height:0.4rem; line-height:0.4rem;}
+.register_cont .register form textarea.text{ width:100%; border:0.01rem solid #eee; margin-bottom:0.1rem; height:0.8rem;}
+
+@media (max-width:240px){
+    html { font-size: 75px;}
+}
+@media screen and (min-width: 240px) and (max-width: 319px){
+    html{font-size:75px;}
+}
+@media screen and (min-width: 320px) and (max-width: 479px){
+    html{font-size:100px;}
+}
+@media screen and (min-width: 480px) and (max-width: 639px){
+    html{font-size:100px;}
+}
+@media screen and (min-width: 640px) and (max-width: 719px){
+    html{font-size:100px;}
+}
+@media screen and (min-width: 720px) and (max-width:967px){
+    html{font-size:225px;}
+}
+@media (min-width:721px) {
+    html { font-size: 100px;}
+	.login_cont{ width:400px; position:fixed; left:50%; top:20%; box-shadow:0 0 18px 1px #ccc; height:auto; background:#fff; margin:0px 0px 0px -200px;}
+	.login{ width:280px; margin:40px auto;}
+	.login h2{ font-size:24px; margin-bottom:40px; line-height:30px; height:30px; font-weight:normal; color:#466FAE;}
+	.login form input.text{ width:280px; margin-bottom:15px; border:1px solid #eee; padding:5px 0px 5px 10px; height:40px; line-height:40px;}
+	.login .login_link{ font-size:14px; margin:-5px 0px 25px 0px;}
+	.login form input.btn{ width:100%; border:none; height:40px; line-height:40px; background:#466FAE; color:#fff; font-size:16px;}
+	.login form .yanzheng input.short{ width:180px;}
+	.login form .yanzheng .hqyzm{ float:right; display:inline-block; height:38px; line-height:38px; border:1px solid #eee; width:90px; text-align:center; background:#f8f8f8;color:#134a9f;}
+	.login .bottom_link{ text-align:center; margin-top:20px;}
+	.login .bottom_link a{text-decoration:underline; color:#134a9f;  font-size:14px;}
+	
+	.register_cont { top:10%;}
+	.register_cont .register form input,.register_cont .register form select{ margin-bottom:8px;}
+	.register_cont .register h2{ margin-bottom:20px;}
+	.register_cont .register form select.text{ width:280px; border:1px solid #eee; padding:5px 0px 5px 10px; height:40px; line-height:40px;}
+	.register_cont .register form textarea.text{ width:280px; border:1px solid #eee; margin-bottom:10px; height:80px;}
+}
+
+
+
+
+
+
+
+

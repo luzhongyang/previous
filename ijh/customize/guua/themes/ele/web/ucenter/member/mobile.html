@@ -1,0 +1,162 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <!--更改手机-->
+        <div class="prslCenter_acont">
+            <h2>更改手机</h2>
+            <div class="phone_top">
+                <ul>
+                    <li <{if $step == 1}>class="on"<{/if}> ><span class="num">1</span>验证原先手机号码</li>
+                    <li <{if $step == 2}>class="on"<{/if}> ><hr><span class="num">2</span>绑定新手机号码</li>
+                    <li <{if $step == 3}>class="on"<{/if}> ><hr><span class="num">3</span>修改成功</li>
+                </ul>
+            </div>
+            <div class="phone">
+                <{if $step ==1}>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td colspan="2">为保障你的账号安全，请先帮助我们验证你的身份！</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">原手机号码<span class="ml10"><{substr_replace($MEMBER.mobile,'****',3,4)}></span></td>
+                        </tr>
+                        <tr>
+                            <th>验证码</th>
+                            <td>
+                                <div><input type="text" id="yzm" class="int"><input type="button" login="sendsms" value="获取验证码" class="yzmget"><div class="cl"></div></div>
+                                <small class="black9">为了保障账号安全，请先对你的身份进行验证</small>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="button" id="step_1" value="下一步" class="pub_btn">
+                    <p class="txt_center black9" style="font-size:14px;">当前号码已不用或丢失/无法收到验证码？请联系客服：<span class="black3">10105757</span></p>
+                <{elseif $step==2}>
+                <table border="0" cellspacing="0" cellpadding="0">
+                	<tr>
+                        <td colspan="2">验证身份成功，请绑定新的手机号码！</td>
+                    </tr>
+                    <tr>
+                        <th>新手机号码</th>
+                        <td>
+                        	<div><input type="text" id="mobile" class="long_int" placeholder="请输入新的手机号码"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>验证码</th>
+                        <td>
+                            <div><input type="text" id="yzm2" class="int"><input type="button" login="sendsms" value="获取验证码" class="yzmget"><div class="cl"></div></div>
+                            <small class="black9">为了保障账号安全，请先对你的身份进行验证</small>
+                        </td>
+                    </tr>
+                </table>
+                <input type="button" id="step_2"  value="下一步" class="pub_btn">
+                <{else}>
+                <div class="phone">
+                    <div class="finish">
+                        <p class="pointcl">新手机号码绑定成功！</p>
+                        <p class="">手机号码：<{$MEMBER.mobile}></p>
+                        <p class="black9"><small>为了保障账号安全，请记住你的新手机号码</small></p>
+                    </div>
+                </div>   
+                <{/if}>
+            </div>
+        </div>
+        <!--更改手机end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<script>
+    $(document).ready(function(){
+         $("#step_1").click(function(){
+             var mobile = "<{$MEMBER.mobile}>";
+             var yzm = $('#yzm').val();
+             var url = "<{link ctl='web/ucenter/member/verify_old'}>";
+             $.post(url, {mobile: mobile, yzm: yzm}, function (ret) {
+                if (ret.error == 0) {
+                    setTimeout(function () {
+                        window.location.href = "<{link ctl='web/ucenter/member/mobile' step=2}>";
+                    }, 1000)
+                    BtnCount();
+                } else {
+                    layer.msg(ret.message);
+                }
+            }, 'json');
+         })
+         
+         
+         $("#step_2").click(function(){
+             var mobile = $('#mobile').val();
+             var yzm = $('#yzm2').val();
+             var url = "<{link ctl='web/ucenter/member/set_mobile'}>";
+             $.post(url, {mobile: mobile, yzm: yzm}, function (ret) {
+                if (ret.error == 0) {
+                    layer.msg(ret.message);
+                    setTimeout(function () {
+                        window.location.href = "<{link ctl='web/ucenter/member/mobile' step=3}>";
+                    }, 1000)
+                    BtnCount();
+                } else {
+                    layer.msg(ret.message);
+                }
+            }, 'json');
+         })
+         
+    })
+
+    
+    
+    var minute = 60;
+    var mobile_timeout;
+    var mobile_count = minute;
+    var mobile_lock = 0;
+
+
+    BtnCount = function () {
+        if (mobile_count == 0) {
+            $(".yzmget").addClass("on");
+            $('.yzmget').removeAttr("disabled");
+            $('.yzmget').val("<{L('重新获取')}>");
+            mobile_lock = 0;
+            clearTimeout(mobile_timeout);
+            $('.yzmget').removeClass("on");
+        } else {
+            mobile_count--;
+            $('.yzmget').val("重新获取(" + mobile_count.toString() + ")" + "<{L('秒')}>");
+            mobile_timeout = setTimeout(BtnCount, 1000);
+        }
+    };
+
+
+
+    $("[login]").click(function () {
+        if (mobile_lock == 0) {
+            var step = "<{$step}>";
+            if(step == 1){
+                var mobile = "<{$MEMBER.mobile}>";
+            }else{
+                var mobile = $('#mobile').val();
+            }
+            var link = "<{link ctl='web/passport/sendsms'}>";
+            $(".yzmget").addClass("on");
+            $.post(link, {mobile: mobile}, function (ret) {
+                if (ret.error == 0) {
+                    BtnCount();
+                    mobile_lock = 1;
+                    $(".yzmget").addClass("on");
+                    $('.yzmget').attr("disabled", "disabled");
+
+                } else {
+                    layer.msg(ret.message);
+                    mobile_lock = 0;
+
+                }
+            }, 'json');
+            mobile_count = minute;
+        }
+    });
+</script>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

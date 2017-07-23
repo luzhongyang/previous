@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+    <body>
+        <header>
+            <i class="left">
+                <a class="bell_prompt" href="javascript:void(0);"><{if $msgnum > 0}><span class="num"><{$msgnum}></span><{/if}></a>
+            </i>
+            <div class="title"> 404 页面不存在</div>
+            <i class="right"></i>
+        </header>
+        <div class="error_box">
+            <div style="text-align:center;"><img src="/themes/default/static/images/none_networkService@2x.png" style="margin:0px auto;" /></div>
+        </div>
+    </body>
+</html>
+
+
+
+
+
+

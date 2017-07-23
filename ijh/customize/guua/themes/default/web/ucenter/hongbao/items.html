@@ -1,0 +1,115 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <!--头部切换-->
+        <div class="prslCenter_redBag_tab">
+            <ul class="fl">
+                <li <{if $st==1}>class="on"<{/if}> ><a href="<{link ctl='web/ucenter/hongbao/index' st=1}>">可用红包</a></li>
+                <li <{if $st==2}>class="on"<{/if}> ><a href="<{link ctl='web/ucenter/hongbao/index' st=2}>">历史红包</a></li>
+            </ul>
+            <a href="javascript:;" class="fr duihuan duihuan_show">兑换红包</a>
+            <div class="cl"></div>
+        </div>
+        <!--头部切换end-->
+        <script>
+            $(document).ready(function () {
+                $(".prslCenter_redBag_tab ul li").each(function (e) {
+                    $(this).click(function () {
+                        $(".prslCenter_redBag_tab ul li").removeClass("on");
+                        $(this).addClass("on");
+                        $(".prslCenter_redBag_box").each(function (i) {
+                            if (e == i) {
+                                $(".prslCenter_redBag_box").hide();
+                                $(this).show();
+                            }
+                            else {
+                                $(this).hide();
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
+        <!--我的红包列表-->
+        <div class="prslCenter_redBag_box">
+            <ul>
+                <{foreach $items as $item}>
+                <li class="prslCenter_redBag_list <{if $st ==2}>no<{/if}>">
+                    <div class="box">
+                        <div>
+                            <div class="fl price"><small>￥</small><{$item.amount}></div>
+                            <div class="pub_wz">
+                                <h3 class="maincl"><{$item.title}></h3>
+                                <p class="black9">满<{$item.min_amount}>元可用、限手机尾号<{$MEMBER['mobile']|substr:-4}>使用</p>
+                            </div>
+                            <div class="cl"></div>
+                        </div>
+                        <p class="time">有效期：<{$item.stime|format:'Y-m-d'}>至<{$item.ltime|format:'Y-m-d'}></p>
+                    </div>
+                </li>
+                <{/foreach}>
+                
+            </ul> 
+            <div class="cl"></div>
+        </div>
+        <!--分页-->
+        <div class="page"><{$pager.pagebar}></div>
+        <!--分页end-->
+        <!--我的红包列表end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<!--兑换红包弹出层-->
+<div class="mask_box duihuan_mask" style="display:none;">
+    <div class="maskOne">
+        <h2>输入兑换码，兑换红包！</h2>
+        <form>
+            <input type="text" id="hongbao_sn" class="int" placeholder="请输入兑换码">
+            <{if $reg_yzm == 'on'}>
+            <div class="int_box"><input type="number" maxlength="6" id="verifycode" placeholder="请输入验证码"><img style="border-radius: 5px; margin-left: 10px;" verify="#pass-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>"  width="160" height="50"><a href="javascript:void(0);" class="change">看不清换一张</a></div>
+            <{/if}>
+            <div class="btn_box">
+                <input type="button" id="exchange_btn" class="pub_btn" value="确定">
+                <a href="javascript:javascript:void(0);" class="pub_btn cancel">取消</a>
+            </div>
+        </form>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".duihuan_show").click(function () {
+            $(".duihuan_mask").show();
+        });
+        $(".duihuan_mask .cancel").click(function () {
+            $(".duihuan_mask").hide();
+        });
+        $("#exchange_btn").click(function(){
+            var url = "<{link ctl='web/ucenter/hongbao/exchange'}>";
+            var hongbao_sn = $("#hongbao_sn").val();
+            if(hongbao_sn == 0||hongbao_sn==""||hongbao_sn==undefined){
+                layer.msg("请填写红包兑换码");return false;
+            }
+            var yzm = $("#verifycode").val();
+            $.post(url,{hongbao_sn:hongbao_sn,yzm:yzm},function(ret){
+                if(ret.error ==0){
+                    layer.msg(ret.message);
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },'1000')
+                }else{
+                    layer.msg(ret.message);
+                }
+            },'json')
+        })
+        
+        
+        
+    });
+</script>
+<!--兑换红包弹出层end-->
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

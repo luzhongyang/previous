@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="<{link ctl='ucenter/mall:orderitems'}>" class="gobackIco"></a></i>
+    <div class="title">
+    	订单详情
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+    <div class="daizhifu mt10">
+        <div class="daizhifu-cont">
+            <div class="daizhifu-tit pad_l10 bder_b">
+            <{if $order.order_status==0 && $order.pay_status==0}>
+            订单待支付
+            <{else if $order.order_status==0 && $order.pay_status==1 }>
+            订单已支付
+            <{else if $order.order_status==5 && $order.pay_status==1}>
+            订单已发货
+            <{else if $order.order_status==8}>
+            订单已完成
+            <{else if $order.order_status==-1}>
+            订单已取消
+            <{/if}>
+            <span class="black9 font_size14">-<{$order.dateline|format:'Y-m-d H:i:s'}></span></div>
+            <ul>
+                <{foreach $order.products as $v}>
+                <li class="daizhifu-list pad10 bder_b">
+                    <div class="fl tupian" style="width:0.6rem;height:0.6rem;"><img src="<{$pager.img}>/<{$v.photo}>"/></div>
+                    <div class="wenzi ">
+                        <a href="javascript:void(0);" class="font_size14"><{$v.title}></a>
+                        <div class="font_size14 ">
+                            <div class="fl">
+                                <span><{$v.product_price}>元</span>
+                                <span class="jifen"><{$v.product_jifen}><span class="black9">积分</span></span>
+                            </div>
+                            <div class="fr">x<{$v.product_number}></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                <{/foreach}>
+            </ul>
+            <div class="danzi-heji pad_l10 pad_r10">
+               <div class="fl">合计</div>
+               <div class="fr yuanmuch"><{$order.product_price}>元</div>
+               <div class="clear"></div>
+            </div>
+        
+        </div>
+    </div>	
+    <!--订单详情-->
+    <div class="dan-xiangqing mt10 pad_l10 pad_r10 bder_b">
+        <div class="thetit ">订单详情</div>
+        <div class="danhao ">订单号：<{$order.order_id}></div>
+        <div class="danhao ">联系人：<{$order.contact}>  <{$order.mobile}></div>
+        <div class="danhao ">联系地址：<{$order.addr}></div>
+        <div class="danhao bb-non">支付方式：<{$order.pay_method}></div>
+    </div>
+</section>
+
+<{if $order.order_status==0 && $order.pay_status==0}>
+<div class="daizhifu_foot ">
+	<div class="pad_l10 pad_r10">
+        <a href="javascript:set(<{$order.order_id}>, 'chargeback');" class="daizhifu_xiao fl">取消订单</a>
+        <a href="javascript:set(<{$order.order_id}>, 'pay');" class="daizhifu_fu fr">支付订单</a>
+        <div class="clear"></div>
+    </div>
+</div>
+<{/if}>
+<{if $order.order_status==5 && $order.pay_status==1}>
+<div class="queren_foot">
+    <a href="javascript:set(<{$order.order_id}>, 'receive');" class="queren_huo">确认收货</a>
+</div>
+<{/if}>
+<{if $order.order_status==8 || $order.order_status==-1}>
+<div class="shanchu_foot">
+    <a href="javascript:set(<{$order.order_id}>, 'delete');" class="shanchucont">
+        <em class="throw"></em><span class="black9 shandiao">删除订单</span>
+    </a>
+</div>
+<{/if}>
+</body>
+</html>
+<script>
+
+function set(order_id, type) {
+    var link = null;
+    if(type == 'pay') {
+        link = "<{link ctl='order:pay' arg0='temp1' arg1='temp2'}>";
+        window.location.href = link.replace("temp1",order_id).replace('temp2', 'mall');
+    }else {
+        link = "<{link ctl='ucenter/mall:"+type+"' args=temp}>";
+        jQuery.ajax({        
+            url: link.replace("temp",order_id), 
+            async: true,  
+            dataType: 'json',
+            type: 'POST',   
+            success: function (ret) { 
+                if(ret.error > 0){
+                    layer.open({content: ret.message,time: 2});
+                }else{
+                    layer.open({content: ret.message,time: 2});
+                    if(ret.data) {
+                        setTimeout(function(){window.location.href="<{link ctl='ucenter/mall:orderitems'}>";},1000);
+                    }else {
+                        setTimeout(function(){window.location.reload();},1000);
+                    }  
+                }
+            }, 
+        });
+    }
+}
+</script>

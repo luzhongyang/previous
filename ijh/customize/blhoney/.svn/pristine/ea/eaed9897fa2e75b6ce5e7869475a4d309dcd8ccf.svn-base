@@ -1,0 +1,47 @@
+<{assign var='tpl_title' value='服务中心'}>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+</head>
+<body>
+<{if !$request.IN_APP_CLIENT}>
+<header>
+    <i class="left"><a href="<{link ctl='ucenter/index'}>" class="gobackIco"></a></i>
+    <div class="title">
+        <{$detail.title}>
+    </div>
+</header>
+<{else}>
+<style type="text/css">.page_center_box{top:0;}</style>
+<{/if}>
+<section class="page_center_box">
+    <div class="">
+        <div class="serve_center mb10"> 
+            <a href="tel:<{$site.phone}>"><img src="/themes/default/static/images/kf_img.png"><p>联系客服</p></a>
+        </div>
+        <ul class="form_list_box">
+            <{foreach $items as $item}>
+            <li class="mineHome_list <{if $item@index == ($count-1)}>last<{/if}> ">
+                <a href="<{link ctl='help/detail' args=$item.article_id}>">
+                    <p class="fl"><{$item.title}></p>
+                    <div class="fr"><em class="linkIco"></em></div>
+                    <div class="clear"></div>
+                </a>
+            </li>
+            <{/foreach}>
+        </ul>
+    </div>
+</section>
+<{if !$request.IN_APP_CLIENT}>
+<{include file="block/sfooter.html"}>
+<{/if}>
+<script>
+    $(document).ready(function(){
+    
+        $('#l5').addClass('on');
+     
+    });
+</script>
+</body>
+</html>

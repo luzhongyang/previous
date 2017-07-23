@@ -1,0 +1,88 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <!--订单评价-->
+        <script>
+            $(document).ready(function () {
+                $(".prslCenter_evlt_list").hover(function () {
+                    $(".prslCenter_evlt_list .nr").hide();
+                    $(this).find(".nr").show();
+                });
+            });
+        </script>
+        <div class="prslCenter_evlt_list">
+            <div class="box">
+                    <div class="fl">
+                        <div class="pub_img fl"><a href="<{link ctl='web/menu/index' args=$detail.shop_id}>"><img src="<{$pager.img}>/<{$shop.logo}>"></a></div>
+                        <div class="pub_wz">
+                            <h3 class="mb20"><a href="<{link ctl='web/menu/index' args=$detail.shop_id}>"><{$shop.title}><em class="ico"></em></a></h3>
+                            <P class="black9">订单号：<{$detail.order_id}></P>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="wz">
+                        <p class="black9 mb30">商家电话：<{$shop.phone}></p>
+                        <p class="black9">下单时间：<{$detail.dateline|format:'Y-m-d H:i'}><a href="<{link ctl='web/ucenter/order/complaint' args=$detail.order_id}>" class="fr black9 tousu"><em class="ico"></em>投诉商家</a></p>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+            <div class="nr" style="display:block;">
+                <div class="fl menu_box">
+                        <h3>菜品共 <span class="pointcl"><{$detail.product_number}></span> 份，总价<span class="pointcl">￥<{$detail.amount+$detail.money}></span></h3>
+                        <ul>
+                            <{foreach $products as $item}>
+                            <li class="black6"><span class="fl w120"><{$item.product_name}></span><span class="fl ml10 w60">￥<{$item.product_price}></span><span class="fl ml10 w60"><{$item.product_number}>份</span><span class="fr">￥<{$item.amount}></span></li>
+                            <{/foreach}>
+                        </ul>
+                        <div class="addr">
+                            <p>地址：<{$detail.addr}><{$detail.house}></p>
+                            <p>姓名：<{$detail.contact}></p>
+                            <p>电话：<{$detail.mobile}></p>
+                            <p>备注：<{$detail.note|default:'无'}></p>
+                        </div>
+                    </div>
+                <div class="fl evlt_box">
+                    <h3 class="maincl">我的评价<small class="black9 fr">完成时间：<{$detail.comment.dateline|format:'Y-m-d'}></small></h3>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>总体评价：</th>
+                            <td><span class="starBg"><span class="star" style="width:<{$detail['comment']['score']*20}>%;"></span></span><span class="pointcl ml10"><{if $detail.comment.score<=2}>差评<{elseif $detail.comment.score>=4}>好评<{else}>中评<{/if}></span></td>
+                        </tr>
+                         <tr>
+                            <th>服务态度：</th>
+                            <td><span class="starBg"><span class="star" style="width:<{$detail['comment']['score_fuwu']*20}>%;"></span></span><span class="pointcl ml10"><{if $detail.comment.score_fuwu<=2}>差评<{elseif $detail.comment.score_fuwu>=4}>好评<{else}>中评<{/if}></span></td>
+                        </tr>
+                         <tr>
+                            <th>菜品口味：</th>
+                            <td><span class="starBg"><span class="star" style="width:<{$detail['comment']['score_kouwei']*20}>%;"></span></span><span class="pointcl ml10"><{if $detail.comment.score_kouwei<=2}>差评<{elseif $detail.comment.score_kouwei>=4}>好评<{else}>中评<{/if}></span></td>
+                        </tr>
+                        <tr>
+                            <th>送餐速度：</th>
+                            <td><{$detail.comment.pei_time}>分钟</td>
+                        </tr>
+                        <tr>
+                            <th>补充评价：</th>
+                            <td><p class="line2"><{$detail.comment.content}></p></td>
+                        </tr>
+                        <tr>
+                            <th>评论图片：</th>
+                                <td>
+                                <{foreach $detail.comment.photos as $pic}>
+                                <img style="float:left; margin-right: 5px;" src="<{$pager.img}>/<{$pic.photo}>" width="100" height="100"/>
+                                <{/foreach}>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--订单评价end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

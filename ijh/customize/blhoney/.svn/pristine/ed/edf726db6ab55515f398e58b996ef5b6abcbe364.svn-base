@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+<body>
+<{if !$request.IN_APP_CLIENT}>
+<header>
+   <i class="left"><a href="<{link ctl='video:index'}>" class="gobackIco"></a></i>
+    <div class="title"> 视频秀详情 </div>
+    <i class="right"><a class=""></a> </i> 
+    </header>
+<{else}>
+<style type="text/css">.page_center_box{top:0;}</style>
+<{/if}>
+<section class="page_center_box">
+    <!--内容-->
+    <div class="shipinXQ mt10">
+        <div class="xiangqing">
+            <h3 class="wenzi1"><{$detail.title}></h3>
+            <p class="black9 mb10"><{$detail.dateline|format:'Y-m-d H:i:s'}>  爱美Home</p>
+            <a href="<{$detail.linkurl}>">
+                <video src="" poster="<{$pager.img}>/<{$detail.thumb}>"  width="100%" >您的浏览器不支持此种视频格式。</video>
+            </a>
+            <p class="wenzi2"><{$detail.desc}></p>
+            <div class="img"> <img src="%THEME%/static/images/video/end.png"/>
+                <p>【来源于网络，版权归作者所有。如有侵权请速删！】</p>
+            </div>
+        </div>
+        <div class="tuijian">
+            <div class="wenzi3">视频推荐</div>
+            <div class="video_list_box">
+                <ul>
+                    <{foreach $other as $v}>
+                    <li class="video_list">
+                        <div class="box"> <img src="<{$pager.img}>/<{$v.thumb}>"/>
+                            <a href="<{link ctl='video:detail' args=<{$v.article_id}>}>">
+                            <div class="nr">
+                                <table width="100%" height="100%" border="0" align="center">
+                                    <tr>
+                                        <td valign="middle">
+                                            <p><{$v.title}></p>
+                                            <img src="%THEME%/static/images/video/vedio_icon1.png" class="ico"/> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </a>
+                        </div>
+                    </li>
+                    <{/foreach}>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!--内容end--> 
+</section>
+<{if !$request.IN_APP_CLIENT}>
+<{include file="block/sfooter.html"}>
+<{else}>
+<style type="text/css">.page_center_box{bottom:0;}</style>
+<{/if}>
+</body>
+</html>

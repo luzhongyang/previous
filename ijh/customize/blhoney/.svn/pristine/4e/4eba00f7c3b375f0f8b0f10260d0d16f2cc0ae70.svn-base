@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+<body><div style='margin:0 auto;display:none;'>
+        <img src='<{$pager.img}>/<{$CONFIG.site.logo}>' />
+    </div>
+<{if !$request.IN_APP_CLIENT}>
+<header> <i class="left"><a href="<{link ctl='hotstyle:index'}>" class="gobackIco"></a></i>
+    <div class="title"> 发型详情 </div>
+    <i class="right"><a class=""></a></i> 
+</header>
+<{else}>
+<style type="text/css">.page_center_box{top:0;}</style>
+<{/if}>
+<section class="page_center_box">
+    <div class="hotstyleXq"> 
+        <!--banner部分 -->
+        <div class="">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li class="list"> 
+                    <a href="javascript:void(0);"> <img src="<{$pager.img}>/<{$detail.thumb}>"></a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--banner部分结束--> 
+        <!--内容-->
+        <div class="xiangqing bgcolor_white mb10">
+            <h3><{$detail.title}></h3>
+            <div class="miaoshu">发型详情描述：<br/><span class="black6"><{$detail.desc|nl2br}></span></div>
+        </div>
+        <div class="more bgcolor_white">
+            <h3><span></span>更多发型</h3>
+            <div class="hotstyle_list_box">
+                <ul>
+                    <{foreach $other as $k=>$v}>
+                    <li class="hotstyle_list">
+                        <div class="box"> 
+                            <a href="<{link ctl='hotstyle:detail' args=<{$v.article_id}>}>"> 
+                                <img src="<{$pager.img}>/<{$v.thumb}>"/>
+                            </a>
+                       </div>
+                        <div class="nr overflow_clear">时尚斜刘海长直发梨花头</div>
+                    </li>
+                    <{/foreach}>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <!--内容end--> 
+    </div>
+</section>
+<{if !$request.IN_APP_CLIENT}>
+<{include file="block/sfooter.html"}>
+<{else}>
+<style type="text/css">.page_center_box{bottom:0;}</style>
+<{/if}>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//轮播js结束
+    });
+</script>

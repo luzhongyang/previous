@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+</head>
+
+<body><div style='margin:0 auto;display:none;'>
+        <img src='<{$pager.img}>/<{$CONFIG.site.logo}>' />
+    </div>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a></i>
+    <div class="title">
+    	提交订单
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="order_confirm_infor mb10">
+    	<div class="ico fl"></div>
+        <div class="wz">
+        	<p class="bt">尤哥 15000000000</p>
+            <p>潜山路496号新景花园16栋804室 </p>
+        </div>
+    </div>
+	
+	<div class="order_details_nr">
+        <ul class="form_list_box">
+            <li class="list last waimaiTime">
+            	<div class="fl"><p class="">选择预约时间</p></div>
+                <div class="fr"><p class="maincl">2016-4-16 12:00<em class="linkIco"></em></p></div>
+            </li>
+            
+            <li class="list">
+            	<div class="fl"><p class="">美发-短发</p></div>
+                <div class="fr"><p class="black9"><span class="maincl">￥<big>30</big></span>起</p></div>
+            </li>
+            <li class="list">
+            	<div class="fl"><p class="">美发-短发</p></div>
+                <div class="fr"><p class="black9"><span class="maincl">￥<big>30</big></span>起</p></div>
+            </li>
+            <li class="list">
+            	<div class="fl"><p class="">美发-短发</p></div>
+                <div class="fr"><p class="black9"><span class="maincl">￥<big>30</big></span>起</p></div>
+            </li>
+            <li class="list">
+            	<div class="fl"><p class="">在线支付红包抵扣</p></div>
+                <div class="fr"><p class="pointcl1">10元<em class="linkIco"></em></p></div>
+            </li>
+            <li class="list last">
+            	<div class="fl">合计</div>
+                <div class="fr"><p class="maincl total">50元</p></div>
+            </li>
+        </ul>
+    </div>
+</section>
+<footer>
+    <div class="ord_tousu">
+		<p class="fl pad_t10">支付：<span class="maincl"><big>50</big>元</span></p>
+		<a href="#" class="fr pub_btn">提交</a></div>
+</footer>
+<style>
+.waimaiTime_mask ul li{ display:block; padding:0 0.1rem; line-height:0.34rem; font-size:0.14rem; color:#999;}
+</style>
+<div class="mask_box">
+    <div class="maskOne waimaiTime_mask">
+        <div class="title">选择送达时间</div>
+        <div class="cont">
+            <ul>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+                <li>10:00-10:15</li>
+            </ul>
+        </div>
+    </div>
+	<div class="mask_bg"></div>
+</div>
+<script>
+$(document).ready(function() {
+	$(".waimaiTime").click(function(){
+		$(".waimaiTime_mask").show();
+		$(".waimaiTime_mask").parent().find(".mask_bg").show();
+	});
+	$(".waimaiTime_mask").find("li").click(function(){
+		$(".waimaiTime_mask").hide();
+		$(".waimaiTime_mask").parent().find(".mask_bg").hide();
+	});
+});
+</script>
+</body>
+</html>

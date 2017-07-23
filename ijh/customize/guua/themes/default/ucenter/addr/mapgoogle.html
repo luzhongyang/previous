@@ -1,0 +1,291 @@
+<{assign var='tpl_title' value='收货地址-定位'}>
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #map {
+                height: 100%;
+            }
+            .controls {
+              margin-top: 10px;
+              border: 1px solid transparent;
+              border-radius: 2px 0 0 2px;
+              box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              height: 32px;
+              width: 100%;
+              outline: none;
+              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            #pac-input {
+              background-color: #fff;
+              font-family: Roboto;
+              font-size: 15px;
+              font-weight: 300;
+              margin-left: 0px;
+              padding: 0 11px 0 13px;
+              text-overflow: ellipsis;
+              width: 2.5rem;
+              float: left;
+            }
+
+            #pac-input:focus {
+              border-color: #4d90fe;
+            }
+
+            .pac-container {
+              font-family: Roboto;
+            }
+
+            #type-selector {
+              color: #fff;
+              background-color: #4d90fe;
+              padding: 5px 11px 0px 11px;
+            }
+
+            #type-selector label {
+              font-family: Roboto;
+              font-size: 13px;
+              font-weight: 300;
+            }
+        </style>
+        <style>
+            #target {
+              width: 345px;
+            }
+        </style>
+    <link rel="stylesheet" type="text/css" href="%THEME%/static/css/pub_app.css"/>
+    <link rel="stylesheet" type="text/css" href="%THEME%/static/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="%THEME%/static/css/pullToRefresh.css"/> 
+    <link rel="stylesheet" type="text/css" href="%THEME%/static/css/append.css"/>
+    <link rel="stylesheet" type="text/css" href="%THEME%/static/css/mobiscroll.custom-2.6.2.min.css"/>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<{$pager.res}>/script/fastclick.js" type="text/javascript" charset="utf-8"></script>
+    <script src="%THEME%/static/js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+<body>
+<header>
+    <i class="left"><a href="" class="gobackIco"></a></i>
+</header>
+
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+<div style="width:100%;height:3.5rem;margin-top:0.5rem;position:fixed; z-index: 100;"><div id="map"></div></div>
+<div class="page_center_box orderAddr_page" style="top:4rem;"><div><ul id="near_place"></ul></div></div>
+
+<script>
+var map = null;
+var latlng = null;
+var container = document.getElementById("map");
+var central = document.createElement("div");
+
+central.style.left = "50%";
+central.style.marginLeft="-18px";
+central.style.top="50%";
+central.style.marginTop="-48px";
+central.style.position="relative";
+central.style.width="36px";
+central.style.height="36px";
+central.style.zIndex="100000";
+central.innerHTML ='';
+central.innerHTML ='<img src="%THEME%/static/images/coordinate@2x.png" />';
+
+// 点击搜索结果跳到新地点
+function getPlace(service, map) {
+    // 创建搜索框并将其链接到UI 
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    // 设置搜索框对当前地图的结果
+    map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds());
+    });
+
+    var markers = [];
+    // 当用户选择一个搜索结果时，触发监听事件
+    searchBox.addListener('places_changed', function() {
+        var places = searchBox.getPlaces();
+        if (places.length == 0) {
+          return;
+        }
+
+        // 清除旧的标记
+        markers.forEach(function(marker) {
+          marker.setMap(null);
+        });
+        markers = [];
+
+        // 得到每一个地点的图标，名称和地理位置
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+          /*var icon = {
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25)
+          };
+
+          // 为每个地点做标记
+          markers.push(new google.maps.Marker({
+            map: map,
+            icon: icon,
+            title: place.name,
+            position: place.geometry.location
+          }));*/
+
+          if (place.geometry.viewport) {
+            // 只有具有地理编码
+            bounds.union(place.geometry.viewport);
+          } else {
+            bounds.extend(place.geometry.location);
+          }
+        });
+        map.fitBounds(bounds);
+        nearbyResults(service, map.getCenter());
+    }); 
+}
+
+
+// 获取当前选中的地址
+function placeInfo(obj) {
+    var addr_num = obj.getAttribute('name');
+    var addr_info = obj.getAttribute('addr');
+    var addr_lat = obj.getAttribute('lat');
+    var addr_lng = obj.getAttribute('lng');
+    // 将选中的地址进行本地存储以供其他页面调用
+    if(window.localStorage){   
+        if(localStorage.getItem('title') == '新增地址') {
+            localStorage.setItem('addr_num',addr_num);  
+            localStorage.setItem('addr_info',addr_info);
+            localStorage.setItem('addr_lng',addr_lng);  
+            localStorage.setItem('addr_lat',addr_lat);
+            window.location.href="<{link ctl='ucenter/addr:create'}>";  
+        }else if(localStorage.getItem('title') == '修改地址'){
+            localStorage.setItem('state','on');
+            localStorage.setItem('addr_num',addr_num);  
+            localStorage.setItem('addr_info',addr_info);
+            localStorage.setItem('addr_lng',addr_lng);  
+            localStorage.setItem('addr_lat',addr_lat);
+            window.location.href="<{link ctl='ucenter/addr:edit' args=$location.addr_id}>";  
+        }
+
+        if(localStorage.getItem('title') == 'paotuisongmap') {
+            // 跑腿取货地址
+            localStorage.setItem('q_ptsong_addr_num',addr_num);  
+            localStorage.setItem('q_ptsong_addr_info',addr_info);
+            localStorage.setItem('q_ptsong_addr_lng',addr_lng);  
+            localStorage.setItem('q_ptsong_addr_lat',addr_lat);
+            window.location.href="<{link ctl='paotui/song'}>";  
+        }
+
+        if(localStorage.getItem('title') == 'zd_buy_addr') {
+            // 跑腿帮我买地址
+            localStorage.setItem('ptbuy_addr_num',addr_num);  
+            localStorage.setItem('ptbuy_addr_info',addr_info);
+            localStorage.setItem('ptbuy_addr_lng',addr_lng);  
+            localStorage.setItem('ptbuy_addr_lat',addr_lat);
+            window.location.href="<{link ctl='paotui/buy'}>";  
+        }
+    }else{  
+        alert("浏览器还不支持 web storage 功能");  
+    }                 
+}
+
+
+// 根据当前位置搜索周边地址列表
+function nearbyResults(service, latlng) {
+    var request = {
+        location: latlng,
+        radius: '200',
+        bounds: map.getBounds(),
+        types:["accounting","airport","amusement_park","aquarium","art_gallery","atm","bakery","bank","bar","beauty_salon","bicycle_store","book_store","bowling_alley","bus_station","cafe","campground","car_dealer","car_rental","car_repair","car_wash","casino","cemetery","church","city_hall","clothing_store","convenience_store","courthouse","dentist","department_store","doctor","electrician","electronics_store","embassy","establishment","finance","fire_station","florist","food","funeral_home","furniture_store","gas_station","general_contractor","grocery_or_supermarket","gym","hair_care","hardware_store","health","hindu_temple","home_goods_store","hospital","insurance_agency","laundry","lawyer","library","liquor_store","local_government_office","locksmith","lodging","meal_delivery","meal_takeaway","mosque","movie_rental","movie_theater","moving_company","museum","night_club","painter","park","parking","pet_store","pharmacy","physiotherapist","place_of_worship","plumber","police","post_office","real_estate_agency","restaurant","roofing_contractor","rv_park","school","shoe_store","shopping_mall","spa","stadium","storage","subway_station","synagogue","taxi_stand","train_station","travel_agency","university","veterinary_care","zoo"]
+    };
+    service.nearbySearch(request, function(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            var place = null; var str = []; var tip = null; var black = null; var mainc1 = null;
+            for (var i = 0; i < results.length; i++) {
+                if(i == 0) {
+                    tip = '[current]';
+                    black = 'black3';
+                    mainc1 = 'maincl';
+                }else {
+                    tip = '';
+                    black = 'black9';
+                    mainc1 = 'black3';
+                }
+                place = results[i];
+                str.push("<li onclick=\"placeInfo(this);\" name='"+place.name+"' addr='"+place.vicinity+"' lat='"+place.geometry.location.lat()+"' lng='"+place.geometry.location.lng()+"' class='orderAddr_map_list'><div class='fl ico'></div><div class='wz'><p class='"+mainc1+"'>" + tip + place.name + "</p><p class='"+black+"'>" + place.vicinity + "</p></div></li>");
+            }  
+            document.getElementById("near_place").innerHTML = str;  
+        }
+    });
+}
+
+// 获取当前地理位置
+function initAutocomplete(callback) {
+    callback = callback || function(ret){};
+    map = new google.maps.Map(container);
+    var service = new google.maps.places.PlacesService(map);
+    map.setZoom(15);
+    map.setCenter(new google.maps.LatLng(41.902481, 12.535685999999941));
+    // HTML5 geolocation.
+    if(navigator.geolocation){ 
+        navigator.geolocation.getCurrentPosition(function(position){
+            latlng = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setZoom(15);
+            map.setCenter(latlng);
+            getPlace(service, map);
+            // 根据当前位置搜索附近POI点
+            nearbyResults(service, latlng);
+        },function(error){
+            var error_msg = "";
+            switch (error.code){
+                case error.PERMISSION_DENIED:
+                    error_msg = 'User denied the request for Geolocation.';
+                    break; 
+                case error.POSITION_UNAVAILABLE:
+                    error_msg = 'Location information is unavailable.';
+                    break; 
+                case error.TIMEOUT:
+                    error_msg = 'The request to get user location timed out.';
+                    break; 
+                case error.UNKNOWN_ERROR:
+                    error_msg = 'An unknown error occurred.';
+                    break;
+            }
+            callback({"error":error.code, "message":error_msg});
+        },{enableHighAccuracy:true});
+    }else{
+        callback({"error":-1, "message":'Geolocation is not supported by this browser.'});
+    }
+    
+    // 地图拖拽事件
+    map.addListener("dragend",function(e){
+        map.setCenter(map.getCenter());
+        nearbyResults(service, map.getCenter());
+    });
+
+    // 地图加载完成时，显示中心点标记图片
+    map.addListener("tilesloaded",function(e){ 
+        container.appendChild(central); 
+        map.setCenter(map.getCenter());
+    });
+}
+
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpffjC9Wbc5sT8B2KBg6bx1382rjo7QbY&signed_in=true&language=it&libraries=places&callback=initAutocomplete"
+         async defer></script>
+  </body>
+</html>

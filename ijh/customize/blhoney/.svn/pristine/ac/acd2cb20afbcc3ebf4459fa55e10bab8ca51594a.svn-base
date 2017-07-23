@@ -1,0 +1,33 @@
+<{include file="biz/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li class="on"><a href="<{link ctl='biz/shop/pic'}>">轮播设置</a></li>
+    </ul>
+    <span class="r"><a href="<{link ctl='biz/shop:createpic'}>" class="btn btn-success">添加轮播</a></span>
+</div>
+<div class="ucenter_c">
+    <table cellspacing="0" cellpadding="0" class="table">
+    <tr>  
+        <th class="w-30">图片ID</th>
+        <th class="w-80">图片</th>
+        <th class="w-50">创建时间</th>
+        <th class="w-150">操作</th>
+    </tr>
+    <{foreach $pics as $v}>
+    <tr>
+        <td><{$v.pic_id}></td>
+        <td><img src="<{$pager.img}>/<{$v.photo}>" class="wh-50" /></td>
+        <td><{$v.dateline|format:'Y-m-d H:i:s'}></td>   
+        <td>
+            <a href="<{link ctl='biz/shop/editpic' args=$v.pic_id}>" class="btn btn-success">修改</a>&nbsp;&nbsp;
+            <a href="<{link ctl='biz/shop/delpic' args=$v.pic_id}>" mini-act="confirm:确认要删除该轮播吗?" class="btn btn-success">删除</a>
+        </td>
+    </tr>     
+    <{foreachelse}>
+    <tr><td colspan="20"><div class="alert alert-info">没有数据</div></td></tr>
+    <{/foreach}>
+    <tr>
+    </table>
+    <div class="page"><{$pager.pagebar}></div>
+</div>
+<{include file="biz/block/footer.html"}>

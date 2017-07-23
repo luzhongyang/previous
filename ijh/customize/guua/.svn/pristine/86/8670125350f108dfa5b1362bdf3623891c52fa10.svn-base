@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>积分商城</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a></i>
+    <div class="title">
+    	积分商城
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="banner">
+        <div class="flexslider">  
+            <ul class="slides">  
+                <li><img src="images/banner3.png" width="640" height="198" /></li>
+                <li><img src="images/banner3.png" width="640" height="198" /></li>
+                <li><img src="images/banner3.png" width="640" height="198" /></li>
+            </ul>  
+        </div>
+    </div>
+    <div class="mineIntegral_link_box mb10">
+        <ul>
+            <li class="mineIntegral_link"><a href="#"><em class="ico_1"></em>我的积分</a></li>
+            <li class="mineIntegral_link"><a href="#"><em class="ico_2"></em>兑换记录</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="mineIntegral_menu mb10">
+        <ul>
+            <li class="list">
+            	<i class="ico_1"></i>
+                <p>新品推荐</p>
+            </li>
+            <li class="list">
+            	<i class="ico_2"></i>
+                <p>个护美妆</p>
+            </li>
+            <li class="list">
+            	<i class="ico_3"></i>
+                <p>食品饮料</p>
+            </li>
+            <li class="list">
+            	<i class="ico_4"></i>
+                <p>数码家电</p>
+            </li>
+            <li class="list">
+            	<i class="ico_5"></i>
+                <p>日常家居</p>
+            </li>
+            <li class="list">
+            	<i class="ico_6"></i>
+                <p>服饰鞋帽</p>
+            </li>
+            <li class="list">
+            	<i class="ico_7"></i>
+                <p>健康运动</p>
+            </li>
+            <li class="list">
+            	<i class="ico_8"></i>
+                <p>全部</p>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="mineIntegral_list_box">
+    	<ul>
+    	    <li class="mineIntegral_list">
+            	<div class="nr">
+                	<img src="images/banner3.png" width="280" height="200" />
+                    <p class="bt">商品名称</p>
+                    <p class="black9"><span class="pointcl1">600</span>积分<a href="#" class="pub_btn fr">兑换</a></p>
+                </div>
+            </li>
+            <li class="mineIntegral_list">
+            	<div class="nr">
+                	<img src="images/banner3.png" width="280" height="200" />
+                    <p class="bt">商品名称</p>
+                    <p class="black9"><span class="pointcl1">600</span>积分<a href="#" class="pub_btn fr">兑换</a></p>
+                </div>
+            </li>
+            <li class="mineIntegral_list">
+            	<div class="nr">
+                	<img src="images/banner3.png" width="280" height="200" />
+                    <p class="bt">商品名称</p>
+                    <p class="black9"><span class="pointcl1">600</span>积分<a href="#" class="pub_btn fr">兑换</a></p>
+                </div>
+            </li>
+            <li class="mineIntegral_list">
+            	<div class="nr">
+                	<img src="images/banner3.png" width="280" height="200" />
+                    <p class="bt">商品名称</p>
+                    <p class="black9"><span class="pointcl1">600</span>积分<a href="#" class="pub_btn fr">兑换</a></p>
+                </div>
+            </li>
+	    </ul>
+        <div class="clear"></div>
+    </div>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico_1"></i>
+        <p>外卖</p>
+		</a>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico_2"></i>
+        <p>订单</p>
+		</a>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico_3"></i>
+        <p>发现</p>
+		</a>
+    </div>
+    <div class="list">
+       <a href="#">
+        <i class="ico_4"></i>
+        <p>我的</p>
+		</a>
+    </div>
+</footer>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//轮播js结束
+    });
+</script>
+</body>
+</html>

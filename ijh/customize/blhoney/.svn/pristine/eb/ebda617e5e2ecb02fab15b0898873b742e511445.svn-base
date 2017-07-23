@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a></i>
+    <div class="title">
+    	提交订单
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="order_confirm_infor mb10">
+    	<div class="ico fl"></div>
+        <{if empty($maddr)}>
+        <a href="<{link ctl='ucenter/addr/create'}>">
+            <div class="wz">
+                <p class="bt">您还没有设置地址</p>
+                <p>点击立即添加地址</p>
+            </div>
+        </a>
+        <{else}>
+        <a href="<{link ctl='ucenter/addr/index' order=2}>">
+            <div class="wz" id="addr_info">
+                <input type="hidden" id="addr" name="params[addr_id]" value="<{$maddr.addr_id}>"/>
+                <p class="bt"><span class="contact"><{$maddr.contact}></span> <span class="mobile"><{$maddr.mobile}></span></p>
+                <p class="house"><{$maddr.house}></p>
+            </div>
+        </a>
+        <{/if}>
+    </div>
+	<div class="mb10 mall_dianpu_list"></div>
+	<div class="order_details_nr">
+        <ul class="form_list_box">
+            <li class="list last">
+            	<div class="fl">合计</div>
+                <div class="fr"><p class="maincl total" id="total1"><{$total_price}>元</p></div>
+            </li>
+        </ul>
+    </div>
+</section>
+<footer>
+    <div class="ord_tousu">
+		<p class="fl pad_t10">支付：<span class="maincl"><big id="total2"><{$total_price}></big>元</span></p>
+		<a href="javascript:createorder();" class="fr pub_btn">提交</a></div>
+</footer>
+
+<script>
+$(document).ready(function() {
+
+});
+
+if(localStorage['mall_ordersub']) {
+    $('.gobackIco').attr('href', localStorage['mall_ordersub']);
+}
+
+
+
+//初始化购物车
+~function () {
+    window.mall.init();
+    var totalprice = parseFloat(window.mall.totalprice()).toFixed(2);
+    $('#total1').text(totalprice+'元');
+    $('#total2').text(totalprice);
+    getlist();
+}();
+
+// 加号
+function addcart(o) {
+    var data = {}; 
+    data['product_id'] = $(o).attr('pid');
+    data['title'] = encodeURIComponent($(o).attr('title'));
+    data['price'] = $(o).attr('price');
+    data['jifen'] = $(o).attr('jifen');
+    data['sku'] = sku = $(o).attr('sku');
+    data['photo'] = $(o).attr('photo');
+    window.mall.addcart(data);
+    var totalprice = parseFloat(window.mall.totalprice()).toFixed(2);
+    $('#total1').text(totalprice+'元');
+    $('#total2').text(totalprice);
+    getlist();
+}
+
+// 减号
+function dec(o) {
+    if($(o).attr('num') == 1) {
+        return false;
+    }
+    var product_id = $(o).attr('pid');
+    window.mall.dec($(o).attr('pid'));
+    var totalprice = parseFloat(window.mall.totalprice()).toFixed(2);
+    $('#total1').text(totalprice+'元');
+    $('#total2').text(totalprice);
+    getlist();
+}
+
+// 删除单个商品
+function del(o) {
+    // 当购物车长度为1时，通知用户至少选择一个商品
+    var cart_len = getObjLen(window.mall.getcart());
+    var product_id = $(o).attr('pid');
+    window.mall.dec(product_id, 'null');
+    if(cart_len == 1) {
+        setTimeout(function(){
+            window.location.href = "<{link ctl='mall:index'}>";
+        },800);
+    }
+    var totalprice = parseFloat(window.mall.totalprice()).toFixed(2);
+    $('#total1').text(totalprice+'元');
+    $('#total2').text(totalprice);
+    getlist();
+}
+
+
+// 展示购物车商品列表
+function getlist() {
+    var cart = window.mall.getcart();
+    var str = '';
+    for(var pid in cart) {
+        str += '<div class="dianpu_list">';
+        str += '<span class="close" pid="'+pid+'" onClick="del(this);">×</span>';
+        str += '<div class="img fl"><a href="javascript:void(0);"><img src="<{$pager.img}>/'+cart[pid]['photo']+'" width="100" height="100" /></a></div>';
+        str += '<div class="wz">';
+        str += '<h3>'+decodeURIComponent(cart[pid]['title'])+'</h3>';
+        str += '<p class="maincl">￥'+cart[pid]['price']+'<span class="ml10 black9">'+cart[pid]['jifen']+'积分</span></p>';
+        str += '<p class="black9">剩余数量：'+cart[pid]['sku']+'</p>';
+        str += '<div class="num_operate dianpu_num">';
+        str += '<span class="reduce" quantity="-" pid="'+cart[pid]['product_id']+'" num="'+cart[pid]['num']+'" onClick="dec(this);">-</span>';
+        str += '<input type="text" value="'+cart[pid]['num']+'" class="text_box">';
+        str += '<span class="add" quantity="+" pid="'+cart[pid]['product_id']+'" title="'+decodeURIComponent(cart[pid]['title'])+'" price="'+cart[pid]['price']+'" jifen="'+cart[pid]['jifen']+'"  sku="'+cart[pid]['sku']+'"  photo="'+cart[pid]['photo']+'" onClick="addcart(this);">+</span>';
+        str += '</div>';
+        str += '</div>';
+        str += '</div>';   
+    }
+    $('.mall_dianpu_list').html(str);
+}
+
+function createorder() {
+    localStorage['order_pay'] = "<{link ctl='ucenter/mall:orderitems'}>";
+    var addr_id = $('#addr').val();
+    jQuery.ajax({  
+        url: "<{link ctl='mall:create'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"addr_id":addr_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+                return false;
+            }else{
+                // 下单成功清空购物车
+                window.mall.removeby();
+                layer.open({content: ret.message,time: 2});
+                var order_id = ret.data.order_id;
+                var link_pay = "<{link ctl='order/pay' arg0='temp1' arg1='mall'}>";
+                setTimeout(function(){window.location.href = link_pay.replace('temp1', order_id);},2000); 
+            }
+        },error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },
+    });
+}
+
+</script>
+</body>
+</html>

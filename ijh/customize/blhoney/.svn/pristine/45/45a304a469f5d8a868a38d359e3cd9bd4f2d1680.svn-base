@@ -1,0 +1,58 @@
+<{include file="biz/block/header.html"}>
+<div class="ucenter_t">
+	<ul>
+        <li class="on"><a href="<{link ctl='biz/product/spec' args=<{$product_id}>}>">商品规格</a></li>
+	</ul>
+	<span class="r"><a href="javascript:void(0);"  class="btn btn-success jq_add">+新增一行</a></span>
+</div>
+
+<div class="ucenter_c">
+    <form action="<{link ctl='biz/product/spec' args=<{$product_id}>}>" mini-form="ucenter" method="post" ENCTYPE="multipart/form-data">
+        <table cellspacing="0" cellpadding="0" class="table">
+            <tr>
+                <th class="w-50">编号</th>
+                <th class="w-100">名称</th>
+                <th class="w-60">价格</th>
+                <th class="w-60">库存</th>
+                <th class="w-100">图片</th>
+                <th class="w-100">操作</th>
+            </tr>
+            <{foreach $items as $item}>
+            <tr class="jq_tr">
+                <td><input type="text" class="input w-50" name="data1[spec_id][]" value="<{$item.spec_id}>" readonly="readonly"/></td>
+                <td><input type="text" class="input w-100" name="data1[spec_name][]" value="<{$item.spec_name}>"/></td>
+                <td><input type="text" class="input w-60" name="data1[price][]" value="<{$item.price}>" /></td>
+                <td><input type="text" class="input w-60" name="data1[sale_sku][]" value="<{$item.sale_sku}>" /></td>
+                <td>
+                    <input type="text" name="data1[spec_photo][]" class="input w-100" id="file_photo" value="<{$item.spec_photo}>"/>
+                    <input type="file" name="data1[spec_photo][]" class="input w-100" />
+                </td>
+                <td><a href="<{link ctl='biz/product/spec_del' arg0=$item.spec_id arg1=<{$product_id}>}>" mini-act="remove:spec_<{$item.spec_id}>" mini-confirm="确认要删除吗？" class="btn btn-warning">删除</a></td>
+            </tr>            
+            <{foreachelse}>
+            <tr class="nodata"><td colspan="20"><div class="alert alert-info">没有数据</div></td></tr>
+            <{/foreach}>
+        </table>
+        <div><div class="jq_bottom"><input type="submit" class="btn btn-primary jq_save" value="保存数据"/></div></div>
+    </form>
+</div>
+<script>
+$(document).ready(function(){
+    $(".jq_add").click(function(){
+        var html = '<tr class="jq_tr">';
+        html+='<td>New</td>';
+        html+='<td><input type="text" class="input w-100" name="data2[spec_name][]" value="" /></td>';
+        html+='<td><input type="text" class="input w-60" name="data2[price][]" value="" /></td>';
+        html+='<td><input type="text" class="input w-60" name="data2[sale_sku][]" value="" /></td>';
+        html+='<td><input type="text" name="data2[spec_photo][]" class="input w-100" id="file_photo" value=""/><input type="file" name="data2[spec_photo][]" class="input w-100" /></td>';
+        html+='<td><a href="javascript:void(0);" class="btn btn-warning jq_delete">移除</a></td></tr>';
+        $(".table").append(html);
+        $(".nodata").html("");
+    })
+    $(".table").on('click','.jq_delete', function () {
+        $(this).parent().parent().remove();
+    })
+
+})    
+</script>
+<{include file="biz/block/footer.html"}>

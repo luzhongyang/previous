@@ -1,0 +1,155 @@
+<?php
+/**
+ * Copy Right IJH.CC
+ * Each engineer has a duty to keep the code elegant
+ * $Id$
+ */
+if(!defined('__CORE_DIR')){
+    exit("Access Denied");
+}
+class Ctl_Shop_Comment extends Ctl
+{
+
+    public function index($params)
+    {
+        if(!$shop_id = (int)$params['shop_id']){
+            $this->msgbox->add('商家不存在',211);
+        }else if(!$shop = K::M('shop/shop')->detail($shop_id)){
+            $this->msgbox->add('商家不存在',212);
+        }else if(empty($shop['audit'])){
+            $this->msgbox->add('商户审核中',213);
+        }else{
+            $filter['shop_id'] = $shop_id;
+            $page = max((int)$params['page'], 1);
+            $count = K::M('shop/comment')->count($filter);
+            if($comment_list = K::M('shop/comment')->items($filter, null, $page, 10, $count)){
+                $comment_ids = array();
+                foreach ($comment_list as $k=>$val){
+                    $comment_ids[$val['comment_id']] = $val['comment_id'];
+                    $uids[] = $val['uid'];
+                }
+                $photo_list = K::M('shop/photo')->items(array('comment_id'=>$comment_ids));
+                foreach($photo_list as $kk=>$v){
+                    $comment_list[$v['comment_id']]['photos'][] = $v;
+                }
+                foreach ($comment_list as $k=>$val){
+                    $items[] = $this->filter_fields('comment_id,shop_id,uid,order_id,score,score_fuwu,score_kouwei,pei_time,content,reply,reply_time,dateline,photos', $val);
+                }                
+                foreach($items as $k => $v){
+                    $detail = K::M('member/member')->detail($v['uid']);
+                    $items[$k]['nickname'] = $detail['nickname'];
+                    $items[$k]['face'] = $detail['face'];
+                    $items[$k]['pei_time'] = K::M('shop/comment')->timestr($v['pei_time']);
+                }               
+            }else{
+                $items = array();
+            }
+            $this->msgbox->add('success');
+            $this->msgbox->set_data('data', array('items'=>array_values($items),'total_count'=>$count));
+        }
+    }
+
+    // 评价订单
+    public function create($params)
+    {
+        $this->check_login();
+        K::M('system/logs')->log('api.http.upload', $_FILES);
+        if(!$order_id = (int)$params['order_id']){
+            $this->msgbox->add('订单不存在',213);
+        }else if(!$order = K::M('order/order')->detail($order_id)){
+            $this->msgbox->add('订单不存在',213);
+        }else if($order['uid'] != $this->uid){
+            $this->msgbox->add('非法操作',213);
+        }else if($order['status'] < 0){
+            $this->msgbox->add('订单已取消不可评价',213);
+        }else if($order['order_status'] != 8){
+            $this->msgbox->add('订单未完成不可评价',213);
+        }else if($order['comment_status']){
+            $this->msgbox->add('该订单已经评价过了',213);
+        }else if(!$score_fuwu = (int)$params['score_fuwu']){
+            $this->msgbox->add('服务质量评分不能为空',213);
+        }else if(!$score_price= (int)$params['score_price']){
+            $this->msgbox->add('服务价格评分不能为空',213);
+        }else if(!$content = $params['content']){
+            $this->msgbox->add('评论内容不能为空',213);
+        }else{
+            if($score_fuwu>5 || $score_fuwu < 1){
+                $score_fuwu = 3;
+            }
+            if($score_price>5 || $score_price < 1){
+                $score_price = 3;
+            }
+
+            $data = array(
+                'uid'=>$this->uid,
+                'shop_id'=>$order['shop_id'],
+                'order_id'=>$order['order_id'],
+                'content'=>$content,
+                'score_fuwu'=> $score_fuwu,
+                'score_price' => $score_price,
+                'pei_time'=>0
+            );
+            if($comment_id = K::M('shop/comment')->create($data)){
+                if($attachs = $_FILES){
+                    $upload = K::M('magic/upload');
+                    foreach($attachs as $k=>$attach){
+                        if($attach['error'] == UPLOAD_ERR_OK){
+                            if($a = $upload->upload($attach, 'photo')){
+                                K::M('shop/photo')->create(array('comment_id'=>$comment_id, 'photo'=>$a['photo']));
+                            }
+                        }
+                    }
+                }
+                if($data['score_fuwu']>3 && $data['score_price']>3 ){
+                    $update_data = array('comments'=>'`comments`+1','praise_num'=>'`praise_num`+1','score_fuwu'=>'`score_fuwu`+'.$data['score_fuwu'],'score_price'=>'`score_price`+'.$data['score_price']);
+                }else{
+                   $update_data = array('comments'=>'`comments`+1','score_fuwu'=>'`score_fuwu`+'.$data['score_fuwu'],'score_price'=>'`score_price`+'.$data['score_price']); 
+                }
+                K::M('shop/shop')->update($order['shop_id'],$update_data,true);
+
+                K::M('order/order')->update($data['order_id'],array('comment_status'=>1,'lasttime'=>__TIME));
+                if($jifen = K::M('system/config')->find(array('k'=>'jifen'))) {
+                    $jifen_v = unserialize(stripslashes($jifen['v']));
+                }
+                $jifen_total = (int)($order['amount']*$jifen_v['jifen_ratio']);
+                K::M('member/member')->update_jifen($this->uid,$jifen_total,'订单(ID:'.$order_id.')评价完成，获得美币', $data['order_id']);
+                $shopmsg = array(
+                    'shop_id'=>$order['shop_id'],
+                    'title'=>sprintf('用户已评价订单(ID:%s)', $order['order_id']),
+                    'content'=>$content,
+                    'is_read'=>0,
+                    'type'=>2,
+                    'order_id'=>$order['order_id'],
+                    'dateline'=>__TIME
+                    );
+                K::M('shop/msg')->create($shopmsg);
+                $shop = K::M('shop/shop')->detail($order['shop_id']);
+                // 综合评分 小于等于5
+                $total_score = round(($shop['score_fuwu']+$shop['score_price'])/2);
+                K::M('shop/shop')->update($order['shop_id'],array('score'=>$total_score));
+                $this->msgbox->add('success');
+            }else{
+                $this->msgbox->add('评价订单失败',216);
+            }
+        }
+    }
+
+    public function detail($params)
+    {
+        if(!$comment_id = (int)$params['comment_id']){
+            $this->msgbox->add('评论不存在',211);
+        }else if(!$detail = K::M('shop/comment')->detail($comment_id)){
+            $this->msgbox->add('评论不存在', 212);
+        }else if(!$shop = K::M('shop/shop')->detail($detail['shop_id'])){
+            $this->msgbox->add('商家不存在', 213);
+        }else{
+            if(!$photos = K::M('shop/photo')->items(array('comment_id'=>$comment_id))){
+                $photos = array();
+            }
+            $detail['photos'] = array_values($photos);
+            $this->msgbox->add('success');
+            $this->msgbox->set_data('data', $detail);
+        }
+    }
+
+}

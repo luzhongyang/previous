@@ -1,0 +1,9 @@
+<!doctype html>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+<body>
+<div style='margin:0 auto;display:none;'>
+	<img src='你的图片链接' />
+</div>

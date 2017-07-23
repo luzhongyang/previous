@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>订单添加备注</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a></i>
+    <div class="title">
+    	添加备注
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="addNotes">
+    	<div class="int_box_border"><textarea placeholder="输入您想交待的话吧"></textarea></div>
+        <div class="tag"><a href="#">30分钟内到达</a> <a class="on" href="#">口味要清淡的</a> <a href="#">少放辣的</a></div>
+    </div>
+    <div class="long_btn_box">
+        <a class="long_btn">确定</a>
+    </div>
+</section>
+</body>
+</html>

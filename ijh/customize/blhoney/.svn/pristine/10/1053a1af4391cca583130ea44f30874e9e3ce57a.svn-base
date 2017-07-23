@@ -1,0 +1,172 @@
+<?php
+/**
+ * Copy Right IJH.CC
+ * Each engineer has a duty to keep the code elegant
+ * $Id$
+ * check view code by shzhrui 
+ */
+if(!defined('__CORE_DIR')){
+    exit("Access Denied");
+}
+class Ctl_Shop extends Ctl
+{
+
+    protected $_allow_fields = 'shop_id,city_id,city_name,d,youhui,orders,cate_title,title,cate_id,phone,logo,lat,lng,addr,score,score_fuwu,score_kouwei,pei_time,comments,praise_num,min_amount,first_amount,pei_amount,freight,pei_type,yy_status,yy_stime,yy_ltime,is_new,online_pay,info,orders,youhui,youhui_title,order_youhui';
+
+    public function index($params)
+    {
+        $this->items($params);
+    }
+    
+    public function items($params)
+    { 
+        //status 0:未使用,1:已使用;
+       $filter = $orderby = $items = $lnglat = array();
+       //分类筛选
+        if($cate_id = (int)$params['cate_id']){
+            if($ids = K::M('shop/cate')->children_ids($cate_id)){
+                $cate_ids = explode(',', $ids);
+            }
+            $cate_ids[] = $cate_id;
+            $filter['cate_id'] = $cate_ids;
+        }     
+        $u_lng = $params['lng'];        
+        $u_lat = $params['lat'];        
+        if(!$u_lng || !$u_lat){
+            $this->msgbox->add(L('经纬度不正确'),211);
+        }else{
+            // 排序
+            if(isset($params['order'])){
+                if($params['order'] == '') {           // 智能排序默认dateline
+                     $orderby['dateline'] = 'desc';
+                }else if($params['order'] == 'time') { // 送餐速度最快
+                     $orderby['pei_time'] = 'asc';
+                }else if($params['order'] == 'juli') { // 距离最近                    
+
+                }else if($params['order'] == 'sales') { // 销量最高
+                    $orderby['orders'] = 'desc';
+                }else if($params['order'] == 'score') { // 评价最好
+                    $orderby['score'] = 'desc';
+                }else if($params['order'] == 'price') { // 起送价最低
+                    $orderby['min_amount'] = 'asc';
+                }
+             }
+
+            // 筛选
+            if($params['is_new']) { //是否新店
+                $filter['is_new'] = 1;
+            }
+            if ($params['online_pay']) { // 是否支持在线支付
+                $filter['online_pay'] = 1;
+            }
+            if($params['youhui_first']) {  // 首单优惠
+                $filter['first_amount'] = '>:0';
+            }
+            if($params['youhui_order']) {  // 下单立减
+                $filter['youhui'] = "<>:''";
+            }
+            if(in_array((int)$params['pei_type'], array(1,2))) {          // 配送类型
+                $filter['pei_type'] = $params['pei_type'];
+            }
+            if($title = $params['title']){
+                $filter['title'] = "LIKE:%".$title."%";
+            }
+            
+            //使用此函数计算得到结果后，带入sql查询。
+            $squares = K::M('helper/round')->returnSquarePoint($u_lng, $u_lat);
+            $filter['lat'] = $squares['left-bottom']['lat'].'~'.$squares['right-top']['lat'];
+            $filter['lng'] = $squares['left-bottom']['lng'].'~'.$squares['right-top']['lng'];
+            /*
+            if($city_id){
+                $filter['city_id'] = $city_id;   //城市筛选
+            }
+            */
+            $page = max((int)$params['page'], 1);
+            $filter['audit'] = 1;
+            $filter['closed'] = 0;
+            //最多返回到第100条
+            if(($page <= 10) && $shop_list = K::M('shop/shop')->items($filter, $orderby, 1, 500, $count)){
+                foreach($shop_list as $k=>$val) {
+                    $val = $this->filter_fields($this->_allow_fields, $val);                
+                    $val['juli'] = K::M('helper/round')->getdistances($val['lng'], $val['lat'], $u_lng, $u_lat);  //距离
+                    $val['collect'] = 0;
+                    $shop_list[$k] = $val;
+                }
+                if($params['order'] == 'juli'){
+                    uasort($shop_list, array($this, 'juli_order'));
+                }
+                $items = array_slice($shop_list, ($page-1)*10, 10, true);
+                //查出我的关注商家ID列表
+                if($this->uid && $items){
+                    $shop_ids = array();
+                    foreach($items as $k=>$v){
+                        $shop_ids[$v['shop_id']] = $v['shop_id'];
+                    }
+                    if($collect_list = K::M('shop/collect')->items(array('uid'=>$this->uid,'shop_id'=>$shop_ids))){
+                        foreach($collect_list as $k=>$v){
+                            if($items[$v['shop_id']]){
+                                $items[$v['shop_id']]['collect'] = 1;
+                            }
+                        }
+                    }
+                }
+            }else {
+                $items = array();
+            }
+            
+            $this->msgbox->add('success');
+            $this->msgbox->set_data('data', array('items'=>array_values($items), 'total_count'=>$count));  
+        }
+    }
+    
+    protected function juli_order($a, $b)
+    {
+        if ($a['juli'] == $b['juli']) {
+            return 0;
+        }
+        return ($a['juli'] < $b['juli']) ? -1 : 1;
+    }
+
+    public function cate($params)
+    {
+        $tree = array();
+        if($items = K::M('shop/cate')->fetch_all()){
+            foreach($items as $k=>$v){
+                if($v['parent_id']){
+                    $tree[$v['parent_id']]['childrens'][] = $v;
+                }else{
+                    $v['childrens'] = array();
+                    $tree[$v['cate_id']] = array_merge((array)$items[$v['cate_id']], $v);
+                }
+            }
+            foreach($tree as $k=>$v){
+                if($v['childrens']){
+                    $a = $items[$k];
+                    $a['title'] = '全部'.$a['title'];
+                    $v['childrens'] = array_merge(array($a), $v['childrens']);
+                    $tree[$k] = $v;
+                }
+            }
+        }  
+        $this->msgbox->set_data('data', array('items'=>array_values($tree),'mall_isnew'=>1));
+    }
+
+    public function detail($params)
+    {
+        if(!$shop_id = (int)$params['shop_id']){
+            $this->msgbox->add(L('商户不存在'), 211);
+        }else if(!$detail = K::M('shop/shop')->detail($shop_id)){
+            $this->msgbox->add(L('商户不存在或已被删除'),212);
+        }else if(empty($detail['audit'])){
+            $this->msgbox->add(L('商户审核中不可下单'),212);
+        }else{
+            $detail = $this->filter_fields($this->_allow_fields, $detail);
+            $detail['collect'] = 0;
+            if($this->uid && K::M('shop/collect')->count(array('uid'=>$this->uid,'shop_id'=>$detail['shop_id']))){
+                $detail['collect'] = 1;
+            }     
+            $this->msgbox->add('success');
+            $this->msgbox->set_data('data', array('detail'=>$detail));
+        }
+    }
+ }
