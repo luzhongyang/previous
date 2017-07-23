@@ -1,0 +1,53 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="cashier/staff:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?cashier/staff-create.html" mini-form="staff-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th><span class="red">*</span>商户：</th>
+	<td>
+		<select name="data[shop_id]">
+			<{foreach $shops as $v}>
+				<option value="<{$v.shop_id}>"selected="selected"><{$v.title}></option>
+			<{/foreach}>
+		</select>
+		
+		<!-- <input type="text" name="data[shop_id]" value="<{$detail.shop_id|default:''}>" class="input w-100"/>
+			 -->
+	</td>
+</tr>
+<tr>
+	<th><span class="red">*</span>店主：</th>
+	<td>
+		<label><input type="radio" name="data[is_owner]" <{if $detail.is_owner}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[is_owner]" <{if isset($detail.is_owner) && empty($detail.is_owner)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+<tr><th><span class="red">*</span>姓名：</th><td><input type="text" name="data[name]" value="<{$detail.name|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>手机：</th><td><input type="text" name="data[mobile]" value="<{$detail.mobile|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>密码：</th><td><input type="text" name="data[passwd]" value="<{$detail.passwd|default:''}>" class="input w-300"/></td></tr>
+<!-- <tr><th>当班订单量：</th><td><input type="text" name="data[day_orders]" value="<{$detail.day_orders|default:''}>" class="input w-100"/></td></tr>
+<tr><th>当班金额：</th><td><input type="text" name="data[day_cash]" value="<{$detail.day_cash|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>当班现金：</th><td><input type="text" name="data[day_money]" value="<{$detail.day_money|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>当班支付宝收款：</th><td><input type="text" name="data[day_alipay]" value="<{$detail.day_alipay|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>当班微信收款：</th><td><input type="text" name="data[day_wxpay]" value="<{$detail.day_wxpay|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>当班退款：</th><td><input type="text" name="data[day_refund]" value="<{$detail.day_refund|default:'0.00'}>" class="input w-100"/></td></tr> -->
+<tr>
+	<th>审核：</th>
+	<td>
+		<label><input type="radio" name="data[audit]" checked="checked" value="1"/>发布</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[audit]" value="0"/>待审</label>
+	</td>
+</tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

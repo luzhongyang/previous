@@ -1,0 +1,62 @@
+<{include file="merchant:block/header.html"}>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加优惠券</h5>
+            </div>
+            <div class="ibox-content">
+
+                <form action="<{link ctl='merchant/shop/coupon:create'}>" mini-form="merchant" method="post" ENCTYPE="multipart/form-data" role="form" class="form-horizontal m-t" >
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">订单金额：</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="data[order_amount]" value="<{$detail.order_amount}>" class="form-control" placeholder="请输入订单金额">
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">优惠金额：</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="data[coupon_amount]" value="<{$detail.coupon_amount}>" class="form-control" placeholder="请输入优惠金额">
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">开始时间：</label>
+                        <div class="col-sm-4">
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="data[stime]" id="stime" value="" class="form-control" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">结束时间：</label>
+                        <div class="col-sm-4">
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="data[ltime]" id="ltime" value="" class="form-control" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">库存：</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="data[sku]" value="<{$detail.sku}>" class="form-control" placeholder="请输入库存">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group draggable">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit">立即创建</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<{link ctl='merchant/shop/coupon'}>" class="btn btn-default" type="submit">返回</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>

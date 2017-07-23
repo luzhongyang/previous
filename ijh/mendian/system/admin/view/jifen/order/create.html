@@ -1,0 +1,32 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="jifen/order:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?jifen/order-create.html" mini-form="order-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>商户：</th><td><input type="text" name="data[shop_id]" value="<{$detail.shop_id|default:''}>" class="input w-100"/></td></tr>
+<tr><th>会员：</th><td><input type="text" name="data[uid]" value="<{$detail.uid|default:''}>" class="input w-100"/></td></tr>
+<tr><th>商户ID：</th><td><input type="text" name="data[product_id]" value="<{$detail.product_id|default:''}>" class="input w-100"/></td></tr>
+<tr><th>商户名：</th><td><input type="text" name="data[product_title]" value="<{$detail.product_title|default:''}>" class="input w-300"/></td></tr>
+<tr><th>兑换数量：</th><td><input type="text" name="data[product_number]" value="<{$detail.product_number|default:''}>" class="input w-100"/></td></tr>
+<tr><th>商品积分：</th><td><input type="text" name="data[product_jifen]" value="<{$detail.product_jifen|default:''}>" class="input w-100"/></td></tr>
+<tr><th>总积分：</th><td><input type="text" name="data[total_jifen]" value="<{$detail.total_jifen|default:''}>" class="input w-100"/></td></tr>
+<tr>
+	<th>状态：</th>
+	<td>
+		<label><input type="radio" name="data[order_status]" <{if $detail.order_status}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[order_status]" <{if isset($detail.order_status) && empty($detail.order_status)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

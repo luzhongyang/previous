@@ -1,0 +1,108 @@
+<{include file="merchant:block/header.html"}>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class=""><a  href="<{link ctl='merchant/weixin/index:welcome'}>" >单次关注</a></li>
+                    <li class="active"><a  href="<{link ctl='merchant/weixin/index:auto'}>" >自动回复</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/weixin/keyword:index'}>" >关键字回复</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/weixin/menu:index'}>" >自定义菜单</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <p class="font-bold  alert alert-success m-b-sm" style="display: block;">
+                                <i class="fa fa-info-circle" style="font-size: 18px;"></i>  即不管用户给您微信公众号发送什么信息，公众号都会自动按照您设定的“展现类型”回复用户。
+                            </p>
+                            <form action="<{link ctl='merchant/weixin/index:auto'}>" method="post" mini-form="auto" class="form-horizontal" ENCTYPE="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">公众号：<br/></label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <p class="form-control-static"><{$weixin.wx_appid}>(<{$weixin.nick_name}>)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">回复类型：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <div class="radio radio-success radio-inline">
+                                                <input type="radio" id="type_1" name="data[type]" <{if empty($auto)||$auto.type == 1}>checked="checked"<{/if}> value="1" />
+                                                <label for="type_1">文本回复</label>
+                                            </div>
+                                            <div class="radio radio-inline">
+                                                <input type="radio" id="type_2" name="data[type]" <{if $auto.type == 2}>checked="checked"<{/if}> value="2" />
+                                                <label for="type_2">图文回复</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group" wxtype="1" <{if $auto&&$auto.type == 2}>style="display:none;"<{/if}>>
+                                    <label class="col-sm-2 control-label">回复内容：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <textarea name="data[content]"  class="form-control" style="height: 150px"><{$auto.content}></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" wxtype="2" <{if empty($auto)||$auto.type != 2}>style="display:none;"<{/if}>>
+                                    <label class="col-sm-2 control-label">回复图文：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <div class="weixin-preview" style="float:left;<{if !$reply}>display:none;<{/if}>">
+                                                <div class="weixin-box">
+                                                    <p class="weixin-title" id="weixin_reply_title"><{$reply.title}></p>
+                                                    <div class="weixin-cover"><img class="weixin-cover-pic" id="weixin_reply_photo" src="<{$pager.img}>/<{$reply.photo}>"></div>
+                                                </div>
+                                                <input type="hidden" name="data[reply_id]" value="<{$welcome.reply_id}>" id="weixin_reply_id"/>
+                                            </div>
+                                            <a href="<{link ctl='merchant/weixin/reply:dialog'}>" id="weixin_reply_btn" class="btn btn-primary" title="选择微信素材">选择微信素材</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">&nbsp;</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-primary" type="submit">保存数据</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<{include file="merchant:block/footer.html"}>
+
+<script  type="text/javascript" charset="utf-8" async defer>
+
+(function(K, $){
+
+    $("input[name='data[type]']").click(function(){
+        $("div[wxtype]").hide();
+        $("div[wxtype='"+$(this).val()+"']").show();
+    });
+
+    $("#weixin_reply_btn").click(function(e){
+        e.stopPropagation(); e.preventDefault();
+        var link = $(this).attr("action") || $(this).attr("href");
+        Widget.Dialog.Select(link, 'N', function(ret){
+            $("#weixin_reply_id").val(ret[0]);
+            $("#weixin_reply_title").html(ret[1].title);
+            $("#weixin_reply_photo").attr("src", "<{$pager.img}>/"+ret[1].photo);
+            $(".weixin-preview").show();
+        }, {title:"选择微信素材",width:720});
+    });
+})(window.KT, window.jQuery);
+</script>

@@ -1,0 +1,47 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="tuan/Tuan:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>商户ID：</th><td><{$detail.shop_id}></td><th>商家名称：</th><td><{$detail.shop.title}></td></tr>
+<tr><th>抹零状态：</th><td><{if $detail.is_moling == 0}>关闭<{else}>开启<{/if}></td><th>抹零详情：</th><td><{$moling[$detail.moling]}></td></tr>
+<tr><th>优惠状态：</th><td><{if $detail.is_youhui == 0}>关闭<{else}>开启<{/if}></td><th>认证状态：</th><td><{if $detail.verify_name == 0}>未认证<{else}>已认证<{/if}></td></tr>
+<tr><th>充值套餐：</th>
+	<td><{foreach $packages as $k=>$package}>
+		<span class="red">套餐<{$k+1}>:</span>充<{$package[0]}>元送<{$package[1]}>元<{$package[2]}>积分;  
+		<{/foreach}></td>
+	<th>优惠立减：</th><td><{$detail.youhui}></td></tr>
+<tr><th>签到奖励积分：</th><td><{$detail.sign_jifen}></td><th>每消费一元奖励积分：</th><td><{$detail.xf_jifen}></td></tr>
+<tr><th>微信总收款：</th><td><{$detail.total_wxpay}>元</td><th>现金总收款：</th><td><{$detail.total_cash}>元</td></tr>
+<tr><th>余额总消费：</th><td><{$detail.total_money}></td>
+	<th>折扣比例：</th><td><b>
+	<{foreach $discount as $k=>$v}>
+	<span class="red"><{$v}></span>折 ,  
+	<{/foreach}></b></td></tr>
+<tr><th>支付宝总收款：</th><td><{$detail.total_alipay}>元</td><th>总充值：</th><td><{$detail.total_chongzhi}>元</td></tr>
+<tr><th>总退款：</th><td><b class="green"><{$detail.total_refund}>元</b></td>
+	<th>创建时间：</th><td><b class="green"><{$detail.dateline|format}></b></td>
+</tr>
+
+	<form action="?cashier/cashier-doaudit-<{$detail.shop_id}>.html" mini-form="cahiser-form" method="post">
+		<tr>
+			<th>审核：</th><td>
+			<label><input type="radio" name="data[audit]" <{if $detail.verify_name==1}>checked="checked"<{/if}>  value="1"/>通过</label>&nbsp;&nbsp;
+			<label><input type="radio" name="data[audit]" <{if $detail.verify_name==0}>checked="checked"<{/if}> value="0"/>待审</label>
+		</td>
+		<tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" id="tijiao" value="提交数据" /></td></tr>
+		</tr>
+
+	</form>
+
+
+</table></div>
+
+<{include file="admin:common/footer.html"}>

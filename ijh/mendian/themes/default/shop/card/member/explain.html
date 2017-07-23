@@ -1,0 +1,31 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_cont">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="pub_lists membcardPrivlg">
+                    <{$detail.explain}>
+                </div>
+                <!--内容结束-->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+	$(".membcardPrivlg .pub_list .pub_list_bd").click(function(){
+		if($(this).parent(".pub_list").hasClass("on")){
+			$(".membcardPrivlg .pub_list").removeClass("on");
+			$(this).parent(".pub_list").removeClass("on");
+		}else{
+			$(".membcardPrivlg .pub_list").removeClass("on");
+			$(this).parent(".pub_list").addClass("on");
+		}
+		
+	});
+    
+});
+</script>
+<{include file="shop/card/block/sfooter.html"}>
+<{include file="shop/card/block/footer.html"}>

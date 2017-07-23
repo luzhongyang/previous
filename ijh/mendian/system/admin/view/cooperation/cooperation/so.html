@@ -1,0 +1,25 @@
+<{include file="admin:common/header.html"}>
+<div class="page-data"><form action="?cooperation/cooperation-index.html" id="SO-form" method="post">
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+	<tr><th>姓名：</th><td><input type="text" name="SO[name]" value="" class="input w-100"/></td></tr>
+	<tr><th>所在城市：</th><td><input type="text" name="SO[city_name]" value="" class="input w-200"/></td></tr>
+	<tr><th>QQ号码：</th><td><input type="text" name="SO[qq]" value="" class="input w-200"/></td></tr>
+	<tr>
+		<th>申请时间：</th>
+		<td>
+			<input type="text" name="SO[dateline][0]" value="" class="input w-100" date="dateline" readonly/>~
+			<input type="text" name="SO[dateline][1]" value="" class="input w-100" date="dateline" readonly/>
+		</td>
+	</tr>
+	<tr>
+		<th>审核：</th>
+		<td>
+			<label><input type="radio" name="SO[audit]" checked="checked" value="NULL"/>全部</label>
+			<label><input type="radio" name="SO[audit]" value="0"/>待审核</label>
+			<label><input type="radio" name="SO[audit]" value="1"/>已审核</label>
+		</td>
+	</tr>
+	<tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="搜 索" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

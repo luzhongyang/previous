@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title><{$site.title}></title>
+    <link rel="shortcut icon" href="../../../../../favicon.ico">
+    <link href="%THEME%/biz/static/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="%THEME%/biz/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="%THEME%/biz/static/css/animate.min.css" rel="stylesheet">
+    <link href="%THEME%/biz/static/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link href="%THEME%/biz/static/css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="loginTop">
+    <div class="smallpage">
+        <div class="logo fl"><img src="%THEME%/biz/static/images/logo.png"><span><{$site.title}>商家登录</span></div>
+        <div class="tit fl">欢迎登录</div>
+    </div>
+</div>
+<div class="login_box">
+    <div class="smallpage">
+        <div class="img fl"><img src="%THEME%/biz/static/images/login_img.png"></div>
+        <div class="fr">
+            <div class="login_form_box">
+                <div class="tab_box">
+                    <a href="javascript:;" class="on border_r">账户密码登录</a>
+                    <!--<a href="javascript:;">手机验证码登录</a>-->
+                </div>
+                <div class="cont">
+                    <div class="change_box">
+                        <form id="signupForm" action="<{link ctl='cashier/account:login'}>" method="post">
+                            <div class="int_box form-group mb20">
+                                <div class="ico ico1"></div>
+                                <div class="box"><input type="text" id="username" name="data[mobile]" aria-required="true" aria-invalid="true" class="form-control error" placeholder="手机号"><a href="javascript:;" class="clear_ico"></a></div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="int_box form-group mb20">
+                                <div class="ico ico2"></div>
+                                <div class="box"><input type="password" id="password" name="data[passwd]" aria-required="true" aria-invalid="true" class="form-control error" placeholder="密码"><a href="javascript:;" class="clear_ico"></a></div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="caozuo_box">
+                                <div class="fl"><input type="checkbox" checked name="data[is_auto]">自动登录</div>
+                                <a href="<{link ctl='cashier/password:step_one'}>" class="fr black6">忘记密码</a>
+                            </div>
+                            <input type="submit" value="登 录" class="long_btn">
+                        </form>
+                    </div>
+                   <!-- <div class="change_box none">
+                        <form id="commentForm">
+                            <div class="int_box form-group getyzm_int_box mb20">
+                                <div class="ico ico1"></div>
+                                <div class="box"><input type="text" id="phone" name="phone" minlength="11" required aria-required="true" class="form-control" placeholder="手机号"><a href="javascript:;" class="clear_ico"></a></div>
+                                <div class="getyzm_box"><span>获取验证码</span></div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="int_box form-group mb20">
+                                <div class="ico ico3"></div>
+                                <div class="box"><input type="text" id="yzm" name="yzm" required aria-required="true" class="form-control" placeholder="验证码"><a href="javascript:;" class="clear_ico"></a></div>
+                                <div class="clear"></div>
+                            </div>
+                            <input type="submit" value="登 录" class="long_btn">
+                        </form>
+                    </div>-->
+
+                </div>
+                <div class="foot">
+                    <a href="#" class="fl"><img src="%THEME%/biz/static/images/other_ico1.png"></a>
+                    <a href="#" class="fl"><img src="%THEME%/biz/static/images/other_ico2.png"></a>
+                    <a href="#" class="fr"><i class="ico animated infinite"></i>立即入驻</a>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<{include file='biz/block/footer-one.html'}>
+<script src="%THEME%/biz/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="%THEME%/biz/static/js/bootstrap.min.js?v=3.3.5"></script>
+
+<script src="%THEME%/biz/static/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="%THEME%/biz/static/js/plugins/validate/messages_zh.min.js"></script>
+<script src="%THEME%/biz/static/js/demo/form-validate-demo.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+
+        var input = $(".login_form_box .int_box .box input");
+
+        $(input).focus(function() {
+            $(".login_form_box .int_box .box .clear_ico").hide();
+            $(this).parent().find(".clear_ico").show();
+
+            $(this).parents(".int_box").css("border-color","#00bd9e");
+
+        }).blur(function() {
+            if (input.val() != "") {
+                $(this).parent().find(".clear_ico").show();
+            }else{
+
+                $(this).parent().find(".clear_ico").hide();
+            }
+            $(this).parents(".int_box").css("border-color","");
+        });
+
+        $(".login_form_box .int_box .box .clear_ico").click(function(){
+            $(this).parent().find("input").val("");
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $(".login_form_box .tab_box a").each(function(i){
+            $(this).click(function(){
+                $(this).addClass("on").siblings("a").removeClass("on");
+                $(".login_form_box .cont .change_box").each(function(e){
+                    if(i==e){
+                        $(this).removeClass("none").siblings(".change_box").addClass("none");
+                    }else{
+                        $(this).addClass("none")
+                    }
+                });
+            });
+        });
+    });
+</script>
+</body>
+</html>

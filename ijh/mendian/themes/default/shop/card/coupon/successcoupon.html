@@ -1,0 +1,67 @@
+<{include file="shop/card/block/header.html"}>
+
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_cont couponRecv">
+            <!--内容开始-->
+            <div class="couponRecv_wind">
+                <img class="bg" src="%THEME%/static/images/coupon/card__big_bg@2x.png">
+                <div class="cont">
+                    <img class="cont_bg" src="%THEME%/static/images/coupon/card_text_bg@2x.png">
+                    <div class="recv share">
+                        <{if $user.mobile}>
+                        <P class="text-left black3">已将优惠券放入您 <span class="fontcl2"><{$user.mobile}></span> 的账户</P>
+                        <{/if}>
+                        <p class="price_box fontcl2"><big><small>￥:<{$items.amount}></small></big><{if $items.min_price >0}>[满<{$items.min_price}>抵消<{$items.amount}>]<{else}>[消费即抵]<{/if}> <span class="black9"></span></p>
+                        <p class="black6">使用期限：<{'Y.m.d '|date:$items.stime}> 至 <{'Y.m.d'|date:$items.ltime}></p>
+                        <a href="" class="btn">同步至微信卡包</a>
+                    </div>
+                    <div class="top"><img src="%THEME%/static/images/coupon/card_1@2x.png"></div>
+                    <div class="right"><img src="%THEME%/static/images/coupon/cadr_2@2x.png"></div>
+                    <div class="bottom"><img src="%THEME%/static/images/coupon/card_3@2x.png"></div>
+                    <div class="left"><img src="%THEME%/static/images/coupon/card_4@2x.png"></div>
+                </div>
+            </div>
+
+            <div class="couponRecord_list">
+                <div class="list pub_list linkico " id="urls" data-url="<{link ctl='card/coupon:ablelist'}>">
+                    <div class="img"><img src="<{$wxuserinfo.face}>"/></div>
+                    <div class="pub_list_bd">我领到的优惠券总额</div>
+                    <div class="pub_list_ft"> ￥:<{$items.money}></div>
+                </div>
+            </div>
+
+            <div class="couponRecv_instr">
+                <h3><span>使用说明</span></h3>
+                <P><{$items.intro}></P>
+            </div>
+            <div class="couponRecv_ft">
+                <div class="cont">
+                    <img src="%THEME%/static/images/coupon/logo@2x.png">
+                    <P>江湖科技</P>
+                </div>
+            </div>
+            <!--内容结束-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.onload = function () {
+        $('#urls').on('click',function(){
+            var url =  $('#urls').attr('data-url')
+            window.location.href = url;
+        })
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+<{include file="shop/card/block/footer.html"}>

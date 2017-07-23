@@ -1,0 +1,14 @@
+<{foreach $items as $item}>
+<div class="inform_list">
+    <div class="pub_lists_title text-center"><{$item.dateline|format}></div>
+    <a href="#" class="pub_list">
+        <div class="pub_list_hd">
+            <div class="img"><img src="<{$pager.img}>/<{$shop.logo}>"></div>
+        </div>
+        <div class="pub_list_bd">
+            <h4><{$item.title}></h4>
+            <p><{$item.content}></p>
+        </div>
+    </a>
+</div>
+<{/foreach}>

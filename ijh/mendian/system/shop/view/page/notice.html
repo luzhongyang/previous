@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+        <meta name="format-detection" content="telephone=no,email=no,adress=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-touch-fullscreen" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <title><{if $request.IN_WEIXIN}><{$CONFIG.site.title}><{else}><{$tpl_title|default:$CONFIG.site.title}><{/if}></title>
+        <link rel="stylesheet" type="text/css" href="%THEME%/static/css/mobiscroll.custom-2.6.2.min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="%THEME%/shop/card/static/css/style.css" rel="stylesheet">
+        <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript">
+        <{if $request.IN_WEIXIN}>
+            window.WXJS_CFG = {
+                debug: false,
+                appId: '<{$wxjs_config["appId"]}>',
+                timestamp: '<{$wxjs_config["timestamp"]}>',
+                nonceStr: '<{$wxjs_config["nonceStr"]}>',
+                signature: '<{$wxjs_config["signature"]}>',
+                jsApiList: ['getLocation']
+            };
+            wx.config(WXJS_CFG);
+        <{/if}>
+        window.CFG = {"domain":"<{$CONFIG.site.domain}>","url":"<{$CONFIG.site.siteurl}>", "title":"<{$CONFIG.site.title}>", "res":"<{$pager.res}>", "img":"<{$pager.img}>","C_PREFIX":"KT-"};
+        </script>
+        <script src="<{$pager.res}>/script/layer.m/layer.m.js" type="text/javascript" charset="utf-8"></script>
+        <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> 
+        <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="%THEME%/static/js/kt.js"></script>
+        <script src="%THEME%/static/js/kt.weixin.js?20161124"></script>
+    </head>
+    <body>
+    <{if $request.IN_APP_CLIENT}>
+<style type="text/css">
+    header {
+        display: none;
+    }
+
+    .page_center_box {
+        top: 0;
+    }
+</style>
+<{/if}>
+        <section class="page_center_box">
+            <div class="tipsPage">
+            	<{if $pager.error>0 }>
+                <img src="<{$pager.theme}>/default/biz/static/images/sorryImg.png" class="error">
+                <{else}>
+                <img src="<{$pager.theme}>/default/biz/static/images/cgImg.png" class="error">
+                <{/if}>
+                <h3><{if $pager.error}><span><{else}><span><{/if}><{$pager.message}></span></h3>
+                <{if $pager.timer>0}><p>在 <strong id="notice-timer" style="color:red;"><{$pager.timer}></strong> 秒后跳转到第一个链接地址。<{/if}>
+                    <p>
+            </div>
+        </section>
+<script>
+    var secs = 3; //倒计时的秒数 
+    var URL ; 
+    function Load(url){ 
+        URL = "<{if $pager.link}><{$pager.link}><{else}><{link ctl='index'}><{/if}>";
+        for(var i=secs;i>=0;i--) { 
+            window.setTimeout('doUpdate(' + i + ')', (secs-i) * 1000); 
+        } 
+    } 
+    function doUpdate(num)  { 
+        document.getElementById('notice-timer').innerHTML = num; 
+        if(num == 0) { window.location=URL; } 
+    }
+</script>
+<script language="javascript"> 
+    Load(""); //要跳转到的页面 
+</script> 
+        
+    </body>
+</html>

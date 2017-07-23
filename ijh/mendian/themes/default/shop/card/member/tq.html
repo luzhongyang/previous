@@ -1,0 +1,57 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_cont">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="pub_lists membcardPrivlg">
+                    <div class="pub_lists_title">我亲爱的<span class="maincl">会员</span>，您目前享有以下特权</div>
+                    <{if $detail}>
+                    <div class="pub_list on">
+                    	<div class="pub_list_hd"><img src="%THEME%/shop/card/static/images/card_center_birthday@2x.png"></div>
+                        <div class="pub_list_bd b-b">
+                        	<h4>生日惊喜</h4>
+                        	<P>专属生日礼品：会员当天，可凭会员卡内生日信息，领取您的专属礼品。每位会员一个自然年内只能领取一次</P>
+                            <span class="ico"></span>
+                        </div>
+                    </div>
+                    <div class="pub_list">
+                    	<div class="pub_list_hd"><img src="%THEME%/shop/card/static/images/card_center_vip@2x.png"></div>
+                        <div class="pub_list_bd b-b">
+                        	<h4>会员专享</h4>
+                        	<P>专属生日礼品：会员当天，可凭会员卡内生日信息，领取您的专属礼品。每位会员一个自然年内只能领取一次</P>
+                            <span class="ico"></span>
+                        </div>
+                    </div>
+                    <div class="pub_list">
+                    	<div class="pub_list_hd"><img src="%THEME%/shop/card/static/images/card_center_exchange@2x.png"></div>
+                        <div class="pub_list_bd b-b">
+                        	<h4>积分兑换</h4>
+                        	<P>专属生日礼品：会员当天，可凭会员卡内生日信息，领取您的专属礼品。每位会员一个自然年内只能领取一次</P>
+                            <span class="ico"></span>
+                        </div>
+                    </div>
+                    <{/if}>
+                </div>
+                <!--内容结束-->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+	$(".membcardPrivlg .pub_list .pub_list_bd").click(function(){
+		if($(this).parent(".pub_list").hasClass("on")){
+			$(".membcardPrivlg .pub_list").removeClass("on");
+			$(this).parent(".pub_list").removeClass("on");
+		}else{
+			$(".membcardPrivlg .pub_list").removeClass("on");
+			$(this).parent(".pub_list").addClass("on");
+		}
+		
+	});
+    
+});
+</script>
+<{include file="shop/card/block/sfooter.html"}>
+<{include file="shop/card/block/footer.html"}>

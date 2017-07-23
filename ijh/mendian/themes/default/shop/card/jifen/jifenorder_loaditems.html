@@ -1,0 +1,17 @@
+<{foreach $items as $k => $v}>
+<div class="pub_list">
+    <div class="pub_list_bd">
+        <P><{$v.product_title}></P>
+        <small>数量：<{$v.product_number}></small>
+        <div><small>兑换时间：<{$v.dateline|format}></small></div>
+    </div>
+    <div class="pub_list_ft text-right">
+        <p class="m-b10 fontcl2">
+            <{if $v.order_status == 0}>未领取<{/if}>
+            <{if $v.order_status == 1}>已领取<{/if}>
+            <{if $v.order_status == -1}>已取消<{/if}>
+        </p>
+        <p class="maincl"><i class="ico"></i>-<{$v.product_jifen}></p>
+    </div>
+</div>
+<{/foreach}>

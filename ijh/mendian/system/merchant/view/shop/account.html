@@ -1,0 +1,74 @@
+<{include file="merchant:block/header.html"}>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class=""><a href="<{link ctl='merchant/shop:index'}>">基本资料</a></li>
+                <li class=""><a href="<{link ctl='merchant/shop:passwd'}>">安全设置</a></li>
+                <li class=""><a href="<{link ctl='merchant/shop:mobile'}>">更换手机</a></li>
+                <li class="active"><a href="javascript:;">提现帐号</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="">
+                            <form action="<{link ctl='merchant/shop:account'}>" method="post" class="form-horizontal"
+                                  ENCTYPE="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">开户行：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <select name="data[account_type]" class="form-control m-b">
+                                                <{foreach $bank_list as $v}>
+                                                <option value="<{$v}>"
+                                                <{if $account_info.account_type == $v}>selected<{/if}>><{$v}></option>
+                                                <{/foreach}>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">开户人：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[account_name]"
+                                                   value="<{$account_info.account_name|default:''}>"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">帐号：</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="data[account_number]"
+                                                   value="<{$account_info.account_number|default:''}>"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">&nbsp;</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-sm-4">
+                                            <button class="btn btn-primary" type="submit">保存数据</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+</script>
+<{include file="merchant:block/footer.html"}>

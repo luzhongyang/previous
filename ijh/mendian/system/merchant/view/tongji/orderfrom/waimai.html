@@ -1,0 +1,121 @@
+<{include file="merchant:block/header.html"}>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a  href="<{link ctl='merchant/tongji:w_orderfrom'}>" >外卖</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/tongji:t_orderfrom'}>" >团购</a></li>
+                    <li class=""><a  href="<{link ctl='merchant/tongji:m_orderfrom'}>" >优惠买单</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="ibox-content">
+                                <div class="col-sm-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title"></div>
+                                        <div class="ibox-content">
+                                            <div id="week_orderfrom"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title"></div>
+                                        <div class="ibox-content">
+                                            <div id="month_orderfrom" style="margin-top:20px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<{include file="merchant:block/footer.html"}>
+
+<script type="text/javascript" src="<{$pager.res}>/script/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="<{$pager.res}>/script/highcharts/modules/exporting.js"></script>
+<script type="text/javascript" src="<{$pager.res}>/script/highcharts/modules/no-data-to-display.js"></script>
+
+<script  type="text/javascript" charset="utf-8" async defer>
+$(function () {
+    $('#week_orderfrom').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '近一周订单来源饼状图'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '订单来源',
+            data: [
+                <{foreach $week_data as $v1}>
+                ['<{if $v1.order_from=='www'}>PC网页<{/if}><{if $v1.order_from=='wap'}>手机网页<{/if}><{if $v1.order_from=='android'}>安卓APP<{/if}><{if $v1.order_from=='ios'}>苹果APP<{/if}><{if $v1.order_from=='weixin'}>微信<{/if}>',   <{$v1.nums}>],
+                <{foreachelse}>
+                <{/foreach}>
+            ]
+        }]
+    });
+
+    $('#month_orderfrom').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '近一月订单来源饼状图'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '订单来源',
+            data: [
+                <{foreach $month_data as $v2}>
+                ['<{if $v2.order_from=='www'}>PC网页<{/if}><{if $v2.order_from=='wap'}>手机网页<{/if}><{if $v2.order_from=='android'}>安卓APP<{/if}><{if $v2.order_from=='ios'}>苹果APP<{/if}><{if $v2.order_from=='weixin'}>微信<{/if}>',   <{$v2.nums}>],
+                <{foreachelse}>
+                <{/foreach}>     
+            ]
+        }]
+    });
+});
+</script>

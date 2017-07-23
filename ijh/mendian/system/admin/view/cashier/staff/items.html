@@ -1,0 +1,62 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+	<table width="100%" align="center" cellpadding="0" cellspacing="0" >
+		<tr>
+			<td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+			<th><{$MOD.title}></th>
+			<td align="right"><{link ctl="cashier/staff:create" class="button" title="添加"}>
+<{link ctl="cashier/staff:so" load="mini:搜索内容" width="mini:500" class="button" title="搜索"}></td>
+			<td width="15"></td>
+		</tr>
+	</table>
+</div>
+<div class="page-data">	
+	<form id="items-form">
+    <table width="100%" border="0" cellspacing="0" class="table-data table">
+    <tr><th class="w-100">ID</th>
+<th class="w-50">商户</th>
+<th class="w-50">店主</th>
+<th>名称</th>
+<th>手机</th>
+<th>当班金额</th>
+<th>当班退款</th>
+<th>当班微信收款</th>
+<th>当班现金</th>
+<th>当班支付宝收款</th>
+<th class="w-50">审核</th>
+<th class="w-150">操作</th>
+</tr>
+    <{foreach $items as $item}>
+    <tr>
+<td><label><input type="checkbox" value="<{$item.staff_id}>" name="staff_id[]" CK="PRI"/><{$item.staff_id}><label></td>
+<td><{$shops[$item.shop_id]['title']}>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="red">id:<{$item.shop_id}></span>)</td>
+<td><{if $item.is_owner}><b class="blue">是</b><{else}>否<{/if}></td>
+<td><{$item.name}></td>
+<td><{$item.mobile}></td>
+<td><{$item.day_cash}></td>
+<td><{$item.day_refund}></td>
+<td><{$item.day_wxpay}></td>
+<td><{$item.day_money}></td>
+<td><{$item.day_alipay}></td>
+<td><{if $item.audit}><b class="green">正常<{else}></b><b class="red">待审</b><{/if}></td>
+<td>
+	<{link ctl="cashier/staff:edit" args=$item.staff_id title="修改" class="button"}>
+	<{link ctl="cashier/staff:delete" args=$item.staff_id act="mini:删除" confirm="mini:确定要删除吗？" title="删除" class="button"}></td>
+</tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="text-align tip-notice">没有数据</p></td></tr>
+    <{/foreach}>
+    </table>
+	</form>
+	<div class="page-bar">
+		<table>
+			<tr>
+			<td class="w-100"><label><input type="checkbox" CKA="PRI"/>&nbsp;&nbsp;全选</label></td>
+			<td colspan="10" class="left"><{link ctl="cashier/staff:delete" type="button" submit="mini:#items-form" confirm="mini:确定要批量删除选中的内容吗?" priv="hide" value="批量删除"}>
+<{link ctl="cashier/staff:doaudit" type="button" submit="mini:#items-form" confirm="mini:确定要批量审核选中的内容吗?" priv="hide" value="批量审核"}></td>
+			<td class="page-list"><{$pager.pagebar}></td>
+		</tr>
+		</table>
+	</div>
+</div>
+<{include file="admin:common/footer.html"}>

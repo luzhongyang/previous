@@ -1,0 +1,39 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="card/card:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?card/card-create.html" mini-form="card-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>会员卡号：</th><td><input type="text" name="data[number]" value="<{$detail.number|default:''}>" class="input w-300"/></td></tr>
+<tr><th>商户：</th><td><input type="text" name="data[shop_id]" value="<{$detail.shop_id|default:''}>" class="input w-100"/></td></tr>
+<tr><th>会员：</th><td><input type="text" name="data[uid]" value="<{$detail.uid|default:''}>" class="input w-100"/></td></tr>
+<tr><th>等级：</th><td><input type="text" name="data[grade_id]" value="<{$detail.grade_id|default:''}>" class="input w-100"/></td></tr>
+<tr><th>手机号：</th><td><input type="text" name="data[mobile]" value="<{$detail.mobile|default:''}>" class="input w-300"/></td></tr>
+<tr><th>姓名：</th><td><input type="text" name="data[name]" value="<{$detail.name|default:''}>" class="input w-300"/></td></tr>
+<!-- <tr><th>性别：</th><td><input type="text" name="data[sex]" value="<{$detail.sex|default:''}>" class="input w-100"/></td></tr>
+ -->
+ <tr>
+    <th>性别：</th>
+    <td>
+        <label><input type="radio" name="data[sex]" <{if $detail.sex==0}>checked="checked"<{/if}> value="0"/>未知</label>&nbsp;&nbsp;
+        <label><input type="radio" name="data[sex]" <{if $detail.sex==1}>checked="checked"<{/if}> value="1"/>男</label>&nbsp;&nbsp;
+        <label><input type="radio" name="data[sex]" <{if $detail.sex==2}>checked="checked"<{/if}> value="2"/>女</label>
+    </td>
+</tr>
+<tr><th>年：</th><td><input type="text" name="data[Y]" value="<{$detail.Y|default:'2008'}>" class="input w-100"/></td></tr>
+<tr><th>月：</th><td><input type="text" name="data[M]" value="<{$detail.M|default:'1'}>" class="input w-100"/></td></tr>
+<tr><th>日：</th><td><input type="text" name="data[D]" value="<{$detail.D|default:'1'}>" class="input w-100"/></td></tr>
+<tr><th>余额：</th><td><input type="text" name="data[money]" value="<{$detail.money|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>积分：</th><td><input type="text" name="data[jifen]" value="<{$detail.jifen|default:''}>" class="input w-100"/></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

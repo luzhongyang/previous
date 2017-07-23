@@ -1,0 +1,9 @@
+<{foreach $data.tree as $v}>
+<option value="<{$v.cate_id}>"<{if (is_array($data.value) && in_array($v.cate_id, $data.value)) || $v.cate_id==$data.value}>selected="selected"<{/if}>><{$v.title}></option>
+<{foreach $v.children as $vv}>
+<option value="<{$vv.cate_id}>"<{if (is_array($data.value) && in_array($vv.cate_id, $data.value)) || $vv.cate_id==$data.value}>selected="selected"<{/if}>>&nbsp;&nbsp;├─<{$vv.title}></option>
+<{foreach $vv.children as $vvv}>
+<option value="<{$vvv.cate_id}>"<{if (is_array($data.value) && in_array($vvv.cate_id, $data.value)) || $vvv.cate_id==$data.value}>selected="selected"<{/if}>>&nbsp;&nbsp;&nbsp;&nbsp;├─<{$vvv.title}></option>
+<{/foreach}>
+<{/foreach}>
+<{/foreach}>

@@ -1,0 +1,55 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_footer">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="membcard">
+                	<div class="membcard_info">
+                    	<img src="%THEME%/shop/card/static/images/card_bg@2x.png" class="bg">
+                        <div class="cont clearfix">
+                            <div class="img pull-left"><img src="<{$pager.img}>/<{$shop.logo}>" width="50" height="50"></div>
+                            <div class="wz_box">
+                                <P><{$shop.title}><small class="pull-right">会员卡</small></P>
+                            </div>
+                        </div>
+                        <div class="num">NO.<{$CARD.number}></div>
+                    </div>
+                    <div class="membcard_count clearfix">
+                    	<a href="#" class="b-r">余额 <big><{$CARD.money}></big></a>
+                        <a href="#">积分 <big><{$CARD.jifen}></big></a>
+                    </div>
+                    <div class="membcard_btn clearfix">
+                    	<div class="btn_box">
+                            <a href="<{link ctl='card/money/index'}>" class="btn btn-outline btn-primary btn-block">我要充值</a>
+                        </div>
+                    	<div class="btn_box">
+                            <a href="<{link ctl='card/maidan/index'}>" class="btn btn-outline btn-primary btn-block">快速买单</a>
+                        </div>
+                    </div>
+                    <div class="pub_lists membcard_menu">
+                        <a href="<{link ctl='card/member/index'}>" class="pub_list linkico">
+                            <div class="pub_list_hd"><i class="ico ico1"></i></div>
+                            <div class="pub_list_bd">会员中心</div>
+                            <div class="pub_list_ft"></div>
+                        </a>
+                        <a href="<{link ctl='card/jifen/index'}>" class="pub_list linkico">
+                            <div class="pub_list_hd"><i class="ico ico2"></i></div>
+                            <div class="pub_list_bd">积分商城</div>
+                            <div class="pub_list_ft"></div>
+                        </a>
+                        <a href="<{link ctl='card/member/explain'}>" class="pub_list linkico">
+                            <div class="pub_list_hd"><i class="ico ico3"></i></div>
+                            <div class="pub_list_bd">会员卡说明</div>
+                            <div class="pub_list_ft"></div>
+                        </a>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+            
+        </div>
+    </div>
+</div>
+<{include file="shop/card/block/sfooter.html"}>
+<{include file="shop/card/block/footer.html"}>

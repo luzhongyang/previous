@@ -1,0 +1,68 @@
+<{include file="shop/card/block/header.html"}>
+
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_cont couponRecv">
+            <!--内容开始-->
+            <div class="couponRecv_wind">
+                <img class="bg" src="%THEME%/static/images/coupon/card__big_bg@2x.png">
+                <div class="cont">
+                    <img class="cont_bg" src="%THEME%/static/images/coupon/card_text_bg@2x.png">
+                    <div class="recv">
+                        <div class="info pub_list">
+                            <div class="img"><img src="<{$pager.img}>/<{$logo}>"  style="height: 52px;width: 52px;border-radius: 50%;"></div>
+                            <div class="pub_list_bd"><{$name}></div>
+                        </div>
+                        <h1><{$intro.title}></h1>
+                        <a href="<{$url}>" class="btn">领取优惠券</a>
+                    </div>
+                    <div class="top"><img src="%THEME%/static/images/coupon/card_1@2x.png"></div>
+                    <div class="right"><img src="%THEME%/static/images/coupon/cadr_2@2x.png"></div>
+                    <div class="bottom"><img src="%THEME%/static/images/coupon/card_3@2x.png"></div>
+                    <div class="left"><img src="%THEME%/static/images/coupon/card_4@2x.png"></div>
+                </div>
+            </div>
+            <div class="couponRecv_instr">
+                <h3><span>使用说明</span></h3>
+                <P><{$intro.intro}></P>
+            </div>
+            <div class="couponRecv_instr">
+
+                <!--<div>-->
+                    <!--<img src="<{$log['weixin_user']['face']}>" style="width: 20px;height: 20px">:-->
+                    <!--<span><{$log['weixin_user']['nickname']}></span>-->
+                    <!--<span><{$log.dateline|format}>领取该优惠券</span>-->
+
+
+                <!--</div>-->
+                <h3><span>领取记录</span></h3>
+                <div class="couponRecord_list couponRecord_list2">
+                    <{foreach $logs as $log}>
+                    <div class="list pub_list">
+                        <div class="img"><img src="<{$log['weixin_user']['face']}>"></div>
+                        <div class="pub_list_bd">
+                            <p><{$log['weixin_user']['nickname']}></p>
+                            <small style="color: #f7f7f7; opacity: 0.8;"><{$log.dateline|format}>领取该优惠券</small>
+                        </div>
+                    </div>
+                    <{/foreach}>
+                </div>
+
+
+
+            </div >
+
+            <div class="couponRecv_ft">
+                <div class="cont">
+                    <img src="%THEME%/static/images/coupon/logo@2x.png">
+                    <P>江湖科技</P>
+                </div>
+            </div>
+            <!--内容结束-->
+        </div>
+    </div>
+</div>
+
+
+
+<{include file="shop/card/block/footer.html"}>

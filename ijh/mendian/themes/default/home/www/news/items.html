@@ -1,0 +1,73 @@
+<{include file='home/www/block/header.html'}>
+<!--头部导航-->
+<div class="topNav">
+    <div class="pagewd">
+        <div class="logo fl"><img src="%THEME%/home/www/static/images/logo.png"></div>
+        <div class="topNav_nav fr">
+            <ul>
+                <li><a href="<{link ctl='index:index'}>">首页</a></li>
+                <li><a href="<{link ctl='index:productcenter'}>">产品中心</a></li>
+                <li><a href="<{link ctl='index:customercase'}>">客户案列</a></li>
+                <li><a href="<{link ctl='news:index'}>" class="on">资讯中心</a></li>
+                <li><a href="<{link ctl='index:cooperation'}>">申请合作</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="topNav_h"><!--勿删--></div>
+<!--导航end-->  
+<!--内容-->
+<div class="pagewd">
+    <div class="help_cont">
+        <div class="help_cont_l">
+            <ul class="menu_list">
+				<{calldata mdl='article/cate' parent_id=1}>
+                <li><a href="<{link ctl='news:items' arg0=$item.cate_id}>" <{if $pager.cate.cate_id == $item.cate_id}>class="on"<{/if}>><{$item.title}></a></li>
+				<{/calldata}>
+            </ul>
+            <div class="contact_box">
+            	<h4>联系我们</h4>
+                <div class="tel mb10"><i class="ico"></i><{$CONFIG.site.phone}></div>
+                <div class="qq"><i class="ico"></i><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=<{$CONFIG.site.kfqq}>&aty=0&a=0&curl=&ty=1" target="_blank" class="btn">点击咨询</a></div>
+                <div class="wx_box">
+                	<div class="img"><img src="<{$pager.img}>/<{$CONFIG.site.weixinqr}>"></div>
+                    <P>[扫一扫关注我们]</P>
+                </div>
+            </div>
+        </div>
+        <div class="help_cont_r">
+        	<div class="crumbs_box">
+            	<ul>
+                	<li><{$pager.cate.title}></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="news_list_box">
+            	<ul>
+					<{foreach $items as $item}>
+                	<li>
+                    	<a href="<{link ctl='news:detail' arg0=$item.article_id}>">
+                            <div class="tit">
+                                <h3 class="fl overflow_clear"><{$item.title}><i class="ico"></i></h3> 
+                            </div>
+                            <div class="img fl"><img src="<{$pager.img}>/<{$item.thumb}>" /></div>
+                            <div class="wz_box">
+                                <p><{$item.desc}></p>
+                                <small class="black9"><{$item.dateline|format:"Y-m-d"}></small>
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                    </li>
+					<{/foreach}>
+                </ul>
+                <!--页码-->
+                <div class="paging"><{$pager.pagebar}></div>
+                <!--页码end-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--内容end-->  
+<{include file='home/www/block/footer.html'}>

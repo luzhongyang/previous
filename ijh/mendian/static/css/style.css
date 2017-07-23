@@ -1,0 +1,71 @@
+@charset "utf-8";
+/* CSS Document */
+.shy-idx_top_fixed{width:100%;z-index:3}
+.shy-top-nav{background:#fff;position: relative;left: 0;top: 0px;width: 100%;height:90px;box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);transition: all ease-out 0.2s;-webkit-transition: all ease-out 0.2s;z-index: 99999;}
+.shy-top-nav .top-nav_nei{width: 1200px;height: 100%;margin: 0 auto;position: relative;}
+.shy-top-nav .the-left_logo{float:left;padding-top: 20px;font-size: 26px;line-height: 40px;color:#000;margin-left:12px;}
+.shy-top-nav .the-logo{width:50px;height:50px; display:inline-block;margin-right:14px}
+.shy-top-nav .the_right{float:right;}
+.shy-top-nav .nav_li{float:left;margin-left: 10px;}
+.shy-top-nav .nav_li>a{display: inline-block;padding: 0 25px;color: #000;font-size: 18px;line-height: 90px;text-align: center;
+height: 90px;}
+.shy-top-nav .nav_li.active>a{color:#59C181}
+
+.shouyin_index-banner{position:relative}
+.shouyin_index-banner .shy-idx_top{position: absolute;left: 0;right: 0;top: 0;}
+.shouyin_index-banner .shy-top-nav{background:rgba(255,255,255,0.3);}
+.shouyin_index-banner .shy-top-nav .the-left_logo{color:#fff}
+.shouyin_index-banner .shy-top-nav .nav_li>a{display: inline-block;padding: 0 25px;color: #fff;font-size: 18px;line-height: 90px;text-align: center;height: 90px;}
+.shouyin_index-banner .shy-top-nav .nav_li.active>a{color:#000}
+
+.shouyin_index-banner .wenzi-page_cont{position:relative;height:900px}
+.shouyin_index-banner .banner_wenzi{position:absolute;bottom:188px;left:0;color: #fff;-webkit-animation: fadeInUp 2s 0s 1 linear both;-moz-animation: fadeInUp 2s 0s 1 linear both;-ms-animation: fadeInUp 2s 0s 1 linear both;-o-animation: fadeInUp 2s 0s 1 linear both;animation: fadeInUp 2s 0s 1 linear both;padding-left:15px}
+.shouyin_index-banner .banner_wenzi>h1{font-size: 40px;margin-bottom:35px}
+.shouyin_index-banner .banner_wenzi>p{font-size: 26px;line-height:65px}
+.shouyin_index-banner .ban_btn0{display:block;width:250px;height:60px; background:url(../images/shy_btn0.png) no-repeat center;margin-top:50px}
+/*01*/
+.shouyin-cont1{background:#fff;height:980px}
+.shouyin-cont1 .title {text-align: center;padding-top: 90px;color:#2e2e2e}
+.shouyin-cont1 .title h1{font-size: 40px;line-height: 50px;margin-bottom:20px}
+.shouyin-cont1 .title h2{font-size: 16px;line-height: 25px;color:#949494;margin-bottom:80px}
+.shouyin-cont1 .list-one{float:left;width:33.3333%;text-align: center;margin-bottom:95px}
+.shouyin-cont1 .list-one>h2{font-size: 22px;color:#3f4244;margin-top:32px}
+.shouyin-cont1 .list-one>p{font-size: 16px;color:#7f7f7f;line-height:25px}
+.shouyin-cont1 .cont1-line0{width:94px;height:16px;margin:22px auto 16px}
+/*02*/
+.shouyin-cont2{background:#f3f3f3;height:872px}
+.shouyin-cont2 .title {text-align: center;padding-top: 90px;color:#2e2e2e}
+.shouyin-cont2 .title h1{font-size: 40px;line-height: 50px;margin-bottom:20px}
+.shouyin-cont2 .title h2{font-size: 16px;line-height: 25px;color:#949494;margin-bottom:40px}
+.shouyin-cont2 .func_show-cont{width:1090px;margin:0 auto;position:relative;padding-top:75px}
+.shouyin-cont2 .mobile-ke{position: absolute;left:50%;margin-left:-137px;top:0;width:274px;height:512px;background:url(../images/shy_cont2-mobile--.png) no-repeat center;z-index:2}
+.shouyin-cont2 .img-li{margin:15px auto 0;text-align: center;}
+.shouyin-cont2 .img-txt{color:#7f7f7f;font-size:14px;text-align: center;margin-top:15px}
+.swiper-container{padding-bottom:120px;}
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {bottom: 10px;left: 50%;
+width: 200px;margin:0 auto;margin-left:-100px;}
+.swiper-pagination-bullet {width: 16px;height: 16px;display: inline-block;border-radius: 100%;border:2px solid #747474;background:none;
+opacity: 0.9;}
+.swiper-pagination-bullet-active {opacity: 1;background: #747474;}
+/*03*/
+.shouyin-cont3{height:600px;background:url(../images/shy_03-bg.jpg) no-repeat center top;}
+.shouyin-cont3 .title{text-align: center;padding-top: 75px;color:#fff}
+.shouyin-cont3 .title h1{font-size: 36px;line-height: 50px;margin-bottom:20px}
+.shouyin-cont3 .title h2{font-size: 16px;line-height: 25px;margin-bottom:80px;color:#f2f2f2}
+.shouyin-cont3 .down-cont{text-align: center;}
+.shouyin-cont3 .down-one{width:200px;text-align: center;display:inline-block;}
+.shouyin-cont3 .down-you{margin-left:264px;}
+.shouyin-cont3 .down_btn{display:inline-block;width:200px;height:50px;background:url(../images/shy_ios-down.png) no-repeat center;margin-top:48px;}
+.shouyin-cont3 .down_btn.btn_you{background:url(../images/shy_and-down.png) no-repeat center;}
+/*04*/
+.shouyin-cont4{height:480px;background:url(../images/shy_04-bg.jpg) no-repeat center top;}
+.shouyin-cont4 .title {text-align: center;padding-top: 100px;color:#2e2e2e}
+.shouyin-cont4 .title h1{font-size: 40px;line-height: 50px;margin-bottom:30px}
+.shouyin-cont4 .title h2{font-size: 30px;margin-bottom:70px}
+.shouyin-cont4 .button-cont{width:900px;height:90px;margin:0 auto;}
+.shouyin-cont4 .button-a{display:block;font-size: 30px;color:#fff;background:#59c181;text-align: center;width:400px;height:90px;line-height:90px; border-radius:6px;}
+
+
+
+/*底部*/
+.shouyin_foot{height:110px;background:#3b3f3d; line-height:110px;color:#fff; text-align:center; font-size:16px;}

@@ -1,0 +1,38 @@
+<{include file="shop/card/block/header.html"}>
+
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_page_cont">
+            <div class="pub_cont">
+                <!--内容开始-->
+                <div class="membcard_finipay">
+
+                    <img src="%THEME%/static/images/card/complete@2x.png">
+                    <p class="m-b5 fontcl1">￥<{$order.total_price}></p>
+                    <P class="black6">支付完成</P>
+                </div>
+                <!--内容结束-->
+            </div>
+            <!--底部工具栏-->
+            <footer class="footer_btn-block">
+                <button type="button" class="btn btn-primary btn-block btn-lg" data-id="<{$order.order_id}>">完成</button>
+            </footer>
+            <!--底部工具栏结束-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.onload = function(){
+        $('.footer_btn-block button').on('click',function(){
+            var order_id = $(this).attr('data-id');
+            var url = "<{link ctl='card/order/detail' arg0='#order_id#' arg1='1' http=$shop.url}>".replace('#order_id#',order_id);
+            window.location.href=url;
+
+        })
+
+    }
+
+
+</script>
+
+<{include file="shop/card/block/footer.html"}>

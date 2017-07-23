@@ -1,0 +1,40 @@
+<div class="wrapper wrapper-content animated fadeInDown">
+
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+
+            <form id="SO-form" action="/merchant/?weidian/pintuanproduct/index.html"  method="post"
+                  enctype="multipart/form-data" role="form"  class="form-horizontal m-t">
+                <div class="form-group draggable">
+                    <label class="col-sm-4 control-label">产品标题：</label>
+
+                    <div class="col-sm-8">
+                        <input type="text" name="SO[title]" value="" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group draggable">
+                    <label class="col-sm-4 control-label">分类：</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="SO[cate_id]">
+                            <option value="0">顶级分类</option>
+                            <{foreach $cates as $k=>$v}>
+                            <option value="<{$k}>"><{$v.title}></option>
+                            <{/foreach}>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="hr-line-dashed"></div>
+                <div class="form-group draggable">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <button class="btn btn-primary" type="submit">搜索</button>
+                        <!-- <button class="btn btn-white" type="submit">取消</button> -->
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

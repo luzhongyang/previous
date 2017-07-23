@@ -1,0 +1,57 @@
+<{include file='biz/block/header.html'}>
+
+<body>
+<div class="loginTop">
+    <div class="smallpage">
+        <div class="logo fl"><img src="%THEME%/biz/static/images/logo.png"><span>江湖骑手团调度中心</span></div>
+        <div class="tit fl">忘记密码</div>
+    </div>
+</div>
+<div class="forget_box bg_grey">
+    <div class="smallpage">
+        <h2>找回密码</h2>
+        <div class="state_box">
+            <ul>
+                <li class="on"><span>1</span><P>验证身份</P></li>
+                <li class="on"><span>2</span><P>设置密码</P></li>
+                <li><span>3</span><P>完成</P></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="login_form_box">
+            <div class="cont">
+                <form id="signupForm" action="<{link ctl='cashier/password:step_three'}>" method="post">
+                    <input name="data[shop_id]" value="<{$shop_info.shop_id}>" type="hidden"/>
+                    <div class="int_box form-group mb20">
+                        <div class="ico ico2"></div>
+                        <div class="box"><input type="password" id="password"  name="data[passwd]" aria-required="true" aria-invalid="true" class="form-control error" placeholder="设置新密码"><a href="javascript:;" class="clear_ico"></a></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="int_box form-group mb20">
+                        <div class="ico ico2"></div>
+                        <div class="box"><input type="password" id="password" name="data[repasswd]" aria-required="true" aria-invalid="true" class="form-control error" placeholder="确认新密码"><a href="javascript:;" class="clear_ico"></a></div>
+                        <div class="clear"></div>
+                    </div>
+                    <input type="submit" value="下一步" class="long_btn">
+                    <div class="caozuo_box">
+                        <div class="fl">已有帐号 <a href="<{link ctl='cashier/account:index'}>" class="maincl">登录</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<{include file='biz/block/footer-one.html'}>
+<{include file='biz/block/footer-two.html'}>
+
+<script></script>
+
+
+</body>
+</html>
+
+
+
+

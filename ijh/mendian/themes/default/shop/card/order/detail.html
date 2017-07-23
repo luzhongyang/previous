@@ -1,0 +1,136 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_cont">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="membcard_ord mar15">
+                	<div class="price_box">
+                    	<P>交易金额</P>
+                        <P class="big fontcl1"><small class="black6">￥</small><{$_order.amount+$_order.money}></P>
+                    </div>
+                    <div class="info_box b-t b-b">
+                    	<p class="clearfix">交易时间：<span class="pull-right"><{$_order['dateline']|format:'Y-m-d H:i:s'}></span></p>
+                        <p class="clearfix">流水号：<span class="pull-right"><{$order.order_id}></span></p>
+                        <!--<p class="clearfix">销售单号：<span class="pull-right">cyan201610280011344</span></p>-->
+                        <{if $_order.staff_id >0}><p class="clearfix">收银员：<span class="pull-right"><{$staff.name|default:$staff.mobile}></span></p><{/if}>
+                        <p class="clearfix">总计金额：<span class="pull-right">￥<{$order.product_price}></span></p>
+                        <{if $order.youhui_title}><p class="clearfix">优惠方式：<span class="pull-right"><{$order.youhui_title}></span></p><{/if}>
+                        <p class="clearfix">优惠金额：<span class="pull-right">￥<{$_order.order_youhui}></span></p>
+                        <p class="clearfix">应收：<span class="pull-right">￥<{$order.product_price - $order.youhui_amount}></span></p>
+                        <p class="clearfix">实收：<span class="pull-right">￥<{$_order.amount+$_order.money}></span></p>
+                        <{if $_order.moling_amount > 0}><p class="clearfix">抹零：<span class="pull-right">￥<{$_order.moling_amount}></span></p><{/if}>
+                        <p class="clearfix">收款方式：<{if $_order.money !='0.00'}><span class="pull-right"><{$_order.order_pay_type}>   ￥<{$_order.money}></span><{/if}></p>
+                        <p class="clearfix"><{if $_order.amount !='0.00' }><span class="pull-right"> <{$_order.order_pay_type}> ￥<{$_order.amount}></span><{/if}></p>
+                        <{if $_order.intro}> <p class="clearfix">订单备注:<span class="pull-right"><{$_order.intro}></span></p><{/if}>
+
+                    </div>
+                    <div class="info_box b-b">
+                    	<div class="clearfix">会员：<span class="pull-right"><{$CARD['number']}></span></div>
+                    </div>
+                    <div class="delt_box">
+                    	<div class="delt_box_tit on clearfix">商品详情：<span class="pull-right"><i class="ico"></i></span></div>
+                        <div class="table_box">
+                        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr class="b-b">
+                                    <th>商品名称</th>
+                                    <th class="text-center">单价</th>
+                                    <th width="40" class="text-right">数量</th>
+                                </tr>
+                                <{if $products}>
+                                    <{foreach $order_product as $product}>
+                                        <tr>
+                                            <td><{$products['title']}></td>
+                                            <td class="text-center">￥<{$product.product_price}></td>
+                                            <td class="text-center"><{$product.product_number}></td>
+                                        </tr>
+                                    <{/foreach}>
+                                <{else}>
+                                <{foreach $order_product as $product}>
+                                    <tr>
+                                        <td><{$product.product_title}></td>
+                                        <td class="text-center">￥<{$product.product_price}></td>
+                                        <td class="text-center"><{$product.product_number}></td>
+                                    </tr>
+                                <{/foreach}>
+                                <{/if}>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="membcard_ord_ft"></div>
+                </div>
+                <!--内容结束-->
+            </div>
+            <!--底部工具栏-->
+        	<footer class="footer_btn-block b-t" style="display:block;">
+            	<div class="text-center">
+                    <{if $order['refund_id']}>
+                    <button type="button" id="yechao" onclick="tiaozhuan()" data-order="<{$order.order_id}>" class="btn btn-primary btn-outline btn-sm">查看退款单</button>
+                     <{else}>
+                    <button type="button"  onclick="tiaozhuan1()" data-order="<{$order.order_id}>" class="btn btn-primary btn-outline btn-sm">返回首页</button>
+                    <{/if}>
+
+                </div>
+            </footer>
+            <!--底部工具栏结束-->
+        </div>
+    </div>
+</div>
+<script>
+    if (window.history && window.history.pushState) {
+
+        $(window).on('popstate', function () {
+
+            var hashLocation = location.hash;
+            var hashSplit = hashLocation.split("#!/");
+            var hashName = hashSplit[1];
+            if (hashName !== '') {
+                var hash = window.location.hash;
+                if (hash === '') {
+                    var href = window.location.href;
+                    window.location.href = href;
+
+                }
+            }
+        });
+
+        window.history.pushState('forward', null, './#forward');
+    }
+
+
+    function tiaozhuan() {
+        var id = $("#yechao").attr('data-order')
+
+        var url = "<{link ctl='card/order:refund' arg0='#order_id#' }>".replace("#order_id#", id)
+        window.location.href=url;
+
+    }
+    function tiaozhuan1() {
+        var url = "<{link ctl='card'  }>";
+        window.location.href=url;
+
+
+    }
+    $('#yechao').on('clock',function(){
+        var url = "<{link ctl='card/order:index'  }>";
+
+
+    })
+$(document).ready(function() {
+
+
+
+
+	$(".membcard_ord .delt_box .delt_box_tit").click(function(){
+		if($(this).hasClass("on")){
+			$(".membcard_ord .delt_box .delt_box_tit").removeClass("on");
+			$(".membcard_ord .delt_box .table_box").slideUp();
+		}else{
+			$(".membcard_ord .delt_box .delt_box_tit").addClass("on");
+			$(".membcard_ord .delt_box .table_box").slideDown();
+		}
+	});
+    
+});
+</script>
+<{include file="shop/card/block/footer.html"}>

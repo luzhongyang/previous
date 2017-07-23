@@ -1,0 +1,43 @@
+<script src="%THEME%/biz/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="%THEME%/biz/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="%THEME%/biz/static/js/bootstrap.min.js?v=3.3.5"></script>
+<script src="%THEME%/biz/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="%THEME%/biz/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/static/layer/layer.js"></script>
+<script src="%THEME%/biz/static/js/hplus.min.js?v=4.0.0"></script>
+<script type="text/javascript" src="%THEME%/biz/static/js/contabs.min.js"></script>
+<script src="%THEME%/biz/static/js/plugins/pace/pace.min.js"></script>
+
+<script src="%THEME%/biz/static/js/bootstrap.min.js?v=3.3.5"></script>
+
+<script src="%THEME%/biz/static/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="%THEME%/biz/static/js/plugins/validate/messages_zh.min.js"></script>
+<script src="%THEME%/biz/static/js/demo/form-validate-demo.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        var input = $(".login_form_box .int_box .box input");
+
+        $(input).focus(function() {
+            $(".login_form_box .int_box .box .clear_ico").hide();
+            $(this).parent().find(".clear_ico").show();
+
+            $(this).parents(".int_box").css("border-color","#00bd9e");
+
+        }).blur(function() {
+            if (input.val() != "") {
+                $(this).parent().find(".clear_ico").show();
+            }else{
+
+                $(this).parent().find(".clear_ico").hide();
+            }
+            $(this).parents(".int_box").css("border-color","");
+        });
+
+        $(".login_form_box .int_box .box .clear_ico").click(function(){
+            $(this).parent().find("input").val("");
+        });
+
+
+    });
+</script>

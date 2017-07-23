@@ -1,0 +1,73 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="shop/shop:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data">
+<form action="?shop/shop-edit.html" mini-form="shop-form" method="post" >
+<input type="hidden" name="shop_id" value="<{$detail.shop_id}>"/>
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th><span class="red">*</span>商户名称：</th><td><input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="input w-300"/></td></tr>
+<tr>
+    <th>分类：</th>
+    <td>
+        <select name="data[cate_id]" class="w-200">
+            <{widget id="shop/cate" value=$detail.cate_id type="option"}>
+        </select>
+    </td>
+</tr>
+<tr><th><span class="red">*</span>手机号：</th><td><input type="text" name="data[mobile]" value="<{$detail.mobile|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>密码：</th><td><input type="text" name="data[passwd]" value="******" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>联系人：</th><td><input type="text" name="data[contact]" value="<{$detail.contact|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>联系电话：</th><td><input type="text" name="data[phone]" value="<{$detail.phone|default:''}>" class="input w-300"/></td></tr>
+<tr><th>提现比例:1~100：</th><td><input type="text" name="data[tixian_percent]" value="<{$detail.tixian_percent|default:'100'}>" class="input w-300"/></td></tr>
+<tr><th>logo：</th><td><input type="text" name="data[logo]" value="<{$detail.logo}>" <{if $detail.logo}>photo="<{$pager.img}>/<{$detail.logo}>"<{/if}> class="input w-300" />&nbsp;&nbsp;&nbsp;<input type="file" name="data[logo]" class="input w-100" /></td></tr>
+<tr><th>logo：</th><td><input type="text" name="data[banner]" value="<{$detail.banner}>" <{if $detail.banner}>photo="<{$pager.img}>/<{$detail.banner}>"<{/if}> class="input w-300" />&nbsp;&nbsp;&nbsp;<input type="file" name="data[banner]" class="input w-100" /></td></tr>
+<tr><th class="w-100"><span class="red">*</span>城市：</th><td><{widget id="data/region" city_id=$detail.city_id level=3}></td></tr>
+<tr><th>地址：</th><td><input type="text" name="data[addr]" value="<{$detail.addr|default:''}>" class="input w-300"/></td></tr>
+<tr><th>排序：</th><td><input type="text" name="data[orderby]" value="<{$detail.orderby|default:''}>" class="input w-100"/></td></tr>
+<tr>
+	<th>认证：</th>
+	<td>
+		<label><input type="radio" name="data[verify_name]" <{if $detail.verify_name}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[verify_name]" <{if isset($detail.verify_name) && empty($detail.verify_name)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+<tr>
+	<th>审核：</th>
+	<td>
+		<label><input type="radio" name="data[audit]" checked="checked" value="1"/>发布</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[audit]" value="0"/>待审</label>
+	</td>
+</tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<script type="text/javascript">
+(function(K, $){
+$("select[name='data[city_id]']").live('change', function(){
+	var city_id = $(this).val();
+	if(!city_id){return false;}
+	$.getJSON("?data/area-city-"+city_id+".html", function(ret){
+		if(ret.error){
+			Widget.MsgBox.error(ret.message.join(","));
+		}else if(ret.areas.length>0){
+			var html = "";
+			for(var i=0; i<ret.areas.length; i++){
+				html += '<option value="'+ret.areas[i].area_id+'">'+ret.areas[i].area_name+'</option>';
+			}
+			$("select[name='data[area_id]']").html(html);		
+		}else{
+			$("select[name='data[area_id]']").html('<option value="">--</option>');
+		}
+	});
+});
+})(window.KT, window.jQuery);
+</script>
+<{include file="admin:common/footer.html"}>

@@ -1,0 +1,50 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_page_cont">
+            <div class="pub_cont">
+                <!--内容开始-->
+                <div class="couponUse_code m-b10">
+                    <P class="num">[<{$logs.number}>]</P>
+                    <div class="code"><img src="<{$logs.qrcode}>"></div>
+                    <div class="btn_box">
+
+
+                        <a href="#" class="btn  <{if $logs.is_used == 0 and $logs.ltime > $logs.now_time  }>btn-primary<{else}>btn-default<{/if}> ">同步至微信卡包</a>
+                        <a href="#" class="btn <{if $logs.is_used == 0 }>btn-default<{else}>btn-primary<{/if}>">使用完成</a>
+                    </div>
+                    <div class="see"><a href="<{link ctl='card/coupon:ablelist'}>">查看我的卡券</a></div>
+                </div>
+                <div class="couponUse_info">
+                    <div class="pub_list">
+                        <div class="bt">名称：</div>
+                        <div class="pub_list_bd text-right"><{$logs.title}></div>
+                    </div>
+                    <div class="pub_list">
+                        <div class="bt">面值：</div>
+                        <div class="pub_list_bd text-right">￥<{$logs.amount}></div>
+                    </div>
+                    <div class="pub_list">
+                        <div class="bt">使用限制：</div>
+                        <div class="pub_list_bd text-right"><{if $logs.min_price >0}>[满￥:<{$logs.min_price}>抵消￥:<{$logs.amount}>]<{else}>[消费即抵]<{/if}></div>
+                    </div>
+                    <div class="pub_list">
+                        <div class="bt">使用期限：</div>
+                        <div class="pub_list_bd text-right"><{'Y.m.d'|date:$logs.stime}> 至 <{'Y.m.d'|date:$logs.ltime}></div>
+                    </div>
+                    <div class="pub_list">
+                        <div class="bt">使用说明：</div>
+                        <div class="pub_list_bd text-right"><{$logs.intro}></div>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+            <!--底部工具栏-->
+
+            <!--底部工具栏结束-->
+        </div>
+    </div>
+</div>
+
+
+<{include file="shop/card/block/footer.html"}>

@@ -1,0 +1,42 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?system/config-app_download.html" mini-form="config-form" method="post" >
+<input type="hidden" name="K" value="app_download" />
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+    <tr><th>收银端IOS版本：</th><td><input type="text" name="config[cashier][ios_version]" value="<{$config.cashier.ios_version|default:''}>" class="input w-300"/></td></tr>
+    <tr>
+        <th>IOS是否强制升级：</th>
+        <td>
+            <label><input type="radio" name="config[cashier][ios_force_update]" <{if $config.cashier.ios_force_update}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+            <label><input type="radio" name="config[cashier][ios_force_update]" <{if empty($config.cashier.ios_force_update)}>checked="checked"<{/if}> value="0"/>否</label>
+            <span class="tip-comment">选择强制升级后APP版本小于配置版本时必须升级后才能使用</span>
+        </td>
+    </tr>
+    <tr><th>IOS下载地址：</th><td><input type="text" name="config[cashier][ios_url]" value="<{$config.cashier.ios_url|default:''}>" class="input w-500"/><span class="tip-comment">下载地址 http:// 开头</span></td></tr>
+    <tr><th>IOS版本更新说明：</th><td><textarea name="config[cashier][ios_intro]" class="textarea"><{$config.cashier.ios_intro}></textarea><br /></td></tr>
+    <tr><td colspan="10" class="h-10"></td></tr>
+    <tr><th>收银端安卓版本：</th><td><input type="text" name="config[cashier][apk_version]" value="<{$config.cashier.apk_version|default:''}>" class="input w-300"/></td></tr>
+    <tr>
+        <th>安卓是否强制升级：</th>
+        <td>
+            <label><input type="radio" name="config[cashier][apk_force_update]" <{if $config.cashier.apk.force_update}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+            <label><input type="radio" name="config[cashier][apk_force_update]" <{if empty($config.cashier.apk.force_update)}>checked="checked"<{/if}> value="0"/>否</label>
+            <span class="tip-comment">选择强制升级后APP版本小于配置版本时必须升级后才能使用</span>
+        </td>
+    </tr>
+    <tr><th>案桌下载网址：</th><td><input type="text" name="config[cashier][apk_url]" value="<{$config.cashier.apk_url|default:''}>" class="input w-500"/><span class="tip-comment">案桌下载网址 http:// 开头</span></td></tr>
+    <tr><th>案桌安装包下载：</th><td><input type="text" name="config[cashier][apk_download]" value="<{$config.cashier.apk_download|default:''}>" class="input w-500"/><span class="tip-comment">案桌安装包下载地址 http:// 开头</span></td></tr>
+    <tr><th>安卓版本更新说明：</th><td><textarea name="config[cashier][apk_intro]" class="textarea"><{$config.cashier.apk_intro}></textarea><br /></td></tr>
+<tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+<{include file="admin:common/footer.html"}>

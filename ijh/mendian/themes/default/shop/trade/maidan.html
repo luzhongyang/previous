@@ -1,0 +1,131 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_cont">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class=" membcard_paybill">
+                    <div class="info">
+                        <div class="img"><img src="<{$pager.img}>/<{$shop.logo}>" alt="<{$shop.title}>" style="width: 52px;height: 52px;border-radius: 50%;"> </div>
+                        <span><{$shop.title}></span>
+
+                    </div>
+                    <form>
+                        <div class="pay-info ">
+                            <div class="tit">金额（元）</div>
+                            <div class="cashier-field">
+                                <i class="money-text">¥</i>
+                                <span type="text" id="cashier-price" class="cashier-text cashiers"></span>
+                                <i id="js-cashier-cursor" class="cursor"></i>
+                            </div>
+                        </div>
+                    </form>
+                   <!-- <form action="<{link ctl= 'trade/payment:maidan'}>" method="post" id="form">
+                	<div class="info">
+                        <div class="img"><img src="<{$pager.img}>/<{$shopinfo.logo}>"></div>
+                        <div class="tit"><{$shopinfo.title}></div>
+                        <div class="pub_list price_box">
+                            <div class="sign">￥</div>
+                            <div class="int_box pub_list_bd"><input type="text" name="amount" id="amount"></div>
+                            <p>支付金额（元）</p>
+                        </div>
+                    </div>
+                    <div class="footer_btn-block mar20" style="margin-top: 50px;">
+                        <button type="submit" id="order_create" class="btn btn-primary btn-block btn-lg">立即支付</button>
+                    </div>
+                    </form>-->
+
+                </div>
+                <div class="ui-keyboard js-keyboard WX on keybords" >
+                    <ul class="ui-keyboard-numbers js-num" >
+                        <li class="">1</li><li class="">2</li><li class="">3</li>
+                        <li class="">4</li><li class="">5</li><li class="">6</li>
+                        <li class="">7</li><li class="">8</li><li class="">9</li>
+                        <li class="zero " >0</li><li class="" >.</li>
+                    </ul>
+                    <ul class="ui-keyboard-buttons" >
+                        <li class="btn-del js-del " style="height: 50%"></li>
+                        <{if  $request.IN_WEIXIN}>
+                        <li class="btn-ok js-ok " id="wx" style="height: 50%"></li>
+                        <{else}>
+                        <li class="btn-ok js-ok " id="alipay" style="height: 50%"></li>
+                        <{/if}>
+
+                    </ul>
+                </div>
+
+                <style>
+                    .bLETddoT8v_gcO_8SLGhF {
+                        display:block;
+                        position: fixed;
+                        top: 35%;
+                        left: 50%;
+                        width: 220px;
+                        padding: 0;
+                        margin: 0 0 0 -110px;
+                        z-index: 9999;
+                        background: rgba(0,0,0,.8);
+                        color: #fff;
+                        line-height: 1.5em;
+                        border-radius: 6px;
+                        box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                    }
+                    .motify-inner {
+                        padding: 10px;
+                        text-align: center;
+                        word-wrap: break-word;
+                    }
+
+                    ui-keyboard.WX .ui-keyboard-buttons li.btn-ok {
+                        color: #fff;
+                        background: #1aad19 url(//b.yzcdn.cn/store/6e1612b2800c2bc228967ad0fabed6bf.png) 50% no-repeat;
+                        background-size: 60px 74px;
+                    }
+                    #wx {
+                        color: #fff;
+                        background: #1aad19 url(%THEME%/shop/card/static/images/wx.png) 50% no-repeat;
+                        background-size: 60px 74px;
+
+
+                    }
+                    #alipay{
+                        color: #fff;
+                        background: #59f url(%THEME%/shop/card/static/images/zhifubao.png) 50% no-repeat;
+                        background-size: 60px 74px;
+
+
+                    }
+
+
+                </style>
+
+                
+                <!--内容结束-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var payType = "wxpay";
+    var shopInfo = {"shopName":"<{$shop.title}>","shopId":"<{$shop.shop_id}>","bid":"<{$shop.cate_id}>"};
+    var orderInfo = [];
+    var jhpayurl = '';
+    window.pay_callback = function(e){
+
+        $.post("<{link ctl= 'trade/payment:maidan' http=$url}>", { amount: $("#cashier-price").html()}, function (a) {
+           if(a.error>0){
+               Widget.MsgBox.error(a.message)
+           } else {
+               window.location.href = a.data.url;
+           }
+        },'json');
+        return false;
+    }
+</script>
+<script src="%THEME%/shop/card/static/js/deccaPay.js"></script>
+
+
+
+<{include file="shop/card/block/footer.html"}>

@@ -1,0 +1,61 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="cashier/cashier:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?cashier/cashier-edit.html" mini-form="cashier-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<input type="hidden" name="shop_id" value="<{$detail.shop_id}>"/>
+<tr><th>总订单数：</th><td><input type="text" name="data[orders]" value="<{$detail.orders|default:''}>" class="input w-100"/></td></tr>
+<!-- <tr><th>微信总收款：：</th><td><input type="text" name="data[total_wxpay]" value="<{$detail.total_wxpay|default:''}>" class="input w-100"/></td></tr>
+<tr><th>现金总收款：</th><td><input type="text" name="data[total_cash]" value="<{$detail.total_cash|default:''}>" class="input w-100"/></td></tr>
+<tr><th>余额总消费：</th><td><input type="text" name="data[total_money]" value="<{$detail.total_money|default:''}>" class="input w-100"/></td></tr>
+<tr><th>支付宝总收款：</th><td><input type="text" name="data[total_alipay]" value="<{$detail.total_alipay|default:''}>" class="input w-100"/></td></tr>
+<tr><th>总充值：</th><td><input type="text" name="data[total_chongzhi]" value="<{$detail.total_chongzhi|default:''}>" class="input w-100"/></td></tr>
+<tr><th>总退款：</th><td><input type="text" name="data[total_refund]" value="<{$detail.total_refund|default:''}>" class="input w-100"/></td></tr> -->
+<!-- <tr><th>总收入数：</th><td><input type="text" name="data[total_money]" value="<{$detail.total_money|default:''}>" class="input w-100"/></td></tr> -->
+<tr><th>账户余额：</th><td><input type="text" name="data[money]" value="<{$detail.money|default:''}>" class="input w-100"/></td></tr>
+<tr>
+	<th>优惠状态：</th>
+	<td>
+		<label><input type="radio" name="data[is_youhui]" <{if $detail.is_youhui}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[is_youhui]" <{if isset($detail.is_youhui) && empty($detail.is_youhui)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+<tr><th>折扣：</th><td><input type="text" name="data[discount]" value="<{$detail.discount|default:''}>" class="input w-300"/></td></tr>
+<tr><th>优惠：</th><td><input type="text" name="data[youhui]" value="<{$detail.youhui|default:''}>" class="input w-300"/></td></tr>
+<tr>
+	<th>是否抹零：</th>
+	<td>
+		<label><input type="radio" name="data[is_moling]" <{if $detail.is_moling}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[is_moling]" <{if isset($detail.is_moling) && empty($detail.is_moling)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+<tr>
+	<th>抹零：</th>
+	<td>
+	<select class="input w-200" name="data[moling]">
+		<option vlaue="1" <{if $detail.moling ==1}>selected<{/if}>>抹去分</option>
+		<option vlaue="2" <{if $detail.moling ==2}>selected<{/if}>>抹去角</option>
+		<option vlaue="3" <{if $detail.moling ==3}>selected<{/if}>>四舍五入分</option>
+		<option vlaue="4" <{if $detail.moling ==4}>selected<{/if}>>四舍五入角</option>
+	</select>
+</tr>
+<tr>
+	<th>认证：</th>
+	<td>
+		<label><input type="radio" name="data[verify_name]" <{if $detail.verify_name}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[verify_name]" <{if isset($detail.verify_name) && empty($detail.verify_name)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

@@ -1,0 +1,117 @@
+<{include file="shop/card/block/header.html"}>
+<style>
+    .pub_list_label{ width: 75px;}
+</style>
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_page_footer">
+            <div class="pub_cont">
+                <!--内容开始-->
+                <div class="pub_lists membcard_actv">
+                    <div class="pub_lists_title">激活信息仅由商家使用</div>
+                    <div class="pub_list b-b">
+                        <div class="pub_list_label">手机号码</div>
+                        <div class="pub_list_bd"><input class="pub_list_input" type="text" id='mobile' name='mobile' placeholder="输入手机号码" value=""></div>
+                    </div>
+                    <div class="pub_list">
+                        <div class="pub_list_label">验证码</div>
+                        <div class="pub_list_bd"><input class="pub_list_input" type="text" name='code' id='code' placeholder="输入验证码" value=""></div>
+                        <div class="pub_list_ft text-right"><input type="button" class="vcode-btn " id='send_sms' value="发送验证码"></div>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+
+            <!--底部工具栏-->
+            <footer class="footer_btn-block">
+                <button type="button" id='btn' class="btn btn-primary btn-block btn-lg">立即激活</button>
+            </footer>
+            <!--底部工具栏结束-->
+        </div>
+    </div>
+</div>
+<script>
+
+
+
+
+
+
+
+
+    $('#send_sms').click(function () {
+        var mobile = $('#mobile').val();
+        if (!mobile) {
+            layer.open({
+                content: '请先填写手机号'
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+            });
+            return false;
+        }
+
+
+
+
+        var link = "<{link ctl='card/bind/sendsms'}>";
+        $.post(link, {"mobile": mobile}, function (ret) {
+            var times = parseInt(60);
+            var timer = setInterval(function(){
+                if(times>0){
+                    $('#send_sms').val(times+'s');
+                    $('#send_sms').attr('disabled','disabled')
+
+                } else {
+                    clearInterval(timer);
+                    $('#send_sms').val('发送验证码');
+                    $('#send_sms').attr('disabled',false);
+
+                }
+                times--;
+
+
+            },1000)
+
+                layer.open({
+                    content: ret.message
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+                });
+        }, 'json')
+    })
+    
+    $('#btn').click(function(){
+        var mobile = $('#mobile').val();
+        var code = $('#code').val();
+        if (!mobile) {
+            layer.open({
+                content: '请先填写手机号'
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+            });
+            return false;
+        }
+        if (!code) {
+            layer.open({
+                content: '请输入验证码'
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+            });
+            return false;
+        }
+        var link = "<{link ctl='card/bind/binding'}>";
+        $.post(link, {"mobile": mobile,code:code}, function (ret) {
+                if(ret.error == 0){
+                    setTimeout(function(){
+                        location.href="<{link ctl='card/index'}>";
+                    },2000);
+                }
+                layer.open({
+                    content: ret.message
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+                });
+        }, 'json')
+    })
+</script>
+<{include file="shop/card/block/footer.html"}>

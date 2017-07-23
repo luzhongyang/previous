@@ -1,0 +1,11 @@
+<{foreach $items as $item}>
+<a href="<{link ctl='card/order/detail' args=$item.order_id}>">
+    <div class="pub_list">
+        <div class="pub_list_bd">
+            <P><{$item.intro}></P>
+            <small><{$item.dateline|format:'Y-m-d H:i'}></small>
+        </div>
+        <div class="pub_list_ft maincl">￥<{$item.number}></div>
+    </div>
+</a>
+<{/foreach}>

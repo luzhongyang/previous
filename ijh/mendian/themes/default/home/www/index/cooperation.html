@@ -1,0 +1,92 @@
+<{include file='home/www/block/header.html'}>
+<body>
+
+<iframe id="miniframe" name="miniframe" style="display:none;"></iframe>
+<!--头部导航-->
+<div class="topNav">
+    <div class="pagewd">
+        <div class="logo fl"><img src="%THEME%/home/www/static/images/logo.png"></div>
+        <div class="topNav_nav fr">
+            <ul>
+                <li><a href="<{link ctl='index:index'}>">首页</a></li>
+                <li><a href="<{link ctl='index:productcenter'}>">产品中心</a></li>
+                <li><a href="<{link ctl='index:customercase'}>">客户案列</a></li>
+                <li><a href="<{link ctl='news:index'}>">资讯中心</a></li>
+                <li><a href="<{link ctl='index:cooperation'}>" class="on">申请合作</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="topNav_h"><!--勿删--></div>
+<!--导航end-->  
+<!--内容-->
+<div class="applyPage">
+	<h1>我也要加入你们！</h1>
+	<div class="smallpage">
+    	<div class="form_box fl">
+        	<form action="<{link ctl='index:cooperation'}>" id="form" method="post" mini-form="jhcms">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="bt">您的姓名：</td>
+                        <td><input type="text" id="name" class="int" name="data[name]"></td>
+                    </tr>
+                    <tr>
+                        <td class="bt">您的城市：</td>
+                        <td><input type="text" id="city" class="int" name="data[city_name]"></td>
+                    </tr>
+                    <tr>
+                        <td class="bt">您的手机：</td>
+                        <td><input type="text" id="mobile" class="int" name="data[mobile]"></td>
+                    </tr>
+                    <tr>
+                        <td class="bt">您的ＱＱ：</td>
+                        <td><input type="text" id="qq" class="int" name="data[qq]"></td>
+                    </tr>
+                    <tr>
+                        <td class="bt">&nbsp;</td>
+                        <td><input  class="btn fl" id="confirm" value="申请合作"><a href="#" class="btn btn2 fr">立即咨询</a></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="wx_box fr">
+        	<div class="img"><img src="%THEME%/home/www/static/images/wx_img.png"></div>
+            <p>（扫一扫进入下载体验）</p>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<!--内容end-->
+<script>
+
+    $('#confirm').on('click',function(){
+        var url ="<{link ctl='index:cooperation'}>";
+        var name = $('#name').val();
+        var mobile = $('#mobile').val();
+        var qq = $('#qq').val();
+        var city = $('#city').val();
+        var data = {
+            'name':name,
+            'mobile':mobile,
+            'qq':qq,
+            'city_name':city
+        };
+        $.post(url,{data},function(e){
+            if(e.error>0){
+                layer.msg(e.message,{icon:2})
+            }else{
+                layer.msg(e.message,{icon:1})
+                setTimeout(function(){
+                    window.location.reload();
+                },2000);
+            }
+
+        },'json')
+    })
+
+
+
+</script>
+<{include file='home/www/block/footer.html'}>

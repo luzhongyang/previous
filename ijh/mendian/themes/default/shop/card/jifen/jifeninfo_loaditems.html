@@ -1,0 +1,9 @@
+<{foreach $items as $k => $v}>
+<div class="pub_list">
+    <div class="pub_list_bd">
+        <P><{$v.intro}></P>
+        <small><{$v.dateline|format}></small>
+    </div>
+    <div class="pub_list_ft maincl"><i class="ico"></i><{$v.number}></div>
+</div>
+<{/foreach}>

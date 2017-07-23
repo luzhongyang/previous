@@ -1,0 +1,374 @@
+<?php
+/**
+ * Copy Right IJH.CC
+ * Each engineer has a duty to keep the code elegant
+ * $Id$
+ */
+
+if(!defined('__CORE_DIR')){
+    exit("Access Denied");
+}
+Import::C('weixin/weixin');
+class Ctl_Weixin_Relay extends Ctl_Weixin
+{
+    protected $_allow_fields = 'shop_id,keyword,title,intro,photo,stime,ltime,use_tips,end_tips,follower_condtion,member_condtion,collect_count,views,end_photo,lastupdate,clientip,relay_num,max_num,max_gold,min_gold,time,dateline';
+
+    public function index($page=1)
+    {
+		$pager = array();
+        $pager['page'] = $page = max((int)$page, 1);
+        $pager['page'] = $limit = 30;
+        $pager['page'] = $count = 0;
+        if($items = K::M('weixin/relay')->items(array('shop_id'=>$this->shop_id), null, $page, $limit, $count)){
+            $pgaer['count'] = $count;
+            $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')));
+            $this->pagedata['items'] = $items;
+        }
+        $this->tmpl = 'merchant:weixin/relay/index.html';
+    }
+
+	public function create()
+	{
+		if($data = $this->checksubmit('data')){
+            if($_FILES['data']){
+				foreach($_FILES['data'] as $k=>$v){
+					foreach($v as $kk=>$vv){
+						$attachs[$kk][$k] = $vv;
+					}
+				}
+				$upload = K::M('magic/upload');
+				foreach($attachs as $k=>$attach){
+					if($attach['error'] == UPLOAD_ERR_OK){
+						if($a = $upload->upload($attach, 'weixin')){
+							$data[$k] = $a['photo'];
+						}
+					}
+				}
+			}
+			$data['shop_id'] = $this->shop_id;
+			$data['stime'] = strtotime($data['stime']);
+			$data['ltime'] = strtotime($data['ltime']);
+			if(!$items = K::M('weixin/keyword')->items(array('keyword'=>$data['keyword'],'shop_id'=>$this->shop_id))){
+
+				if($relay_id = K::M('weixin/relay')->create($data)){
+					$keyword = array();
+					$keyword['shop_id'] = $this->shop_id;
+					$keyword['keyword'] = $data['keyword'];
+					$keyword['plugin'] = 'relay:'.$relay_id;
+					K::M('weixin/keyword')->create($keyword);
+					$this->msgbox->add('添加内容成功');
+					$this->msgbox->set_data('forward',$this->mklink('merchant/weixin/relay/index'));
+				} 
+			}else{
+				$this->msgbox->add('该关键字已经被使用，请修改关键字', 212);
+			}
+        }else{
+           $this->tmpl = 'merchant:weixin/relay/create.html';
+        }
+	}
+
+	public function edit($relay_id=null)
+    {
+        if(!($relay_id = (int)$relay_id) && !($relay_id = $this->GP('relay_id'))){
+            $this->msgbox->add('未指定要修改的内容ID', 211);
+        }else if(!$detail = K::M('weixin/relay')->detail($relay_id)){
+            $this->msgbox->add('您要修改的内容不存在或已经删除', 212);
+        }else if($data = $this->checksubmit('data')){
+			if($_FILES['data']){
+				foreach($_FILES['data'] as $k=>$v){
+					foreach($v as $kk=>$vv){
+						$attachs[$kk][$k] = $vv;
+					}
+				}
+				$upload = K::M('magic/upload');
+				foreach($attachs as $k=>$attach){
+					if($attach['error'] == UPLOAD_ERR_OK){
+						if($a = $upload->upload($attach, 'weixin')){
+							$data[$k] = $a['photo'];
+						}
+					}
+				}
+			}
+			$data['stime'] = strtotime($data['stime']);
+			$data['ltime'] = strtotime($data['ltime']);
+            if(K::M('weixin/relay')->update($relay_id, $data)){
+                $this->msgbox->add('修改内容成功');
+            }  
+        }else{
+        	$this->pagedata['detail'] = $detail;
+        	 $this->tmpl = 'merchant:weixin/relay/edit.html';
+        }
+	}
+
+	public function preview($relay_id=null)
+	{
+		$site = $this->system->config->get('site');
+		$url = $site['siteurl'].'/weixin/relay-preview-'.$relay_id.'.html';
+		echo '<img alt="模式一扫码支付" src="/qrcode?data='.urlencode($url).'&size=13"/>';
+		exit;
+	}
+
+	 public function delete($relay_id=null)
+    {
+        if($relay_id = (int)$relay_id){
+            if(!$detail = K::M('weixin/relay')->detail($relay_id)){
+                $this->msgbox->add('你要删除的内容不存在或已经删除', 211);
+            }else{
+				if($items = K::M('weixin/keyword')->items(array('keyword'=>$detail['keyword'],'shop_id'=>$this->shop_id))){
+					if(K::M('weixin/relay')->delete($relay_id)){
+						foreach($items as $k => $v){
+							K::M('weixin/keyword')->delete($v['kw_id']);
+						}
+						$this->msgbox->add('删除内容成功');
+					}
+				}else{
+					$this->msgbox->add('非法操作');
+				}
+            }
+        }
+    }  
+
+	
+
+	public function sn($relay_id,$page=1)
+	{
+		if(!($relay_id = (int)$relay_id) && !($relay_id = $this->GP('relay_id'))){
+            $this->msgbox->add('没有指定微接力ID', 211);
+        }else if(!$detail = K::M('weixin/relay')->detail($relay_id)){
+            $this->msgbox->add('该微接力不存在或已经删除', 212);
+        }else{
+			$filter = $pager = array();
+			$pager['page'] = max(intval($page), 1);
+			$pager['limit'] = $limit = 50;
+			$filter['relay_id'] = $relay_id;
+			if($items = K::M('weixin/relaysn')->items($filter, null, $page, $limit, $count)){
+				$uids = array();
+				foreach($items as $k => $v){
+					$uids[$v['uid']] = $v['uid'];
+				}
+				$this->pagedata['member_list'] = K::M('member/member')->items_by_ids($uids);
+				$pager['count'] = $count;
+				$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
+			}
+			$this->pagedata['items'] = $items;
+			$this->pagedata['detail'] = $detail;
+			$this->pagedata['pager'] = $pager;
+			$this->tmpl = 'merchant:weixin/relay/sn.html';
+		}
+	} 
+	
+
+	public function sndelete($sn_id=null)
+    {
+        if($sn_id = (int)$sn_id){
+            if(!$detail = K::M('weixin/relaysn')->detail($sn_id)){
+                $this->msgbox->add('你要删除的内容不存在或已经删除', 211);
+            }else{
+                if(K::M('weixin/relaysn')->delete($sn_id)){
+                    $this->msgbox->add('删除内容成功');
+                }
+            }
+        }else if($ids = $this->GP('sn_id')){
+            if(K::M('weixin/relaysn')->delete($ids)){
+                $this->msgbox->add('批量删除内容成功');
+            }
+        }else{
+            $this->msgbox->add('未指定要删除的内容ID', 401);
+        }
+    }  
+
+	public function snedit($sn_id=null)
+    {
+        if($sn_id = (int)$sn_id){
+            if(!$detail = K::M('weixin/relaysn')->detail($sn_id)){
+                $this->msgbox->add('你要修改的内容不存在或已经删除', 211);
+            }else{
+				if($detail['is_use'] == '1'){
+					$data['is_use'] = 0;
+					$data['use_time'] = '';
+				}else{
+					$data['is_use'] = 1;
+					$data['use_time'] = __TIME;
+				}
+                if(K::M('weixin/relaysn')->update($sn_id, $data)){
+                    $this->msgbox->add('改变状态成功');
+                }
+            }
+        }
+    }
+
+	public function goods($relay_id,$page=1)
+	{
+		if(!($relay_id = (int)$relay_id) && !($relay_id = $this->GP('relay_id'))){
+            $this->msgbox->add('没有指定微接力ID', 211);
+        }else if(!$detail = K::M('weixin/relay')->detail($relay_id)){
+            $this->msgbox->add('该微接力不存在或已经删除', 212);
+        }else{
+			$filter = $pager = array();
+			$pager['page'] = max(intval($page), 1);
+			$pager['limit'] = $limit = 50;
+			$filter['relay_id'] = $relay_id;
+			if($items = K::M('weixin/relayprize')->items($filter, null, $page, $limit, $count)){
+				$uids = array();
+				foreach($items as $k => $v){
+					$uids[$v['uid']] = $v['uid'];
+				}
+				$this->pagedata['member_list'] = K::M('member/member')->items_by_ids($uids);
+				$pager['count'] = $count;
+				$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
+			}
+			$this->pagedata['items'] = $items;
+			$this->pagedata['detail'] = $detail;
+			$this->pagedata['pager'] = $pager;
+			$this->tmpl = 'merchant:weixin/relay/goods.html';
+		}
+	}
+
+	public function goodscreate($relay_id)
+    {
+		if(!($relay_id = (int)$relay_id) && !($relay_id = $this->GP('relay_id'))){
+            $this->msgbox->add('未指定要微接力的ID', 211);
+        }else if(!$detail = K::M('weixin/relay')->detail($relay_id)){
+            $this->msgbox->add('微接力内容不存在或已经删除', 212);
+        }else if($data = $this->checksubmit('data')){
+			$data['relay_id'] = $relay_id;
+			if($_FILES['data']){
+				foreach($_FILES['data'] as $k=>$v){
+					foreach($v as $kk=>$vv){
+						$attachs[$kk][$k] = $vv;
+					}
+				}
+				$upload = K::M('magic/upload');
+				foreach($attachs as $k=>$attach){
+					if($attach['error'] == UPLOAD_ERR_OK){
+						if($a = $upload->upload($attach, 'weixin')){
+							$data[$k] = $a['photo'];
+						}
+					}
+				}
+			}
+			$data['shop_id'] = $this->shop_id;
+			$data['relay_id'] = $relay_id;
+            if($id = K::M('weixin/relayprize')->create($data)){
+                $this->msgbox->add('添加内容成功');
+				$this->msgbox->set_data('forward',$this->mklink('merchant/weixin/relay/goods',array($relay_id)));
+            } 
+		}else{
+		   $this->pagedata['relay_id'] = $relay_id;
+		   $this->tmpl = 'merchant:weixin/relay/goodscreate.html';
+		}
+    }
+
+	public function goodsedit($id=null)
+    {
+        if(!($id = (int)$id) && !($id = $this->GP('id'))){
+            $this->msgbox->add('未指定要修改的内容ID', 211);
+        }else if(!$detail = K::M('weixin/relayprize')->detail($id)){
+            $this->msgbox->add('您要修改的内容不存在或已经删除', 212);
+        }else if($data = $this->checksubmit('data')){
+			if($_FILES['data']){
+				foreach($_FILES['data'] as $k=>$v){
+					foreach($v as $kk=>$vv){
+						$attachs[$kk][$k] = $vv;
+					}
+				}
+				$upload = K::M('magic/upload');
+				foreach($attachs as $k=>$attach){
+					if($attach['error'] == UPLOAD_ERR_OK){
+						if($a = $upload->upload($attach, 'weixin')){
+							$data[$k] = $a['photo'];
+						}
+					}
+				}
+			}
+
+            if(K::M('weixin/relayprize')->update($id, $data)){
+                $this->msgbox->add('修改内容成功');
+            }  
+        }else{
+        	$this->pagedata['detail'] = $detail;
+			$this->tmpl = 'merchant:weixin/relay/goodsedit.html';
+        }
+    }
+
+	public function goodsdelete($id=null)
+    {
+        if($id = (int)$id){
+            if(!$detail = K::M('weixin/relayprize')->detail($id)){
+                $this->msgbox->add('你要删除的内容不存在或已经删除', 211);
+            }else{
+                if(K::M('weixin/relayprize')->delete($id)){
+                    $this->msgbox->add('删除内容成功');
+                }
+            }
+        }else if($ids = $this->GP('id')){
+            if(K::M('weixin/relayprize')->delete($ids)){
+                $this->msgbox->add('批量删除内容成功');
+            }
+        }else{
+            $this->msgbox->add('未指定要删除的内容ID', 401);
+        }
+    }  
+
+
+	protected function wechat_client()
+    {
+        static $client = null;
+        if($client === null){
+            if(!$client = K::M('weixin/weixin')->admin_wechat_client()){
+                exit('网站公众号设置错误');
+            }
+        }
+        return $client;
+    }
+
+    protected function access_openid($force = false)
+    {
+        static $openid = null;
+        if($force || $openid === null){
+            if($code = $this->GP('code')){
+                $client = $this->wechat_client();
+                $ret = $client->getAccessTokenByCode($code);
+                $openid = $ret['openid'];
+            }else{
+                if(!$openid = $this->cookie->get('wx_openid')){
+                    $client = $this->wechat_client();
+                    $url = $this->request['url'].'/'.$this->request['uri'];
+                    $authurl = $client->getOAuthConnectUri($url, $state, 'snsapi_userinfo');
+                    header('Location:'.$authurl);
+                    exit();
+                }
+            }
+            $this->cookie->set('wx_openid', $openid);
+        }
+        if(empty($openid)){
+            exit('获取授权失败');
+        }
+        return $openid;
+    }
+
+	public function snlist($sn_id,$page_id)
+	{
+		$weixin = $this->ucenter_weixin();
+        if(!$sn_id){
+			$this->msgbox->add('你要查看的内容不存在或已经删除', 211);
+		}elseif(!$detail = K::M('weixin/relaysn')->detail($sn_id)){
+			$this->msgbox->add('你要查看的内容不存在或已经删除', 212);
+		}else{
+			$filter = $pager = array();
+			$pager['page'] = max(intval($page), 1);
+			$pager['limit'] = $limit = 50;
+			$filter['relay_id'] = $detail['relay_id'];
+
+			$filter['openid'] = $detail['openid'];
+			if($items = K::M('weixin/relaylist')->items($filter, null, $page, $limit, $count)){
+				$pager['count'] = $count;
+				$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
+			}
+			$this->pagedata['items'] = $items;
+			$this->pagedata['detail'] = $detail;
+			$this->pagedata['pager'] = $pager;
+			$this->tmpl = 'merchant:weixin/relay/snlist.html';
+		}
+	}
+}

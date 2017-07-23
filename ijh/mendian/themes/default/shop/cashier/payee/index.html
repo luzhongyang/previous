@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>自主收款账号</title>
+<link rel="stylesheet" href="%THEME%/static/weui/weui.min.css"/>
+<link rel="stylesheet" href="%THEME%/static/weui/example.css"/>
+<link rel="stylesheet" href="%THEME%/static/weui/weui.min.css"/>
+<link rel="stylesheet" href="%THEME%/shop/cashier/static/css/payee.css"/>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+			<!-- 内容部分 -->
+            <div class="container_mid">
+				<div class="cashier_bt">营收资产存放至个人账户：</div>
+				<ul class="cashier_list">
+					<li>
+						<a href="<{link ctl='cashier/payee:alipay'}>"  class="pub_list black3">
+							<p>支付宝钱包</p>
+							<p class="black9"><{if !$payee_alipay}>未开通<{elseif $payee_alipay.status}>有效期:<{$payee_alipay.expire_time|format:"Y-m-d"}><{else}>待审核<{/if}></p>
+						</a>
+					</li>
+					<li>
+						<a href="<{link ctl='cashier/payee:wxpay'}>"  class="pub_list black3">
+							<p>微信钱包</p>
+							<p class="black9"><{if !$payee_wxpay}>未开通<{elseif $payee_alipay.status}>有效期:<{$payee_alipay.expire_time|format:"Y-m-d"}><{else}>待审核<{/if}></p>
+						</a>
+					</li>
+				</ul>
+				<a href="<{link ctl='page:payee'}>" class="cashier_rule"><i></i>规则说明</a>
+            </div>
+			<!-- 内容部分结束 -->
+        </div>
+    </div>
+</div>
+</body>
+</html>

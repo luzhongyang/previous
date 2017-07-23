@@ -1,0 +1,29 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_page_footer">
+            <div class="pub_cont">
+                <!--内容开始-->
+                <div class="promptPage">
+                    <{if $pager.error>0 }> 
+                    <img src="/themes/default/shop/card/static/images/cz_sb_ico.png">
+                    <{else}>
+                    <img src="/themes/default/shop/card/static/images/cz_cg_ico.png">
+                    <{/if}>
+                    <h4><{if $pager.error}>操作失败<{else}>操作成功<{/if}></h4>
+                    <p><{$pager.message}></p>
+                    <div class="btn_box">
+                        <{if $pager.link}>
+                        <a href="<{$pager.link}>" class="btn btn-primary btn-block btn-lg m-b15"><{$pager.title|default:'点击跳转'}></a>
+                        <{/if}>
+                        <{foreach $pager.url_list as $v}>
+                        <a href="<{$v.link}>" class="btn btn-default btn-block btn-lg"><{$v.title}></a>
+                        <{/foreach}>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="shop/card/block/footer.html"}>

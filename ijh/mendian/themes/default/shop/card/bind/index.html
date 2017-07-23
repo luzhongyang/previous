@@ -1,0 +1,52 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_footer">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="membcard">
+                	<div class="membcard_info">
+                    	<img src="%THEME%/shop/card/static/images/card_bg@2x.png" class="bg">
+                        <div class="cont clearfix">
+                        	<div class="img pull-left"><img src="<{$pager.img}>/<{$shop.logo}>" width="50" height="50"></div>
+                            <div class="wz_box">
+                                <P><{$shop.title}><small class="pull-right">会员卡</small></P>
+                            </div>
+                        </div>
+                        <div class="num">NO.-</div>
+                    </div>
+
+                    <div class="membcard_btn clearfix">
+                        <a href="<{link ctl='card/bind/bind'}>" class="btn btn-default btn-block m-t5">激活会员卡</a>
+                    </div>
+                    <div class="pub_lists membcard_menu">
+                    	<a href="<{if $card}><{link ctl='card/member:index'}><{else}>javascript:;<{/if}>" class="pub_list <{if $card}><{else}>shabi<{/if}> linkico">
+                            <div class="pub_list_hd"><i class="ico ico1"></i></div>
+                            <div class="pub_list_bd">会员中心</div>
+                            <div class="pub_list_ft"></div>
+                        </a>
+                        <a href="<{if $card}><{link ctl='card/jifen:index'}><{else}>javascript:;<{/if}>" class="pub_list <{if $card}><{else}>shabi<{/if}> linkico">
+                            <div class="pub_list_hd"><i class="ico ico2"></i></div>
+                            <div class="pub_list_bd">积分商城</div>
+                            <div class="pub_list_ft"></div>
+                        </a>
+                        <a href="<{if $card}><{link ctl='card/member:explain'}><{else}>javascript:;<{/if}>" class="pub_list <{if $card}><{else}>shabi<{/if}> linkico">
+                            <div class="pub_list_hd"><i class="ico ico3"></i></div>
+                            <div class="pub_list_bd">会员卡说明</div>
+                            <div class="pub_list_ft"></div>
+                        </a>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script>
+    $('.shabi').on('click',function () {
+       Widget.MsgBox.error('请先激活会员卡');
+    })
+</script>
+<{include file="shop/card/block/sfooter.html"}>
+<{include file="shop/card/block/footer.html"}>

@@ -1,0 +1,153 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>收银设置</h5>
+            </div>
+            <div class="ibox-content">
+                <form action="<{link ctl='merchant/cashier/set:index'}>" mini-form="merchant" method="post"
+                      ENCTYPE="multipart/form-data" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">订单总数：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[orders]" value="<{$detail.orders}>" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">现金总收款：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[total_cash]" value="<{$detail.total_cash}>" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">微信总收款：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[total_wxpay]" value="<{$detail.total_wxpay}>" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">支付宝总收款：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[total_alipay]" value="<{$detail.total_alipay}>" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">总充值：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[total_chongzhi]" value="<{$detail.total_chongzhi}>" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">余额总消费：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[total_money]" value="<{$detail.total_money}>" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">总退款：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[total_refund]" value="<{$detail.total_refund}>" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">优惠：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" name="data[is_youhui]" value="1" <{if $detail.is_youhui==1}>checked="checked"<{/if}> />
+                                        <label >开启</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio"  name="data[is_youhui]" value="0" <{if $detail.is_youhui==0}>checked="checked"<{/if}> />
+                                        <label >关闭</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">优惠金额：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[youhui]" value="<{$detail.youhui}>" class="form-control" >
+                                    <span class="red">格式：10,20,30(优惠10元，优惠20，优惠30)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">折扣：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[discount]" value="<{$detail.discount}>" class="form-control" >
+                                    <span class="red">格式：9.8,9,8.8(9.8折，9折，8.8折)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">抹零：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <div class="radio radio-success radio-inline">
+                                        <input type="radio" name="data[is_moling]" value="1" <{if $detail.is_moling==1}>checked="checked"<{/if}> />
+                                        <label >开启</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio"  name="data[is_moling]" value="0" <{if $detail.is_moling==0}>checked="checked"<{/if}> />
+                                        <label >关闭</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group draggable">
+                            <label class="col-sm-2 control-label">抹零方式：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                <select class="form-control" name="data[moling]">
+                                        <option value="1" <{if $detail.moling==1}> selected="selected" <{/if}> class="cate">抹分</option>
+                                        <option value="2" <{if $detail.moling==2}>selected="selected" <{/if}> class="cate">抹角</option>
+                                        <option value="3" <{if $detail.moling==3}>selected="selected" <{/if}> class="cate">四舍五入角</option>
+                                        <option value="4" <{if $detail.moling==4}>selected="selected" <{/if}> class="cate">四舍五入元</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">充值套餐：</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4">
+                                    <input type="text" name="data[package]" value="<{$detail.package}>" class="form-control" >
+                                    <span class="red">格式：100:10:100,200:20:200</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-20">
+                            <div class="col-sm-2"><!--勿删--></div>
+                            <div class="col-sm-4">
+                                <div class="formitems newSet_btn_box col-sm-10 control-label" style="margin: 20px 0px">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+
+<{include file="merchant:block/footer.html"}>

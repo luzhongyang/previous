@@ -1,0 +1,76 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_footer">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="pub_lists mineCter">
+                    <div class="pub_list linkico">
+                        <div class="pub_list_hd"><i class="ico ico1"></i></div>
+                        <div class="pub_list_label">头像</div>
+                        <div class="pub_list_bd text-right"><span class="img"><img src="<{$wxuserinfo.face}>"></span></div>
+                    </div>
+                    <div class="pub_list linkico">
+                        <div class="pub_list_hd"><i class="ico ico2"></i></div>
+                        <div class="pub_list_label">姓名</div>
+                        <div class="pub_list_bd clearfix">
+                            <p class="black9 text-right"><{$wxuserinfo.nickname}><!--(<{$CARD.card_id}>)--></p>
+                        </div>
+                    </div>
+                    <div class="pub_list linkico">
+                        <div class="pub_list_hd"><i class="ico ico3"></i></div>
+                        <div class="pub_list_label">生日</div>
+                        <div class="pub_list_bd">
+                            <p class="black9 text-right"><!--<{$CARD.Y}>- --><{$CARD.M}>月-<{$CARD.D}>日</p>
+                            <!--<input class="pub_list_input text-right" type="text"  id="birthday" placeholder="<{$CARD.Y}>-<{$CARD.M}>-<{$CARD.D}>">-->
+                        </div>
+                    </div>
+                    <div class="pub_list linkico m-b10">
+                        <div class="pub_list_hd"><i class="ico ico4"></i></div>
+                        <div class="pub_list_label">绑定手机号码</div>
+                        <div class="pub_list_bd">
+                            <p class="black9 text-right"><{$CARD.mobile}></p>
+                        </div>
+                    </div>
+                    <div class="pub_list">
+                        <div class="pub_list_hd"><i class="ico ico5"></i></div>
+                        <div class="pub_list_label">余额</div>
+                        <div class="pub_list_bd">
+                            <p class="black9 text-right"><{$CARD.money}></p>
+                        </div>
+                    </div>
+                    <div class="pub_list m-b10">
+                        <div class="pub_list_hd"><i class="ico ico6"></i></div>
+                        <div class="pub_list_label">积分</div>
+                        <div class="pub_list_bd">
+                            <p class="black9 text-right"><{$CARD.jifen}></p>
+                        </div>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+            <!--底部工具栏-->
+        	<footer class="tabbar_box">
+            	<a href="#" class="tabbar_item">
+                	<i class="ico ico1"></i>
+                    <p>会员卡</p>
+                </a>
+                <a href="#" class="tabbar_item on">
+                	<i class="ico ico2"></i>
+                    <p>我的资料</p>
+                </a>
+                <a href="#" class="tabbar_item">
+                	<i class="ico ico3"></i>
+                    <p>通知</p>
+                </a>
+                <a href="#" class="tabbar_item">
+                	<i class="ico ico4"></i>
+                    <p>签到</p>
+                </a>
+            </footer>
+            <!--底部工具栏结束-->
+        </div>
+    </div>
+</div>
+<{include file="shop/card/block/sfooter.html"}>
+<{include file="shop/card/block/footer.html"}>

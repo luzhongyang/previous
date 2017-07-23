@@ -1,0 +1,25 @@
+<{assign var='tpl_title' value=L("404 页面不存在")}>
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_page_footer">
+            <div class="pub_cont">
+                <!--内容开始-->
+                <div class="promptPage">
+                    <{if $pager.error>0 }> 
+                    <img src="/themes/default/shop/card/static/images/cz_sb_ico.png">
+                    <{else}>
+                    <img src="/themes/default/shop/card/static/images/cz_cg_ico.png">
+                    <{/if}>
+                    <h4>非法操作</h4>
+                    <p>您访问的页面不存在</p>
+                    <div class="btn_box">
+                        <a href="/card/" class="btn btn-primary btn-block btn-lg m-b15">点击跳转</a>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="shop/card/block/footer.html"}>

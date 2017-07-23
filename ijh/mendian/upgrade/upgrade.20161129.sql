@@ -1,0 +1,2 @@
+ALTER TABLE `jh_cashier_order`
+MODIFY COLUMN `type`  enum('refund','chongzhi','maidan','cashier') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'cashier' COMMENT 'ceshier:收银,chongzhi:充值,refund:退款' AFTER `order_id`;

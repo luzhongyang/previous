@@ -1,0 +1,35 @@
+<div class="footer">
+	<div class="pull-right">All Rights Reserved ICP备案：皖ICP备13010842号</div>
+</div>
+
+</div>
+<!--右侧部分结束-->
+</div>
+<script src="%THEME%/biz/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="%THEME%/biz/static/js/plugins/layer/layer.js"></script>
+<script src="%THEME%/biz/static/js/bootstrap.min.js?v=3.3.5"></script>
+<script src="%THEME%/biz/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="%THEME%/biz/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="%THEME%/biz/static/js/hplus.min.js?v=4.0.0"></script>
+<script type="text/javascript" src="%THEME%/biz/static/js/contabs.min.js"></script>
+<script src="%THEME%/biz/static/js/plugins/pace/pace.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$(".navbar-static-top .userInfo_box").mousemove(function(){
+			$(".navbar-static-top .userInfo_box .userInfo").addClass("on");
+			$(".navbar-static-top .userInfo_box .dropMenu").show();
+		});
+		$(".navbar-static-top .userInfo_box").mouseleave(function(){
+			$(".navbar-static-top .userInfo_box .userInfo").removeClass("on");
+			$(".navbar-static-top .userInfo_box .dropMenu").hide();
+		});
+		$('.nav-second-level li').on('click',function(){
+			var url = $(this).children().attr('data-url');
+			$('#content-main iframe').attr('src',url)
+
+		})
+	});
+
+</script>
+</body>
+</html>

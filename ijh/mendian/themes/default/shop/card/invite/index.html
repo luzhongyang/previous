@@ -1,0 +1,107 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+	<div class="pub_page">
+    	<!--内容开始-->
+        <div class="cashInvite">
+            <div class="img"><img src="%THEME%/shop/card/static/images/bg@2x.png"></div>
+            <div class="pub_lists">
+                <div class="pub_list border_b">
+                	<div class="pub_list_hd"><i class="ico ico1"></i></div>
+                        <div class="pub_list_bd"><input class="pub_list_input" type="text" id="mobile" placeholder="请输入手机号码" value="<{$mobile}>" ></div>
+                </div>
+                <div class="pub_list">
+                	<div class="pub_list_hd"><i class="ico ico2"></i></div>
+                    <div class="pub_list_bd"><input class="pub_list_input" type="text" id='code' placeholder="请输入验证码" value=""></div>
+                    <div class="pub_list_ft text-right"><input type="button" id="send_sms" class="btn vcode-btn" value="获取验证码"></div>
+                </div>
+                <div class="pub_list">
+                	<div class="pub_list_hd"><i class="ico ico3"></i></div>
+                    <div class="pub_list_bd">
+                        <input class="pub_list_input" type="password" id="pwd" placeholder="请设置密码" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="btn_box">
+                <button type="button" id="join_btn" class="btn btn-primary btn-block btn-lg">加入店铺</button>
+            </div>
+            <P class="wxts">请在24小时内完成操作</P>
+        </div>
+        
+        <!--内容结束-->
+    </div>
+</div>
+<style>
+    .pub_list_ft .btn.graybg{background:gray; color: #212121;}
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+    
+        var minute = 60;
+        var mobile_timeout;
+        var mobile_count = minute;
+        var mobile_lock = 0;
+
+        BtnCount = function () {
+            if (mobile_count == 0) {
+                $("#send_sms").addClass("graybg");
+                $('#send_sms').removeAttr("disabled");
+                $('#send_sms').val("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+                $('#send_sms').removeClass("graybg");
+            } else {
+                mobile_count--;
+                $('#send_sms').val(+mobile_count.toString() + "秒...");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+            }
+        };
+    
+    
+    $('#send_sms').click(function () {
+        if (mobile_lock == 0) {
+            var mobile = $('#mobile').val();
+            if (!mobile) {
+                Widget.MsgBox.error("请先填写手机号");
+                return false;
+            }
+            var link = "<{link ctl='magic/sendsms'}>";
+            $.post(link, {"mobile": mobile}, function (ret) {
+                if(ret.error){
+                    mobile_lock = 0;
+                    Widget.MsgBox.error(ret.message);
+                }else{
+                    BtnCount();
+                    $("#send_sms").addClass("graybg");
+                    $('#send_sms').attr("disabled", "disabled");
+                }                    
+            }, 'json')
+            mobile_count = minute;
+        }
+    })
+    
+    $('#join_btn').click(function(){
+        var mobile = $('#mobile').val();
+        var code = $('#code').val();
+        var shop_id = "<{$shop.shop_id}>";
+        var passwd = $("#pwd").val();
+        if (!mobile) {
+            Widget.MsgBox.error("请先填写手机号");
+            return false;
+        }else if(!code){
+            Widget.MsgBox.error("请输入验证码");
+            return false;
+        }
+        var link = "<{link ctl='card/invite/invite'}>";
+        $.post(link, {"mobile": mobile,"code":code,"shop_id":shop_id,"passwd":passwd}, function (ret) {
+            if(ret.error){
+                Widget.MsgBox.error(ret.message);
+            }else{
+                Widget.MsgBox.success('加入店铺成功');
+                setTimeout(function(){location.href = "<{link ctl='card/invite:success'}>";},2000);
+            }
+        }, 'json')
+    })
+    
+    })
+</script>
+<{include file="shop/card/block/footer.html"}>

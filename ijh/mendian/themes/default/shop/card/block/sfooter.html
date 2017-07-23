@@ -1,0 +1,39 @@
+<!--底部工具栏-->
+<footer class="tabbar_box">
+    <a href="<{link ctl='card/index'}>" class="tabbar_item">
+        <i class="ico ico1"></i>
+        <p>会员卡</p>
+    </a>
+    <a href="<{link ctl='card/info'}>" class="tabbar_item">
+        <i class="ico ico2"></i>
+        <p>我的资料</p>
+    </a>
+    <a href="<{link ctl='card/message'}>" class="tabbar_item">
+        <i class="ico ico3"></i>
+        <p>通知</p>
+    </a>
+    <a href="<{link ctl='card/jifen'}>" class="tabbar_item">
+        <i class="ico ico4"></i>
+        <p>签到</p>
+    </a>
+</footer>
+<!--底部工具栏结束-->
+<script type="text/javascript">
+    //选中导航JS
+    var urlstr = location.href;
+    $('a').removeClass('on');
+    var i = 0;
+    $('.tabbar_box a').each(function () {
+        var href = $(this).attr('href');
+        if(href == '/'){
+            href = '/index';
+        }
+        if ((urlstr).indexOf(href) > 0) {
+            $(this).addClass('on');
+            i=i+1;
+        }
+    });
+    if(i == 0){
+        $('.tabbar_box a').eq(0).addClass('on');
+    }
+</script>

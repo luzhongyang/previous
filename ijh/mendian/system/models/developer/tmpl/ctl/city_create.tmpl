@@ -1,0 +1,15 @@
+    public function create()
+    {
+        if($data = $this->checksubmit('data')){
+            #upload#
+            if(CITY_ID){
+                $data['city_id'] = CITY_ID;
+            }
+            if($#pk# = K::M('#module#/#mdl#')->create($data)){
+                $this->msgbox->add('添加内容成功');
+                $this->msgbox->set_data('forward', '?#module#/#ctl#-index.html');
+            } 
+        }else{
+           $this->tmpl = 'admin:#view#/create.html';
+        }
+    }

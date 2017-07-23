@@ -1,0 +1,232 @@
+<{include file="shop/card/block/header.html"}>
+
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_page_cont">
+            <div class="pub_cont">
+                <!--内容开始-->
+                <div class="membcard_paybill">
+                    <div class="info">
+                        <div class="img"><img src="<{$pager.img}>/<{$shop.logo}>" alt="<{$shop.title}>" style="height: 52px;width: 52px;border-radius: 50%;"></div>
+                        <span><{$shop.title}></span>
+                    </div>
+                    <form>
+                        <div class="pay-info">
+                            <div class="tit">金额（元）</div>
+                            <div class="cashier-field">
+                                <i class="money-text">¥</i>
+                                <span type="text" id="cashier-price" class="cashier-text cashiers"></span>
+                                <i id="js-cashier-cursor" class="cursor"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="pub_lists">
+                        <div class="pub_list b-b">
+                            <div class="pub_list_hd"><{$grade['title']}>折扣（<{$grade['discount']}>折）</div>
+                            <div class="pub_list_bd text-right" id="youhui" rel="<{$grade['discount']}>">-￥<span id="caon">0.00</span></div>
+                        </div>
+                        <div class="pub_list b-b">
+                            <div class="pub_list_hd">实付金额</div>
+                            <div class="pub_list_bd text-right">￥<span id="sf">0.00</span></div>
+                        </div>
+                        <label class="pub_list b-b">
+                            <div class="pub_list_hd">可用余额抵扣￥<{$CARD.money}></div>
+                        </label>
+                        <div class="pub_list b-b">
+                            <div class="pub_list_hd">还需支付</div>
+                            <div class="pub_list_bd text-right maincl">￥<span id="need_pay">0.00</span></div>
+                        </div>
+                        <div class="pub_list">
+                            <div class="pub_list_hd">付款备注</div>
+                            <div class="pub_list_bd"><input class="pub_list_input text-right" type="text" id="intro" placeholder="请输入备注内容" value=""></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-keyboard js-keyboard WX on keybords" >
+                    <ul class="ui-keyboard-numbers js-num" >
+                        <li class="">1</li><li class="">2</li><li class="">3</li>
+                        <li class="">4</li><li class="">5</li><li class="">6</li>
+                        <li class="">7</li><li class="">8</li><li class="">9</li>
+                        <li class="zero " >0</li><li class="" >.</li>
+                        <li class="btn-ok js-ok " id="alipay" ></li>
+                    </ul>
+                    <ul class="ui-keyboard-buttons">
+                        <li class="btn-del js-del " style="height: 25%"></li>
+                        <li class="btn-ok btn-ok2 js-money" style="height: 37.5%"></li>
+                      <{if  $request.IN_WEIXIN}>
+                        <li class="btn-ok js-ok " id="wx" style="height: 37.5%"></li>
+                        <{else}>
+                        <li class="btn-ok js-ok " id="alipay" style="height: 37.5%"></li>
+                        <{/if}>
+
+                    </ul>
+                </div>
+
+
+                <!--内容结束-->
+            </div>
+            <!--底部工具栏-->
+
+            <!--底部工具栏结束-->
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .bLETddoT8v_gcO_8SLGhF {
+        display:block;
+        position: fixed;
+        top: 35%;
+        left: 50%;
+        width: 220px;
+        padding: 0;
+        margin: 0 0 0 -110px;
+        z-index: 9999;
+        background: rgba(0,0,0,.8);
+        color: #fff;
+        line-height: 1.5em;
+        border-radius: 6px;
+        box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    }
+    .motify-inner {
+        padding: 10px;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+     ui-keyboard.WX .ui-keyboard-buttons li.btn-ok {
+         color: #fff;
+         background: #1aad19 url(//b.yzcdn.cn/store/6e1612b2800c2bc228967ad0fabed6bf.png) 50% no-repeat;
+         background-size: 60px 74px;
+     }
+    #wx {
+        color: #fff;
+        background: #1aad19 url(%THEME%/shop/card/static/images/wx.png) 50% no-repeat;
+        background-size: 60px 74px;
+
+
+    }
+    #alipay{
+        color: #fff;
+        background: #59f url(%THEME%/shop/card/static/images/zhifubao.png) 50% no-repeat;
+        background-size: 60px 74px;
+
+
+    }
+
+     li.btn-ok2 {
+        color: #fff;
+        background: #59c181 url(%THEME%/shop/card/static/images/yue_pay.png) 50% no-repeat;
+        background-size: 50px auto;
+    }
+     ui-keyboard-buttons li {
+        height:33.33333%;
+    }
+
+</style>
+
+<script>
+    var payType = "wxpay";
+    var shopInfo = {"shopName":"<{$shop.title}>","shopId":"<{$shop.shop_id}>","bid":"<{$shop.cate_id}>"};
+    var orderInfo = [];
+    var jhpayurl = '';
+</script>
+<script src="%THEME%/shop/card/static/js/deccaPay.js"></script>
+<script>
+
+    function  money_change(e){
+        e = parseFloat(e)
+        if(isNaN(e)){
+            $("#caon").html(0);
+            $("#sf").html(0);
+            $("#need_pay").html(0);
+
+
+        } else if(e >= 0){
+            //折扣
+          if(e< 0.1){
+              youhui = 0;
+              sf =e;
+          }else {
+              var youhui = 0;
+              if("<{$grade}>"&&"<{$grade.discount}>" < 10){
+                  var xx=e*(($("#youhui").attr("rel"))/10);
+                  xx = Math.floor(xx* 100) / 100;
+                  youhui = (e - xx);
+              }
+              //实付
+              var sf = (e - youhui);
+              sf=Math.floor(sf* 100) / 100;
+              youhui=Math.floor(youhui* 100) / 100;
+
+          }
+
+            $("#caon").html(youhui);
+            $("#sf").html(sf);
+
+            var money = 0;
+            if($(".selct").is(':checked')){
+                var card_money = "<{$CARD.money}>";
+
+                (card_money <= sf) ? money = card_money : money = sf;
+            }
+            //还需支付
+            var need_pay = parseFloat(sf - money).toFixed(2);
+            if(need_pay < 0){
+                need_pay = 0
+            }
+            $("#need_pay").html(need_pay);
+        }
+
+    }
+
+
+    window.deccaPay_callback_preChange = function(e){
+        money_change(e);
+    }
+
+    window.pay_callback = function(code, total_price){
+
+        var intro = $("#intro").val();
+        $.post("<{link ctl= 'card/maidan:create'}>", {"total_price":$('#cashier-price').html(),"code":code,'intro':intro}, function (ret) {
+            if(ret.error>0){
+                Widget.MsgBox.error(ret.message);
+            }else if(code != 'money'){
+                window.location.href = ret.data.payurl;
+            } else {
+                Widget.MsgBox.success(' 订单付款成功');
+                window.location.href = ret.data.rebackurl
+            }
+        }, 'json');
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        localStorage.setItem('def_height',$(window).height());
+        $(window).resize(function(){
+
+            var width = $(window).width();
+            var height = $(window).height();
+
+            if(height != localStorage.getItem('def_height')){
+
+                $(".ui-keyboard").hide();
+                var height  =$(window).height();
+                var width = $(window).width();
+
+            }
+            else
+            {
+
+                $(".ui-keyboard").show();
+                var height  =$(window).height();
+                var width = $(window).width();
+
+            }
+        });
+
+    });
+</script>
+<{include file="shop/card/block/footer.html"}>

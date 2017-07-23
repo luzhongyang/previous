@@ -1,0 +1,166 @@
+<{include file="shop/card/block/header.html"}>
+<style>
+    .signPage_fixd{ position: fixed; left: 0; right: 0; top: 0; z-index: 99;}
+    .signPage_fixd~.pub_container{ top:222px;; }
+</style>
+<body>
+    <div class="signPage_fixd">
+        <div class="sign_info">
+            <div class="pub_list">
+                <div class="pub_list_hd">
+                    <div class="img"><img src="<{$wxuserinfo.face}>"></div>
+
+                </div>
+                <div class="pub_list_bd">
+                    <P class="big"><{$wxuserinfo.nickname}></P>
+                    <P class="maincl"><i class="ico"></i><{$CARD.jifen}> 积分</P>
+                </div>
+                <div class="pub_list_ft"><a href="javascript:void(0);" class="btn btn-outline btn-primary on <{if $today_is_sign }>sign_ed<{/if}>" id='sign_btn' <{if $today_is_sign}>style="background:#d7d8d7;color:#ffffff;border:none;"<{/if}> ><{if $today_is_sign }>今日已签到<{else}>签到<{/if}></a></div>
+            </div>
+        </div>
+        <div class="sign_count clearfix b-t m-b10">
+            <a href="<{link ctl='card/jifen/jifeninfo'}>" class="b-r">
+                <img src="%THEME%/shop/card/static/images/sign_detailed@2x.png">
+                <p>积分明细</p>
+            </a>
+            <a href="<{link ctl='card/jifen/jifenorder'}>" class="b-r">
+                <img src="%THEME%/shop/card/static/images/sign_record@2x.png">
+                <p>兑换记录</p>
+            </a>
+        </div>
+        <div class="sign_gds_lists">
+            <div class="tit b-b"><i class="ico"></i>精品兑换</div>
+        </div>
+    </div>
+    <div class="pub_container">
+        <div class="pub_page" style="padding-bottom:50px;">
+            <div class="pub_page_footer">
+                <div class="pub_cont">
+                    <!--内容开始-->
+                    
+                    <div class="sign_gds_lists">
+                        
+                        <div class="pub_lists m-t15" id="index_goods_items">
+
+                            
+ 
+                        </div>
+                        
+                        <div class="loadding"></div>
+                        
+                    </div>
+
+                    <!--内容结束-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+    var _lock = false;
+    var params = {'':""};
+    var page = 1;
+    var link = "<{link ctl='card/jifen:loaditems' arg0='#page#'}>";
+    loaddata();
+
+    function setloadparams(k,v) {
+        page = 1;
+        params[k] = v;
+        loaddata();
+    }
+
+    function showLoader(msg, st) {
+        msg = '<div class="preloader" style="text-align:center;"><img src="%THEME%/shop/card/static/images/home_logo@2x.png" width="28"><p class="black9 font_size14 font_line30 mt10">'+msg+'</p></div>';
+        $(".loadding").html(msg).show();
+    }
+
+    function hideLoader()
+    {
+        $(".loadding").hide();
+    }
+
+    function loaddata() {
+        showLoader('正在加载中....', true);
+        $.getJSON(link.replace('#page#', page), params, function (ret) {
+            //console.log(ret);
+            if(ret.loadst == 0){
+                hideLoader();
+            }
+            if (page == 1) {
+                $("#index_goods_items").html(ret.html);
+                _lock = false;
+                if (ret.html == "") {
+                    showLoader("没有找到数据");
+                }
+            } else {
+                if (ret.html) {
+                    $("#index_goods_items").append(ret.html);
+                    _lock = false;
+                } else {
+                    showLoader('没有更多了', false);
+                }
+            }
+        });
+    }
+
+    $(".pub_page").scroll(function () {//监听滚动条改变
+
+        if ($(window).scrollTop() == $(document).height() - $(window).height()) { //滚动条到顶部的垂直高度 = 页面高度 - 可视高度
+            if (_lock) {
+                return false;
+            }
+            _lock = false;
+             page++;
+            loaddata();
+            _lock = true;
+        }
+    });
+    
+
+    //签到
+    $('#sign_btn').click(function(){
+        if($(this).hasClass('sign_ed')){
+            return false;
+        }
+        $.post("<{link ctl='card/jifen/sign_handel'}>",{}, function (ret) {
+            if(ret.error == 0){
+                setTimeout(function(){
+                    location.reload();
+                },2000);
+            }
+            layer.open({
+                content: ret.message
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+            });
+        }, 'json')
+    })
+    
+    $(document).on('click','.exchange_btn',function(){
+        var product_id = $(this).attr('pid');
+        //询问框
+     /*   layer.open({
+          content: '您确定要刷新一下本页面吗？'
+          ,btn: ['刷新', '不要']
+          ,yes: function(index){
+            location.reload();
+            layer.close(index);
+          }
+        });*/
+
+        $.post("<{link ctl='card/jifen/exchange'}>",{product_id:product_id}, function (ret) {
+            if(ret.error == 0){
+                setTimeout(function(){
+                    location.reload();
+                },2000);
+            }
+            layer.open({
+                content: ret.message
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+            });
+        }, 'json')
+    })
+</script>
+<{include file="shop/card/block/sfooter.html"}>
+<{include file="shop/card/block/footer.html"}>

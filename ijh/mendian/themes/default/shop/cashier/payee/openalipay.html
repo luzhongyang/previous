@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>开通支付宝</title>
+<link rel="stylesheet" href="%THEME%/static/weui/weui.min.css"/>
+<link rel="stylesheet" href="%THEME%/shop/cashier/static/css/payee.css"/>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+			<!-- 内容部分 -->
+            <div class="container_mid">
+				<div class="openAlipay_box">
+					<h2 class="open_bt">请按照以下步骤开通支付宝收款</h2>
+					<div class="cont1">
+						<h3 class="black6 mb5 step">一、授权</h3>
+						<p class="black9 mb10 wz_box">打开支付宝钱包，扫以下二维码授权支付宝</p>
+						<div class="text_c"><img src="http://api.wxzhu.com/tools/qrcode?data=<{$alipay_auth_code_uri}>" class="code"/></div>
+					</div>
+					<div class="cont2">
+						<h3 class="black6 mb5 step">二、开通</h3>
+						<div class="mb10 wz_box">
+							<i class="fl l_num">1</i>
+							<div class="r_wz">
+								<p class="black9">授权成功后，请用电脑登录网址：<p>
+								<p class="black6"><{$alipay_auth_sign_uri}></p>
+								<p class="black9">进行签约资料填写</p>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="mb10 wz_box">
+							<i class="fl l_num">2</i>
+							<div class="r_wz">
+								<p class="black9">签约成功后，请联系客服进行开通：</p>
+								<div class="open_zixun">
+									<div class="mt10">
+										<i class="ico1"></i><span><{$CONFIG.site.phone}></span>
+										<a href="#" class="btn">立即咨询</a>
+									</div>
+									<div class="mt10">
+										<i class="ico2"></i><span><{$CONFIG.site.kfqq}></span>
+										<a href="#" class="btn">立即咨询</a>
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+            </div>
+			<!-- 内容部分结束 -->
+        </div>
+    </div>
+</div>
+</body>
+</html>

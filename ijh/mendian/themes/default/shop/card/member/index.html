@@ -1,0 +1,81 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_page_cont">
+            <div class="pub_cont">
+                <!--内容开始-->
+                <div class="membcardCenter_info m-b10">
+                    <div class="info_box">
+                        <div class="wz">
+                            <P class="big"><{$CARD.money}></P>
+                            <P>余额</P>
+                        </div>
+                        <div class="mid">
+                            <div class="img_box">
+                                <div class="img"><img src="<{$pager.img}>/<{$shop.logo}>" width="68px" height="68px" style="border-radius: 50%;"><span class="tag">v<{$level}></span></div>
+                            </div>
+                            <p><{$wxuserinfo.nickname}></p>
+                        </div>
+                        <div class="wz">
+                            <P class="big"><{$CARD.jifen}></P>
+                            <P>积分</P>
+                        </div>
+                    </div>
+                    <a href="<{if $today_is_sign}><{link ctl='card/jifen:index'}><{else}>###<{/if}>" class="sign_box linkico"><span class="tag <{if $today_is_sign}>sign_ed<{/if}>" id='sign_btn' <{if $sign == 1}>style="background:#d7d8d7;color:#ffffff;border:none;"<{/if}>><{if $today_is_sign}>今日已签到<{else}>签到<{/if}></span>签到可获取积分</a>
+                </div>
+                <div class="membcardCenter_count clearfix m-b10">
+                    <a href="<{link ctl='card/order/index'}>" class="b-r"><img src="%THEME%/shop/card/static/images/card_center_consume@2x.png">消费记录</a>
+                    <a href="<{link ctl='card/money/recharge'}>"><img src="%THEME%/shop/card/static/images/card_center_recharge@2x.png">充值记录</a>
+                </div>
+                <div class="membcardCenter_privlg m-b10">
+                    <div class="tit b-b">我的特权</div>
+                    <div class="list_box clearfix">
+                        <ul>
+                            <li>
+                                <a href="<{link ctl='card/member/tq'}>">
+                                    <img src="%THEME%/shop/card/static/images/card_center_birthday@2x.png">
+                                    <p>生日惊喜</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<{link ctl='card/member/tq'}>">
+                                    <img src="%THEME%/shop/card/static/images/card_center_vip@2x.png">
+                                    <p>会员专享</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<{link ctl='card/jifen/index'}>">
+                                    <img src="%THEME%/shop/card/static/images/card_center_exchange@2x.png">
+                                    <p>积分兑换</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //签到
+    $('#sign_btn').click(function () {
+        if ($(this).hasClass('sign_ed')) {
+            return false;
+        }
+        $.post("<{link ctl='card/jifen/sign_handel'}>", {}, function (ret) {
+            if (ret.error == 0) {
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+            }
+            layer.open({
+                content: ret.message
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+            });
+        }, 'json')
+    })
+</script>
+<{include file="shop/card/block/footer.html"}>

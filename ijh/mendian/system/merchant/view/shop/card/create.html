@@ -1,0 +1,89 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加会员</h5>
+            </div>
+            <div class="ibox-content">
+                <form action="<{link ctl='merchant/shop/card:create'}>" mini-form="jhcms" method="post" ENCTYPE="multipart/form-data" role="form" class="form-horizontal m-t" >
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 col-sm-2 control-label">会员卡号：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" name="data[number]" value="" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">会员等级：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <select class="form-control" name="data[grade_id]">
+                                    <optgroup label="会员等级">
+                                    <{foreach $grade_obj as $k=>$v}>
+                                    <option value="<{$v.grade_id}>"><{$v.title}></option>
+                                    <{/foreach}>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 col-sm-2 control-label">姓名：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" name="data[name]" value="" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 col-sm-2 control-label">会员电话：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" name="data[mobile]" value="" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">会员生日：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <div class="input-group date">
+                                    <span  class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" name="data[birthday]" id="d4311" value="" class="form-control" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 col-sm-2 control-label">初始积分：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" readonly="readonly" value="0" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 col-sm-2 control-label">初始余额：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" readonly="readonly" value="0.00" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">&nbsp;</label>
+                            <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <button class="btn btn-primary" type="submit">保存数据</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<{include file="merchant:block/footer.html"}>

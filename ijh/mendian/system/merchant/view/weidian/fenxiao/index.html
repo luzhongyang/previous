@@ -1,0 +1,45 @@
+<{include file="merchant:block/header.html"}>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>外送店铺资料</h5>
+            </div>
+            <div class="ibox-content">
+
+
+                <form action="<{link ctl='merchant/weidian/fenxiao:index'}>" mini-form="ucenter" method="post" ENCTYPE="multipart/form-data"
+                      role="form" class="form-horizontal m-t">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分销设置：</label>
+
+                        <div class="col-sm-6">
+                        <{for $i=0; $i<=$fenxiao.level;$i++}>
+                            <div class="col-sm-3">
+                            <label><input type="radio" name="data[have_fenxiao]"
+                                          value="<{$i}>" <{if $shop.have_fenxiao==$i}>checked="checked"<{/if}>><{if $i==0}>关闭<{elseif $i==1}>一级<{elseif $i==2}>二级<{elseif $i==3}>三级<{/if}>
+                            </label>
+                            </div>
+                        <{/for}>
+                        </div>
+                    </div>
+
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group draggable">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit">保存修改</button>
+                            <!-- <button class="btn btn-white" type="submit">取消</button> -->
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<{include file="merchant:block/footer.html"}>

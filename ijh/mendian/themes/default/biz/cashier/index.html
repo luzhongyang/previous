@@ -1,0 +1,78 @@
+<{include file='biz/block/header.html' }>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i> </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <a href="index.html" data-index="0" class="wz J_menuItem"><{$shop.title}></a>
+                    <span class="img"></span>
+                </li>
+                <{foreach $menu_list as $key=>$items}>
+                <{if $items['menu']}>
+                <li><a href="#"><i class="ico ico<{$key+1}>"></i><span class="nav-label"><{$items.title}></span></a>
+                    <ul class="nav nav-second-level">
+                        <{foreach $items['items'] as $v}>
+                        <{if $v.menu}>
+                        <li> <a class="J_menuItem" href="#" data-url="<{link ctl=$v.ctl}>"><{$v.title}></a> </li>
+                        <{/if}>
+                        <{/foreach}>
+
+                    </ul>
+                </li>
+                <{/if}>
+
+                <{/foreach}>
+
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2" href="#"><i class="fa fa-bars"></i></a>
+                </div>
+                <div class="pull-left input-group search-section">
+                    <input type="text" class="form-control" placeholder="请输入手机号/订单编号/商家名/配送员姓名" aria-describedby="basic-addon2">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-theme"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+                <div class="pull-right news_box">
+                    <a href="#">
+                        <i class="fa fa-envelope"></i>
+                        消息提醒中心
+                        <span class="num"></span>
+                    </a>
+                </div>
+                <div class="pull-right userInfo_box">
+                    <a href="javascript:;" class="userInfo">
+                        <span class="img"><img src="<{$pager.img}>/<{$shop.logo}>"></span>
+                        <span><{$shop.mobile}></span>
+                        <i class="glyphicon glyphicon-menu-down"></i>
+                    </a>
+                    <ul class="dropMenu">
+                        <li><a href="#"><i class="fa fa-lock"></i>修改密码</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-phone"></i>修改手机号</a></li>
+                        <li><a href="<{link ctl='cashier/account:loginout'}>"><i class="fa fa-power-off"></i>退出登录</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="row breadcrumb_box">
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-home mr10"></i>首页</a></li>
+                <li><a href="#">管理中心</a></li>
+                <li class="active">商家管理</li>
+            </ol>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0" data-id="index.html" seamless></iframe>
+        </div>
+        <{include file='biz/block/footer.html' }>

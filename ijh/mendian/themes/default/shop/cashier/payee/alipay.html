@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>支付宝收款</title>
+<link rel="stylesheet" href="%THEME%/static/weui/weui.min.css"/>
+<link rel="stylesheet" href="%THEME%/shop/cashier/static/css/payee.css"/>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+			<!-- 内容部分 -->
+            <div class="container_mid">
+				<{if $payee_alipay.status}>
+				<div class="cashier_state1 cashier_state2">
+					<i class="ico2"></i>
+					<p class="state">已开通，总收款</p>
+					<p class="fontcl2 mt10">￥<{$payee_alipay.total_amount}></p>
+				</div>
+				<h3 class="cashier_xinxi_tit">开通信息</h3>
+				<div class="cashier_xinxi">
+					<p><span>有效期至</span><{$payee_alipay.expire_time|format:"Y-m-d"}></p>
+				</div>
+				<{else}>
+				<div class="cashier_state1">
+					<i class="ico1"></i>
+					<p class="state">开通受理中</p>
+				</div>
+				<h3 class="cashier_xinxi_tit">开通信息</h3>
+				<div class="cashier_xinxi">
+					<p><span>有效日期</span>开通受理中</p>
+				</div>
+				<{/if}>
+            </div>
+			<!-- 内容部分结束 -->
+        </div>
+    </div>
+</div>
+</body>
+</html>

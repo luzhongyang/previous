@@ -1,0 +1,29 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="shop/printer:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?shop/printer-edit.html" mini-form="printer-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<input type="hidden" name="printer_id" value="<{$detail.printer_id}>"/>
+<tr><th><span class="red">*</span>设备名称：</th><td><input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>类型：</th><td><input type="text" name="data[type]" value="<{$detail.type|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>配置：</th><td><textarea name="data[config]" class="textarea"><{$detail.config}></textarea><br /></td></tr>
+<tr>
+	<th><span class="red">*</span>状态：</th>
+	<td>
+		<label><input type="radio" name="data[status]" <{if $detail.status}>checked="checked"<{/if}> value="1"/>是</label>&nbsp;&nbsp;
+		<label><input type="radio" name="data[status]" <{if isset($detail.status) && empty($detail.status)}>checked="checked"<{/if}> value="0"/>否</label>
+	</td>
+</tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

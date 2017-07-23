@@ -1,0 +1,162 @@
+<{include file="merchant:block/header.html"}>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 广告列表</a></li>
+                <li class="list_btn_right">
+                    <button onclick="location_addr('<{link ctl='merchant/weidian/banner:create'}>')"
+                            class="btn btn-primary ">添加广告
+                    </button>
+                </li>
+                <li class="list_btn_right">
+                    <button class="btn btn-danger " href="<{link ctl="merchant/weidian/banner/so"}>" mini-load="搜索内容" mini-width="500" class="btn btn-danger " title="搜索">搜索
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <table class="table table-striped  table-hover">
+                            <thead>
+                            <tr>
+                                <th><span class="screeTable">编号<i class="ico up"></i></span></th>
+                                <th><span class="screeTable">图片<i class="ico down"></i></span></th>
+                                <th>标题</th>
+                                <th><span class="screeTable">链接<i class="ico up"></i></span></th>
+                                <th>点击数</th>
+                                <th><span class="screeTable">状态<i class="ico up"></i></span></th>
+                                <th><span class="screeTable">创建时间<i class="ico up"></i></span></th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <{foreach $items as $item}>
+                            <tr>
+                                <td><input type="checkbox" class="i-checks" name="ids[]"
+                                           value="<{$item.banner_id}>"><span class="m-l"><{$item.banner_id}></span></td>
+                                <td>
+                                    <div class="goods_list">
+                                        <a href="#">
+                                            <div class="img"><img width="100" src="<{$pager.img}>/<{$item.photo}>">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td><{$item.title}></td>
+                                <td><{$item.link}></td>
+                                <td><{$item.clicks}></td>
+                                <td>
+                                    <{if $item.audit == 1}>显示<{else}>隐藏<{/if}>
+                                </td>
+                                <td><{$item.dateline|format:'Y-m-d H:i'}></td>
+                                <td>
+                                <{if $item.audit == 1}>
+                                    <a type="button" class="btn btn-success btn-sm btn-outline"
+                                       href="<{link ctl='merchant/weidian/banner:audit' arg1=$item.banner_id arg2=0}>"
+                                       style="margin-right:2px;" mini-act="audit">隐藏</a>
+                                    <{else}>
+                                    <a type="button" class="btn btn-success btn-sm btn-outline"
+                                       href="<{link ctl='merchant/weidian/banner:audit' arg1=$item.banner_id arg2=1}>"
+                                       style="margin-right:2px;" mini-act="audit">显示</a>
+                                    <{/if}>
+                                    <a type="button" class="btn btn-primary btn-sm btn-outline"
+                                       href="<{link ctl='merchant/weidian/banner:edit' args=$item.banner_id}>"
+                                       style="margin-right:2px;">修改</a>
+                                    <a type="button" class="btn btn-danger btn-sm btn-outline" mini-act="del"
+                                       mini-confirm="确定要删除吗？"
+                                       href="<{link ctl='merchant/weidian/banner:delete' args=$item.banner_id}>">删除
+                                    </a>
+                                </td>
+                            </tr>
+                            <{foreachelse}>
+                            <tr>
+                                <td colspan="20">
+                                    <div class="alert alert-info">没有数据</div>
+                                </td>
+                            </tr>
+                            <{/foreach}>
+                            </tbody>
+                        </table>
+
+                        <!--分页-->
+                        <div class="clearfix p-xs">
+                            <div class="pull-left">
+                                <span class="m-r-sm"><input type="checkbox" class="i-checks" id="allChk"></span>
+                                <a href="javascript:;" id="del">
+                                    <button type="button" class="btn btn-danger btn-sm" >批量删除</button>
+                                </a>
+                            </div>
+                            <div class="btn-group pull-right pagination_box">
+                                <div class="page"><{$pager.pagebar}></div>
+                            </div>
+                        </div>
+                        <!--分页结束-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var sechScree_h = $("#sechScree").height();
+        var sechScree_w = $("#sechScree").width();
+        $("#sechScree").css("top", "50%");
+        $("#sechScree").css("left", "50%");
+        $("#sechScree").css("margin-top", -(sechScree_h / 2));
+        $("#sechScree").css("margin-left", -(sechScree_w / 2));
+    });
+</script>
+
+<script type="text/javascript" src="<{$pager.res}>/script/widget.bmap.js"></script>
+<{include file="merchant:block/footer.html"}>
+
+<script>
+    // 全选  
+    $("#allChk").click(function () {
+        $("input[name='ids[]']").prop("checked", this.checked);
+    });
+
+    // 单选  
+    var subChk = $("input[name='ids[]']")
+    subChk.click(function () {
+        $("#allChk").prop("checked", subChk.length == subChk.filter(":checked").length ? true : false);
+    });
+
+    $(document).on('click','#del',function(){
+        var checkedNum = $("input[name='ids[]']:checked").length;
+        if (checkedNum == 0) {
+            layer.msg("请选择至少一项！");
+            return;
+        }
+        show_confirm();
+    });
+
+    function show_confirm(){  
+        var result = confirm('确认要批量删除吗？');  
+        if(result){  
+            if (true) {
+                var checkedList = new Array();
+                $("input[name='ids[]']:checked").each(function () {
+                    checkedList.push($(this).val());
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "?weidian/banner/dels",
+                    data: {'ids': checkedList},
+                    dataType:"JSON",
+                    success: function (ret) {
+                        if (ret.error == 0) {
+                            layer.msg('操作成功');
+                            setTimeout(function(){window.location.reload();},1500);
+                        }
+                    }
+                });
+            }
+        } 
+    }  
+</script>

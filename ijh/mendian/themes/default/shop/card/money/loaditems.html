@@ -1,0 +1,9 @@
+<{foreach $order as $v}>
+<div class="pub_list">
+    <div class="pub_list_bd">
+        <P><{$v.title}></P>
+        <small><{$v.dateline|format:'Y-m-d H:i'}></small>
+    </div>
+    <div class="pub_list_ft fontcl1">￥<{$v.total_price}></div>
+</div>
+<{/foreach}>

@@ -1,0 +1,83 @@
+<{include file="shop/card/block/header.html"}>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_cont">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="membcard_ord mar15">
+                	<div class="price_box">
+                    	<P>交易金额</P>
+                        <P class="big fontcl1"><small class="black6">￥</small><{$order.money+$order.amount}></P>
+                    </div>
+                    <div class="info_box b-t b-b">
+                    	<p class="clearfix">交易时间：<span class="pull-right"><{$_order['dateline']|format:'Y-m-d H:i:s'}></span></p>
+                        <p class="clearfix">流水号：<span class="pull-right"><{$order.order_id}></span></p>
+                        <!--<p class="clearfix">关联单号：<span class="pull-right">cyan201610280011344</span></p>-->
+                        <p class="clearfix">退款方式：<span class="pull-right"><{$back_code.pay_code_title}></span></p>
+                        <p class="clearfix">退款金额：<span class="pull-right">￥<{$order.money+$order.amount}></span></p>
+                        <{if $order.youhui_title}> <p class="clearfix">优惠方式：<span class="pull-right"><{$order.youhui_title}></span></p><{/if}>
+                        <p class="clearfix">优惠金额：<span class="pull-right">￥<{$_order.order_youhui}></span></p>
+                    </div>
+                    <div class="delt_box">
+                    	<div class="delt_box_tit on clearfix">商品详情：<span class="pull-right"><i class="ico"></i></span></div>
+                        <div class="table_box">
+                        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr class="b-b">
+                                    <th>商品名称</th>
+                                    <th class="text-center">单价</th>
+                                    <th width="40" class="text-right">数量</th>
+                                </tr>
+                                <{if $products}>
+                                    <{foreach $order_product as $product}>
+                                        <tr>
+                                            <td><{$products['title']}></td>
+                                            <td class="text-center">￥<{$product.product_price}></td>
+                                            <td class="text-center"><{$product.product_number}></td>
+                                        </tr>
+                                    <{/foreach}>
+                                <{else}>
+                                <{foreach $order_product as $product}>
+                                    <tr>
+                                        <td><{$product.product_title}></td>
+                                        <td class="text-center">￥<{$product.product_price}></td>
+                                        <td class="text-center"><{$product.product_number}></td>
+                                    </tr>
+                                <{/foreach}>
+                                <{/if}>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="membcard_ord_ft"></div>
+                </div>
+                <!--内容结束-->
+            </div>
+            <footer class="footer_btn-block b-t" style="display:block;">
+                <div class="text-center">
+                    <button type="button"  onclick="tiaozhuan1()" data-order="<{$order.order_id}>" class="btn btn-primary btn-outline btn-sm">返回首页</button>
+
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+	$(".membcard_ord .delt_box .delt_box_tit").click(function(){
+		if($(this).hasClass("on")){
+			$(".membcard_ord .delt_box .delt_box_tit").removeClass("on");
+			$(".membcard_ord .delt_box .table_box").slideUp();
+		}else{
+			$(".membcard_ord .delt_box .delt_box_tit").addClass("on");
+			$(".membcard_ord .delt_box .table_box").slideDown();
+		}
+	});
+    
+});
+function tiaozhuan1() {
+    var url = "<{link ctl='card'  }>";
+    window.location.href=url;
+
+
+}
+</script>
+<{include file="shop/card/block/footer.html"}>

@@ -1,0 +1,443 @@
+<{include file="merchant:block/header.html"}>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>收款</h5>
+            </div>
+            <div class="ibox-content">
+                <form  method="post" role="form" class="form-horizontal m-t">
+           
+                  	<div class="form-group">
+                        <label class="col-sm-2 control-label">选择卡券：</label>
+                        <div class="col-sm-10">
+                        	<div class="col-sm-4" >
+		                        <select data-placeholder="输入立减金额或折扣搜索" class="chosen-select youhui form-control"  tabindex="2" >
+		                        	<option value=""></option>
+		                        	<{foreach $youhui_data as $v1}>
+		                            	<option value="<{$v1}>" yhtype="youhui">&yen; <{$v1}> 整单立减</option>
+		                            <{/foreach}>
+		                            <{foreach $discount_data as $v2}>
+		                            	<option value="<{$v2}>" yhtype="discount"><{$v2}>折 整单折扣</option>
+		                            <{/foreach}>
+		                        </select>
+	                        </div>
+                        </div>
+                    </div>
+                  	<div class="form-group">
+                        <label class="col-sm-2 control-label">选择会员：</label>
+                        <div class="col-sm-10">
+                        	<div class="col-sm-4" >
+		                        <select data-placeholder="输入会员手机号搜索" class="chosen-select member form-control"  tabindex="2" >
+		                        	<option value=""></option>
+		                        	<{foreach $member_items as $v}>
+		                            	<option value="<{$v.mobile}>" mobile="<{$v.mobile}>" username="<{$v.name}>" money="<{$v.money}>" jifen="<{$v.jifen}>" cardid="<{$v.card_id}>" discount="<{$v.discount}>"><{$v.mobile}></option>
+		                            <{/foreach}>
+		                        </select>
+	                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">会员姓名：</label>
+                        <div class="col-sm-10">
+                        	<div class="col-sm-4" >
+	                            <input type="text" name="username" value="" class="form-control" readonly="readonly">
+	                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">会员卡号：</label>
+                        <div class="col-sm-10">
+                        	<div class="col-sm-4" >
+	                            <input type="text" name="card_id" value="" class="form-control" readonly="readonly">
+	                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">会员余额：</label>
+                        <div class="col-sm-10">
+	                        <div class="col-sm-4">
+	                        	<div class="input-group ">
+		                        	<span class="input-group-addon">¥</span>
+		                            <input type="text" name="money" value="" class="form-control" readonly="readonly">
+		                        </div>
+	                        </div>
+	                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">会员积分：</label>
+                        <div class="col-sm-10">
+	                        <div class="col-sm-4">
+	                            <input type="text" name="jifen" value="" class="form-control" readonly="readonly">
+	                        </div>
+	                    </div>
+                    </div>
+					<div class="form-group" id="member_money_pay" style="display: none;">
+                        <label class="col-sm-2 control-label">余额支付：</label>
+                        <div class="col-sm-10">
+                        	<div class="col-sm-4">
+                        		<div class="checkbox checkbox-success">
+                                    <input id="checkbox3" name="money_dikou" type="checkbox">
+                                    <label for="checkbox3">
+                                        会员可以使用余额支付
+                                    </label>
+                                </div>
+	                        </div>
+	                    </div>
+                    </div>
+                    <div class="form-group" id="member_discount_pay" style="display: none;">
+                        <label class="col-sm-2 control-label" id="member_discount_label1"></label>
+                        <div class="col-sm-10">
+                        	<div class="col-sm-4">
+                        		<div class="checkbox checkbox-success">
+                                    <input id="checkbox4" name="discount_dikou" type="checkbox">
+                                    <label for="checkbox4" id="member_discount_label2">
+                                        
+                                    </label>
+                                </div>
+	                        </div>
+	                    </div>
+                    </div>
+                    <div class="form-group" id="member_pay" style="display: none;">
+                        <label class="col-sm-2 control-label">会员还需支付：</label>
+                        <div class="col-sm-10">
+	                        <div class="col-sm-4">
+	                        	<div class="input-group ">
+		                        	<span class="input-group-addon">¥</span>
+		                            <input type="text" name="m_need_pay" value="0.00" class="form-control" readonly="readonly">
+		                        </div>
+	                        </div>
+	                    </div>
+                    </div>
+                    <div class="form-group ">
+	                    <label class="col-sm-2 control-label">输入金额：</label>
+	                    <div class="col-sm-10">
+							<div class="col-sm-4">
+	                    		<div class="input-group ">
+			                   		<span class="input-group-addon">¥</span>
+			                        <input type="text" name="shoukuan_amount" value="0.00" class="form-control" placeholder="请输入收款金额">
+			                    </div>
+			                </div>
+		                </div>
+	                </div>
+                    <div class="form-group ">
+	                    <label class="col-sm-2 control-label">优惠金额：</label>
+	                    <div class="col-sm-10">
+							<div class="col-sm-4">
+	                    		<div class="input-group ">
+			                   		<span class="input-group-addon">¥</span>
+			                        <input type="text" name="youhui_amount" value="0.00" class="form-control" readonly="readonly">
+			                    </div>
+			                </div>
+		                </div>
+	                </div>
+	                 <div class="form-group ">
+	                    <label class="col-sm-2 control-label">应收金额：</label>
+	                    <div class="col-sm-10">
+	                    	<div class="col-sm-4">
+		                    	<div class="input-group ">
+			                    	<span class="input-group-addon">¥</span>
+			                        <input type="text" name="yinshou_amount" value="0.00" class="form-control" readonly="readonly">
+			                    </div>
+			                </div>
+	                    </div>
+	                </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">&nbsp;</label>
+                        <div class="col-sm-10">
+	                        <div class="col-sm-4">
+	                        	<button class="btn btn-primary" type="button" id="goto_sub">确认结算</button>
+	                        </div>
+	                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">现金收款</h4>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                <form  method="post" role="form" class="form-horizontal m-t">
+                	<input type="hidden" name="data[order_id]" value="">
+                	<div class="form-group draggable">
+	                    <label class="col-sm-4 control-label">应收金额：</label>
+	                    <div class="col-sm-4">
+	                    	<div class="input-group ">
+		                    <span class="input-group-addon">¥</span>
+		                        <input type="text" name="data[shishou_amount]" value="" class="form-control" readonly="readonly">
+		                    </div>
+		                </div>
+	                </div>
+	                 <div class="form-group draggable">
+	                    <label class="col-sm-4 control-label">实收金额：</label>
+	                    <div class="col-sm-4">
+	                    	<div class="input-group ">
+		                    	<span class="input-group-addon">¥</span>
+		                        <input type="text" name="data[s_money]" value="0" class="form-control" >
+		                    </div>
+	                    </div>
+	                </div>
+	                <div class="form-group draggable">
+	                    <label class="col-sm-4 control-label">找零金额：</label>
+	                    <div class="col-sm-4">
+		                    <div class="input-group ">
+		                    	<span class="input-group-addon">¥</span>
+		                        <input type="text" name="data[z_money]" value="0" class="form-control" readonly="readonly">
+		                    </div>
+	                    </div>
+	                </div>
+	            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white cancel_order">取消</button>
+                <button type="button" class="btn btn-primary" id="goto_cashpay">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<{include file="merchant:block/footer.html"}>
+<script  type="text/javascript" charset="utf-8" async defer>
+
+	// chosen初始化
+	$('.chosen-select').chosen({
+		width: "100%",
+		no_results_text: "没有找到",
+	});
+
+  	var youhui_type = '';   		// 优惠券类型(选择标识)  整单立减、整单折扣
+  	var youhui = 0;       			// 整单立减值
+  	var discount = 0;	  			// 折扣值
+  	var member_card_id = 0; 		// 会员卡ID
+  	var member_card_discount = 0; 	// 某个会员享受的折扣等级
+  	var is_money = 0; 				// 会员是否余额支付
+  	var is_card_discount = 0;		// 会员是否折扣
+  	var card = '';  				// 无码商品
+  	var shoukuan_amount = 0; 		// 输入收款金额
+  	var youhui_amount = 0;    		// 优惠金额
+  	var yinshou_amount = 0; 		// 应收金额
+
+  	// 选择卡券事件
+  	$(".chosen-select.youhui").chosen().change(function(){
+  		if($(this).val()) {
+  			youhui_type = $('.chosen-select.youhui').find('option:selected').attr('yhtype');
+  			if(youhui_type == 'youhui') {
+  				discount = 0;
+  				youhui = parseFloat($(this).val());
+  			}else if(youhui_type == 'discount') {
+  				youhui = 0;
+  				discount = parseFloat($(this).val());
+  			}
+  		}
+  		balance();
+  	})
+
+  	// 选择会员事件
+  	$(".chosen-select.member").chosen().change(function(){
+  		if($(this).val()) {
+  			member_card_id = $('.chosen-select.member').find('option:selected').attr('cardid');
+  			member_card_discount = parseFloat($('.chosen-select.member').find('option:selected').attr('discount'));
+	  		$("input[name='username']").val($('.chosen-select.member').find('option:selected').attr('username'));
+		    $("input[name='money']").val($('.chosen-select.member').find('option:selected').attr('money'));
+		    $("input[name='jifen']").val($('.chosen-select.member').find('option:selected').attr('jifen'));
+		    $("input[name='card_id']").val($('.chosen-select.member').find('option:selected').attr('cardid'));
+		    $('#member_pay').css('display','block');
+		    $('#member_money_pay').css('display','block');
+		    $('#member_discount_pay').css('display','block');
+		    $('#member_discount_label1').html($('.chosen-select.member').find('option:selected').attr('discount')+'折优惠：');
+		    $('#member_discount_label2').html('会员专享'+$('.chosen-select.member').find('option:selected').attr('discount')+'折优惠');
+  		}
+  		balance();
+  	})
+
+  	// 余额支付勾选事件
+  	$("input[name='money_dikou']").change(function() {
+  		if($(this).is(':checked') == true) {
+  			is_money = 1;
+  		}else {
+  			is_money = 0;
+  		}
+  		balance();
+  	})
+  	
+  	// 8折优惠勾选事件
+  	$("input[name='discount_dikou']").change(function() {
+  		if($(this).is(':checked') == true) {
+  			is_card_discount = 1;
+  		}else {
+  			is_card_discount = 0;
+  		}
+  		balance();
+  	})
+
+  	// 计算优惠金额、应收金额
+  	function balance() {
+  		if(shoukuan_amount>0) {
+  			yinshou_amount = shoukuan_amount;
+
+  			if(is_card_discount && member_card_id) {
+  				yinshou_amount = yinshou_amount * member_card_discount * 0.1;
+  			}
+
+  			if(youhui_type == 'youhui') {
+  				if(yinshou_amount > youhui) {
+  					yinshou_amount = yinshou_amount - youhui;
+  				}else {
+  					yinshou_amount = 0;
+  				}
+  			}else if(youhui_type == 'discount'){
+  				yinshou_amount = yinshou_amount * discount * 0.1;
+  			}
+
+  			youhui_amount = shoukuan_amount - yinshou_amount;
+  			$("input[name='youhui_amount']").val(parseFloat(youhui_amount).toFixed(2));
+			$("input[name='yinshou_amount']").val(parseFloat(yinshou_amount).toFixed(2));
+  		}
+  	}
+
+  	// 输入收款金额
+  	$(document).on('input propertychange',"input[name='shoukuan_amount']", function(){
+  		shoukuan_amount = parseFloat($(this).val());
+  		balance();
+  	})
+
+  	window.LoadData = window.LoadData || {"LOCK":false, "LOAD_END":false, "params":{}};
+
+	// 确认结算
+	$(document).on('click','#goto_sub',function(){
+		LoadData.params = {};
+		yinshou_amount = parseFloat($("input[name='yinshou_amount']").val());
+		if(yinshou_amount == 0) {
+			layer.msg('该单应收金额为0');return;
+		}
+
+ 		if(is_money == 1) {
+ 			LoadData.params.is_money = 1;
+ 		}
+ 		if(youhui_type == 'youhui') {
+ 			LoadData.params.youhui = youhui;
+ 		}else if(youhui_type == 'discount') {
+ 			LoadData.params.discount = discount;
+ 		}
+ 		if(is_card_discount == 1) {
+ 			LoadData.params.is_card_discount = 1;
+ 		}
+ 		if(member_card_id > 0) {
+ 			LoadData.params.card_id = member_card_id;
+ 		} 
+ 		LoadData.params.cart = "无码商品1:" + yinshou_amount + ":1";
+
+		// 生成订单
+		$.ajax({
+	        url: "<{link ctl='merchant/cashier/order/create'}>",
+	        async: false,
+	        dataType: 'json',
+	        data: LoadData.params,
+	        type: 'POST',
+	        success: function (ret) {
+	            if(ret.error == 0) {
+	            	if(ret.data.amount==0) {
+	            		// 选择了余额支付直接付款成功
+	            		var text_html = '';
+	            		text_html += '<span class="sa-line sa-right">会员信息</span></br></br>';
+	            		text_html += '<span class="sa-line sa-right">手机号：'+ret.data.card.mobile+'</span></br>';
+	            		text_html += '<span class="sa-line sa-right">姓名：'+ret.data.card.name+'</span></br>';
+	            		text_html += '<span class="sa-line sa-right">余额：'+ret.data.card.money+'</span></br>';
+	            		text_html += '<span class="sa-line sa-right">积分：'+ret.data.card.jifen+'</span>';
+	            		swal({
+			                title: "完成收款",
+			                html: true,
+			                text: text_html,
+			                type: "success"
+			            });
+			            setTimeout(function(){window.location.reload();},3000);
+	            	}else if(ret.data.amount > 0){
+	            		$("input[name='data[order_id]']").val(ret.data.order_id);
+		            	$("input[name='data[shishou_amount]']").val(ret.data.amount);
+		                $('#myModal6').modal();
+	            	}
+                }
+	        },
+	        error: function (xhr, status, err) {
+	            alert(err);
+	        },
+	    });
+	})
+
+	// modal取消按钮点击事件
+	$(document).on('click','.cancel_order', function(){
+		$.ajax({
+	        url: "<{link ctl='merchant/cashier/order/cancel'}>",
+	        async: false,
+	        dataType: 'json',
+	        data: {"order_id":$("input[name='data[order_id]']").val()},
+	        type: 'POST',
+	        success: function (ret) {
+	        	if(!$(this).hasClass('close')) {
+	        		$('#myModal6').modal('toggle');
+	        	}
+	        },
+	        error: function (xhr, status, err) {
+	            alert(err);
+	        },
+	    });
+	})
+
+	// 确定现金入账
+	$(document).on('click','#goto_cashpay',function(){
+		var s_money = parseFloat($("input[name='data[s_money]']").val());
+		var shishou_amount = parseFloat($("input[name='data[shishou_amount]']").val()); 
+		if(s_money < shishou_amount) {
+			layer.msg('实际收款金额不得低于应收金额');return;
+		}
+		$.ajax({
+	        url: "<{link ctl='merchant/cashier/order/cashpay'}>",
+	        async: false,
+	        dataType: 'json',
+	        data: {"order_id":$("input[name='data[order_id]']").val(),'shishou_amount':shishou_amount},
+	        type: 'POST',
+	        success: function (ret) {
+	        	if(ret.error==0) {
+	        		$('#myModal6').modal('toggle');
+	        		var text_html = '';
+            		text_html += '<span class="sa-line sa-right">会员信息</span></br></br>';
+            		text_html += '<span class="sa-line sa-right">手机号：'+ret.data.card.mobile+'</span></br>';
+            		text_html += '<span class="sa-line sa-right">姓名：'+ret.data.card.name+'</span></br>';
+            		text_html += '<span class="sa-line sa-right">余额：'+ret.data.card.money+'</span></br>';
+            		text_html += '<span class="sa-line sa-right">积分：'+ret.data.card.jifen+'</span>';
+	        		swal({
+		                title: "完成收款",
+		                html: true,
+		                text: text_html,
+		                type: "success"
+		            });
+	        		setTimeout(function(){window.location.reload();},3000);
+	        	}
+	        },
+	        error: function (xhr, status, err) {
+	            alert(err);
+	        },
+	    });
+	})
+
+	// 实收input
+	$(document).on('input propertychange',"input[name='data[s_money]']", function(){
+		var s_money = parseFloat($("input[name='data[s_money]']").val());
+		var z_money = parseFloat($("input[name='data[z_money]']").val());
+		var shishou_amount = parseFloat($("input[name='data[shishou_amount]']").val());
+		if(s_money > shishou_amount) {
+			$("input[name='data[z_money]']").val(s_money-shishou_amount);
+		}else {
+			$("input[name='data[z_money]']").val(0);
+		}
+	})
+	
+</script>

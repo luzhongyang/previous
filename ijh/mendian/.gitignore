@@ -1,0 +1,14 @@
+/system/data/logs
+/system/data/cache
+/system/data/tplcache
+/system/data/tpladmin
+/attachs/photo
+.nbproject
+.settings
+.idea
+/nbproject
+/system/config.php
+/system/models/system/config.mdl.php
+/system/data/tplmerchant
+%SystemDrive%
+/system/models/sign

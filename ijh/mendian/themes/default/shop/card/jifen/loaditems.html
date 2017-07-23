@@ -1,0 +1,15 @@
+<{foreach $items as $k => $v}>
+<div class="pub_list">
+    <div class="pub_list_hd">
+        <div class="img"><a href="javascript:void(0);"><img src="<{$pager.img}>/<{$v.photo}>" style="width: 80px;height: 80px"></a></div>
+    </div>
+    <div class="pub_list_bd">
+        <h4><a href="javascript:void(0);"><{$v.title}></a></h4>
+        <P class="maincl"><i class="ico"></i><{$v.jifen}></P>
+        <p class="black9">还剩<{$v.stock}>件</p>
+    </div>
+    <div class="pub_list_ft">
+        <a href="javascript:void(0);" class="btn <{if $v.stock > 0}>btn-primary exchange_btn<{else}>btn-default bg<{/if}>" pid="<{$v.product_id}>">兑换</a>
+    </div>
+</div>
+<{/foreach}>

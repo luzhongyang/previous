@@ -1,0 +1,27 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="cashier/stafflog:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?cashier/stafflog-create.html" mini-form="stafflog-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>商户：</th><td><input type="text" name="data[shop_id]" value="<{$detail.shop_id|default:''}>" class="input w-100"/></td></tr>
+<tr><th>收银员：</th><td><input type="text" name="data[staff_id]" value="<{$detail.staff_id|default:''}>" class="input w-100"/></td></tr>
+<tr><th>当班订单量：</th><td><input type="text" name="data[day_orders]" value="<{$detail.day_orders|default:''}>" class="input w-100"/></td></tr>
+<tr><th>当班现金：</th><td><input type="text" name="data[day_cash]" value="<{$detail.day_cash|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>当班余额：</th><td><input type="text" name="data[day_money]" value="<{$detail.day_money|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>当班支付宝：</th><td><input type="text" name="data[day_alipay]" value="<{$detail.day_alipay|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>当班微信：</th><td><input type="text" name="data[day_wxpay]" value="<{$detail.day_wxpay|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>当班退款：</th><td><input type="text" name="data[day_refund]" value="<{$detail.day_refund|default:'0.00'}>" class="input w-100"/></td></tr>
+<tr><th>日期：</th><td><input type="text" name="data[day]" value="<{$detail.day|default:''}>" class="input w-100"/></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

@@ -1,0 +1,108 @@
+<{include file="merchant:block/header.html"}>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>微店店铺资料</h5>
+            </div>
+            <div class="ibox-content">
+                <{if !$weidian.shop_id}>
+                <h3 class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;您需要申请开通微店功能，才可以继续操作
+                </h3>
+                <{elseif !$weidian.audit}>
+                <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;您的微店正在审核中，请耐心等待
+                </div>
+                <{/if}>
+
+                <form action="<{link ctl='merchant/weidian:open'}>" mini-form="merchant" method="post"
+                      ENCTYPE="multipart/form-data" role="form" class="form-horizontal m-t">
+
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 col-sm-2 control-label">微店名称：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" name="data[title]" value="<{$weidian.title}>" class="form-control"
+                                       placeholder="请输入标题">
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">微店LOGO：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4"><input type="text" name="data[logo]" class="form-control" id="file_photo" value="<{$weidian.logo|default:''}>"  photo="<{if $weidian.logo}><{$pager.img}>/<{$weidian.logo|default:''}><{/if}>" readonly="readonly"/></div>
+                            <div class="col-sm-8"><input type="button" uploadbtn="#file_photo" class="ke-upload_lay pull-left" value=" 选择文件 " /><a preview="#file_photo" class="btn btn-success btn-outline"><span class="bs-glyphicons glyphicon glyphicon-th" aria-hidden="true"></span> 预览</a></div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 col-sm-2 control-label">客服电话：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <input type="text" name="data[phone]" value="<{$weidian.phone}>" class="form-control"
+                                       placeholder="请输入标题">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 control-label">到店自提：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <div class="radio radio-success radio-inline">
+                                    <input type="radio" name="data[is_ziti]" value="1" <{if $weidian.is_ziti == 1}>checked="checked"<{/if}> />
+                                    <label>支持</label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <input type="radio" name="data[is_ziti]" value="0" <{if $weidian.is_ziti == 0}>checked="checked"<{/if}> />
+                                    <label>不支持</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group draggable">
+                        <label class="col-sm-2 col-sm-2 control-label">付款方式：</label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <select class="form-control" name="data[parent_id]" id="pay_type_select">
+                                    <option value="all"
+                                    <{if $weidian.is_daofu==1 && $weidian.online_pay==1}>selected="selected"<{/if}>
+                                    >全部支持</option>
+                                    <option value="is_daofu"
+                                    <{if $weidian.is_daofu==1 &&
+                                    $weidian.online_pay==0}>selected="selected"<{/if}>>仅支持货到付款</option>
+                                    <option value="online_pay"
+                                    <{if $weidian.is_daofu==0 &&
+                                    $weidian.online_pay==1}>selected="selected"<{/if}>>仅支持在线支付</option>
+                                </select>
+                                <input type="hidden" name="data[online_pay]" value="<{$weidian.online_pay}>">
+                                <input type="hidden" name="data[is_daofu]" value="<{$weidian.is_daofu}>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">&nbsp;</label>
+                            <div class="col-sm-10">
+                            <div class="col-sm-4">
+                                <button class="btn btn-primary" type="submit"><{if $weidian}>保存数据<{else}>提交申请<{/if}></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#pay_type_select").change(function () {
+        if ($(this).val() == 'is_daofu') {
+            $("input[name='data[is_daofu]']").val(1);
+            $("input[name='data[online_pay]']").val(0);
+        } else if ($(this).val() == 'online_pay') {
+            $("input[name='data[is_daofu]']").val(0);
+            $("input[name='data[online_pay]']").val(1);
+        } else {
+            $("input[name='data[is_daofu]']").val(1);
+            $("input[name='data[online_pay]']").val(1);
+        }
+    });
+</script>
+<{include file="merchant:block/footer.html"}>

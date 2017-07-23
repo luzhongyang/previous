@@ -1,0 +1,147 @@
+<!--底部-->
+<div class="footer">
+    <div class="pagewd">
+        <P>All Rights Reserved ICP备案：皖ICP备13010842号</P>
+    </div>
+</div>
+
+<!--底部end-->
+<!--右边咨询浮动-->
+<div class="right_fixed" >
+    <ul class="list_box">
+        <li class="yuyue">
+            <i class="ico ico1"></i>
+            <div class="cx_box">
+                <div class="ta-r" style="display:none;"><a href="javascript:;" class="close"></a></div>
+                <p>0551-64278115</p>
+                <input type="text" id="mobile" placeholder="请输入您的手机号码">
+                <input type="button" id="yuyue" value="立即免费预约" class="btn">
+            </div>
+        </li>
+        <li class="qq_zx"><a href="#"><i class="ico ico2"></i></a></li>
+        <li class="wx">
+            <i class="ico ico3"></i>
+            <div class="cx_box">
+                <img src="%THEME%/home/www/static/images/wx_img.png">
+            </div>
+        </li>
+    </ul>
+    <a href="javascript:;" class="gotoback"><i class="ico ico4"></i></a>
+</div>
+<script>
+    $('.qq_zx').on('click',function(){
+        $("div.qq_main").show();$("iframe").css("z-index", 99);
+    })
+    $('#yuyue').on('click',function(){
+        var mobile = $('#mobile').val();
+        var url ="<{link ctl='index:cooperation'}>";
+        var data = {
+            'mobile':mobile,
+        };
+        $.post(url,{data},function(e){
+            if(e.error>0){
+                layer.msg(e.message,{icon:2})
+            }else{
+                layer.msg(e.message,{icon:1})
+                setTimeout(function(){
+                    window.location.reload();
+                },2000);
+            }
+
+        },'json')
+
+    })
+</script>
+<script src="%THEME%/static/js/scrollReveal.min.js"></script> 
+<script type="text/javascript">
+window.sr = new scrollReveal({
+	//reset: true,
+	move: '200px',
+	mobile: true
+});
+</script> 
+<script src="%THEME%/static/js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $('.flexslider').flexslider({
+                directionNav: true,
+                pauseOnAction: false,
+            });//首页轮播js结束
+        });
+    </script>
+
+
+
+<!--中间弹窗咨询-->
+<div class="qq_main" style="display:none;">
+    <p class="title">江湖信息科技<a href="javascript:;" rel="close_qq_main" class="rt"></a></p>
+    <div class="qq_main_intro">
+        <p>免费在线咨询</p>
+        <p>电话：<{$CONFIG.site.phone}></p>
+
+        <p>工作时间：9:00-18:00</p>
+    </div>
+    <p class="bottom"><a href="javascript:;" rel="close_qq_main" class="sm_bg">&nbsp;</a><a onclick="_hmt.push(['_trackEvent', 'qqEvent', 'clickQQ', 'window<{$smarty.cookies.baiducpc}>']);" href="javascript:;" id="kefu_win_ZX" class="clickQQ">&nbsp;</a></p>
+</div>
+<script charset="utf-8" src="http://wpa.b.qq.com/cgi/wpa.php"></script>
+<script>
+    (function($){
+        if(true||!cookies.get('KT-QQ_Zixun_Dialog')){
+            setTimeout(function(){$("div.qq_main").show();$("iframe").css("z-index", 99);}, 1000);
+            var _TM1 = setTimeout(function(){$("div.qq_main").show();$("iframe").css("z-index", 99);}, 1000);
+            var _TM2 = setTimeout(function(){$("div.qq_main").show();$("iframe").css("z-index", 99);}, 2000);
+            var _TM3 = setTimeout(function(){$("div.qq_main").show();$("iframe").css("z-index", 99);}, 3000);
+            $("a[rel='close_qq_main']").click(function(){
+                cookies.set('KT-QQ_Zixun_Dialog', '1', 1800);
+                $("div.qq_main").hide();
+                $("#QQZIXUNDIALOG iframe").hide();
+                clearTimeout(_TM1);
+                clearTimeout(_TM2);
+                clearTimeout(_TM3);
+            });
+        }
+    })(window.jQuery);
+    BizQQWPA.addCustom({aty: '0', nameAccount: 800026911, selector: 'kefu_win_ZX'});
+    BizQQWPA.addCustom({aty: '0', nameAccount: 800026911, selector: 'right_qqZixun'});
+    BizQQWPA.addCustom({aty: '0', nameAccount: 800026911, selector: 'footer_qqZixun'});
+    BizQQWPA.addCustom({aty: '0', nameAccount: 800026911, selector: 'banner_qqZixun'});
+    BizQQWPA.addCustom({aty: '0', nameAccount: 800026911, selector: 'body_qqZixun'});
+    BizQQWPA.addCustom({aty: '0', nameAccount: 800026911, selector: 'winbox_qqZixun'});
+    BizQQWPA.addCustom({aty: '0', nameAccount: 800026911, selector: 'kefu_zixun'});
+</script>
+<!--中间弹窗咨询结束-->
+
+<script>
+    //右边浮动
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $(".right_fixed .gotoback").show();
+            } else {
+                $(".right_fixed .gotoback").hide();
+            }
+
+        });
+        $(".gotoback").click(function () {
+            $("html,body").animate({scrollTop: 0}, 200);
+        });
+
+        $(".right_fixed .list_box .yuyue").hover(function(){
+            $(this).find(".cx_box").css("right",'57px')
+        },function(){
+            $(this).find(".cx_box").css("right",'-200px')
+        });
+        $(".right_fixed .list_box .wx").hover(function(){
+            $(this).find(".cx_box").css("right",'57px')
+        },function(){
+            $(this).find(".cx_box").css("right",'-200px')
+        });
+    });
+</script>
+
+
+
+<p style="display:none"><{$CONFIG.site.tongji}></p>
+
+</body>
+</html>

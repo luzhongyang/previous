@@ -1,0 +1,50 @@
+<{include file="shop/card/block/header.html"}>
+
+<div class="pub_container">
+    <div class="pub_page">
+        <div class="pub_page_cont">
+            <!--切换-->
+            <div class="change_tab">
+                <a href="<{link ctl='card/coupon/ablelist'}>" class="list">
+                    <span>可使用</span>
+                </a>
+                <a href="<{link ctl='card/coupon/unablelist'}>" class="list on">
+                    <span style="color: #00a74f">已失效</span>
+                </a>
+            </div>
+            <!--切换end-->
+            <div class="pub_cont">
+                <!--内容开始-->
+                <div class="coupon_list_box">
+                    <ul>
+                        <{foreach $datalist as $items}>
+                        <li class="no"  ids="<{$items.log_id}>">
+
+                            <h4><{$items.title}><i class="ico"></i></h4>
+                            <div class="price_box fontcl1"><small>￥</small><{$items.amount}> <small class="black9 m-l10"><{if $items.min_price >0}>[满￥：<{$items.min_price}>抵消￥：<{$items.amount}>]<{else}>[消费即抵]<{/if}></small></div>
+                            <P>使用期限：<{'Y-m-d H:i'|date:$items.stime}> 至 <{'Y-m-d H:i'|date:$items.ltime}></P>
+                        </li>
+
+
+                        <{/foreach}>
+
+
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                    window.onload = function(){
+                        $('.coupon_list_box ul li').on('click',function(){
+
+                            var ids = $(this).attr('ids');
+                            var href = '/card/coupon/cdetail-'+ids+'.html';
+                            window.location.href = href;
+                        })
+
+                    }
+                </script>
+
+
+
+
+
+<{include file="shop/card/block/footer.html"}>
