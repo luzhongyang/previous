@@ -1,0 +1,417 @@
+<{include file="web/block/header.html"}>
+<script src="/themes/default/web/static/js/jquery.fly.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/themes/default/web/static/js/requestAnimationFrame.js" type="text/javascript" charset="utf-8"></script>
+<!--<script type="text/javascript" src="<{$pager.res}>/script/kt.js"></script>-->
+<!--内容开始-->
+<div class="pagewd mt10 mb30">
+    <!--商家信息-->
+    <div class="shangjia_infor mb10">
+        <div class="infor_box fl">
+            <img src="<{$pager.img}>/<{$detail.logo}>" width="186" height="140" class="fl">
+            <div class="pub_wz">
+                <h3><{$detail.title}></h3>
+                <div class="black9"><span class="starBg mr10"><span class="star" style="width:<{round(($detail['score']/$detail['comments'])*20,1)}>%;"></span></span><small class="ml10">起送:￥<{round($detail.min_amount,1)}></small><small class="ml10">配送费 :￥<{round($detail.freight,1)}></small></div>
+                <p class="black9"><span class="maincl">商家地址：</span><{$detail.addr}></p>
+                <p class="black9"><span class="maincl">商家电话：</span><{$detail.phone}></p>
+                <p class="black9"><span class="maincl">营业时间：</span><{$detail.yy_stime}>--<{$detail.yy_ltime}></p>
+            </div>
+        </div>
+        <div class="box fl">
+            <h3 class="maincl"><{round($detail['score']/$detail['comments'],1)}><small class="black9">分</small></h3>
+            <p class="black9">商家评分</p>
+        </div>
+        <div class="xian fl"></div>
+        <div class="box fl">
+            <h3 class="maincl"><{if $detail.pei_time==0}>30<{else}><{$detail.pei_time}><{/if}><small class="black9">分钟</small></h3>
+            <p class="black9">平均送餐时间</p>
+        </div>
+        <div class="xian fl"></div>
+        <div class="box fl">
+            <div id="qrcodeTable"></div>
+            <p class="black9">扫一扫进店下单</p>
+        </div>
+        <div class="xian fl"></div>
+        <div class="box fl">
+            <a href="javascript:void(0);" class="collect_btn">
+                <{if $detail.collect == 1}>
+                    <img src="/themes/default/web/static/images/zan.png" class="zan">
+                    <p class="black9">退订<span class="maincl">(<{$detail.collect_num}>)</span></p>
+                <{else}>
+                    <img src="/themes/default/web/static/images/nozan.png" class="zan">
+                    <p class="black9">订阅<span class="maincl">(<{$detail.collect_num}>)</span></p>
+                <{/if}>
+            </a>
+        </div>
+        <div class="cl"></div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#qrcodeTable').qrcode({
+                render: "canvas",            //渲染方式 table 和 canvas两种
+                width: 54,                  //设置宽度  
+                height: 54,                 //设置高度  
+                typeNumber: -1,              //计算模式 
+                correctLevel: 2,             //纠错等级  0,1,2,3 默认为2
+                background: "#ffffff",       //背景颜色  
+                foreground: "#000000",       //前景颜色 
+                text    : "<{$url}>"
+            }); 
+            
+            
+            $(".collect_btn").click(function(){
+                var url = "<{link ctl='web/shop/collect' args=$detail.shop_id}>";
+                $.post(url,{},function(ret){
+                    if (ret.error == 300) {
+                        layer.msg(ret.message);
+                        setTimeout(function(){
+                            window.location.href = "<{link ctl='web/passport/login'}>";
+                        },1000)
+                    }else if(ret.error == 0){
+                        layer.msg(ret.message);
+                        setTimeout(function(){
+                            window.location.reload(true);
+                        },1000)
+                    }else{
+                        layer.msg(ret.message);
+                    }
+                },'json')
+            })
+        })
+    </script>
+    <!--商家信息end-->
+    <div class="shangjia_cont">
+        <div class="fl shangjia_cont_left">
+            <div class="shangjia_tab mb10">
+                <div class="box">
+                    <ul>
+                        <li class="list <{if $act == 'index'}>on<{/if}> "><a href="<{link ctl='web/menu/index' args=$detail['shop_id']}>">菜单</a></li>
+                        <li class="list <{if $act == 'comment'}>on<{/if}>" ><a href="<{link ctl='web/menu/comment' args=$detail['shop_id']}>">评价</a></li>
+                    </ul>
+                    <div class="cl"></div>
+                </div>
+                <div class="shangjia_menuCate">
+                    <{foreach $cates as $cate}>
+                    <a href="javascript:void(0);" rel="<{$cate.cate_id}>" ><{$cate.title}></a>
+                    <{/foreach}>
+                </div>
+            </div>
+            <!--浮动菜单-->
+            <div class="shangjia_tab_fixed" id="shangjia_tab_fixed">
+                <{foreach $cates as $cate}>
+                <a href="javascript:void(0);" class="left_<{$cate.cate_id}>" rel="<{$cate.cate_id}>" ><{$cate.title}><em></em></a>
+                <{/foreach}>
+            </div>
+
+
+            <!--浮动菜单end-->
+            <!--菜单列表-->
+            <div class="shangjia_menu" style="min-height: 400px;">
+                <{foreach $cates as $cate}>
+                <div class="title cate_<{$cate.cate_id}>" rel="<{$cate.cate_id}>"><{$cate.title}></div>
+                <div class="shangjia_menu_box">
+                    <ul>
+                        <{foreach $products as $item}> 
+                        <{if $item['cate_id'] == $cate.cate_id}>
+                            <li class="shangjia_menu_list list_<{$item.product_id}>">
+                                <div class="pub_img"><a href="javascript:void(0);"><img src="<{$pager.img}>/<{$item.photo|default:'default.png'}>"></a></div>
+                                <div class="pub_wz dianpu_num_<{$item.product_id}>">
+                                    <h3 class="overflow_clear"><{$item.title}></h3>
+                                    <div class="num black9">已售<{$item.sales}>份<input type="hidden" class="ordernum" value="<{$item.cart_num}>"><!--<span class="fr maincl"><em class="ico"></em>(23)</span>--></div>
+                                    <div class="price pointcl">￥<{$item.price}>/份<a href="javascript:void(0);" class="add_btn fr" val="<{$item.price}>" rel="<{$item.title}>" pid="<{$item.product_id}>" sku="<{$item.sku}>" cate_id="<{$item.cate_id}>" pack="<{$item.package_price}>" onClick="addcart(this);"></a></div>
+                                </div>
+                            </li>
+                        <{/if}>
+                        <{/foreach}>
+                    </ul>
+                    <div class="cl"></div>
+                </div>
+                <{foreachelse}>
+                    <div style="font-size: 20px; text-align: center; margin: 100px auto;">该商家暂无商品</div>
+                <{/foreach}>          
+            </div>
+            <!--菜单列表end-->
+        </div>
+        <script>
+
+            $(document).ready(function () {
+                $(".shangjia_menuCate a").click(function () {
+                    var target = $('.cate_' + $(this).attr('rel')).offset().top;//获取位置
+                    jQuery("html,body").stop(true).animate({scrollTop: target}, 300, function () {
+                    });//跳转
+                })
+                $(".shangjia_tab_fixed a").click(function () {
+                    var target = $('.cate_' + $(this).attr('rel')).offset().top;//获取位置
+                    
+                    jQuery("html,body").stop(true).animate({scrollTop: target}, 300, function () {
+                        
+                    });//跳转
+                })
+
+                $(window).scroll(function () {
+                    
+                    var top = $(document).scrollTop();          //定义变量，获取滚动条的高度                
+                    var items = $(".shangjia_menu").find(".title");    //定义变量，查找.item                      
+
+                    items.each(function () {
+                        var m = $(this);                        //定义变量，获取当前类
+                        var itemsTop = m.offset().top;        //定义变量，获取当前类的top偏移量
+                        if (top > itemsTop - 300) {
+                            $(".shangjia_tab_fixed a").removeClass("on");
+                            $(".left_" + m.attr("rel")).addClass("on");
+                        } else {
+                            return false;
+                        }
+                    });
+                });
+                /*控制*/
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() < 220) {
+                        $(".shangjia_tab_fixed").css("top", "220px");
+                        $(".shangjia_tab_fixed").css("bottom", "auto");
+                    }
+                    else {
+                        $(".shangjia_tab_fixed").css("top", "40px");
+                        $(".shangjia_tab_fixed").css("bottom", "auto");
+                    }
+                });
+
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() > 100) {
+                        $(".shangjia_tab_fixed").show();
+                    } else {
+                        $(".shangjia_tab_fixed").hide();
+                    }
+                });
+
+
+            });
+        </script>
+
+        <div class="fr shangjia_cont_right">
+            <div class="shangjia_anouct mb10">
+                <h3>订餐必读&商家公告</h3>
+                <p><{$detail.info}></p>
+            </div>
+            <div class="shangjia_hd">
+                <p class="black9"><span class="maincl">起送价：</span><{round($detail.min_amount,1)}>元</p>
+                <p class="black9"><span class="maincl">配送费：</span><{round($detail.freight,1)}>元</p>
+                <div class="hd"><em class="ico ico_4"></em><p class="black9"><{if $item.pei_type == 0}>商家自主配送<{elseif $item.pei_type==1}>第三方配送<{/if}></p></div>
+                <{if $detail.online_pay == 1}><div class="hd"><em class="ico ico_2"></em><p class="black9">该商家支持在线支付</p></div><{/if}>
+                <{if $detail.min_amount > 0}><div class="hd"><em class="ico ico_1"></em><p class="black9">新用户首次下单，立减<{round($detail.first_amount,1)}>元<span class="maincl">（手机客户端专享）</span></p></div><{/if}>
+                <{if $detail.youhui}><div class="hd"><em class="ico ico_3"></em><p class="black9"><{$detail.youhui_str}><span class="maincl">（手机客户端专享）</span></p></div><{/if}>
+            </div>
+        </div>
+        <div class="cl"></div>
+    </div>
+</div>
+<!--浮动购物车表单-->
+<div class="cartFloat" id="cartFloat">
+    <div class="cartFloat_up">
+        <div class="cartFloat_top pointcl">电脑下单不享受优惠噢，优惠活动手机专享~</div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <th align="left">菜品<a href="javascript:void(0);" class="pointcl empty">{清空}</a></th>
+                <th>份数</th>
+                <th align="right">价格</th>
+            </tr>
+        </table>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="cartFloat_list">
+        </table>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td colspan="3">
+                    <p class="mb5" id="pack_price"></p>
+                    <p>配送费(不计入起送价)<span class="fr">￥<{$detail.freight}></span></p>
+                </td>
+            </tr>
+        </table>
+        <p class="total">共 <span class="pointcl" id="cart_num"></span> 份，总计<big id="total_price" class="pointcl ">￥54</big></p>
+    </div>
+<div class="cartFloat_bottom">
+    <em id="foot_cart" class="ico fl"><span class="cart_num" id="num"></span></em>
+    <a id="cart" href="javascript:void(0);" class="btn pub_btn fr"></a>
+</div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(".cartFloat_bottom .ico").click(function(){
+                    $(".cartFloat_up").slideToggle();
+            });
+    });
+    function set_status() {
+        var min_amount = "<{$detail['min_amount']}>";
+        var total = window.ele.totalprice("<{$detail['shop_id']}>");
+        if (total == 0) {
+            $('#cart').removeClass("pub_btn");
+            $('#cart').attr('href', "javascript:void(0);");
+            $('#cart').html("￥" + min_amount + "<{L('起送')}>");
+        } else if (total < min_amount) {
+            $('#cart').removeClass("pub_btn");
+            $('#cart').attr('href', "javascript:void(0);");
+            $('#cart').html("<{L('还差')}>￥" + parseFloat(min_amount - total).toFixed(2) + "<{L('起送')}>");
+        } else {
+            $('#cart').attr('href', "<{link ctl='web/order/index' args=$detail['shop_id']}>");
+            $('#cart').addClass('pub_btn');
+            $('#cart').html("<{L('去结算')}>");
+        }
+    }
+
+    function cart_checkout(shop_id) {
+
+    }
+
+    function addcart(o) {
+        var top = 0, left = 0;
+        var ooffset = $(o).offset();
+        top = ooffset.top; // + poffset.top + 11;
+        left = ooffset.left; // + poffset.left + 11;
+        var data = {}, shop_id = "<{$detail['shop_id']}>";
+        data['product_id'] = $(o).attr('pid');
+        data['price'] = $(o).attr('val');
+        data['title'] = $(o).attr('rel');
+        data['sku'] = $(o).attr('sku');
+        data['cate_id'] = $(o).attr('cate_id');
+        data['package_price'] = $(o).attr('pack');
+        var sku = parseInt($(o).attr('sku'));
+        var limit = 0;
+        (99 <= sku) ? limit = 99 : limit = sku;
+        var v = $(o).parent().parent().find(".ordernum").val();
+        if (v < limit) {
+            v++;
+            $(".dianpu_num_" + $(o).attr('pid')).find(".ordernum").val(v);
+            //event = window.event;
+            var offset = $("#num").offset();  //结束的地方的元素
+            var flyer = $('<div style="width:0.16rem; height:0.16rem;border-radius:0.16rem; background:#1ec0be;position: relative; z-index:101;"></div>');
+            //alert(offset);return false;
+                flyer.fly({
+                    start: {left: left, top: top},
+                    end: {
+                        left: offset.left + 10,
+                        top: offset.top + 10,
+                        width: 0,
+                        height: 0
+                    },
+                    onEnd: function () {
+                        this.destory();
+                    }
+                });
+        } else {
+            layer.msg("<{L('店里没有那么多商品了')}>");
+            return false;
+        }
+        window.ele.addcart(shop_id, data);
+        $("#num").text(window.ele.count(shop_id));
+        $("#cart_num").text(window.ele.count(shop_id));
+        $("#total_price").html("￥"+parseFloat(window.ele.totalprice(shop_id)).toFixed(2));
+        var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+        if (packprice > 0) {
+            $("#pack_price").html('<{L("打包费")}><span class="fr">￥' + packprice + '</span>');
+        } else {
+            $("#pack_price").html('');
+        }
+        set_status();
+        get_list();
+    }
+
+    function dec(e) {
+        var product_id = $(e).attr('pid'), shop_id = "<{$detail['shop_id']}>";
+        window.ele.dec(shop_id, product_id);
+        var v = $(e).parent().find(".ordernum").val();
+        if (v > 0) {
+            v--;
+            $(".dianpu_num_" + $(e).attr('pid')).find(".ordernum").val(v);
+        }
+        $("#num").text(window.ele.count(shop_id));
+        $("#cart_num").text(window.ele.count(shop_id));
+        $("#total_price").html("￥"+parseFloat(window.ele.totalprice(shop_id)).toFixed(2));
+        var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+        if (packprice > 0) {
+            $("#pack_price").html('<{L("打包费")}><span class="fr">￥' + packprice + '</span>');
+        } else {
+            $("#pack_price").html('');
+        }
+        set_status();
+        get_list();
+    }
+
+
+    $(".empty").click(function () {
+        layer.confirm('<{L("确定要清空购物车吗")}>？', {
+            btn: ['<{L("确认")}>', '<{L("取消")}>']
+        }, function () {
+            var shop_id = "<{$detail['shop_id']}>";
+            window.ele.removeby(shop_id);
+            $("#num").text(window.ele.count(shop_id));
+            $("#cart_num").text(window.ele.count(shop_id));
+            $("#total_price").html(parseFloat(window.ele.totalprice(shop_id)).toFixed(2));
+            var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+            if (packprice > 0) {
+                $("#pack_price").html('<{L("打包费")}><span class="fr">￥' + packprice + '</span>');
+            } else {
+                $("#pack_price").html('');
+            }
+            $(".ordernum").val(0);
+            set_status();
+            get_list();
+            layer.closeAll();
+            $('.dianpu_footer .dianpu_spin').slideToggle();
+            $('.dianpu_shop_zzc').hide();
+        });
+    })
+    
+
+
+    function get_list() {
+        var shop_id = "<{$detail['shop_id']}>";
+        var goods = window.ele.getcart();
+        var str = "";
+        for (var sid in goods) {
+            if (sid == shop_id) {
+                for (var index in goods[sid]) {
+                    if (goods[sid][index]["num"] > 0) {
+                        $(".dianpu_num_" + index).find(".ordernum").val(goods[sid][index]["num"]);
+                        str += '<tr><td align="left">'+goods[sid][index]["title"]+'</td>';
+                        str += '<td align="center"><div class="num_operate dianpu_num_'+goods[sid][index]["product_id"]+'"><span class="jian" val="' + goods[sid][index]["price"] + '" rel="' + goods[sid][index]["title"] + '" pid="' + goods[sid][index]["product_id"] + '" sku="' + goods[sid][index]["sku"] + '" cate_id="' + goods[sid][index]["cate_id"] + '" pack="' + goods[sid][index]["package_price"] + '" onclick="dec(this);" quantity="-">-</span><input type="text" readonly="readonly" class="text_box ordernum" value="' + goods[sid][index]["num"] + '"><span class="add" val="' + goods[sid][index]["price"] + '" rel="' + goods[sid][index]["title"] + '" pid="' + goods[sid][index]["product_id"] + '" sku="' + goods[sid][index]["sku"] + '" cate_id="' + goods[sid][index]["cate_id"] + '" pack="' + goods[sid][index]["package_price"] + '"  onclick="addcart(this);" quantity="+">+</span></div></td>';
+                        str += '<td align="right">￥'+goods[sid][index]["price"]+'</td></tr>';
+                    }
+                }
+            }
+        }
+        $("table.cartFloat_list").html(str);
+    }
+
+    //初始化外卖数据
+    ~function () {
+        window.ele.init();
+        //console.log(window.ele.getcart());
+        var count = parseInt(window.ele.count("<{$detail['shop_id']}>"), 10);
+        var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+        if (packprice > 0) {
+            $("#pack_price").html('<{L("打包费")}><span class="fr">￥' + packprice + '</span>');
+        } else {
+            $("#pack_price").html('');
+        }
+        var totalprice = parseFloat(window.ele.totalprice("<{$detail['shop_id']}>")).toFixed(2);
+        $("#num").text(count);
+        $("#cart_num").text(count);
+        $("#total_price").html(totalprice);
+        set_status();
+        get_list();
+    }();
+</script>
+
+<script>
+    $(window).scroll(function () {
+        if ($(window).scrollTop() < 340) {
+            $("#cartFloat").css("top", "800px");
+            $("#cartFloat").css("bottom", "auto");
+        }
+        else {
+            $("#cartFloat").css("top", "auto");
+            $("#cartFloat").css("bottom", "153px");
+        }
+    });
+</script>
+<!--浮动购物车表单end-->
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

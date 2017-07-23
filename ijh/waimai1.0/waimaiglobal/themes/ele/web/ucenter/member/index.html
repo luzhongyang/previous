@@ -1,0 +1,79 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <!--个人资料-->
+        <div class="prslCenter_acont">
+            <h2>个人资料</h2>
+            <div class="infor">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>头像</th>
+                        <td><div class="upload_img"><{if $MEMBER.face}><a href="<{link ctl='web/ucenter/member/face'}>"><img width="130" height="130" src="<{$pager.img}>/<{$MEMBER.face}>"/></a><{/if}></div></td>
+                    </tr>
+                    <tr>
+                        <th>用户名</th>
+                        <td><div><span class="box black9"><{$MEMBER.nickname}></span><a href="javascript:void(0);" class="maincl userName_show">【修改】</a></div></td>
+                    </tr>
+                    <tr>
+                        <th>手机号码</th>
+                        <td><div><span class="box black9"><{$MEMBER.mobile}></span><a href="<{link ctl='web/ucenter/member/mobile'}>" class="maincl">【修改】</a></div></td>
+                    </tr>
+                    <tr>
+                        <th>登录密码</th>
+                        <td><div><span class="box black9">******</span><a href="<{link ctl='web/ucenter/member/passwd'}>" class="maincl">【修改】</a></div></td>
+                    </tr>
+                    <!--<tr>
+                        <th>微信</th>
+                        <td><div><span class="box black9">未绑定</span><a href="<{link ctl='web/ucenter/member/info'}>" class="pointcl">【立即绑定】</a></div></td>
+                    </tr>-->
+                </table>
+            </div>
+        </div>
+        <!--个人资料end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<!--用户名修改弹出层-->
+<div class="mask_box userName_mask" style="display:none;">
+    <div class="maskOne">
+        <h2>修改用户名<small class="black9"><!--用户名只能修改一次--></small></h2>
+        <form method="post">
+            <input type="text" id="nickname" name="nickname" class="int" placeholder="请输入新的用户名">
+            <div class="btn_box">
+                <input type="button" id="sure_btn" class="pub_btn" value="确定">
+                <a href="javascript:void(0);" class="pub_btn cancel">取消</a>
+            </div>
+        </form>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".userName_show").click(function () {
+            $(".userName_mask").show();
+        });
+        $(".userName_mask .cancel").click(function () {
+            $(".userName_mask").hide();
+        });
+        $("#sure_btn").click(function(){
+            var url = "<{link ctl='web/ucenter/member:set_nickname'}>";
+            var nickname = $("#nickname").val();
+            $.post(url,{nickname:nickname},function(ret){
+                if(ret.error == 0){
+                    layer.msg(ret.message);
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },'1000')
+                }else{
+                    layer.msg(ret.message);
+                }
+            },'json')
+        })
+    });
+</script>
+<!--用户名修改弹出层end-->
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

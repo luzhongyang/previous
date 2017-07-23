@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+
+    <body>
+            <header>
+                <i class="left"><a href="<{link ctl='ucenter'}>" link-load="" link-type="right"  class="gobackIco"></a></i>
+                <div class="title">
+                    <{L('我的红包')}>
+                </div>
+                <i class="right"><a link-load="" href="<{link ctl='ucenter/hongbao/exchange'}>"><{L('兑换')}></a></i>
+            </header>
+            <section class="page_center_box">
+                <div id="wrapper">
+                    <ul></ul>
+                </div>
+            </section>
+            <{include file="block/sfooter.html"}>
+        <script id="data_list" type="text/x-jquery-tmpl">
+        <li>
+           <div class="redBag_list">
+               <div class="redBag_top" style="background:#1ec0be;">
+                   <div class="fl"><small>￥</small><big>${amount}</big></div>
+                   <div class="fl">
+                       <h4>${title}</h4>
+                       <p><{L('满')}>${min_amount}<{L('元可用')}></p>
+                   </div>
+                   <div class="clear"></div>
+                   <div class="redBag_bg"></div>
+               </div>
+               <div class="redBag_bottom">
+                   <p>
+				   <{sprintf(L('此红包限手机尾号%s的用户使用'),$MEMBER['mobile']|substr:-4)}>
+				   </p>
+                   <p><{L('有效期至')}>：${ltime} </p>
+               </div>
+           </div>
+        </li>
+        </script>
+    <script type="text/javascript">
+    var page = 1;
+    var wapper = document.querySelector("#wrapper ul");
+    var url = "<{link ctl='ucenter/hongbao:hongbao_list' }>";
+    build_refresher_items(url,{page:1},"#data_list",wapper);
+    refresher.init({
+        id: "wrapper",
+        pullDownAction: function () {
+            post_json = {page: 1};
+            $("#wrapper ul").html("");
+            $("#pullUp").hide();
+            build_refresher_items(url, post_json, '#data_list',wapper);
+            page = 1;
+            myScroll.refresh();
+        },
+        pullUpAction: function () {
+            page++;
+            post_json = {page: page};
+            build_refresher_items(url, post_json, '#data_list', wapper);
+            myScroll.refresh();
+        },
+    });
+setmsgisread();
+function setmsgisread() {
+    var message_id = localStorage['message_id'];
+    jQuery.ajax({  
+        url: "<{link ctl='ucenter/msg:setread'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"message_id": message_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                //layer.open({content: ret.message,time: 2});
+            }else{
+                //提交成功
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+        
+    });
+}
+</script>
+        
+        
+
+    </body>
+</html>

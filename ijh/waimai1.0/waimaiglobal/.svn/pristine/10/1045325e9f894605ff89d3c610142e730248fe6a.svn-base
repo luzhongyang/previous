@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+
+<body>
+<header>
+    <i class="left"><a href="<{link ctl='mall/index'}>" link-load="" link-type="right" class="gobackIco"></a></i>
+    <div class="title">
+    	<{L('积分商城列表')}> 
+    </div>
+    <i class="right"><a class="menuIco" href="javascript:;" id="header_menu"></a></i>
+</header>
+<div class="mineIntegral_pull">
+    <div class="list_box">
+        <ul>
+            <li <{if empty($cate_id)}>class="on"<{/if}> ><a href="<{link ctl='mall/items'}>"><{L('全部')}> </a></li>
+            <{foreach $cates as $val}>
+            <li <{if $val['cate_id'] == $cate_id}>class="on"<{/if}> ><a href="<{link ctl='mall/items' cate_id=$val['cate_id']}>"><{$val['title']}></a></li>
+            <{/foreach}>
+        </ul>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<section class="page_center_box">
+
+
+    <div class="mineIntegral_list_box">
+            <ul>
+            
+            <{foreach $product as $k => $v}>
+            <{if $v.closed==0 && $v.sku>0}>
+    	    <li class="mineIntegral_list">
+            	<div class="nr">
+                    <a href="<{link ctl='mall/detail' args=$v.product_id}>">
+                    <img src="<{$pager.img}>/<{$v.photo}>" width="280" height="200" />
+                    <p class="bt"><{$v.title}></p>
+                    </a>
+                    <p class="black9"><span class="pointcl1"><{$v.jifen}></span><{L('积分')}> <a href="<{link ctl='mall/detail' args=$v.product_id}>" class="pub_btn fr"><{L('兑换')}> </a></p>
+                </div>
+            </li>
+            <{/if}>
+            <{/foreach}>
+
+	    </ul>
+        <div class="clear"></div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#l4').addClass('on');
+        /*头部下来分类开始*/
+		$("#header_menu").click(function(){
+			$(".mineIntegral_pull").find(".list_box").toggle();
+			$(".mineIntegral_pull").find(".mask_bg").toggle();
+		});
+		$(".mineIntegral_pull .list_box li").click(function(){
+			$(this).parent().find("li").removeClass("on");
+			$(this).addClass("on");
+			$(".mineIntegral_pull").find(".list_box").hide();
+			$(".mineIntegral_pull").find(".mask_bg").hide();
+		});
+		/*头部下来分类开始*/
+    });
+</script>
+    
+<{include file="block/sfooter.html"}>
+</body>
+</html>

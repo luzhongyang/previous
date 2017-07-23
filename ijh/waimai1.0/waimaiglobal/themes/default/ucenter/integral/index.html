@@ -1,0 +1,54 @@
+<{assign var='tpl_title' value=L("我的积分")}>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+
+    <body>
+        <header>
+            <i class="left">
+                <{if $mall}>
+                    <a href="<{link ctl='mall/index'}>" link-load="" link-type="right" class="gobackIco"></a>
+                <{else}>
+                    <a href="<{link ctl='ucenter/index'}>" link-load="" link-type="right" class="gobackIco"></a>
+                <{/if}>
+            </i>
+            <div class="title">
+                <{L('我的积分')}>
+            </div>
+        </header>
+        <section class="page_center_box">
+            <div class="mineFigure">
+                <div class="mineFigure_state mb10">
+                    <div class="fl">
+                        <p class="black9"><{L('当前积分')}></p>
+                        <p class="black9"><big class="fontcl1"><{$MEMBER.jifen}></big> <{L('分')}></p>
+                    </div>
+                    <div class="fr">
+                        <a href="<{link ctl='mall/index'}>" class="btn" style="background:#ff6333;"><{L('兑换商品')}></a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="mineFigure_list_box">
+                    <h3 class="black9"><{L('最近')}>30<{L('天积分记录')}></h3>
+                    <div id="wrapper">
+                        <ul>
+                            <{foreach $items as $k => $v}>
+                            <li class="mineFigure_list">
+                                    <div class="fl">
+                                    <p><{$v.intro}></p>
+                                    <p class="black9"><{$v.dateline}></p>
+                                </div>
+                                <div class="fr pointcl1"><{$v.number}></div>
+                            </li>
+                            <{/foreach}>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <{include file="block/sfooter.html"}>
+    </body>
+</html>

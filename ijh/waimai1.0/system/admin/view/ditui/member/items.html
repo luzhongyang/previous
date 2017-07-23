@@ -1,0 +1,63 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="ditui/member:so" load="mini:搜索内容" width="mini:400" class="button" title="搜索"}></td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data"> 
+    <form id="items-form">
+    <table width="100%" border="0" cellspacing="0" class="table-data table">
+    <tr>
+        <th class="w-100">人员ID</th>
+        <th class="w-50">地推</th>
+        <th class="w-50">会员</th>
+        <th class="w-50">注册奖励</th>
+        <th class="w-50">首单奖励</th>
+        <th>首单</th>
+        <th class="w-150">注册ip</th>
+        <th class="w-100">注册时间</th>
+        <th class="w-150">操作</th>
+</tr>
+    <{foreach $items as $item}>
+    <tr>
+        <td><label><input type="checkbox" value="<{$item.mid}>" name="mid[]" CK="PRI"/><{$item.mid}><label></td>
+        <td><{$ditui_list[$item.ditui_id].name}>(ID:<{$item.ditui_id}>)</td>
+        <td><{$member_list[$item.uid].nickname}>，<{$member_list[$item.uid].mobile}>(ID:<{$item.uid}>)</td>
+        <td><{$item.signup_amount}></td>
+        <td><{$item.first_amount|default:'--'}></td>
+        <td>
+            <{if $item.first_order_id}>
+            单号：<{$item.first_order_id}>， 金额：<{$item.first_order_amount}>， 下单时间：<{$item.first_order_time|format}>&nbsp;&nbsp;&nbsp;
+            <{link ctl="order/order:detail" args=$item.first_order_id class="button" title="查看订单"}>
+            <{else}>
+            用户未下单
+            <{/if}>
+        </td>
+        <td><{$item.clientip|iplocal}>(<{$item.clientip}>)</td>
+        <td><{$item.dateline|format}></td>
+        <td>
+            <{link ctl="member/member:detail" args=$item.uid class="button" title="查看会员"}>
+            <{link ctl="ditui/member:delete" args=$item.mid act="mini:删除" confirm="mini:确定要删除吗？" title="删除" class="button"}>
+        </td>
+    </tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="text-align tip-notice">没有数据</p></td></tr>
+    <{/foreach}>
+    </table>
+    </form>
+    <div class="page-bar">
+        <table>
+            <tr>
+            <td class="w-100"><label><input type="checkbox" CKA="PRI"/>&nbsp;&nbsp;全选</label></td>
+            <td colspan="10" class="left"><{link ctl="ditui/member:delete" type="button" submit="mini:#items-form" confirm="mini:确定要批量删除选中的内容吗?" priv="hide" value="批量删除"}></td>
+            <td class="page-list"><{$pager.pagebar}></td>
+        </tr>
+        </table>
+    </div>
+</div>
+<{include file="admin:common/footer.html"}>

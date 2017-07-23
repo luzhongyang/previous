@@ -1,0 +1,41 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+    	<!--安全中心-->
+        <div class="prslCenter_acont">
+        	<h2>安全中心</h2>
+            <div class="safety_top">
+                安全等级<span class="bar_bg"><span class="bar" style="width:60%;"></span></span>高<span class="ts pointcl">建议你启动全部安全设置，以保障账户及资金安全</span>
+            </div>
+            <div class="safety">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td align="center" width="94"><{if $MEMBER.passwd}><img src="/themes/default/web/static/images/prslCenter/safety-agree.png"><{else}><img src="/themes/default/web/static/images/prslCenter/safety-caution.png"><{/if}></td>
+                        <td width="106">登录密码</td>
+                        <td>互联网存在被盗风险，建议您定期更改密码以保护安全。</td>
+                        <td align="right" width="94"><a href="<{link ctl='web/ucenter/member/passwd'}>" class="maincl">更改密码</a></td>
+                    </tr>
+                    <tr>
+                        <td align="center" width="94"><{if $MEMBER.mobile}><img src="/themes/default/web/static/images/prslCenter/safety-agree.png"><{else}><img src="/themes/default/web/static/images/prslCenter/safety-caution.png"><{/if}></td>
+                        <td width="106">手机验证</td>
+                        <td>已绑定手机<{substr_replace($MEMBER.mobile,'****',3,4)}><small class="black9">（在线支付已经可以使用，<span class="pointcl"><a href="<{link ctl='web/ucenter/member/account'}>">去充值</a></span>）</small></td>
+                        <td align="right" width="94"><a href="<{link ctl='web/ucenter/member/mobile'}>" class="maincl">更改手机</a></td>
+                    </tr>
+                    <!--<tr>
+                        <td align="center" width="94"><img src="/themes/default/web/static/images/prslCenter/safety-caution.png"></td>
+                        <td width="106">绑定微信</td>
+                        <td>您还没有绑定微信<small class="black9">（绑定后使得支付方式多了一种验证渠道，保障你的账户安全）</small></td>
+                        <td align="right" width="94"><a href="#" class="pointcl">立即绑定</a></td>
+                    </tr>-->
+                </table>
+            </div>
+        </div>
+        <!--安全中心end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

@@ -1,0 +1,37 @@
+<!--底部开始-->
+<div class="footer">
+    <div class="footer_nr">
+        <div class="fl">
+             <{calldata mdl="article/cate" parent_id="1" limit=10}>
+        	<div class="list_box">
+            	<h3><{$item.title}></h3>
+                <ul>
+                    <{calldata mdl='article/article' from="help" hidden="0" cat_id=$item.cat_id}>
+						<{if $item.page}>
+						<li><a href="<{link ctl='web/help:'|cat:$item.page}>"><{$item.title}></a></li>
+						<{else}>
+						<li><a href="<{link ctl='web/help:detail' arg0=$item.article_id}>"><{$item.title}></a></li>
+						<{/if}>
+                    <{/calldata}>
+                </ul>
+            </div>
+             <{/calldata}>
+        </div>
+        <div class="fr tel">
+        	<img src="/themes/default/web/static/images/footerIco.png">
+        	<h3><{$site.title}>客服电话</h3>
+            <h4><{$site.phone}></h4>
+            <p>周一到周日 9:00-23:00</p>
+            <p>客服不受理商务合作</p>
+        </div>
+        <div class="cl"></div>
+    </div>
+    <div class="footer_copy">
+        <div class="pagewd">
+            <p><{$site.icp}>|Copyright ©2013-2016 <{$CONFIG.site.domain}>, All Rights Reserved.</p>
+        </div>
+    </div>
+</div>
+<!--底部结束-->
+</body>
+</html>

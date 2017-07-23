@@ -1,0 +1,8 @@
+/system/data/logs
+/system/data/cache
+/system/data/tplcache
+/system/data/tpladmin
+.nbproject
+.settings
+/nbproject
+/system/config.php

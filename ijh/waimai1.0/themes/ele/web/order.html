@@ -1,0 +1,435 @@
+<{include file="web/block/header.html"}>
+<script src="/themes/default/web/static/js/jquery.fly.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/themes/default/web/static/js/requestAnimationFrame.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8"></script>
+<style type="text/css">
+    #l-map{height:300px;width:100%;display:none;}
+    #r-result{width:100%;}
+    .tangram-suggestion table tr td{height: 50px !important;line-height: 50px !important; border-bottom: 1px solid #ededed;}
+    #tangram-suggestion--TANGRAM__1c-main{ z-index: 200 !important;}
+</style>
+<!--内容开始-->
+<form id="form_post" method="post">
+    <div class="pagewd orderConfirm mt10 mb30" style="height:auto;">
+        <!--所选订单-->
+        <div class="fl orderConfirm_left">
+            <div class="box">
+                <p class="black9 positA"><a href="<{link ctl='web/shop/index'}>" class="black9">首页</a> &gt; <a href="<{link ctl='web/menu/index' args=$detail.shop_id}>" class="black9"><{$detail.title}></a> <a href="<{link ctl='web/menu/index' args=$detail.shop_id}>" class="maincl fr">返回修改订单</a></p>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th align="left">菜品</th>
+                        <th>份数</th>
+                        <th align="right">价格</th>
+                    </tr>
+                    <{foreach $carts as $item}>
+                    <tr>
+                        <td><{$item.title}></td>
+                        <td align="center">
+                            <div class="num_operate dianpu_num_<{$item.product_id}>">
+                                <span class="jian"  val="<{$item.price}>" rel="<{$item.title}>" pid="<{$item.product_id}>" sku="<{$item.sku}>" cate_id="<{$item.cate_id}>" pack="<{$item.package_price}>" onClick="dec(this);">-</span>
+                                <input type="text" class="ordernum" readonly="readonly" value="<{$item.cart_num}>">
+                                <span class="add" val="<{$item.price}>" rel="<{$item.title}>" pid="<{$item.product_id}>" sku="<{$item.sku}>" cate_id="<{$item.cate_id}>" pack="<{$item.package_price}>" onClick="addcart(this);" >+</span>
+                            </div>
+                        </td>
+                        <td align="right">￥<{$item.price}></td>
+                    </tr>
+                    <{/foreach}>
+                    <tr>
+                        <td>打包费</td>
+                        <td align="center"></td>
+                        <td align="right">￥<span id="pack_price"><{$package_price}></span></td>
+                    </tr>
+                    <tr>
+                        <td>配送费</td>
+                        <td align="center"></td>
+                        <td align="right">￥<{$detail.freight}></td>
+                    </tr>
+                </table>
+                <p class="pointcl total">合计<span class="fr price">￥<span id="total_price"></span></span></p>
+                <div class="redBag black6">使用红包：
+                    <select name="params[hongbao_id]" id="hongbao">
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--所选订单end-->
+            <input type="hidden" name="params[shop_id]" value="<{$detail.shop_id}>"/>
+            <div class="fr orderConfirm_right">
+                <h2>收货人信息：<a href="javascript:void(0);" class="fr add_addr_show"><em class="ico"></em>新增送餐地址</a></h2>
+                <!--收货人信息-->
+                <div class="orderConfirm_infor">
+                    <input type="hidden" id="addr_id" name="params[addr_id]" value="<{$addr_id}>"/>
+                    <ul>
+                        <{foreach $maddr as $val}>
+                        <li rel="<{$val['addr_id']}>" class="orderConfirm_infor_list <{if $val.is_default == 1}>on<{/if}> ">
+                            <p class="name"><{$val.contact}></p>
+                            <p><{$val.mobile}></p>
+                            <p title="<{$val.addr}>&nbsp;<{$val.house}>" style="overflow: hidden; height: 24px; line-height: 24px;"><{$val.addr}>&nbsp;<{$val.house}></p>
+                            <em class="ico"></em>
+                        </li>
+                        <{/foreach}>
+                    </ul>
+                    <div class="cl"></div>
+                </div>
+                <{if $addr_num > 3}><div class="orderConfirm_infor_addr_show"><span>显示所有地址<em class="ico"></em></span></div><{/if}>
+                <script>
+                    $(document).ready(function () {
+                        $(document).on("click",".orderConfirm_infor_list",function () {
+                            $(".orderConfirm_infor_list").removeClass("on");
+                            $("#addr_id").val($(this).attr('rel'));
+                            $(this).addClass("on");
+                        });
+                        $(".orderConfirm_infor_addr_show span").click(function () {
+                            if($(".orderConfirm_infor").css("height") == '136px'){
+                                $(".orderConfirm_infor").css('height', 'auto');
+                            }else{
+                                $(".orderConfirm_infor").css('height', '136px');
+                            }
+                        });
+                    });
+                </script>
+                <!--收货人信息end-->
+                <h2>支付方式：</h2>
+                <!--支付方式-->
+                <div class="orderConfirm_payWay">
+                    <input type="hidden" id="online_pay" name="params[online_pay]" value="1"/>
+                    <ul>
+                        <li class="list on" rel="1">
+                            <p>在线支付</p>
+                            <p class="black9">支持微信、支付宝、账户余额</p>
+                            <em class="ico"></em>
+                        </li>
+                        <li class="list" rel="0">
+                            <p>货到付款</p>
+                            <p class="black9">送货上门后再付款</p>
+                            <em class="ico"></em>
+                        </li>
+                    </ul>
+                </div>
+                <!--支付方式end-->
+                <div class="orderConfirm_int_box">送达时间：
+                    <span>
+                        <select id="time_select" name="params[pei_time]">
+                        </select>
+                    </span>
+                </div>
+                <div class="orderConfirm_int_box">备注信息：<input type="text" name="params[note]" placeholder="请填写您的要求"></div>
+                <input type="button" value="确认下单" id="order_create" class="long_btn">
+            </div>
+        <div class="cl"></div>
+    </div>
+</form>
+<!--新增地址弹出层-->
+<div class="mask_box add_addr_mask" style="display:none;">
+    <div class="maskOne">
+        <form id="addr_add" method="post">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>姓&nbsp;&nbsp;名</th>
+                    <td><input type="text" class="int" name="params[contact]" placeholder="您的姓名"></td>
+                </tr>
+                <tr>
+                    <th>手&nbsp;&nbsp;机</th>
+                    <td><input type="text" class="int" name="params[mobile]" placeholder="11位手机号码"></td>
+                </tr>
+                <tr>
+                    <th>位&nbsp;&nbsp;置</th>
+                    <td>
+                        <input type="hidden" class="pos_lng" name="params[lng]" value="">
+                        <input type="hidden" class="pos_lat" name="params[lat]" value="">
+                        <div id="r-result"><input type="text" id="suggestId" class="int" name="params[addr]" placeholder="请输入小区、大厦或学校"></div>
+                        <div id="l-map" style="display: none; width: 100px; height: 50px;"></div>
+                        <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none; margin-top: 10px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>详细地址</th>
+                    <td><input type="text" class="int" name="params[house]" placeholder="请输入门牌号等详细信息"></td>
+                </tr>
+
+            </table>
+            <div class="btn_box">
+                <input type="button" id="addr_btn" class="pub_btn" value="确定">
+                <a href="javascript:void(0);" class="pub_btn cancel">取消</a>
+            </div>
+        </form>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<script>
+    $(document).ready(function () {
+        var html = "<option value=0><{L('立即配送')}></option>";
+        html += time_select("<{$set_time['start']}>", "<{$set_time['start_quarter']}>", "<{$set_time['end']}>", "<{$set_time['end_quarter']}>");
+        $("#time_select").html(html);
+
+
+        $(".add_addr_show").click(function () {
+            $(".add_addr_mask").show();
+        });
+        $(".add_addr_mask .cancel").click(function () {
+            $(".add_addr_mask").hide();
+        });
+
+        $(".add_addr_mask .sex_box").click(function () {
+            $(".add_addr_mask .sex_box").removeClass("on");
+            $(this).addClass("on");
+        });
+
+        var map = new BMap.Map("l-map");
+        var city = Cookie.get('UxCity');
+        map.centerAndZoom(city, 15);   // 初始化地图,设置城市和地图级别。
+        map.clearOverlays();
+
+        function G(id) {
+            return document.getElementById(id);
+        }
+        var ac = new BMap.Autocomplete(//建立一个自动完成的对象
+                {"input": "suggestId", "location": map});
+
+        ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+            var str = "";
+            var _value = e.fromitem.value;
+            var value = "";
+            if (e.fromitem.index > -1) {
+                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+            }
+            str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+            value = "";
+            if (e.toitem.index > -1) {
+                _value = e.toitem.value;
+                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+            }
+            str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+            G("searchResultPanel").innerHTML = str;
+        });
+
+        var myValue;
+        ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+            var _value = e.item.value;
+            myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+            G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+            setPoint();
+        });
+
+
+
+        function setPoint() {
+            var myGeo = new BMap.Geocoder();
+
+            myGeo.getPoint(myValue, function (point) {
+                if (point) {
+                    $(".pos_lng").val(point.lng);
+                    $(".pos_lat").val(point.lat);
+                }
+            }, city);
+        }
+
+        $("#addr_btn").click(function () {
+            var url = "<{link ctl='web/order/createAddr'}>";
+            $.post(url, $("#addr_add").serialize(), function (data) {
+                if (data.error == 101) {
+                    layer.msg(data.message);
+                    setTimeout(function () {
+                        window.location.href = "<{link ctl='web/passport/login'}>";
+                    }, 1000);
+                } else if (data.error == 0) {
+                    layer.msg(data.message);
+                    $(".add_addr_mask").hide();
+                    var addrs = data.addrs;
+                    //console.log(addrs);
+                    var res = "";
+                    $("#addr_id").val(data.addr_id);
+                    $.each(addrs, function (n, value) {
+                        if (value.addr_id == data.addr_id) {
+                            res += '<li class="orderConfirm_infor_list on">';
+                        } else {
+                            res += '<li class="orderConfirm_infor_list">';
+                        }
+                        res += '<p class="name">' + value.contact + '</p><p>' + value.mobile + '</p>';
+                        res += '<p title="'+ value.addr +'&nbsp;'+ value.house +'" style="overflow: hidden; height: 24px; line-height: 24px;">' + value.addr+'&nbsp;' +value.house + '</p><em class="ico"></em></li>';
+
+                    });
+                    $(".orderConfirm_infor ul").html(res);
+
+                } else {
+                    layer.msg(data.message);
+                }
+            }, 'json')
+        })
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $(".orderConfirm_payWay .list").click(function () {
+            $(".orderConfirm_payWay .list").removeClass("on");
+            $("#online_pay").val($(this).attr('rel'));
+            $(this).addClass("on");
+            get_hongbao();
+        });
+        
+        //下单
+        $("#order_create").click(function () {
+            //var products = Cookie.get('ele');
+            //console.log(products);
+            
+            //return false;
+            var url = "<{link ctl='web/order/create'}>";
+            $.post(url, $("#form_post").serialize(), function (ret) {
+                if (ret.error > 0) {
+                    if (ret.error == 101) {
+                        layer.msg('请先登录');
+                        setTimeout(function () {
+                            window.location.href = "<{link ctl='web/passport/login'}>";
+                        }, 1000);
+                    } else if (ret.error >= 221 && ret.error <= 224) {
+                        layer.msg(ret.message);
+                        setTimeout(function () {
+                            window.location.href = "<{link ctl='index/index'}>";
+                        }, 1000);
+                    } else {
+                        layer.msg(ret.message);
+                    }
+                } else {
+                    layer.msg(ret.message);
+                    window.ele.removeby("<{$detail.shop_id}>");
+                    var order_id = ret.order_id;
+                    var pay_status = ret.pay_status;
+                    var link = "<{link ctl='web/order/pay' args=oooo}>";
+                    var link2 = "<{link ctl='web/ucenter/order/detail' args=oooo}>";
+                    window.ele.removeby("<{$detail.shop_id}>");
+                    setTimeout(function () {
+                        if (ret.online_pay == 0) {
+                            window.location.href = link2.replace('oooo', order_id);
+                            return false;
+                        }
+                        //if (pay_status == 1) {
+                        //    window.location.href = link2.replace('oooo', order_id);
+                        //} else {
+                            window.location.href = link.replace('oooo', order_id);
+                        //}
+                    }, 1000);
+                }
+            }, 'json')
+        })
+        
+        
+    });
+    
+        var hongbao = [];
+        <{foreach $hongbao as $k=>$v}>
+        hongbao.push({"hongbao_id":"<{$v.hongbao_id}>","min_amount":"<{$v.min_amount}>","amount":"<{$v.amount}>"});
+        <{/foreach}>
+        function get_hongbao(){
+                var html = "<option value='0'><{L('请选择红包')}></option>";
+                var online_pay = $("#online_pay").val();
+                var mini_amount = Number(parseFloat(window.ele.totalprice("<{$detail['shop_id']}>")).toFixed(2));
+                $.each(hongbao, function (n, value) {                    
+                    if(value.min_amount <= mini_amount && online_pay==1){
+                        html += '<option value='+value.hongbao_id+'>满'+value.min_amount+'可用，减'+value.amount+'元</option>';
+                    }
+                });
+                $("#hongbao").html(html);
+            }
+        
+        function addcart(o) {
+            var data = {}, shop_id = "<{$detail['shop_id']}>";
+            data['product_id'] = $(o).attr('pid');
+            data['price'] = $(o).attr('val');
+            data['title'] = $(o).attr('rel');
+            data['sku'] = $(o).attr('sku');
+            data['cate_id'] = $(o).attr('cate_id');
+            data['package_price'] = $(o).attr('pack');
+            var sku = parseInt($(o).attr('sku'));
+            var limit = 0;
+            (99 <= sku) ? limit = 99 : limit = sku;
+            var v = $(o).parent().parent().find(".ordernum").val();
+            if (v < limit) {
+                v++;
+                $(".dianpu_num_" + $(o).attr('pid')).find(".ordernum").val(v);
+                //event = window.event;
+            } else {
+                layer.msg("<{L('店里没有那么多商品了')}>");
+                return false;
+            }
+            window.ele.addcart(shop_id, data);
+            var totalprice = parseFloat(window.ele.totalprice("<{$detail['shop_id']}>")).toFixed(2);
+            var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+            var total_price = parseFloat(parseFloat(packprice) + parseFloat(totalprice) + parseFloat("<{$detail['freight']}>")).toFixed(2);
+            $("#total_price").html(total_price);
+            if (packprice > 0) {
+                $("#pack_price").html(packprice);
+            } else {
+                $("#pack_price").html(0);
+            }
+            get_list();
+            get_hongbao();
+        }
+
+        function dec(e) {
+            var product_id = $(e).attr('pid'), shop_id = "<{$detail['shop_id']}>";
+            var v = $(e).parent().find(".ordernum").val();
+            if (v > 1) {
+                window.ele.dec(shop_id, product_id);
+                v--;
+                $(".dianpu_num_" + $(e).attr('pid')).find(".ordernum").val(v);
+                $("#num").text(window.ele.count(shop_id));
+                $("#cart_num").text(window.ele.count(shop_id));
+                var totalprice = parseFloat(window.ele.totalprice("<{$detail['shop_id']}>")).toFixed(2);
+                var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+                var total_price = parseFloat(parseFloat(packprice) + parseFloat(totalprice) + parseFloat("<{$detail['freight']}>")).toFixed(2);
+                $("#total_price").html(total_price);
+                if (packprice > 0) {
+                    $("#pack_price").html(packprice);
+                } else {
+                    $("#pack_price").html(0);
+                }
+                get_list();
+                get_hongbao();
+            }else{
+                layer.msg("不能再少了");return false;
+            }
+            
+        }
+
+        function get_list() {
+            var shop_id = "<{$detail['shop_id']}>";
+            var goods = window.ele.getcart();
+            var str = "";
+            for (var sid in goods) {
+                if (sid == shop_id) {
+                    for (var index in goods[sid]) {
+                        if (goods[sid][index]["num"] > 0) {
+                            $(".dianpu_num_" + index).find(".ordernum").val(goods[sid][index]["num"]);
+                            str += '<tr><td align="left">' + goods[sid][index]["title"] + '</td>';
+                            str += '<td align="center"><div class="num_operate dianpu_num_' + goods[sid][index]["product_id"] + '"><span class="jian" val="' + goods[sid][index]["price"] + '" rel="' + goods[sid][index]["title"] + '" pid="' + goods[sid][index]["product_id"] + '" sku="' + goods[sid][index]["sku"] + '" cate_id="' + goods[sid][index]["cate_id"] + '" pack="' + goods[sid][index]["package_price"] + '" onclick="dec(this);" quantity="-">-</span><input type="text" readonly="readonly" class="text_box ordernum" value="' + goods[sid][index]["num"] + '"><span class="add" val="' + goods[sid][index]["price"] + '" rel="' + goods[sid][index]["title"] + '" pid="' + goods[sid][index]["product_id"] + '" sku="' + goods[sid][index]["sku"] + '" cate_id="' + goods[sid][index]["cate_id"] + '" pack="' + goods[sid][index]["package_price"] + '"  onclick="addcart(this);" quantity="+">+</span></div></td>';
+                            str += '<td align="right">￥' + goods[sid][index]["price"] + '</td></tr>';
+                        }
+                    }
+                }
+            }
+            $("table.cartFloat_list").html(str);
+        }
+
+        //初始化外卖数据
+        ~function () {
+            window.ele.init();
+            var count = parseInt(window.ele.count("<{$detail['shop_id']}>"), 10);
+            var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+            if (packprice > 0) {
+                $("#pack_price").html(packprice);
+            } else {
+                $("#pack_price").html(0);
+            }
+            var totalprice = parseFloat(window.ele.totalprice("<{$detail['shop_id']}>")).toFixed(2);
+            var total_price = parseFloat(parseFloat(packprice) + parseFloat(totalprice) + parseFloat("<{$detail['freight']}>")).toFixed(2);
+            $("#total_price").html(total_price);
+            get_list();
+            get_hongbao();
+        }();
+    </script>
+<!--新增地址弹出层end-->
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

@@ -1,0 +1,168 @@
+<{assign var='tpl_title' value=L('跑腿')}>
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+    <body style="height:100%;">
+<header>
+    <i class="left"><a href="<{link ctl='index'}>" class="gobackIco"></a></i>
+    <div class="title">
+    	<{L('跑腿')}>
+    </div>
+    <i class="right"></i>
+</header>
+
+        <section class="page_center_box" style="position:relative;height: 100%; padding-bottom: 0; top: 0;display:block;">
+                <div class="waimaiRun" style="width:100%;height:100%;">
+                <div class="waimaiRun_map" id="allmap" style="width: 100%; height:100%;background:url(%THEME%/static/images/map_loading.gif) center center no-repeat;"></div>
+                <div class="waimaiRun_cate" style="width:100%;position:absolute;bottom:0;">
+                    <ul>
+                        <li class="list"><a href="javascript:song();"><i class="ico ico_1"></i><p><{L('帮我送')}></p></a></li>
+                        <li class="list"><a href="<{link ctl='paotui:buy'}>"><i class="ico ico_2"></i><p><{L('帮我买')}></p></a></li>
+                        <li class="list"><a href="<{link ctl='paotui:paotui' args='1'}>"><i class="ico ico_3"></i><p><{L('跑腿订单')}></p></a></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </section>
+        
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8"></script>
+<!--百度地图JavaScript API开始-->
+<script type="text/javascript">
+    // 创建Map实例
+    var map = new BMap.Map("allmap");
+    var lng = null;
+    var lat = null;
+    var SouthWlng = null;
+    var SouthWlat = null;
+    var NorthElng = null;
+    var NorthElat = null;
+    var items = test = null;
+    // 根据浏览器定位
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            lng = r.point.lng; lat = r.point.lat;
+            var point = new BMap.Point(lng, lat);
+            map.centerAndZoom(point, 17);  
+
+            //左下角坐标
+            SouthWlng = map.getBounds().getSouthWest().lng;
+            SouthWlat  = map.getBounds().getSouthWest().lat;
+            //右上角坐标
+            NorthElng = map.getBounds().getNorthEast().lng;
+            NorthElat = map.getBounds().getNorthEast().lat;
+            if(SouthWlat && SouthWlng && NorthElat && NorthElng) {
+                jQuery.ajax({  
+                    url: "<{link ctl='paotui:getstaffpoi'}>", 
+                    async: true,  
+                    dataType: 'json',  
+                    data: {"SouthWlng":SouthWlng,"SouthWlat": SouthWlat,"NorthElng": NorthElng,"NorthElat": NorthElat},
+                    type: 'POST',   
+                    success: function (ret) { 
+                        if(ret.error > 0){
+
+                        }else{
+                            items = ret.data.items;
+                              $.each(items,function(key,val){
+                                var each_point = new BMap.Point(val.lng, val.lat); 
+                                addMarker(each_point);
+                            });
+                        }
+                    }, 
+                    error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                        alert(errorThrown); 
+                    },  
+                });
+            }    
+        }else {
+            alert('failed'+this.getStatus());
+        }        
+    },{enableHighAccuracy: true});
+
+
+    map.enableScrollWheelZoom(true); //允许滚轮缩放
+    map.enableDragging(); // 允许地图拖拽
+
+    map.addEventListener("dragend", function(){
+        var center = map.getCenter();    
+        var mPoint = new BMap.Point(center.lng, center.lat);
+        map.enableScrollWheelZoom();  //启用滚轮缩放
+        map.centerAndZoom(mPoint,17); // 设置地图显示级别
+            //左下角坐标
+            SouthWlng = map.getBounds().getSouthWest().lng;
+            SouthWlat  = map.getBounds().getSouthWest().lat;
+            //右上角坐标
+            NorthElng = map.getBounds().getNorthEast().lng;
+            NorthElat = map.getBounds().getNorthEast().lat;
+            if(SouthWlat && SouthWlng && NorthElat && NorthElng) {
+                jQuery.ajax({  
+                    url: "<{link ctl='paotui:getstaffpoi'}>", 
+                    async: true,  
+                    dataType: 'json',  
+                    data: {"SouthWlng":SouthWlng,"SouthWlat": SouthWlat,"NorthElng": NorthElng,"NorthElat": NorthElat},
+                    type: 'POST',   
+                    success: function (ret) { 
+                        if(ret.error > 0){
+
+                        }else{
+                            items = ret.data.items;
+                            $.each(items,function(key,val){
+                                var each_point = new BMap.Point(val.lng, val.lat); 
+                                addMarker(each_point);
+                            });
+                        }
+                    }, 
+                    error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                        alert(errorThrown); 
+                    },  
+                });
+            }    
+    });
+
+    
+             //设置中心点样式
+        var container = document.getElementById("allmap");
+        var central = document.createElement("div");
+        central.style.left = "50%";
+        central.style.marginLeft="-18px";
+        central.style.top="50%";
+        central.style.marginTop="-48px";
+        central.style.position="relative";
+        central.style.width="36px";
+        central.style.height="36px";
+        central.style.zIndex="100000";
+        central.innerHTML ='';
+        central.innerHTML ='<img src="%THEME%/static/images/coordinate@2x.png" />';
+    
+
+
+
+    map.addEventListener("tilesloaded",function(){
+        
+
+        container.appendChild(central); 
+        
+    });
+    
+    
+     function addMarker(point){
+            var myIcon = new BMap.Icon("%THEME%/static/images/ren@2x.png", new BMap.Size(32,37));
+            var marker = new BMap.Marker(point,{icon:myIcon});  // 创建标注
+            map.addOverlay(marker);
+        } 
+
+    
+</script>
+<!--百度地图JavaScript API结束-->
+<script>
+function song() {
+    localStorage.setItem('indexfrom','index');
+    window.location.href = "<{link ctl='paotui:song'}>";
+}
+</script>
+
+</body>
+</html>

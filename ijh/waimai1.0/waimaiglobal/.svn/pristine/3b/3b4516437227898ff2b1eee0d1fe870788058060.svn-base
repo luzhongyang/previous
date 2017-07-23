@@ -1,0 +1,261 @@
+<{include file="web/block/header.html"}>
+<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7b92b3afff29988b6d4dbf9a00698ed8"></script>-->
+<style type="text/css">
+    #l-map{height:300px;width:100%;display:none;}
+    #r-result{width:100%;}
+    .tangram-suggestion table tr td{height: 50px !important;line-height: 50px !important; border-bottom: 1px solid #ededed;}
+    #tangram-suggestion--TANGRAM__1c-main{ z-index: 200 !important;}
+</style>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <div class="prslCenter_recharge">
+        	<h2>地址管理<span class="fr prslCenter_addr_add add_addr_show">新增收货地址</span></h2>
+            <div class="cl"></div>
+        </div>
+        <!--收货地址-->
+        <div class="prslCenter_addr_box">
+            <ul>
+                <{foreach $items as $item}>
+                    <li class="prslCenter_addr_list">
+                        <div class="top">
+                            <div class="fl"><{$item.contact}> <{if $item.is_default}><span class="deftl">默认地址</span><{/if}></div>
+                            <div class="fr"><{if !$item['is_default']}><a href="javascript:void(0);" onclick="set_default(<{$item.addr_id}>);" class="caozuo">设为默认</a><{/if}><a class="caozuo edit_addr"  addr_id="<{$item.addr_id}>" contact="<{$item.contact}>" lat="<{$item.lat}>" lng="<{$item.lng}>" addr="<{$item.addr}>" house="<{$item.house}>" mobile="<{$item.mobile}>" href="javascript:void(0);" >编辑</a></div>
+                        </div>
+                        <div>
+                            <p class="mb10"><{$item.mobile}></p>
+                            <p style="height:20px;overflow: hidden; cursor: pointer;" title="<{$item.addr}>" ><{$item.addr}></p>
+                            <p style="height:20px;overflow: hidden; cursor: pointer;" title="<{$item.house}>" ><{$item.house}></p>
+                        </div>
+                        <div class="close del_addr_show" onclick="delete_addr(<{$item.addr_id}>);" ></div>
+                    </li>
+                <{/foreach}>
+    	    </ul>
+        </div>
+        <!--收货地址结束-->
+    </div>
+    <div class="cl"></div>
+</div>
+<!--新增地址弹出层-->
+<div class="mask_box add_addr_mask" style="display:none;">
+    <div class="maskOne">
+        <form id="addr_add" method="post">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>姓&nbsp;&nbsp;名</th>
+                    <td><input type="text" class="int" id="addr_contact" name="params[contact]" placeholder="您的姓名"></td>
+                </tr>
+                <tr>
+                    <th>手&nbsp;&nbsp;机</th>
+                    <td><input type="text" class="int" id="addr_mobile" name="params[mobile]" placeholder="11位手机号码"></td>
+                </tr>
+                <tr>
+                    <th>位&nbsp;&nbsp;置</th>
+                    <td>
+                        <input type="hidden" class="pos_lng" name="params[lng]" value="">
+                        <input type="hidden" class="pos_lat" name="params[lat]" value="">
+                        <div id="r-result"><input type="text" id="pac-input" class="int" name="params[addr]" placeholder="请输入小区、大厦或学校"></div>
+                        <div id="map" style="display: none; width: 100px; height: 50px;"></div>
+                        <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none; margin-top: 10px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>详细地址</th>
+                    <td><input type="text" class="int" id="addr_house" name="params[house]" placeholder="请输入门牌号等详细信息"></td>
+                </tr>
+
+            </table>
+            <div class="btn_box">
+                <input type="hidden" name="params[addr_id]" value="" id="addr_id"/>
+                <input type="button" id="addr_btn" class="pub_btn" value="确定">
+                <a href="javascript:void(0);" class="pub_btn cancel">取消</a>
+            </div>
+        </form>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+<script>
+    function set_default(addr_id){
+        layer.confirm('<{L("您确定要设置为默认地址吗")}>？', {
+            btn: ['<{L("确认")}>', '<{L("取消")}>']
+        }, function () {
+            var url = "<{link ctl='web/ucenter/addr/set_default' args=oooo}>";
+            $.post(url.replace('oooo', addr_id),{},function(ret){
+                if(ret.error == 0){
+                    layer.msg(ret.message);
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },'1000')
+                }else{
+                    layer.msg(ret.message);
+                }
+            },'json')
+        });
+    }
+    
+    
+    
+    function delete_addr(addr_id){
+        layer.confirm('<{L("您确定要删除地址吗")}>？', {
+            btn: ['<{L("确认")}>', '<{L("取消")}>']
+        }, function () {
+            var url = "<{link ctl='web/ucenter/addr/delete' args=oooo}>";
+            $.post(url.replace('oooo', addr_id),{},function(ret){
+                if(ret.error == 0){
+                    layer.msg(ret.message);
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },'1000')
+                }else{
+                    layer.msg(ret.message);
+                }
+            },'json')
+        });
+    }
+    
+    function clear_info(){
+        $("#addr_contact").val("");
+        $("#addr_mobile").val("");
+        $("#pac-input").val("");
+        $("#addr_house").val("");
+        $("#addr_id").val("");
+        $(".pos_lat").val("");
+        $(".pos_lng").val("");
+    }
+    
+    function initAutocomplete() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        var lng= "";
+        var lat ="";
+
+        // [START region_getplaces]
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            lng = place.geometry.location.lng();
+            lat = place.geometry.location.lat();    
+            if(lng&&lat){
+                $(".pos_lng").val(lng);
+                $(".pos_lat").val(lat);  
+             }
+            //alert(lng);  
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+        // [END region_getplaces]
+    }
+    $(document).ready(function () {
+        $(".add_addr_show").click(function () {
+            clear_info();
+            $(".add_addr_mask").show();
+        });
+        $(".add_addr_mask .cancel").click(function () {
+            $(".add_addr_mask").hide();
+        });
+
+        $(".edit_addr").click(function(){
+            $("#addr_contact").val($(this).attr('contact'));
+            $("#addr_mobile").val($(this).attr('mobile'));
+            $("#pac-input").val($(this).attr('addr'));
+            $("#addr_house").val($(this).attr('house'));
+            $("#addr_id").val($(this).attr('addr_id'));
+            $(".pos_lat").val($(this).attr('lat'));
+            $(".pos_lng").val($(this).attr('lng'));
+            $(".add_addr_mask").show();
+        })
+
+
+        /*
+        $(".add_addr_mask .sex_box").click(function () {
+            $(".add_addr_mask .sex_box").removeClass("on");
+            $(this).addClass("on");
+        });*/
+
+        
+    
+
+        $("#addr_btn").click(function () {
+            var addr_id = $("#addr_id").val();
+            if(addr_id){
+                var link = "<{link ctl='web/ucenter/addr/edit' args=oooo}>"
+                var url = link.replace('oooo',addr_id);
+            }else{
+                var url = "<{link ctl='web/ucenter/addr/create'}>";
+            }
+            $.post(url, $("#addr_add").serialize(), function (data) {
+                if (data.error == 101) {
+                    layer.msg(data.message);
+                    setTimeout(function () {
+                        window.location.href = "<{link ctl='web/passport/login'}>";
+                    }, 1000);
+                } else if (data.error == 0) {
+                    layer.msg(data.message);
+                    $(".add_addr_mask").hide();
+                    setTimeout(function () {
+                        window.location.reload(true);
+                    }, 1000);
+                } else {
+                    layer.msg(data.message);
+                }
+            }, 'json')
+        })
+    });
+</script>
+<!--新增地址弹出层end-->
+<!--内容结束-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpffjC9Wbc5sT8B2KBg6bx1382rjo7QbY&signed_in=true&language=it&libraries=places&callback=initAutocomplete" async="" defer=""></script>
+<{include file="web/block/footer.html"}>

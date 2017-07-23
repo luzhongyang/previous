@@ -1,0 +1,32 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="ditui/ditui:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data">
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<tr><th>ID：</th><td class="w-300"><{$detail.ditui_id}></td><th>手机号：</th><td><{$detail.mobile}></td></tr>
+<tr><th>城市：</th><td><{$detail.city_name}>(ID:<{$detail.city_id}>)</td><th>状态：</th><td><{if $detail.audit}><b class="blue">通过</b><{else}><b class="red">待审</b><{/if}></td></tr>
+<tr><th>推广码：</th><td><{$detail.pmid}></td><th>余额：</th><td><{$detail.money}></td></tr>
+<tr><th>已注册数：</th><td><{$detail.reg_count}></td><th>已下单数：</th><td><{$detail.order_count}></td></tr>
+<tr><th>注册时间：</th><td><{$detail.dateline|format}></td><th>注册IP：</th><td><{$detail.clientip}>(<{$detail.clientip|iplocal}>)</td></tr>
+<tr><th>姓名：</th><td><{$detail.name}></td><th>身份证：</th>
+    <td rowspan="2"><img src="<{$pager.img}>/<{$detail.id_photo}>" width="400"/></td>
+</tr>
+<tr><th>身份证号：</th><td><{$detail.id_number}></td><th></th></tr>
+<tr><th>提现帐号：</th><td colspan="3">开户行：<{$detail.account_type}>， 开户名：<{$detail.account_name}>, 帐号：<{$detail.account_number}></td></tr>
+<tr><th></th><td>
+    <{link ctl="ditui/member:ditui" arg0=$detail.ditui_id class="button" title="查看推广的用户"}>
+    <{link ctl="ditui/shop:ditui" arg0=$detail.ditui_id class="button" title="查看推广的商家"}>
+</td></tr>
+</table>
+
+
+</div>
+<{include file="admin:common/footer.html"}>

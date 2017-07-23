@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+        <script src="%THEME%/static/js/jquery.fly.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="%THEME%/static/js/requestAnimationFrame.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <header>
+            <i class="left"><a href="<{link ctl='index'}>" link-load="" link-type="right" class="gobackIco"></a><a href="javascript:void(0);"><{$detail.title}></a></i>
+            <div class="title">
+            </div>
+            <i class="right"><a class="searchIco" link-load="" href="<{link ctl='search'}>"></a></i>
+        </header>
+        <!--提示内容开始-->
+        <div class="dianpuPrompt"><p><{L('商家温馨提示')}>:<{$detail.info}></p></div>
+        <!--提示内容结束-->
+        <!--头部切换开始-->
+        <ul id="shangjia_tab">
+            <li><a href="<{link ctl='shop/detail' arg0=$detail.shop_id}>" class="on"><{L('菜单')}></a></li>
+            <li><a href="<{link ctl='shop/comment' arg0=$detail.shop_id}>" link-load=""><{L('评价')}></a></li>
+            <li><a href="<{link ctl='shop/shop' arg0=$detail.shop_id}>" link-load=""><{L('商家')}></a></li>
+        </ul>
+        <!--头部切换结束-->
+        <section class="page_center_box" style="bottom:0.7rem; padding-bottom:0;">
+            <div class="dianpu_cont mt10">
+                <div class="dianpu_left fl">
+                    <ul>
+                        <{foreach $cates as $item}>
+                        <li <{if $item@index ==0}>class="on"<{/if}> id="cate_num_<{$item.cate_id}>"><a href="javascript:void(0);" rel="<{$item.cate_id}>"><{$item.title}></a><em></em></li>
+                        <{/foreach}>
+                    </ul>
+                </div>
+                <div class="dianpu_right fr">
+                    <{foreach $items as $k=>$var}>
+                    <h2 class="dianpu_list_bt"><{$cates[$k]['title']}></h2>
+                    <{foreach $var as $item}>
+                    <div class="dianpu_list">
+                        <div class="img fl"><a href="<{link ctl='shop/product' arg0=$item.product_id}>" link-load=""><img src="<{$pager.img}>/<{$item.photo}>" width="100" height="100" /></a></div>
+                        <div class="wz">
+                            <h3><a href="<{link ctl='shop/product' arg0=$item.product_id }>"><{$item.title}></a></h3>
+                            <p class="black9"><{L('总售')}>：<{$item.sales}><{L('份')}></p>
+                            <p class="pointcl1">￥<{$item.price}></p>
+                            <{if $item['sku'] >0}>
+                            <div class="num_operate dianpu_num dianpu_num_<{$item.product_id}>">
+                                <span class="reduce" pack="<{$item.package_price}>"  val="<{$item.price}>" rel="<{$item.title}>" pid="<{$item.product_id}>" sku="<{$item.sku}>" cate_id="<{$item.cate_id}>" onClick="dec(this);" quantity="-">-</span>
+                                <input type="text" readonly="readonly" class="text_box ordernum" value="<{$item.cart_num}>">
+                                <span class="add jq_addcart" val="<{$item.price}>" rel="<{$item.title}>" pid="<{$item.product_id}>" sku="<{$item.sku}>" cate_id="<{$item.cate_id}>" pack="<{$item.package_price}>" onClick="addcart(this);" quantity="+">+</span>
+                            </div>
+                            <{else}>
+                            <div class="num_operate dianpu_num">
+                                <{L('已售完')}>
+                            </div>
+                            <{/if}>
+                        </div>
+                    </div>
+                    <{/foreach}>
+                    <{/foreach}>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </section>
+        <section class="dianpu_footer">
+            <div class="dianpu_fot_shop">
+                <div class="fl"><div class="fl spcart"><i id="num">0</i></div><div class="fl zjia" ><span class="pointcl1 big"><sele>￥</sele><span id="total_price">0</span></span><span class="pack"><span id="pack_price"></span></span><{if $detail['freight'] >0}><span class="pack"><{L('配送费')}>￥<{$detail.freight}></span><{else}><span><{L('免配送费')}></span><{/if}></div></div>
+                <div class="fr jiesuan"><a href="javascript:void(0);" id="cart" class="pub_btn"><{L('去结算')}></a></div>
+                <div class="clear"></div>
+            </div>
+            <div class="dianpu_spin none">
+                <h2><a href="javascript:void(0);" class="empty black9"><em></em><{L('清空所有')}></a></h2>
+                <div>
+
+                </div>
+            </div>
+            <div class="dianpu_shop_zzc"></div>
+        </section>
+        <!--JS 购物车-->
+        <script>
+            $(document).ready(function (e) {
+                var public_top = $('.dianpu_left').offset().top; //这个滚动一个条件
+                var list = Array();
+
+                $(".dianpu_list_bt").each(function (a) {
+                    list[a] = $(this).offset().top;
+                });
+                var num = $(".dianpu_left li").length;
+
+                function gundong() {
+                    for (i = 0; i < num; i++) {
+                        if ($(".dianpu_list_bt").eq(i).offset().top <= public_top) {
+                            $(".dianpu_left li").removeClass('on');
+                            $(".dianpu_left li").eq(i).addClass('on');
+                        }
+                    }
+                }
+                $('.dianpu_right').scroll(function () {
+                    gundong();
+                });
+
+
+                $(".dianpu_left li").click(function () {
+                    var index = $(this).index();
+                    $(".dianpu_right").animate({scrollTop: list[index] - public_top + 'px'}, 200);
+
+                });
+
+
+            });//商家店铺菜单分类效果结束
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.dianpu_fot_shop .spcart').click(function () {
+                    $('.dianpu_footer .dianpu_spin').slideToggle();
+                    if ($('.dianpu_footer .dianpu_shop_zzc').css('display') == 'none') {
+                        $('.dianpu_shop_zzc').show();
+                    }
+                    else {
+                        $('.dianpu_shop_zzc').hide();
+                    }
+                });
+                $('.dianpu_shop_zzc').click(function () {
+                    $('.dianpu_footer .dianpu_spin').hide();
+                    $('.dianpu_shop_zzc').hide();
+                });//底部购物车弹出窗结束
+
+            })
+
+            function set_status() {
+                var min_amount = "<{$detail['min_amount']}>";
+                var total = window.ele.totalprice("<{$detail['shop_id']}>");
+                if (total == 0) {
+                    $('#cart').removeClass("pub_btn");
+                    $('#cart').attr('href', "javascript:void(0);");
+                    $('#cart').html("￥" + min_amount + "<{L('起送')}>");
+                } else if (total < min_amount) {
+                    $('#cart').removeClass("pub_btn");
+                    $('#cart').attr('href', "javascript:void(0);");
+                    $('#cart').html("<{L('还差')}>￥" + parseFloat(min_amount - total).toFixed(2) + "<{L('起送')}>");
+                } else {
+                    $('#cart').attr('href', "<{link ctl='order/order' args=$detail['shop_id']}>");
+                    $('#cart').addClass('pub_btn');
+                    $('#cart').html("<{L('去结算')}>");
+                }
+            }
+
+            function cart_checkout(shop_id){
+                
+            }
+
+            function addcart(o) {
+                var top = 0, left = 0;
+                var ooffset = $(o).offset();
+                top = ooffset.top; // + poffset.top + 11;
+                left = ooffset.left; // + poffset.left + 11;
+                var data = {}, shop_id = "<{$detail['shop_id']}>";
+                data['product_id'] = $(o).attr('pid');
+                data['price'] = $(o).attr('val');
+                data['title'] = $(o).attr('rel');
+                data['sku'] = $(o).attr('sku');
+                data['cate_id'] = $(o).attr('cate_id');
+                data['package_price'] = $(o).attr('pack');
+                var sku = parseInt($(o).attr('sku'));
+                var limit = 0;
+                (99 <= sku) ? limit = 99 : limit = sku;
+                var v = $(o).parent().find(".ordernum").val();
+                if (v < limit) {
+                    v++;
+                    $(".dianpu_num_" + $(o).attr('pid')).find(".ordernum").val(v);
+                    //event = window.event;
+                    var offset = $("#num").offset();  //结束的地方的元素
+                    var flyer = $('<div style="width:0.16rem; height:0.16rem;border-radius:0.16rem; background:#1ec0be;position: relative; z-index:101;"></div>');
+                    if(getAndroidVersion() > 5){ //Android 大于5.0才给抛物线动画
+                        flyer.fly({
+                            start: {left: left,top: top},
+                            end: {
+                                left: offset.left + 10,
+                                top: offset.top + 10,
+                                width: 0,
+                                height: 0
+                            },
+                            onEnd: function () {
+                                this.destory();
+                            }
+                        });
+                    }
+                } else {
+                    Widget.MsgBox.error("<{L('店里没有那么多商品了')}>");
+                    return false;
+                }
+                window.ele.addcart(shop_id, data);
+                $("#num").text(window.ele.count(shop_id));
+                $("#total_price").html(parseFloat(window.ele.totalprice(shop_id)).toFixed(2));
+                var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+                if (packprice > 0) {
+                    $("#pack_price").html('<{L("打包费")}>￥' + packprice);
+                } else {
+                    $("#pack_price").html('');
+                }
+                set_status();
+                get_list();
+                cate_list();
+            }
+
+            function dec(e) {
+                var product_id = $(e).attr('pid'), shop_id = "<{$detail['shop_id']}>";
+                window.ele.dec(shop_id, product_id);
+                var v = $(e).parent().find(".ordernum").val();
+                if (v > 0) {
+                    v--;
+                    $(".dianpu_num_" + $(e).attr('pid')).find(".ordernum").val(v);
+                }
+                $("#num").text(window.ele.count(shop_id));
+                $("#total_price").html(parseFloat(window.ele.totalprice(shop_id)).toFixed(2));
+                var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+                if (packprice > 0) {
+                    $("#pack_price").html('<{L("打包费")}>￥' + packprice);
+                } else {
+                    $("#pack_price").html('');
+                }
+                set_status();
+                get_list();
+                cate_list();
+            }
+
+            $(".empty").click(function () {
+                layer.open({
+                    title: '<{L("温馨提示")}>',
+                    content: '<{L("确定要清空购物车吗")}>？',
+                    btn: ['<{L("确认")}>', '<{L("取消")}>'],
+                    shadeClose: false,
+                    yes: function () {
+                        var shop_id = "<{$detail['shop_id']}>";
+                        window.ele.removeby(shop_id);
+                        $("#num").text(window.ele.count(shop_id));
+                        $("#total_price").html(parseFloat(window.ele.totalprice(shop_id)).toFixed(2));
+                        var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+                        if (packprice > 0) {
+                            $("#pack_price").html('<{L("打包费")}>￥' + packprice);
+                        } else {
+                            $("#pack_price").html('');
+                        }
+                        $(".ordernum").val(0);
+                        set_status();
+                        get_list();
+                        cate_list();
+                        layer.closeAll();
+                        $('.dianpu_footer .dianpu_spin').slideToggle();
+                        $('.dianpu_shop_zzc').hide();
+                    }, no: function () {
+
+                    }
+                });
+            })
+
+            function cate_list() {
+                var cates = window.ele.catecount("<{$detail['shop_id']}>");
+                var str = "";
+                $("[id^='cate_num']").find("em").hide();
+                for (var cate_id in cates) {
+                    if (cates[cate_id] > 0) {
+                        $("#cate_num_" + cate_id + " em").html(cates[cate_id]).show();
+                    }
+                }
+            }
+
+
+            function get_list() {
+                var shop_id = "<{$detail['shop_id']}>";
+                var goods = window.ele.getcart();
+                var str = "";
+                for (var sid in goods) {
+                    if (sid == shop_id) {
+                        for (var index in goods[sid]) {
+                            if (goods[sid][index]["num"] > 0) {
+                                $(".dianpu_num_"+index).find(".ordernum").val(goods[sid][index]["num"]);
+                                str += '<div class="dianpu_list dianpu_list_bt">';
+                                str += '<h3>' + goods[sid][index]["title"] + '<span class="pointcl1">￥' + goods[sid][index]["price"] + '</span></h3>';
+                                str += '<div class="num_operate dianpu_num dianpu_num_' + goods[sid][index]["product_id"] + '">';
+                                str += '<span class="reduce" val="' + goods[sid][index]["price"] + '" rel="' + goods[sid][index]["title"] + '" pid="' + goods[sid][index]["product_id"] + '" sku="' + goods[sid][index]["sku"] + '" cate_id="' + goods[sid][index]["cate_id"] + '" pack="' + goods[sid][index]["package_price"] + '" onclick="dec(this);" quantity="-">-</span>';
+                                str += '<input type="text" readonly="readonly" class="text_box ordernum" value="' + goods[sid][index]["num"] + '">';
+                                str += '<span class="add jq_addcart" val="' + goods[sid][index]["price"] + '" rel="' + goods[sid][index]["title"] + '" pid="' + goods[sid][index]["product_id"] + '" sku="' + goods[sid][index]["sku"] + '" cate_id="' + goods[sid][index]["cate_id"] + '" pack="' + goods[sid][index]["package_price"] + '"  onclick="addcart(this);" quantity="+">+</span></div></div>';
+                            }
+                        }
+                    }
+                }
+                $(".dianpu_spin div").html(str);
+            }
+
+            //初始化外卖数据
+            ~function () {
+                window.ele.init();
+                //console.log(window.ele.getcart());
+                var count = parseInt(window.ele.count("<{$detail['shop_id']}>"),10);
+                var packprice = parseFloat(window.ele.packprice("<{$detail['shop_id']}>")).toFixed(2);
+                if (packprice > 0) {
+                    $("#pack_price").html('<{L("打包费")}>￥' + packprice);
+                } else {
+                    $("#pack_price").html('');
+                }
+                var totalprice = parseFloat(window.ele.totalprice("<{$detail['shop_id']}>")).toFixed(2);
+                $("#num").text(count);
+                $("#total_price").html(totalprice);
+                set_status();
+                get_list();
+                cate_list();
+            }();
+        </script>
+    </body>
+</html>

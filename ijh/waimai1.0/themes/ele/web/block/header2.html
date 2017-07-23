@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><{if $seo_sub_title}><{$seo_sub_title}>_<{/if}><{if $seo_title}><{$seo_title}><{elseif $SEO.title}><{$SEO.title}><{else}><{L('商户管理')}>-<{$CONFIG.site.title}><{/if}></title>
+<link rel="stylesheet" type="text/css" href="/themes/default/web/static/css/style.css?<{$VER}>" />
+<link rel="stylesheet" type="text/css" href="/themes/ele/web/static/css/pub.css?<{$VER}>" />
+<link rel="stylesheet" type="text/css" href="/themes/default/web/static/css/append.css?<{$VER}>" />
+<link rel="stylesheet" type="text/css" href="/themes/ele/web/static/css/append.css?<{$VER}>" />
+<script type="text/javascript" src="/themes/default/web/static/js/jquery.js?<{$VER}>"></script>
+<script src="<{$pager.res}>/script/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="<{$pager.res}>/script/fastclick.js" type="text/javascript" charset="utf-8"></script>
+<script src="/themes/default/web/static/js/common.js?<{$VER}>" type="text/javascript" charset="utf-8"></script>
+<script src="/themes/default/static/js/jquery.qrcode.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body class="smallpage" style="background:#f7f7f7;">
+<iframe id="miniframe" name="miniframe" style="display:none;"></iframe>
+
+<header class="shoptopbar">
+		<div class="pagewd">
+        		<h1><a href="<{link ctl='web/index'}>" class="topbar-logo fl"><img src="/themes/ele/web/static/images/logo.png" /></a></h1>	
+                <a href="<{link ctl='web/shop'}>" class="topbar-item homepage">首页</a>
+                <a href="<{link ctl='web/ucenter/index'}>"  class="topbar-item">我的外卖</a>
+                <a href="<{link ctl='web/help/apply'}>" class="topbar-item">加盟合作</a>
+                <nav class="topbar-nav fr">
+                        <a href="javascript:void(0);" class="topbar-nav-link"><i class="ico-mobile"></i>手机应用
+                                <div class="app_box">
+                                        <div class="box">
+                                            <p>扫一扫，手机订餐更方便</p>
+                                            <img src="<{$pager.img}>/<{$site.weixinqr}>">
+                                        </div>
+                                </div>
+            			</a>
+                        <div class="topbar-profilebox fr"><i class="icon-man"></i>
+                        	<{if !$MEMBER['uid']}><a href="<{link ctl='web/passport/login' type=2}>" class="enterA">登录</a><b>/</b><a href="<{link ctl='web/passport/register'}>" class="enterA">注册</a><{else}>欢迎您，<a href="<{link ctl='web/ucenter/index'}>"><{$MEMBER['nickname']}></a> | <a id="logout" href="javascript:void(0);">退出登录</a><{/if}>
+                        </div>
+                </nav>
+                <div class="cl"></div>
+        </div>
+</header>
+<div class="shopguide">
+		<div class="container pagewd">
+        		<div class="shopguide-info">
+                		<img src="<{$pager.img}>/<{$detail.logo}>">
+                        <div class="shopguide-info-wrapper">
+                        		<h1 class="overflow_clear"><{$detail.title}></h1>
+                                <p class="info-rate"><span class="starBg mr10"><span class="star" style="width:<{round(($detail['score']/$detail['comments'])*20,1)}>%;"></span></span></p>
+                        </div>
+                        <div class="info-extra">
+                        		<ul>
+                                		<li class="extra-item item1">
+                                        		<div class="first1">
+                                                		<h2 class="pointcl">4.5</h2>
+                                                        <p>综合评价<br><span class="black9">高于周边商家</span><span class="pointcl">68%</span></p>
+                                                </div>
+                                                <div>
+                                                		<p class="mb10">服务态度<span class="starBg ml10"><span class="star" style="width:50%;"></span></span><span class="pointcl">4.5分</span></p>
+                                                        <p>菜品评价<span class="starBg ml10"><span class="star" style="width:50%;"></span></span><span class="pointcl">4.5分</span></p>
+                                                </div>
+                                        </li>
+                                        <li class="extra-item">本店推荐您在“饿了么（http://ele.me）”订餐——饭点较忙，电话常占线，本店优先配送网上订单。2、首次订餐用户，饿了么客服会跟您进行电话确认，请确保证您的电话畅通，以便送餐员能及时联系上您。3、外卖制作+配送都需要消耗时间，为了能及时用餐，希望大家提前1小时以上预定，避开高峰拥堵。饿了么全国客服电话：4000557117</li>
+                                        <li class="extra-item">
+                                        		<p>商家地址：<{$detail.addr}></p>
+                                                <p>营业时间：<{$detail.yy_stime}>--<{$detail.yy_ltime}></p>
+                                        </li>
+                                        <li class="extra-item">
+                                        		<p class="mb10">由<span class="maincl peisong"><{$detail.title}></span>提供配送服务</p>
+                                                <a href="" class="btn-block">查看商家详情</a>
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+                <div class="shopguide-server">
+                		<span class="one"><em>起送价</em><em class="shopguide-server-value"><{round($detail.min_amount,1)}>元</em></span>
+                        <span><em>配送费</em><em class="shopguide-server-value"><{round($detail.freight,1)}>元</em></span>
+                        <span><em>平均送达速度</em><em class="shopguide-server-value"><{if $detail.pei_time==0}>30<{else}><{$detail.pei_time}><{/if}>分钟</em></span>
+                </div>
+                <a href="javascript:void(0);" class="shopguide-favor">
+                    <{if $detail.collect == 1}>
+                        <img src="/themes/ele/web/static/images/zan.png" class="zan">
+                        <p>退订<span>(<{$detail.collect_num}>)</span></p>
+                    <{else}>
+                        <img src="/themes/ele/web/static/images/nozan.png" class="zan">
+                        <p>订阅<span>(<{$detail.collect_num}>)</span></p>
+                    <{/if}>
+                </a>
+        </div>	
+</div>
+
+
+<!--共用头部-->
+<script>
+    $(document).ready(function(){
+        var addr = Cookie.get('addr');
+        addr = unescape(addr);
+        $(".jq_addr").html(addr);
+        
+        $("#logout").click(function(){
+            var url = "<{link ctl='web/passport/loginout'}>";
+            $.post(url,{},function(ret){
+                if(ret.error == 0){
+                    layer.msg(ret.message);
+                    setTimeout(function(){
+                        window.location.href = "<{link ctl='web/index'}>";
+                    },'1000')
+                }
+            },'json')
+        })
+        
+    })
+</script>
+<!--头部导航-->
+<script>
+    
+</script>
+<!--共用头部end-->

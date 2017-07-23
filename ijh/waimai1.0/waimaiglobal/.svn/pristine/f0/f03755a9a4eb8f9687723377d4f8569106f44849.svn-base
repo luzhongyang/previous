@@ -1,0 +1,148 @@
+<{include file="web/block/header.html"}>
+<!--内容开始-->
+<div class="pagewd mt10 mb30">
+	<!--商家信息-->
+    <div class="shangjia_infor mb10">
+        <div class="infor_box fl">
+            <img src="<{$pager.img}>/<{$detail.logo}>" width="186" height="140" class="fl">
+            <div class="pub_wz">
+            	<h3><{$detail.title}></h3>
+                <div class="black9"><span class="starBg mr10"><span class="star" style="width:<{round(($detail['score']/$detail['comments'])*20,1)}>%;"></span></span><small class="ml10">起送:￥<{round($detail.min_amount,1)}></small><small class="ml10">配送费 :￥<{round($detail.freight,1)}></small></div>
+                <p class="black9"><span class="maincl">商家地址：</span><{$detail.addr}></p>
+                <p class="black9"><span class="maincl">商家电话：</span><{$detail.phone}></p>
+                <p class="black9"><span class="maincl">营业时间：</span><{$detail.yy_stime}>--<{$detail.yy_ltime}></p>
+            </div>
+        </div>
+        <div class="box fl">
+            <h3 class="maincl"><{round($detail['score']/$detail['comments'],1)}><small class="black9">分</small></h3>
+            <p class="black9">商家评分</p>
+        </div>
+        <div class="xian fl"></div>
+        <div class="box fl">
+            <h3 class="maincl"><{if $detail.pei_time==0}>30<{else}><{$detail.pei_time}><{/if}><small class="black9">分钟</small></h3>
+            <p class="black9">平均送餐时间</p>
+        </div>
+        <div class="xian fl"></div>
+        <div class="box fl">
+            <div id="qrcodeTable"></div>
+            <p class="black9">扫一扫进店下单</p>
+        </div>
+        <div class="xian fl"></div>
+        <div class="box fl">
+            <a href="javascript:void(0);" class="collect_btn">
+                <{if $detail.collect == 1}>
+                    <img src="/themes/default/web/static/images/zan.png" class="zan">
+                    <p class="black9">退订<span class="maincl">(<{$detail.collect_num}>)</span></p>
+                <{else}>
+                    <img src="/themes/default/web/static/images/nozan.png" class="zan">
+                    <p class="black9">订阅<span class="maincl">(<{$detail.collect_num}>)</span></p>
+                <{/if}>
+            </a>
+        </div>
+        <div class="cl"></div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#qrcodeTable').qrcode({
+                render: "canvas",            //渲染方式 table 和 canvas两种
+                width: 54,                  //设置宽度  
+                height: 54,                 //设置高度  
+                typeNumber: -1,              //计算模式 
+                correctLevel: 2,             //纠错等级  0,1,2,3 默认为2
+                background: "#ffffff",       //背景颜色  
+                foreground: "#000000",       //前景颜色 
+                text    : "<{$url}>"
+            }); 
+            
+            
+            $(".collect_btn").click(function(){
+                var url = "<{link ctl='web/shop/collect' args=$detail.shop_id}>";
+                $.post(url,{},function(ret){
+                    if (ret.error == 300) {
+                        layer.msg(ret.message);
+                        setTimeout(function(){
+                            window.location.href = "<{link ctl='web/passport/login'}>";
+                        },1000)
+                    }else if(ret.error == 0){
+                        layer.msg(ret.message);
+                        setTimeout(function(){
+                            window.location.reload(true);
+                        },1000)
+                    }else{
+                        layer.msg(ret.message);
+                    }
+                },'json')
+            })
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".selct_box input").click(function () {
+                //alert($(this).attr('rel'));return flase;
+                if ($(this).prop('checked') == true) {
+                    location.href = $(this).attr('rel');
+                }
+            });
+        });</script>
+    <!--商家信息end-->
+    <div class="shangjia_cont">
+        <div class="fl shangjia_cont_left">
+        	<div class="shangjia_tab">
+                <div class="box">
+                    <ul>
+                        <li class="list <{if $act == 'index'}>on<{/if}> "><a href="<{link ctl='web/menu/index' args=$detail['shop_id']}>">菜单</a></li>
+                        <li class="list <{if $act == 'comment'}>on<{/if}>" ><a href="<{link ctl='web/menu/comment' args=$detail['shop_id']}>">评价</a></li>
+                    </ul>
+                    <div class="cl"></div>
+                </div>
+            </div>
+            <!--评价列表-->
+            <div class="shangjia_evlt">
+            	<div class="selct_box">
+                    <label <{if empty($st)}>class="maincl"<{/if}> ><input type="radio" <{if empty($st)}>checked="checked"<{/if}> rel="<{link ctl='web/menu/comment' args=$detail.shop_id}>" name="evlt">全部评价<span class="black9">(<{$counts}>)</span></label>
+                    <label <{if $st==1}>class="maincl"<{/if}> ><input type="radio" <{if $st==1}>checked="checked"<{/if}> rel="<{link ctl='web/menu/comment' args=$detail.shop_id st=1}>" name="evlt">好评<span class="black9">(<{$count1}>)</span></label>
+                    <label <{if $st==2}>class="maincl"<{/if}> ><input type="radio" <{if $st==2}>checked="checked"<{/if}> rel="<{link ctl='web/menu/comment' args=$detail.shop_id st=2}>" name="evlt">中评<span class="black9">(<{$count2}>)</span></label>
+                    <label <{if $st==3}>class="maincl"<{/if}> ><input type="radio" <{if $st==3}>checked="checked"<{/if}> rel="<{link ctl='web/menu/comment' args=$detail.shop_id st=3}>" name="evlt">差评<span class="black9">(<{$count3}>)</span></label>
+                </div>
+                <ul>
+                    <{foreach $items as $item}>
+                	<li class="shangjia_evlt_list">
+                    	<div class="top"><span class="name"><{$users[$item['uid']]['nickname']}></span> <small class="black9">总体评价：<span class="starBg mr5"><span class="star" style="width:<{$item['score']*20}>%;"></span></span><{if $item.score<3}>差评<{elseif $item.score == 3}>中评<{elseif $item.score>3}>好评<{/if}></small><span class="fr black9">评价时间 <{$item.dateline|format:'Y-m-d'}></span></div>
+                        <{if $item.photos}>
+                            <ul class="img_box">
+                                <{foreach $item.photos as $pic}>
+                                    <li><img src="<{$pager.img}>/<{$pic.photo}>" width="70" height="70"></li>
+                                <{/foreach}>
+                            </ul>
+                        <{/if}>
+                        <p class="mb10"><{$item.content}></p>
+                        <{if $item.reply}><p class="maincl"><{$item.reply}></p><{/if}>
+                    </li>
+                    <{/foreach}>
+                </ul>
+                <div class="page_box">
+                    <!--分页-->
+                    <div class="page"><{$pager.pagebar}></div>
+                    <!--分页end-->
+                </div>
+            </div>
+            <!--评价列表end-->
+            
+        </div>
+        <div class="fr shangjia_cont_right">
+        	<div class="shangjia_pingfen">
+            	<p class="bt"><{$detail.title}>总体评分：</p>
+                <p class="black9">(共收到<{$counts}>份美食评价)</p>
+                <div class="total maincl"><big><{round($detail['score']/$detail['comments'],1)}></big><span class="starBg"><span class="star" style="width:<{round(($detail['score']/$detail['comments'])*20,1)}>%;"></span></span></div>
+                <div class="box black9"><span class="starBg"><span class="star" style="width:100%;"></span></span> <span class="bar" style="width:<{round($num5/$counts,1)*70}>px;"></span><{round($num5/$counts,1)*100}>%</div>
+                <div class="box black9"><span class="starBg"><span class="star" style="width:80%;"></span></span> <span class="bar" style="width:<{round($num4/$counts,1)*70}>px;"></span><{round($num4/$counts,1)*100}>%</div>
+                <div class="box black9"><span class="starBg"><span class="star" style="width:60%;"></span></span> <span class="bar" style="width:<{round($num3/$counts,1)*70}>px;"></span><{round($num3/$counts,1)*100}>%</div>
+                <div class="box black9"><span class="starBg"><span class="star" style="width:40%;"></span></span> <span class="bar" style="width:<{round($num2/$counts,1)*70}>px;"></span><{round($num2/$counts,1)*100}>%</div>
+                <div class="box black9"><span class="starBg"><span class="star" style="width:20%;"></span></span> <span class="bar" style="width:<{round($num1/$counts,1)*70}>px;"></span><{round($num1/$counts,1)*100}>%</div>
+            </div>
+        </div>
+        <div class="cl"></div>
+    </div>
+</div>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

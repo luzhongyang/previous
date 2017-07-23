@@ -1,0 +1,20 @@
+<!--回到顶部end-->
+<!--底部开始-->
+<div class="login_bottom">
+    <img width="200" height="200" src="<{$pager.img}>/<{$site.weixinqr}>">
+    <div class="linkA_box">
+        <{calldata mdl="article/cate" parent_id="1" limit=5}>
+            <{calldata mdl='article/article' from="help" hidden="0" limit=1 cat_id=$item.cat_id}>
+				<{if $item.page}>
+				<a href="<{link ctl='web/help:'|cat:$item.page}>"><{$item.title}></a>|
+				<{else}>
+				<a href="<{link ctl='web/help:detail' arg0=$item.article_id}>"><{$item.title}></a>|
+				<{/if}>
+            <{/calldata}>
+        <{/calldata}>
+    </div>
+    <p class="black9"><{$site.icp}>|Copyright ©2013-2016 <{$site.domain}>, All Rights Reserved.</p>
+</div>
+<!--底部结束-->
+</body>
+</html>

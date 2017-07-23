@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+
+    <body>
+        <header>
+            <i class="left"><a href="#" class="gobackIco"></a></i>
+            <div class="title">
+               <{L('添加备注')}>  
+            </div>
+            <i class="right"><a class="" href="#"></a></i>
+        </header>
+        <section class="page_center_box">
+            <div class="addNotes">
+                <div class="int_box_border"><textarea id="jq_content" placeholder="<{L('请输入备注内容')}> "></textarea></div>
+                <div class="tag">
+                    <{foreach $notes as $k=>$val}>
+                        <{if is_array($val)}>
+                        <{foreach $val as $item}>
+                        <a class="tag_<{$k}>" rel="<{$k}>" href="javascript:void(0);"><{$item}></a>
+                        <{/foreach}>
+                        <{else}>
+                        <a class="tag_<{$k}>" rel="<{$k}>" href="javascript:void(0);"><{$val}></a>
+                        <{/if}>
+                    <{/foreach}>
+                </div>
+            </div>
+            <div class="long_btn_box">
+                <a class="long_btn" href="javascript:void(0);"><{L('确定')}> </a>
+            </div>
+        </section>
+        <script>
+           $(document).ready(function(){
+               var remarks = JSON.parse(localStorage.getItem('remark'));
+               if(remarks){
+                    $(".addNotes").html(remarks);
+                    $("#jq_content").val(localStorage.getItem('content'));
+               }
+           }) 
+            
+            $(".addNotes").on('click', '.tag a', function () {
+                if ($(this).hasClass('on')) {
+                    $(this).removeClass('on');
+                } else {
+                    $(".tag_" + $(this).attr('rel')).removeClass('on');
+                    $(this).addClass('on');
+                }
+            })
+            var remark = "";
+            $(".long_btn").click(function(){
+                $(".tag a").each(function () {
+                    if ($(this).hasClass("on")) {
+                        remark += $(this).text();
+                        remark += "，";
+                    }
+                });
+                
+                var content = $("#jq_content").val();
+                remark += content;
+                
+               localStorage.setItem('remark', JSON.stringify($(".addNotes").html()));
+               localStorage.setItem('note',remark);
+               localStorage.setItem('content',content);
+               var link = '<{link ctl="order/order" args=__abc}>';
+               window.location.href = link.replace('__abc',localStorage.getItem('shop_id')); 
+               
+            })
+        </script>
+
+    </body>
+</html>

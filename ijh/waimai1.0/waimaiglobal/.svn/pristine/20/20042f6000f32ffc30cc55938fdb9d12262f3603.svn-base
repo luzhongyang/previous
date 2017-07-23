@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="Generator" content="ECJIA 1.5" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<title><{L('外送')}>APP<{L('下载')}>-<{$CONFIG.site.title}></title>
+<link type="text/css" rel="stylesheet" href="%THEME%/welcome/css/style.css" />
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="%THEME%/welcome/js/scrollReveal.min.js"></script>
+<script type="text/javascript" src="%THEME%/welcome/js/swiper.min.js"></script>
+<style>
+html { overflow-y: auto; }
+body { background-color: #fff; }
+.header { width: 100%; }
+.offerPos { position: relative; height: 60px; }
+.header_extend { position: absolute; left: 0; top: 0; }
+</style>
+</head>
+<body>
+<div class="index b2b2c">
+<script>
+$(document).ready(function() {
+    //快捷导航
+	$(".fast-nav li").click(function(){
+		var index 	= $(this).index(),
+			_this 	= $(".action").eq(index),
+			sc_top	= _this.offset().top-80,
+			t   	= 300;
+		if( index == 2){
+			sc_top = sc_top+20;
+		}else if(index == 3){
+			sc_top = sc_top+20;
+		}else if(index == 9){
+			sc_top = sc_top+40;
+		}
+		$("html,body").animate({
+			scrollTop:sc_top
+		},t);
+	});
+	var arr	= [];
+	$(".action").each(function(i){
+		arr[i] = $(".action").eq(i).offset().top;
+	});
+	$(window).resize(function(){
+		$(".action").each(function(i){
+			arr[i] = $(".action").eq(i).offset().top;
+		});
+	})
+	$(window).scroll(function(){
+		var top = $(document).scrollTop(),
+			t   = 100;
+		for (var i = 0 ; i < arr.length; i++) {
+			if(top >= arr[i]-300 && top < arr[i] + 150){
+				$(".fast-nav li").removeClass("active");
+				$(".fast-nav li").eq(i).addClass("active");
+			}
+		};
+	});
+
+	var fast_nav_height = $(".fast-nav").height();
+	var window_height	= $(window).height();
+	$(".fast-nav").css({
+		top:(window_height-fast_nav_height)/2
+	})
+	$(window).resize(function(){
+		fast_nav_height = $(".fast-nav").height();
+		window_height   = $(window).height();
+		$(".fast-nav").stop(true,false).animate({
+			top:(window_height-fast_nav_height)/2
+		},300);
+	});
+
+	$(window).scroll(function(){
+		if($(window).scrollTop() > $(".section-7 .title").offset().top){
+			$(".section-7 ul li .wrap").removeClass("xuanzhuan180").addClass("xuanzhuan0");
+		};
+	});
+
+	$(".section-11 ul li").hover(function(){
+		$(this).addClass("active");
+		$(this).find("p").hide();
+		$(this).find(".img").show();
+	},function(){
+		$(this).removeClass("active");
+		$(this).find("p").show();
+		$(this).find(".img").hide();
+	});
+
+});
+</script>
+	<!--fix-nav定位头部导航开始-->
+    <div class="fix-nav">
+        <div class="fix-nav-wrapper">
+            <div class="l"><a href="<{$CONFIG.site.siteurl}>"><img src="<{$pager.img}>/<{$CONFIG.site.logo}>"></a></div>
+            <div class="r">
+                <ul class="fa fast-nav">
+                    <li  class="active"><a href="javascript:void(0);">APP<{L('简介')}></a></li>
+                    <li ><a href="javascript:void(0);"><{L('客户端')}></a></li>
+                    <li ><a href="javascript:void(0);"><{L('商户端')}></a></li>
+                    <li ><a href="javascript:void(0);"><{L('配送端')}></a></li>
+                </ul>
+                <div class="linkA"><a target="_blank" href="<{link ctl='biz/account/signup'}>"><{L('商家入驻')}></a></div>
+                <div class="topWechat">
+                	<div class="downceng2"><img src="<{$pager.img}>/<{$site.weixinqr}>" width="100" height="100"><p><{L('关注')}><{$site.title}><{L('公众号')}></p></div>
+                </div>
+                <div class="topTel"><em></em><{$CONFIG.site.phone}></div>
+            </div>
+        </div>
+    </div>
+    <!--fix-nav定位头部导航结束-->
+    <div class="content">
+        <div class="section section-1 action">
+        	<div class="section-wrapper">
+                <div class="box">
+                	<div class="pingOne">
+                        <div class="pingOne_nr1">
+                            <div class="f_l" data-sr="wait .4s enter left"><img src="%THEME%/welcome/images/ping1_img1.png"></div>
+                            <div class="f_r" data-sr="wait .9s enter right"><img src="%THEME%/welcome/images/ping1_img2.png"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="pingOne_nr2">
+                        	<img src="%THEME%/welcome/images/ping1_img4.png">
+                            <div class="animt_build movebuildone"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section section-2 action">
+            <div class="section-wrapper">
+                <div class="title"><img src="%THEME%/welcome/images/ping2_img1.png"></div>
+                <div class="box">
+                	<img src="%THEME%/welcome/images/ping2_img2.png" class="img1"  data-sr="over 1s,enter left"> 
+                    <img src="%THEME%/welcome/images/ping2_img3.png" class="img2"  data-sr="over 1s, enter bottom">
+                    <div class="ico ico1"  data-sr="over 1s,wait .3s, enter bottom"><img src="%THEME%/welcome/images/ping2_ico1.png"><p><{L('一键下单')}></p><p><{L('方便快捷')}></p></div>
+                    <div class="ico ico2"  data-sr="over 1s,wait .5s, enter bottom"><img src="%THEME%/welcome/images/ping2_ico2.png"><p><{L('多种支付')}></p><p><{L('任你选择')}></p></div>
+                    <div class="ico ico3"  data-sr="over 1s,wait .7s, enter bottom"><p><{L('火速配送')}></p><p><{L('坐等外卖')}></p><img src="%THEME%/welcome/images/ping2_ico3.png"></div>
+                    <div class="ico ico4"  data-sr="over 1s,wait .9s, enter bottom"><p><{L('外卖状态')}></p><p><{L('时刻跟踪')}></p><img src="%THEME%/welcome/images/ping2_ico4.png"></div>
+                    <img src="%THEME%/welcome/images/ping2_x.png" class="x"  data-sr="over 1s,wait 1.6s, enter center">
+                    <div class="weixinCode">
+                    	<img src="<{$pager.img}>/<{$CONFIG.site.weixinqr}>" class="f_l" width="139" height="139">
+                        <div class="wz">
+                        	<a href="javascript:void(0);" class="btn btn1"><em></em>Android<{L('下载')}></a>
+                    		<a href="javascript:void(0);" class="btn btn2"><em></em>IOS<{L('下载')}></a>
+                            <p><{L('客户端下载')}>！</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section section-3 action">
+            <div class="section-wrapper">
+                <div class="title"><img src="%THEME%/welcome/images/ping3_img1.png"></div>
+                <div class="box">
+                    <div class="pingThree">
+                    	<div class="weixinCode f_l">
+                            <img src="<{$pager.img}>/<{$CONFIG.site.weixinqr}>" class="f_l" width="139" height="139">
+                            <div class="wz">
+                                <a href="javascript:void(0);" class="btn btn1"><em></em>Android<{L('下载')}></a>
+                                <a href="javascript:void(0);" class="btn btn2"><em></em>IOS<{L('下载')}></a>
+                                <p><{L('商户端下载')}>！</p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="img_lunbo f_l">
+                        	<div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img src="%THEME%/welcome/images/sySan_img1.png" width="257" height="456" ></div>
+                                    <div class="swiper-slide"><img src="%THEME%/welcome/images/sySan_img2.png" width="257" height="456" ></div>
+                                    <div class="swiper-slide"><img src="%THEME%/welcome/images/sySan_img3.png" width="257" height="456" ></div>
+                                    <div class="swiper-slide"><img src="%THEME%/welcome/images/sySan_img4.png" width="257" height="456" ></div>
+                                </div>
+                                <div class="clear"></div>
+                                <!-- Add Pagination -->
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <script src="js/swiper.min.js"></script>
+                            <script>
+							var swiper = new Swiper('.swiper-container', {
+								pagination: '.swiper-pagination',
+								paginationClickable: true,
+								centeredSlides: true,
+								autoplay: 2500,
+								autoplayDisableOnInteraction: false,
+							});
+							</script>
+                        </div>
+                        <ul class="wz_list f_l">
+                            <li><p><{L('便捷的操作')}>，<{L('详细的数据统计')}></p></li>
+                            <li><p><{L('资金管理安全高效操作方便')}></p></li>
+                            <li><p><{L('用户信息全掌握时刻了解最新动态')}></p></li>
+                            <li><p><{L('有效及时与用户互动评价交流提高粘度')}></p></li>
+                            <li><p><{L('商家和平台用户三位一体的结合高效便捷')}></p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section section-4 action">
+            <div class="section-wrapper">
+                <div class="title"><img src="%THEME%/welcome/images/ping4_t.png"></div>
+                <div class="box">
+                	<img src="%THEME%/welcome/images/ping4_img1.png" class="img1"  data-sr="over 1s,wait .3s, enter bottom">
+                    <img src="%THEME%/welcome/images/ping4_img2.png" class="img2"  data-sr="over 1s,wait .5s, enter bottom">
+                    <img src="%THEME%/welcome/images/ping4_img3.png" class="img3"  data-sr="over 1s,wait .7s, enter bottom">
+                    <img src="%THEME%/welcome/images/ping4_img4.png" class="img4"  data-sr="over 1s,wait .9s, enter bottom">
+                    <img src="%THEME%/welcome/images/ping4_img5.png" class="img5"  data-sr="over 1s,wait 1.1s, enter bottom">
+                    <img src="%THEME%/welcome/images/ping4_x.png" class="x"  data-sr="over 1s,wait 1.6s, enter center">
+                    <div class="weixinCode">
+                        <img src="<{$pager.img}>/<{$CONFIG.site.weixinqr}>" class="f_l" width="139" height="139">
+                        <div class="wz">
+                            <a href="javascript:void(0);" class="btn btn1"><em></em>Android<{L('下载')}></a>
+                            <a href="javascript:void(0);" class="btn btn2"><em></em>IOS<{L('下载')}></a>
+                            <p><{L('配送端下载')}>！</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <img src="%THEME%/welcome/images/ping4_bg.png" class="bg"  data-sr="over 1s,enter bottom">
+                </div>
+            </div>
+            
+        </div>
+        <!--右侧悬浮弹窗开始-->
+<script>
+$(document).ready(function() {
+    $(".float_window>img").click(function(){
+		$(".float_window_nr").show();
+	});
+	$(".float_window_nr .closs_btn").click(function(){
+		$(".float_window_nr").hide();
+	});
+    $(".float_window_nr").show();
+});
+</script>
+<div class="float_window">
+	<img src="%THEME%/welcome/images/float_float_window1.png">
+    <div class="float_window_nr">
+    	<img src="%THEME%/welcome/images/float_float_window2.png">
+        <a href="javascript:void(0);" class="closs_btn"></a>
+        <a href="<{link ctl='index'}>" target="_blank" class="btn"></a>
+    </div>
+</div>
+<!--右侧悬浮弹窗结束-->
+
+    </div>
+</div>
+</body>
+<script>
+window.sr = new scrollReveal({
+	// reset: true,
+	move: '200px',
+	mobile: true
+});
+$(function(){
+	$(".ul-tab li").click(function(){
+		var index = $(this).index();
+		if(!$(this).hasClass("active")){
+			$(".ul-tab li").removeClass("active");
+			$(this).addClass("active");
+		}
+		$(".tab-con .box-wrap").removeClass("show");
+		$(".tab-con .box-wrap").eq(index).addClass("show");
+	});
+
+	var index = 0;
+    var autoChange = setInterval(function(){
+	    if(index < $(".banner-wrapper .btns li").length-1){
+	        index++;
+	    }else{
+	        index=0;
+	    }
+	    showPics(index);
+	},5000);
+	$(".banner-wrapper .btns li").hover(function(){
+		var _index = $(this).index();
+		clearInterval(autoChange);
+		showPics(_index);
+		index = _index;
+    },function(){
+		autoChange = setInterval(function(){
+			if(index < $(".banner-wrapper .btns li").length-1){
+		        index++;
+		    }else{
+		        index=0;
+		    }
+		    showPics(index);
+		},5000);
+    });
+	function showPics(index){
+		var _this = $(".banner-wrapper .pics li").eq(index);
+		$(".banner-wrapper .btns li").removeClass("active");
+		$(".banner-wrapper .btns li").eq(index).addClass("active");
+		_this.stop(true,false).animate({
+			opacity: 1
+		},1000);
+		_this.siblings("li").stop(true,false).animate({
+			opacity: 0
+		},1000);
+	}//切换效果结束
+
+});
+</script>
+</html>

@@ -1,0 +1,539 @@
+<{if $order.order_status==0 && $order.pay_status==0}>
+<{assign var='tpl_title' value=L('订单详情-等待支付')}>
+<{/if}>
+<{if $order.order_status==0 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L('订单详情-等待接单')}>
+<{/if}>
+<{if $order.order_status==1 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L('订单详情-已接单')}>
+<{/if}>
+<{if $order.order_status==3 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L('订单详情-配送中')}>
+<{/if}>
+<{if $order.order_status==8 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L('订单详情-订单已完成')}>
+<{/if}>
+<{if $order.order_status==4 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L('订单详情-已送达')}>
+<{/if}>
+<{if $order.order_status==-1 && $order.pay_status==0}>
+<{assign var='tpl_title' value=L('订单详情-订单已取消')}>
+<{/if}>
+<{if $order.order_status==-1 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L('订单详情-订单已取消')}>
+<{/if}>
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+<body>
+<header>
+	<i class="left"><a href="" link-load="" link-type="right"  class="gobackIco"></a></i>
+    <div class="title"><{L("订单详情")}></div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<!--头部切换开始-->
+<ul id="shangjia_tab">
+    <li><a href="<{link ctl='order:work' args=<{$order.order_id}>}>" link-load="" link-type="right" ><{L("订单进度")}></a></li>
+    <li><a href="javascript:;" class="on"><{L("订单详情")}></a></li>
+</ul>
+<!--头部切换结束-->
+<section class="page_center_box">
+	<div class="order_progress_infor mb10">
+    <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+        <div class="fl">
+            <p class="black9"><{if $order.online_pay == 1}><span class="pointcl1"><{L("等待支付")}></span><{/if}>(<{$order.dateline|format:'Y-m-d H:i'}><{L("下单")}>)</p>
+            <p class="black9"><{if $order.online_pay == 1}><{L("订单逾期未支付半小时自动取消")}><{/if}><{if $order.online_pay == 0}><{L("当前订单为货到付款")}><{/if}></p>
+        </div>
+        <a href="javascript:chargeback();" class="btn fr"><{L("取消订单")}></a>
+    <{/if}>
+    <{if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L("已支付")}></span>(<{$order.pay_time|format:'Y-m-d H:i'}><{L("支付")}>)</p>
+                <p class="black9"><{L("等待商家接单")}></p>
+            </div>
+            <a href="javascript:chargeback();" class="btn fr"><{L("取消订单")}></a>
+    <{/if}>
+
+    <{if $order.order_status==0 && $order.online_pay==0}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('等待接单')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+                <p class="black9"><{L('等待商家接单')}></p>
+            </div>
+            <a href="javascript:chargeback();" class="btn fr"><{L('取消订单')}></a>
+    <{/if}>
+
+    <{if $order.order_status==1 && $order.pay_status==1 && $order.online_pay==1}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('商家已接单')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('预计送达')}>：<{L('尽快送达')}></p>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==1 && $order.pay_status==0 && $order.online_pay==0}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('商家已接单')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('预计送达')}>：<{L('尽快送达')}></p>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==2 && $order.pay_status==1 && $order.online_pay==1}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('配送员已接单')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('预计送达')}>：<{L('尽快送达')}></p>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==2 && $order.pay_status==0 && $order.online_pay==0}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('配送员已接单')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('预计送达')}>：<{L('尽快送达')}></p>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==3 && $order.pay_status==1 && $order.online_pay==1}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('订单配送中')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单超过')}>3<{L('小时自动完成')}> </p>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==3 && $order.pay_status==0 && $order.online_pay==0}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('订单配送中')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单超过')}>3<{L('小时自动完成')}> </p>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==4 && $order.pay_status==1 && $order.online_pay==1}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('已送达')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单超过')}>3<{L('小时自动完成')}> </p>
+        </div>
+    <{/if}>
+
+     <{if $order.order_status==4 && $order.online_pay==0}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('已送达')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单超过')}>3<{L('小时自动完成')}> </p>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==8 && $order.pay_status==1 && $order.online_pay==1 }>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('订单已完成')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单超过')}>3<{L('小时自动完成')}> </p>
+        </div>
+    <{/if}>
+
+     <{if $order.order_status==8 && $order.online_pay==0}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('订单已完成')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单超过')}>3<{L('小时自动完成')}> </p>
+        </div>
+    <{/if}>
+    <{if $order.order_status==-1 && $order.pay_status==0}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('订单已取消')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单逾期未支付')}>1<{L('小时自动取消')}> </p>
+        </div>
+    <{/if}>
+    <{if $order.order_status==-1 && $order.pay_status==1}>
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{L('订单已取消')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单逾期未支付')}>1<{L('小时自动取消')}> </p>
+        </div>
+    <{/if}>
+        <div class="clear"></div>
+    </div>
+    <div class="order_details_nr">
+        <ul class="form_list_box">
+             
+                <li class="list">
+                    <a href="<{link ctl='shop:detail' args=<{$order.shop_id}>}>" link-load=""><div class="fl"><p class="shangjia_name"><img src="<{$pager.img}>/<{$shop.logo}>" width="100" height="100" /><{$shop.title}></p></div>
+                    <div class="fr"><em class="linkIco"></em></div>
+                    </a>
+                </li>
+                <{foreach $pro as $proo => $p}>
+                    <li class="list">
+                        <div class="fl"><p class="black9"><{$p.title}></p></div>
+                        <div class="fr"><p class="black9">x<{$p.numbers}>&nbsp;&nbsp;￥<{$p.price}></p></div>
+                    </li>
+                <{/foreach}>
+                <{if $order.package_price>0}>
+                    <li class="list">
+                        <div class="fl"><p class="black9"><{L('打包费')}></p></div>
+                        <div class="fr"><p class="black9">￥<{$order.package_price}></p></div>
+                    </li>
+                <{/if}>
+                <{if $order.freight>0}>
+                    <li class="list">
+                        <div class="fl"><p class="black9"><{L('配送费')}></p></div>
+                        <div class="fr"><p class="black9">￥<{$order.freight}></p></div>
+                    </li>
+                <{/if}>
+                <{if $order.first_youhui>0}>
+                    <li class="list">
+                        <div class="fl"><p class="pointcl1"><{L('首单优惠')}></p></div>
+                        <div class="fr"><p class="pointcl1">-￥<{$order.first_youhui}></p></div>
+                    </li>
+                <{/if}>
+                <{if $order.order_youhui>0}>
+                    <li class="list">
+                        <div class="fl"><p class="pointcl1"><{L('在线支付立减优惠')}></p></div>
+                        <div class="fr"><p class="pointcl1">-￥<{$order.order_youhui}></p></div>
+                    </li>
+                <{/if}>
+                <{if $order.hongbao>0}>
+                    <li class="list">
+                        <div class="fl"><p class="pointcl1"><{L('红包抵扣')}></p></div>
+                        <div class="fr"><p class="pointcl1">-￥<{$order.hongbao}></p></div>
+                    </li>
+                <{/if}>
+                <{if $order.money>0}>
+                    <li class="list">
+                        <div class="fl"><p class="pointcl1"><{L('余额抵扣')}></p></div>
+                        <div class="fr"><p class="pointcl1">-￥<{$order.money}></p></div>
+                    </li>
+                <{/if}>
+                <li class="list last">
+                    <div class="fl"><a class="add_btn" href="javascript:onemore();"><{L('再来一份')}></a></div>
+                    <div class="fr"><p class="pointcl1 total"><{L('合计')}>  ￥<{$order.amount}></p></div>
+                </li>
+
+                <li class="list">
+                    <div class="fl"><p><{L('订单详情')}></p></div>
+                    <div class="fr"><p class="black9"><{L('订单号')}>：<{$order.order_id}></p></div>
+                </li>
+                <li class="list">
+                    <p class="black6"><{L('联系人')}>：<{$order.contact}></p>
+                </li>
+                <li class="list">
+                    <p class="black6"><{L('联系电话')}>：<{$order.mobile}></p>
+                </li>
+                <li class="list">
+                    <p class="black6"><{L('服务地址')}>：<{$order.house}></p>
+                </li>
+                <li class="list">
+                    <p class="black6"><{L('下单时间')}>：
+                        <{$order.dateline|format:'Y-m-d H:i'}>
+                    </p>
+                </li>
+                <li class="list">
+                    <p class="black6"><{L('支付方式')}>：<{if $order.online_pay==1 && $order.pay_status==1}><{if $order.pay_code=='wxpay'}><{L('微信支付')}><{/if}><{if $order.pay_code=='alipay'}><{L('支付宝支付')}><{/if}><{if $order.pay_code=='money'}><{L('余额支付')}><{/if}><{/if}><{if $order.online_pay==0 && $order.pay_status==0}><{L('货到付款')}><{/if}>
+                </li>
+                <li class="list last">
+                    <p class="black6"><{L('送达时间')}>：<{if $order.pei_time}><{$order.pei_time}><{else}><{L('尽快送出')}><{/if}></p>
+                </li>
+                <{if $order.note}>
+                <li class="list last">
+                    <p class="black6"><{L('备注')}>：<{$order.note}></p>
+                </li>
+                <{/if}>
+        </ul>
+    </div>
+</section>
+
+    <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+        <footer>
+        <div class="long_btn_box" style=" padding:0.1rem;"><a href="<{link ctl='order:pay' args=<{$order.order_id}>}>" class="long_btn" style="background:#ff5959;"></a></div>
+        </footer>
+    <{/if}>
+
+    <{if $order.order_status==1 && $order.pay_status==1 && $order.online_pay==1}>
+        <footer>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl" style="width:50%; padding:0; margin:0;"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <a href="javascript:remind();" class="fr cuidan" style="width:50%; padding:0; margin:0; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><img src="%THEME%/static/images/cuidan.png">
+        <p class="black9"><{L('催单')}></p>
+        </a>
+        </div>
+        </footer>
+    <{/if}>
+
+    <{if $order.order_status==1 && $order.online_pay==0}>
+        <footer>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl" style="width:50%; padding:0; margin:0;"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <a href="javascript:remind();" class="fr cuidan" style="width:50%; padding:0; margin:0; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><img src="%THEME%/static/images/cuidan.png">
+        <p class="black9"><{L('催单')}></p>
+        </a>
+        </div>
+        </footer>
+    <{/if}>
+
+    <{if $order.order_status==3 && $order.pay_status==1 && $order.online_pay==1}>
+        <footer>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <a href="javascript:remind();" class="fl cuidan"><img src="%THEME%/static/images/cuidan.png">
+        <p class="black9"><{L('催单')}></p>
+        </a>
+        <a href="javascript:getwell();" class="fr pub_btn"><{L('确认送达')}></a></div>
+        </footer>
+    <{/if}>
+
+    <{if $order.order_status==3 && $order.online_pay==0}>
+        <footer>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <a href="javascript:remind();" class="fl cuidan"><img src="%THEME%/static/images/cuidan.png">
+        <p class="black9"><{L('催单')}></p>
+        </a>
+        <a href="javascript:getwell();" class="fr pub_btn"><{L('确认送达')}></a></div>
+        </footer>
+    <{/if}>
+
+    <{if $order.order_status==8 && $order.pay_status==1 && $order.online_pay==1}>
+        <footer>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <{if $order.comment_status == 1}>
+        <a href="javascript:void(0);" class="fr pub_btn" style="background: #ccc;"><{L('已评价')}></a>
+        <{else}>
+        <a href="<{link ctl='order:comment' args=<{$order.order_id}>}>" class="fr pub_btn"><{L('评价得积分')}></a>
+        <{/if}>
+        </footer>
+    <{/if}>
+
+    <{if $order.order_status==8 && $order.online_pay==0}>
+        <footer>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <{if $order.comment_status == 1}>
+        <a href="javascript:void(0);" class="fr pub_btn" style="background: #ccc;"><{L('已评价')}></a>
+        <{else}>
+        <a href="<{link ctl='order:comment' args=<{$order.order_id}>}>" class="fr pub_btn"><{L('评价得积分')}></a>
+        <{/if}>
+        </footer>
+    <{/if}>
+
+    <{if $order.order_status==4 && $order.pay_status==1 && $order.online_pay==1}>
+        <footer>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <a href="javascript:remind();" class="fl cuidan"><img src="%THEME%/static/images/cuidan.png">
+        <p class="black9"><{L('催单')}></p>
+        </a>
+        <a href="javascript:getwell();" class="fr pub_btn"><{L('确认送达')}></a></div>
+        </footer>
+    <{/if}>
+
+    <{if $order.order_status==4 && $order.online_pay==0}>
+        <footer>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <a href="javascript:remind();" class="fl cuidan"><img src="%THEME%/static/images/cuidan.png">
+        <p class="black9"><{L('催单')}></p>
+        </a>
+        <a href="javascript:getwell();" class="fr pub_btn"><{L('确认送达')}></a></div>
+        </footer>
+    <{/if}>
+
+    <{if $order.order_status==-1}>
+        <!--<div class="ord_tousu"><a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="black9"><img src="%THEME%/static/images/tousu.png">&nbsp;&nbsp;<{L('投诉')}></a></div>-->
+    <{/if}>
+
+</body>
+<script>
+$(document).ready(function() {
+   
+    setmsgisread();
+    goback();
+    getTimes();
+    interval_start();
+    localStorage['pinjiatips'] = "detail";  
+});
+
+var interval = null;
+var order_id = "<{$order.order_id}>";
+var order_status = <{$order.order_status}>;
+var pay_status = <{$order.pay_status}>;
+
+function interval_start() {
+    var time1 = "<{$last_time}>";
+    var time2 = Date.parse(new Date())/1000;
+    if(time1>time2) {
+        interval = setInterval("getTimes()",1000);
+    }else {
+        interval_stop();
+    }
+}
+
+function interval_stop() { 
+    if(interval){
+        clearInterval(interval);
+        interval = null;
+        chargeback();
+        return false;
+    }   
+} 
+    // 申请退单
+
+function chargeback() {
+    if(order_status == 0) {
+        var link = "<{link ctl='order:chargeback' args=__order_id}>";
+        layer.open({
+            title: '<{L("提示")}>',
+            content: '<{L("您确定要取消订单吗")}>？',
+            btn: ['<{L("确定")}>', '<{L("不了")}>'],
+            yes: function(index){
+                jQuery.ajax({        
+                    url: link.replace("__order_id",order_id), 
+                    async: true,  
+                    dataType: 'json',
+                    type: 'POST',   
+                    success: function (ret) { 
+                        if(ret.error > 0){
+                            layer.open({content: ret.message,time: 2});
+                        }else{
+                            layer.open({content: ret.message,time: 2});
+                            setTimeout(function(){window.location.reload();},1000);
+                        }
+                    }, 
+                    error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                        alert(errorThrown); 
+                    },  
+
+                });
+            }
+        });
+    }
+}
+
+    // 催单
+function remind() {
+    jQuery.ajax({  
+        url: "<{link ctl='order:remind'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id": order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{
+                layer.open({content: ret.message,time: 2});
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+        
+    });
+}
+
+    // 确认送达
+function getwell() {
+    jQuery.ajax({  
+        url: "<{link ctl='order:getwell'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id": order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{
+                layer.open({content: ret.message,time: 2});
+                setTimeout(function(){window.location.reload();},1000);
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+        
+    });
+}
+
+    // 再来一份
+function onemore() {
+    jQuery.ajax({  
+        url: "<{link ctl='order:onemore'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id": order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{
+                setTimeout(function(){
+                    window.location.href="<{link ctl='shop/detail' arg0=$order.shop_id }>";
+                },1000);  
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+        
+    });
+}
+
+    // 显示剩余支付时间
+function getTimes() {
+    var last_time = "<{$last_time}>";
+    var now_time = Date.parse(new Date())/1000;
+    youtime = last_time - now_time;
+    var seconds = youtime;
+    var minutes = Math.floor(seconds/60);
+    var CMinute = minutes%60;
+    var CSecond = Math.floor(seconds%60);
+    if(last_time<=now_time) {
+        interval_stop();
+    }else {
+        left = '<{L("去支付")}>（<{L("还剩")}>'+ CMinute+':'+CSecond+'）';
+        $('.long_btn').text(left);
+    } 
+}
+
+    // 更新消息状态为已读
+function setmsgisread() {
+    var message_id = localStorage['message_id'];
+    jQuery.ajax({  
+        url: "<{link ctl='ucenter/msg:setread'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"message_id": message_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                //layer.open({content: ret.message,time: 2});
+            }else{
+                //提交成功
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+        
+    });
+}
+
+function goback() {
+    if(localStorage['linktips'] == 'index') {
+        $(".gobackIco").attr("href","<{link ctl='order:index'}>");
+    }else if(localStorage['linktips'] == 'orderwell'){
+        $(".gobackIco").attr("href","<{link ctl='order:orderwell'}>");
+    }else if(localStorage['linktips'] == 'msg'){
+        $(".gobackIco").attr("href","<{link ctl='ucenter/msg:index'}>");
+    }
+}
+</script>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>登录密码修改</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<header>
+	<i class="left"><a href="#" class="gobackIco"></a></i>
+    <div class="title">
+    	登录密码修改
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="loginModiy mt10">
+    	<form>
+    	<table width="100%">
+            <tr>
+                <th>手机号</th>
+                <td>
+                    <input type="text" placeholder="请输入手机号">
+                    <div class="get_yzm">获取验证码</div>
+                </td>
+            </tr>
+            <tr>
+                <th>验证码</th>
+                <td>
+                    <input type="text" placeholder="请输入验证码">
+                </td>
+            </tr>
+            <tr>
+                <th>密码</th>
+                <td>
+                    <input type="password" placeholder="请输登录密码">
+                </td>
+            </tr>
+            <tr>
+                <th>密码</th>
+                <td>
+                    <input type="password" placeholder="请再次输入登录密码">
+                </td>
+            </tr>
+        </table>
+        <div class="long_btn_box">
+            <input class="long_btn graybg" type="button" value="确认修改">
+        </div>
+        </form>
+    </div>
+</section>
+<footer>
+    <div class="list on">
+		<a href="#">
+        <i class="ico_1"></i>
+        <p>外卖</p>
+		</a>
+    </div>
+    <div class="list">
+        <a href="#">
+        <i class="ico_2"></i>
+        <p>订单</p>
+		</a>
+    </div>
+	 <div class="list">
+       <a href="#">
+        <i class="ico_3"></i>
+        <p>发现</p>
+		</a>
+    </div>
+    <div class="list">
+       <a href="#">
+        <i class="ico_4"></i>
+        <p>我的</p>
+		</a>
+    </div>
+</footer>
+<script>
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 60;
+        var mobile_lock = 0;
+        $(function () {
+            $(".get_yzm").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 60;
+					$(".get_yzm").addClass("on");
+                    $('.get_yzm').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".get_yzm").removeClass("on");
+                $('.get_yzm').removeAttr("disabled");
+                $('.get_yzm').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+				$('.get_yzm').removeClass("on");
+            }
+            else {
+                mobile_count--;
+                $('.get_yzm').text( + mobile_count.toString() + "秒...");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+				$('.get_yzm').addClass("on");
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+</body>
+</html>

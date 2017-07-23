@@ -1,0 +1,48 @@
+<{include file="web/block/header.html"}>
+<!--内容开始-->
+<style>
+    
+</style>
+<div class="pagewd mt10 mb30">
+    <div class="promptPage">
+    	<{if $pager.error > 0 && $pager.error != 888}>
+        <img src="/themes/default/web/static/images/ts_fail.png">
+        <{else}>
+        <img src="/themes/default/web/static/images/ts_suces.png">
+        <{/if}>
+        <p class="maincl"><{$pager.message}></p>
+        <p class="" style="color:#666; font-size: 20px; line-height: 26px;">
+            <{if $pager.timer>0}><{L('如果您不做出选择')}>，<{L('将在')}> <strong id="notice-timer" style="color:red;"><{$pager.timer}></strong> <{L('秒后跳转到第一个链接地址')}>。<{else}><{L('请选择以下操作')}>。<{/if}></p>
+                <div>
+                <{foreach $pager.url_list as $link}>
+                <span style=" background: #00cdda; color: #fff; font-size: 18px; line-height: 40px; padding: 0 20px; border-radius: 5px; margin:10px;"><img src="<{$pager.res}>/images/icon/link.gif" align="absmiddle" style="margin-right:5px;"/><a href="<{$link.url}>" style="color: #006699"><{$link.title}></a></span>
+            <{foreachelse}>
+            <span style=" background: #00cdda; color: #fff; font-size: 18px; line-height: 40px; padding: 0 20px; border-radius: 5px; margin:10px;"><img src="<{$pager.res}>/images/icon/link.gif" align="absmiddle" style="margin-right:5px; margin-top: 12px;"/><a href="<{if $pager.link}><{$pager.link}><{else}><{link ctl='index'}><{/if}>" style="color: #fff;"><{L('点击立即跳转')}></a></span>
+			<{/foreach}>
+                </div>
+    </div>
+</div>
+<{if ((int)$pager.timer > 0)}>
+<script type="text/javascript">
+var timer = <{$pager.timer}>;
+//var timer = 6000000;
+var link = "<{if $pager.link}><{$pager.link}><{else}><{link ctl='web/index'}><{/if}>";
+window.onload = function(){
+	if (link == 'javascript:history.go(-1)' && window.history.length == 0){
+		document.getElementById('notice-msg').innerHTML = '';
+		return;
+	}
+	window.setInterval(function(){
+		if(timer<1){window.clearInterval();
+			window.location.href = link;
+			return ;
+		}
+		timer --;
+		document.getElementById("notice-timer").inserHTML = timer;
+	}, 1000);
+}
+</script>
+<{/if}>
+<{if $pager.appendjs}><{$pager.appendjs}><{/if}>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

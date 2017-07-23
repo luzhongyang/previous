@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+
+    <body>
+        <header>
+            <i class="left"><a href="<{link ctl='shop/detail' arg0=$detail.shop_id}>"  link-load="" link-type="right" class="gobackIco"></a><a href="javascript:void(0);"><{$detail.title}></a></i>
+            <div class="title">
+            </div>
+            <i class="right"><a class="searchIco" link-load="" href="<{link ctl='search'}>"></a></i>
+        </header>
+        <!--提示内容开始-->
+        <div class="dianpuPrompt"><p><{L('商家温馨提示')}>:<{$detail.info}></p></div>
+        <!--提示内容结束-->
+        <!--头部切换开始-->
+        <ul id="shangjia_tab">
+            <li><a href="<{link ctl='shop/detail' arg0=$detail.shop_id}>" link-load="" link-type="right"><{L('菜单')}></a></li>
+            <li><a class="on" href="<{link ctl='shop/comment' arg0=$detail.shop_id}>"><{L('评价')}></a></li>
+            <li><a href="<{link ctl='shop/shop' arg0=$detail.shop_id}>" link-load=""><{L('商家')}></a></li>
+        </ul>
+        <!--头部切换结束-->
+        <section class="page_center_box">
+            <div class="evaluate mt10 mb10">
+                <div class="fl">
+                    <p class="fen pointcl1"><{$detail.agv}>%</p>
+                    <p class="black9"><{L('好评率')}></p> 
+                </div>
+                <div class="fr">
+                    <!-- <p><{L('综合得分')}>&nbsp;&nbsp;<span class="starBg"><span class="star" style=" width:<{$detail['score']/$detail['comments']*20}>%;"></span></span></p> -->
+                    <p><{L('服务态度')}>&nbsp;&nbsp;<span class="starBg"><span class="star" style=" width:<{$detail['score_fuwu']/$detail['comments']*20}>%;"></span></span></p>
+                    <p><{L('菜品口味')}>&nbsp;&nbsp;<span class="starBg"><span class="star" style=" width:<{$detail['score_kouwei']/$detail['comments']*20}>%;"></span></span></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="evaluate_list_box">
+                <h3 class="black9"><{sprintf(L('共有%s人评价'),$detail['comments'])}></h3>
+            </div>
+            <div class="evaluate_list_box">
+                <div id="wrapper" style="position: ;">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <script id="data_list" type="text/x-jquery-tmpl">
+            <li class="evaluate_list">
+            	<div class="tx fl"><img src="<{$pager.img}>/${face}" width="100" height="100" /></div>
+                <div class="wz">
+                	<p>${nickname}</p>
+                    <div>
+                    	<span class="star_evaluate"><span class="bq" style="background:#ff6aad;"><{L('服')}></span><span class="starBg"><span class="star" style=" width:${score_fuwu*20}%;"></span></span></span>
+                        <span class="star_evaluate"><span class="bq" style="background:#7ecef4;"><{L('味')}></span><span class="starBg"><span class="star" style=" width:${score_kouwei*20}%;"></span></span></span>
+                    </div>
+                    <div>
+                    	<span class="star_evaluate black9"><span class="bq" style="background:#466fae;"><{L('配')}></span>${pei_time}</span>
+                    </div>
+                    <p>${content}</p>
+                    <div class="img_list">
+                    	<ul>
+                        {{each(i,pic) photo}}
+                            <li><img src="<{$pager.img}>/${pic.photo}" width="100" height="100" /></li>     
+                        {{/each}}
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <p class="black9">${dateline}</p>
+                {{if reply != ""}}
+                    <div class="evaluate_reply">
+                    	<p>${reply}</p>
+                        <p class="time black9">${reply_time}</p>
+                    </div>
+                {{/if}}
+                </div>
+                <div class="clear"></div>
+            </li>    
+    
+    
+        </script>
+        <script>
+            var page = 1;
+            var wapper = document.querySelector("#wrapper ul");
+            $("#pullUp").hide();
+            build_refresher_items("<{link ctl='shop/items'}>", {page: 1, shop_id: "<{$detail.shop_id}>"}, "#data_list", wapper);
+            refresher.init({
+                id: "wrapper",
+                pullDownAction: function () {
+                    var url = "<{link ctl='shop/items'}>";
+                    post_json = {page: 1, shop_id: "<{$detail.shop_id}>"};
+                    $("#wrapper ul").html("");
+                    build_refresher_items(url, post_json, '#data_list', wapper);
+                    page = 1;
+                    myScroll.refresh();
+                },
+                pullUpAction: function () {
+                    page++;
+                    var url = "<{link ctl='shop/items'}>";
+                    post_json = {page: page, shop_id: "<{$detail.shop_id}>"};
+                    build_refresher_items(url, post_json, '#data_list', wapper);
+                    myScroll.refresh();
+                },
+            });
+        </script>
+    </body>
+</html>

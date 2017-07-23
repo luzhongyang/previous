@@ -1,0 +1,1 @@
+ALTER TABLE  `jh_payment_log` ADD  `pay_level` TINYINT( 1 ) NOT NULL DEFAULT  '0' AFTER  `order_id` , ADD INDEX (  `pay_level` );

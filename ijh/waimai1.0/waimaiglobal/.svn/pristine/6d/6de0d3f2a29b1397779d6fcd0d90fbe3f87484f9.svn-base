@@ -1,0 +1,49 @@
+<{assign var='tpl_title' value=L("订单列表")-L("待处理")}>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+
+    <body>
+     <header>
+         <i class="left"><a href="<{link ctl='paotui/paotui' args='1'}>" class="gobackIco"></a></i>
+    <div class="title">
+    	<{L('订单进度')}>
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<!--头部切换开始-->
+<ul id="shangjia_tab">
+    <li><a href="<{link ctl='paotui/log' args=$paotui.paotui_id}>" class="on"><{L('订单进度')}></a></li>
+    <li><a href="<{link ctl='paotui/detail' args=$paotui.paotui_id}>"><{L('订单详情')}></a></li>
+</ul>
+<!--头部切换结束-->
+<section class="page_center_box">
+	<div class="order_progress_infor mb10">
+        <div class="fl">
+            <p class="black9"><span class="pointcl1"><{$paotui.order_status_label}></span>(<{$paotui.dateline|format}><{L('下单')}>)</p>
+            <p class="black9"><{L('订单逾期未支付')}>1<{L('小时自动取消')}></p>
+        </div>
+        <{if $paotui.order_status == 0}><a href="#" class="btn fr"><{L('申请退单')}></a><{/if}>
+        <div class="clear"></div>
+    </div>
+	<div class="order_progress">
+    	<ul>
+             <{foreach $logs as $k => $v}>
+            <li class="order_progress_list">
+            	<div class="ico ico_8 on fl"></div>
+                <div class="wz">
+                	<p class="maincl"><{$v.log}></p>
+                    <p class="black9"><{$v.dateline|format}></p>
+                    <span class="long_xian"></span>
+                    <span class="xian"></span>
+                </div>
+                <div class="clear"></div>
+            </li>
+            <{/foreach}>
+	    </ul>
+    </div>
+</section>
+    </body>
+</html>

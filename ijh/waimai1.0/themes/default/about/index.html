@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+
+<body>
+<{if !$request.IN_APP_CLIENT}>
+<header>
+    <i class="left"><a href="<{link ctl='ucenter'}>"  link-load="" link-type="right" class="gobackIco"></a></i>
+    <div class="title">
+    	<{L('关于')}>
+    </div>
+</header>
+<{/if}>
+<section class="page_center_box">
+    <div class="aboutPage">
+        <img src="%THEME%/static/images/about.png" />
+        <span class="version"><{L('版本')}>V1.0</span>
+        <p class="copy">Copyright@ 2015</p>
+    </div>
+</section>
+</body>
+</html>

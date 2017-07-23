@@ -1,0 +1,90 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <!--账户充值-->
+        <div class="prslCenter_recharge">
+            <h2>账户充值</h2>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>充值账号</th>
+                    <td><{substr_replace($MEMBER.mobile,'****',3,4)}></td>
+                </tr>
+                <tr>
+                    <th>充值金额</th>
+                    <td>
+                        <div class="selct_box">
+                            <em class="ico"></em>
+                            <div class="int black6"></div>
+                            <div class="selct_nr">
+                                <{foreach $money_pack as $k=>$money}>
+                                    <div class="list black6"><{$k}>元<small amount="<{$k}>" class="pointcl">送<{$money}>元</small></div>
+                                <{/foreach}>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <script>
+                $(document).ready(function () {
+                    $(".prslCenter_recharge .selct_box").click(function () {
+                        if ($(this).find(".selct_nr").css('display') == 'block') {
+                            $(this).find(".selct_nr").hide();
+                        }
+                        else {
+                            $(this).find(".selct_nr").show();
+                        }
+                    });
+
+                    $(".prslCenter_recharge .selct_nr .list").click(function () {
+                        $(".prslCenter_recharge .selct_box .int").html($(this).html());
+                    });
+                });
+            </script>
+            <!--充值方式--> 
+            <div class="prslCenter_recharge_way">
+                <h3>第三方支付</h3>
+                <div>
+                    <ul>
+                        <input type="hidden" name="pay_code" id="pay_code" value="wxpay"/>
+                        <li class="list on" ><label><input type="radio" class="paym" name="pay_code" checked="checked" value="wxpay"><img src="/themes/default/web/static/images/wxpay.png"></label></li>
+                        <li class="list"><label><input type="radio" class="paym" name="pay_code" value="alipay"><img src="/themes/default/web/static/images/alipay.png"></label></li>
+                        <li class="list" ><label><input type="radio" class="paym" name="pay_code" value="paypal"><img src="/themes/default/web/static/images/paypal.png"></label></li> 
+                    </ul>
+                    <div class="cl"></div>
+                </div>
+            </div> 
+            <script>
+                $(document).ready(function () {
+                    $(".prslCenter_recharge_way .list").click(function () {
+                        $(".prslCenter_recharge_way .list").removeClass("on");
+                        $("#pay_code").val($(this).find(".paym").val());
+                        $(this).addClass("on");
+                    });
+                });
+            </script>
+            <!--充值方式end--> 
+            <input type="button" value="确认" onClick="paymoney();" class="pub_btn">
+        </div>
+        <!--账户充值end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<script>
+    function paymoney () {
+    var code = $("#pay_code").val();
+    var amount = $(".int small").attr("amount");
+    if(amount == ""||amount == undefined||amount==0){
+        layer.msg('充值金额不正确');return false;
+    }
+    if(code == ""){
+        layer.msg('请选择支付方式');return false;
+    }
+    var link = "<{link ctl='trade/payment:money' code=codes amount=amounts}>";
+    window.location.href = link.replace('codes',code).replace('amounts',amount);
+}
+</script>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

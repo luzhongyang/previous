@@ -1,0 +1,23 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+            <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+            <th><{$MOD.title}></th>
+            <td align="right"><{link ctl="shop/youhui:index" arg0=$detail.shop_id priv="hidden" class="button"}></td>
+            <td width="15"></td>
+        </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?shop/youhui-edit.html" mini-form="youhui-form" method="post" >
+        <table width="100%" border="0" cellspacing="0" class="table-data form">
+            <input type="hidden" name="youhui_id" value="<{$detail.youhui_id}>"/>
+            <input type="hidden" name="data[shop_id]" value="<{$detail.shop_id}>"/>
+            <tr><th><span class="red">*</span>满多少：</th><td><input type="text" name="data[order_amount]" value="<{$detail.order_amount|default:''}>" class="input w-100"/><span class="tip-comment">订单最小金额</span></td></tr>
+            <tr><th><span class="red">*</span>减多少：</th><td><input type="text" name="data[youhui_amount]" value="<{$detail.youhui_amount|default:''}>" class="input w-100"/><span class="tip-comment">优惠金额</span></td></tr>
+            <tr><th><span class="red">*</span>排序：</th><td><input type="text" name="data[orderby]" value="<{$detail.orderby|default:''}>" class="input w-100"/><span class="tip-comment">排序</span></td></tr>
+            <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+        </table>
+    </form></div>
+
+<{include file="admin:common/footer.html"}>

@@ -1,0 +1,46 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title><{$tpl_title|default:$CONFIG.site.title}></title>
+<link rel="stylesheet" type="text/css" href="%THEME%/static/css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="%THEME%/static/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="%THEME%/static/css/pullToRefresh.css"/> 
+<link rel="stylesheet" type="text/css" href="%THEME%/static/css/append.css"/>
+<link rel="stylesheet" type="text/css" href="%THEME%/static/css/mobiscroll.custom-2.6.2.min.css"/>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+<{if $request.IN_WEIXIN}>
+	window.WXJS_CFG = {
+		debug: false,
+		appId: '<{$wxjs_config["appId"]}>',
+		timestamp: '<{$wxjs_config["timestamp"]}>',
+		nonceStr: '<{$wxjs_config["nonceStr"]}>',
+		signature: '<{$wxjs_config["signature"]}>',
+		jsApiList: ['getLocation']
+	};
+	wx.config({
+    debug: false,
+    appId: '<{$wxjs_config["appId"]}>',
+    timestamp:'<{$wxjs_config["timestamp"]}>',
+    nonceStr:  '<{$wxjs_config["nonceStr"]}>',
+    signature:  '<{$wxjs_config["signature"]}>',
+    jsApiList: ['getLocation']
+});
+<{/if}>
+window.CFG = {"domain":"<{$CONFIG.site.domain}>","url":"<{$CONFIG.site.siteurl}>", "title":"<{$CONFIG.site.title}>", "res":"<{$pager.res}>", "img":"<{$pager.img}>","C_PREFIX":"KT-"};
+</script>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="<{$pager.res}>/script/layer.m/layer.m.js" type="text/javascript" charset="utf-8"></script>
+<script src="<{$pager.res}>/script/fastclick.js" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/common.js?20160630" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/jscookie.js" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/jquery.tmpl.js" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/jquery.qrcode.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/jquery.sglide.js" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/mobiscroll.custom-2.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="%THEME%/static/js/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+
+

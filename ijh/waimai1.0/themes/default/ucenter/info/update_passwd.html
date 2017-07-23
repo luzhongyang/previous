@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+
+<body>
+  
+
+<header>
+    <i class="left"><a href="<{link ctl='ucenter'}>"  link-load="" link-type="right" class="gobackIco"></a></i>
+    <div class="title">
+    	<{L('修改密码')}>
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="loginModiy mt10">
+
+    	<table width="100%">
+            <tr>
+                <th><{L('输旧密码')}></th>
+                <td>
+                    <input type="password" name="old_passwd" id="old_passwd" placeholder="<{L('请输入旧密码')}>">
+                </td>
+            </tr>
+            <tr>
+                <th><{L('输新密码')}></th>
+                <td>
+                    <input type="password" name="new_passwd" id="new_passwd" placeholder="<{L('请输入新密码')}>">
+                </td>
+            </tr>
+            <tr>
+                <th><{L('新密确认')}></th>
+                <td>
+                    <input type="password" name="new_passwd2" id="new_passwd2" placeholder="<{L('请再次输入新密码')}>">
+                </td>
+            </tr>
+        </table>
+        <div class="long_btn_box">
+            <input class="long_btn" type="button" value="<{L('确定修改')}>">
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<script type="text/javascript">    
+/*判断浏览器是否支持placeholder开始*/
+$(function(){
+if(!placeholderSupport()){   // 判断浏览器是否支持 placeholder
+    $('[placeholder]').focus(function() {
+        var input = $(this);
+        if (input.val() == input.attr('placeholder')) {
+            input.val('');
+            input.removeClass('placeholder');
+        }
+    }).blur(function() {
+        var input = $(this);
+        if (input.val() == '' || input.val() == input.attr('placeholder')) {
+            input.addClass('placeholder');
+            input.val(input.attr('placeholder'));
+        }
+    }).blur();
+};
+})
+function placeholderSupport() {
+    return 'placeholder' in document.createElement('input');
+}
+/*判断浏览器是否支持placeholder结束*/
+    
+$(document).ready(function(){
+    
+        $('#l5').addClass('on');
+        $('.long_btn').click(function(){
+            var old_passwd = $('#old_passwd').val();
+            var new_passwd = $('#new_passwd').val();
+            var new_passwd2 = $('#new_passwd2').val();
+            var link = "<{link ctl='ucenter/info/set_passwd' }>";
+
+            $.post(link, {old_passwd:old_passwd,new_passwd:new_passwd,new_passwd2:new_passwd2}, function (ret) {
+                if (ret.error == 0) {
+                    layer.open({
+                        content: ret.message,
+                        time: 2 //2秒后自动关闭
+                    });
+                    setTimeout(function(){
+                       window.location.href=ret.forward;
+                    },1000)
+                    BtnCount();
+                } else {
+                    layer.open({
+                        content: ret.message,
+                        time: 2 //2秒后自动关闭
+                    });
+                    return ;
+                }
+            }, 'json');
+            
+        })
+
+
+})
+
+</script>
+
+<{include file="block/sfooter.html"}>
+
+</body>
+</html>

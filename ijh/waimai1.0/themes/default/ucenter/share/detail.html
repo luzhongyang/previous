@@ -1,0 +1,68 @@
+<include file="public:header"/>
+<body>
+<?php if(!$is_app){?>
+<header>
+    <i class="left"><a href="javascript:;" class="CDmineTransfer_leave_btn"><em class="ico icon-goback"></em></a></i>
+    <i class="right"><a href="#"></a></i>
+    <div class="title">发布转让</div>
+</header>
+<?php }?>
+<div class="page-center-box">
+    <form action="<{:AppLink('/mcenter/elecoupcode/pubtrans')}>" method="POST">
+        <div class="CDmineTransfer_info mb10">
+            <div class="bt">【转让】<{$elecoup['title']}></div>
+            <textarea placeholder="简介：请输入内容" name="data[intro]"></textarea>
+        </div>
+        <div class="CDmineTransfer_form">
+            <div class="price_box clearfix border_b">
+                <div class="CDpub_list border_r">
+                    <div class="mr10 bt">想卖多少</div>
+                    <div class="CDpub_list_bd"><input type="text" name="data[sold_price]" required placeholder="¥0.00"></div>
+                </div>
+                <div class="CDpub_list">
+                    <div class="mr10 bt">购入价格</div>
+                    ¥<div class="CDpub_list_bd"><input type="text" name="data[pur_price]" readonly placeholder="¥0.00" value="<{:round($elecoup['elecoup_price']/100,2)}>"></div>
+                </div>
+            </div>
+            <div class="CDpub_list border_b">
+                <div class="mr10 bt">分类</div>
+                <div class="CDpub_list_bd"><input type="text" name="data[type]" readonly value="<{$elecoup['type']}>" placeholder="请输入电子券类型／如：优惠券"></div>
+            </div>
+            <div class="CDpub_list">
+                <div class="mr10 bt">联系电话</div>
+                <div class="CDpub_list_bd"><input type="text" name="data[phone]" value="<{$user['account']}>" placeholder="请输入电话号码"></div>
+            </div>
+        </div>
+</div>
+<footer>
+    <input type="hidden" id="code_id" name="data[code_id]" value="<{$code_id}>">
+    <input type="hidden" id="elecoup_id" name="data[elecoup_id]" value="<{$elecoup['elecoup_id']}>">
+    <div class="mar5"><input type="submit" class="long_btn" value="确定发布"></div>
+     </form>
+</footer>
+<!--未发布离开-->
+<div class="CDmineTransfer_leave_mask">
+    <div class="cont">
+        <P>信息尚未发布，确认离开吗？</P>
+    </div>
+    <div class="btn_box border_t">
+        <a href="javascript:;" class="border_r btn black9 cancel">取消</a>
+        <a href="/mcenter/elecoupcode" class="btn maincl">确定</a>
+    </div>
+</div>
+<div class="mask_bg" style="z-index:1001;"></div>
+<script>
+$(document).ready(function() {
+    $(".CDmineTransfer_leave_btn").click(function(){
+        $(".CDmineTransfer_leave_mask").fadeIn(100);
+        $(".mask_bg").fadeIn(100);
+    });
+    $(".CDmineTransfer_leave_mask .cancel,.mask_bg").click(function(){
+        $(".CDmineTransfer_leave_mask").fadeOut(100);
+        $(".mask_bg").fadeOut(100);
+    });
+});
+</script>
+<!--未发布离开-->
+</body>
+</html>

@@ -1,0 +1,198 @@
+<{include file="web/block/header.html"}>
+<!--内容开始-->
+<div class="pagewd mt10 mb30">
+    <!--筛选-->
+    <div class="shnagjia_cate mb10">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr class="cate_box">
+                <th><em class="ico ico_1"></em>商家分类</th>
+                <td>
+                    <a href="javascript:void(0);" onclick="setloadparams('cate_id',0);" class="on">全部</a>
+                    <{foreach $cates as $item}>
+                        <{if $item.parent_id == 0}>
+                            <a href="javascript:void(0);" onclick="setloadparams('cate_id','<{$item.cate_id}>');" ><{$item.title}></a>
+                        <{/if}>
+                    <{/foreach}>
+                </td>
+            </tr>
+            <script>
+                $(document).ready(function(){
+                    $(".cate_box a").click(function(){
+                        $(".cate_box a").removeClass("on");
+                        $(this).addClass("on");
+                    })
+                })
+            </script>
+            <tr class="box_check">
+                <th><em class="ico ico_2"></em>优惠筛选</th>
+                <td>
+                    <label class="on" ><i class="ico"></i><input class="all_youhui" type="checkbox" checked="checked">不限</label>
+                    <label><i class="ico"></i><input class="other_set" type="checkbox" name="is_pay">在线支付</label>
+                    <label><i class="ico"></i><input class="other_set" type="checkbox" name="is_new">新店开张</label>
+                    <label><i class="ico"></i><input class="other_set" type="checkbox" name="first_youhui">新用户优惠</label>
+                    <label><i class="ico"></i><input class="other_set" type="checkbox" name="is_youhui">下单立减</label>
+                </td>
+            </tr>
+            <tr class="box_pei">
+                <th><em class="ico ico_3"></em>配送方式</th>
+                <td>
+                    <label class="on"><i class="ico"></i><input class="" re type="radio" name="pei_type" value="0">不限</label>
+                    <label><i class="ico"></i><input  type="radio" name="pei_type" value="1">商家自主配送</label>
+                    <label><i class="ico"></i><input  type="radio" name="pei_type" value="2">第三方配送</label>
+                </td>
+            </tr>
+        </table>
+        <script>
+            $(document).ready(function () {
+                $(".other_set").click(function () {
+                    if ($(this).prop('checked') == true) {
+                        $(".box_check .all_youhui").prop("checked",false);
+                        $(".box_check .all_youhui").parent().removeClass('on');
+                        setloadparams($(this).attr('name'),1);
+                    } else {
+                        setloadparams($(this).attr('name'),0);
+                    }
+                });
+                $(".box_pei input").click(function () {
+                     if ($(this).attr('ischeck') == '1') {
+                        $(this).attr('ischeck', 0);
+                        setloadparams($(this).attr('name'),0);
+                    } else {
+                        $(this).attr('ischeck', 1);
+                        setloadparams($(this).attr('name'),$(this).val());
+                    }
+                });
+                $(".all_youhui").click(function () {
+                    $(".other_set").prop("checked",false);
+                    $(".other_set").parent().removeClass('on');
+                    $(this).prop('checked',true);
+                    setloadparams("is_pay",0);
+                    setloadparams("is_new",0);
+                    setloadparams("first_youhui",0);
+                    setloadparams("is_youhui",0);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $(".shnagjia_cate table tr.box_check td label").click(function () {
+                    if ($(this).hasClass("on")) {
+                        $(this).removeClass("on");
+                    } else {
+                        $(this).addClass("on");
+                    }
+                });
+                $(".shnagjia_cate table tr.box_pei td label").click(function () {
+                    if ($(this).hasClass("on")) {
+                        $(".shnagjia_cate table tr.box_pei td label").removeClass("on");
+                        $(this).removeClass("on");
+                    } else {
+                        $(".shnagjia_cate table tr.box_pei td label").removeClass("on");
+                        $(this).addClass("on");
+                    }
+                });
+            });
+        </script>
+    </div>
+    <!--筛选end-->
+    <div class="shangjia_list_box">
+        <ul>
+
+        </ul>
+        <div class="cl"></div>
+    </div>
+    <div class="jiazai_box"></div>
+</div>
+
+<script>
+ var _lock = false;
+ var params = {"kw":"<{$pager.kw}>","cate_id":"<{$pager.cate_id}>","is_new":"<{$pager.is_new}>","is_pay":"<{$pager.is_pay}>","first_youhui":"<{$pager.first_youhui}>","is_youhui":"<{$pager.is_youhui}>","pei_type":"<{$pager.pei_type}>"};
+ var page = 1;
+ var link = "<{link ctl='web/shop/loaddata' arg0='#page#'}>";
+ loaddata();
+function setloadparams(k, v) {
+    page = 1;
+    params[k] = v;
+    loaddata();
+}
+
+function showLoader(msg,st) {
+    if(st){
+        msg = '<em class="ico"></em>'+msg; 
+    }
+    $(".jiazai_box").html(msg).show();
+}
+
+function hideLoader()
+{
+    $(".jiazai_box").hide();
+}
+
+function loaddata() {
+    //console.log(params);
+    if(_lock){
+        return false;
+    }
+    _lock = false;
+    showLoader('正在加载商品中....',true);
+    $.getJSON(link.replace('#page#', page), params, function(ret){
+        if(page == 1){
+            $(".shangjia_list_box ul").html(ret.html);
+             _lock = false;
+            if(ret.html==""){
+                 showLoader('没有找到数据',false);
+            }
+        }else{
+            if(ret.html){
+                $(".shangjia_list_box ul").append(ret.html);
+                _lock = false;
+            }else{
+                showLoader('没有更多了',false);
+            }
+        }
+    });
+}
+   
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if($(window).scrollTop() == $(document).height() - $(window).height() ){
+                //_lock = true;
+                page++;
+                loaddata();
+            }          
+        });    
+    
+});
+</script>
+
+<!--内容结束-->
+<!--回到顶部-->
+<div class="rightFloat">
+    <div class="wx_box">
+        <img src="<{$pager.img}>/<{$site.weixinqr}>" width="86" height="86">
+        <p class="maincl">下载客户端<a href="javascript:void(0);" class="close black9">×</a></p>
+    </div>
+    <div class="topBack"></div>
+    <div style="width: 100px; text-align: center;"><{$site.kfqq|qq}></div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".close").click(function () {
+            $(".wx_box").hide();
+        })
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $(".rightFloat").show();
+                $(".rightFloat").css("bottom", "200px");
+            } else {
+                $(".rightFloat").hide();
+            }
+
+        });
+        $(".topBack").click(function () {
+            $("html,body").animate({scrollTop: 0}, 200);
+        });
+    });
+</script>
+<{include file="web/block/footer.html"}>

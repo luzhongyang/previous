@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+    <body>
+        <header>
+            <i class="left">
+                <{if $mall}>
+                    <a href="<{link ctl='mall/index'}>"  link-load="" link-type="right" class="gobackIco"></a>
+                    <{else}>
+                    <a href="<{link ctl='ucenter/index'}>"  link-load="" link-type="right" class="gobackIco"></a>
+                <{/if}>
+            </i>
+            <div class="title">
+               <{L('兑换记录')}> 
+            </div>
+            <i class="right"><a class="" href="#"></a></i>
+        </header>
+        <section class="page_center_box">
+            <div class="mineIntegral_record" id="wrapper">
+                <ul>
+                    <{foreach $items as $k => $v}>
+                    <li class="list">
+                        <div class="fl img"><img src="<{$pager.img}>/<{$v.photo}>" width="280" height="200" /></div>
+                        <div class="wz">
+                        <p class="bt"><{$v.product_name}>&nbsp;</p>
+                        <p class="black9"><{L('兑换数量')}>：<{$v.product_number}></p>
+                        <p class="maincl"><{L('兑换成功')}></p>
+                        <{if $v.status == 0}><p style="color:#ff0000;"><{L('未发货')}></p><{/if}>
+                        <{if $v.status == 1}><p style="color:green"><{L('已发货')}></p><{/if}>
+                        </div>
+                    </li>
+                    <{/foreach}>
+                </ul>
+            </div>
+        </section>
+        <script>
+            $('#l5').addClass('on');
+          
+        </script>
+        <{include file="block/sfooter.html"}>
+    </body>
+</html>

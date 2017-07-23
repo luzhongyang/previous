@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+
+<body>
+    
+    <script>
+        
+         if (!window.applicationCache) {
+                  alert("<{L('不支持')}>HTML5");
+          }
+
+        function fileSelected(obj){
+                    var files = obj.files;
+                    for(var i=0;i<files.length;i++){
+                        var tag = '';
+                        var rFilter = /^(image\/gif|image\/jpeg|image\/jpg|image\/png)$/i;
+                    if (! rFilter.test(files[i].type)) {                   
+                        alert("<{L('只允许上传')}>JPG、PNG、GIF<{L('格式图片')}>");
+                        return false;
+                    }
+                    var reader = new FileReader();
+                    reader.onloadstart = function(e){
+                            $(".loading").show();
+                    }
+                    reader.onload = function(e){
+                        $(".face_img").attr('src',e.target.result);
+                    }
+                    reader.readAsDataURL(files[i]);
+                }
+        } 
+        
+    </script>
+    
+<header>
+	<i class="left"><a href="<{link ctl='ucenter'}>"  link-load="" link-type="right" class="gobackIco"><span class="num">0</span></a></i>
+    <div class="title">
+    	<{L('账户信息')}>
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<section class="page_center_box">
+	<div class="accountInfor">
+        <ul class="form_list_box">
+            <li class="mineHome_list accountInfor_headX">
+            	<p class="fl"><{L('头像')}></p>
+                <div class="fr">
+                    <div class="img"><{if $MEMBER.face}><img src="<{$pager.img}>/<{$MEMBER.face}>" class="face_img" width="100" height="100"/><{/if}></div>
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li class="mineHome_list last">
+                <a href="<{link ctl='ucenter/info/update_nickname'}>"  link-load="">
+            	<p class="fl"><{L('用户名')}></p>
+                <div class="fr">
+                    <{if $MEMBER.nickname}>
+                            <span class="black9"><{$MEMBER.nickname}></span>
+                    <{else}>
+                            <span class="black9"><{L('点击设置昵称')}></span>
+                    <{/if}>
+                    <em class="linkIco"></em></div>
+                <div class="clear"></div>
+                <{if !$MEMBER.nickname}></a><{/if}>
+            </li>
+            <li class="mineHome_list"><p class="black9"><{L('账户设置')}></p></li>
+            <li class="mineHome_list">
+            	<a href="<{link ctl='ucenter/info/update_mobile'}>" link-load="">
+            	<p class="fl"><em class="ico_8"></em><{L('手机')}></p>
+                <div class="fr"><span class="black9"><{$MEMBER.mobile}></span><em class="linkIco"></em></div>
+                <div class="clear"></div>
+                </a>
+            </li>
+            <li class="mineHome_list last">
+            	<a href="javascript:;">
+            	<p class="fl"><em class="ico_9"></em><{L('微信')}></p>
+                <div class="fr"><span class="maincl" id='wxbangd'><{if $MEMBER.wx_openid}><{L('已绑定')}><{else}><{L('未绑定')}><{/if}></span><em class="linkIco"></em></div>
+                <div class="clear"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<{include file="block/sfooter.html"}>
+<div class="mask_box">
+    <form action="<{link ctl='ucenter/info:upload_face'}>" mini-form="car-form" id="sbtfrm" method="post" ENCTYPE="multipart/form-data">
+    <div class="maskOne accountInfor_headX_mask">
+        <div class="title">
+            <span class="fl"><{L('上传图像')}></span>
+            <span class="fr" style="color:#ff0000;"><{L('关闭')}></span>
+        </div>
+        <div class="cont">
+            <div class="btn_box">
+            	<input type="file" name="avatar" onChange="fileSelected(this)" id="fileField" style="background:none;border:none;border-radius:0.5rem;height:100%;width:100%;"  />
+            </div>
+        </div>
+        <div class="yuee_btn"> <input type="submit" value="<{L('保存')}>" class="btn" style=" color:#fff;width:95%;margin:0 auto;margin-bottom:0.1rem;background-color: #1ec0be"></div>
+    </div>
+        
+	<div class="mask_bg"></div>
+    </form>
+</div>
+
+<div class="mask_box">
+    <div class="maskOne addrDel_mask" style="text-align:center;">
+        <div class="title"><{L('解除绑定')}></div>
+        <div class="cont">
+            <p class="black9"><{L('确定要解除帐号与微信的关联吗')}>？</br><{L('解除后将无法使用微信登录此帐号')}></p>
+            <div class="btn_box">
+                <input type="button" class="pub_btn graybg cancel" value="<{L('取消')}>" />&nbsp;
+                <input type="button" id="no_bind" class="pub_btn confirm" value="<{L('解除绑定')}>" />
+            </div>
+        </div>
+    </div>
+    <div class="mask_bg"></div>
+</div>
+
+<script>
+$(document).ready(function() {
+	$(".accountInfor_headX").click(function(){
+		$(".accountInfor_headX_mask").show();
+		$(".accountInfor_headX_mask").parent().find(".mask_bg").show();
+	});
+
+    $('.title .fr').click(function(){
+        $('.accountInfor_headX_mask').hide();
+        $(".accountInfor_headX_mask").parent().find(".mask_bg").hide();
+    });
+
+    $('#wxbangd').click(function(){
+        var status = $('#wxbangd').text();
+        if(status=='已绑定') {
+            // 解除绑定弹框 
+            $('.addrDel_mask').show();
+            $(".addrDel_mask").parent().find(".mask_bg").show();
+            $('#no_bind').click(function(){
+                wx_bind();
+                $('.addrDel_mask').hide();
+            });
+        }else {
+            wx_bind();
+        }
+    });
+    $('.addrDel_mask .cancel').click(function(){
+        $('.addrDel_mask').hide();
+        $(".addrDel_mask").parent().find(".mask_bg").hide();
+    });
+});
+
+function wx_bind() {
+    jQuery.ajax({  
+        url: "<{link ctl='ucenter/info:wx_bind'}>", 
+        async: true,  
+        dataType: 'json',  
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+                setTimeout(function(){window.location.reload();},2000);
+            }else{
+                window.location.reload();
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },   
+    });   
+}
+
+</script>
+
+
+</body>
+</html>

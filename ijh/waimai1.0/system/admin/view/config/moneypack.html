@@ -1,0 +1,69 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><a href="javascript:;" class="button jq_add" title="新增一行">新增一行</a></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data">
+	<form action="?system/config-moneypack.html" mini-form="config-form" method="post" >
+		<input type="hidden" name="K" value="moneypack" />
+		<table width="100%" border="0" cellspacing="0" class="table-data form table111">
+		<tr>
+			<tr>
+			    <th style="text-align:center;">充值金额</th>
+			    <th style="text-align:center;">赠送金额</th>
+			    <th style="text-align:center;">操作</th>
+			</tr>
+			<{foreach $config as $item}>
+			<tr class="jq_tr tr111">
+			    <td style="text-align:center;">&yen;&nbsp;<input type="text" class="input w-100" style="text-align:center;" name="config[money][]" value="<{$item.money}>" />&nbsp;元</td>
+			    <td style="text-align:center;">&yen;&nbsp;<input type="text" class="input w-100" style="text-align:center;" name="config[give][]" value="<{$item.give|default:0}>" />&nbsp;元</td>
+			    <td style="text-align:center;">
+			    	<a href="javascript:void(0);" class="button jq_delete">删除</a>
+			    </td>
+			</tr>            
+			<{foreachelse}>
+			<tr class="jq_tr nodata"><td colspan="20"><div class="alert alert-info" style="text-align:center;">没有数据</div></td></tr>
+			<{/foreach}>
+		</tr>
+		</table>
+		<table width="100%" border="0" cellspacing="0" class="table-data form jq_bottom">
+			<tr>
+				<th class="clear-th-bottom" style="width:33%"></th>
+				<td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script>
+$(document).ready(function(){
+    $(".jq_add").click(function(){
+        var html = '<tr class="jq_tr tr222">';
+        html+='<td style="text-align:center;">&yen;&nbsp;<input type="text" class="input w-100" style="text-align:center;" name="config[money][]" value="" />&nbsp;元</td>';
+        html+='<td style="text-align:center;">&yen;&nbsp;<input type="text" class="input w-100" style="text-align:center;" name="config[give][]" value="" />&nbsp;元</td>';
+        html+='<td style="text-align:center;"><a href="javascript:void(0);" class="button jq_delete222">删除</a></td></tr>';
+        $(".table111").append(html);
+        $(".nodata").html("");
+        $('.jq_bottom').show();
+    })
+
+    $(".table111").on('click','.jq_delete222', function () {
+        $(this).parent().parent().remove();
+    })
+
+    $(".table111").on('click','.jq_delete', function () {
+        $(this).parent().parent().remove();
+    })
+     <{if $config}>
+    $('.jq_bottom').show();
+    <{else}>
+    $('.jq_bottom').hide();
+    <{/if}>
+})    
+</script>
+<{include file="admin:common/footer.html"}>

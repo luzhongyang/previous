@@ -1,0 +1,24 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?system/config-paotui.html" mini-form="config-form" method="post" >
+<input type="hidden" name="K" value="paotui" />
+<table width="100%" border="0" cellspacing="0" class="table-data form"><tr><th>起步价格：</th><td><input type="text" name="config[start_price]" value="<{$config.start_price|default:'8'}>" class="input w-100"/>
+<span class="tip-comment">元</span></td></tr>
+<tr><th>起步里程：</th><td><input type="text" name="config[start_km]" value="<{$config.start_km|default:'5'}>" class="input w-100"/><span class="tip-comment">千米(km)</span></td></tr>
+<tr><th>起步重量：</th><td><input type="text" name="config[start_kg]" value="<{$config.start_kg|default:'1'}>" class="input w-100"/><span class="tip-comment">千克(kg)</span></td></tr>
+<tr><th>每超过起步里程每KM的价格：</th><td><input type="text" name="config[addkm_price]" value="<{$config.addkm_price|default:'1'}>" class="input w-100"/><span class="tip-comment">元</span></td></tr>
+<tr><th>每超过起步重量每KG的价格：</th><td><input type="text" name="config[addkg_price]" value="<{$config.addkg_price|default:'1'}>" class="input w-100"/><span class="tip-comment">元</span></td></tr>
+    <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>

@@ -1,0 +1,45 @@
+<{include file="admin:common/header.html"}>
+<div class="page-title">
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="30" align="right"><img src="<{$pager.url}>/images/main-h5-ico.gif" alt="" /></td>
+        <th><{$MOD.title}></th>
+        <td align="right"><{link ctl="staff/staff:index" priv="hidden" class="button"}></td>
+        <td width="15"></td>
+      </tr>
+    </table>
+</div>
+<div class="page-data"><form action="?staff/staff-edit.html" mini-form="staff-form" method="post" >
+<table width="100%" border="0" cellspacing="0" class="table-data form">
+<input type="hidden" name="staff_id" value="<{$detail.staff_id}>"/>
+<tr><th><span class="red">*</span>姓名：</th><td><input type="text" name="data[name]" value="<{$detail.name|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>手机号：</th><td><input type="text" name="data[mobile]" value="<{$detail.mobile|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>密码：</th><td><input type="text" name="data[passwd]" value="******" class="input w-300"/></td></tr>
+<tr><th>城市：</th>
+    <td><select name="data[city_id]" class="select w-200"><{widget id="data/city" value=$detail.city_id}></select></td>
+</tr>
+<tr><th>帐户类型：</th>
+    <td><select name="data[account_type]" class="select w-200"><{html_options options=$bank_options selected=$detail.account_type}></select></td>
+</tr>
+<tr><th>开户人：</th><td><input type="text" name="data[account_name]" value="<{$detail.account_name|default:''}>" class="input w-300"/></td></tr>
+<tr><th>开户帐号：<td><input type="text" name="data[account_number]" value="<{$detail.account_number|default:''}>" class="input w-300"/></td></tr>
+<tr><th><span class="red">*</span>提现比例：</th><td><input type="text" name="data[tixian_percent]" value="<{if $detail.tixian_percent==0}>100<{else}><{$detail.tixian_percent}><{/if}>" class="input w-50"/>%<span class="tip-comment">填写0~100之间的数字(例如:填写95则表示提现100元实际得到100X95%=95元)</span></td></tr>
+<tr>
+    <th>认证：</th>
+    <td>
+        <label><input type="radio" name="data[verify_name]" <{if $detail.verify_name}>checked="checked"<{/if}> value="1"/>已认证</label>&nbsp;&nbsp;
+        <label><input type="radio" name="data[verify_name]" <{if empty($detail.verify_name)}>checked="checked"<{/if}> value="0"/>未认证</label>
+    </td>
+</tr>
+<tr>
+    <th>审核：</th>
+    <td>
+        <label><input type="radio" name="data[audit]" <{if $detail.audit}>checked="checked"<{/if}> value="1"/>发布</label>&nbsp;&nbsp;
+        <label><input type="radio" name="data[audit]" <{if empty($detail.audit)}>checked="checked"<{/if}> value="0"/>待审</label>
+    </td>
+</tr>
+<tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
+</table>
+</form></div>
+
+<{include file="admin:common/footer.html"}>
