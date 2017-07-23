@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>首页-新闻列表</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+			<!-- 内容部分 -->
+            <div class="container_mid">
+            	<div class="new_detail">
+					<h2 class="tit">文章标题文章标题文章标题文章标题文章标题文章标题</h2>
+					<div class="black9 top_wz">
+						<span>2016-09-27</span>
+						<sapn class="fr">小编:张三丰</span>
+						<div class="clear"></div>
+					</div>
+					<div class="border_t detail_box">
+						<p class="wz_box">小区住户你们好，热力公司x月份已下发改造暖气通知(一户一阀)，我们积极响应组织改造暖气，本篇文章来自资料管理下载。因多种原因小区暖气没有在规定时间改造完毕，热力公司今年将不再给我们小区供暖，望住户谅解。</p>
+						<img src="img/index-banner@2x.png" class="mt5 text_c"/>
+						<div class="black9">
+							<span class="mr10 news_func"><i class="see_ico"></i>500</span>
+							<span class="mr10 news_func"><i class="zan_ico"></i>14</span>
+						</div>
+					</div>
+				</div>
+            </div>
+			<!-- 内容部分结束 -->
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<script>
+$(document).ready(function() {
+    $(".news_func .zan_ico").click(function(){
+		if($(this).hasClass("zan_ico")){
+			$(this).removeClass("zan_ico");
+			$(this).addClass("zan_ico_on");
+		}else{
+			$(this).addClass("zan_ico");
+			$(this).removeClass("zan_ico_on");
+		}
+	});
+});
+</script> 
+</body>
+</html>

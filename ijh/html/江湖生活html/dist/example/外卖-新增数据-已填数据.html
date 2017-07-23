@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>外卖-首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/style2.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+        <div class="page_cont">
+            <div class="container_mid">
+                <div class="Mine_addressAdd">
+                    <div class="MinePersonal mt10 border_b">
+                        <div class="item-innerIN border_b">
+                            <div class="item-row">
+                                <div class="item-title">收货人</div>
+                                <div class="item-after"><input type="text" placeholder="请输入收货人姓名" value="元子设计"></div>
+                            </div>
+                        </div> 
+                        <div class="item-innerIN">
+                            <div class="item-row">
+                                <div class="item-title">手机号</div>
+                                <div class="item-after"><input type="text" placeholder="请输入收货人手机号" value="12115600222"></div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="address_detail mt10 mb20">
+                        <div class="item-innerIN border_b">
+                            <div class="item-row">
+                                <div class="item-title">地址</div>
+                                <div class="item-after"><input type="text" placeholder="小区/写字楼/学校等" value="华润五彩国际"></div>
+                                <i class="ico_right ml20"></i>
+                            </div>
+                        </div>
+                        <div class="item-innerIN border_b">
+                            <div class="item-row">
+                                <div class="item-title">门牌号</div>
+                                <div class="item-after"><input type="text" placeholder="例：5号楼101室" value="5号楼101室"></div>
+                            </div>
+                        </div>  
+                        <div class="label">
+                            <div class="item-row">
+                                <div class="item-title">
+                                    <p class="fl">标签</p>
+                                    <div class="box">
+                                      <a href="javascript:;">家</a>  
+                                      <a href="javascript:;" class="on">公司</a>  
+                                      <a href="javascript:;">学校</a>  
+                                      <a href="javascript:;">其他</a> 
+                                    </div><div class="clear"></div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="save_btn takeoutLongBtn">
+                        保存
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+<script type="text/javascript">
+    $(function(){
+       $('.Mine_addressAdd  .address_detail .label .item-title .box a').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+       })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会员卡-快速买单</title>
+<link rel="shortcut icon" href="favicon.ico">
+<!--<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">-->
+<!--<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">-->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_cont">
+        	<div class="pub_cont">
+            	<!--内容开始-->                
+                <div class="membcard_paybill">
+					<div class="info">
+                        <div class="img"><img src="pic/pic1.png" alt="江湖收银"></div>
+                        <span>江湖客栈</span>
+                    </div>
+                    <form>
+                        <div class="pay-info">
+                            <div class="tit">金额（元）</div>
+                            <div class="cashier-field">
+                                <i class="money-text">¥</i>
+                                <span type="text" id="cashier-price" class="cashier-text"></span>
+                                <i id="js-cashier-cursor" class="cursor"></i>
+                            </div>
+                        </div>
+                    </form> 
+                    <div class="pub_lists">
+                        <div class="pub_list b-b">
+                            <div class="pub_list_hd">普通会员折扣（9.5折）</div>
+                            <div class="pub_list_bd text-right">-￥3.75</div>
+                        </div>
+                        <div class="pub_list b-b">
+                            <div class="pub_list_hd">实付金额</div>
+                            <div class="pub_list_bd text-right">￥61.75</div>
+                        </div>
+                        <label class="pub_list b-b">
+                            <div class="pub_list_hd">可用余额抵扣￥50.00</div>
+                            <div class="pub_list_bd text-right"><input class="selct" type="checkbox" checked value=""></div>
+                        </label>
+                        <div class="pub_list b-b">
+                            <div class="pub_list_hd">还需支付</div>
+                            <div class="pub_list_bd text-right maincl">￥11.75</div>
+                        </div>
+                        <div class="pub_list">
+                            <div class="pub_list_hd">付款备注</div>
+                            <div class="pub_list_bd"><input class="pub_list_input text-right" type="text" placeholder="请输入备注内容" value=""></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-keyboard js-keyboard ZFB on">
+                    <ul class="ui-keyboard-numbers js-num">
+                        <li>1</li><li>2</li><li>3</li>
+                        <li>4</li><li>5</li><li>6</li>
+                        <li>7</li><li>8</li><li>9</li>
+                        <li class="zero">0</li><li>.</li>
+                    </ul>
+                    <ul class="ui-keyboard-buttons">
+                        <li class="btn-del js-del"></li>
+                        <li class="btn-ok2 js-ok"></li>
+                        <li class="btn-ok js-ok"></li>
+                    </ul>
+                </div>
+                
+                
+                <!--内容结束-->
+            </div>
+            <!--底部工具栏-->
+        	
+            <!--底部工具栏结束-->
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<script src="js/pub.js"></script> 
+<style>
+.bLETddoT8v_gcO_8SLGhF {
+    display:block;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    width: 220px;
+    padding: 0;
+    margin: 0 0 0 -110px;
+    z-index: 9999;
+    background: rgba(0,0,0,.8);
+    color: #fff;
+    line-height: 1.5em;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.motify-inner {
+    padding: 10px;
+    text-align: center;
+    word-wrap: break-word;
+}
+</style>
+<script>
+    var payType = "alipay";
+    var shopInfo = {"shopName":"\u6c5f\u6e56\u5ba2\u6808","shopId":19690345,"bid":17807013};
+    var orderInfo = [];
+</script>
+<script src="js/deccaPay_042056db4219b09e626b.js"></script> 
+<script>
+$(document).ready(function () {
+	localStorage.setItem('def_height',$(window).height());
+	$(window).resize(function(){
+		
+		var width = $(window).width();
+		var height = $(window).height();
+		
+		if(height != localStorage.getItem('def_height')){
+			
+			$(".ui-keyboard").hide();
+			var height  =$(window).height();
+			var width = $(window).width();
+			
+		}
+		else
+		{
+
+			$(".ui-keyboard").show();
+			var height  =$(window).height();
+			var width = $(window).width();
+
+		}
+	});
+
+});
+</script>
+</body>
+</html>

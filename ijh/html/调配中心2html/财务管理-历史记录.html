@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>财务管理-历史记录</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+	<div class="dispatch_serch">
+    	<div class="fl">
+            <span class="fl">查询日期：<input type="text" placeholder="2015-06-29" class="tuan_topser tuan_topserw3">至<input type="text" placeholder="2015-07-29" class="tuan_topser tuan_topserw3"></span><input type="button" class="btn btn-primary btn-sm fl" value="搜 索">
+        </div>
+        <span class="fl ml20"><select class="tuan_topser tuan_topserw1"><option>今天</option> <option>近7天</option> <option>最近30天</option></select></span>
+        <div class="clear"></div>
+    </div>    
+    <table class="dispatch_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr class="tit">
+            <td>配送员</td>
+            <td>申请时间</td>
+            <td>申请金额</td>
+            <td>累计单数</td>
+            <td>操作</td>
+            <td>通过时间</td>
+            <td>上次提现时间</td>
+            <td>备注</td>
+        </tr>  
+        <tr>
+            <td>王宝强</td>
+            <td>10/11 14:39</td>
+            <td>5652</td>
+            <td>5652</td>
+            <td>
+            	<a href="javascript:;" class="maincl pass_btn">通过</a>
+            </td>
+            <td>&nbsp;</td>
+            <td>10/11 14:39</td>
+            <td>罚款1000</td>
+        </tr>
+        <tr>
+            <td>王宝强</td>
+            <td>10/11 14:39</td>
+            <td>5652</td>
+            <td>5652</td>
+            <td>
+            	<a href="javascript:;" class="black9">通过</a>
+            </td>
+            <td>10/11 14:39</td>
+            <td>10/11 14:39</td>
+            <td>罚款1000</td>
+        </tr>
+    </table>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<!--通过-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">确认通过***提现申请？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary">确认</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<!--通过end-->
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".pass_btn").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+</body>
+</html>

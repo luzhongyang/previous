@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>线上订单-待配送</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<div class="page_box">
+    <header>
+    	<div class="windowOprt">
+        	<a href="javascript:;" class="min"></a>
+            <a href="javascript:;" class="max"></a>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <div class="title">线上订单</div>
+        <i class="left"><a href="#" class="ico ico1"></a></i>
+    </header>
+    <section class="page_center_box">
+        <div class="ord_left">
+        	<div class="top">
+            	<i class="left ico"></i>
+                <i class="right ico"></i>
+                <h1>订单列表</h1>
+            </div>
+            <div class="cont">
+                <ul>
+                    <li class="ord_list">
+                    	<P>单号：20160921001 <span class="fr pointcl1">待接单</span></P>
+                        <p class="small">2016-09-21  15：08：55</p>
+                    </li>
+                    <li class="ord_list">
+                    	<P>单号：20160921001 <span class="fr pointcl1">待厨打</span></P>
+                        <p class="small">2016-09-21  15：08：55</p>
+                    </li>
+                    <li class="ord_list">
+                    	<P>单号：20160921001 <span class="fr pointcl1">待完成</span></P>
+                        <p class="small">2016-09-21  15：08：55</p>
+                    </li>
+                    <li class="ord_list on">
+                    	<P>单号：20160921001 <span class="fr pointcl1">待配送</span></P>
+                        <p class="small">2016-09-21  15：08：55</p>
+                    </li>
+                    <li class="ord_list">
+                    	<P>单号：20160921001</P>
+                        <p class="small">2016-09-21  15：08：55</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom">总计 <i class="ml10">54</i></div>
+        </div>
+        <div class="ord_right">
+        	<div class="ord_delt_top">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th width="38%">商品名称</th>
+                        <th width="20%">售价</th>
+                        <th width="12%">数/重量</th>
+                        <th width="30%">小计</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="cont">
+            	<div class="ord_delt_num">
+                    <p class="fl">单号：20160923002</p>
+                    <p class="fr">2016-09-21 15:08:55</p>
+                </div>
+            	<div class="ord_delt_table">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="38%">江湖抹茶蛋糕</td>
+                            <td width="20%">10元/斤</td>
+                            <td width="12%">2</td>
+                            <td width="30%">200.00元</td>
+                        </tr>
+                        <tr>
+                            <td width="38%">江湖抹茶蛋糕</td>
+                            <td width="20%">10元/斤</td>
+                            <td width="12%">2</td>
+                            <td width="30%">200.00元</td>
+                        </tr>
+                        <tr>
+                            <td width="38%">江湖抹茶蛋糕</td>
+                            <td width="20%">10元/斤</td>
+                            <td width="12%">2</td>
+                            <td width="30%">200.00元</td>
+                        </tr>
+                        <tr>
+                            <td width="38%">江湖抹茶蛋糕</td>
+                            <td width="20%">10元/斤</td>
+                            <td width="12%">2</td>
+                            <td width="30%">200.00元</td>
+                        </tr>
+                    </table>
+                    <div class="zong">共 <i>8</i> 件商品 <span>总计 80.00元</span></div>
+                </div>
+            	
+            </div>
+            <div class="bottom">
+            	<div class="wz">
+                	<div>平台：商圈</div>
+                    <div>平台优惠：9折</div>
+                    <div>实收：72.00元</div>
+                </div>
+                <div class="btn_box">
+                	<a href="#" class="btn btn2 fr">待配送</a>
+                	<a href="#" class="btn fr">退款</a>
+                </div>
+            </div>
+        </div>
+        <!--此处遮罩层要放在 class="page_center_box"里面-->
+        <div class="ord_mask">
+        	<div class="cont">
+            	<div class="serch_box mb30"><input type="text" placeholder="&nbsp;&nbsp;输入关键字搜索单据" onfocus="$('.ord_mask .cont .serch_box').addClass('on');" onblur="if (value == '') { $('.ord_mask .cont .serch_box').removeClass('on'); } else { $('.ord_mask .cont .serch_box').addClass('on'); }"></div>
+                <div class="ord_mask_list_box">
+                	<div class="bt">状态</div>
+                    <ul>
+                        <li class="list on"><a href="#">全部 <span class="fr">58</span></a></li>
+                        <li class="list"><a href="#">待接单 <span class="fr">1</span></a></li>
+                        <li class="list"><a href="#">待厨打 <span class="fr">1</span></a></li>
+                        <li class="list"><a href="#">待配送 <span class="fr">1</span></a></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <div class="ord_mask_list_box">
+                	<div class="bt">平台</div>
+                    <ul>
+                        <li class="list on"><a href="#">全部 <span class="fr">58</span></a></li>
+                        <li class="list"><a href="#">待接单 <span class="fr">1</span></a></li>
+                        <li class="list"><a href="#">待厨打 <span class="fr">1</span></a></li>
+                        <li class="list"><a href="#">待配送 <span class="fr">1</span></a></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <div class="ord_mask_list_box">
+                	<div class="bt">时间选择 <div class="fr time"><span>09月</span> <span>27日</span></div></div>
+                    <div class="time_box">
+                    	<div class="fl time">
+                        	<input type="text">时
+                            <input type="text">分
+                        </div>
+                        <div class="fr time">
+                        	<input type="text">时
+                            <input type="text">分
+                        </div>
+                        至
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="btn_box">
+                	<a href="javascript:;" class="black9 cancel">取消</a>
+                    <a href="#" class="maincl">确定</a>
+                </div>
+            </div>
+        </div>
+        <div class="ord_mask_bg none"></div>
+        <!--此处遮罩层要放在 class="page_center_box"里面-->
+    </section>
+</div>
+<script>
+$(document).ready(function() {
+    $(".ord_left .top i").click(function(){
+		$(".ord_mask").addClass("on");
+		$(".ord_mask_bg").removeClass("none");
+	});
+	$(".ord_mask .cancel").click(function(){
+		$(".ord_mask").removeClass("on");
+		$(".ord_mask_bg").addClass("none");
+	});
+	$(".ord_mask_bg").click(function(){
+		$(".ord_mask").removeClass("on");
+		$(".ord_mask_bg").addClass("none");
+	});
+});
+</script>
+</body>
+</html>

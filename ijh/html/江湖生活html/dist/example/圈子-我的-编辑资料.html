@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>圈子-我的-编辑资料</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+            	<div class="qzMine_edit">
+					<div class="mt10 pub_list top">
+						<p class="pub_list_bd">头像</p>
+						<div class="img"><img src=""/></div>
+					</div>
+					<ul class="mt10 edit">
+						<li class="border_b">
+							<p class="fl left">昵称：</p>
+							<div class="right"><input type="text" placeholder="输入昵称" class="txt"/></div>
+							<div class="clear"></div>
+						</li>
+						<li class="border_b">
+							<p class="fl left">性别：</p>
+							<div class="right"><input type="text" placeholder="女" class="txt sex"/></div>
+							<div class="clear"></div>
+						</li>
+						<li>
+							<p class="fl left">个性签名：</p>
+							<div class="right"><textarea placeholder="用几句话介绍自己吧"></textarea></div>
+							<div class="clear"></div>
+							<p class="text_r black9 num">30</p>
+						</li>
+					</ul>
+				</div>
+            </div>
+			<div class="qz_editBtn"><a href="javascript:;" class="weui-btn weui-btn_primary">按钮</a></div>
+        </div>
+    </div>
+</div>
+<!--性别弹出框-->
+<div class="sex_popup">
+	<div class="popup">
+		<div class="border_b">
+			<label class="pub_list radLabel">
+				<div class="pub_list_bd">女</div>
+				<div class="ml10 radInt"><input type="radio"/></div>
+			</label>
+		</div>
+		<div class="border_b">
+			<label class="pub_list radLabel">
+				<div class="pub_list_bd">男</div>
+				<div class="ml10 radInt"><input type="radio"/></div>
+			</label>
+		</div>
+		<a class="quxiao">取消</a>
+	</div>
+	<div class="mask"></div>
+</div>
+<!--性别弹出框end-->
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+      $('.qzMine_edit .edit .right .sex').click(function(){
+        $('.sex_popup .mask').show();
+        $('.sex_popup .popup').show();
+      });
+      $('.sex_popup .mask').click(function(){
+         $('.sex_popup .mask').hide();
+        $('.sex_popup .popup').hide();
+      });
+      $('.sex_popup .quxiao').click(function(){
+         $('.sex_popup .mask').hide();
+        $('.sex_popup .popup').hide();
+      });
+	  $('.sex_popup .popup .radLabel').click(function(){
+		$('.sex_popup .popup .radLabel .radInt').removeClass('on');
+		$(this).find('.radInt').addClass('on');
+	  });
+    })
+</script>
+</body>
+</html>

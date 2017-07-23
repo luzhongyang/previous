@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>商城-分类-推荐（热销商品排行双栏）</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+            	<!--产品列表-->
+                    <div class="goods_list_box mb10 shangcheng-index-goodlist mt5 ml5 mr5">
+                        <ul>
+                            <li class="goods_list">
+                                <div class="box">
+                                    <div class="red-num">1</div>
+                                    <div class="img">
+                                    	<a href="#"><img src="img/ad01@2x.png"></a>
+                                    </div>
+                                    <div class="wz_box">
+                                        <h4 class="overflow_clear"><a href="#">此处显示团购商品名称此处显示团购商品名称此处显示团购商品名称…</a></h4>
+                                        <p><span  class="fontcl2"><small>￥</small>15.8</span><span class="black9 have-sell">已售1280</span></P>
+                                        <P class="black9">哈哈玩具店</P>
+                                        <a href="javascript:;" class="btn"></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="goods_list">
+                                <div class="box">
+                                    <div class="red-num">2</div>
+                                    <div class="img">
+                                    	<a href="#"><img src=""></a>
+                                    </div>
+                                    <div class="wz_box">
+                                        <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                        <p><span  class="fontcl2"><small>￥</small>15.8</span><span class="black9 have-sell">已售1280</span></P>
+                                        <P class="black9">哈哈玩具店</P>
+                                        <a href="javascript:;" class="btn"></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="goods_list">
+                                <div class="box">
+                                    <div class="red-num">3</div>
+                                    <div class="img">
+                                    	<a href="#"><img src=""></a>
+                                    </div>
+                                    <div class="wz_box">
+                                        <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                        <p><span  class="fontcl2"><small>￥</small>15.8</span><span class="black9 have-sell">已售1280</span></P>
+                                        <P class="black9">哈哈玩具店</P>
+                                        <a href="javascript:;" class="btn"></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="goods_list">
+                                <div class="box">
+                                    <div class="red-num">1</div>
+                                    <div class="img">
+                                    	<a href="#"><img src=""></a>
+                                    </div>
+                                    <div class="wz_box">
+                                        <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                        <p><span  class="fontcl2"><small>￥</small>15.8</span><span class="black9 have-sell">已售1280</span></p>
+                                        <P class="black9">哈哈玩具店</P>
+                                        <a href="javascript:;" class="btn"></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <!--产品列表end-->                  	
+            </div>
+            <div class="shangcheng-goods-lei-linkfix">
+                <a href="#" class="the-link-a"></a>    
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<!-- 单双栏切换 -->
+<script>
+    $(".the-link-a").click(function(){       
+        if($(this).hasClass("link-a2")){
+            $(this).removeClass("link-a2");
+            $(".goods_list_box").removeClass("goods_list_box-danlan");
+        }else{
+            $(this).addClass("link-a2");
+            $(".goods_list_box").addClass("goods_list_box-danlan");
+        }
+    });
+</script>
+<!-- 单双栏切换end-->
+</body>
+</html>

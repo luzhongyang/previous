@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>忘记密码</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="loginTop">
+	<div class="smallpage">
+        <div class="logo fl"><img src="images/logo.png"><span>江湖外送商家后台</span></div>
+        <div class="tit fl">忘记密码</div>
+    </div>
+</div>
+<div class="forget_box bg_grey">
+	<div class="smallpage">
+    	<h2>找回密码</h2>
+    	<div class="state_box">
+        	<ul>
+            	<li class="on"><span>1</span><P>验证身份</P></li>
+                <li class="on"><span>2</span><P>设置密码</P></li>
+                <li><span>3</span><P>完成</P></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    	<div class="login_form_box">
+            <div class="cont">
+                <form id="signupForm">
+                    <div class="int_box form-group mb20">
+                        <div class="ico ico2"></div>
+                        <div class="box"><input type="password" id="password" name="password" aria-required="true" aria-invalid="true" class="form-control error" placeholder="设置新密码"><a href="javascript:;" class="clear_ico"></a></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="int_box form-group mb20">
+                        <div class="ico ico2"></div>
+                        <div class="box"><input type="password" id="password" name="confirm_password" aria-required="true" aria-invalid="true" class="form-control error" placeholder="确认新密码"><a href="javascript:;" class="clear_ico"></a></div>
+                        <div class="clear"></div>
+                    </div>
+                    <input type="submit" value="下一步" class="long_btn">
+                    <div class="caozuo_box">
+                        <div class="fl">已有帐号 <a href="登录.html" class="maincl">登录</a></div>
+                    </div>
+                </form>                   
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer_one">
+    <div class="smallpage">
+        <div class="footer_nav"><a href="#">网站首页</a> / <a href="#">加入我们</a> / <a href="#">关于我们</a> / <a href="#">下载APP</a> / <a href="#">帮助中心</a> / <a href="#">申请入驻</a></div>
+        <div class="footer_link"><a href="#">O2O解决方案</a> <a href="#">O2O网站系统</a> <a href="#">一团网</a> <a href="#">软件商城</a> <a href="#">江湖网站</a> <a href="#">baocms系统</a> <a href="#">江湖家居系统</a></div>
+        <div class="footer_copy">
+            <P>All Rights Reserved ICP备案：皖ICP备13010842号</P>
+            <P>合肥江湖信息科技有限公司</P>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+
+<script src="js/plugins/validate/jquery.validate.min.js"></script>
+<script src="js/plugins/validate/messages_zh.min.js"></script>
+<script src="js/demo/form-validate-demo.min.js"></script>
+<script>
+	$(document).ready(function() {
+		
+		var input = $(".login_form_box .int_box .box input");
+		
+		$(input).focus(function() {
+			$(".login_form_box .int_box .box .clear_ico").hide();
+			$(this).parent().find(".clear_ico").show();
+			
+			$(this).parents(".int_box").css("border-color","#00bd9e");
+			
+		}).blur(function() {
+			if (input.val() != "") {
+				$(this).parent().find(".clear_ico").show();
+			}else{
+				
+				$(this).parent().find(".clear_ico").hide();
+			}
+			$(this).parents(".int_box").css("border-color","");
+		});
+		
+		$(".login_form_box .int_box .box .clear_ico").click(function(){
+			$(this).parent().find("input").val("");
+		});
+	});
+</script>
+</body>
+</html>

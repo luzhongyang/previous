@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>管理中心-团队管理</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+	<div class="dispatch_caozuo">
+    	<div class="fr">
+        	<a href="管理中心-团队管理-添加服务范围.html" class="J_menuItem btn btn-primary btn-sm">添加服务范围</a>
+        	<a href="javascript:;" class="btn btn-primary btn-sm add_rider ml10">添加成员+</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <table class="dispatch_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr class="tit">
+            <td>团队成员</td>
+            <td>联系方式</td>
+            <td>职位</td>
+            <td>岗位状态</td>
+            <td>身份认证</td>
+            <td>移出</td>
+            <td>编辑信息</td>
+        </tr>  
+        <tr>
+            <td>
+            	<div class="rider_name">
+                	<span class="img"><img src=""></span>王宝强
+                </div>
+            </td>
+            <td>18205564125</td>
+            <td>配送员</td>
+            <td>
+            	<p class="maincl">在岗</p>
+            </td>
+            <td>
+            	<img class="identity_img" src="images/gou.png">
+            </td>
+            <td>
+            	<a href="javascript:;" class="del_btn fa fa-trash"></a>
+            </td>
+            <td>
+            	<a href="javascript:;" class="btn btn-primary btn-outline btn-sm edit_btn"><i class="fa fa-pencil-square-o"></i>编辑信息</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            	<div class="rider_name">
+                	<span class="img"><img src=""></span>王宝强
+                </div>
+            </td>
+            <td>18205564125</td>
+            <td>配送员</td>
+            <td>
+            	<p class="maincl">在岗</p>
+            </td>
+            <td>
+            	<img class="identity_img" src="images/gou.png">
+            </td>
+            <td>
+            	<a href="javascript:;" class="del_btn fa fa-trash"></a>
+            </td>
+            <td>
+            	<a href="javascript:;" class="btn btn-primary btn-outline btn-sm edit_btn"><i class="fa fa-pencil-square-o"></i>编辑信息</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            	<div class="rider_name">
+                	<span class="img"><img src=""></span>王宝强
+                </div>
+            </td>
+            <td>18205564125</td>
+            <td>配送员</td>
+            <td>
+            	<p class="black9">调休</p>
+            </td>
+            <td>
+            	<img class="identity_img" src="images/gou.png">
+            </td>
+            <td>
+            	<a href="javascript:;" class="del_btn fa fa-trash"></a>
+            </td>
+            <td>
+            	<a href="javascript:;" class="btn btn-primary btn-outline btn-sm edit_btn"><i class="fa fa-pencil-square-o"></i>编辑信息</a>
+            </td>
+        </tr>
+        
+    </table>
+	<!--页码-->
+    <div class="paging">
+        <span>91 条记录 1/10 页</span>
+        <a href="#">上一页</a>
+        <a href="#">下一页</a>
+        <span class="on">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">下5页</a>
+        <a href="#">最后一页</a>
+    </div>
+    <!--页码end-->
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<!--添加配送员-->
+<div class="mask_cont add_rider_mask add_rider_mask1">
+	<div class="mask_cont_tit">添加配送员 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="int_box mb20"><span class="fl">配送员帐号：</span><div class="int"><input type="text"></div></div>
+        <div class="int_box mb20"><span class="fl">联系方式：</span><div class="int"><input type="text"></div></div>
+        <div class="int_box mb20"><span class="fl">身份证号码：</span><div class="int"><input type="text"></div></div>
+        <div class="text_c mt30">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary">确定</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<!--添加配送员end-->
+<!--修改配送员信息-->
+<div class="mask_cont add_rider_mask edit_rider_mask">
+	<div class="mask_cont_tit">编辑信息 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="int_box mb20"><span class="fl">配送员帐号：</span><div class="int"><input type="text" value="18205564125"></div></div>
+        <div class="int_box mb20"><span class="fl">联系方式：</span><div class="int"><input type="text" value="18205564125"></div></div>
+        <div class="int_box mb20"><span class="fl">身份证号码：</span><div class="int"><input type="text" value="340827199312055986"></div></div>
+        <div class="text_c mt30">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary">确定</a>
+        </div>
+    </div>
+</div>
+<!--修改配送员信息end-->
+<!--移出配送员-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">确定要将***移出？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">否</a>
+            <a href="" class="btn btn-w-m btn-primary">是</a>
+        </div>
+    </div>
+</div>
+<!--移出配送员end-->
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.add_rider_mask1').height();
+	var evlt_w = $('.add_rider_mask1').width();
+	$('.add_rider_mask1').css("margin-top",-evlt_h/2 + 'px');
+	$('.add_rider_mask1').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".add_rider").click(function(){
+		$('.add_rider_mask1').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".add_rider_mask1 .cancel,.add_rider_mask1 .close,.mask_bg").click(function(){
+		$('.add_rider_mask1').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.edit_rider_mask').height();
+	var evlt_w = $('.edit_rider_mask').width();
+	$('.edit_rider_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.edit_rider_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".edit_btn").click(function(){
+		$('.edit_rider_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".edit_rider_mask .cancel,.edit_rider_mask .close,.mask_bg").click(function(){
+		$('.edit_rider_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".del_btn").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>分享-微信页面</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+        <div class="content">
+        	 <div class="share-page-bg">
+             	 <div class="share-weixin">
+                     <div class="weixin_share-top">
+                          <img src="images/share_logo.png">
+                          <div><span class="hong-bao"><big><span class="pointcl1">15元</span>红包</big></span></div>
+                     </div>
+                     <div class="weixin_Share_form">
+                          <div class="head-man">
+                            <img src=""/>
+                            <P class="userName">元升子</P>
+                            <P>正在邀请您使用江湖外卖</P>
+                          </div>
+                          <div class="form_box">
+                                <form>
+                                    <div class="inp-box"><input type="text" placeholder="请输入手机号" /><a href="javascript:;" class="yzmget">获取验证码</a></div>
+                                    <input type="text" placeholder="请输入验证码" />
+                                    <input type="button" value="立即领取" class="long_btn" />
+                                </form>
+                                <p class="whitecl">活动说明？</p>
+                          </div>
+                    </div> 
+                 </div>
+             </div>          
+        </div>        
+        
+    <!--内容结束-->   
+    </div>
+</div>
+<script>
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 60;
+        var mobile_lock = 0;
+        $(function () {
+            $(".yzmget").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 60;
+					$(".yzmget").addClass("graybg");
+                    $('.yzmget').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".yzmget").removeClass("graybg");
+                $('.yzmget').removeAttr("disabled");
+                $('.yzmget').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+				$('.yzmget').removeClass("on");
+            }
+            else {
+                mobile_count--;
+                $('.yzmget').text( + mobile_count.toString() + "s重新获取");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+				$('.yzmget').addClass("on");
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

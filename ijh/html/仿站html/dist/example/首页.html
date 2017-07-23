@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <!--底部导航-->
+            <div class="footer_nav">
+            	<a href="#" class="list on">
+                	<i class="ico ico1"></i>
+                    <P>首页</P>
+                </a>
+                <a href="#" class="list">
+                	<i class="ico ico2"></i>
+                    <P>搜索</P>
+                </a>
+                <a href="#" class="list">
+                	<i class="ico ico3"></i>
+                    <P>优惠券</P>
+                </a>
+                <a href="#" class="list">
+                	<i class="ico ico4"></i>
+                    <P>个人中心</P>
+                </a>
+            </div>
+            <!--底部导航end-->
+            <div class="container_mid">
+            	<div class="idx_banner">                    
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><a href="#"><img src="img/banner.png"></a></div>
+                            <div class="swiper-slide"><a href="#"><img src="img/banner.png"></a></div>
+                            <div class="swiper-slide"><a href="#"><img src="img/banner.png"></a></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <!--特色导航-->
+                <div class="idx_menu border_b mb20">
+                	<a href="#" class="list">
+                    	<img src="img/new@2x.png">
+                        <P>最新上架</P>
+                    </a>
+                    <a href="#" class="list">
+                    	<img src="img/discount@2x.png">
+                        <P>品牌折扣</P>
+                    </a>
+                    <a href="#" class="list">
+                    	<img src="img/9.9@2x.png">
+                        <P>9.9包邮</P>
+                    </a>
+                    <a href="#" class="list">
+                    	<img src="img/19.9@2x.png">
+                        <P>19.9包邮</P>
+                    </a>
+                </div>
+                <!--特色导航end-->
+                <!--产品列表-->
+                <div class="idx_like_tit mb10"><span>猜你喜欢</span></div>
+                <div class="goods_list_box">
+                	<ul>
+                    	<li class="goods_list">
+                        	<div class="box">
+                                <div class="img"><a href="#"><img src=""><p>券后价格</p></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">冰棒模具 - 绿色-恐龙款…</a></h4>
+                                    <div class="price_box">
+                                        <span class="maincl">￥</span><big class="maincl">15.8</big><del class="black9">¥192.0</del>
+                                        <span class="maincl fr mr20">天猫</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                        	<div class="box">
+                                <div class="img"><a href="#"><img src=""><p>券后价格</p></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">冰棒模具 - 绿色-恐龙款…</a></h4>
+                                    <div class="price_box">
+                                        <span class="maincl">￥</span><big class="maincl">15.8</big><del class="black9">¥192.0</del>
+                                        <span class="maincl fr mr20">天猫</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                        	<div class="box">
+                                <div class="img"><a href="#"><img src=""><p>券后价格</p></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">冰棒模具 - 绿色-恐龙款…</a></h4>
+                                    <div class="price_box">
+                                        <span class="maincl">￥</span><big class="maincl">15.8</big><del class="black9">¥192.0</del>
+                                        <span class="maincl fr mr20">天猫</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                        	<div class="box">
+                                <div class="img"><a href="#"><img src=""><p>券后价格</p></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">冰棒模具 - 绿色-恐龙款…</a></h4>
+                                    <div class="price_box">
+                                        <span class="maincl">￥</span><big class="maincl">15.8</big><del class="black9">¥192.0</del>
+                                        <span class="maincl fr mr20">天猫</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <!--产品列表end-->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+</body>
+</html>

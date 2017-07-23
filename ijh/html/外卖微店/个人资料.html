@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>个人资料</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+        <!-- 标题栏开始 -->
+        <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left back"> <span class="Ico1"></span> </a>
+            <h1 class="title">个人资料</h1>
+        </header>
+        <!-- 标题栏结束 --> 
+        <!-- 主要内容 -->
+        <div class="content">
+        	<div class="gerenZiliao">
+                <div class="list-block ziLiao1">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title zl-title">头像</div>
+                                <div class="item-after zl-after open-vertical-modal"><img src="pic/touxiang.png"/></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-inner">
+                                <div class="item-title zl-title">用户名</div>
+                                <div class="item-after font_size15">生活lm</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt10 mb10">
+                    <div class="list-block">
+                        <ul>
+                            <li class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title zl-title">修改密码</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="list-block">
+                    <ul>
+                        <li class="item-content item-link">
+                            <div class="item-inner">
+                                <div class="item-title zl-title">手机号</div>
+                                <div class="item-after font_size15">188****4118</div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-inner">
+                                <div class="item-title zl-title">微信号</div>
+                                <div class="item-after font_size15 open-slider-moda2">已绑定</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 主要内容结束 --> 
+    </div>
+</div>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script> 
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<style>
+.modal-inner{ padding:0.5rem 0.75rem;}
+.modal-title { text-align: left;}
+.modal-button { padding: 0 0.75rem; background: #fff; text-align:left;}
+.modal-buttons-vertical .modal-button:after,.modal-inner:after,.modal-button:after{ background:#fff;}
+</style>
+<script>
+$(document).on('click','.open-vertical-modal', function () {
+    $.modal({
+      title:  "<div class='maincl'>上传照片</div>",
+      text: '',
+      verticalButtons: true,
+      buttons: [
+        {
+          text: "<div class='mineAcntinfor_btn black3'>拍照</div>",
+          onClick: function() {
+            
+          }
+        },
+        {
+          text: "<div class='mineAcntinfor_btn black3'><input type='file' value=''>从相册选择</div>",
+          onClick: function() {
+            
+          }
+        },
+        
+      ]
+    })
+});
+$(document).on('click','.open-slider-moda2', function () {
+    var modal = $.modal({
+      title: "<div class='maincl'>解除绑定</div>",
+      afterText:"<div class='txt_left'>确定要解除账号与微信的关联吗？</div>",
+      buttons: [
+        {
+          text: "<span class='maincl txt_left' style=' display:block;'>取消</span>"
+        },
+        {
+          text: "<span class='maincl txt_right' style=' display:block;'>解除绑定</span>",
+          bold: true,
+          onClick: function () {
+            
+          }
+        },
+      ]
+    })
+    $.swiper($$(modal).find('.swiper-container'), {pagination: '.swiper-pagination'});
+});
+</script>
+</body>
+</html>

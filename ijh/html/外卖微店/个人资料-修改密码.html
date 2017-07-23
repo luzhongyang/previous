@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>个人资料-修改密码</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+        <!-- 标题栏开始 -->
+        <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left back"> <span class="Ico1"></span> </a>
+            <h1 class="title">修改密码</h1>
+        </header>
+        <!-- 标题栏结束 --> 
+        <!-- 主要内容 -->
+        <div class="content">
+        	<div class="hbMobile">
+                <div class="list-block">
+                    <ul>
+                        <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <input type="text" placeholder="">
+                                    </div>
+                                    <a href="javascript:;" class="yzmget">获取验证码</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <input type="text" placeholder="请输入验证码">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <input type="password" placeholder="请输入新的密码">
+                                        <i class="password"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <input type="password" placeholder="请再次输入密码">
+                                        <i class="password"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p><a href="#" class="button button-big button-round">确定</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- 主要内容结束 --> 
+    </div>
+</div>
+<script>
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 60;
+        var mobile_lock = 0;
+        $(function () {
+            $(".yzmget").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 60;
+					$(".yzmget").addClass("graybg");
+                    $('.yzmget').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".yzmget").removeClass("graybg");
+                $('.yzmget').removeAttr("disabled");
+                $('.yzmget').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+				$('.yzmget').removeClass("on");
+            }
+            else {
+                mobile_count--;
+                $('.yzmget').text( + mobile_count.toString() + "s重新获取");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+				$('.yzmget').addClass("on");
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script> 
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+</body>
+</html>

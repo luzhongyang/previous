@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>订单-订单提交</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a>
+            <h1 class="title">提交订单</h1>
+        </header>
+        <!--头部结束-->
+        <div class="bar bar-tab ordSubmit_footer">
+        	<div class="fl ml10">已优惠￥15</div>
+            <div class="fr">待支付<span class="fontcl1">￥15</span><a class="pub_btn">提交</a></div>
+            
+        </div>
+        <div class="content">
+           <div class="ordSubmit">
+           		<div class="list-block">
+                    <ul>
+                      <li class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">是否自提</div>
+                          <div class="item-after">
+                              <label class="label-switch">
+                                <input type="checkbox">
+                                <div class="checkbox"></div>
+                              </label>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+                <div class="list-block media-list">
+                  <ul>
+                    <li class="ordSubmit_infor">
+                      <div class="item-content item-link">
+                        <div class="item-media"><i class="iconfont icon-site-copy"></i></div>
+                        <div class="item-inner">
+                          <div class="item-title-row">
+                            <div class="item-title mb10">尤哥 18000000000</div>
+                          </div>
+                          <div class="item-subtitle">潜山路496号新景花园16栋804室 </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="list-block media-list ordSubmit_radio">
+                  <ul>
+                    <li>
+                      <label class="label-checkbox item-content">
+                        <div class="item-inner">在线支付<span class="ml10 ts">首单立减10元</span></div>
+                        <input type="radio" name="my-radio">
+                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="label-checkbox item-content">
+                        <div class="item-inner">货到付款</div>
+                        <input type="radio" name="my-radio">
+                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                      </label>
+                    </li>
+                  </ul>
+    			</div>
+                <div class="list-block">
+                  <ul>
+                    <li class="item-content item-link">
+                      <div class="item-inner">
+                        <div class="item-title">送达时间</div>
+                        <div class="item-after"><input class="maincl font_size14" id='picker-name' value="立即送出（大约18:40送达）"></div>
+                      </div>
+                    </li>
+                    <li class="item-content item-link">
+                      <div class="item-inner">
+                        <div class="item-title">订单备注</div>
+                        <div class="item-after"><span class="black9 font_size14">可输入偏好、忌口等</span></div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="list-block">
+                  <ul>
+                    <li class="item-content item-link">
+                      <div class="item-inner">
+                        <div class="item-title">红包</div>
+                        <div class="item-after"><span class="black9 font_size14">0个红包可用</span></div>
+                      </div>
+                    </li>
+                    <li class="item-content item-link">
+                      <div class="item-inner">
+                        <div class="item-title">商家优惠券</div>
+                        <div class="item-after"><span class="fontcl1 font_size14">5元优惠券</span></div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="list-block media-list ordSubmit_list">
+                  <ul>
+                    <li class="item-content bt">
+                      <div class="item-media"><i class="iconfont icon-dianpu"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title"><span class="black6">良记卷饼王</span></div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                      <div class="item-inner">
+                      	<div class="item-title-row">
+                            <div class="item-title">回锅肉</div>
+                            <div class="item-after"><span class="mr10 black9">x1</span>￥10</div>
+                        </div>
+                        <div class="item-title-row">
+                            <div class="item-title">回锅肉<p class="font_size14 black9">卤肉+千张+卷饼</p></div>
+                            <div class="item-after"><span class="mr10 black9">x1</span>￥10</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                      <div class="item-inner">
+                      	<div class="item-title-row">
+                            <div class="item-title">配送费</div>
+                            <div class="item-after"><span class="ml10">￥10</span></div>
+                        </div>
+                        <div class="item-title-row">
+                            <div class="item-title">餐盒费</div>
+                            <div class="item-after"><span class="ml10">￥10</span></div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                      <div class="item-inner">
+                      	<div class="item-title-row">
+                            <div class="item-title"><span class="fontcl1">首单立减</span></div>
+                            <div class="item-after"><span class="fontcl1">-￥10</span></div>
+                        </div>
+                        <div class="item-title-row">
+                            <div class="item-title"><span class="fontcl1">商家优惠券抵扣</span></div>
+                            <div class="item-after"><span class="fontcl1">-￥10</span></div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                      <div class="item-inner">
+                      	<div class="item-title-row">
+                            <div class="item-title"><span class="mr10 pad_r10">总计￥30</span>优惠￥15</div>
+                            <div class="item-after">实付<span class="fontcl1">￥10</span></div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+           </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+</div>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>
+$("#picker-name").picker({
+  toolbarTemplate: '<header class="bar bar-nav">\
+  <h1 class="title"><span class="whitecl">选择送达时间</span></h1>\
+  </header>',
+  cols: [
+    {
+      textAlign: 'center',
+      values: ['今天', '明天', '后天']
+      //如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+    },
+    {
+      textAlign: 'center',
+      values: ['11:30 - 11:45', '立即送达（11:00送达）', '11:30 - 11:45']
+    }
+  ]
+});
+</script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

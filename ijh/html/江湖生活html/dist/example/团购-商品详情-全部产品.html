@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>团购-商品详情-全部团购</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+				<!--产品列表-->
+                <div class="goods_list_box goods_list_box_singel mt10">
+                    <ul>
+                        <li class="goods_list">
+                            <div class="box">
+                                <div class="img"><a href="#"><img src=""></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                    <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                    <P class="black9">已售200</P>
+                                    <a href="javascript:;" class="btn"></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                            <div class="box">
+                                <div class="img"><a href="#"><img src=""></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                    <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                    <P class="black9">已售200</P>
+                                    <a href="javascript:;" class="btn"></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                            <div class="box">
+                                <div class="img"><a href="#"><img src=""></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                    <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                    <P class="black9">已售200</P>
+                                    <a href="javascript:;" class="btn"></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                            <div class="box">
+                                <div class="img"><a href="#"><img src=""></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                    <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                    <P class="black9">已售200</P>
+                                    <a href="javascript:;" class="btn"></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <!--产品列表end-->
+            </div>
+        </div>
+    </div>
+</div>
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script type="text/javascript">
+	$('.takeout-list-mask .left ul li').click(function(){
+        var tk_idx=$(this).index();
+        $(this).addClass('on').siblings().removeClass('on');
+        $(this).parents(".list").find('.right .right_list').eq(tk_idx).show().siblings().hide();
+    })
+    $('.takeout-list-mask .right .right_list li').click(function(){
+        $(this).addClass('on').siblings().removeClass('on');
+    })
+    $('.takeout-list-title a.list').click(function(){
+        $(this).toggleClass('on').siblings().removeClass('on'); 
+        $('.takeout-list-mask').show();
+         var ind=$(this).index();
+        $('.takeout-list-mask .mask-list').eq(ind/2).toggle().siblings().hide();
+		if($(this).hasClass("on")){
+			$('.takeout-list-mask').show();
+		}else{
+			$('.takeout-list-mask').hide();
+		}
+    })
+    $('.takeout-list-mask .choose a').click(function(){
+        $(this).addClass('on').siblings().removeClass('on');
+    })
+
+    $('.takeout_mask-bg').click(function(){
+        $('.takeout-list-mask').hide();
+        $('.takeout-list-title a').removeClass('on');
+    });
+    $('.mask-list li').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+    })
+</script>
+<script>
+$('.activity .first .pull_down').click(function(){
+	$(this).parents('.activity').find('.hide_show').toggle();
+	$('.activity .first .pull_down').removeClass('on');
+	$(this).children('i').toggleClass('on');
+});
+</script>
+<script>
+	$(".see_style").click(function(){		
+		if($(this).hasClass("singel")&&$(this).hasClass("see_style_none")){
+			$(this).addClass("singel");
+			$(".goods_list_box").addClass("goods_list_box_singel");
+		}else if($(this).hasClass("singel")){
+			$(this).removeClass("singel");
+			$(".goods_list_box").removeClass("goods_list_box_singel");
+		}else if($(this).hasClass("see_style_none")){
+			$(this).removeClass("singel");
+			$(".goods_list_box").removeClass("goods_list_box_singel");
+		}else{
+			$(this).addClass("singel");
+			$(".goods_list_box").addClass("goods_list_box_singel");
+		}
+	});
+</script>
+<script>
+	$(".topTab_box .list").each(function(e){
+		$(this).click(function(){
+			$(this).addClass("on").siblings(".list").removeClass("on");
+			$(".list_change_cont").each(function(i){
+				if(e==i){
+					$(this).removeClass("none").siblings(".list_change_cont").addClass("none");
+				}else{
+					$(this).addClass("none")
+				}
+				if(e==1){
+					$(".see_style").addClass("see_style_none");
+				}else{
+					$(".see_style").removeClass("see_style_none");
+				}
+			});
+		});
+	});
+</script>
+
+</body>
+</html>

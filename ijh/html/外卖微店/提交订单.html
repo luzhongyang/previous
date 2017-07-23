@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>提交订单</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+	<div class="page page-current"> 
+		<!-- 标题栏开始 -->
+		<header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left back"> <span class="Ico1"></span> </a>
+			<h1 class="title">我要开团</h1>
+		</header>
+		<!-- 标题栏结束 --> 
+		<!-- 工具栏 -->
+		<nav class="bar bar-tab kaituan-footer txt_center">
+			<div class="box1 color1">合计：<em class="fontcl1">￥21</em></div>
+			<div class="box2 f_size1">确认开团</div>
+		</nav>
+		<!-- 工具栏结束 --> 
+		<!-- 主要内容 -->
+		<div class="content">
+			<div class="kaituan_nr">
+				<div class="content-block bgcolor_white">
+					<div class="buttons-row"> <a href="#tab1" class="tab-link active button">自提</a> <a href="#tab2" class="tab-link button">配送</a> </div>
+				</div>
+				<div class="tabs">
+					<div id="tab1" class="tab active">
+						<div class="list-block media-list dian_name border_b">
+							<ul>
+								<li> <a href="#" class="item-content">
+									<div class="item-media"><i class="dizhi-icon"></i></div>
+									<div class="item-inner black3">
+										<div class="item-subtitle"><span>收款人：甜天</span><span class="fr">18255124087</span>
+											<div class="cl"></div>
+										</div>
+										<!--<div class="item-text open-about">安徽省合肥蜀山区蜀南庭苑枫林路油墩社区302</div>-->
+										<div class="item-text open-about">请填写收货地址</div>
+									</div>
+									</a> </li>
+							</ul>
+						</div>
+						<div class="mt10"></div>
+						<div class="gerenZiliao">
+							<div class="list-block">
+								<ul>
+									<li class="item-content item-link">
+										<div class="item-inner">
+											<div class="item-title f_size1" style=" color:#767679;">自提时间</div>
+											<div class="item-after">
+												<input type="text" id='picker' value="选择自提时间" readonly >
+											</div>
+										</div>
+									</li>
+									<li class="item-content item-link">
+										<div class="item-inner">
+											<div class="item-title f_size1 fontcl1">优惠券</div>
+											<div class="item-after f_size1" style="color:#ff7800;">无可用优惠券</div>
+										</div>
+									</li>
+									<li class="item-content item-link">
+										<div class="item-inner">
+											<div class="item-title f_size1" style=" color:#767679;">备注</div>
+											<div class="item-after f_size1" style=" color:#a8a8ae;">（选填）可输入特殊要求</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="list-block media-list dan_goods kaituan_box1">
+							<ul>
+								<li> <a href="#" class="item-content border_b" >
+									<div class="item-media"><img src="pic/melon.png" width="100%"></div>
+									<div class="item-inner">
+										<div class="item-subtitle black3"><big>【水蜜桃果酱】</big></div>
+										<div class="item-title-row">
+											<div class="item-title fontcl1 font_size14"><big class="f_size2">￥20</big>/份</div>
+											<div class="item-after"><span class="black9 mr5">8寸</span><span class="fontcl1">X 1</span></div>
+										</div>
+									</div>
+									</a> </li>
+								<li> <a href="#" class="item-content">
+									<div class="item-media"><img src="pic/melon.png" width="100%"></div>
+									<div class="item-inner">
+										<div class="item-subtitle black3"><big>【水蜜桃果酱】</big></div>
+										<div class="item-title-row">
+											<div class="item-title fontcl1 font_size14"><big class="f_size2">￥20</big>/份</div>
+											<div class="item-after"><span class="black9 mr5">8寸</span><span class="fontcl1">X 1</span></span></div>
+										</div>
+									</div>
+									</a> </li>
+							</ul>
+						</div>
+						<div class="dingdan-details mb10 kaituan_box2">
+							<div class="list-block">
+								<ul>
+									<li class="item-content">
+										<div class="item-inner  no-bord">
+											<div class="item-title"><span>包装费</span></div>
+											<div class="item-after"><span class="black3">￥5</span></div>
+										</div>
+									</li>
+									<li class="item-content">
+										<div class="item-inner border_b">
+											<div class="item-title"><span>配送费</span></div>
+											<div class="item-after">￥5</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="list-block media-list">
+								<ul>
+									<li>
+										<div class="item-content">
+											<div class="item-inner border_b">
+												<div class="item-title-row">
+													<div class="item-title"><span class="special-icon">特</span>特价优惠</div>
+													<div class="item-after">-￥2</div>
+												</div>
+												<div class="item-subtitle"><small class="black9">特价商品按优惠后价格计算满减哦</small></div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="list-block">
+								<ul>
+									<li class="item-content border_b">
+										<div class="item-inner no-bord">
+											<div class="item-title"><span class="black9">订单</span>￥54-<span class="black9">优惠</span>￥2</div>
+											<div class="item-after"><span class="maincl">总计：￥52</span></div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="tab2" class="tab">
+						<div class="list-block media-list dian_name border_b">
+							<ul>
+								<li> <a href="#" class="item-content">
+									<div class="item-media"><i class="dizhi-icon"></i></div>
+									<div class="item-inner black3">
+										<div class="item-subtitle"><span>收款人：甜天</span><span class="fr">18255124087</span>
+											<div class="cl"></div>
+										</div>
+										<div class="item-text">安徽省合肥蜀山区蜀南庭苑枫林路油墩社区302</div>
+									</div>
+									</a> </li>
+							</ul>
+						</div>
+						<div class="mt10"></div>
+						<div class="gerenZiliao">
+							<div class="list-block">
+								<ul>
+									<li class="item-content item-link">
+										<div class="item-inner">
+											<div class="item-title f_size1" style=" color:#767679;">送达时间</div>
+											<div class="item-after">
+												<input type="text" value="立即送达（12:10）" id='picker2' readonly style="color:#ff7800;">
+											</div>
+										</div>
+									</li>
+									<li class="item-content item-link">
+										<div class="item-inner">
+											<div class="item-title f_size1 fontcl1">优惠券</div>
+											<div class="item-after f_size1" style=" color:#ff7800;">无可用优惠券</div>
+										</div>
+									</li>
+									<li class="item-content item-link">
+										<div class="item-inner">
+											<div class="item-title f_size1" style=" color:#767679;">备注</div>
+											<div class="item-after f_size1" style=" color:#a8a8ae;">（选填）可输入特殊要求</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="list-block media-list dan_goods kaituan_box1">
+							<ul>
+								<li> <a href="#" class="item-content border_b" >
+									<div class="item-media"><img src="pic/melon.png" width="100%"></div>
+									<div class="item-inner">
+										<div class="item-subtitle black3"><big>【水蜜桃果酱】</big></div>
+										<div class="item-title-row">
+											<div class="item-title fontcl1 font_size14"><big class="f_size2">￥20</big>/份</div>
+											<div class="item-after"><span class="black9 mr5">8寸</span><span class="fontcl1">X 1</span></div>
+										</div>
+									</div>
+									</a> </li>
+								<li> <a href="#" class="item-content">
+									<div class="item-media"><img src="pic/melon.png" width="100%"></div>
+									<div class="item-inner">
+										<div class="item-subtitle black3"><big>【水蜜桃果酱】</big></div>
+										<div class="item-title-row">
+											<div class="item-title fontcl1 font_size14"><big class="f_size2">￥20</big>/份</div>
+											<div class="item-after"><span class="black9 mr5">8寸</span><span class="fontcl1">X 1</span></span></div>
+										</div>
+									</div>
+									</a> </li>
+							</ul>
+						</div>
+						<div class="dingdan-details mb10 kaituan_box2">
+							<div class="list-block">
+								<ul>
+									<li class="item-content">
+										<div class="item-inner  no-bord">
+											<div class="item-title"><span>包装费</span></div>
+											<div class="item-after"><span class="black3">￥5</span></div>
+										</div>
+									</li>
+									<li class="item-content">
+										<div class="item-inner border_b">
+											<div class="item-title"><span>配送费</span></div>
+											<div class="item-after">￥5</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="list-block media-list">
+								<ul>
+									<li>
+										<div class="item-content">
+											<div class="item-inner border_b">
+												<div class="item-title-row">
+													<div class="item-title"><span class="special-icon">特</span>特价优惠</div>
+													<div class="item-after">-￥2</div>
+												</div>
+												<div class="item-subtitle"><small class="black9">特价商品按优惠后价格计算满减哦</small></div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="list-block">
+								<ul>
+									<li class="item-content border_b">
+										<div class="item-inner no-bord">
+											<div class="item-title"><span class="black9">订单</span>￥54-<span class="black9">优惠</span>￥2</div>
+											<div class="item-after"><span class="maincl">总计：￥52</span></div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 主要内容结束 --> 
+	</div>
+</div>
+<!--编辑地址弹出层--> 
+<!--<div class="popup popup-about kaituan_address_mask">
+    <div class="address_box">
+		<h3 class="tit">选择收货地址</h3>
+		<div class="nr mb10">
+			<label class="rad">
+				<div class="box border_t border_b">
+					<div>甜天&nbsp;&nbsp;18255124087</div>
+					<div>安徽省合肥蜀山区蜀南庭苑枫林路油墩社区302</div>
+					<span class="radio"><input type="radio" name="my-radio"></span> 
+				</div>
+			</label>
+			<div class="btn">
+				<a href="#" class=" border_r"><i class="editIco"></i>编辑</a>
+				<a href="#"><i class="delIco"></i>删除</a>
+				<div class="cl"></div>
+			</div>
+		</div>
+	</div>
+	<div class="mask_footerBtn"><a href="#">新增收货地址</a></div>
+    <i class="sy_popup_delIco close-popup"></i>
+</div>-->
+<!--编辑地址弹出层结束--> 
+<!--添加地址弹出层-->
+<div class="popup popup-about kaituan_add_mask">
+	<form>
+		<div class="add_box">
+			<h3 class="tit">编辑收货地址</h3>
+			<div class="mb10 nr_box">
+				<input type="text" placeholder="姓名"/>
+				<input type="text" placeholder="联系电话"/>
+				<select>
+					<option>安徽省</option>
+					<option>安徽</option>
+				</select>
+				<select>
+					<option>合肥</option>
+					<option>安庆</option>
+				</select>
+				<select>
+					<option>蜀山区</option>
+					<option>包河区</option>
+				</select>
+				<input type="text" placeholder="详细地址"/>
+				<input type="text" placeholder="邮政地址（选填）"/>
+			</div>
+			<label class="">
+			<div class="checkbox mb10">设为默认地<span class="check">
+				<input type="checkbox" name="my-radio">
+				</span>址</div>
+			</label>
+			<div><a href="#" class="btn">保存</a></div>
+		</div>
+	</form>
+	<i class="sy_popup_delIco close-popup"></i> </div>
+添加地址弹出层结束
+<style>
+.picker-modal .bar .title{color:#fff}
+</style>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script> 
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script> 
+<script>
+$(document).ready(function() {
+    /* 单选项选择 */
+	$('.kaituan_address_mask .address_box .rad').click(function(){
+		$('.address_box .rad .radio').removeClass('on');
+		$(this).find('.radio').addClass('on');
+	});
+	/* 复选项选择 */
+	$('.kaituan_add_mask .add_box .checkbox').click(function(){
+		if( $(this).find('.check').hasClass("on")){
+			$(this).find('.check').removeClass("on")
+			}else{
+				$(this).find('.check').addClass("on")
+			}
+	});	
+});
+</script> 
+<script>
+$(document).on('click','.open-about', function () {
+  $.popup('.popup-about');
+});
+</script> 
+<script>
+$("#picker").picker({
+  toolbarTemplate: '<header class="bar bar-nav">\
+  <button class="button button-link pull-right close-picker">确定</button>\
+  <h1 class="title">选择自提时间</h1>\
+  </header>',
+  cols: [
+    {
+      textAlign: 'center',
+      values: ['马上自提（预计12:00）', '12:15-12:30', '12:35-12:50', '12:55-13:10', '13:25-13:40', '13:55-14:10']
+    }
+  ]
+});
+</script> 
+<script>
+$("#picker2").picker({
+  toolbarTemplate: '<header class="bar bar-nav">\
+  <button class="button button-link pull-right close-picker">确定</button>\
+  <h1 class="title">选择送达时间</h1>\
+  </header>',
+  cols: [
+    {
+      textAlign: 'center',
+      values: ['马上送达（预计12:00）', '12:15-12:30', '12:35-12:50', '12:55-13:10', '13:25-13:40', '13:55-14:10']
+    }
+  ]
+});
+</script>
+</body>
+</html>

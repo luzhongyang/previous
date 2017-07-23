@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>圈子-发布话题2</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+				<!--内容开始-->
+                <div class="cirTopiclreply">
+                	<div class="tit pub_list">
+                    	<div>标题：</div>
+                        <div class="pub_list"><input type="text" placeholder="4-23字"></div>
+                    </div>
+                	<textarea placeholder="说说想说的...（最少10个字）"></textarea>
+                    <div class="img_list">
+                    	<ul class="fl">
+                        	<li><span><img src=""></span></li>
+                            <li><span><img src="img/circle/circle_add_img@3x.png"></span></li>
+                        </ul>
+                        <p class="black9 fl">1/9</p>
+                    </div>
+                </div>                
+                <!--内容结束-->
+            </div>
+            <!--底部输入-->
+            <div class="footer_cirTopicl pub_list">
+            	<div class="int_box mr10"><i></i><input type="text" class="int" placeholder="所在位置"><a href="javascript:;" class="clear_btn">×</a></div>
+            	<a href="javascript:;" class="expression"><img src="img/circle/circle_expression@3x.png"></a>
+            	<div class="pub_list_bd"><!--勿删！--></div>
+                <a href="javascript:;" class="btn weui-btn weui-btn_primary">发送</a>
+            </div>
+            <!--底部输入结束-->
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script>
+$(document).ready(function() {
+	$(".footer_cirTopicl .zan").click(function(){
+		$(this).addClass("on");
+	});
+});
+</script>
+<!--弹层-->
+<div>
+    <div class="weui-mask" id="cirTopiclMask" style="display: none"></div>
+    <div class="weui-actionsheet" id="cirTopiclActionsheet">
+        <div class="weui-actionsheet__menu">
+            <!--<div class="weui-actionsheet__cell"><small class="fontcl1">删除</small></div>-->
+            <div class="weui-actionsheet__cell"><small class="maincl">投诉</small></div>
+        </div>
+        <div class="weui-actionsheet__action">
+            <div class="weui-actionsheet__cell" id="cirTopiclActionsheetCancel"><small>取消</small></div>
+        </div>
+    </div>
+</div>
+<script>
+$(function(){
+	var $cirTopiclActionsheet = $('#cirTopiclActionsheet');
+	var $cirTopiclMask = $('#cirTopiclMask');
+
+	function hideActionSheet() {
+		$cirTopiclActionsheet.removeClass('weui-actionsheet_toggle');
+		$cirTopiclMask.fadeOut(200);
+	}
+
+	$cirTopiclMask.on('click', hideActionSheet);
+	$('#cirTopiclActionsheetCancel').on('click', hideActionSheet);
+	$("#showcirTopiclActionSheet").on("click", function(){
+		$cirTopiclActionsheet.addClass('weui-actionsheet_toggle');
+		$cirTopiclMask.fadeIn(200);
+	});
+});
+</script>
+<!--弹层结束-->
+</body>
+</html>

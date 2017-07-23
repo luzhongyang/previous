@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>圈子</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+				<!--我的话题-->
+            	<div class="qz_topicBox">
+					<div class="mb10 topicBox">
+						<div class="pub_list info">
+							<div class="pub_list_bd left">
+								<div class="fl img"><a href="#"><img src=""/></a></div>
+								<div class="wz">
+									<h3><a href="#" class="black3">语笑嫣然</a></h3>
+									<p class="black9">1小时前<span>12345人阅读</span></p>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<i class="ml10 r_ico"></i>
+						</div>
+						<div class="nr">
+							<a href="#">
+								<h2 class="overflow_clear">啊，婚姻！当我遇到梦中情人的那天</h2>
+								<p class="wz">开篇的时候，那个女上司一直在喋喋不休，哭诉着说 你看我去新换了发型，我报名参加单身游艇，注册单身网</p>
+								<div class="img_box">
+									<ul>
+										<li>
+											<div class="box">
+												<div class="img">
+													<span><img src=""/></span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="box">
+												<div class="img">
+													<span><img src=""/></span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="box">
+												<div class="img">
+													<span><img src=""/><p class="wz_mask">共9张</p></span>
+												</div>
+											</div>
+										</li>
+									</ul>
+									<div class="clear"></div>
+								</div>
+							</a>
+							<div class="black9 ComeFrom">来自圈子：<a href="#" class="maincl">娱乐八卦者协会</a></div>
+						</div>
+						<div class="bot">
+							<ul>
+								<li class="list1">
+									<a href="javascript:;"><i class="ico ico1"></i>点赞</a>
+								</li>
+								<li>
+									<a href="#"><i class="ico ico2"></i>评论</a>
+								</li>
+								<li>
+									<a href="#"><i class="ico ico3"></i>打赏</a>
+								</li>
+							</ul>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="mb10 topicBox">
+						<div class="pub_list info">
+							<div class="pub_list_bd left">
+								<div class="fl img"><a href="#"><img src=""/></a></div>
+								<div class="wz">
+									<h3><a href="#" class="black3">语笑嫣然</a></h3>
+									<p class="black9">1小时前<span>12345人阅读</span></p>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<i class="ml10 r_ico"></i>
+						</div>
+						<div class="nr">
+							<a href="#">
+								<h2 class="overflow_clear">啊，婚姻！当我遇到梦中情人的那天</h2>
+								<p class="wz">开篇的时候，那个女上司一直在喋喋不休，哭诉着说 你看我去新换了发型，我报名参加单身游艇，注册单身网</p>
+								<div class="img_box">
+									<ul>
+										<li>
+											<div class="box">
+												<div class="img">
+													<span><img src=""/></span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="box">
+												<div class="img">
+													<span><img src=""/></span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="box">
+												<div class="img">
+													<span><img src=""/><p class="wz_mask">共9张</p></span>
+												</div>
+											</div>
+										</li>
+									</ul>
+									<div class="clear"></div>
+								</div>
+							</a>
+							<div class="black9 ComeFrom">来自圈子：<a href="#" class="maincl">娱乐八卦者协会</a></div>
+						</div>
+						<div class="bot">
+							<ul>
+								<li class="list1">
+									<a href="javascript:;"><i class="ico ico1"></i>点赞</a>
+								</li>
+								<li>
+									<a href="#"><i class="ico ico2"></i>评论</a>
+								</li>
+								<li>
+									<a href="#"><i class="ico ico3"></i>打赏</a>
+								</li>
+							</ul>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+				<!--我的话题end-->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".qz_topicBox .bot .list1").click(function(){
+		if($(this).find(".ico1").hasClass("ico1_on")){
+			$(this).find('.ico1').removeClass("ico1_on");
+		}else{
+			$(this).find('.ico1').addClass("ico1_on");
+		}
+	});
+});
+</script> 
+</body>
+</html>

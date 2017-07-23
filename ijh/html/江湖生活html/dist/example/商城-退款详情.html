@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>外卖-首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="orderTakeOut  shopTuikuan">
+                   <div class="wait_tuikuan">
+                       <div class="top">
+                          等待商家处理退款申请
+                          <i class="fr"></i> 
+                       </div>
+                       <div class="maybe border_b">
+                           <p>如商家同意：申请将达成并原路退款</p>
+                           <p>如商家拒绝：您可以重新修改退款申请或者申请维权</p>
+                           <p>如商家未处理：超过5天则申请达成并自动为您退款</p>
+                       </div>
+                       <div class="tuikuan_detail black9 mt10">
+                           <div><p>退款编号：</p><div>25425542652233552</div></div>
+                           <div><p>退款方式：</p><div>仅退款</div></div>
+                           <div><p>退款金额：</p><div>￥30</div></div>
+                           <div><p>退款说明：</p><div>买了超过三天还没发货，气死了！退款买了超过三天还
+               没发货，气死了！退款...</div></div>
+                           <div><p>退款手机：</p><div>13515608638</div></div>
+                           <div><p>申请时间：</p><div>2016-11-24  12:00</div></div>
+                       </div>
+                   </div>
+                   <div class="btns mt20">
+                      <a href="#" class="chakan_btn">查看详情</a>
+                      <a href="#" class="weiquan_btn">申请维权</a>
+                  </div>
+                </div> 
+            </div>
+    	</div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+<script type="text/javascript">
+    $(function(){
+       $('.Mine_addressAdd  .address_detail .label .item-title .box a').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+       })
+    })
+</script>
+</body>
+</html>

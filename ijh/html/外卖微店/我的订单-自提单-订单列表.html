@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>订单列表</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+<script language="javascript" type="text/javascript"> 
+var interval = 1000; 
+function ShowCountDown(year,month,day,divname) 
+{ 
+var now = new Date(); 
+var endDate = new Date(year, month-1, day); 
+var leftTime=endDate.getTime()-now.getTime(); 
+var leftsecond = parseInt(leftTime/1000); 
+//var day1=parseInt(leftsecond/(24*60*60*6)); 
+var day1=Math.floor(leftsecond/(60*60*24)); 
+var hour=Math.floor((leftsecond-day1*24*60*60)/3600); 
+var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
+var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60); 
+var cc = document.getElementById(divname); 
+cc.innerHTML = minute+ "分" + second + "秒"; 
+} 
+window.setInterval(function(){ShowCountDown(2016,8,13,'sheng_time');}, interval); 
+</script>
+</head>
+
+<body>
+<div class="page-group">
+      <div class="page page-current"> 
+        <!--头部-->
+            <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left back"> <span class="Ico1"></span> </a>
+              <h1 class="title">我的订单</h1>
+            </header>
+            <!--头部结束-->
+            <div class="content">
+                 <div style="padding-bottom:0.5rem" class="dingdan-lists">
+                 		<div class="dingdan-list-card">
+                            <div class="list-block">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title"><i class="self-tidan-logo">自提单</i>订单号：232736616677</div>
+                                                <div class="item-after"><span class="maincl">还剩<span id="sheng_time"></span></span></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                            </div>
+                            <div class="list-block media-list">
+                                    <ul>
+                                          <li>
+                                                <a href="#" class="item-content">
+                                                      <div class="item-media"><img src="pic/melon.png" width="100%"></div>
+                                                      <div class="item-inner">
+                                                               <div class="item-title"><big>芒果嘟乐<span class="fr">￥5</span></big></div>
+                                                               <div class="item-title-row">
+                                                                      <div class="item-title"><span class="black9">2016/05/04 17:20</span></div>
+                                                                      <div class="item-after">
+                                                                            <span class="total-num">共<span class="maincl">2</span>件</span>
+                                                                            <big>总计:<span class="maincl">￥54</span></big>
+                                                                      </div>
+                                                               </div>
+                                                        </div>
+                                                </a>
+                                          </li>
+                                    </ul>
+                            </div>
+                            <p class="long_btn">查看其他商品</p>
+                            <div class="button-rows border_b">
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">再来一单</a></div>
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-success">去支付</a></div>
+                                  <div class="cl"></div>
+                            </div>               
+                        </div>                   
+						<div class="dingdan-list-card">
+                            <div class="list-block">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title"><i class="self-tidan-logo">自提单</i>订单号：232736616677</div>
+                                                <div class="item-after"><span class="maincl">待接单</span></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                            </div>
+                            <div class="list-block media-list">
+                                    <ul>
+                                          <li>
+                                                <a href="#" class="item-content">
+                                                      <div class="item-media"><img src="pic/melon.png" width="100%"></div>
+                                                      <div class="item-inner">
+                                                               <div class="item-title"><big>芒果嘟乐<span class="fr">￥5</span></big></div>
+                                                               <div class="item-title-row">
+                                                                      <div class="item-title"><span class="black9">2016/05/04 17:20</span></div>
+                                                                      <div class="item-after">
+                                                                            <span class="total-num">共<span class="maincl">2</span>件</span>
+                                                                            <big>总计:<span class="maincl">￥54</span></big>
+                                                                      </div>
+                                                               </div>
+                                                        </div>
+                                                </a>
+                                          </li>
+                                    </ul>
+                            </div>
+                            <p class="long_btn">查看其他商品</p>
+                            <div class="button-rows border_b">
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">再来一单</a></div>
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">取消订单</a></div>
+                                  <div class="cl"></div>
+                            </div>               
+                        </div>  
+                        <div class="dingdan-list-card">
+                            <div class="list-block">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title"><i class="self-tidan-logo">自提单</i>订单号：232736616677</div>
+                                                <div class="item-after"><span class="maincl">已接单</span></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                            </div>
+                            <div class="list-block media-list">
+                                    <ul>
+                                          <li>
+                                                <a href="#" class="item-content">
+                                                      <div class="item-media"><img src="pic/melon.png" width="100%"></div>
+                                                      <div class="item-inner">
+                                                               <div class="item-title"><big>芒果嘟乐<span class="fr">￥5</span></big></div>
+                                                               <div class="item-title-row">
+                                                                      <div class="item-title"><span class="black9">2016/05/04 17:20</span></div>
+                                                                      <div class="item-after">
+                                                                            <span class="total-num">共<span class="maincl">2</span>件</span>
+                                                                            <big>总计:<span class="maincl">￥54</span></big>
+                                                                      </div>
+                                                               </div>
+                                                        </div>
+                                                </a>
+                                          </li>
+                                    </ul>
+                            </div>
+                            <p class="long_btn">查看其他商品</p>
+                            <div class="button-rows border_b">
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">再来一单</a></div>
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">自提码</a></div>
+                                  <div class="cl"></div>
+                            </div>               
+                        </div>
+                        <div class="dingdan-list-card">
+                            <div class="list-block">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title"><i class="self-tidan-logo">自提单</i>订单号：232736616677</div>
+                                                <div class="item-after"><span class="maincl">已完成</span></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                            </div>
+                            <div class="list-block media-list">
+                                    <ul>
+                                          <li>
+                                                <a href="#" class="item-content">
+                                                      <div class="item-media"><img src="pic/melon.png" width="100%"></div>
+                                                      <div class="item-inner">
+                                                               <div class="item-title"><big>芒果嘟乐<span class="fr">￥5</span></big></div>
+                                                               <div class="item-title-row">
+                                                                      <div class="item-title"><span class="black9">2016/05/04 17:20</span></div>
+                                                                      <div class="item-after">
+                                                                            <span class="total-num">共<span class="maincl">2</span>件</span>
+                                                                            <big>总计:<span class="maincl">￥54</span></big>
+                                                                      </div>
+                                                               </div>
+                                                        </div>
+                                                </a>
+                                          </li>
+                                    </ul>
+                            </div>
+                            <div class="button-rows border_b">
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">再来一单</a></div>
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-success">去评价</a></div>
+                                  <div class="cl"></div>
+                            </div>               
+                        </div>
+                        <div class="dingdan-list-card">
+                            <div class="list-block">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title"><i class="self-tidan-logo">自提单</i>订单号：232736616677</div>
+                                                <div class="item-after"><span class="maincl">已完成</span></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                            </div>
+                            <div class="list-block media-list">
+                                    <ul>
+                                          <li>
+                                                <a href="#" class="item-content">
+                                                      <div class="item-media"><img src="pic/melon.png" width="100%"></div>
+                                                      <div class="item-inner">
+                                                               <div class="item-title"><big>芒果嘟乐<span class="fr">￥5</span></big></div>
+                                                               <div class="item-title-row">
+                                                                      <div class="item-title"><span class="black9">2016/05/04 17:20</span></div>
+                                                                      <div class="item-after">
+                                                                            <span class="total-num">共<span class="maincl">2</span>件</span>
+                                                                            <big>总计:<span class="maincl">￥54</span></big>
+                                                                      </div>
+                                                               </div>
+                                                        </div>
+                                                </a>
+                                          </li>
+                                    </ul>
+                            </div>
+                            <div class="button-rows border_b">
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">再来一单</a></div>
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">查看评价</a></div>
+                                  <div class="cl"></div>
+                            </div>               
+                        </div> 
+                        <div class="dingdan-list-card">
+                            <div class="list-block">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">订单号：232736616677</div>
+                                                <div class="item-after"><span class="maincl">已取消</span></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                            </div>
+                            <div class="list-block media-list">
+                                    <ul>
+                                          <li>
+                                                <a href="#" class="item-content">
+                                                      <div class="item-media"><img src="pic/melon.png" width="100%"></div>
+                                                      <div class="item-inner">
+                                                               <div class="item-title"><big>芒果嘟乐<span class="fr">￥5</span></big></div>
+                                                               <div class="item-title-row">
+                                                                      <div class="item-title"><span class="black9">2016/05/04 17:20</span></div>
+                                                                      <div class="item-after">
+                                                                            <span class="total-num">共<span class="maincl">2</span>件</span>
+                                                                            <big>总计:<span class="maincl">￥54</span></big>
+                                                                      </div>
+                                                               </div>
+                                                        </div>
+                                                </a>
+                                          </li>
+                                    </ul>
+                            </div>
+                            <div class="button-rows border_b">
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">再来一单</a></div>
+                                  <div class="col-50"><a href="#" class="button button-big button-fill button-danger">投诉</a></div>
+                                  <div class="cl"></div>
+                            </div>               
+                        </div>   
+                 </div>
+            </div>
+      </div>
+</div>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script> 
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script> 
+<script>   
+	$.init();
+</script>
+</body>
+</html>

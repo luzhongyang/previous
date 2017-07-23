@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>其他-订单详情3-已接单</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span></a> 
+        	<div class="button button-link button-nav pull-right"><a href="#" class="iconfont icon-callphone-copy whitecl create-actions"></a></div>
+        	<h1 class="title">订单详情</h1>
+        </header>
+        <!--头部结束-->
+    	<!--工具栏-->
+        <nav class="bar bar-tab runord_footer">
+        	<span></span>
+            <a href="javascript:;" class="button button-cancel open-slider-modal"><span class="black9">等待服务</span></a>
+            <span></span>
+        </nav>
+        <!--工具栏结束-->
+        <div class="content">
+            <div class="ord_state">
+            	<div class="state_box">
+                	<h3 class="maincl">已接单<small class="black9">-2016/06/27 12:00下单</small></h3>
+                    <p class="black9">请耐心等待服务</p>
+                </div>
+            </div>
+            <!--订单详情-->
+            <div class="runordDelt_box">
+                <div class="list-block">
+                    <ul>
+                      <li class="item-content">
+                        <div class="item-inner">
+                        	<p class="black3"><span class="tag" style="background:#fab42e;">他</span>餐馆占座</p>
+                            <div class="item-after"><small class="black9">订单号：1007 0141 5424 6300 41</small></div>
+                        </div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black3">费用：<span class="fontcl1">￥20+5元小费</span>-5元红包（未支付）</p></div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black6"><span class="black3">服务时间：</span>2016/06/27 11:30-12:00</p></div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black6"><span class="black3">备注：</span>师傅尽快来取货，中午时间比较紧，你在12点就要我家取货。</p></div>
+                      </li>
+                      <li class="runSub_box">
+                      	<div class="operate_nr">
+                            <div class="box">
+                                <div class="voice_box fl"><i class="ico"></i>5"</div>
+                            </div>                            
+                            <div class="img_box">
+                                <img src="" class="list_img">
+                                <img src="" class="list_img">
+                                <img src="" class="list_img">
+                                <img src="" class="list_img">
+                            </div>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="runordDelt_box">
+                <div class="list-block">
+                    <ul>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black6"><span class="black3">派活人：</span>费富元</p></div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black6"><span class="black3">联系电话：</span>13515608638</p></div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black6"><span class="black3">服务地址：</span>华润五彩国际904</p></div>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="runordDelt_box">
+                <div class="list-block">
+                    <ul>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black6"><span class="black3">接单员：</span>费富元</p></div>
+                      </li>
+                      <li class="item-content">
+                        <div class="item-inner"><p class="black6"><span class="black3">联系电话：</span>13515608638</p></div>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+            <!--订单详情结束-->
+            <a href="#" class="zixun_fixed"><i></i></a>
+        </div>        
+    <!--内容结束-->   
+    </div>
+</div>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>
+$(document).on('click','.create-actions', function () {
+      var buttons1 = [
+        {
+          text: "<p class='mineAcntinfor_btn black3'>联系商家</p>",
+          onClick: function() {
+            
+          }
+        },
+        {
+          text: "<p class='mineAcntinfor_btn black3'>联系骑手</p>",
+          onClick: function() {
+            
+          }
+        },
+		{
+          text: "<p class='mineAcntinfor_btn black3'>联系客服</p>",
+          onClick: function() {
+            
+          }
+        },
+      ];
+      var buttons2 = [
+        {
+          text: "<div class='mineAcntinfor_btn black9'>取消</div>",
+        }
+      ];
+      var groups = [buttons1, buttons2];
+      $.actions(groups);
+  });
+</script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

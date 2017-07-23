@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的收藏</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/xia.css"/>
+<link rel="stylesheet" type="text/css" href="css/wang.css"/>
+</head>
+
+<body>
+<section class="page_center_box">
+<div class="myall-collect-cont">
+     <div class="collect-one mb10">
+                 <div class="dan-tu fl"><img src="pic/home_img@2x.png"></div>
+                 <div class="dan-detail">
+                      <h3 class="">这里一句话描述商品，不超过一行狼来了描述商品描述商品</h3>
+                      <div class="how-much">￥50</div>
+                 </div>
+                 <div class="clear"></div>
+                 <div class="collect-aixin-ico"></div>
+     </div>
+     <div class="collect-one mb10">
+                 <div class="dan-tu fl"><img src="pic/home_img@2x.png"></div>
+                 <div class="dan-detail">
+                      <h3 class="">这里一句话描述商品，不超过一行狼来了描述商品描述商品</h3>
+                      <div class="how-much">￥50</div>
+                 </div>
+                 <div class="clear"></div>
+                 <div class="collect-aixin-ico"></div>
+     </div>
+     <div class="collect-one mb10">
+                 <div class="dan-tu fl"><img src="pic/home_img@2x.png"></div>
+                 <div class="dan-detail">
+                      <h3 class="">这里一句话描述商品，不超过一行狼来了描述商品描述商品</h3>
+                      <div class="how-much">￥50</div>
+                 </div>
+                 <div class="clear"></div>
+                 <div class="collect-aixin-ico"></div>
+     </div>
+</div>
+</section>
+
+
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//首页轮播js结束
+    });
+</script>
+<script>
+    $(document).ready(function () {
+		$(".collect-aixin-ico").click(function(){
+			if($(this).hasClass("on")){
+				$(this).removeClass("on");
+			}else{
+				$(this).addClass("on");
+				}
+			
+			}
+		);
+	 });	
+</script>
+</body>
+</html>

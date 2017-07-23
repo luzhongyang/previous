@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>购物车</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="takeout_Mine take_outPart">
+                    <div class="mine_bg">
+                        <div class="item-inner">
+                            <div class="item-row">
+                                <div class="item-title"><i class="mr10"></i>本元正道</div>
+                                <div class="item-after"><i class="ico_rightArr"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Mine_detail">
+                        <div class="mine_address mt10">
+                             <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title"><i class="ico_le ico_address"></i>我的收货地址</div>
+                                    <div class="item-after"><i class="ico_rightArr"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mine_infor mt10">
+                            <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title"><i class="ico_le ico_shoucang"></i>我的收藏</div>
+                                    <div class="item-after"><i class="ico_rightArr"></i></div>
+                                </div>
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title"><i class="ico_le ico_quan"></i>我的优惠券</div>
+                                    <div class="item-after"><i class="ico_rightArr"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--底部导航-->
+            <div class="footer_nav">
+            	<a href="#" class="list">
+                	<i class="ico ico1"></i>
+                    <P>首页</P>
+                </a>
+                <a href="#" class="list">
+                	<i class="ico ico3"></i>
+                    <P>购物车</P>
+                </a>
+                <a href="#" class="list">
+                	<i class="ico ico4"></i>
+                    <P>订单</P>
+                </a>
+                <a href="#" class="list on">
+                	<i class="ico ico5"></i>
+                    <P>我的</P>
+                </a>
+            </div>
+            <!--底部导航end-->
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.shopCart_list .top .del').click(function(){
+            $(this).parents('.shopCart_list').remove();
+        })
+    })
+</script>
+
+</body>
+</html>

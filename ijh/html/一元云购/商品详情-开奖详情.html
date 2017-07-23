@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>商品详情-开奖详情</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav">
+            <a class="pull-left headerIco headerIco2"></a>
+            <a class="pull-right headerIco headerIco3"></a>
+            <h1 class="title">开奖详情</h1>
+        </header>
+		<!--头部结束-->
+        <!-- 工具栏 -->
+        <div class="new_navStyle">
+        	<div class="foot_spaceBetween foot_center">
+            	<p>新的一期火热进行中......</p>
+                <a href="#" class="btn">立即夺宝</a>
+            </div>
+        </div>
+        <!-- 工具栏结束 -->
+        <!-- 主要内容部分 -->
+        <div class="content">
+        	<img src="pic/pic3.png" width="100%"/>
+            <div class="shangpinDetail_jiexiao">
+            	<div class="tit_box">
+                	<p class="black3 overflow_clear">(第469期)iPhone6S plus128GB</p>
+                    <p class="black6 font_size14">总需310</p>
+                </div>
+                <div class="luckyNumber_box">
+                    <div class="card">
+                        <div class="card-header border_t">
+                        	<div class="black3 number">幸运号码：<em class="maincl">10001598</em></div>
+                            <a href="#" class="btn">计算详情</a>
+                        </div>
+                        <div class="card-content border_b">
+                        	<div class="card-content-inner">
+                            	<div class="fl left">
+                                	<div class="img"><img src="pic/pic4.png"/></div>
+                                    <i class="huojiangIco"></i>
+                                </div>
+                          		<div class="right">
+                                	<a href="#" class="black6">
+                                        <div class="tit maincl">一定会中奖</div>
+                                        <div>参与20次<div class="fr" style=" color:#2094f7;">参与详情<i class="linkIco"></i></div></div>
+                                        <div class="overflow_clear">开奖时间：2016-07-19<span class="ml10">21:58:09</span></div>
+                                        <div class="overflow_clear">夺宝时间：2016-07-19<span class="ml10">09:58:09</span></div>
+                                    </a>
+                                </div>
+                                <div class="cl"></div>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="canyuJilu_box">
+                	<div class="tit border_t border_b">所有参与记录</div>
+                    <ul class="canyuJilu_nr">
+                    	<li class="mb5">
+                            <div class="fl img"><img src="pic/pic4.png"/></div>
+                            <div class="wz">
+                                <div class="fl  mt10">
+                                    <div class="maincl">坚持不懈</div>
+                                    <div class="black6 font_size14">参与10次</div>
+                                </div>
+                                <div class="fr mt5 right black6 font_size14">21:43:13</div>
+                                <div class="cl"></div>
+                            </div>
+                            <div class="cl"></div>
+                    	<li>
+                        <li class="mb5">
+                            <div class="fl img"><img src="pic/pic4.png"/></div>
+                            <div class="wz">
+                                <div class="fl mt10">
+                                    <div class="maincl">坚持不懈</div>
+                                    <div class="black6 font_size14">参与10次</div>
+                                </div>
+                                <div class="fr  mt5 10black6 font_size14">21:43:13</div>
+                                <div class="cl"></div>
+                            </div>
+                            <div class="cl"></div>
+                    	<li>	
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 主要内容部分结束 --> 
+    </div>
+</div>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script type="text/javascript">
+	$(document).ready(function(e) {
+	
+		function yiyuan_time(id) {
+			var t = Math.floor($("#" + id).attr('rel'));
+			t--;
+			var d = Math.floor(t / 60 / 60 / 24);
+			var h = Math.floor(t / 60 / 60 % 24);
+			var m = Math.floor(t / 60 % 60);
+			var s = Math.floor(t % 60);
+			$("#" + id).attr('rel', t);
+			$("#" + id).html('<span class="wz">揭晓倒计时：</span>' + h + ':' + m + ':' + s);
+		}
+		setInterval(function () {
+			for(i=1;i<100;i++){
+				yiyuan_time("daojishi" + i);
+			}
+		}, 1000);//倒计时js部分结束
+
+	});
+</script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

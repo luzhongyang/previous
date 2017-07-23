@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>登录</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+        <!--头部-->
+        <header class="bar bar-nav">
+            <a class="pull-left headerIco headerIco4"></a>
+            <h1 class="title">登录</h1>
+            <button class="button pull-right">注册</button>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+            <div class="login_tab">
+                <div class="list fl active">账号密码登录</div>
+                <div class="list fl">手机号快捷登录</div>
+            </div>
+            <div class="login_tab_cont">
+                <div class="list_box">
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ico ico1"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="昵称/手机号/邮箱">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ico ico2"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" placeholder="密码" class="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-block"> <a href="#" class="button button-big button-fill button-success">登录</a> </div>
+                    <div class="text-center font_size14"><a href="#" class="maincl">忘记密码？</a></div>
+                </div>
+                <div class="list_box" style="display:none;">
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ico ico3"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="手机号">
+                                        </div>
+                                        <a href="javascript:;" class="yzmget">获取验证码</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ico ico4"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="验证码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-block"> <a class="button button-big button-fill button-success open-slider-modal">登录</a> </div>
+                    <div class="text-center font_size14"><a href="#" class="maincl">忘记密码？</a></div>
+                </div>
+                <style>
+                .login_bot{ margin:1.5rem 0;}
+                .login_bot h2{ text-align:center; border-bottom:0.05rem solid #ddd; height:1rem; margin:0 auto 1.25rem; font-weight:normal;}
+                .login_bot span{ font-size:0.7rem; display:inline-block; background:#f5f5f5; padding:0 1rem; line-height:2rem;}
+                .login_other{ margin:0 0.75rem; text-align:center;}
+                .login_other a{ display:inline-block; margin:0 0.5rem;}
+                .login_other a p{ font-size:0.7rem; line-height:1.2rem; color:#333;}
+                .login_other a img{ display:inline-block; width:2.2rem; height:2.2rem;}
+                </style>
+                <div class="login_bot pd10">
+                    <h2><span class="black9">第三帐号方登录</span></h2>
+                    <div class="login_other">
+                        <a href="#"><img src="images/pay/pay2.png"><p>微信</p></a>
+                    </div>
+                </div>
+            </div>            
+        </div>        
+    <!--内容结束-->   
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    $(".login_tab .list").each(function(i){
+		$(this).click(function(){
+			$(".login_tab .list").removeClass("active");
+			$(this).addClass("active");
+			$(".login_tab_cont .list_box").each(function(e){
+				if(i==e){
+					$(".login_tab_cont .list_box").hide();
+					$(this).show();
+				}else{
+					$(this).hide();
+				}
+			});
+		});
+	});
+});
+</script> 
+<script>
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 60;
+        var mobile_lock = 0;
+        $(function () {
+            $(".yzmget").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 60;
+					$(".yzmget").addClass("graybg");
+                    $('.yzmget').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".yzmget").removeClass("graybg");
+                $('.yzmget').removeAttr("disabled");
+                $('.yzmget').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+				$('.yzmget').removeClass("on");
+            }
+            else {
+                mobile_count--;
+                $('.yzmget').text( + mobile_count.toString() + "s重新获取");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+				$('.yzmget').addClass("on");
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+<script>
+$(document).on('click','.open-slider-modal', function () {
+    var modal = $.modal({
+      title: "<div class='txt_left'>请填写图形验证码</div>",
+      afterText:  "<div class='yzmint'><input type='text' value=''><span class='yzmimg'><img src=''></span></div>",
+      buttons: [
+        {
+          text: '取消'
+        },
+        {
+          text: '确定',
+          bold: true,
+          onClick: function () {
+            $.alert('Thanks! I know you like it!')
+          }
+        },
+      ]
+    })
+    $.swiper($$(modal).find('.swiper-container'), {pagination: '.swiper-pagination'});
+    });
+</script>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

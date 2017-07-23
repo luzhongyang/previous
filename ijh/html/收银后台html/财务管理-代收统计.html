@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>财务管理-代收统计</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content full_wrapper-content"> 
+    <!--右侧内容-->
+    <div class="cateBox_right full_cateBox_right">
+        <div class="dispatch_serch">
+        	<div class="clearfix list_box">
+                结算状态：<label class="ml10"><input type="radio" checked name="zj">全部</label> <label class="ml20"><input type="radio" name="zj">已结算</label> <label class="ml20"><input type="radio" name="zj">未结算</label> </div>
+            <div class="clearfix list_box">
+            	<span class="fl">查询日期：</span>
+            	<span class="fl"><select class="tuan_topser tuan_topserw1"><option>今天</option> <option>近7天</option> <option>最近30天</option></select></span>
+                <span class="fl ml10"><input type="text" placeholder="2016-12-26" class="tuan_topser tuan_topserw3">至<input type="text" placeholder="2016-12-26" class="tuan_topser tuan_topserw3"></span> <input type="button" class="btn btn-primary btn-sm ml20" value="确 定"> 
+            </div>
+            
+        </div>
+        <div class="tableBox">
+        	<div class="tableBox_top">
+                <div class="fr">
+                    <a href="javascript:;" class="btn btn_hover fl tab_btn_import"><i class="glyphicon glyphicon-log-out"></i>导出</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                    	<th>交易日期</th>
+                        <th>结算状态</th>
+                        <th>应收总金额</th>
+                        <th>实收总金额</th>
+                        <th>支付宝</th>
+                        <th>手续费（元）</th>
+                        <th>微信</th>
+                        <th>手续费（元）</th>
+                        <th>单号</th>
+                        <th>详情</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    	<td>2017-01-03</td>
+                        <td>已结算</td>
+                        <td>1000</td>
+                        <td>994</td>
+                        <td>500</td>
+                        <td>3</td>
+                        <td>500</td>
+                        <td>3</td>
+                        <td>14771</td>
+                        <td><a href="#" class="btn btn-primary btn-outline btn-sm">查看</a></td>
+                    </tr>
+                    <tr>
+                    	<td>2017-01-03</td>
+                        <td>已结算</td>
+                        <td>1000</td>
+                        <td>994</td>
+                        <td>500</td>
+                        <td>3</td>
+                        <td>500</td>
+                        <td>3</td>
+                        <td>14771</td>
+                        <td><a href="#" class="btn btn-primary btn-outline btn-sm">查看</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--页码-->
+            <div class="paging">
+                <span>91 条记录 1/10 页</span>
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
+                <span class="on">1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">下5页</a>
+                <a href="#">最后一页</a>
+            </div>
+            <!--页码end-->
+    </div>
+    <!--右侧内容end--> 
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<!--提现-->
+<div class="mask_cont tixian_mask">
+	<div class="mask_cont_tit">余额转出到银行卡 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="int_box mb20"><span class="fl">银行卡：</span><span class="fr">2-3日到账</span><div class="int"><input type="text" placeholder="招商银行  尾号：7890"></div></div>
+        <div class="int_box mb20"><span class="fl">提现金额：</span><span class="fr">元</span><div class="int"><input type="text" placeholder="最多可转出1000元"></div></div>
+        <div class="text_c mt30">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary">确定</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.tixian_mask').height();
+	var evlt_w = $('.tixian_mask').width();
+	$('.tixian_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.tixian_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tixian_btn").click(function(){
+		$('.tixian_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".tixian_mask .cancel,.tixian_mask .close,.mask_bg").click(function(){
+		$('.tixian_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--提现end-->
+</body>
+</html>

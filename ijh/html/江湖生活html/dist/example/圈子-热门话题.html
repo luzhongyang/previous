@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>圈子-热门话题</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+				<!--每日精选-->
+				<div class="cirTopic_box mb10">
+                	<ul>
+                    	<li class="cirTopiclist">
+                        	<div class="img fr"><a href="#"><img src=""></a></div>
+                            <div class="wz_box">
+                                <h3><a href="#" class="black3">鬼吹灯之精绝古城</a></h3>
+                                <div><span class="fr black9"><a href="javascript:;" class="guanzhu"></a>4527</span><P class="black9 from">来自圈子：<a href="#" class="maincl">电视剧集社</a></P></div>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                       	<li class="cirTopiclist">
+                        	<div class="img fr"><a href="#"><img src=""></a></div>
+                            <div class="wz_box">
+                                <h3><a href="#" class="black3">鬼吹灯之精绝古城</a></h3>
+                                <div><span class="fr black9"><a href="javascript:;" class="guanzhu"></a>4527</span><P class="black9 from">来自圈子：<a href="#" class="maincl">电视剧集社</a></P></div>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="cirTopiclist">
+                        	<div class="img fr"><a href="#"><img src=""></a></div>
+                            <div class="wz_box">
+                                <h3><a href="#" class="black3">鬼吹灯之精绝古城</a></h3>
+                                <div><span class="fr black9"><a href="javascript:;" class="guanzhu on"></a>4527</span><P class="black9 from">来自圈子：<a href="#" class="maincl">电视剧集社</a></P></div>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                </div>
+                <!--每日精选end-->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script>
+$(document).ready(function() {
+	$(".cirTopiclist .wz_box .guanzhu").click(function(){
+		$(this).addClass("on");
+	});
+});
+</script>
+</body>
+</html>

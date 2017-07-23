@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>外送-营销管理-店铺活动-折扣优惠(详情)</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+   	<!--表单-->
+    <div class="mb20">
+    	<div class="mb10 clearfix"><a href="javascript:;" class="btn btn-primary btn-w-m add_discount">添加折扣商品</a> <a href="javascript:;" class="btn btn-primary btn-sm btn-outline fr">保存</a></div>
+        <table class="" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="180"><big class="form_table_t">每单限购折扣商品总数：</big></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<input type="text" class="form_table_int form_table_intw3" />
+                        <span>份</span>
+                        <small class="black9 ml10 mt5">数量不限时输入-1</small>
+                    </div>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    <!--表单end-->
+    <div class="dispatch_serch">
+        <div class="clearfix list_box">
+            活动状态：<label class="ml10"><input type="radio" checked name="zt">全部</label> <label class="ml30"><input type="radio" name="zt">未生效</label> <label class="ml30"><input type="radio" name="zt">已生效</label> <label class="ml30"><input type="radio" name="zt">已过期</label>
+        </div>
+    </div>
+    
+    <!--表格-->
+    <div class="dispatch_table_top">
+    	<div class="fl mr30 all"><input type="checkbox"><span class="ml10">全选</span></div>
+        <div class="fl">
+        	<a href="javascript:;" class="btn btn-default btn-sm tab_btn_del">批量删除</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <table class="dispatch_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr class="tit">
+        	<td class="check_box">&nbsp;</td>
+            <td>活动状态</td>
+            <td>商品名称</td>
+            <td>活动时间</td>
+            <td>原价</td>
+            <td>折扣价</td>
+            <td>面向人群</td>
+            <td>限购数量</td>            
+            <td>操作</td>
+        </tr>  
+        <tr>
+        	<td class="check_box"><input type="checkbox"></td>
+            <td>已生效</td>
+            <td>西红柿500g</td>
+            <td>2016-12-26至2016-12-26</td>
+            <td>
+            	<P>20</P>
+            </td>
+            <td>
+                <p>12</p>
+            </td>
+            <td>
+            	<p>新老客户通用</p>
+            </td>
+            <td>
+                <p>9999</p>
+            </td>
+            <td>
+            	 <a href="javascript:;" class="btn btn-default btn-outline btn-sm tab_btn_del">删除</a>
+                 <a href="#" class="btn btn-primary btn-outline btn-sm tab_btn_edit">编辑</a>
+            </td>
+        </tr>
+        <tr>
+        	<td class="check_box"><input type="checkbox"></td>
+            <td>已生效</td>
+            <td>西红柿500g</td>
+            <td>2016-12-26至2016-12-26</td>
+            <td>
+            	<P>20</P>
+            </td>
+            <td>
+                <p>12</p>
+            </td>
+            <td>
+            	<p>新老客户通用</p>
+            </td>
+            <td>
+                <p>9999</p>
+            </td>
+            <td>
+            	 <a href="javascript:;" class="btn btn-default btn-outline btn-sm tab_btn_del">删除</a>
+                 <a href="#" class="btn btn-primary btn-outline btn-sm tab_btn_edit">编辑</a>
+            </td>
+        </tr>
+    </table>
+    <!--页码-->
+    <div class="paging">
+        <span>91 条记录 1/10 页</span>
+        <a href="#">上一页</a>
+        <a href="#">下一页</a>
+        <span class="on">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">下5页</a>
+        <a href="#">最后一页</a>
+    </div>
+    <!--页码end-->
+    <!--表格end-->
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<!--规格编辑-->
+<div class="mask_cont spec_mask discount_mask">
+	<div class="mask_cont_tit">添加折扣商品 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<table class="form_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        	<tr>
+                <td class="bt" width="120"><p class="form_table_t">选择商品：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<select class="form_table_int form_table_intw2 fl">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                        <select class="form_table_int form_table_intw2 fl ml10">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        	<tr>
+                <td class="bt" width="120"><p class="form_table_t">活动时间：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<input type="text" class="form_table_int" value="2016-12-26" /><span class="ml5 mr5">至</span><input type="text" class="form_table_int" value="2016-12-26" /> <span class="ml5 black9">（默认为开始日期0:00至结束日期23:59）</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="bt" width="120"><p class="form_table_t">面向人群：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<label class="mr30"><input type="radio" name="jd" checked class="check_box">新客户</label>
+                        <label class="mr30"><input type="radio" name="jd" checked="" class="check_box">新老客户通用</label>
+                    </div>
+                </td>
+            </tr>
+            
+        	<tr>
+                <td class="bt" width="120"><p class="form_table_t">活动信息：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<div class="dispchSet_list mt10 ml10 mr10 mb10">
+                            <div class="int_list clearfix">
+                                <span class="mr20">原价：<input type="text" class="text">元</span>
+                                <span class="mr20">折扣价：<input type="text" class="text">元</span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        	<tr>
+                <td class="bt" width="120"><p class="form_table_t">每单限购：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<input type="text" class="form_table_int form_table_intw3" />
+                        <span>份</span>
+                        <small class="black9 ml10 mt5">数量不限时输入-1</small>
+                    </div>
+                </td>
+            </tr>
+            
+        </table>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">保存</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.discount_mask').height();
+	var evlt_w = $('.discount_mask').width();
+	$('.discount_mask').css("margin-top",-(evlt_h/2 + 60) + 'px');
+	$('.discount_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".add_discount,.tab_btn_edit").click(function(){
+		$('.discount_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".discount_mask .cancel,.discount_mask .close,.mask_bg").click(function(){
+		$('.discount_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--规格编辑end-->
+<!--删除提示-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">删除后将不可返回，确认删除？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">考虑一下</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">确认删除</a>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_del").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--删除提示end-->
+</body>
+</html>

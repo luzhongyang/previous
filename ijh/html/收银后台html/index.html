@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>首页</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<!--头部-->
+<div class="">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+        	<div class="logo fl"><img src="images/logo.png"><span>13053062</span></div>
+            <ul class="fl nav_list">
+            	<li class="on"><a href="index.html">首页</a></li>
+                <li><a href="商品.html">商品</a></li>
+                <li><a href="流水.html">流水</a></li>
+                <li><a href="统计.html">统计</a></li>
+                <li><a href="员工.html">员工</a></li>
+                <li><a href="财务管理.html">财务管理</a></li>
+                <li><a href="会员.html">会员</a></li>
+                <li><a href="营销.html">营销</a></li>
+                <li><a href="设置.html">设置</a></li>
+                <li><a href="网店管理.html">网店管理</a></li>
+                <li><a href="微信设置.html">微信设置</a></li>
+            </ul>
+        </div>
+        <div class="pull-right userInfo_box">
+            <a href="javascript:;" class="userInfo" id="userInfo">
+                <span class="img"><img src=""></span>
+                <span>您好</span>
+                <i class="fa fa-sort-down"></i>
+            </a>
+            <div class="dropMenu" id="dropMenu">
+            	<div class="info">
+                	<P>帐号：13053062170</P>
+                    <p>门店：满天星超市</p>
+                </div>
+                <ul>
+                	<li><a href="#"><i class="glyphicon glyphicon-phone"></i>下载手机APP <i class="fa fa-angle-right fr"></i></a></li>
+                    <li><a href="#"><i class="fa fa-group"></i>交班 <i class="fa fa-angle-right fr"></i></a></li>
+                    <li><a href="#"><i class="fa fa-question-circle"></i>帮助 <i class="fa fa-angle-right fr"></i></a></li>
+                    <li><a href="#"><i class="fa fa-headphones"></i>客服</a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-off"></i>退出登录 <i class="fa fa-angle-right fr"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div> 
+<!--头部end-->
+<div id="wrapper"> 
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <!--面包屑导航-->
+        <div class="row breadcrumb_box">
+        	<ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-home mr10"></i>首页</a></li>
+                <li><a href="#">商品</a></li>
+                <li class="active">商品信息管理</li>
+            </ol>
+        </div>
+        <!--面包屑导航-->
+        <!--右侧部分开始-->
+        <div class="row J_mainContent" id="content-main">
+            <div class="wrapper wrapper-content full_wrapper-content">
+            	<div class="cateBox_right full_cateBox_right">
+                    <!--三栏-->
+                    <div class="row idx_total_box">
+                        <div class="col-lg-4 col-md-4 list">
+                            <div class="idx_total bg1">
+                                <a href="javascript:;">
+                                    <div class="img"><i class="ico1"></i></div>
+                                    <div class="wz_box">
+                                        <p class="big">1000<small>个</small></p>
+                                        <p>商品库存</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 list">
+                            <div class="idx_total bg2">
+                                <a href="#">
+                                    <div class="img"><i class="ico2"></i></div>
+                                    <div class="wz_box">
+                                        <p class="big">5<small>个</small></p>
+                                        <p>会员生日</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 list">
+                            <div class="idx_total bg3">
+                                <a href="#">
+                                    <div class="img"><i class="ico3"></i></div>
+                                    <div class="wz_box">
+                                        <p class="big">0<small>个</small></p>
+                                        <p>报损金额</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dispatch_serch">
+                        <div class="clearfix list_box">
+                            概况：<label class="ml10"><input type="radio" checked name="zj">今日概况</label> <label class="ml20"><input type="radio" name="zj">昨日概况</label> </div>
+                    </div>
+                    <div class="tableBox mb20">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <th>目录</th>
+                                    <th>概况</th>
+                                    <th>现金支付</th>
+                                    <th>银联支付</th>
+                                    <th>支付宝</th>
+                                    <th>微信</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>销售商品</td>
+                                    <td>
+                                        <p>销售额 0.00 <span class="ml10">毛利 0.00</span> <span class="ml10">单数 0</span></p>
+                                    </td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>购物卡充值</td>
+                                    <td>
+                                        <p>充值 0.00 <span class="ml10">赠送 0.00</span> <span class="ml10">单数 0</span></p>
+                                    </td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>现金收支</td>
+                                    <td>
+                                        <p>收入 0.00 <span class="ml10">支出0暂不作</span></p>
+                                    </td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>总计</td>
+                                    <td>
+                                        <p>今日收入 0.00</p>
+                                    </td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--三栏end-->
+                    
+                    <!--会员消费统计-->
+                    <div class="mrkt_tit mb10"><span class="bt">会员消费统计</span> <span class="ml20 black6">统计时间：2017-01-06至2017-01-06</span></div>
+                    
+                    <div class="tableBox mb20">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <th>新增会员</th>
+                                    <th>历史会员</th>
+                                    <th>全部会员</th>
+                                    <th>会员消费单据数</th>
+                                    <th>会员消费金额</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0个</td>
+                                    <td>0个</td>
+                                    <td>0个</td>
+                                    <td>0个</td>
+                                    <td>0.00元</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--会员消费统计end-->
+                      
+                    <!--优惠券折让统计-->
+                    <div class="mrkt_tit mb10"><span class="bt">优惠券折让统计</span> </div>
+                    <div class="dispatch_serch">
+                        <div class="clearfix list_box">
+                            概况：<label class="ml10"><input type="radio" checked name="zj">今日概况</label> <label class="ml20"><input type="radio" name="zj">昨日概况</label> </div>
+                    </div>
+                    <div class="tableBox mb20">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <th>优惠券名</th>
+                                    <th>已发券</th>
+                                    <th>已使用</th>
+                                    <th>使用类型</th>
+                                    <th>折价总计</th>
+                                    <th>使用率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>***优惠券</td>
+                                    <td>100张</td>
+                                    <td>25</td>
+                                    <td>商品折让</td>
+                                    <td>125元</td>
+                                    <td>25%</td>
+                                </tr>
+                                <tr>
+                                    <td>***优惠券</td>
+                                    <td>100张</td>
+                                    <td>25</td>
+                                    <td>商品折让</td>
+                                    <td>125元</td>
+                                    <td>25%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--优惠券折让统计end-->    
+                </div>
+                
+            </div>
+        </div>
+        <div class="footer">
+            <div class="pull-right">All Rights Reserved ICP备案：皖ICP备13010842号</div>
+        </div>
+        <!--右侧部分结束-->
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script> 
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script> 
+<script src="js/plugins/layer/layer.min.js"></script> 
+<script src="js/hplus.min.js?v=4.0.0"></script> 
+<script type="text/javascript" src="js/contabs.min.js"></script> 
+<script src="js/plugins/pace/pace.min.js"></script>
+<script>
+$(document).ready(function() {
+    $(".navbar-static-top .userInfo_box .userInfo").click(function(){
+		$(".navbar-static-top .userInfo_box .dropMenu").toggle();
+	});
+});
+</script>
+</body>
+</html>

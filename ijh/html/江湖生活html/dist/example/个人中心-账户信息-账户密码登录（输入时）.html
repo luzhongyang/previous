@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>个人中心-账户信息-账户密码登录（输入时）</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+
+<style>
+.page, body {background-color: #fff;}
+</style>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="myself-shuru-cont">
+                    <form method="" action="" name=""> 
+                        <div class="inp-box">
+                            <input type="text" placeholder="手机号" value="">
+                            <div class="cha-cio"></div>
+                        </div>
+                        <div class="inp-box">
+                            <input type="password" placeholder="密码" value="">
+                            <div class="cha-cio"></div>
+                        </div>
+                        <div class="mt30"> 
+                            <a href="#" class="btn-a fl">注册</a><a href="javascript:;" class="btn-a login-a fr">登录</a>
+                            <div class="clear"></div> 
+                        </div>
+                        <p class="a-link-as">
+                            <a href="#" class="soon-btn">快捷登录</a><a href="#" class="soon-btn">忘记密码?</a>   
+                        </p>
+                        <div class="line-box">
+                            <span class="black9">第三方登录</span>
+                        </div>
+                        <a href="#" class="weixin-login-a">
+                            <img src="img/my/btn_weixin@3x.png">
+                            <p class="black6 text_c">微信</p>    
+                        </a>
+                    </form>  
+                </div>           
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+    
+        function yiyuan_time(id) {
+            var t = Math.floor($("#" + id).attr('rel'));
+            t--;
+            var d = Math.floor(t / 60 / 60 / 24);
+            var h = Math.floor(t / 60 / 60 % 24);
+            var m = Math.floor(t / 60 % 60);
+            var s = Math.floor(t % 60);
+            $("#" + id).attr('rel', t);
+            $("#" + id).html(m + '分' + s + '秒');
+        }
+        setInterval(function () {
+            for(i=1;i<100;i++){
+                yiyuan_time("daojishi" + i);
+            }
+        }, 1000);//倒计时js部分结束
+
+    });
+        
+</script>
+
+<!-- 输入时 -->
+<script>
+$(function(){
+    $(".inp-box input").focus(function () {
+        $('.inp-box input').on('input', function() {
+                if($(this).val().length == 0 ){
+                          $(this).parent(".inp-box").find(".cha-cio").css("display","none");       
+                }else{
+                        
+                          $(this).parent(".inp-box").find(".cha-cio").css("display","block");
+                }
+        });
+    }); 
+    $(".inp-box input").blur(function(){
+        $(this).parent(".inp-box").find(".cha-cio").css("display","none");            
+    }); 
+
+    $(".cha-cio").on("click",function(){
+        $(this).hide();
+        $(this).parent(".inp-box").find(".inp-box input").val('');
+        $(this).parent(".inp-box").find(".inp-box input").focus();
+    });
+});
+</script>
+<!-- 输入时end -->
+
+<!-- 获取验证码 -->
+<script>
+$(function(){
+    var mobile_timeout;
+        var mobile_count = 60;
+        var mobile_lock = 0;
+        $(function () {
+            $(".get_yzm").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 60;
+                    $(".get_yzm").addClass("on");
+                    $('.get_yzm').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+                $(".get_yzm").removeClass("on");
+                $('.get_yzm').removeAttr("disabled");
+                $('.get_yzm').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+                $('.get_yzm').removeClass("on");
+            }
+            else {
+                mobile_count--;
+                $('.get_yzm').text( + mobile_count.toString() + "s");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+                $('.get_yzm').addClass("on");
+            }
+        };
+});
+</script>
+<!-- 获取验证码end-->
+
+</body>
+</html>

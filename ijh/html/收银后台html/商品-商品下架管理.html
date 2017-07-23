@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>商品-商品下架管理</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content full_wrapper-content"> 
+    <!--分类-->
+    <div class="cateBox">
+        <div class="tit"><big>商品分类</big> </div>
+        <ul>
+            <li> <a href="#" class="all">全部分类</a> </li>
+            <li>
+                <div class="clearfix box">
+                    <a href="#" class="fl">默认分类</a>
+                </div>
+            </li>
+            <li>
+            	<div class="clearfix box">
+                    <a href="#" class="fl">茶叶</a>
+                </div>
+            </li>
+            <li>
+            	<div class="clearfix box">
+                    <a href="#" class="fl">水果</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--分类end--> 
+    <!--右侧内容-->
+    <div class="cateBox_right">
+        <div class="tableBox">
+        	<div class="tableBox_top">
+            	<div class="serch_box fl"><input type="text" class="text" placeholder="搜索商品编码/名称"><input type="submit" value="" class="btn"></div>
+                <div class="fr">
+                	<a href="#" class="btn btn_hover fl J_menuItem">下架</a>
+                    <a href="javascript:;" class="btn btn_hover fl"><i class="glyphicon glyphicon-log-out"></i>导入清单</a>
+                    <a href="javascript:;" class="btn btn_hover fl tab_btn_state"><span>改状态</span><i class="fa fa-caret-down r"></i></a>
+                    <div class="state_box">
+                    	<ul>
+                        	<li><a href="javascript:;">在售</a></li>
+                            <li><a href="javascript:;">停售并加入库存</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                    	<th class="check_box"><input type="checkbox"></th>
+                        <th>序号</th>
+                        <th>商品名</th>
+                        <th>商品编码</th>
+                        <th>分类</th>
+                        <th>进货价</th>
+                        <th>销售价</th>
+                        <th>库存</th>
+                        <th>发布日期</th>
+                        <th>保质期</th>
+                        <th>操作</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="check_box"><input type="checkbox"></td>
+                        <td>1</td>
+                        <td>六安瓜片</td>
+                        <td>111111111111</td>
+                        <td>茶叶</td>
+                        <td>15元</td>
+                        <td>80</td>
+                        <td>50盒</td>
+                        <td>2017/01/05</td>
+                        <td>12个月</td>
+                        <td><a href="javascript:;" class="btn btn-danger btn-outline btn-sm tab_btn_shangjia">下架</a></td>
+                        <td>在售</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--页码-->
+            <div class="paging">
+                <span>91 条记录 1/10 页</span>
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
+                <span class="on">1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">下5页</a>
+                <a href="#">最后一页</a>
+            </div>
+            <!--页码end-->
+    </div>
+    <!--右侧内容end--> 
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<script>
+$(document).ready(function() {
+    $(".tab_btn_state").click(function(){
+		$(".tableBox_top .state_box").toggle();
+	});
+	$(".tableBox_top .state_box ul li a").click(function(){
+		$(".tab_btn_state span").text($(this).text());
+		$(".tableBox_top .state_box").toggle();
+	});
+	
+});
+</script>
+
+
+<!--提示-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">你一共选择了1款商品确认要下架？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">否</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">是</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_shangjia").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--提示end-->
+</body>
+</html>

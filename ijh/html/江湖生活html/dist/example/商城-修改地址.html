@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>外卖-首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/style2.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="Mine_addressAdd shoppingAdd">
+        	        <div class="MinePersonal mt10 border_b">
+                        <div class="Personal">
+                            <div class="item-innerIN border_b">
+                                <div class="item-row">
+                                    <div class="item-title">收货人</div>
+                                    <div class="item-after"><input type="text" placeholder="请输入收货人姓名" value="元子设计"></div>
+                                </div>
+                            </div> 
+                            <div class="item-innerIN">
+                                <div class="item-row">
+                                    <div class="item-title">手机号</div>
+                                    <div class="item-after"><input type="text" placeholder="请输入收货人手机号" value="13515608638"></div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="address_detail mt10 mb20 border_b">
+                        <div class="detail">
+                            <div class="detailLeft border_r fl ">
+                                <div class="item-innerIN border_b province">
+                                    <div class="item-row">
+                                        <div class="item-title">省份</div>
+                                        <div class="item-after"><input type="text" placeholder="请输入所属省份" value="安徽省"></div>
+                                    </div>
+                                </div>
+                                <div class="item-innerIN border_b">
+                                    <div class="item-row">
+                                        <div class="item-title">城市</div>
+                                        <div class="item-after"><input type="text" placeholder="请输入城市名" value="合肥市"></div>
+                                    </div>
+                                </div>  
+                                <div class="item-innerIN border_b">
+                                    <div class="item-row">
+                                        <div class="item-title">县区</div>
+                                        <div class="item-after"><input type="text" placeholder="请输入县/区名" value="蜀山区"></div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <a class="right fr border_b">
+                                <i></i>
+                                <p>定位</p>
+                            </a>
+                            <div class="clear"></div>
+                            <div class="item-innerIN xiangxiAdd">
+                                <div class="item-row">
+                                    <div class="item-title">详细地址</div>
+                                    <div class="item-after"><textarea name="" placeholder="">收货地址：安徽省合肥市蜀山区莲花社区管理委员会莲花路819号莲花电子商务产业园E座四楼</textarea></div>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+                     <label>
+                     <div class="addressSet addressSetOn">
+                         <div class="item-inner">
+                            <div class="item-row">
+                                <div class="item-title">设为默认地址</div>
+                                <div class="item-after"><i class="ico_inp"></i></div>
+                            </div>
+                        </div> 
+                     </div>
+                     </label>
+                    <div class="save_btn takeoutLongBtn mt20">
+                        保存
+                    </div>
+                    <div class="del_btn takeoutLongBtn mt10">
+                        删除
+                    </div>
+                </div>
+                <div class="shoppingAddPop_mask"></div>
+                <div class="shoppingAddPop">
+                    <h3 class="tit border_b"><span>省份</span></h3>
+                    <div class="sheng">
+                        <p>北京市</p>
+                        <p>天津市</p>
+                        <p>山西省</p>
+                        <p>河北省</p>
+                        <p>内蒙古自治区</p>
+                        <p>辽宁省</p>
+                        <p>吉林省</p>
+                        <p>黑龙江省</p>
+                        <p>北京市</p>
+                        <p>天津市</p>
+                        <p>山西省</p>
+                        <p>河北省</p>
+                        <p>内蒙古自治区</p>
+                        <p>辽宁省</p>
+                        <p>吉林省</p>
+                        <p>黑龙江省</p>
+                    </div>
+                    <div class="quxiao border_t">
+                        取消
+                    </div>
+                </div>
+    	    </div>
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+<script type="text/javascript">
+    $(function(){
+      $('.shoppingAdd .addressSet').click(function(){
+        $(this).toggleClass('addressSetOn');
+      })
+      $('.address_detail .province input').click(function(){
+        $('.shoppingAddPop_mask').show();
+        $('.shoppingAddPop').show();
+      })
+      $('.shoppingAddPop_mask').click(function(){
+         $('.shoppingAddPop_mask').hide();
+        $('.shoppingAddPop').hide();
+      })
+      $('.shoppingAddPop .quxiao').click(function(){
+         $('.shoppingAddPop_mask').hide();
+        $('.shoppingAddPop').hide();
+      })
+    })
+</script>
+</body>
+</html>

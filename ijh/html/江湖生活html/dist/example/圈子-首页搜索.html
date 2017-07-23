@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>圈子-首页搜索</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+        	<!--搜索-->
+            <div class="coupons_sousuo-cont cirTopserch_two">
+                <div class="sousuo-box mt5  ml10 mr10">
+                    <form  method="" action="">
+                        <input type="text" value="" id="souInput" class="shuru-inp" placeholder="搜索圈子或话题"><input type="button" class="sou-btn">
+                        <a href="javascript:" class="icon-cha" id="clearCha"></a>
+                    </form>    
+                </div> 
+            </div>
+            <!--搜索end-->
+            <div class="container_mid">
+                <div class="cirIdx_tit border_b black9">话题</div>
+                <div class="cirTopic_box mb10">
+                	<ul>
+                    	<li class="cirTopiclist">
+                        	<div class="img fr"><a href="#"><img src=""></a></div>
+                            <div class="wz_box">
+                                <h3><a href="#" class="black3">鬼吹灯之精绝古城</a></h3>
+                                <div><span class="fr black9"><a href="javascript:;" class="guanzhu"></a>4527</span><P class="black9 from">来自圈子：<a href="#" class="maincl">电视剧集社</a></P></div>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                    <a href="#" class="cirIdx_more border_t">更多话题&gt;&gt;</a>
+                </div>
+                <div class="cirIdx_tit border_b black9">相关圈子（5）</div>
+                <div class="cirList_box mb10">
+                	<ul>
+                    	<li class="cirList">
+                        	<a href="#">
+                                <div class="img fl"><img src=""></div>
+                                <div class="wz_box">
+                                    <h3 class="overflow_clear">私奔B计划</h3>
+                                    <P class="black9">成员5562人 <span class="ml10">话题12.3万条</span></P>
+                                </div>
+                                <div class="clear"></div>
+                            </a>
+                            <a href="javascript::" class="btn join_btn">加入</a>
+                        </li>
+                        <li class="cirList">
+                        	<a href="#">
+                                <div class="img fl"><img src=""></div>
+                                <div class="wz_box">
+                                    <h3 class="overflow_clear">私奔B计划</h3>
+                                    <P class="black9">成员5562人 <span class="ml10">话题12.3万条</span></P>
+                                </div>
+                                <div class="clear"></div>
+                            </a>
+                            <a href="javascript::" class="btn join_btn">加入</a>
+                        </li>
+                        <li class="cirList">
+                        	<a href="#">
+                                <div class="img fl"><img src=""></div>
+                                <div class="wz_box">
+                                    <h3 class="overflow_clear">私奔B计划</h3>
+                                    <P class="black9">成员5562人 <span class="ml10">话题12.3万条</span></P>
+                                </div>
+                                <div class="clear"></div>
+                            </a>
+                            <a href="javascript::" class="btn join_btn">加入</a>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<!-- 搜索框输入时-->
+<script>
+$(function(){
+    $("#souInput").on("input",function(){
+        if($(this).val().length!=0){
+           $("#clearCha").css("display","block"); 
+        }else{
+           $("#clearCha").css("display","none");
+        }
+    });
+     $("#clearCha").on("click",function(){
+            $(this).hide();
+            $("#souInput").val('');
+            $("#souInput").focus();
+    });
+});
+</script>
+<!-- 搜索框输入end-->
+<!--加入成功提示-->
+<script>
+$(document).ready(function() {
+	function joinPrompt(type,time){
+		var html = '';
+		var time = 1500;
+		html += '<div class="joinPrompt_mask" id="joinPrompt">成功加入电视剧集社</div>';
+		$('body').append(html);
+		var msk_w = $(".joinPrompt_mask").width();
+		var msk_h = $(".joinPrompt_mask").height();
+		$('#joinPrompt').css("margin-left",-msk_w/2);
+		$('#joinPrompt').css("margin-top",-msk_h/2);
+		setTimeout(function(){
+		   $('#joinPrompt').remove();
+		},time);
+	}
+    
+	$(".join_btn").click(function(){
+		if($(this).hasClass("join_btn")){
+			$(this).text("去圈子").removeClass("join_btn").addClass("link_btn");
+			joinPrompt();
+		}else{
+			return false;
+		}		
+	});	
+});
+</script>
+<!--加入成功提示结束-->
+<script>
+$(document).ready(function() {
+	$(".cirTopiclist .wz_box .guanzhu").click(function(){
+		$(this).addClass("on");
+	});
+});
+</script>
+</body>
+</html>

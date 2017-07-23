@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>外卖-首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="orderTakeOut shopNotice">
+                   <div class="box">
+                        <div class="time">
+                            11月14日晚上20:36
+                        </div>
+                        <div class="content">
+                            Aliquam vitae felis a massa ultrices tincidunt. Aliquam aliquam iaculis risus sed maximus. Suspendisse pretium lorem turpis, eu imperdiet enim efficitur sit amet. Mauris aliquam tellus mauris, lobortis tincidunt purus porta ac. Mauris nec tellus in elit interdum tempus. Nullam pellentesque aliquam purus, vitae dignissim neque tincidunt ut. Aliquam id cursus libero.
+                        </div>
+                   </div>
+                    <div class="box">
+                        <div class="time">
+                            11月14日晚上20:36
+                        </div>
+                        <div class="content">
+                            Aliquam vitae felis a massa ultrices tincidunt. Aliquam aliquam iaculis risus sed maximus. Suspendisse pretium lorem turpis, eu imperdiet enim efficitur sit amet. Mauris aliquam tellus mauris, lobortis tincidunt purus porta ac. Mauris nec tellus in elit interdum tempus. Nullam pellentesque aliquam purus, vitae dignissim neque tincidunt ut. Aliquam id cursus libero.
+                        </div>
+                   </div>
+                    <div class="box">
+                        <div class="time">
+                            11月14日晚上20:36
+                        </div>
+                        <div class="content">
+                            Aliquam vitae felis a massa ultrices tincidunt. Aliquam aliquam iaculis risus sed maximus. Suspendisse pretium lorem turpis, eu imperdiet enim efficitur sit amet. Mauris aliquam tellus mauris, lobortis tincidunt purus porta ac. Mauris nec tellus in elit interdum tempus. Nullam pellentesque aliquam purus, vitae dignissim neque tincidunt ut. Aliquam id cursus libero.
+                        </div>
+                   </div>
+                </div> 
+            </div>
+    	</div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+<script type="text/javascript">
+    $(function(){
+       $('.Mine_addressAdd  .address_detail .label .item-title .box a').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+       })
+    })
+</script>
+</body>
+</html>

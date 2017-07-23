@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>立即购买-地址未添加</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/xia.css"/>
+<link rel="stylesheet" type="text/css" href="css/wang.css"/>
+</head>
+
+<body>
+<header>
+	<div class="newAdd_search">
+		<input type="text" placeholder="请输入区域/商圈/地址" class="txt"/>
+	</div>
+</header>
+<section class="page_center_box"> 
+	<!-- 主要内容部分 --> 
+	<div class="newAdd_address">
+		<div class="hostCity">
+			所在城市：合肥市<i class="ico"></i>
+		</div>
+		<div>
+			<div class="border_b label_box">
+				<label>
+					<span class="ico radioInt">
+						<input type="radio">
+					</span>
+					<div class="address black3">
+						<p class="wz1">橙言的小店合肥蜀山区门店 0551-12345678</p>
+						<p class="wz2">收货地址：合肥市 蜀山区 望江西路288号 华润五彩国际904室</p>
+					</div>
+				</label>
+			</div>
+			<div class="border_b label_box">
+				<label>
+					<span class="ico radioInt">
+						<input type="radio">
+					</span>
+					<div class="address black3">
+						<p class="wz1">橙言的小店合肥蜀山区门店 0551-12345678</p>
+						<p class="wz2">收货地址：合肥市 蜀山区 望江西路288号 华润五彩国际904室</p>
+					</div>
+				</label>
+			</div>
+			<div class="border_b label_box">
+				<label>
+					<span class="ico radioInt">
+						<input type="radio">
+					</span>
+					<div class="address black3">
+						<p class="wz1">橙言的小店合肥蜀山区门店 0551-12345678</p>
+						<p class="wz2">收货地址：合肥市 蜀山区 望江西路288号 华润五彩国际904室</p>
+					</div>
+				</label>
+			</div>
+		</div>
+	</div>
+	<!-- 主要内容部分 --> 
+</section>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script> 
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script> 
+<script>
+	$('.newAdd_address .label_box').click(function(){
+		$('.newAdd_address .label_box .radioInt').removeClass('on');
+		$(this).find('.radioInt').addClass('on');
+		});
+</script>
+</body>
+</html>

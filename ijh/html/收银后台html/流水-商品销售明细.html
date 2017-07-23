@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>流水-商品销售明细</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content full_wrapper-content"> 
+    <!--右侧内容-->
+    <div class="cateBox_right full_cateBox_right">    	
+        <div class="dispatch_serch">
+            <div class="clearfix list_box">
+            	<span class="fl">商品分类：</span>
+            	<span class="fl"><select class="tuan_topser tuan_topserw1"><option>全部分类</option> <option>支付宝</option> <option>微信</option></select></span>
+            </div>
+            <div class="clearfix list_box">
+            	<span class="fl">商品：</span>
+                <span class="fl ml10"><input type="text" placeholder="输入商品编码/商品名" class="tuan_topser tuan_topserw2"></span> <input type="button" class="btn btn-primary btn-sm ml20" value="确 定"> 
+            </div>
+        </div>
+        <div class="tableBox">
+        	<div class="tableBox_top">
+                <div class="fr">
+                    <a href="javascript:;" class="btn btn_hover fl tab_btn_import"><i class="glyphicon glyphicon-log-out"></i>导出</a>
+                    <a href="javascript:;" class="btn btn_hover fl tab_btn_del"><i class="glyphicon glyphicon-trash"></i>删除</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                    	<th class="check_box"><input type="checkbox"></th>
+                        <th>序号</th>
+                        <th>商品编码</th>
+                        <th>交易时间</th>
+                        <th>分类</th>
+                        <th>商品名</th>
+                        <th>进货价</th>
+                        <th>销售价</th>
+                        <th>消费类型</th>
+                        <th>销售数量</th>
+                        <th>销售额</th>
+                        <th>毛利</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="check_box"><input type="checkbox"></td>
+                        <td>1</td>
+                        <td>6928468912</td>
+                        <td>2017-01-06 <span class="ml10">18:05</span></td>
+                        <td>茶叶</td>
+                        <td>六安瓜片</td>
+                        <td>15元</td>
+                        <td>80</td>
+                        <td>会员</td>
+                        <td>1盒</td>
+                        <td>79.2</td>
+                        <td>64.8</td>
+                    </tr>
+                    <tr>
+                        <td class="check_box"><input type="checkbox"></td>
+                        <td>1</td>
+                        <td>6928468912</td>
+                        <td>2017-01-06 <span class="ml10">18:05</span></td>
+                        <td>茶叶</td>
+                        <td>六安瓜片</td>
+                        <td>15元</td>
+                        <td>80</td>
+                        <td>会员</td>
+                        <td>1盒</td>
+                        <td>79.2</td>
+                        <td>64.8</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--页码-->
+            <div class="paging">
+                <span>91 条记录 1/10 页</span>
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
+                <span class="on">1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">下5页</a>
+                <a href="#">最后一页</a>
+            </div>
+            <!--页码end-->
+    </div>
+    <!--右侧内容end--> 
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<!--提现-->
+<div class="mask_cont tixian_mask">
+	<div class="mask_cont_tit">余额转出到银行卡 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="int_box mb20"><span class="fl">银行卡：</span><span class="fr">2-3日到账</span><div class="int"><input type="text" placeholder="招商银行  尾号：7890"></div></div>
+        <div class="int_box mb20"><span class="fl">提现金额：</span><span class="fr">元</span><div class="int"><input type="text" placeholder="最多可转出1000元"></div></div>
+        <div class="text_c mt30">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary">确定</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.tixian_mask').height();
+	var evlt_w = $('.tixian_mask').width();
+	$('.tixian_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.tixian_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tixian_btn").click(function(){
+		$('.tixian_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".tixian_mask .cancel,.tixian_mask .close,.mask_bg").click(function(){
+		$('.tixian_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--提现end-->
+</body>
+</html>

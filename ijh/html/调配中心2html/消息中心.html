@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>消息中心</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+	<div class="dispatch_tab">
+        <ul>
+            <li class="on"><a href="#">投诉消息</a></li>
+            <li><a href="#">系统通知</a></li>
+        </ul>
+    </div>
+    <div class="change_list_box">
+        <table class="dispatch_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr class="tit">
+                <td>订单ID</td>
+                <td>投诉时间</td>
+                <td>投诉类型</td>
+                <td>被投诉人</td>
+                <td>投诉原因</td>
+                <td>处理方案</td>
+                <td>处理状态</td>
+            </tr>  
+            <tr>
+                <td>4526442</td>
+                <td>2016/10/28  19：52</td>
+                <td>商家投诉配送员</td>
+                <td>牛毛</td>
+                <td>
+                    饭菜包装破损
+                </td>
+                <td>
+                    罚款<span class="fontcl1">100</span>元
+                </td>
+                <td>
+                    <p class="black9">已处理</p>
+                </td>
+            </tr>
+            <tr>
+                <td>4526442</td>
+                <td>2016/10/28  19：52</td>
+                <td>商家投诉配送员</td>
+                <td>牛毛</td>
+                <td>
+                    饭菜包装破损
+                </td>
+                <td>
+                    罚款<span class="fontcl1">100</span>元
+                </td>
+                <td>
+                    <p class="black9">已处理</p>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    <div class="change_list_box none">
+    	<table class="dispatch_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr class="tit">
+                <td>时间</td>
+                <td>正文</td>
+            </tr>  
+            <tr>
+                <td>
+                	<p class="black9">2016/10/28  19：52</p>
+                </td>
+                <td>
+                	<p class="black6"><span class="black3">恭喜您成为第16456164位用户：根据打破世界发生看来发货按时付款后交付.....</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                	<p class="black9">2016/10/28  19：52</p>
+                </td>
+                <td>
+                	<p class="black6"><span class="black3">恭喜您成为第16456164位用户：根据打破世界发生看来发货按时付款后交付.....</span></p>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".dispatch_tab ul li").each(function(e){
+			$(this).click(function(){ 
+				$(".dispatch_tab ul li").removeClass("on");
+				$(this).addClass("on");
+				$(".change_list_box").each(function(i){ 
+					if(e==i){
+						$(".change_list_box").addClass("none");
+						$(this).removeClass("none");	
+					}else{
+						$(this).addClass("none");
+					}
+				});
+			});	
+		});
+		
+	});
+</script>
+
+</body>
+</html>

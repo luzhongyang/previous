@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>商品-商品信息管理</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content full_wrapper-content"> 
+    <!--分类-->
+    <div class="cateBox">
+        <div class="tit"><big>商品分类</big> <a href="javascript:;" class="create fr">+新建分类</a></div>
+        <ul>
+            <li> <a href="#" class="all">全部分类</a> </li>
+            <li>
+                <div class="clearfix box">
+                    <a href="#" class="fl">默认分类</a>
+                    <div class="oprt_box fr"> <a href="javascript:;" class="down fa fa-arrow-down"></a> <a href="javascript:;" class="edit fa fa-pencil"></a> <a href="javascript:;" class="del fa fa-trash"></a> </div>
+                </div>
+                <div class="clearfix edit_int">
+                    <input type="text" class="fl">
+                    <div class="oprt_box fr"> <a href="javascript:;" class="confirm fa fa-check"></a> <a href="javascript:;" class="del fa fa-trash"></a> </div>
+                </div>
+            </li>
+            <li>
+            	<div class="clearfix box">
+                    <a href="#" class="fl">茶叶</a>
+                    <div class="oprt_box fr"> <a href="javascript:;" class="up fa fa-arrow-up"></a> <a href="javascript:;" class="down fa fa-arrow-down"></a> <a href="javascript:;" class="edit fa fa-pencil"></a> <a href="javascript:;" class="del fa fa-trash"></a> </div>
+                </div>
+                <div class="clearfix edit_int">
+                    <input type="text" class="fl">
+                    <div class="oprt_box fr"> <a href="javascript:;" class="confirm fa fa-check"></a> <a href="javascript:;" class="del fa fa-trash"></a> </div>
+                </div>
+            </li>
+            <li>
+            	<div class="clearfix box">
+                    <a href="#" class="fl">水果</a>
+                    <div class="oprt_box fr"> <a href="javascript:;" class="up fa fa-arrow-up"></a> <a href="javascript:;" class="down fa fa-arrow-down"></a> <a href="javascript:;" class="edit fa fa-pencil"></a> <a href="javascript:;" class="del fa fa-trash"></a> </div>
+                </div>
+                <div class="clearfix edit_int">
+                    <input type="text" class="fl">
+                    <div class="oprt_box fr"> <a href="javascript:;" class="confirm fa fa-check"></a> <a href="javascript:;" class="del fa fa-trash"></a> </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--分类end--> 
+    <!--右侧内容-->
+    <div class="cateBox_right">
+        <div class="tableBox">
+        	<div class="tableBox_top">
+            	<div class="serch_box fl"><input type="text" class="text" placeholder="搜索商品编码/名称"><input type="submit" value="" class="btn"></div>
+                <div class="fr">
+                	<a href="商品-商品信息管理-新增商品.html" class="btn btn_hover fl J_menuItem"><i class="fa fa-plus"></i>新增商品</a>
+                    <a href="javascript:;" class="btn btn_hover fl tab_btn_import"><i class="glyphicon glyphicon-log-in"></i>导入</a>
+                    <a href="javascript:;" class="btn btn_hover fl tab_btn_del"><i class="glyphicon glyphicon-trash"></i>删除</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                    	<th class="check_box"><input type="checkbox"></th>
+                        <th>序号</th>
+                        <th>商品名</th>
+                        <th>商品编码</th>
+                        <th>分类</th>
+                        <th>进货价</th>
+                        <th>销售价</th>
+                        <th>会员价</th>
+                        <th>规格</th>
+                        <th>生产日期</th>
+                        <th>保质期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="check_box"><input type="checkbox"></td>
+                        <td>1</td>
+                        <td>六安瓜片</td>
+                        <td>111111111111</td>
+                        <td>茶叶</td>
+                        <td>15元</td>
+                        <td>80</td>
+                        <td>79.2</td>
+                        <td>70g/盒</td>
+                        <td>2017/01/05</td>
+                        <td>12个月</td>
+                    </tr>
+                    <tr>
+                        <td class="check_box"><input type="checkbox"></td>
+                        <td>1</td>
+                        <td>六安瓜片</td>
+                        <td>111111111111</td>
+                        <td>茶叶</td>
+                        <td>15元</td>
+                        <td>80</td>
+                        <td>79.2</td>
+                        <td>70g/盒</td>
+                        <td>2017/01/05</td>
+                        <td>12个月</td>
+                    </tr>
+                    <tr>
+                        <td class="check_box"><input type="checkbox"></td>
+                        <td>1</td>
+                        <td>六安瓜片</td>
+                        <td>111111111111</td>
+                        <td>茶叶</td>
+                        <td>15元</td>
+                        <td>80</td>
+                        <td>79.2</td>
+                        <td>70g/盒</td>
+                        <td>2017/01/05</td>
+                        <td>12个月</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--页码-->
+            <div class="paging">
+                <span>91 条记录 1/10 页</span>
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
+                <span class="on">1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">下5页</a>
+                <a href="#">最后一页</a>
+            </div>
+            <!--页码end-->
+    </div>
+    <!--右侧内容end--> 
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<script>
+$(document).ready(function() {
+	$(".cateBox ul li a.fl").each(function(){
+		var _text = $(this).text();
+		$(this).parents("li").find("input").val(_text);
+	});
+	
+    $(".cateBox ul li .oprt_box .edit").click(function(){
+		$(this).parents("li").find(".box").hide();
+		$(this).parents("li").find(".edit_int").show();
+	});
+	
+	$(".cateBox ul li .oprt_box .confirm").click(function(){
+		$(this).parents("li").find(".box").show();
+		$(this).parents("li").find(".edit_int").hide();
+		var _val = $(this).parents("li").find("input").val();
+		if($(this).parents("li").find("input").val() != ""){
+			$(this).parents("li").find("a.fl").text(_val);
+		}
+		$(this).parents("li").removeClass("show");
+	});
+	
+	$(".cateBox ul li .oprt_box .del").click(function(){
+		$(this).parents("li").remove();
+		attr_click();
+	});	
+	
+	$('.cateBox .tit .create').click(function(){
+		$(".cateBox ul").append('<li class="show"><div class="clearfix box"><a href="#" class="fl"></a><div class="oprt_box fr"><a href="javascript:;" class="up fa fa-arrow-up"></a><a href="javascript:;" class="down fa fa-arrow-down"></a><a href="javascript:;" class="edit fa fa-pencil"></a><a href="javascript:;" class="del fa fa-trash"></a></div></div><div class="clearfix edit_int"><input type="text" class="fl"><div class="oprt_box fr"> <a href="javascript:;" class="confirm fa fa-check"></a><a href="javascript:;" class="del fa fa-trash"></a></div></div></li>');
+		attr_click();
+	});
+	
+	
+	function attr_click()
+	{
+		$(".cateBox ul li a.fl").each(function(){
+			var _text = $(this).text();
+			$(this).parents("li").find("input").val(_text);
+		});
+		
+		$(".cateBox ul li .oprt_box .edit").click(function(){
+			$(this).parents("li").find(".box").hide();
+			$(this).parents("li").find(".edit_int").show();
+		});
+		
+		$(".cateBox ul li .oprt_box .confirm").click(function(){
+			$(this).parents("li").find(".box").show();
+			$(this).parents("li").find(".edit_int").hide();
+			var _val = $(this).parents("li").find("input").val();
+			if($(this).parents("li").find("input").val() != ""){
+				$(this).parents("li").find("a.fl").text(_val);
+			}
+		});
+		
+		$(".cateBox ul li .oprt_box .del").click(function(){
+			$(this).parents("li").remove();
+		});
+		
+		$(".cateBox ul li.show .oprt_box .confirm").click(function(){
+			$(this).parents("li").removeClass("show");
+		});
+	}
+});
+</script>
+<!--删除提示-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">确定删除选定数据吗？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">考虑一下</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">确认删除</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_del").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--删除提示end-->
+<!--导入-->
+<div class="mask_cont import_mask">
+	<div class="mask_cont_tit">导入商品 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="nr">
+        	<p class="black6">操作步骤：</p>
+            <p class="black6">1.如没创建过导入文件数据，建议<a href="#">下载《导入商品模板》</a>；</p>
+            <p class="black6">2.已有建好导入数据文件，直接导入。</p>
+            <div class="file_int"><input type="text" class="text"><span class="btn_file_box">选择文件<input type="file" value="选择文件" class="btn_file"></span></div>
+            <P class="pointcl"><small>每次最多导入1000条，如有大量商品请分批导入。</small></P>
+        </div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">导入</a>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.import_mask').height();
+	var evlt_w = $('.import_mask').width();
+	$('.import_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.import_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_import").click(function(){
+		$('.import_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".import_mask .cancel,.import_mask .close,.mask_bg").click(function(){
+		$('.import_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--导入end-->
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>商城-我的-我的订单-申请售后（退款）</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="mall-apply-tui-cont"> 
+                    <div class="link-one pub_list" id="fuwu-show">                           
+                        <div class="pub_list_bd">请选择申请服务</div>
+                        <div class="xia-jt"></div>
+                    </div>  
+                    <div class="link-one pub_list"  id="huowu-show">                           
+                        <div class="pub_list_bd">请选择货物状态</div>
+                        <div class="xia-jt"></div>
+                    </div> 
+                    <div class="link-one pub_list">                           
+                        <div class="pub_list_bd">退款金额：<span class="fontcl1">￥30</span></div>
+                    </div>
+                    <div class="link-one pub_list">                           
+                        <div class="pub_list_bd"><input type="text" class="inp-txt" value="" placeholder="退款说明"></div>
+                    </div>
+                    <div class="link-one pub_list">                           
+                        <span class="mr20">手机号码</span><div class="pub_list_bd"><input type="text" class="inp-txt" value="" placeholder="填写手机号码便于卖家联系您"></div>
+                    </div>
+                    <div class="img-uploader">
+                        <ul>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <img src="img/idx_ad5.png">
+                                <div class="cha-ico"></div>
+                            </li>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <div class="file-txt">上传中...</div>
+                            </li>
+                        </ul>
+                        <div class="inp-box fl text_c">
+                            <div class="up-txt">
+                                <p class="black6">上传凭证</p>
+                                <small class="black9">(最多三张)</small>
+                            </div>
+                            <input type="file" class="upload-input" accept="image/*" multiple>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <a href="#" class="tijiao-btn">提交申请</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 选择申请服务 -->
+<div class="service-tanchu" style="display:none">
+    <div class="mall-service-upload-cont">
+        <div class="service-menu">
+            <div class="menu1 border_b"><label class="pub_list"><span class="pub_list_bd">仅退款</span><input type="checkbox" class="fuwu-input"></label></div> 
+            <div class="menu1 border_b"><label class="pub_list"><span class="pub_list_bd">退货退款</span><input type="checkbox" class="fuwu-input"></label></div> </div>
+        </div>
+    <div class="mall-myservice-mask"></div>    
+</div>   
+<!-- 选择申请服务弹出end -->
+
+<!-- 请选择货物状态 -->
+<div class="huowu-tanchu" style="display:none">
+    <div class="mall-huowu-upload-cont">
+        <div class="huowu-menu">
+            <div class="menu1 border_b"><label class="pub_list"><span class="pub_list_bd">收到货物</span><input type="checkbox" class="huowu-input"></label></div> 
+            <div class="menu1 border_b"><label class="pub_list"><span class="pub_list_bd">未收到货物</span><input type="checkbox" class="huowu-input"></label></div> </div>
+        </div>
+    <div class="mall-huowu-mask"></div>    
+</div>   
+<!-- 请选择货物状态弹出end -->
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+    
+        function yiyuan_time(id) {
+            var t = Math.floor($("#" + id).attr('rel'));
+            t--;
+            var d = Math.floor(t / 60 / 60 / 24);
+            var h = Math.floor(t / 60 / 60 % 24);
+            var m = Math.floor(t / 60 % 60);
+            var s = Math.floor(t % 60);
+            $("#" + id).attr('rel', t);
+            $("#" + id).html(m + '分' + s + '秒');
+        }
+        setInterval(function () {
+            for(i=1;i<100;i++){
+                yiyuan_time("daojishi" + i);
+            }
+        }, 1000);//倒计时js部分结束
+
+    });
+        
+</script> 
+
+<!-- 选择申请服务弹出 -->
+<script>
+    $('#fuwu-show').on("click",function(){
+        $(".service-tanchu").fadeIn(300);
+        $('.mall-myservice-mask').on("click",function(){
+            $(".service-tanchu").fadeOut(300);   
+        });
+    });   
+</script>
+<!-- 选择申请服务弹出end -->
+<!-- 请选择货物状态 -->
+<script>
+    $('#huowu-show').on("click",function(){
+        $(".huowu-tanchu").fadeIn(300);
+        $('.mall-huowu-mask').on("click",function(){
+            $(".huowu-tanchu").fadeOut(300);   
+        });
+    });   
+</script>
+<!-- 请选择货物状态弹出end -->
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>首页</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+    	<!--头部-->
+        <!--<header class="bar bar-nav">
+            <a class="icon icon-me pull-left open-panel"></a>
+            <div class="sy_serch">
+                <div class="searchbar">
+                    <div class="search-input">
+                        <i class="iconfont icon-place"></i>
+                        <input type="search" id='search' value='中国邮政储蓄银行（望江路...）'/>
+                        <i class="iconfont icon-xiangyou ico_2"></i>
+                    </div>
+                </div>
+            </div>
+            <button class="button pull-right"><i class="iconfont icon-sousuo"></i></button>
+        </header>-->
+		<!--头部结束-->
+        <!-- 工具栏 -->
+        <nav class="bar bar-tab">
+            <a class="tab-item external active" href="#">
+                <span class="iconfont icon-shouye"></span>
+                <span class="tab-label">首页</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="iconfont icon-581danxianpaobu"></span>
+                <span class="tab-label">跑腿</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="iconfont icon-dingdan"></span>
+                <span class="tab-label">订单</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="iconfont icon-faxian"></span>
+                <span class="tab-label">发现</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="iconfont icon-profile"></span>
+                <span class="tab-label">我的</span>
+            </a>
+        </nav>
+        <!-- 工具栏结束 -->
+        
+        <div class="content"> 
+        	<!--幻灯banner-->
+            <!-- Slider -->
+            <div class="swiper-container" data-space-between='10'>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="images/banner.png" style='width: 100%'></div>
+                    <div class="swiper-slide"><img src="images/banner.png" style='width: 100%'></div>
+                    <div class="swiper-slide"><img src="images/banner.png" style='width: 100%'></div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <!--搜索栏-->
+                <div class="sy_serch">
+                    <div class="searchbar row">
+                        <div class="search-input col-85">
+                            <i class="iconfont icon-place"></i>
+                            <input type="search" id='search' placeholder='中国邮政储蓄银行（望江路...）'/>
+                            <i class="iconfont icon-xiangyou ico_2"></i>
+                        </div>
+                        <a class="button button-fill button-primary col-15"><span class="iconfont icon-sousuo"></span></a> 
+                    </div>
+                </div>
+                <!--搜索栏end--> 
+            </div>
+            <!--幻灯banner结束-->
+            <!--外卖功能-->
+            <div class="funct_list_box_bg">
+                <div class="funct_list_box">
+                    <div class="row no-gutter">
+                      <div class="col-25 funct_list"><a href="#"><img src="images/functIco1.png"><p>品牌馆</p></a></div>
+                      <div class="col-25 funct_list"><a href="#"><img src="images/functIco2.png"><p>拼团</p></a></div>
+                      <div class="col-25 funct_list"><a href="#"><img src="images/functIco3.png"><p>餐饮美食</p></a></div>
+                      <div class="col-25 funct_list"><a href="#"><img src="images/functIco4.png"><p>水果牛奶</p></a></div>
+                      <div class="col-25 funct_list"><a href="#"><img src="images/functIco5.png"><p>鲜花</p></a></div>
+                      <div class="col-25 funct_list"><a href="#"><img src="images/functIco6.png"><p>小吃</p></a></div>
+                      <div class="col-25 funct_list"><a href="#"><img src="images/functIco7.png"><p>蛋糕甜点</p></a></div>
+                      <div class="col-25 funct_list"><a href="#"><img src="images/functIco8.png"><p>更多</p></a></div>
+                    </div>
+                </div>
+            </div>
+            <!--外卖功能结束-->
+			<div class="list-block sy_shangjia_bt">
+              <ul>
+                <li class="item-content item-link">
+                  <div class="item-media"><i class="iconfont icon-dianpu"></i></div>
+                  <div class="item-inner">
+                    <div class="item-title"><span class="black6">附近商家</span></div>
+                    <div class="item-after"><a href="#" class="black9">更多</a></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!--外卖商家列表-->
+            <div class="tabs shangjia_list_box">
+                <div id="tab1" class="tab infinite-scroll active">
+                      <div class="list-block">
+                        <ul class="list-container">
+                          <li class="shangjia_list">
+                                <div class="box">
+                                    <div class="pub_img"><a href="#"><img src=""></a></div>
+                                    <div class="pub_wz">
+                                        <div class="fl left">
+                                            <h3 class="overflow_clear"><a href="#" class="black">商家名称</a></h3>
+                                            <div class="black9"><span class="starBg"><span class="star" style="width:60%;"></span></span>月售200份</div>
+                                            <p class="black9"><span class="fontcl1">￥5</span>配送费</p>
+                                        </div>
+                                        <div class="fr right">
+                                        	<p class="black9"><span class="fontcl1">￥<big>30</big></span>起送</p>
+                                            <p class="black9 mt10 pad_t10 overflow_clear">666米/<span class="maincl">30分钟</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="cl"></div>
+                                </div>
+                                <div class="tag_box">
+                                	<div class="list"><img src="images/tag1.png">新用户首次下单立减15元</div>
+                                    <div class="list"><img src="images/tag2.png">在线支付满30元立减10元！</div>
+                                    <div class="list"><img src="images/tag3.png">商家支持在线支付</div>
+                                    <div class="list"><img src="images/tag4.png">店铺5元、10元优惠券可领</div>
+                                </div>
+                                <div class="lab_box"><img src="images/lab_new.png"></div>
+                          </li>
+                          <li class="shangjia_list">
+                                <div class="box">
+                                    <div class="pub_img"><a href="#"><img src=""></a></div>
+                                    <div class="pub_wz">
+                                        <div class="fl left">
+                                            <h3 class="overflow_clear"><a href="#" class="black">商家名称</a></h3>
+                                            <div class="black9"><span class="starBg"><span class="star" style="width:60%;"></span></span>月售200份</div>
+                                            <p class="black9"><span class="fontcl1">￥5</span>配送费</p>
+                                        </div>
+                                        <div class="fr right">
+                                        	<p class="black9"><span class="fontcl1">￥<big>30</big></span>起送</p>
+                                            <p class="black9 mt10 pad_t10">666米</p>
+                                        </div>
+                                    </div>
+                                    <div class="cl"></div>
+                                </div>
+                                <div class="tag_box">
+                                	<div class="list"><img src="images/tag1.png">新用户首次下单立减15元</div>
+                                    <div class="list"><img src="images/tag2.png">在线支付满30元立减10元！</div>
+                                    <div class="list"><img src="images/tag3.png">商家支持在线支付</div>
+                                    <div class="list"><img src="images/tag4.png">店铺5元、10元优惠券可领</div>
+                                </div>
+                                <div class="lab_box"><img src="images/lab_brand.png"></div>
+                          </li>
+                          <li class="shangjia_list">
+                                <div class="box">
+                                    <div class="pub_img"><a href="#"><img src=""></a></div>
+                                    <div class="pub_wz">
+                                        <div class="fl left">
+                                            <h3 class="overflow_clear"><a href="#" class="black">商家名称</a></h3>
+                                            <div class="black9"><span class="starBg"><span class="star" style="width:60%;"></span></span>月售200份</div>
+                                            <p class="black9"><span class="fontcl1">￥5</span>配送费</p>
+                                        </div>
+                                        <div class="fr right">
+                                        	<p class="black9"><span class="fontcl1">￥<big>30</big></span>起送</p>
+                                            <p class="black9 mt10 pad_t10">666米</p>
+                                        </div>
+                                    </div>
+                                    <div class="cl"></div>
+                                </div>
+                                <div class="tag_box">
+                                	<div class="list"><img src="images/tag1.png">新用户首次下单立减15元</div>
+                                    <div class="list"><img src="images/tag2.png">在线支付满30元立减10元！</div>
+                                    <div class="list"><img src="images/tag3.png">商家支持在线支付</div>
+                                    <div class="list"><img src="images/tag4.png">店铺5元、10元优惠券可领</div>
+                                </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- 加载提示符 -->
+                      <div class="infinite-scroll-preloader">
+                        <div class="preloader">
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <!--外卖商家列表结束-->
+            
+            
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+	/*头部下拉开始*/
+    if ($('.saixuan_pull').length > 0)/*判断是否存在这个html代码*/
+	{
+		$('.saixuan_pull .saixuan_pull_list').width(100 / $('.saixuan_pull .saixuan_pull_list').length + '%');
+	}
+	
+	$(".saixuan_pull_list .click").click(function(){
+		
+		if($(this).hasClass("on")){
+			
+			$(".saixuan_pull_list .click").removeClass("on");
+			$(".saixuan_pull_list .saixuan_pull_child_box").hide();
+			
+			$(".saixuan_pull_box .mask_bg").hide();
+		}
+		else{
+			
+			$(".saixuan_pull_list .click").removeClass("on");
+			$(".saixuan_pull_list .saixuan_pull_child_box").hide();
+			
+			$(this).addClass("on");
+			$(this).parent().find(".saixuan_pull_child_box").toggle();
+			$(".saixuan_pull_box .mask_bg").show();
+		}
+	});
+	
+	$('.saixuan_fenlei .saixuan_pull_child').click(function(){
+		var rel = $(this).attr('rel');
+		$(this).parent().find(".saixuan_pull_child").removeClass("on");
+		$(this).addClass("on");
+		$('.saixuan_fenlei_list_nr').hide();
+		
+		if($('#a'+rel).length>0){
+			$('.saixuan_fenlei_list_box').show();
+			$('#a'+rel).show();
+			$('.saixuan_pull_child .linkIco').show();
+		}else{
+			$('.saixuan_fenlei_list_box').hide();
+			$('.saixuan_pull_child .linkIco').hide();
+		}
+		
+	});
+	
+	/*头部下拉结束*/
+});
+</script>
+<script>
+$(document).on("pageInit", function() {
+      //多个标签页下的无限滚动
+      var loading = false;
+      // 每次加载添加多少条目
+      var itemsPerLoad = 20;
+      // 最多可加载的条目
+      var maxItems = 100;
+      var lastIndex = $('.list-container li')[0].length;
+      function addItems(number, lastIndex) {
+        // 生成新条目的HTML
+        var html = '';
+        for (var i = lastIndex + 1; i <= lastIndex + number; i++) {
+          html += '<li class="item-content" onClick="alert(1)"><div class="item-inner"><div class="item-title">新条目</div></div></li>';
+        }
+        // 添加新条目
+        $('.infinite-scroll.active .list-container').append(html);
+      }
+      $(page).on('infinite', function() {
+        // 如果正在加载，则退出
+        if (loading) return;
+        // 设置flag
+        loading = true;
+        var tabIndex = 0;
+        if($(this).find('.infinite-scroll.active').attr('id') == "tab1"){
+          tabIndex = 0;
+        }
+        lastIndex = $('.list-container').eq(tabIndex).find('li').length;
+        // 模拟1s的加载过程
+        setTimeout(function() {
+          // 重置加载flag
+          loading = false;
+          if (lastIndex >= maxItems) {
+            // 加载完毕，则注销无限加载事件，以防不必要的加载:$.detachInfiniteScroll($('.infinite-scroll').eq(tabIndex));多个无线滚动请自行根据自己代码逻辑判断注销时机
+            // 删除加载提示符
+            $('.infinite-scroll-preloader').eq(tabIndex).hide();
+            return;
+          }
+          addItems(itemsPerLoad,lastIndex);
+          // 更新最后加载的序号
+          lastIndex =  $('.list-container').eq(tabIndex).find('li').length;
+          $.refreshScroller();
+        }, 1000);
+      });
+  });
+</script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>收货地址-新添地址</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+
+<body>
+<div class="page-group">
+	 <div class="page page-current"> 
+            <!--头部-->
+            <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left back"> <span class="Ico1"></span> </a><a class="button button-link button-nav pull-right">保存</a>
+                <h1 class="title">新添地址</h1>
+            </header>
+            <!--头部结束-->
+            <div class="content">
+                     <div class="dizhi-add-box mt10">
+                     		<div class="list-block border_b border_t">
+                                    <ul>
+                                          <li>
+                                                <div class="item-content">
+                                                      <div class="item-inner">
+                                                            <div class="item-title label">联系人</div>
+                                                            <div class="item-input">
+                                                              <input type="text" placeholder="您的姓名">
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                          </li>
+                                          <li>
+                                                <div class="item-content">
+                                                          <div class="item-inner">
+                                                                <div class="item-title label">手机号</div>
+                                                                <div class="item-input">
+                                                                  <input type="text" placeholder="配送员联系您的电话">
+                                                                </div>
+                                                          </div>
+                                                </div>
+                                          </li>
+                                          <li>
+                                                <div class="item-content item-link">
+                                                          <div class="item-inner">
+                                                                <div class="item-title label">收货地址</div>
+                                                                <div class="item-input">
+                                                                    <i class='dizhi-choose'></i><input type="text" placeholder="请选择小区、大厦或学校" style="display:inline-block;width:90%">
+                                                                </div>
+                                                          </div>
+                                                </div>
+                                          </li>
+                                          <li>
+                                                <div class="item-content">
+                                                          <div class="item-inner">
+                                                                <div class="item-title label">门牌号</div>
+                                                                <div class="item-input">
+                                                                  <input type="text" placeholder="请输入门牌号等详细信息">
+                                                                </div>
+                                                          </div>
+                                                </div>
+                                          </li>
+                                          <li>
+                                                <div class="item-content">
+                                                          <div class="item-inner open-vertical-modal">
+                                                                <div class="item-title label">标签</div>
+                                                                <div class="item-input txt_left">
+                                                                	<input type="text" placeholder="请选择地址标签">
+                                                                </div>
+                                                          </div>
+                                                          <i class="xia-icon"></i>
+                                                </div>
+                                          </li>
+                                    </ul>
+                            </div>
+                     </div>
+            </div>
+	  </div>
+
+
+</div>
+<style>
+.modal-inner:after{background:none}
+.modal-buttons-vertical .modal-button:after{background:none}
+</style>
+<script>
+$(document).on('click','.open-vertical-modal', function () {
+    $.modal({
+      title:  "<div class='txt_left maincl'>选择地址标签</div>",
+      verticalButtons: true,
+      buttons: [
+        {
+          text: "<div class='bgcolor_white'>无</div>",
+          onClick: function() {
+			  $('.open-vertical-modal .item-input').html("<div class='biaoqian nobg'>无</div>");
+          }
+        },
+        {
+          text: "<div class='bgcolor_white'>家</div>",
+          onClick: function() {
+			  $('.open-vertical-modal .item-input').html("<div class='biaoqian bg2'>家</div>");
+          }
+        },
+        {
+          text: "<div class='bgcolor_white'>公司</div>",
+          onClick: function() {
+			  $('.open-vertical-modal .item-input').html("<div class='biaoqian bg1'>公司</div>");
+          }
+        },
+		{
+          text: "<div class='bgcolor_white'>学校</div>",
+          onClick: function() {
+			  $('.open-vertical-modal .item-input').html("<div class='biaoqian bg3'>学校</div>");
+          }
+        },
+      ]
+    })
+    });
+</script>
+
+
+
+
+
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

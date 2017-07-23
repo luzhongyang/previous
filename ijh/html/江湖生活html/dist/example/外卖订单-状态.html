@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>外卖-首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+<style type="text/css">
+    .page_cont,body{background: #fff;}
+</style>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="orderTakeOut">
+                    <div class="statusProgress">
+                        <div class="tip on">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>订单已完成</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>订单已送达</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>配送员已取货</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>配送员已接单</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>商家已接单</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>订单已支付</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>订单提交成功</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    	</div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+<script type="text/javascript">
+    $(function(){
+       $('.Mine_addressAdd  .address_detail .label .item-title .box a').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+       })
+    })
+</script>
+</body>
+</html>

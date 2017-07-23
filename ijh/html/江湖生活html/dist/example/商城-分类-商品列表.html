@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>商城-分类-商品列表</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <!--头部搜索-->
+            <div class="coupons_sousuo-cont">
+                <div class="sousuo-box mt5 ml10 mr10 sousuo-box2 mb5">
+                    <div class="xuanze-box fl">
+                            <span class="select-txt">商品</span><i class="ico-jt"></i>
+                            <div class="xiala-box" style="display:none">
+                                <ul>
+                                    <li><a href="javascript:;" class="xiala-a">商品</a></li>
+                                    <li><a href="javascript:;" class="xiala-a">店铺</a></li>
+                                </ul>
+                            </div>                          
+                    </div>              
+                    <form  method="" action="" class="suo-form">                                            
+                        <input type="text" value="" class="shuru-inp" id="souInput" placeholder="搜索商家、商品"><input type="button" class="sou-btn">
+                        <a href="javascript:" class="icon-cha" id="clearCha"></a>
+                    </form>
+                    <div class="clear"></div>         
+                </div>                
+            </div>
+            <!--头部搜索end-->
+            <!--头部下拉-->
+            <div class="takeout-list-title border_b mb10  shangcheng-lei-sort-tab">
+               <a class="list" href="javascript:;" id="total-paixu">综合排序</a>
+               <a class="list" href="javascript:;">销量优先</a>
+               <a class="list on" href="javascript:;">价格
+                    <i class="jt-box">
+                        <em class="up-jt jt-ico on"></em><em class="down-jt jt-ico"></em>
+                    </i>
+               </a>
+               <span class="line"></span>
+               <a href="javascript:;" class="see_style"></a>
+            </div>
+            <div class="takeout-list-mask" style="padding-top:88px;">
+                <div class="mask-list">
+                    <div class="order">
+                        <ul>
+                            <li class="on"><a href="#">智能排序</a><i class="ico_on"></i></li>
+                            <li><a href="#">距离最近</a><i class="ico_on"></i></li>
+                            <li><a href="#">评分最高</a><i class="ico_on"></i></li>
+                            <li><a href="#">销售最高</a><i class="ico_on"></i></li>
+                            <li><a href="#">起送价最低</a><i class="ico_on"></i></li>
+                            <li><a href="#">最早送达</a><i class="ico_on"></i></li>
+                        </ul>
+                    </div>
+                    <div class="takeout_mask-bg"></div>
+                </div> 
+            </div>
+            <!--头部下拉end-->
+            <div class="container_mid">
+                <!--产品列表-->
+                <div class="goods_list_box mb10 shangcheng-index-goodlist">
+                    <ul>
+                        <li class="goods_list">
+                            <div class="box">
+                                <div class="img"><a href="#"><img src=""></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…此处显示团购商品名称…此处显示团购商品名称…</a></h4>
+                                    <p class="fontcl2"><small>￥</small>15.8 </P>
+                                    <P class="black9">哈哈玩具店</P>
+                                    <a href="javascript:;" class="btn"></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                            <div class="box">
+                                <div class="img"><a href="#"><img src=""></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                    <p class="fontcl2"><small>￥</small>15.8 </P>
+                                    <P class="black9">哈哈玩具店</P>
+                                    <a href="javascript:;" class="btn"></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                            <div class="box">
+                                <div class="img"><a href="#"><img src=""></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                    <p class="fontcl2"><small>￥</small>15.8 </P>
+                                    <P class="black9">哈哈玩具店</P>
+                                    <a href="javascript:;" class="btn"></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                            <div class="box">
+                                <div class="img"><a href="#"><img src=""></a></div>
+                                <div class="wz_box">
+                                    <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                    <p class="fontcl2"><small>￥</small>15.8 </P>
+                                    <P class="black9">哈哈玩具店</P>
+                                    <a href="javascript:;" class="btn"></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <!--产品列表end-->
+            </div>
+        </div>
+    </div>
+</div>
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+
+<script type="text/javascript">
+    // 综合排序下拉
+$(function(){
+    $('.takeout-list-title .list').click(function(){
+        $('.takeout-list-title .list').removeClass("on"); 
+        $(this).addClass("on");   
+    });
+
+    $("#total-paixu").on("click",function(){
+        if($('.takeout-list-mask').css("display") == "none" && $('.takeout-list-mask .mask-list').css("display")== "none"){
+              $("#total-paixu").addClass("on"); 
+              $('.takeout-list-mask').show(); 
+              $('.takeout-list-mask .mask-list').show();       
+        }else{
+              $("#total-paixu").removeClass("on"); 
+              $('.takeout-list-mask').hide(); 
+              $('.takeout-list-mask .mask-list').hide();  
+        }
+    });
+
+    $(".takeout_mask-bg").on("click",function(){
+        $(this).parent('.takeout-list-mask .mask-list').hide();
+        $(this).parents(".takeout-list-mask").hide();
+        $("#total-paixu").removeClass("on"); 
+    });
+
+
+
+    if($('.takeout-list-title').length > 0){
+        $('.takeout-list-title a.list').width(100 / $('.takeout-list-title a.list').length + '%');  
+    }
+    $('.mask-list li').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+    })
+
+    // 价格箭头
+    $('.takeout-list-title a.list').click(function(){
+        if($(this).hasClass('on') && $(this).find('.jt-box .up-jt').hasClass('on')){
+            $(this).find('.jt-box .up-jt').removeClass('on');
+            $(this).find('.jt-box .down-jt').addClass('on');
+        }else{
+            $(this).find('.jt-box .up-jt').addClass('on');
+            $(this).find('.jt-box .down-jt').removeClass('on');
+        }
+    });
+
+});
+     
+</script>
+
+<script type="text/javascript">
+	// $('.takeout-list-mask .left ul li').click(function(){
+ //        var tk_idx=$(this).index();
+ //        $(this).addClass('on').siblings().removeClass('on');
+ //        $(this).parents(".list").find('.right .right_list').eq(tk_idx).show().siblings().hide();
+ //    })
+ //    $('.takeout-list-mask .right .right_list li').click(function(){
+ //        $(this).addClass('on').siblings().removeClass('on');
+ //    })
+ //    $('.takeout-list-title a.list').click(function(){
+ //        $(this).toggleClass('on').siblings().removeClass('on'); 
+ //    })
+    
+    // 综合排序
+    // $("#total-paixu").on("click",function(){
+    //     $('.takeout-list-mask .mask-list').toggle();
+    //     if($(this).hasClass("on")){
+    //      $('.takeout-list-mask').show();
+    //     }else{
+    //      $('.takeout-list-mask').hide();
+    //     }
+            
+    // });
+
+    // $('.takeout-list-mask .choose a').click(function(){
+    //     $(this).addClass('on').siblings().removeClass('on');
+    // })
+
+    // $('.takeout_mask-bg').click(function(){
+    //     $('.takeout-list-mask').hide();
+    //     $('.takeout-list-title a').removeClass('on');
+    // });
+    // $('.mask-list li').click(function(){
+    //     $(this).addClass('on').siblings().removeClass('on')
+    // })
+
+
+    
+</script>
+<script>
+$('.activity .first .pull_down').click(function(){
+	$(this).parents('.activity').find('.hide_show').toggle();
+	$('.activity .first .pull_down').removeClass('on');
+	$(this).children('i').toggleClass('on');
+});
+</script>
+
+<script>
+	$(".see_style").click(function(){		
+		if($(this).hasClass("singel")&&$(this).hasClass("see_style_none")){
+			$(this).addClass("singel");
+			$(".goods_list_box").addClass("goods_list_box_singel");
+		}else if($(this).hasClass("singel")){
+			$(this).removeClass("singel");
+			$(".goods_list_box").removeClass("goods_list_box_singel");
+		}else if($(this).hasClass("see_style_none")){
+			$(this).removeClass("singel");
+			$(".goods_list_box").removeClass("goods_list_box_singel");
+		}else{
+			$(this).addClass("singel");
+			$(".goods_list_box").addClass("goods_list_box_singel");
+		}
+	});
+</script>
+
+
+<script>
+	$(".topTab_box .list").each(function(e){
+		$(this).click(function(){
+			$(this).addClass("on").siblings(".list").removeClass("on");
+			$(".list_change_cont").each(function(i){
+				if(e==i){
+					$(this).removeClass("none").siblings(".list_change_cont").addClass("none");
+				}else{
+					$(this).addClass("none")
+				}
+				if(e==1){
+					$(".see_style").addClass("see_style_none");
+				}else{
+					$(".see_style").removeClass("see_style_none");
+				}
+			});
+		});
+	});
+</script>
+<!-- 搜索框输入时-->
+<script>
+$(function(){
+    $("#souInput").on("input",function(){
+        if($(this).val().length!=0){
+           $("#clearCha").css("display","block"); 
+        }else{
+           $("#clearCha").css("display","none");
+        }
+    });
+     $("#clearCha").on("click",function(){
+            $(this).hide();
+            $("#souInput").val('');
+            $("#souInput").focus();
+    });
+});
+</script>
+<!-- 搜索框输入end-->
+<!-- 选择店铺或商品-->
+<script>
+$(function(){
+    $(".sousuo-box2 .xuanze-box").on("click",function(){
+        $(".sousuo-box2 .xiala-box").toggle();
+        if($(this).hasClass("on")){
+            $(this).removeClass("on");
+        }else{
+            $(this).addClass("on");
+        };
+    });
+    $(".sousuo-box2 .xiala-box li").on("click",function(){
+        var $txt = $(this).text();
+        $(".sousuo-box2 .select-txt").text($txt);
+    });
+    
+});
+</script>
+<!-- 选择店铺或商品end-->
+</body>
+</html>

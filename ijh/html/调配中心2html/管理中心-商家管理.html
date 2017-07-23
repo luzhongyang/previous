@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>管理中心-商家管理</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+	<div class="dispatch_caozuo">
+    	<div class="fr">
+        	<a href="javascript:;" class="btn btn-primary btn-sm add_shangjia ml10">添加商家+</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <table class="dispatch_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr class="tit">
+            <td>商家名</td>
+            <td>联系方式</td>
+            <td>地址</td>
+            <td>合作截止时间</td>
+            <td>终止合作</td>
+        </tr>  
+        <tr>
+            <td>黄焖鸡米饭</td>
+            <td>18205564125</td>
+            <td>瑶海区文忠路尚泽国际大厦c座106</td>
+            <td>
+            	<p>2017/04/15</p>
+            </td>
+            <td>
+            	<a href="javascript:;" class="end_btn end_shangjia fa fa-power-off"></a>
+            </td>
+        </tr>
+        <tr>
+            <td>黄焖鸡米饭</td>
+            <td>18205564125</td>
+            <td>瑶海区文忠路尚泽国际大厦c座106</td>
+            <td>
+            	<p class="black9">已截止</p>
+            </td>
+            <td>
+            	<a href="javascript:;" class="end_btn end_shangjia fa fa-power-off"></a>
+            </td>
+        </tr>
+        <tr>
+            <td>黄焖鸡米饭</td>
+            <td>18205564125</td>
+            <td>瑶海区文忠路尚泽国际大厦c座106</td>
+            <td>
+            	<p class="black9">已截止</p>
+            </td>
+            <td>
+            	<a href="javascript:;" class="end_btn on fa fa-power-off"><span>合作已终止</span></a>
+            </td>
+        </tr>
+    </table>
+	<!--页码-->
+    <div class="paging">
+        <span>91 条记录 1/10 页</span>
+        <a href="#">上一页</a>
+        <a href="#">下一页</a>
+        <span class="on">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">下5页</a>
+        <a href="#">最后一页</a>
+    </div>
+    <!--页码end-->
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<!--终止商家合作-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">您确定要与***商家终止合作？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">否</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">是</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<!--终止商家合作end-->
+<!--添加商家-->
+<div class="mask_cont add_shangjia_mask">
+	<div class="mask_cont_tit">添加合作商家 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="add_shangjia_info">
+        	<div class="left fl">
+            	<div class="tit">团队信息</div>
+            	<P>负责人：罗晋</P>
+                <p>成员：12人</p>
+                <p>团队地址：合肥蜀山区华润五彩城904</p>
+                <p>至今累计送单：68542</p>
+                <p>投诉率：0%</p>
+            </div>
+            <div class="left fl">
+            	<div class="tit">填写合作商家相关资料</div>
+            	<div class="int_box mb20"><span class="fl">商家名：</span><div class="int"><input type="text"></div></div>
+                <div class="int_box mb20"><span class="fl">地址：</span><div class="int"><input type="text"></div></div>
+                <div class="int_box mb20"><span class="fl">联系方式：</span><div class="int"><input type="text"></div></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="add_shangjia_price mb20">
+        	<div class="tit">送单报价</div>
+            <ul>
+            	<li>0-3km:<input type="text" placeholder="元/份"></li>
+                <li>3-5km:<input type="text" placeholder="元/份"></li>
+                <li>5-8km:<input type="text" placeholder="元/份"></li>
+                <li>8-12km:<input type="text" placeholder="元/份"></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="add_shangjia_instr">
+        	<span class="fl">备注：</span>
+            <div class="textarea_box">
+            	<textarea></textarea>
+            </div>
+        </div>
+    	<div class="text_c mt30">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary">确定</a>
+        </div>
+        <p class="text_c mt10 protocol"><input type="checkbox"><a href="#" class="ml10 black6">我已阅读并已同意 协议</a></p>
+    </div>
+</div>
+<!--添加商家end-->
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".end_shangjia").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.add_shangjia_mask').height();
+	var evlt_w = $('.add_shangjia_mask').width();
+	$('.add_shangjia_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.add_shangjia_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".add_shangjia").click(function(){
+		$('.add_shangjia_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".add_shangjia_mask .cancel,.add_shangjia_mask .close,.mask_bg").click(function(){
+		$('.add_shangjia_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+</body>
+</html>

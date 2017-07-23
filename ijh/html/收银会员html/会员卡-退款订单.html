@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会员卡-退款订单</title>
+<link rel="shortcut icon" href="favicon.ico">
+<!--<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">-->
+<!--<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">-->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_cont">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="membcard_ord mar15">
+                	<div class="price_box">
+                    	<P>交易金额</P>
+                        <P class="big fontcl1"><small class="black6">￥</small>978.00</P>
+                    </div>
+                    <div class="info_box b-t b-b">
+                    	<p class="clearfix">交易时间：<span class="pull-right">2016-10-01 09：34：33</span></p>
+                        <p class="clearfix">流水号：<span class="pull-right">18201234567890qaz124563789856</span></p>
+                        <p class="clearfix">关联单号：<span class="pull-right">cyan201610280011344</span></p>
+                        <p class="clearfix">退款方式：<span class="pull-right">现金</span></p>
+                        <p class="clearfix">退款金额：<span class="pull-right">￥20.00</span></p>
+                    </div>
+                    <div class="delt_box">
+                    	<div class="delt_box_tit on clearfix">商品详情：<span class="pull-right">4<i class="ico"></i></span></div>
+                        <div class="table_box">
+                        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr class="b-b">
+                                    <th>商品名称</th>
+                                    <th class="text-center">单价</th>
+                                    <th width="40" class="text-right">数量</th>
+                                </tr>
+                                <tr>
+                                    <td>草莓蛋糕</td>
+                                    <td class="text-center">￥50.00</td>
+                                    <td class="text-center">1</td>
+                                </tr>
+                                <tr>
+                                    <td>草莓蛋糕</td>
+                                    <td class="text-center">￥50.00</td>
+                                    <td class="text-center">1</td>
+                                </tr>
+                                <tr>
+                                    <td>草莓蛋糕</td>
+                                    <td class="text-center">￥50.00</td>
+                                    <td class="text-center">1</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="membcard_ord_ft"></div>
+                </div>
+                <!--内容结束-->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<script src="js/pub.js"></script> 
+<script>
+$(document).ready(function() {
+	$(".membcard_ord .delt_box .delt_box_tit").click(function(){
+		if($(this).hasClass("on")){
+			$(".membcard_ord .delt_box .delt_box_tit").removeClass("on");
+			$(".membcard_ord .delt_box .table_box").slideUp();
+		}else{
+			$(".membcard_ord .delt_box .delt_box_tit").addClass("on");
+			$(".membcard_ord .delt_box .table_box").slideDown();
+		}
+	});
+    
+});
+</script>
+</body>
+</html>

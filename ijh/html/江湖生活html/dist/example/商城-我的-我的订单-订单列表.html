@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>商城-我的-我的订单-订单列表</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="dingdan-list-top-cont">
+                <div class="top-b border_b">
+                    <div class="list on"><a href="#" class="black3">全部</a></div> 
+                    <div class="list"><a href="#" class="black3">待付款<span class="red-yuan">2</span></a></div>
+                    <div class="list"><a href="#" class="black3">待发货</a></div>
+                    <div class="list"><a href="#" class="black3">待收货</a></div>
+                    <div class="list"><a href="#" class="black3">待评价</a></div>
+                    <div class="clear"></div>  
+                </div>   
+            </div>
+            <div class="container_mid">
+                <div class="mall-mydingdan-list-cont mt10">
+                    <ul>
+                        <li class="dan-one mb10 border_b">                         
+                            <div class="dan-top pub_list border_b border_t">
+                                <div class="pub_list_bd">
+                                    <a href="#" class="black3"><i class="ico-dian mr10"></i>美的官方旗舰店美的官方旗舰店</a>
+                                </div>
+                                <div class="fontcl1">待付款</div>
+                            </div>                              
+                            <div class="dan-mid border_b black3">
+                                <div class="pic fl">
+                                    <img src="img/mall/mall_detail-ban.png">
+                                </div>
+                                <div class="wz-txt">
+                                    <div class="tit">
+                                        <div class="overflow_clear">青春女裤-黑色短脚裤子斑纹直条风裤-韩版风青春女裤-黑色短脚裤子斑纹直条风裤-韩版风</div> 
+                                        <a href="#" class="tui-btn fr">退款</a>
+                                    </div>
+                                    <div class="black9 mb5">规格：黑色ML</div> 
+                                    <div>￥15<span class="fr">x1</span></div>   
+                                </div>
+                                <div class="clear"></div>    
+                            </div>
+                            <div class="dan-mid border_b black3">
+                                <div class="pic fl">
+                                    <img src="img/mall/mall_detail-ban.png">
+                                </div>
+                                <div class="wz-txt">
+                                    <div class="overflow_clear tit">青春女裤-黑色短脚裤子斑纹直条风裤-韩版风青春女裤-黑色短脚裤子斑纹直条风裤-韩版风</div>
+                                    <div class="black9 mb5">规格：黑色ML</div> 
+                                    <div>￥15<span class="fr">x1</span></div>   
+                                </div>
+                                <div class="clear"></div>    
+                            </div>
+                            <div class="text_r dan-bot2">
+                                <span class="mr20">共2件商品</span><span>合计：￥30(含运费¥0.00)</span>
+                            </div> 
+                            <div class="text_r dan-bot">
+                                <a href="#" class="zhifu-btn">取消订单</a><a href="#" class="fontcl2 zhifu-btn">付款</a>
+                            </div>  
+                        </li>
+                        <li class="dan-one mb10 border_b">                         
+                            <div class="dan-top pub_list border_b border_t">
+                                <div class="pub_list_bd">
+                                    <a href="#" class="black3"><i class="ico-dian mr10"></i>美的官方旗舰店美的官方旗舰店</a>
+                                </div>
+                                <div class="fontcl1">待发货</div>
+                            </div>                              
+                            <div class="dan-mid border_b black3">
+                                <div class="pic fl">
+                                    <img src="img/mall/mall_detail-ban.png">
+                                </div>
+                                <div class="wz-txt">
+                                    <div class="overflow_clear tit">青春女裤-黑色短脚裤子斑纹直条风裤-韩版风青春女裤-黑色短脚裤子斑纹直条风裤-韩版风</div>
+                                    <div class="black9 mb5">规格：黑色ML</div> 
+                                    <div>￥15<span class="fr">x1</span></div>   
+                                </div>
+                                <div class="clear"></div>    
+                            </div>
+                            <div class="dan-mid border_b black3">
+                                <div class="pic fl">
+                                    <img src="img/mall/mall_detail-ban.png">
+                                </div>
+                                <div class="wz-txt">
+                                    <div class="overflow_clear tit">青春女裤-黑色短脚裤子斑纹直条风裤-韩版风青春女裤-黑色短脚裤子斑纹直条风裤-韩版风</div>
+                                    <div class="black9 mb5">规格：黑色ML</div> 
+                                    <div>￥15<span class="fr">x1</span></div>   
+                                </div>
+                                <div class="clear"></div>    
+                            </div>
+                            <div class="text_r dan-bot2">
+                                <span class="mr20">共2件商品</span><span>合计：￥30(含运费¥0.00)</span>
+                            </div> 
+                        </li>
+                        <li class="dan-one mb10 border_b">                         
+                            <div class="dan-top pub_list border_b border_t">
+                                <div class="pub_list_bd">
+                                    <a href="#" class="black3"><i class="ico-dian mr10"></i>美的官方旗舰店美的官方旗舰店</a>
+                                </div>
+                                <div class="fontcl1">待收货</div>
+                            </div>                              
+                            <div class="dan-mid border_b black3">
+                                <div class="pic fl">
+                                    <img src="img/mall/mall_detail-ban.png">
+                                </div>
+                                <div class="wz-txt">
+                                    <div class="overflow_clear tit">青春女裤-黑色短脚裤子斑纹直条风裤-韩版风青春女裤-黑色短脚裤子斑纹直条风裤-韩版风</div>
+                                    <div class="black9 mb5">规格：黑色ML</div> 
+                                    <div>￥15<span class="fr">x1</span></div>   
+                                </div>
+                                <div class="clear"></div>    
+                            </div>
+                            <div class="text_r dan-bot2">
+                                <span class="mr20">共2件商品</span><span>合计：￥30(含运费¥0.00)</span>
+                            </div> 
+                            <div class="text_r dan-bot">
+                                <a href="#" class="zhifu-btn">查看物流</a><a href="#" class="zhifu-btn">确认收货</a>
+                            </div>  
+                        </li>
+                        <li class="dan-one mb10 border_b">                         
+                            <div class="dan-top pub_list border_b border_t">
+                                <div class="pub_list_bd">
+                                    <a href="#" class="black3"><i class="ico-dian mr10"></i>美的官方旗舰店美的官方旗舰店</a>
+                                </div>
+                                <div class="fontcl1">待评价</div>
+                            </div>                              
+                            <div class="dan-mid border_b black3">
+                                <div class="pic fl">
+                                    <img src="img/mall/mall_detail-ban.png">
+                                </div>
+                                <div class="wz-txt">
+                                    <div class="overflow_clear tit">青春女裤-黑色短脚裤子斑纹直条风裤-韩版风青春女裤-黑色短脚裤子斑纹直条风裤-韩版风</div>
+                                    <div class="black9 mb5">规格：黑色ML</div> 
+                                    <div>￥15<span class="fr">x1</span></div>   
+                                </div>
+                                <div class="clear"></div>    
+                            </div>
+                            <div class="text_r dan-bot2">
+                                <span class="mr20">共2件商品</span><span>合计：￥30(含运费¥0.00)</span>
+                            </div> 
+                            <div class="text_r dan-bot">
+                                <a href="#" class="zhifu-btn">查看物流</a><a href="#" class="zhifu-btn">去评价</a>
+                            </div>  
+                        </li>
+                        <li class="dan-one mb10 border_b">                         
+                            <div class="dan-top pub_list border_b border_t">
+                                <div class="pub_list_bd">
+                                    <a href="#" class="black3"><i class="ico-dian mr10"></i>美的官方旗舰店美的官方旗舰店</a>
+                                </div>
+                                <div class="fontcl1">交易成功</div>
+                            </div>                              
+                            <div class="dan-mid border_b black3">
+                                <div class="pic fl">
+                                    <img src="img/mall/mall_detail-ban.png">
+                                </div>
+                                <div class="wz-txt">
+                                    <div class="overflow_clear tit">青春女裤-黑色短脚裤子斑纹直条风裤-韩版风青春女裤-黑色短脚裤子斑纹直条风裤-韩版风</div>
+                                    <div class="black9 mb5">规格：黑色ML</div> 
+                                    <div>￥15<span class="fr">x1</span></div>   
+                                </div>
+                                <div class="clear"></div>    
+                            </div>
+                            <div class="text_r dan-bot2">
+                                <span class="mr20">共2件商品</span><span>合计：￥30(含运费¥0.00)</span>
+                            </div> 
+                            <div class="text_r dan-bot">
+                                <a href="#" class="zhifu-btn">查看物流</a>
+                            </div>  
+                        </li>
+                        <li class="dan-one mb10 border_b">                         
+                            <div class="dan-top pub_list border_b border_t">
+                                <div class="pub_list_bd">
+                                    <a href="#" class="black3"><i class="ico-dian mr10"></i>美的官方旗舰店美的官方旗舰店</a>
+                                </div>
+                                <div class="fontcl1">交易关闭</div>
+                            </div>                              
+                            <div class="dan-mid border_b black3">
+                                <div class="pic fl">
+                                    <img src="img/mall/mall_detail-ban.png">
+                                </div>
+                                <div class="wz-txt">
+                                    <div class="overflow_clear tit">青春女裤-黑色短脚裤子斑纹直条风裤-韩版风青春女裤-黑色短脚裤子斑纹直条风裤-韩版风</div>
+                                    <div class="black9 mb5">规格：黑色ML<span class="fr fontcl3">退款成功</span></div> 
+                                    <div>￥15<span class="fr">x1</span></div>   
+                                </div>
+                                <div class="clear"></div>    
+                            </div>
+                            <div class="text_r dan-bot2">
+                                <span class="mr20">共2件商品</span><span>合计：￥30(含运费¥0.00)</span>
+                            </div> 
+                        </li>
+                    </ul>    
+                </div>        
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+
+</body>
+</html>

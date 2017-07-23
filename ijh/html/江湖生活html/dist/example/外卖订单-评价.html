@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>外卖订单-评价</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<!--mobiscroll-->
+<link href="css/mobiscroll/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
+<link href="css/mobiscroll/mobiscroll.frame.css" rel="stylesheet" type="text/css" />
+<link href="css/mobiscroll/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
+<!--mobiscroll-->
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div> 
+<div class="container" id="container">
+    <div class="page js_show">
+      <div class="page_cont">
+        <div class="container_mid">
+            <!--内容-->
+            <div class="ordEvlt_shangjia mb10">
+            	<div class="info">
+                	<span class="img"><img src=""></span>
+                    <p>老汤农家菜</p>
+                </div>
+                <div class="ordEvlt_tit"><span class="black9">商家打分</span></div>
+                <div class="starCz_bg mb20">
+                    <div class="starCz_bar" style="width:40%;"></div>
+                    <div class="click">
+                        <a href="javascript:;"></a>
+                        <a href="javascript:;"></a>
+                        <a href="javascript:;"></a>
+                        <a href="javascript:;"></a>
+                        <a href="javascript:;"></a>
+                    </div>
+                </div>
+                <textarea placeholder="写下您对商家的建议吧~"></textarea>
+            </div>
+            <div class="ordEvlt_goods mb10">
+                <div class="ordEvlt_tit"><span class="black9">商品打分</span></div>
+                <div class="pub_list mb10">
+                	<div class="pub_list_bd black6">肉末茄子</div>
+                    <a href="javascript:;" class="zan"></a>
+                    <a href="javascript:;" class="zan_cha"></a>
+                </div>
+                <div class="pub_list">
+                	<div class="pub_list_bd black6">肉末茄子</div>
+                    <a href="javascript:;" class="zan on"></a>
+                    <a href="javascript:;" class="zan_cha"></a>
+                </div>
+            </div>
+            <div class="ordEvlt_song mb10">
+                <div class="ordEvlt_tit"><span class="black9">配送打分</span></div>
+                <div class="pub_list mb10">
+                	<p>送达时间</p>
+                	<div class="pub_list_bd text_r time"><input type="text" value="50分钟(11:30送达)" id="song_time"></div>
+                    <i class="linkico"></i>
+                </div>
+                <div class="pub_list mb10">
+                	<P>配送服务</P>
+                	<div class="pub_list_bd">
+                    	<div class="starCz_bg fr">
+                            <div class="starCz_bar" style="width:40%;"></div>
+                            <div class="click">
+                                <a href="javascript:;"></a>
+                                <a href="javascript:;"></a>
+                                <a href="javascript:;"></a>
+                                <a href="javascript:;"></a>
+                                <a href="javascript:;"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ordEvlt_imgupload">
+                	<ul>
+                    	<li>
+                        	<div class="box">
+                            	<div class="img"><img src="img/add_pingjia_pic@2x.png"></div>
+                            	<input type="file">
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="box">
+                            	<div class="img"><img src="img/ad03@2x.png"></div>
+                            	<input type="file">
+                                <a href="javascript:;" class="clear_ico">×</a>
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="box">
+                            	<div class="img"><img src="img/ad03@2x.png"></div>
+                            	<input type="file">
+                                <a href="javascript:;" class="clear_ico">×</a>
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="box">
+                            	<div class="img"><img src="img/ad03@2x.png"></div>
+                            	<input type="file">
+                                <a href="javascript:;" class="clear_ico">×</a>
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="box">
+                            	<div class="img"><img src="img/add_pingjia_pic@2x.png"></div>
+                            	<input type="file">
+                                <div class="uping"><p>上传中...</p></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                    <p class="black9 mt5">(最多5张)</p>
+                </div>
+            </div>
+            <!--内容end-->
+        </div>
+        <!--底部-->
+        <div class="ordEvlt_footer pub_list">
+        	<div class="pub_list_bd"><big>评价后获得<span class="maincl">300</span>积分</big></div>
+            <a href="#" class="weui-btn weui-btn_mini weui-btn_primary">发表评价</a>
+        </div>
+        <!--底部end-->
+      </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script type="text/javascript">
+$(".ordEvlt_goods .zan").click(function(){
+	$(this).toggleClass("on");
+});
+$(".ordEvlt_goods .zan_cha").click(function(){
+    $(this).toggleClass("on");
+});
+
+$(".ordEvlt_imgupload ul li .box .clear_ico").click(function(){
+	$(this).parents("li").remove();
+});
+</script>
+
+<script src="js/mobiscroll/mobiscroll.dom.js"></script>
+<script src="js/mobiscroll/mobiscroll.core.js"></script>
+<script src="js/mobiscroll/mobiscroll.scrollview.js"></script>
+<script src="js/mobiscroll/mobiscroll.frame.js"></script>
+<script src="js/mobiscroll/mobiscroll.scroller.js"></script>
+<script>
+(function ($) {
+	mobiscroll.scroller('#song_time', {
+		theme: "mobiscroll",
+		display: "center",
+		lang: "zh",
+		wheels: [
+			[{
+				data: ['20分钟(11:20送达)', '30分钟(11:30送达)', '40分钟(11:40送达)', '50分钟(11:50送达)']
+			}]
+		]
+	});
+
+})(mobiscroll.$);
+</script>
+</body>
+</html>

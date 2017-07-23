@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>商城-我的-我的订单-评价</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont mall-mydingdan-pingjia-cont">
+            <div class="container_mid">
+                <div class="mb10">
+                    <div class="good-pj-top border_b">
+                        <div class="fl good-pic">
+                            <img src="img/idx_ad5.png">   
+                        </div>
+                        <div class="manyi-txt fr">
+                            <a href="javascript:;" class="manyi-btn on"><span>满意</span><i class="manyi-ico"></i></a>
+                            <a href="javascript:;" class="manyi-btn btn-bu"><span>不满意</span><i class="manyi-ico bu-ico"></i></a>
+                        </div>
+                        <div class="clear"></div>    
+                    </div>
+                    <div class="mall-pingjia-text">
+                        <textarea class="weui-textarea" placeholder="亲！说说您对该商品的评价吧～" rows="3"></textarea>     
+                    </div>
+                    <div class="img-uploader">
+                        <div class="inp-box fl text_c">
+                            <input type="file" class="upload-input" accept="image/*" multiple>
+                        </div>
+                        <ul>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <img src="img/idx_ad5.png">
+                                <div class="cha-ico"></div>
+                            </li>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <img src="img/idx_ad5.png">
+                                <div class="cha-ico"></div>
+                            </li>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <img src="img/idx_ad5.png">
+                                <div class="cha-ico"></div>
+                            </li>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <div class="file-txt">上传中...</div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                        <p class="black9">(最多5张)</p>
+                    </div>
+                </div> 
+                <div class="mb10">
+                    <div class="good-pj-top border_b">
+                        <div class="fl good-pic">
+                            <img src="img/idx_ad5.png">   
+                        </div>
+                        <div class="manyi-txt fr">
+                            <a href="javascript:;" class="manyi-btn"><span>满意</span><i class="manyi-ico"></i></a>
+                            <a href="javascript:;" class="manyi-btn btn-bu on"><span>不满意</span><i class="manyi-ico bu-ico"></i></a>
+                        </div>
+                        <div class="clear"></div>    
+                    </div>
+                    <div class="mall-pingjia-text">
+                        <textarea class="weui-textarea" placeholder="亲！说说您对该商品的评价吧～" rows="3"></textarea>     
+                    </div>
+                    <div class="img-uploader">
+                        <div class="inp-box fl text_c">
+                            <input type="file" class="upload-input" accept="image/*" multiple>
+                        </div>
+                        <ul>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <img src="img/idx_ad5.png">
+                                <div class="cha-ico"></div>
+                            </li>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <img src="img/idx_ad5.png">
+                                <div class="cha-ico"></div>
+                            </li>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <img src="img/idx_ad5.png">
+                                <div class="cha-ico"></div>
+                            </li>
+                            <li class="upload-li" style="background:#DFE3E6">
+                                <div class="file-txt">上传中...</div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                        <p class="black9">(最多5张)</p>
+                    </div>
+                </div>       
+            </div>
+            <div class="myMall-dan-pingjia-footer pub_list">
+               <div class="pub_list_bd"><input type="checkbox" class="pj-input mr10">匿名评价</div>
+               <a href="#" class="fabiao-btn">发表评价</a>   
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+
+<script>
+$(function(){
+    $(".manyi-btn").click(function(){
+        $(this).addClass("on").siblings(".manyi-btn").removeClass("on");
+    });
+});
+</script>
+
+</body>
+</html>

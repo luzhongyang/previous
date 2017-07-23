@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>外卖-首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="orderTakeOut shopWuliu">
+                    <div class="wuliu_infor">
+                        <h3>物流状态<span class="ml10">已签收</span></h3>
+                        <div class="black9">
+                            <p>承运公司：天天快递</p>
+                            <p>运单编号：6677778888</p>
+                            <p>客服电话：0551-09865498</p>
+                        </div>
+                    </div>
+                    <div class="statusProgress mt10">
+                        <div class="tip on">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>[合肥市]已签收，签收人是XXX</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>[合肥市]派送员正在为您派送：XXX<a class="phoneNo">13515638638</a></p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>[合肥市]快件已到达合肥</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="circle"></div>
+                            <div class="status">
+                                <p>[合肥市]快件正在等待揽收</p>
+                                <p>2016-11-11 12:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    	</div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+<script type="text/javascript">
+    $(function(){
+       $('.Mine_addressAdd  .address_detail .label .item-title .box a').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+       })
+    })
+</script>
+</body>
+</html>

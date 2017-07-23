@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的订单-无订单情况</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/xia.css"/>
+<link rel="stylesheet" type="text/css" href="css/wang.css"/>
+</head>
+
+<body>
+<style>body{background: #fff;}</style>
+<!--头部筛选-->
+<div class="topShaixuan">
+    <ul>
+        <li class="list"><a href="#">全部</a></li>
+        <li class="list"><a href="#">待付款</a></li>
+        <li class="list"><a href="#">待发货</a></li>
+        <li class="list"><a href="#">待收货</a></li>
+        <li class="list  on"><a href="#">待评价</a></li>
+    </ul>
+    <div class="clear"></div>
+</div>
+<!--头部筛选结束-->
+<section class="page_center_box">
+         <div class="bg-bu"></div>
+         <div class="tuanji-no-cont">
+               <img src="images/order_no@2x.png">
+         	   <p class="font_size14">还没有相关订单哦~</p>
+         </div>
+</section>
+
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//首页轮播js结束
+    });
+</script>
+</body>
+</html>

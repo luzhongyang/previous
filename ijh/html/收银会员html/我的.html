@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的</title>
+<link rel="shortcut icon" href="favicon.ico">
+<!--<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">-->
+<!--<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">-->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/mobiscroll.2.13.2.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_footer">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="pub_lists mineCter">
+                    <div class="pub_list linkico">
+                        <div class="pub_list_hd"><i class="ico ico1"></i></div>
+                        <div class="pub_list_label">头像</div>
+                        <div class="pub_list_bd text-right"><span class="img"><img src="pic/pic1.png"></span></div>
+                        <div class="pub_list_ft"></div>
+                    </div>
+                    <div class="pub_list linkico">
+                        <div class="pub_list_hd"><i class="ico ico2"></i></div>
+                        <div class="pub_list_label">姓名</div>
+                        <div class="pub_list_bd clearfix">
+                            <p class="black9 text-right">橙言</p>
+                        </div>
+                        <div class="pub_list_ft"></div>
+                    </div>
+                    <div class="pub_list linkico">
+                        <div class="pub_list_hd"><i class="ico ico3"></i></div>
+                        <div class="pub_list_label">生日</div>
+                        <div class="pub_list_bd">
+                            <input class="pub_list_input text-right" type="text"  id="birthday" placeholder="2000-01-01">
+                        </div>
+                        <div class="pub_list_ft"></div>
+                    </div>
+                    <div class="pub_list linkico m-b10">
+                        <div class="pub_list_hd"><i class="ico ico4"></i></div>
+                        <div class="pub_list_label">绑定手机号码</div>
+                        <div class="pub_list_bd">
+                            <p class="black9 text-right">18715131234</p>
+                        </div>
+                        <div class="pub_list_ft"></div>
+                    </div>
+                    <div class="pub_list">
+                        <div class="pub_list_hd"><i class="ico ico5"></i></div>
+                        <div class="pub_list_label">余额</div>
+                        <div class="pub_list_bd">
+                            <p class="black9 text-right">200.00</p>
+                        </div>
+                    </div>
+                    <div class="pub_list m-b10">
+                        <div class="pub_list_hd"><i class="ico ico6"></i></div>
+                        <div class="pub_list_label">积分</div>
+                        <div class="pub_list_bd">
+                            <p class="black9 text-right">20042</p>
+                        </div>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+            <!--底部工具栏-->
+        	<footer class="tabbar_box">
+            	<a href="#" class="tabbar_item">
+                	<i class="ico ico1"></i>
+                    <p>会员卡</p>
+                </a>
+                <a href="#" class="tabbar_item on">
+                	<i class="ico ico2"></i>
+                    <p>我的资料</p>
+                </a>
+                <a href="#" class="tabbar_item">
+                	<i class="ico ico3"></i>
+                    <p>通知</p>
+                </a>
+                <a href="#" class="tabbar_item">
+                	<i class="ico ico4"></i>
+                    <p>签到</p>
+                </a>
+            </footer>
+            <!--底部工具栏结束-->
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<script src="js/pub.js"></script>
+<script src="js/mobiscroll.2.13.2.js"></script> 
+<script type="text/javascript">
+$(function () {
+	var curr = new Date().getFullYear();
+	var opt = {  
+		'default': {
+			theme: 'default',
+			mode: 'scroller',
+			display: 'modal',
+			animate: 'fade'
+		},
+		'dateYMD': {
+			preset: 'date',
+			dateFormat: 'yyyy-mm-dd',
+			defaultValue: new Date(new Date()),
+		},
+	}
+	$('#birthday').scroller($.extend(opt['dateYMD'],opt['default']));
+});
+</script>
+</body>
+</html>

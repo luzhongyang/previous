@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>外卖-首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="orderTakeOut shopNotice shopTuikuan">
+                   <div class="box shenqing">
+                        <div class="time">
+                            11月14日晚上20:36
+                        </div>
+                        <div class="content">
+                            <h3 class="sm-tit border_b">买家发起申请</h3>
+                            <p>发起了退货退款申请，货物状态：已发货，金额：15.80元</p>
+                            <i></i>
+                        </div>
+                   </div>
+                   <div class="box tongyi">
+                        <div class="time">
+                            11月14日晚上20:36
+                        </div>
+                        <div class="content">
+                            <h3 class="sm-tit border_b">卖家已同意申请</h3>
+                            <p>卖家同意了本次申请，退货地址：XXXXXXXXXXXXXXX</p>
+                            <i></i>
+                        </div>
+                   </div>
+                   <div class="box success">
+                        <div class="time">
+                            11月14日晚上20:36
+                        </div>
+                        <div class="content">
+                            <h3 class="sm-tit border_b">退货成功</h3>
+                            <p>卖家已收到货，同意了退款申请</p>
+                            <i></i>
+                        </div>
+                   </div>
+                   <div class="box success">
+                        <div class="time">
+                            11月14日晚上20:36
+                        </div>
+                        <div class="content">
+                            <h3 class="sm-tit border_b">退款成功</h3>
+                            <p>退款给买家15.80元，退回至余额</p>
+                            <i></i>
+                        </div>
+                   </div>
+                </div> 
+            </div>
+    	</div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+<script type="text/javascript">
+    $(function(){
+       $('.Mine_addressAdd  .address_detail .label .item-title .box a').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+       })
+    })
+</script>
+</body>
+</html>

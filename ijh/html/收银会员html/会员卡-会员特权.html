@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会员卡-会员特权</title>
+<link rel="shortcut icon" href="favicon.ico">
+<!--<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">-->
+<!--<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">-->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_cont">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="pub_lists membcardPrivlg">
+                	<div class="pub_lists_title">我亲爱的<span class="maincl">会员</span>，您目前享有以下特权</div>
+                    <div class="pub_list on">
+                    	<div class="pub_list_hd"><img src="images/card_center_birthday@2x.png"></div>
+                        <div class="pub_list_bd b-b">
+                        	<h4>生日惊喜</h4>
+                        	<P>专属生日礼品：会员当天，可凭会员卡内生日信息，领取您的专属礼品。美味会员一个自然年内只能领取一次</P>
+                            <span class="ico"></span>
+                        </div>
+                    </div>
+                    <div class="pub_list">
+                    	<div class="pub_list_hd"><img src="images/card_center_vip@2x.png"></div>
+                        <div class="pub_list_bd b-b">
+                        	<h4>会员专享</h4>
+                        	<P>专属生日礼品：会员当天，可凭会员卡内生日信息，领取您的专属礼品。美味会员一个自然年内只能领取一次</P>
+                            <span class="ico"></span>
+                        </div>
+                    </div>
+                    <div class="pub_list">
+                    	<div class="pub_list_hd"><img src="images/card_center_exchange@2x.png"></div>
+                        <div class="pub_list_bd b-b">
+                        	<h4>积分兑换</h4>
+                        	<P>专属生日礼品：会员当天，可凭会员卡内生日信息，领取您的专属礼品。美味会员一个自然年内只能领取一次</P>
+                            <span class="ico"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<script src="js/pub.js"></script> 
+<script>
+$(document).ready(function() {
+	$(".membcardPrivlg .pub_list .pub_list_bd").click(function(){
+		if($(this).parent(".pub_list").hasClass("on")){
+			$(".membcardPrivlg .pub_list").removeClass("on");
+			$(this).parent(".pub_list").removeClass("on");
+		}else{
+			$(".membcardPrivlg .pub_list").removeClass("on");
+			$(this).parent(".pub_list").addClass("on");
+		}
+		
+	});
+    
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+        <!--内容开始-->
+        <div class="coupon_box">
+        	<div class="coupon">
+				<div class="wz_box">
+					<h2 class="tit">天猫超市生鲜店店铺优惠券</h2>
+					<p class="date"><span>2016.11.30前有效</span></p>
+					<p class="sum"><small>¥</small>20</p>
+					<p class="wz">剩1789张（已领259张）</p>
+					<p class="wz">单笔满98元可用，每人限领1张</p>
+				</div>
+				<i class="bg_t"></i>
+				<i class="bg_b"></i>
+				<i class="ico"></i>
+			</div>
+			<div class="button"><a href="javascript:;" class="weui-btn weui-btn_primary" id="showAndroidActionSheet">立即领取</a></div>
+			<!--弹出层-->
+			<div class="weui-skin_android" id="androidActionsheet" style="display: none">
+				<div class="weui-mask"></div>
+				<div class="weui-actionsheet">
+					<div class="weui-actionsheet__menu">
+						<h3 class="tit">口令推广</h3>
+						<p class="wz">锐巢活性炭包新房椰壳除甲醛装修家用竹碳吸... 原价65.9元，抢券立省50】http://e22a.com/h.YFOsVn?cv=AAbEXRVG点击链接，再选择浏览器打开；或复制这条信息，打开👉手淘👈￥AAbEXRVG￥</p>
+						<div class="mask_btn"><a href="javascript:;" class="weui-btn weui-btn_plain-primary">复制</a></div>
+					</div>
+				</div>
+			</div>
+			<!--弹出层结束-->
+        </div>
+        <!--内容结束-->
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script type="text/javascript">
+    // android
+    $(function(){
+        var $androidActionSheet = $('#androidActionsheet');
+        var $androidMask = $androidActionSheet.find('.weui-mask');
+
+        $("#showAndroidActionSheet").on('click', function(){
+            $androidActionSheet.fadeIn(200);
+            $androidMask.on('click',function () {
+                $androidActionSheet.fadeOut(200);
+            });
+        });
+    });
+</script>
+</body>
+</html>

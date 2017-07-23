@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>经营报表</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<div class="page_box">
+    <header>
+    	<div class="windowOprt">
+        	<a href="javascript:;" class="min"></a>
+            <a href="javascript:;" class="max"></a>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <div class="title">经营报表</div>
+        <i class="left"><a href="#" class="ico ico1"></a></i>
+    </header>
+    <section class="page_center_box">
+        <!--内容-->
+		<div class="fl report_left">
+			<ul class="report_tab">
+				<li class="on">今天</li>
+				<li>本周</li>
+			</ul>
+			<div class="clear"></div>
+			<div class="box">
+				<div class="box_nr">
+					<div class="pic"><img src="images/report_pic1.png"/></div>
+					<div class="pic"><img src="images/report_pic2.png"/></div>
+					<div class="report_type">
+						<span><i class="Ico1"></i>线下</span>
+						<span><i class="Ico1 Ico2"></i>商圈</span>
+						<span><i class="Ico1 Ico3"></i>自营</span>
+						<span><i class="Ico1 Ico4"></i>美团</span>
+					</div>
+				</div>
+				<div class="box_nr" style="display:none;">
+					<div class="pic"><img src="images/report_pic1.png"/></div>
+					<div class="pic"><img src="images/report_pic1.png"/></div>
+					<div class="report_type">
+						<span><i class="Ico1"></i>线下</span>
+						<span><i class="Ico1 Ico2"></i>商圈</span>
+						<span><i class="Ico1 Ico3"></i>自营</span>
+						<span><i class="Ico1 Ico4"></i>美团</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="report_right">
+			<div class="top_tit">
+				<ul class="fl report_tab">
+					<li class="on">本周</li>
+					<li>本月</li>
+				</ul>
+				<div class="fr date">
+					<span class="fl l_arrow"><i></i></span>
+					<input type="text" value="2016-09" class="fl"/>
+					<span class="fl r_arrow"><i></i></span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="">
+				<div class="fl report_type">
+					<span><i class="Ico1 Ico5"></i>销售额</span>
+					<span><i class="Ico1 Ico6"></i>订单数</span>
+				</div>
+				<div class="fr wz">每日销售状况</div>
+				<div class="clear"></div>
+			</div>
+			<div class="box">
+				<div class="box_nr"><img src="images/report_pic3.png"/></div>
+				<div class="box_nr" style="display:none;"><img src="images/report_pic4.png"/></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+        <!--内容结束-->
+    </section>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".report_left .report_tab li").each(function (e) {
+		$(this).click(function () {
+			$(this).parent().find("li").removeClass("on");
+			$(this).addClass("on");
+			$(".report_left .box .box_nr").each(function (i) {
+				if (e == i)
+				{
+					$(this).parent().find(".report_left .box_nr").hide();
+					$(this).show();
+				}
+				else {
+					$(this).hide();
+				}	
+			});
+		});
+	});
+});
+$(document).ready(function(){
+	$(".report_right .report_tab li").each(function (e) {
+		$(this).click(function () {
+			$(this).parent().find("li").removeClass("on");
+			$(this).addClass("on");
+			$(".report_right .box .box_nr").each(function (i) {
+				if (e == i)
+				{
+					$(this).parent().find(".report_left .box_nr").hide();
+					$(this).show();
+				}
+				else {
+					$(this).hide();
+				}	
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>首页搜索未输入时</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<style>
+.page, body {background-color: #fff;}
+</style>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont coupons_sousuo-cont">
+                <div class="sousuo-box mt5 ml10 mr10">
+                    <form  method="" action="">
+                        <input type="text" value="" class="shuru-inp" id="souInput" placeholder="搜索商家、商品"><input type="button" class="sou-btn">
+                        <a href="javascript:" class="icon-cha" id="clearCha"></a>
+                    </form>    
+                </div> 
+                <div class="container_mid">           	
+                    <div class="hot_sou">
+                        <div class="the-tit pub_list mb10">
+                            <div><i class="ico mr5"></i>热门搜索</div>
+                        </div> 
+                        <div class="sou-list1">
+                            <ul>
+                                <li class="fl"><a href="javascript:;" class="sou-a">食品</a></li>
+                                <li class="fl"><a href="javascript:;" class="sou-a">女装</a></li>
+                                <li class="fl"><a href="javascript:;" class="sou-a">家居家纺</a></li>
+                                <li class="fl"><a href="javascript:;" class="sou-a">家居家纺</a></li>
+                                <li class="fl"><a href="javascript:;" class="sou-a">食品</a></li>
+                                <div class="clear"></div>
+                            </ul>
+                        </div>   
+                    </div>
+                    <div class="hot_sou">
+                        <div class="the-tit pub_list mb10">
+                            <div><i class="ico mr5 ico-history"></i>搜索历史</div>
+                            <a href="javascript:;" class="clear-btn"><i class="ico mr5 clear-ico"></i>清除</a>
+                        </div> 
+                        <div class="sou-list2">
+                            <ul>
+                                <li><a href="javascript:;" class="sou-b">鲜花</a></li>
+                                <li><a href="javascript:;" class="sou-b">鲜花</a></li>
+                                <li><a href="javascript:;" class="sou-b">鲜花</a></li> 
+                            </ul>
+                        </div>   
+                    </div>                                         
+                </div>
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+
+<!-- 搜索框输入时-->
+<script>
+$(function(){
+    $("#souInput").on("input",function(){
+        if($(this).val().length!=0){
+           $("#clearCha").css("display","block"); 
+        }else{
+           $("#clearCha").css("display","none");
+        }
+    });
+     $("#clearCha").on("click",function(){
+            $(this).hide();
+            $("#souInput").val('');
+            $("#souInput").focus();
+    });
+});
+</script>
+<!-- 搜索框输入end-->
+</body>
+</html>

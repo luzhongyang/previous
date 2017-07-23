@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>外送-订单管理-待处理订单</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+	<div class="dispatch_serch">
+    	<div class="clearfix list_box">
+            <span class="fl">选择日期：<input type="text" placeholder="2016-12-26" class="tuan_topser tuan_topserw3">至<input type="text" placeholder="2016-12-26" class="tuan_topser tuan_topserw3"></span><input type="button" class="btn btn-primary btn-sm fl" value="搜 索">
+        </div>
+        <div class="clearfix list_box">
+            订单排序：<label class="ml10"><input type="radio" checked name="xu">期望送达时间</label> <label class="ml30"><input type="radio" name="xu">下单时间</label>
+        </div>
+    </div>
+	
+	<div class="dispatch_tab">
+        <ul>
+            <li class="on"><a href="#">催单</a></li>
+            <li><a href="#">待接单</li>
+            <li><a href="#">待配送</a></li>
+            <li><a href="#">配送中</a></li>
+            <li><a href="#">退单</a></li>
+            <li><a href="#">自提单</a></li>
+        </ul>
+    </div>
+    
+   	<!--订单列表-->
+    <div class="ord_list_box">
+    	<!--催单-->
+    	<div class="ord_list">
+        	<div class="top_box">
+            	<div class="num pull-left">订单编号：<span class="fontcl1">15245688566556</span><small class="ml10 black6">（11-30 11:20下单）</small></div>
+                <div class="state pull-right">
+                	<p class="pointcl">客户催单</p>
+                </div>
+            </div>
+            <div class="mid_box">
+            	<h3>胡（女士）</h3>
+               	<p><span class="black3">联系方式：</span>18642276167</p>
+                <p><span class="black3">地址：</span>大德翠韵华庭 (4号楼一单元8楼 楼宇门按4115# )</p>
+                <p><span class="black3">送达时间：</span><span class="fontcl2">立即送达</span><span class="ml30 maincl"><span class="black3">支付方式：</span>在线支付</span></p>
+                <div class="delt_box">
+                	<div class="bt_box on">
+                        <div class="bt"><b>订单信息</b> <a href="javascript:;" class="pull-right open">展开<i class="ml5 fa fa-angle-down"></i></a></div>
+                        <div class="remark"><span class="fontcl2">备注：</span>老板，又是我哈，回鞍山了，多送一份米线，比较能吃哈</div>
+                    </div>
+                    <div class="open_box none">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                        </table>
+                        <div class="border_b border_t">
+                            <div class="cost_box black6">餐盒费 <span class="pull-right">¥2.00</span></div>
+                            <div class="cost_box black6">配送费 <span class="pull-right">¥2.00</span></div>
+                        </div>
+                        <div class="cost_box"><b>小计：</b> <span class="pull-right fontcl1">¥34.00</span></div>
+                        <div class="cost_box black6">下单立减： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box black6">平台收取： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box maincl"><b>总计收入：</b> <b class="pull-right">¥55.00</b></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="bottom_box">
+            	<a href="javascript:;" class="btn btn-sm btn-primary tab_btn_reminder">催单回复</a>
+                <a href="#" class="btn btn-sm btn-primary">商家配送</a>
+                <a href="#" class="btn btn-sm btn-primary">骑手配送</a>
+                <a href="javascript:;" class="btn btn-sm btn-default btn-outline tab_btn_del">取消订单</a>
+            </div>
+        </div>
+        <!--待接单-->
+        <div class="ord_list">
+        	<div class="top_box">
+            	<div class="num pull-left">订单编号：<span class="fontcl1">15245688566556</span><small class="ml10 black6">（11-30 11:20下单）</small></div>
+                <div class="state pull-right">
+                	<p class="pointcl"></p>
+                </div>
+            </div>
+            <div class="mid_box">
+            	<h3>胡（女士）</h3>
+               	<p><span class="black3">联系方式：</span>18642276167</p>
+                <p><span class="black3">地址：</span>大德翠韵华庭 (4号楼一单元8楼 楼宇门按4115# )</p>
+                <p><span class="black3">送达时间：</span><span class="fontcl2">立即送达</span><span class="ml30 maincl"><span class="black3">支付方式：</span>在线支付</span></p>
+                <div class="delt_box">
+                	<div class="bt_box on">
+                        <div class="bt"><b>订单信息</b> <a href="javascript:;" class="pull-right open">展开<i class="ml5 fa fa-angle-down"></i></a></div>
+                        <div class="remark"><span class="fontcl2">备注：</span>老板，又是我哈，回鞍山了，多送一份米线，比较能吃哈</div>
+                    </div>
+                    <div class="open_box none">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                        </table>
+                        <div class="border_b border_t">
+                            <div class="cost_box black6">餐盒费 <span class="pull-right">¥2.00</span></div>
+                            <div class="cost_box black6">配送费 <span class="pull-right">¥2.00</span></div>
+                        </div>
+                        <div class="cost_box"><b>小计：</b> <span class="pull-right fontcl1">¥34.00</span></div>
+                        <div class="cost_box black6">下单立减： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box black6">平台收取： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box maincl"><b>总计收入：</b> <b class="pull-right">¥55.00</b></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="bottom_box">
+            	<a href="#" class="btn btn-sm btn-primary">接单</a>
+                <a href="javascript:;" class="btn btn-sm btn-default btn-outline tab_btn_del">取消订单</a>
+            </div>
+        </div>
+        <!--待配送-->
+        <div class="ord_list">
+        	<div class="top_box">
+            	<div class="num pull-left">订单编号：<span class="fontcl1">15245688566556</span><small class="ml10 black6">（11-30 11:20下单）</small></div>
+                <div class="state pull-right">
+                	<p class="pointcl"></p>
+                </div>
+            </div>
+            <div class="mid_box">
+            	<h3>胡（女士）</h3>
+               	<p><span class="black3">联系方式：</span>18642276167</p>
+                <p><span class="black3">地址：</span>大德翠韵华庭 (4号楼一单元8楼 楼宇门按4115# )</p>
+                <p><span class="black3">送达时间：</span><span class="fontcl2">立即送达</span><span class="ml30 maincl"><span class="black3">支付方式：</span>在线支付</span></p>
+                <div class="delt_box">
+                	<div class="bt_box on">
+                        <div class="bt"><b>订单信息</b> <a href="javascript:;" class="pull-right open">展开<i class="ml5 fa fa-angle-down"></i></a></div>
+                        <div class="remark"><span class="fontcl2">备注：</span>老板，又是我哈，回鞍山了，多送一份米线，比较能吃哈</div>
+                    </div>
+                    <div class="open_box none">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                        </table>
+                        <div class="border_b border_t">
+                            <div class="cost_box black6">餐盒费 <span class="pull-right">¥2.00</span></div>
+                            <div class="cost_box black6">配送费 <span class="pull-right">¥2.00</span></div>
+                        </div>
+                        <div class="cost_box"><b>小计：</b> <span class="pull-right fontcl1">¥34.00</span></div>
+                        <div class="cost_box black6">下单立减： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box black6">平台收取： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box maincl"><b>总计收入：</b> <b class="pull-right">¥55.00</b></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="bottom_box">
+            	<a href="#" class="btn btn-sm btn-primary">商家配送</a>
+                <a href="#" class="btn btn-sm btn-primary">骑手配送</a>
+                <a href="javascript:;" class="btn btn-sm btn-default btn-outline tab_btn_del">取消订单</a>
+            </div>
+        </div>
+        <!--配送中-->
+        <div class="ord_list">
+        	<div class="top_box">
+            	<div class="num pull-left">订单编号：<span class="fontcl1">15245688566556</span><small class="ml10 black6">（11-30 11:20下单）</small></div>
+                <div class="state pull-right">
+                	<p class="pointcl"></p>
+                </div>
+            </div>
+            <div class="mid_box">
+            	<h3>胡（女士）</h3>
+               	<p><span class="black3">联系方式：</span>18642276167</p>
+                <p><span class="black3">地址：</span>大德翠韵华庭 (4号楼一单元8楼 楼宇门按4115# )</p>
+                <p><span class="black3">送达时间：</span><span class="fontcl2">立即送达</span><span class="ml30 maincl"><span class="black3">支付方式：</span>在线支付</span></p>
+                <div class="delt_box">
+                	<div class="bt_box on">
+                        <div class="bt"><b>订单信息</b> <a href="javascript:;" class="pull-right open">展开<i class="ml5 fa fa-angle-down"></i></a></div>
+                        <div class="remark"><span class="fontcl2">备注：</span>老板，又是我哈，回鞍山了，多送一份米线，比较能吃哈</div>
+                    </div>
+                    <div class="open_box none">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                        </table>
+                        <div class="border_b border_t">
+                            <div class="cost_box black6">餐盒费 <span class="pull-right">¥2.00</span></div>
+                            <div class="cost_box black6">配送费 <span class="pull-right">¥2.00</span></div>
+                        </div>
+                        <div class="cost_box"><b>小计：</b> <span class="pull-right fontcl1">¥34.00</span></div>
+                        <div class="cost_box black6">下单立减： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box black6">平台收取： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box maincl"><b>总计收入：</b> <b class="pull-right">¥55.00</b></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="bottom_box">
+            	<a href="#" class="btn btn-sm btn-default">商家配送</a>
+                <a href="#" class="btn btn-sm btn-default">骑手配送</a>
+                <a href="javascript:;" class="btn btn-sm btn-default btn-outline tab_btn_del">取消订单</a>
+            </div>
+        </div>
+        <!--退单-->
+        <div class="ord_list">
+        	<div class="top_box">
+            	<div class="num pull-left">订单编号：<span class="fontcl1">15245688566556</span><small class="ml10 black6">（11-30 11:20下单）</small></div>
+                <div class="state pull-right">
+                	<p class="pointcl">申请退单</p>
+                </div>
+            </div>
+            <div class="mid_box">
+            	<div class="reason">退单原因：送餐太慢~</div>
+            	<h3>胡（女士）</h3>
+               	<p><span class="black3">联系方式：</span>18642276167</p>
+                <p><span class="black3">地址：</span>大德翠韵华庭 (4号楼一单元8楼 楼宇门按4115# )</p>
+                <p><span class="black3">送达时间：</span><span class="fontcl2">立即送达</span><span class="ml30 maincl"><span class="black3">支付方式：</span>在线支付</span></p>
+                <div class="delt_box">
+                	<div class="bt_box on">
+                        <div class="bt"><b>订单信息</b> <a href="javascript:;" class="pull-right open">展开<i class="ml5 fa fa-angle-down"></i></a></div>
+                        <div class="remark"><span class="fontcl2">备注：</span>老板，又是我哈，回鞍山了，多送一份米线，比较能吃哈</div>
+                    </div>
+                    <div class="open_box none">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                        </table>
+                        <div class="border_b border_t">
+                            <div class="cost_box black6">餐盒费 <span class="pull-right">¥2.00</span></div>
+                            <div class="cost_box black6">配送费 <span class="pull-right">¥2.00</span></div>
+                        </div>
+                        <div class="cost_box"><b>小计：</b> <span class="pull-right fontcl1">¥34.00</span></div>
+                        <div class="cost_box black6">下单立减： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box black6">平台收取： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box maincl"><b>总计收入：</b> <b class="pull-right">¥55.00</b></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="bottom_box">
+            	<a href="#" class="btn btn-sm btn-primary">接收</a>
+                <a href="javascript:;" class="btn btn-sm btn-default btn-outline tab_btn_refuse">拒绝</a>
+            </div>
+        </div>
+        <!--自提单-->
+        <div class="ord_list">
+        	<div class="top_box">
+            	<div class="num pull-left"><span class="style">自提单</span>订单编号：<span class="fontcl1">15245688566556</span><small class="ml10 black6">（11-30 11:20下单）</small></div>
+                <div class="state pull-right">
+                	<p class="pointcl"></p>
+                </div>
+            </div>
+            <div class="mid_box">
+            	<h3>胡（女士）</h3>
+               	<p><span class="black3">联系方式：</span>18642276167</p>
+                <p><span class="black3">地址：</span>大德翠韵华庭 (4号楼一单元8楼 楼宇门按4115# )</p>
+                <p><span class="black3">送达时间：</span><span class="fontcl2">立即送达</span><span class="ml30 maincl"><span class="black3">支付方式：</span>在线支付</span></p>
+                <div class="delt_box">
+                	<div class="bt_box on">
+                        <div class="bt"><b>订单信息</b> <a href="javascript:;" class="pull-right open">展开<i class="ml5 fa fa-angle-down"></i></a></div>
+                        <div class="remark"><span class="fontcl2">备注：</span>老板，又是我哈，回鞍山了，多送一份米线，比较能吃哈</div>
+                    </div>
+                    <div class="open_box none">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                        </table>
+                        <div class="border_b border_t">
+                            <div class="cost_box black6">餐盒费 <span class="pull-right">¥2.00</span></div>
+                            <div class="cost_box black6">配送费 <span class="pull-right">¥2.00</span></div>
+                        </div>
+                        <div class="cost_box"><b>小计：</b> <span class="pull-right fontcl1">¥34.00</span></div>
+                        <div class="cost_box black6">下单立减： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box black6">平台收取： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box maincl"><b>总计收入：</b> <b class="pull-right">¥55.00</b></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="bottom_box">
+            	<a href="#" class="btn btn-sm btn-primary">接单</a>
+                <a href="javascript:;" class="btn btn-sm btn-default btn-outline tab_btn_del">取消订单</a>
+            </div>
+        </div>
+        <div class="ord_list">
+        	<div class="top_box">
+            	<div class="num pull-left"><span class="style">自提单</span>订单编号：<span class="fontcl1">15245688566556</span><small class="ml10 black6">（11-30 11:20下单）</small></div>
+                <div class="state pull-right">
+                	<p class="pointcl"></p>
+                </div>
+            </div>
+            <div class="mid_box">
+            	<h3>胡（女士）</h3>
+               	<p><span class="black3">联系方式：</span>18642276167</p>
+                <p><span class="black3">地址：</span>大德翠韵华庭 (4号楼一单元8楼 楼宇门按4115# )</p>
+                <p><span class="black3">送达时间：</span><span class="fontcl2">立即送达</span><span class="ml30 maincl"><span class="black3">支付方式：</span>在线支付</span></p>
+                <div class="delt_box">
+                	<div class="bt_box on">
+                        <div class="bt"><b>订单信息</b> <a href="javascript:;" class="pull-right open">展开<i class="ml5 fa fa-angle-down"></i></a></div>
+                        <div class="remark"><span class="fontcl2">备注：</span>老板，又是我哈，回鞍山了，多送一份米线，比较能吃哈</div>
+                    </div>
+                    <div class="open_box none">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                            <tr>
+                                <td>麻辣米线套餐</td>
+                                <td>¥20.00</td>
+                                <td>x1</td>
+                                <td class="text_r">¥20.00</td>
+                            </tr>
+                        </table>
+                        <div class="border_b border_t">
+                            <div class="cost_box black6">餐盒费 <span class="pull-right">¥2.00</span></div>
+                            <div class="cost_box black6">配送费 <span class="pull-right">¥2.00</span></div>
+                        </div>
+                        <div class="cost_box"><b>小计：</b> <span class="pull-right fontcl1">¥34.00</span></div>
+                        <div class="cost_box black6">下单立减： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box black6">平台收取： <span class="pull-right">¥5.00</span></div>
+                        <div class="cost_box maincl"><b>总计收入：</b> <b class="pull-right">¥55.00</b></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="bottom_box">
+            	<a href="#" class="btn btn-sm btn-primary">制作完成</a>
+                <a href="javascript:;" class="btn btn-sm btn-default btn-outline tab_btn_del">取消订单</a>
+            </div>
+        </div>
+    </div>
+    <!--订单列表end-->
+    <!--页码-->
+    <div class="paging">
+        <span>91 条记录 1/10 页</span>
+        <a href="#">上一页</a>
+        <a href="#">下一页</a>
+        <span class="on">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">下5页</a>
+        <a href="#">最后一页</a>
+    </div>
+    <!--页码end-->
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<script>
+$(document).ready(function() {
+	$(".ord_list .delt_box .bt .open").click(function(){
+	
+		$(this).parents(".delt_box").find(".open_box").slideToggle(300);
+		if($(this).parents(".bt_box").hasClass("on")){
+			$(this).parents(".bt_box").removeClass("on");
+			$(this).html("收起<i class='ml5 fa fa-angle-up'></i>");
+		}else{
+			$(this).parents(".bt_box").addClass("on");
+			$(this).html("展开<i class='ml5 fa fa-angle-down'></i>");
+		}
+		
+		
+	});
+
+});
+</script>
+
+<!--删除提示-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">删除后将不可返回，确认删除？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">考虑一下</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">确认删除</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_del").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--删除提示end-->
+
+<!--催单回复-->
+<div class="mask_cont spec_mask reminder_mask">
+	<div class="mask_cont_tit">催单回复 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="border_b table_box">
+        	<table border="0" cellspacing="0" cellpadding="0">
+                <tr class="tit">
+                    <td class="bt">催单回复：</td>
+                    <td>
+                    	<select class="form_table_int form_table_intw2">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">保存</a>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.reminder_mask').height();
+	var evlt_w = $('.reminder_mask').width();
+	$('.reminder_mask').css("margin-top",-(evlt_h/2 + 60) + 'px');
+	$('.reminder_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_reminder").click(function(){
+		$('.reminder_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".reminder_mask .cancel,.reminder_mask .close,.mask_bg").click(function(){
+		$('.reminder_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+	
+});
+</script>
+<!--催单回复end-->
+
+<!--拒绝-->
+<div class="mask_cont spec_mask refuse_mask">
+	<div class="mask_cont_tit">拒绝退单 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<textarea placeholder="请输入拒绝原因"></textarea>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">确定</a>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.refuse_mask').height();
+	var evlt_w = $('.refuse_mask').width();
+	$('.refuse_mask').css("margin-top",-(evlt_h/2 + 60) + 'px');
+	$('.refuse_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_refuse").click(function(){
+		$('.refuse_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".refuse_mask .cancel,.refuse_mask .close,.mask_bg").click(function(){
+		$('.refuse_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+	
+});
+</script>
+<!--拒绝end-->
+</body>
+</html>

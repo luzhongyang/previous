@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>统计-库存统计</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content full_wrapper-content"> 
+    <!--右侧内容-->
+    <div class="cateBox_right full_cateBox_right">
+        <div class="tableBox">
+        	<div class="tableBox_top">
+            	<div class="fl"><span class="wz">分类：</span>
+                	<select class="selct_int">
+                    	<option>全部</option>
+                        <option>茶叶</option>
+                    </select>
+                </div>
+            	<div class="serch_box fl ml20"><input type="text" class="text" placeholder="搜索商品编码/名称"><input type="submit" value="" class="btn"></div>
+                <div class="fr">
+                    <a href="javascript:;" class="btn btn_hover fl tab_btn_import"><i class="glyphicon glyphicon-log-out"></i>导出</a>
+                    <a href="javascript:;" class="btn btn_hover fl tab_btn_del"><i class="glyphicon glyphicon-print"></i>打印</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                    	<th>商品编码</th>
+                        <th>商品分类</th>
+                        <th>商品名称</th>
+                        <th>商品单位</th>
+                        <th>库存数</th>
+                        <th>库存成本</th>
+                        <th>库存预售额</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    	<td>111111111111</td>
+                        <td>茶叶</td>
+                        <td>六安瓜片</td>
+                        <td>01</td>
+                        <td>100</td>
+                        <td>500.00</td>
+                        <td>8000.00</td>
+                        <td><a href="javascript:;" class="btn btn-default btn-outline btn-sm tab_btn_del">删除</a></td>
+                    </tr>
+                    <tr>
+                    	<td>111111111111</td>
+                        <td>茶叶</td>
+                        <td>六安瓜片</td>
+                        <td>01</td>
+                        <td>100</td>
+                        <td>500.00</td>
+                        <td>8000.00</td>
+                        <td><a href="javascript:;" class="btn btn-default btn-outline btn-sm tab_btn_del">删除</a></td>
+                    </tr>
+                    <tr>
+                    	<td>111111111111</td>
+                        <td>茶叶</td>
+                        <td>六安瓜片</td>
+                        <td>01</td>
+                        <td>100</td>
+                        <td>500.00</td>
+                        <td>8000.00</td>
+                        <td><a href="javascript:;" class="btn btn-default btn-outline btn-sm tab_btn_del">删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--页码-->
+            <div class="paging">
+                <span>91 条记录 1/10 页</span>
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
+                <span class="on">1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">下5页</a>
+                <a href="#">最后一页</a>
+            </div>
+            <!--页码end-->
+    </div>
+    <!--右侧内容end--> 
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<!--删除提示-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">确定删除数据吗？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">考虑一下</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">确认删除</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_del").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--删除提示end-->
+</body>
+</html>

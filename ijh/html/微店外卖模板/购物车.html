@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>购物车</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/xia.css"/>
+<link rel="stylesheet" type="text/css" href="css/wang.css"/>
+</head>
+
+<body>
+<section class="page_center_box">
+	<!--内容-->
+    <div class="cartSelct_all">
+    	<div><label class="check_box"><input type="checkbox"></label>全选</div>
+        <div><a href="javascript:;" class="del shanchu-dan"></a></div>
+    </div>
+    <div class="cartSelct_list_box">
+    	<ul>
+        	<li class="cartSelct_list">
+            	<div class="shangpin_box">
+                    <div class="img fl"><img src="pic/home_img@2x.png"></div>
+                    <div class="wz_box">
+                        <h3>这里一句话描述商品，不超过一行狼来了描述商品描述商品</h3>
+                        <p class="black9">大份/灰色/数量2</p>
+                        <div class="price">￥50</div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="num_operate">
+                        <span class="min"></span>
+                        <input type="text" value="2">
+                        <span class="add"></span>
+                    </div>
+                </div>
+                <label class="check_box"><input type="checkbox"></label>
+            </li>
+            <li class="cartSelct_list">
+            	<div class="shangpin_box">
+                    <div class="img fl"><img src="pic/home_img@2x.png"></div>
+                    <div class="wz_box">
+                        <h3>这里一句话描述商品，不超过一行狼来了描述商品描述商品</h3>
+                        <p class="black9">大份/灰色/数量2</p>
+                        <div class="price">￥50</div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="num_operate">
+                        <span class="min"></span>
+                        <input type="text" value="2">
+                        <span class="add"></span>
+                    </div>
+                </div>
+                <label class="check_box"><input type="checkbox"></label>
+            </li>
+            <li class="cartSelct_list">
+            	<div class="shangpin_box">
+                    <div class="img fl"><img src="pic/home_img@2x.png"></div>
+                    <div class="wz_box">
+                        <h3>这里一句话描述商品，不超过一行狼来了描述商品描述商品</h3>
+                        <p class="black9">大份/灰色/数量2</p>
+                        <div class="price">￥50</div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="num_operate">
+                        <span class="min"></span>
+                        <input type="text" value="2">
+                        <span class="add"></span>
+                    </div>
+                </div>
+                <label class="check_box"><input type="checkbox"></label>
+            </li>
+            <li class="cartSelct_list">
+            	<div class="shangpin_box">
+                    <div class="img fl"><img src="pic/home_img@2x.png"></div>
+                    <div class="wz_box">
+                        <h3>这里一句话描述商品，不超过一行狼来了描述商品描述商品</h3>
+                        <p class="black9">大份/灰色/数量2</p>
+                        <div class="price">￥50</div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="num_operate">
+                        <span class="min"></span>
+                        <input type="text" value="2">
+                        <span class="add"></span>
+                    </div>
+                </div>
+                <label class="check_box"><input type="checkbox"></label>
+            </li>
+        </ul>
+    </div>
+    <!--内容结束-->
+</section>
+<footer>
+	<div class="footer_orderBtn">
+    	<div class="left">
+        	<p>合计：<span class="fontcl1">￥100</span></p>
+            <small class="black9">（共计2件，不含运费）</small>
+        </div>
+		<a href="#" class="right">去结算</a>
+	</div>
+</footer>
+<!--删除订单弹出-->
+<div>
+     <div class="shanchu-tanchu-cont bgcolor_white">
+         <div class="tit">您确定将选中商品移除购物车？</div>
+         <div>
+             <div class="confirm-or-not fl">确定</div>
+             <div class="confirm-or-not fl">取消</div>
+             <div class="clear"></div>
+         </div>
+     </div>
+     <div class="mask_bg"></div>
+</div>
+
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<!--删除购物车弹出-->
+<script>
+       $(document).ready(function(){
+           $(".shanchu-dan").click(function(){
+               $(".shanchu-tanchu-cont").show();
+               $(".shanchu-tanchu-cont").parent().find(".mask_bg").show();
+
+           });
+           $(".confirm-or-not").click(function(){
+               $(this).parents().find(".shanchu-tanchu-cont").hide();
+               $(this).parents().find(".mask_bg").fadeOut();
+           });
+       })
+</script>
+<!--删除购物车弹出结束-->
+<script>
+$(document).ready(function(){
+   $(".cartSelct_list .check_box input").click(function(){
+	   if($(this).parent('.check_box').hasClass('on')){
+		  $(this).parent('.check_box').removeClass('on'); 
+	   }else{
+		 $(this).parent('.check_box').addClass('on');  
+	   }
+   });
+   $(".cartSelct_all .check_box input").click(function(){
+	   if($(this).parent('.check_box').hasClass('on')){
+		  $(this).parent('.check_box').removeClass('on'); 
+		  $(".cartSelct_list .check_box").removeClass('on');
+	   }else{
+		 $(this).parent('.check_box').addClass('on');  
+		 $(".cartSelct_list .check_box").addClass('on');
+	   }
+   });
+});
+</script>
+</body>
+</html>

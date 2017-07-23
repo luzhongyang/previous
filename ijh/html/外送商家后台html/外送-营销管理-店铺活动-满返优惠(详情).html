@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>外送-营销管理-店铺活动-满返优惠(详情)</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+    <div class="coupon_list_box">
+    	<table class="table_nobd_box mb20" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="bt text_r"><span class="black6">活动状态：</span></td>
+                <td>已生效</td>
+            </tr>
+            <tr>
+                <td class="bt text_r"><span class="black6">活动时间：</span></td>
+                <td>2016-12-26至2016-12-26</td>
+            </tr>
+            <tr>
+                <td class="bt text_r"><span class="black6">活动内容：</span></td>
+                <td>实际支付满30元返5元商家优惠券</td>
+            </tr>
+            <tr>
+                <td class="bt text_r"><span class="black6">发放数量：</span></td>
+                <td>9999张</td>
+            </tr>
+            <tr>
+                <td class="bt text_r"><span class="black6">优惠券：</span></td>
+                <td>
+                	<div class="coupon_list">
+                    	<div class="left fl">
+                        	<big class="pointcl">￥5</big>
+                            <p>满30可用</p>
+                            <small>新用户可用</small>
+                        </div>
+                        <div class="right">
+                            <p>领券后7天内有效</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="bt text_r">&nbsp;</td>
+                <td>
+                	<div class="form_table_btn_box">
+                        <a class="btn btn-default btn-w-m tab_btn_del" href="javascript:;">撤销活动</a>
+                        <a class="btn btn-primary btn-w-m" href="#">返回</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+    </div>
+    
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<!--删除提示-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">撤销后将不可返回，确认撤销？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">考虑一下</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">确认撤销</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_del").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--删除提示end-->
+</body>
+</html>

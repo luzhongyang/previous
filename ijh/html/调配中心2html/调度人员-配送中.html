@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>调度人员-配送中</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+	<div class="dispatch_tab">
+        <ul>
+            <li class="on"><a href="#">全部</a></li>
+            <li><a href="#">待取货<span class="num">7</span></a></li>
+            <li><a href="#">待送达<span class="num">11</span></a></li>
+        </ul>
+    </div>
+    
+    <table class="dispatch_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr class="tit">
+            <td>订单编号</td>
+            <td>商家</td>
+            <td>配送员</td>
+            <td>下单者</td>
+            <td>收货地址</td>
+            <td>配送状态</td>
+            <td>操作</td>
+        </tr>  
+        <tr>
+            <td>4526442</td>
+            <td>张三牛肉面（TCL:400-500-6000）</td>
+            <td>小五：13053065468</td>
+            <td>牛毛：15689898553</td>
+            <td>
+            	<p>中国科技大学东校区九四园7栋504室</p>
+            </td>
+            <td>
+            	<p>配送中</p>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>4526442</td>
+            <td>张三牛肉面（TCL:400-500-6000）</td>
+            <td>小五：13053065468</td>
+            <td>牛毛：15689898553</td>
+            <td>
+            	<p>中国科技大学东校区九四园7栋504室</p>
+            </td>
+            <td>
+            	<p class="fontcl1">待取餐</p>
+            </td>
+            <td><a class="btn btn-primary btn-outline btn-sm modify_rider" href="javascript:;">改派送</a></td>
+        </tr>
+        <tr>
+            <td>4526442</td>
+            <td>张三牛肉面（TCL:400-500-6000）</td>
+            <td>小五：13053065468</td>
+            <td>牛毛：15689898553</td>
+            <td>
+            	<p>中国科技大学东校区九四园7栋504室</p>
+            </td>
+            <td>
+            	<p>配送中</p>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>4526442</td>
+            <td>张三牛肉面（TCL:400-500-6000）</td>
+            <td>小五：13053065468</td>
+            <td>牛毛：15689898553</td>
+            <td>
+            	<p>中国科技大学东校区九四园7栋504室</p>
+            </td>
+            <td>
+            	<p class="fontcl1">待取餐</p>
+            </td>
+            <td><a class="btn btn-primary btn-outline btn-sm modify_rider" href="javascript:;">改派送</a></td>
+        </tr>
+    </table>
+	<!--页码-->
+    <div class="paging">
+        <span>91 条记录 1/10 页</span>
+        <a href="#">上一页</a>
+        <a href="#">下一页</a>
+        <span class="on">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">下5页</a>
+        <a href="#">最后一页</a>
+    </div>
+    <!--页码end-->
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<!--修改配送员-->
+<div class="mask_cont modify_rider_mask">
+	<div class="mask_cont_tit">修改配送员 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="list_box border_b">
+        	<ul>
+            	<li><a href="javascript:;">王宝强<span class="num">1</span></a></li>
+                <li><a href="javascript:;">王宝强<span class="num">4</span></a></li>
+                <li><a href="javascript:;">王宝强<span class="num">1</span></a></li>
+                <li><a href="javascript:;">王宝强<span class="num">6</span></a></li>
+                <li><a href="javascript:;">王宝强<span class="num">11</span></a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="text_c mt30">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary">确认修改</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<!--修改配送员end-->
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.modify_rider_mask').height();
+	var evlt_w = $('.modify_rider_mask').width();
+	$('.modify_rider_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.modify_rider_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".modify_rider").click(function(){
+		$('.modify_rider_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".modify_rider_mask .cancel,.modify_rider_mask .close,.mask_bg").click(function(){
+		$('.modify_rider_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<script>
+$(document).ready(function() {
+	
+	$(".modify_rider_mask .cont .list_box ul li a").click(function(){
+		$(".modify_rider_mask .cont .list_box ul li a").removeClass("on");
+		$(this).addClass("on");
+	});
+
+});
+</script>
+</body>
+</html>

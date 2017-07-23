@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>发布</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+			<div class="fabu-head-cont">发布小程序</div>
+            <div class="container_mid">
+                <div class="fabu-mid-cont">
+                    <div class="cont1 mb10">
+                        <div class="cell-one pub_list">
+                            <div class="cell-hd"><span>名称<span class="red-ico">*</span></span></div> 
+                            <div class="cell-bd pub_list_bd">
+                                <input type="text" placeholder="小程序名称" class="bd-input">
+                            </div> 
+                        </div>
+                        <div class="cell-one pub_list" id="fenlei-show">
+                            <div class="cell-hd"><span>分类<span class="red-ico">*</span></span></div> 
+                            <div class="cell-bd pub_list_bd">
+                                <p class="black9">请选择分类</p>
+                            </div> 
+                            <div class="cell-ft">
+                                <span class="jt-ico"></span>
+                            </div>  
+                        </div>  
+                        <div class="cell-one pub_list" id="diqu-show">
+                            <div class="cell-hd"><span>地区<span class="red-ico">*</span></span></div> 
+                            <div class="cell-bd pub_list_bd">
+                                <p class="black9">请选择地区</p>
+                            </div> 
+                            <div class="cell-ft">
+                                <span class="jt-ico"></span>
+                            </div>  
+                        </div> 
+                        <div class="cell-one pub_list">
+                            <div class="cell-hd"><span>标签<span class="red-ico">*</span></span></div> 
+                            <div class="cell-bd pub_list_bd">
+                                <input type="text" placeholder="标签(多个以,分隔)" class="bd-input">
+                            </div> 
+                        </div>
+                        <div class="list-text">
+                            <div class="cell-hd"><span>描述<span class="red-ico">*</span></span></div> 
+                            <div class="cell-bd">
+                                <textarea class="bd-text" placeholder="小程序介绍，20字以上" rows="3"></textarea>
+                            </div> 
+                        </div>  
+                    </div>  
+                    <div class="cont2 mb10">
+                        <div class="img-uploader border_b">
+                            <div class="tit">小程序图标(建议尺寸: 建议500x500) <span class="red-ico">*</span></div> 
+                            <ul>
+                                <li class="upload-li mb10">
+                                    <img src="img/banner@3x.png">  
+                                </li>
+                                <li class="inp-box">
+                                    <input type="file" class="upload-input" accept="image/*" multiple>
+                                </li>
+                                <div class="clear"></div>
+                            </ul> 
+                        </div>
+                        <div class="img-uploader border_b">
+                            <div class="tit">二维码图片(建议尺寸: 建议500x500) <span class="red-ico">*</span></div> 
+                            <ul>
+                                <li class="upload-li mb10">
+                                    <img src="img/banner@3x.png">  
+                                </li>
+                                <li class="inp-box">
+                                    <input type="file" class="upload-input" accept="image/*" multiple>
+                                </li>
+                                <div class="clear"></div>
+                            </ul> 
+                        </div>
+                        <div class="img-uploader">
+                            <div class="tit">小程序截图(建议尺寸: 1334x750, 建议<span class="red-ico">至少上传三张</span>) <span class="red-ico">*</span></div> 
+                            <ul>
+                                <li class="upload-li mb10">
+                                    <img src="img/banner@3x.png">  
+                                </li>
+                                <li class="upload-li mb10">
+                                    <img src="img/banner@3x.png"> 
+                                    <div class="cha-ico"></div>   
+                                </li>
+                                <li class="upload-li mb10">
+                                    <img src="img/banner@3x.png"> 
+                                    <div class="cha-ico"></div>   
+                                </li>
+                                <li class="inp-box">
+                                    <input type="file" class="upload-input" accept="image/*" multiple>
+                                </li>
+                                <div class="clear"></div>
+                            </ul> 
+                        </div>    
+                    </div> 
+                    <div class="cont1 mb10">
+                        <div class="cell-one pub_list">
+                            <div class="cell-hd"><span>姓名<span class="red-ico">*</span></span></div> 
+                            <div class="cell-bd pub_list_bd">
+                                <input type="text" placeholder="2-20位字符" class="bd-input">
+                            </div> 
+                        </div>
+                        <div class="cell-one pub_list">
+                            <div class="cell-hd"><span>电话<span class="red-ico">*</span></span></div> 
+                            <div class="cell-bd pub_list_bd">
+                                <input type="text" placeholder="7-13位字符" class="bd-input">
+                            </div>  
+                        </div>  
+                        <div class="cell-one pub_list">
+                            <div class="cell-hd"><span>QQ</span></div> 
+                            <div class="cell-bd pub_list_bd">
+                                <input type="text" placeholder="5-11位字符" class="bd-input">
+                            </div>  
+                        </div> 
+                        <div class="cell-one pub_list no-after">
+                            <div class="cell-hd"><span>相关地址</span></div> 
+                            <div class="cell-bd pub_list_bd">
+                                <input type="text" placeholder="(需加http://)10-50位字符" class="bd-input">
+                            </div> 
+                        </div>
+                    </div>
+                </div>          
+            </div>
+            <div class="foot-tijiao-cont">
+                <a href="#" class="tijiao-btn">提交</a>  
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 选择分类 -->
+<div class="fenlei-tanchu" style="display:none">
+    <div class="fenlei-xuan-cont">
+        <div class="tit border_b">选择分类</div>
+        <div class="fenlei-menu">
+            <div class="menu-cont">
+                <div class="menu1 border_b">电商</div>
+                <div class="menu1 border_b">电商</div>
+                <div class="menu1 border_b">电商</div>
+                <div class="menu1 border_b">电商</div>
+                <div class="menu1 border_b">电商</div>
+                <div class="menu1 border_b">电商</div>
+                <div class="menu1 border_b">电商</div>
+                <div class="menu1 border_b">电商</div>
+                <div class="menu1 border_b">电商</div> 
+            </div>
+        </div>
+        <div class="quxiao-btn">取消</div>
+    </div>
+    <div class="fenlei-mask"></div>    
+</div>   
+<!-- 选择分类end -->
+
+<!-- 选择省份地区 -->
+<div class="diqu-tanchu" style="display:none">
+    <div class="diqu-xuan-cont">
+        <div class="tit border_b">选择省份地区</div>
+        <div class="diqu-menu">
+            <div class="diqu-cont">
+                <div class="menu1 border_b">北北京市</div>
+                <div class="menu1 border_b">北京市</div>
+                <div class="menu1 border_b">北京市</div>
+                <div class="menu1 border_b">北京市</div>
+                <div class="menu1 border_b">北京市</div>
+                <div class="menu1 border_b">北京市</div>
+                <div class="menu1 border_b">北京市</div>
+                <div class="menu1 border_b">北京市</div>
+                <div class="menu1 border_b">北京市</div> 
+            </div>
+        </div>
+        <div class="quxiao-btn">取消</div>
+    </div>
+    <div class="diqu-mask"></div>    
+</div>   
+<!-- 选择省份地区end -->
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+<!-- 选择分类弹出 -->
+<script>
+    $('#fenlei-show').on("click",function(){
+        $(".fenlei-tanchu").fadeIn(300);
+        $('.fenlei-mask').on("click",function(){
+            $(".fenlei-tanchu").fadeOut(300);   
+        });
+        $('.quxiao-btn').on("click",function(){
+            $(".fenlei-tanchu").fadeOut(300);   
+        });
+    });   
+</script>
+<!-- 选择分类弹出end -->
+
+<!-- 选择省份地区弹出 -->
+<script>
+    $('#diqu-show').on("click",function(){
+        $(".diqu-tanchu").fadeIn(300);
+        $('.diqu-mask').on("click",function(){
+            $(".diqu-tanchu").fadeOut(300);   
+        });
+        $('.quxiao-btn').on("click",function(){
+            $(".diqu-tanchu").fadeOut(300);   
+        });
+    });   
+</script>
+<!-- 选择省份地区end -->
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>点外卖</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<div class="topShaixuan waimai_tab">
+	<ul>
+		<li class="list"><a href="#">点菜</a></li>
+		<li class="list on"><a href="#">商家详情</a></li>
+	</ul>
+	<div class="clear"></div>
+</div>
+<section class="page_center_box page_box">
+    <!--内容-->	
+	<div class="shangjiaDetail_box mt10">
+		<h3 class="shangjia_tit">配送条件</h3>
+		<ul class="box">
+			<li class="list"><i class="ico ico1"></i>服务半径：10公里</li>
+			<li class="list"><i class="ico ico2"></i>起送 ￥25 | 配送 ￥3</li>
+		</ul>	
+	</div>
+	<div class="shangjiaDetail_box mt10">
+		<h3 class="shangjia_tit">商家信息</h3>
+		<ul class="box">
+			<li class="list"><i class="ico ico3"></i>月售 231 份</li>
+			<li class="list"><i class="ico ico4"></i>09：00-23：00</li>
+			<li class="list">
+				<i class="ico ico5 fl"></i>
+				<p class="wz">合肥市蜀山区望江西路与合作化南路交口华润五彩</p>
+				<div class="clear"></div>
+			</li>
+			<li class="list"><i class="ico ico6"></i>18712345678<i class="ico ico7"></i></li>
+		</ul>
+	</div>
+	<div class="shangjiaDetail_box mt10">
+		<h3 class="shangjia_tit">商家资质</h3>
+		<ul class="box">
+			<li class="list">
+				<i class="ico ico8 fl"></i>
+				<div class="r_nr">
+					<p>营业执照</p>
+					<div class="img"><img src="pic/home_img@2x.png"/></div>
+				</div>
+			</li>
+			<li class="list pad_t10 mt5">
+				<i class="ico ico9 fl"></i>
+				<div class="r_nr">
+					<p>餐饮许可服务证</p>
+					<div class="img"><img src="pic/home_img@2x.png"/></div>
+				</div>
+			</li>
+		</ul>
+	</div>
+    <!--内容结束-->
+</section>
+<script>
+$(document).ready(function(e) {
+	var  public_top = $('.waimai_box .left').offset().top; //这个滚动一个条件
+	var  list = Array();
+	
+	$(".waimai_box .right .bt").each(function(a){
+		list[a] = $(this).offset().top;
+	});
+	
+	var num =  $(".waimai_box .left li").length;
+	
+	function gundong(){
+		for(i=0;i<num;i++){
+			if($(".waimai_box .right .bt").eq(i).offset().top <=public_top ){
+				$(".waimai_box .left li").removeClass('on');
+				$(".waimai_box .left li").eq(i).addClass('on');
+			}
+		}		
+	}			
+	$('.waimai_box .right').scroll(function () {  
+		gundong();
+	});
+	
+	
+	$(".waimai_box .left li").click(function(){				
+		var index = $(this).index();
+		$(".waimai_box .right").animate({scrollTop: list[index]-public_top+'px'}, 200);
+	
+	});
+	
+	
+});//商家店铺菜单分类效果结束
+</script>
+</body>
+</html>

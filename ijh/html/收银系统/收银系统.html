@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>收银系统</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<div class="page_box">
+    <header>
+    	<div class="windowOprt">
+        	<a href="javascript:;" class="min"></a>
+            <a href="javascript:;" class="max"></a>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <div class="cashSytm_nav">
+        	<div class="nav_box">
+            	<ul>
+            	    <li class="list">
+                    	<a href="#">
+                            <img src="images/change.png">
+                            <p>交接班</p>
+                        </a>
+                    </li>
+                    <li class="list">
+                    	<a href="#">
+                            <img src="images/cashier.png">
+                            <p>收银台</p>
+                        </a>
+                    </li>
+                    <li class="list">
+                    	<a href="#">
+                            <img src="images/line.png">
+                            <p>订单列表</p>
+                        </a>
+                    </li>
+                    <li class="list">
+                    	<a href="#">
+                            <img src="images/online.png">
+                            <p>网店订单</p>
+                        </a>
+                    </li>
+                    <li class="list">
+                    	<a href="#">
+                            <img src="images/member1.png">
+                            <p>会员管理</p>
+                        </a>
+                    </li>
+                    <li class="line">&nbsp;</li>
+                    <li class="list">
+                    	<a href="#">
+                            <img src="images/setup.png">
+                            <p>系统设置</p>
+                        </a>
+                    </li>
+                    <li class="list">
+                    	<a href="#">
+                            <img src="images/reports.png">
+                            <p>经营报表</p>
+                        </a>
+                    </li>
+        	    </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="wz">
+            	<P class="overflow_clear">江湖生活馆（五彩国际店）</P>
+                <p>收银员：橙言</p>
+            </div>
+        </div>
+    </header>
+    <section class="page_center_box">
+        <div class="cashSytm_left">
+        	<div class="top">
+            	<div class="fl">挂单&gt;&gt;</div>
+                <div class="fl int_box">
+                	<input type="text" value="单号：20160920001">
+                    <a href="javascript:;" class="close"></a>
+                </div>
+                <a class="fl add"><i class="ico"></i>新订单</a>
+                <div class="clear"></div>
+            </div>
+            <div class="cont">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>商品名称</th>
+                        <th>售价</th>
+                        <th>数/重量</th>
+                        <th>小计</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <td>江湖抹茶蛋糕</td>
+                        <td>10元/个</td>
+                        <td>
+                        	<div class="num_operate">
+                            	<span class="min"></span>
+                                <input type="text" value="1">
+                                <span class="add"></span>
+                            </div>
+                        </td>
+                        <td>20.00元</td>
+                        <td><a href="javascript:;" class="ico del"></a></td>
+                    </tr>
+                    <tr>
+                        <td>江湖抹茶蛋糕</td>
+                        <td>10元/个</td>
+                        <td>
+                        	<div class="num_operate">
+                            	<span class="min"></span>
+                                <input type="text" value="1">
+                                <span class="add"></span>
+                            </div>
+                        </td>
+                        <td>20.00元</td>
+                        <td><a href="javascript:;" class="ico del"></a></td>
+                    </tr>
+                    <tr>
+                        <td>江湖抹茶蛋糕</td>
+                        <td>10元/个</td>
+                        <td>
+                        	<div class="num_operate">
+                            	<span class="min"></span>
+                                <input type="text" value="1">
+                                <span class="add"></span>
+                            </div>
+                        </td>
+                        <td>20.00元</td>
+                        <td><a href="javascript:;" class="ico del"></a></td>
+                    </tr>
+                    <tr>
+                        <td>江湖抹茶蛋糕</td>
+                        <td>10元/个</td>
+                        <td>
+                        	<div class="num_operate">
+                            	<span class="min"></span>
+                                <input type="text" value="1">
+                                <span class="add"></span>
+                            </div>
+                        </td>
+                        <td>20.00元</td>
+                        <td><a href="javascript:;" class="ico del"></a></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="bottom">
+            	<div class="count">
+                	<a href="#" class="btn fl">清空</a>
+                    <a href="#" class="btn btn2 fl">挂单</a>
+                    <div class="fr">共 <i>8</i> 件商品<span class="ml10 pad_l10">总计 80.00元</span></div>
+                </div>
+                <div class="memNum">
+                	<i class="ico fl"></i>
+                    <a href="#" class="btn2 fr">新增</a>
+                    <div class="int_box">
+                    	<input type="text" placeholder="输入会员/手机号码">
+                        <input type="button" value="确定" class="btn">
+                    </div>
+                </div>
+                <div class="balance clear_both">
+                	<a href="#" class="reduce fl">
+                    	<p>减免/折扣</p>
+                        <p>10.00元</p>
+                    </a>
+                    <div class="right fr">
+                    	<a href="#" class="btn">
+                        	<i class="ico"></i>
+                            <p>结算</p>
+                        </a>
+                        <div class="price">
+                        	<P>应收金额</P>
+                            <p class="big">70.00 (元)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cashSytm_right">
+        	<div class="cont">
+            	<div class="goods_serch_box">
+                	<a href="#" class="ico saosao fr"></a>
+                	<div class="int_box"><input type="text" value="" placeholder="&nbsp;&nbsp;输入商品编码/商品字母" onfocus="$('.goods_serch_box .int_box').addClass('on');" onblur="if (value == '') { $('.goods_serch_box .int_box').removeClass('on'); } else { $('.goods_serch_box .int_box').addClass('on'); }"></div>
+                </div>
+                <div class="goods_list_box">
+                	<ul>
+                	    <li class="goods_list">
+                        	<div class="box">
+                                <div class="img fl"><img src="pic/home_img@2x.png"></div>
+                                <div class="wz">
+                                    <h4 class="overflow_clear">江湖抹茶蛋糕</h4>
+                                    <P class="maincl">10元/个</P>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                        	<div class="box">
+                                <div class="img fl"><img src="pic/home_img@2x.png"></div>
+                                <div class="wz">
+                                    <h4 class="overflow_clear">江湖抹茶蛋糕</h4>
+                                    <P class="maincl">10元/个</P>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="goods_list">
+                        	<div class="box">
+                                <div class="img fl"><img src="pic/home_img@2x.png"></div>
+                                <div class="wz">
+                                    <h4 class="overflow_clear">江湖抹茶蛋糕</h4>
+                                    <P class="maincl">10元/个</P>
+                                </div>
+                            </div>
+                        </li>
+            	    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="goods_cate">
+            	<ul>
+            	    <li class="list"><a href="#">烟草、酒水类</a></li>
+                    <li class="list on"><a href="#">糕点类</a></li>
+                    <li class="list"><a href="#">蔬果类</a></li>
+                    <li class="list"><a href="#">零食类</a></li>
+                    <li class="list"><a href="#">肉类</a></li>
+                    <li class="list"><a href="#">生活用品类</a></li>
+                    <li class="list"><a href="#">分类一</a></li>
+                    <li class="more"><a href="javascript:;">更多分类</a></li>
+                    <li class="list"><a href="#">蔬果类</a></li>
+                    <li class="list"><a href="#">零食类</a></li>
+                    <li class="list"><a href="#">肉类</a></li>
+                    <li class="list"><a href="#">生活用品类</a></li>
+                    <li class="list"><a href="#">分类一</a></li>
+                    
+        	    </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+$(document).ready(function() {
+	$('.goods_cate .list').click(function(){
+		$('.goods_cate .list').removeClass('on');
+		$(this).addClass('on');
+		$('.goods_cate').removeClass('on');
+		$('.goods_cate .more').show();
+	});
+    $('.goods_cate .more').click(function(){
+		if($('.goods_cate').hasClass('on')){
+			$('.goods_cate').removeClass('on');
+			$('.goods_cate .more').show();
+		}else{
+			$('.goods_cate').addClass('on');
+			$('.goods_cate .more').hide();
+		}		
+	});
+});
+</script>
+</body>
+</html>

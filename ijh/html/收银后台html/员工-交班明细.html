@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>员工-交班明细</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content full_wrapper-content"> 
+    <!--分类-->
+    <div class="cateBox">
+        <div class="tit"><big>员工职位</big> </div>
+        <ul>
+            <li> <a href="#" class="all">全部职位</a> </li>
+            <li>
+                <div class="clearfix box">
+                    <a href="#" class="fl">默认职位</a>
+                </div>
+            </li>
+            <li>
+            	<div class="clearfix box">
+                    <a href="#" class="fl">收银员</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--分类end--> 
+    <!--右侧内容-->
+    <div class="cateBox_right">
+    	<div class="dispatch_serch">
+            <div class="clearfix list_box">
+                <span class="fl">员工名：</span>
+            	<span class="fl"><select class="tuan_topser tuan_topserw1"><option>全部</option></select></span> 
+            </div>
+            <div class="clearfix list_box">
+            	<span class="fl">交班时间：</span>
+                <span class="fl ml10"><input type="text" placeholder="2016-12-26" class="tuan_topser tuan_topserw3">至<input type="text" placeholder="2016-12-26" class="tuan_topser tuan_topserw3"></span> <input type="button" class="btn btn-primary btn-sm ml20" value="确 定"> 
+            </div>
+        </div>
+        <div class="tableBox">
+        	<div class="tableBox_top">
+                <div class="fr">
+                	<a href="#" class="btn btn_hover fl J_menuItem"><i class="fa fa-plus"></i>新增交班</a>
+                	<a href="javascript:;" class="btn btn_hover fl tab_btn_import"><i class="glyphicon glyphicon-log-out"></i>导出</a>
+                    <a href="javascript:;" class="btn btn_hover fl tab_btn_del"><i class="glyphicon glyphicon-trash"></i>删除</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                    	<th class="check_box"><input type="checkbox"></th>
+                        <th>序号</th>
+                        <th>交班时间</th>
+                        <th>员工名</th>
+                        <th>工号</th>
+                        <th>现金收入</th>
+                        <th>微信收入</th>
+                        <th>支付宝收入</th>
+                        <th>银行卡收入</th>
+                        <th>总计</th>
+                        <th>交班明细</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="check_box"><input type="checkbox"></td>
+                        <td>1</td>
+                        <td>2017-01-06 18:30</td>
+                        <td>猪八戒</td>
+                        <td>02</td>
+                        <td>400</td>
+                        <td>200</td>
+                        <td>200</td>
+                        <td>200</td>
+                        <td>1000</td>
+                        <td><a href="javascript:;" class="btn btn-primary btn-outline btn-sm tab_btn_shangjia">查看</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--页码-->
+            <div class="paging">
+                <span>91 条记录 1/10 页</span>
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
+                <span class="on">1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">下5页</a>
+                <a href="#">最后一页</a>
+            </div>
+            <!--页码end-->
+    </div>
+    <!--右侧内容end--> 
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<!--提示-->
+<div class="mask_cont prompt_mask">
+	<div class="mask_cont_tit text_c">提示</div>
+    <div class="cont">
+    	<div class="ts border_b">你一共选择了1款商品确认要上架？</div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">否</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">是</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.prompt_mask').height();
+	var evlt_w = $('.prompt_mask').width();
+	$('.prompt_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.prompt_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_shangjia").click(function(){
+		$('.prompt_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".prompt_mask .cancel,.mask_bg").click(function(){
+		$('.prompt_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--提示end-->
+<!--导入-->
+<div class="mask_cont import_mask">
+	<div class="mask_cont_tit">导入商品 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="nr">
+        	<p class="black6">操作步骤：</p>
+            <p class="black6">1.如没创建过导入文件数据，建议<a href="#">下载《导入商品模板》</a>；</p>
+            <p class="black6">2.已有建好导入数据文件，直接导入。</p>
+            <div class="file_int"><input type="text" class="text"><span class="btn_file_box">选择文件<input type="file" value="选择文件" class="btn_file"></span></div>
+            <P class="pointcl"><small>每次最多导入1000条，如有大量商品请分批导入。</small></P>
+        </div>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">导入</a>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.import_mask').height();
+	var evlt_w = $('.import_mask').width();
+	$('.import_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.import_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tab_btn_import").click(function(){
+		$('.import_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".import_mask .cancel,.import_mask .close,.mask_bg").click(function(){
+		$('.import_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--导入end-->
+</body>
+</html>

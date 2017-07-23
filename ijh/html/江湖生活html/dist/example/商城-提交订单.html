@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+      <div class="page_cont">
+        <!-- 弹出层 -->
+        <div class="order_tanchu">
+            <!-- 蒙层弹出层 -->
+            <div class="order-mask_bg order-youhuiquan_bg"></div>
+            <div class="order-mask_bg order-fukuan_bg"></div>
+             <!-- 优惠券弹出层 -->
+            <div class="orderyouhuiquan_popup order-pop">
+                <div class="close"></div>
+                <div class="title">选择优惠券</div>
+                <div class="content">
+                    <ul>
+                        <li><label  class="on">5元优惠券<i></i></label></li>
+                        <li><label>不使用优惠券<i></i></label></li>
+                    </ul>
+                </div>
+            </div>  
+            <!-- 支付弹出 -->
+            <div class="orderfukuan_popup order-pop">
+                <div class="close"></div>
+                <div class="title">应支付金额<span>￥30</span></div>
+                <div class="content">
+                    <ul>
+                        <li><label class="on"><i class="ico"></i><i class="zhifu zhifubao"></i>支付宝支付<input type="radio" name="payway" value="payway"></label></li>
+                       <li> <label><i class="ico"></i><i class="zhifu weixin"></i>微信支付<input type="radio" name="payway" value="payway"></label></li>
+                       <li> <label><i class="ico"></i><i class="zhifu yue"></i>余额支付<input type="radio" name="payway" value="payway"></label></li>
+                    </ul>
+                </div>
+                <div class="btn">去支付<span id="daojishi" class="ml10"></span></div>
+            </div>
+        </div>
+        <div class="container_mid">
+            <div class="sysubmit-order">
+                <a class="address" href="#">
+                    <i class="ico_address fl"></i>
+                    <i class="ico_right fr"></i>
+                    <p class="name">收货人：殷宇萌 18756270220</p>
+                    <p class="addr">收货地址：安徽省合肥市蜀山区莲花社区管理委员会莲花路819号莲花电子商务产业园E座四楼</p>
+                    <i class="clear"></i>
+                </a>
+                
+                <div class="order_xiangqing">
+                    <div class="shop_name border_b">
+                        <i class="ico_shop mr10"></i>
+                        美的官方旗舰店
+                    </div>
+                    <ul class="sc_shopping-lists">
+                        <li class="sc_shopping-list">
+                            <div class="pic fl ml10">
+                                <a href=""><img src="img/idx_ad4.png"></a>
+                            </div>
+                            <div class="text">
+                                <h3><a href="#">冰棒模具 - 绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒-恐龙款2016家居新款</a></h3>
+                                <p class="black9">规格：粉色ML规格：粉色ML规格：粉色ML规格：粉色ML规格：粉色ML规格：粉色ML规格：粉色ML</p>
+                                <p class="note"><span class="price">￥15</span><span class="fr">x1</span></p>
+                            </div>
+                        </li>
+                        <li class="sc_shopping-list">
+                            <div class="pic fl ml10">
+                               <a href=""><img src="img/idx_ad4.png"></a> 
+                            </div>
+                            <div class="text">
+                                <h3><a href="#">冰棒模具 - 绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒-恐龙款2016家居新款</a></h3>
+                                <p class="black9">规格：粉色ML</p>
+                                <p class="note"><span class="price">￥15</span><span class="fr">x1</span></p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="order_choose">
+                        <label class="choose">
+                             <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title">配送方式</div>
+                                    <div class="item-after">快递￥5</div>
+                                </div>
+                            </div> 
+                        </label>
+                         <div class="order_liuyan">
+                            <span>买家留言</span>
+                            <input type="text" name="" placeholder="点击输入（选填）" class="black9 ml10">
+                        </div>
+                        <label class="choose order-youhuiquan">
+                             <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title fl">优惠</div>
+                                    <div class="item-after"><p class="fr"><span>使用优惠券</span><i class="ico_right"></i></p></div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="choose">
+                            <div class="item-inner heji">
+                                <div class="item-row fr">
+                                   <div class="item-after black3">
+                                      共2件商品<span class="ml20">合计：<span>￥35</span></span>
+                                   </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="order_xiangqing">
+                    <div class="shop_name border_b">
+                        <i class="ico_shop mr10"></i>
+                        美的官方旗舰店
+                    </div>
+                    <ul class="sc_shopping-lists">
+                        <li class="sc_shopping-list">
+                            <div class="pic fl ml10">
+                                <a href=""><img src="img/idx_ad4.png"></a>
+                            </div>
+                            <div class="text">
+                                <h3><a href="#">冰棒模具 - 绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒-恐龙款2016家居新款</a></h3>
+                                <p class="black9">规格：粉色ML</p>
+                                <p class="note"><span class="price">￥15</span><span class="fr">x1</span></p>
+                            </div>
+                        </li>
+                        <li class="sc_shopping-list">
+                            <div class="pic fl ml10">
+                                <a href=""><img src="img/idx_ad4.png"></a>
+                            </div>
+                            <div class="text">
+                                <h3><a href="#">冰棒模具 - 绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒-恐龙款2016家居新款</a></h3>
+                                <p class="black9">规格：粉色ML</p>
+                                <p class="note"><span class="price">￥15</span><span class="fr">x1</span></p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="order_choose">
+                        <label class="choose">
+                             <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title">配送方式</div>
+                                    <div class="item-after">快递￥5</div>
+                                </div>
+                            </div> 
+                        </label>
+                         <div class="order_liuyan border_b">
+                            <span>买家留言</span>
+                            <input type="text" name="" placeholder="点击输入（选填）" class="black9 ml10">
+                        </div>
+                        <label class="choose order-youhuiquan">
+                             <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title fl">优惠</div>
+                                    <div class="item-after"><p class="fr"><span>使用优惠券</span><i class="ico_right"></i></p></div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="choose">
+                            <div class="item-inner heji">
+                                <div class="item-row fr">
+                                   <div class="item-after black3">
+                                      共2件商品<span class="ml20">合计：<span>￥35</span></span>
+                                   </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="order_xiangqing">
+                    <div class="shop_name border_b">
+                        <i class="ico_shop mr10"></i>
+                        美的官方旗舰店
+                    </div>
+                    <ul class="sc_shopping-lists">
+                        <li class="sc_shopping-list">
+                            <div class="pic fl ml10">
+                                <a href=""><img src="img/idx_ad4.png"></a>
+                            </div>
+                            <div class="text">
+                                <h3><a href="#">冰棒模具 - 绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒-恐龙款2016家居新款</a></h3>
+                                <p class="black9">规格：粉色ML</p>
+                                <p class="note"><span class="price">￥15</span><span class="fr">x1</span></p>
+                            </div>
+                        </li>
+                        <li class="sc_shopping-list">
+                            <div class="pic fl ml10">
+                                <a href=""><img src="img/idx_ad4.png"></a>
+                            </div>
+                            <div class="text">
+                                <h3><a href="#">冰棒模具 - 绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒绿色收纳盒-恐龙款2016家居新款</a></h3>
+                                <p class="black9">规格：粉色ML</p>
+                                <p class="note"><span class="price">￥15</span><span class="fr">x1</span></p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="order_choose">
+                        <label class="choose">
+                             <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title">配送方式</div>
+                                    <div class="item-after">快递￥5</div>
+                                </div>
+                            </div> 
+                        </label>
+                         <div class="order_liuyan">
+                            <span>买家留言</span>
+                            <input type="text" name="" placeholder="点击输入（选填）" class="black9 ml10">
+                        </div>
+                        <label class="choose order-youhuiquan border_b">
+                             <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title fl">优惠</div>
+                                    <div class="item-after"><p class="fr"><span>使用优惠券</span><i class="ico_right"></i></p></div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="choose">
+                            <div class="item-inner heji">
+                                <div class="item-row fr">
+                                   <div class="item-after black3">
+                                      共2件商品<span class="ml20">合计：<span>￥35</span></span>
+                                   </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="sy-submit_pay">
+           <a href="#" class="btn fr">提交订单</a>
+           <p class="fr">合计：<span>￥<big>35</big></span></p>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+
+<script type="text/javascript">
+//点击mask层隐藏
+    $(function(){
+         $('.order-mask_bg').click(function(){$('.order-mask_bg').hide();})
+         $('.order-pop .close').click(function(){$('.order-mask_bg').hide();})
+    })
+//class切换
+    function toggClass(object){
+        object.click(function(){$(this).addClass('on').parent().siblings().find('label').removeClass('on')})
+    }
+//时间弹出层
+    $(function(){
+//优惠券弹出层
+        var youhuiIdx;
+        $('.order_choose .order-youhuiquan').click(function(){
+            youhuiIdx=$('.order_choose .order-youhuiquan').index(this);
+            $('.order-youhuiquan_bg').show();
+            $('.orderyouhuiquan_popup').addClass('orderYou');
+        })
+        toggClass($('.orderyouhuiquan_popup li label'));
+        $('.order-youhuiquan_bg').click(function(){
+             $('.orderyouhuiquan_popup').removeClass('orderYou');
+            var value=$('.orderyouhuiquan_popup .on').text();
+            $('.order_choose .order-youhuiquan .fr span').eq(youhuiIdx).text(value);
+        })
+         $('.orderyouhuiquan_popup .close').click(function(){$('.orderyouhuiquan_popup').removeClass('orderYou');
+             var value=$('.orderyouhuiquan_popup .on').text();
+            $('.order_choose .order-youhuiquan .fr span').eq(youhuiIdx).text(value);
+     })
+//支付
+        $('.sy-submit_pay .btn').click(function(){
+            $('.orderfukuan_popup').addClass('orderFukuan')
+            $('.order-fukuan_bg').show();
+        })
+        toggClass($('.orderfukuan_popup li label'));
+        $('.order-fukuan_bg').click(function(){
+             $('.orderfukuan_popup').removeClass('orderFukuan');
+            var value=$('.orderfukuan_popup .on').text();
+            $('.order_choose .order-youhuiquan .fr span').text(value);
+        })
+         $('.orderfukuan_popup .close').click(function(){$('.orderfukuan_popup').removeClass('orderFukuan');
+             var value=$('.orderfukuan_popup .on').text();
+            $('.order_choose .order-youhuiquan .fr span').text(value);
+     })
+    })
+
+</script>
+<script language="javascript" type="text/javascript"> 
+var interval = 1000; 
+function ShowCountDown(year,month,day,divname) 
+{ 
+var now = new Date(); 
+var endDate = new Date(year, month-1, day); 
+var leftTime=endDate.getTime()-now.getTime(); 
+var leftsecond = parseInt(leftTime/1000); 
+//var day1=parseInt(leftsecond/(24*60*60*6)); 
+var day1=Math.floor(leftsecond/(60*60*24)); 
+var hour=Math.floor((leftsecond-day1*24*60*60)/3600); 
+var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
+var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60); 
+var cc = document.getElementById(divname); 
+cc.innerHTML = "<span class='box'>" + minute+ "</span>" + ":" + "<span class='box'>" + second + "</span>"; 
+} 
+window.setInterval(function(){ShowCountDown(2016,8,13,'daojishi');}, interval); 
+</script>
+</body>
+</html>

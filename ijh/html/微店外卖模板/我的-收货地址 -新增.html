@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的-收货地址-新增</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/xia.css"/>
+<link rel="stylesheet" type="text/css" href="css/wang.css"/>
+</head>
+
+<body>
+<div>
+     <div class="pad10 bgcolor_white address-edit border_b"><input type="text" class="" placeholder="姓名"></div>
+     <div class="pad10 bgcolor_white address-edit border_b"><input type="text" class="" placeholder="联系电话"></div>
+     <div class="xinxi-gai pad10 bgcolor_white border_b diqu"><input type="text" placeholder="省、市、区、乡镇/街道" class="inpu1"><i class="jt-icon"></i></div>
+     <div class="pad10 bgcolor_white address-edit border_b"><input type="text" class="" placeholder="详细地址"></div>
+     <div class="pad10 bgcolor_white address-edit"><input type="text" class="" placeholder="邮政地址（选填）"></div>
+     <div class="xinxi-gai pad10 mt10 bgcolor_white diqu"><span class="font_size14">设置为默认地址</span><span class="yuan-icon-green"><input type="checkbox" class="yuan-radio"><i class="quan-icon-green"></i></span></div>
+</div>
+<div class="dizhi-add-new"><a href="#" class="">保存</a></div>
+
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//首页轮播js结束
+    });
+</script>
+
+<!--设为默认地址-->
+<script>
+     $(document).ready(function(){
+         $(".yuan-icon-green").click(function(){
+              if($(this).hasClass("on")){
+                   $(this).removeClass("on");
+              }else{
+                   $(this).addClass("on");
+              }
+         });
+     });
+</script>
+</body>
+</html>

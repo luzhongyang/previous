@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>首页</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<section class="page_center_box">
+	<div class="idx_banner">
+        <div class="flexslider">  
+            <ul class="slides">  
+                <li><img src="images/banner/home_bananer@2x.png" /></li>
+                <li><img src="images/banner/home_bananer@2x.png" /></li>
+            </ul>  
+        </div>
+    </div>
+    <!--内容-->
+    <!--搜索-->
+    <div class="idx_sousuo"><input type="text" placeholder="商品搜索"><input type="button" class="btn" value="搜索"></div>
+    <!--搜索结束-->
+    <!--商品列表-->
+	<div class="sy_shangpin">
+		<div class="tit border_b"><i class="ico"></i>店家推荐</div>
+		<div class="shangpin_box">
+			<div class="box">
+				<a href="#" class="img"><img src="images/banner/home_bananer@2x.png"/></a>
+				<div class="wz">
+					<div class="left">
+						<div>
+							<p class="font_size15 black6">豆豉蒸排骨<span class="maincl">【特价】</span></p>
+							<p class="black9">月售 12 份</p>
+						</div>
+						<div class="maincl font_size15">￥8.00</div>
+					</div>
+					<a href="#" class="right">
+						<i class="ico"></i>
+						<p class="black6";>购物车</p>
+					</a>
+				</div>
+			</div>
+			<div class="box">
+				<a href="#" class="img"><img src="images/banner/home_bananer@2x.png"/></a>
+				<div class="wz">
+					<div class="left">
+						<div>
+							<p class="font_size15 black6">豆豉蒸排骨<span class="maincl">【特价】</span></p>
+							<p class="black9">月售 12 份</p>
+						</div>
+						<div class="maincl font_size15">￥8.00</div>
+					</div>
+					<a href="#" class="right">
+						<i class="ico"></i>
+						<p class="black6";>购物车</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!--商品列表结束-->
+    <!--内容结束-->
+</section>
+<footer>
+    <ul>
+        <li class="list on">
+        	<a href="#">
+                <i class="ico ico1"></i>
+                <P>首页</P>
+            </a>
+        </li>
+        <li class="list">
+        	<a href="#">
+                <i class="ico ico2"></i>
+                <P>全部商品</P>
+            </a>
+        </li>
+        <li class="list">
+        	<a href="#">
+                <i class="ico ico3"></i>
+                <P>购物车</P>
+            </a>
+        </li>
+        <li class="list">
+        	<a href="#">
+                <i class="ico ico4"></i>
+                <P>拼团</P>
+            </a>
+        </li>
+        <li class="list">
+        	<a href="#">
+                <i class="ico ico5"></i>
+                <P>用户中心</P>
+            </a>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</footer>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//首页轮播js结束
+    });
+</script>
+<!--回到顶部-->
+<div class="fixed_right">
+	<a class="backtop" href="javascript:backtop();" style="display:none;">
+    	<i class="ico ico1"></i>
+        <p>顶部</p>
+    </a>
+    <a href="#" class="kefu">
+    	<i class="ico ico2"></i>
+        <p>客服</p>
+    </a>
+</div>
+<!--回到顶部结束-->
+</body>
+</html>

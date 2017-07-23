@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>微分销-我的余额-提现</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<section class="page_center_box">
+    <div class="fx_centerMenu_list mt10">
+        <ul>
+            <li class="open-about2"><a href="javascript:;" class="linkIco">提现方式 <span class="fr black9">微信钱包</span></a></li>
+            <li class="ts black9">可提现余额：<span class="fontcl1">￥18.00</span></li>
+            <li class="mt10"><a href="#" class="">提现金额 <span class="fr black9"><input type="text" class="int_txt" placeholder="请输入提现金额"></span></a></li>
+            <li class="ts black9">注：最低提现金额为1元 <a href="#" class="fr fontcl_blue">提现记录</a></li>
+        </ul>
+    </div>
+</section>
+<footer class="long_btn_box">
+	<a href="#" class="long_btn">提现</a>
+</footer>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<!-- 支付方式弹出层 -->
+<div class="shangpinSelct_mask order_popup_about shangpinSelct_mask2">
+	<div class="cont" style=" background:#f3f4f3;">
+    	<a href="javascript:;" class="ico close"></a>
+    	<div class="order_popup_box mb10">
+            <h3 class="tit border_b">提现方式</h3>
+			<div class="default border_b">
+				<label class="radioLabel">
+					<div class="fl">微信钱包</div>
+					<span class="fr checkInt">
+						<input type="radio">
+					</span>
+					<div class="clear"></div>
+				</label>
+			</div>
+			<div class="default border_b">
+				<label class="radioLabel">
+					<div class="fl">中国交通银行 **** **** **** ***1 141</div>
+					<span class="fr checkInt">
+						<input type="radio">
+					</span>
+					<div class="clear"></div>
+				</label>
+			</div>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    $('.open-about2').click(function(){
+		$('.shangpinSelct_mask2').addClass('on');
+		$('.mask_bg').show();
+	});
+	$('.shangpinSelct_mask2 .close').click(function(){
+		$('.shangpinSelct_mask2').removeClass('on');
+		$('.mask_bg').hide();
+	});
+	
+	$('.order_popup_box .default .radioLabel').click(function(){
+	$('.order_popup_box .default .radioLabel .checkInt').removeClass('on');
+		$(this).find('.checkInt').addClass('on');
+	});
+});
+</script>
+<!-- 支付方式弹出层结束 -->
+</body>
+</html>

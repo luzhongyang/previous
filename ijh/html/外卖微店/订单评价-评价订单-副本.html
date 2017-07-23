@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>评价订单-副本</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+<script>
+$(function(){
+	$(".zan-up").click(function(){
+		if($(this).hasClass("on")){
+			$(this).removeClass("on");
+			}
+		else{
+			$(this).addClass("on")
+			}
+		
+		});
+	$(".zan-down").click(function(){
+		if($(this).hasClass("on")){
+			$(this).removeClass("on");
+			}
+		else{
+			$(this).addClass("on")
+			}
+		
+		});
+	});
+</script>
+</head>
+
+<body>
+<div class="page-group">
+      <div class="page page-current"> 
+        <!--头部-->
+            <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left back"> <span class="Ico1"></span> </a>
+              <h1 class="title">评价订单</h1>
+            </header>
+            <!--头部结束-->
+            <div class="content">
+                 <div class="pingjia-dingdan-box">
+                         <div class="content-block-title black6">订单详情</div>
+                         <div class="list-block media-list border_b">
+                                    <ul>
+                                      <li>
+                                        <a href="#" class="item-content">
+                                              <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                          <div class="item-title black3">订单号：1452974114682</div>
+                                                          <div class="item-after"><span class="zan-up on"></span><span class="zan-down"></span></div>
+                                                    </div>
+                                                    <div class="item-title-row">
+                                                          <div class="item-title black6">【蔓越莓芝士蛋糕】</div>
+                                                          <div class="item-after">￥28</div>
+                                                    </div>
+                                                    <div class="item-title-row">
+                                                          <div class="item-title black6">【蔓越莓芝士蛋糕】</div>
+                                                          <div class="item-after">￥28</div>
+                                                    </div>
+                                                    <div class="item-title-row">
+                                                          <div class="item-title"></div>
+                                                          <div class="item-after"><span class="maincl"><big>总价：￥28</big></span></div>
+                                                    </div>
+                                              </div>
+                                        </a>
+                                      </li>
+                                    </ul>
+                        </div> 
+                        <div class="content-block-title black6">商品评价</div> 
+                        <div class="zhiliang-pj border_b">
+                        		<div class="star_box">商品质量<span class="starBg"><span class="star" style="width:10%"><span class="star_clink"><a href="#"></a><a href="#"></a><a href="#"></a><a href="#"></a><a href="#"></a></span></span></span></div>
+                                <div class="img_upload">
+                                		<div class="upload_int">
+                                        	<input type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple>
+                                        </div> 
+                                </div>
+                        </div>
+                        <div class="content-block-title black6">写点什么</div> 
+                        <div class="wenzi-pj border_b">
+                        		 <div class="list-block">
+                                        <ul>
+                                             <li class="align-top">
+                                                <div class="item-content">
+                                                      <div class="item-inner">
+                                                        <div class="item-input">
+                                                          <textarea placeholder="至少输入10字，您的建议很重要，来点评一下吧！"></textarea>
+                                                        </div>
+                                                      </div>
+                                                </div>
+                                             </li>
+                                        </ul>
+                                 </div>
+                        </div>
+                        <div class="long_btn">提交</div>               
+                 </div>
+            </div>
+      </div>
+</div>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script> 
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script> 
+<script>   
+	$.init();
+</script>
+</body>
+</html>

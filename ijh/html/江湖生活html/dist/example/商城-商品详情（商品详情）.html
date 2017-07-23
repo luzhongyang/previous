@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>商城-商品详情（商品详情）</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">           	
+                <!--轮播图-->
+                <div class="idx_banner">                    
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><a href="#"><img src="img/mall/mall_detail-ban.png"></a></div>
+                            <div class="swiper-slide"><a href="#"><img src="img/mall/mall_detail-ban.png"></a></div>
+                            <div class="swiper-slide"><a href="#"><img src="img/mall/mall_detail-ban.png"></a></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <!---->
+                    <div class="topLink shangcheng_topLink">
+                        <a href="#" class="to-share mr10"></a>    
+                    </div>
+                </div>
+                <!--轮播图end--> 
+                <div class="shangcheng_good-xinxi">
+                    <div class="border_b biao-ti">
+                        <div class="overflow_clear">美的炒锅不粘锅无油烟炒菜锅电磁炉通用锅具</div>
+                        <p class="fontcl1"><small>￥</small>158</p>
+                    </div>
+                    <div class="border_b xinxi-box black6">
+                        <ul>
+                            <li class="xinxi-li border_r">运费：￥8</li>
+                            <li class="xinxi-li border_r">剩余：5263</li>
+                            <li class="xinxi-li">销量：1280</li>
+                            <div class="clear"></div>
+                        </ul>                        
+                    </div>
+                    <div class="youhui-box  mb10">
+                        <em class="youhui-em mr10">优惠</em>满1元送15.00元优惠券   
+                    </div>
+                    <div class="qu-quan mb10">
+                        <a href="#" class="pub_list">
+                            <div class="pub_list_bd"><i class="quan-ico"></i><span class="lan-zi">领取优惠券</span></div>
+                        </a>  
+                    </div>
+                    <div class="qu-quan mb10">
+                        <a href="#" class="pub_list" id="choose-good-guige">                            
+                            <div class="pub_list_bd">选择规格</div>
+                        </a>  
+                    </div>
+                    <div class="to-dianpu pub_list">
+                        <div class="dian-img"><img src="img/mall/mall_detail-ban.png"></div>
+                        <div class="pub_list_bd">
+                            <div class="tit overflow_clear">美的官方旗舰店</div>
+                            <div class="black9">关注度：524625</div>    
+                        </div>
+                        <a href="#" class="to-shop_btn">进店<i class="ico-jt ml5"></i></a>
+                    </div>
+                    <div class="confirm-dian text_c black6 border_b">
+                        <span class="mr-40"><i class="gou-ico mr5"></i>企业认证</span><span><i class="gou-ico mr5"></i>担保交易</span>    
+                    </div>                       
+                </div>
+                <div class="shangcheng-detail-box">
+                    <div class="pub_list border_b tabs">
+                        <div class="tab1 pub_list_bd border_r on">商品详情</div>
+                        <div class="tab1 pub_list_bd">商品评价</div>     
+                    </div>   
+                    <div class="detail-imgs">
+                        <img src="img/mall/mall_detail-ban.png"><img src="img/mall/mall_detail-ban.png"><img src="img/mall/mall_detail-ban.png"> 
+                    </div>
+                </div>               
+            </div>
+            <div class="shangcheng-links-fixed">
+                <a href="#" class="link-a fl"><i class="ico-a index-a"></i></a>
+                <a href="#" class="link-a fl"><i class="ico-a car-a"><em class="red-dot"></em></i></a> 
+                <div class="clear"></div>    
+            </div> 
+            <div class="footer_nav shangcheng_foot">
+                <a href="#" class="list list-border-r">
+                    <i class="ico ico1"></i>
+                    <p class="overflow_clear">联系商家</p>
+                </a>
+                <a href="#" class="list list-border-r">
+                    <i class="ico ico2"></i>
+                    <p>店铺</p>
+                </a>
+                <a href="#" class="list">
+                    <i class="ico ico3"></i>
+                    <p>收藏</p>
+                </a>
+                <a href="#" class="list2 bg-1">
+                    加入购物车
+                </a>
+                <a href="#" class="list2 bg-2">
+                    立即购买
+                </a>
+            </div>             
+        </div>
+    </div>
+</div>
+<!--选规格弹出-->
+<div class="goods_guige_mask">
+    <div class="cont">
+        <div class="ml10 mr10">
+            <div class="pub_list mb10">
+                <div class="img"><img src=""></div>
+                <div class="pub_list_bd">
+                    <P class="fontcl2">￥<big>158</big></P>
+                    <p class="black6 mt5 mb5">库存5263件</p>
+                    <P>请选择规格</P>
+                </div>
+                <a href="javascript:;" class="close"></a>
+            </div>
+            <div class="tit">规格一</div>
+            <div class="selct_box border_b clear_both">
+                <label><input type="radio" name="guige">蓝色</label>
+                <label><input type="radio" name="guige">白色</label>
+            </div>
+            <div class="tit">规格二</div>
+            <div class="selct_box border_b clear_both">
+                <label><input type="radio" name="guige">大号</label>
+                <label><input type="radio" name="guige">中号</label>
+                <label><input type="radio" name="guige">小号</label>
+            </div>
+            <div class="pub_list">
+                <div class="pub_list_bd tit">数量</div>
+                <div class="num_operate">
+                    <span class="jian" quantity="-"></span>
+                    <input type="text" value="1" class="text_box">
+                    <span class="add" quantity="+"></span>
+                </div>
+            </div>
+        </div>
+        <div class="btn_box"><a href="" class="weui-btn weui-btn_primary">加入购物车</a></div>    
+    </div>
+    <div class="mask_bg" style="z-index:97; opacity:0.4;"></div>
+</div>
+<!--选规格弹出end-->
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+<!-- 点击收藏 -->
+<script>
+$(function(){
+    $(".shangcheng_foot .list .ico3").on("click",function(){
+            if($(this).hasClass("on")){
+                $(this).removeClass("on");
+            }else{
+                $(this).addClass("on");    
+            }            
+    });
+});
+</script>
+<!-- 点击收藏end -->
+<!-- 选择规格 -->
+<script>
+$("#choose-good-guige").click(function(){
+    if($(".goods_guige_mask .cont").hasClass("on")){
+        $(".goods_guige_mask .cont").removeClass("on");
+        $(".goods_guige_mask .mask_bg").fadeOut(100);
+        
+    }else{
+        $(".goods_guige_mask .cont").addClass("on");
+        $(".goods_guige_mask .mask_bg").fadeIn(100).css("opacity","0.4");
+    }
+    
+});
+$(".goods_guige_mask .mask_bg,.goods_guige_mask .cont .close").click(function(){
+    $(".goods_guige_mask .cont").removeClass("on");
+    $(".goods_guige_mask .mask_bg").fadeOut(100);
+});
+$(".goods_guige_mask .cont .selct_box label input").click(function(){
+    
+    $(".goods_guige_mask .cont .selct_box label").removeClass("on");
+    $(this).parent("label").addClass("on");
+});
+</script>
+<!-- 选择规格end-->
+
+</body>
+</html>

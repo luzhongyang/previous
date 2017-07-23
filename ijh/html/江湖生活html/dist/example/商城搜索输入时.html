@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>商城搜索输入时(商品)</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<style>
+.page, body {background-color: #fff;}
+</style>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont coupons_sousuo-cont">
+                <div class="sousuo-box mt5 ml10 mr10 sousuo-box2">
+                	<div class="xuanze-box fl">
+	                		<span class="select-txt">商品</span><i class="ico-jt"></i>
+	                		<div class="xiala-box" style="display:none">
+	                			<ul>
+	                				<li><a href="javascript:;" class="xiala-a">商品</a></li>
+	                				<li><a href="javascript:;" class="xiala-a">店铺</a></li>
+	                			</ul>
+	                		</div>	                		
+                	</div>             	
+                    <form  method="" action="" class="suo-form">                                    	    
+                        <input type="text" value="" class="shuru-inp" id="souInput" placeholder="搜索商家、商品"><input type="button" class="sou-btn">
+                        <a href="javascript:" class="icon-cha" id="clearCha"></a>
+                    </form>
+                    <div class="clear"></div>         
+                </div> 
+                <div class="container_mid">           	
+                    <div class="sou-list2 mr10 mt5">
+                        <ul>
+                            <li><a href="javascript:;" class="sou-b">鲜花</a></li>
+                            <li><a href="javascript:;" class="sou-b">鲜花</a></li>
+                            <li><a href="javascript:;" class="sou-b">鲜花</a></li> 
+                        </ul>
+                    </div>                                          
+                </div>
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+
+<!-- 搜索框输入时-->
+<script>
+$(function(){
+    $("#souInput").on("input",function(){
+        if($(this).val().length!=0){
+           $("#clearCha").css("display","block"); 
+        }else{
+           $("#clearCha").css("display","none");
+        }
+    });
+     $("#clearCha").on("click",function(){
+            $(this).hide();
+            $("#souInput").val('');
+            $("#souInput").focus();
+    });
+});
+</script>
+<!-- 搜索框输入end-->
+<!-- 选择店铺或商品-->
+<script>
+$(function(){
+    $(".sousuo-box2 .xuanze-box").on("click",function(){
+        $(".sousuo-box2 .xiala-box").toggle();
+        if($(this).hasClass("on")){
+            $(this).removeClass("on");
+        }else{
+            $(this).addClass("on");
+        };
+    });
+    $(".sousuo-box2 .xiala-box li").on("click",function(){
+        var $txt = $(this).text();
+        $(".sousuo-box2 .select-txt").text($txt);
+    });
+    
+});
+</script>
+<!-- 选择店铺或商品end-->
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>我的小区</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="css/style2.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav">
+            <a class="pull-left headerIco"></a>
+            <a class="pull-right">管理</a>
+            <h1 class="title">我的小区</h1>
+        </header>
+		<!--头部结束-->
+        <div class="content"> 
+        	  <div class="mt10 my-xiaoqu">
+              		<div class="list-block media-list">
+                        <ul>
+                          <li class="mb10">
+                                <label class="label-checkbox item-content">
+                                  <input type="radio" name="my-radio">
+                                  <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                  <div class="item-inner">
+                                        <div class="item-title-row">
+                                             <div class="item-title mb5">合肥.五彩小区<span class="ml10 confirm-or-not">认证中</span></div>
+                                        </div>
+                                        <div class="item-subtitle"><span class="maincl">5</span>栋 <span class="maincl">6</span>单元 <span class="maincl">601</span>室</div>
+                                  </div>
+                                </label>
+                          </li>
+                          <li class="mb10">
+                                <label class="label-checkbox item-content">
+                                  <input type="radio" name="my-radio">
+                                  <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                  <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title mb5">合肥.五彩小区<span class="ml10 confirm-or-not b-g">已认证</span></div>
+                                        </div>
+                                        <div class="item-subtitle"><span class="maincl">5</span>栋 <span class="maincl">6</span>单元 <span class="maincl">601</span>室</div>
+                                  </div>
+                                </label>
+                          </li>
+                        </ul>
+                    </div>
+                    <div class="add-xiaoqu pad10  bgcolor_white">
+                    	 <a href="" class="maincl"><i class="add-icon"></i>添加小区</a>
+                    </div>
+              </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<style>
+.picker-modal .bar .title{color:#fff}
+</style>
+<script>
+$("#picker-time").picker({
+  toolbarTemplate: '<header class="bar bar-nav">\
+  <button class="button button-link pull-right close-picker">确定</button>\
+  <h1 class="title">时间选择</h1>\
+  </header>',
+  cols: [
+    {
+      textAlign: 'center',
+      values: ['5日', '6日', '7日', '8日', '9日', '10日', '11日', '12日']
+      //如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+    },
+    {
+      textAlign: 'center',
+      values: ['13时', '14时', '15时', '16时', '17时', '18时', '19时']
+    },
+    {
+      textAlign: 'center',
+      values: ['00分', '30分', '50分']
+    }
+  ]
+});
+</script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

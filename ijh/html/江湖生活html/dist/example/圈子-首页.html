@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>圈子-首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+            	<!--搜索-->
+                <div class="cirTopserch">
+                	<a href="#"><i class="ico"></i>搜索圈子或话题</a>
+                </div>
+                <!--搜索end-->
+                <!--轮播图-->
+                <div class="idx_banner">                    
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><a href="#"><img src="img/tuan/tuan_banner@3x.png"></a></div>
+                            <div class="swiper-slide"><a href="#"><img src="img/tuan/tuan_banner@3x.png"></a></div>
+                            <div class="swiper-slide"><a href="#"><img src="img/tuan/tuan_banner@3x.png"></a></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <!--轮播图end-->
+                <!--特色导航-->
+                <div class="cirIdxnav mb10">
+                    <a href="#" class="list">
+                        <img src="img/circle/homepage_recommend@3x.png">
+                        <P>精选推荐</P>
+                    </a>
+                    <a href="#" class="list">
+                        <img src="img/circle/homepage_classify@3x.png">
+                        <P>圈子分类</P>
+                    </a>
+                    <a href="#" class="list">
+                        <img src="img/circle/homepage_topic@3x.png">
+                        <P>热门话题</P>
+                    </a>
+                </div>
+                <!--特色导航end-->
+				<!--我的兴趣圈-->
+				<div class="cirIdx_tit border_b"><i class="ico"></i>我的兴趣圈</div>
+                <div class="cirList_box mb10">
+                	<ul>
+                    	<li class="cirList">
+                        	<a href="#">
+                                <div class="img fl"><img src=""></div>
+                                <div class="wz_box">
+                                    <h3 class="overflow_clear">私奔B计划</h3>
+                                    <P class="black9">成员5562人 <span class="ml10">话题12.3万条</span></P>
+                                </div>
+                                <div class="clear"></div>
+                            </a>
+                        </li>
+                        <li class="cirList">
+                        	<a href="#">
+                                <div class="img fl"><img src=""></div>
+                                <div class="wz_box">
+                                    <h3 class="overflow_clear">私奔B计划</h3>
+                                    <P class="black9">成员5562人 <span class="ml10">话题12.3万条</span></P>
+                                </div>
+                                <div class="clear"></div>
+                            </a>
+                        </li>
+                        <li class="cirList">
+                        	<a href="#">
+                                <div class="img fl"><img src=""></div>
+                                <div class="wz_box">
+                                    <h3 class="overflow_clear">私奔B计划</h3>
+                                    <P class="black9">成员5562人 <span class="ml10">话题12.3万条</span></P>
+                                </div>
+                                <div class="clear"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--我的兴趣圈end-->
+            </div>
+            <!--底部导航-->
+            <div class="footer_nav">
+            	<a href="#" class="list on">
+                	<i class="ico ico1_1"></i>
+                    <P>首页</P>
+                </a>
+                <a href="#" class="list">
+                	<i class="ico ico2_2"></i>
+                    <P>消息</P>
+                </a>
+                <a href="#" class="list">
+                	<i class="ico ico3_3"></i>
+                    <P>我的</P>
+                </a>
+            </div>
+            <!--底部导航end-->
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+</body>
+</html>

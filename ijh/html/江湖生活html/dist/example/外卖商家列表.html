@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>外卖商家列表</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+               
+                <!-- 附近推荐商铺 -->
+                <div class="takeout-list-title border_b">
+                       <a class="list" href="javascript:;">全部分类</a>
+                       <span class="line"></span>
+                       <a class="list" href="javascript:;">排序</a>
+                       <span class="line"></span>
+                       <a class="list" href="javascript:;">筛选</a>
+                </div>
+                <div class="takeout-list-mask">
+                    <div class="mask-list">
+                        <div class="list">
+                            <div class="left fl">
+                                <ul>
+                                    <li class="on"><a href="#">全部分类<span>(888)</span></a></li>
+                                    <li><a href="#">品牌馆<span>(7)</span></a></li>
+                                    <li><a href="javascript:;">拼团<span>(650)</span></a><i></i></li>
+                                    <li><a href="javascript:;">餐饮美食<span>(128)</span></a><i></i></li>
+                                    <li><a href="javascript:;">牛奶水果<span>(12)</span></a><i></i></li>
+                                    <li><a href="javascript:;">鲜花<span>(10)</span></a><i></i></li>
+                                    <li><a href="javascript:;">小吃<span>(18)</span></a><i></i></li>
+                                    <li><a href="javascript:;">异国风味<span>(128)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                </ul>
+                            </div>
+                            <div class="right fr">
+                                <ul>
+                                    <li class="right_list takeout_wu">当前为全部类目</li>
+                                    <li class="right_list takeout_wu">当前为品牌馆类目</li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                             <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="takeout_mask-bg"></div>
+                    </div>
+                    <div class="mask-list">
+                        <div class="order">
+                            <ul>
+                                <li class="on"><a href="#">智能排序</a></li>
+                                <li><a href="#">距离最近</a></li>
+                                <li><a href="#">评分最高</a></li>
+                                <li><a href="#">销售最高</a></li>
+                                <li><a href="#">起送价最低</a></li>
+                                <li><a href="#">最早送达</a></li>
+                            </ul>
+                        </div>
+                        <div class="takeout_mask-bg"></div>
+                    </div>
+                    <div class="mask-list">
+                        <div class="choose_box">
+                            <div class="choose">
+                                <div class="way">
+                                    <p class="title black9"><i class="ico_way"></i>配送方式</p>
+                                    <div class="tips">
+                                        <a href="#">不限<input type="radio" name="way"></a>
+                                        <a href="#">平台送<input type="radio" name="way"></a>
+                                        <a href="#">商家送<input type="radio" name="way"></a>
+                                    </div>
+                                </div>
+                                <div class="infor">
+                                    <p class="title black9"><i class="ico_infor"></i>优惠信息</p>
+                                    <div class="tips">
+                                        <a href="#">立减优惠<input type="radio" name="infor"></a>
+                                        <a href="#">下单立返<input type="radio" name="infor"></a>
+                                        <a href="#">商家优惠<input type="radio" name="infor"></a>
+                                        <a href="#">满返代金券<input type="radio" name="infor"></a>
+                                        <a href="#">首单立减<input type="radio" name="infor"></a>
+                                        <a href="#">下单满减<input type="radio" name="infor"></a>
+                                        <a href="#">提前下单优惠<input type="radio" name="infor"></a>
+                                        <a href="#">折扣商品<input type="radio" name="infor"></a>
+                                    </div>
+                                </div>
+                                <div class="tese">
+                                    <p class="title black9"><i class="ico_te"></i>商家特色</p>
+                                    <div class="tips">
+                                        <a href="#">免配送费<input type="radio" name="tese"></a>
+                                        <a href="#">新店开业<input type="radio" name="tese"></a>
+                                        <a href="#">0元起送<input type="radio" name="tese"></a>
+                                        <a href="#">品牌商家<input type="radio" name="tese"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btns">
+                                <a href="javascript:;" class="reset_btn">清空</a>
+                                <a href="j#" class="confirm_btn">确定</a>
+                            </div>
+                        </div>
+                        <div class="takeout_mask-bg"></div>
+                    </div>  
+                </div>
+
+                <div class="container_mid">
+                   <div class="take-out_tuijian">
+                        <div class="store_lists mb10">
+                            <ul>
+                                 <li>
+                                        <div class="left_top new_store"></div>  
+                                        <a href="#">
+                                        <div class="pub_list">
+                                            <div class="left pub_list_bd">
+                                                <div class="pic fl">
+                                                    <img src="img/idx_ad6.png">
+                                                </div>
+                                                <div class="txt black9">
+                                                    <p class="overflow_clear black3">商家名称</p>
+                                                    <div class="sale"><div class="starBg"><span class="star" style="width: 80%;"></span></div><span class="fontcl2 ml10 mr10">4.0分</span>月售1523单</div>
+                                                    <p>￥0起送 / 配送费0元</p>
+                                                </div>
+                                            </div>
+                                            <div class="right">
+                                                <span class="bg">平台专送<i></i></span>
+                                                <p class="time">30分钟</p>
+                                                <p class="black9">1.2km</p>
+                                            </div>
+                                        </div>
+                                        </a>
+                                        <div class="activity">
+                                            <div class="black6 box">
+                                                <div class="pull_down fr">3个活动<i class="ico_xia"></i></div>
+                                                <div class="first">
+                                                    <a href="#" class="black6">
+                                                    <p><i class="ico_shou"></i><span>新用户首单优惠5元</span></p>
+                                                    <p><i class="ico_jian"></i>满200减50，满500减150，满1000减300</p>
+                                                    <p><i class="ico_quan"></i>满200减50，满500减150，满1000减300</p>
+                                                    <p><i class="ico_zhe"></i>10元优惠券一张（满60元可用），20元优惠券一张...</p>
+                                                    <p><i class="ico_fan"></i>折扣商品5折起</p>
+                                                    </a>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left_top new_store"></div>  
+                                        <a href="#">
+                                        <div class="pub_list">
+                                            <div class="left pub_list_bd">
+                                                <div class="pic fl">
+                                                    <img src="img/idx_ad6.png">
+                                                </div>
+                                                <div class="txt black9">
+                                                    <p class="overflow_clear black3">商家名称</p>
+                                                    <div class="sale"><div class="starBg"><span class="star" style="width: 80%;"></span></div><span class="fontcl2 ml10 mr10">4.0分</span>月售1523单</div>
+                                                    <p>￥0起送 / 配送费0元</p>
+                                                </div>
+                                            </div>
+                                            <div class="right">
+                                                <span class="bg">平台专送<i></i></span>
+                                                <p class="time">30分钟</p>
+                                                <p class="black9">1.2km</p>
+                                            </div>
+                                        </div>
+                                        </a>
+                                        <div class="activity">
+                                            <div class="black6 box">
+                                                <div class="first">
+                                                    <a href="#" class="black6">
+                                                        <p><i class="ico_shou"></i><span>新用户首单优惠5元</span></p>
+                                                        <p><i class="ico_jian"></i>满200减50，满500减150，满1000减300</p>
+                                                    </a>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <li>
+                                    <div class="left_top new_store"></div>  
+                                    <a href="#">
+                                    <div class="pub_list">
+                                        <div class="left pub_list_bd">
+                                            <div class="pic fl">
+                                                <img src="img/idx_ad6.png">
+                                            </div>
+                                            <div class="txt black9">
+                                                <p class="overflow_clear black3">商家名称</p>
+                                                <div class="sale"><div class="starBg"><span class="star" style="width: 80%;"></span></div><span class="fontcl2 ml10 mr10">4.0分</span>月售1523单</div>
+                                                <p>￥0起送 / 配送费0元</p>
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <span class="bg">平台专送<i></i></span>
+                                            <p class="time">30分钟</p>
+                                            <p class="black9">1.2km</p>
+                                        </div>
+                                    </div>
+                                    </a>
+                                    <div class="activity">
+                                        <div class="black6 box">
+                                            <div class="pull_down fr">3个活动<i class="ico_xia"></i></div>
+                                            <div class="first">
+                                                <a href="#" class="black6">
+                                                <p><i class="ico_shou"></i><span>新用户首单优惠5元</span></p>
+                                                <p><i class="ico_jian"></i>满200减50，满500减150，满1000减300</p>
+                                                <p><i class="ico_quan"></i>满200减50，满500减150，满1000减300</p>
+                                                <p><i class="ico_zhe"></i>10元优惠券一张（满60元可用），20元优惠券一张...</p>
+                                                <p><i class="ico_fan"></i>折扣商品5折起</p>
+                                                </a>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                <div class="left_top new_store"></div>  
+                                <a href="#">
+                                <div class="pub_list">
+                                    <div class="left pub_list_bd">
+                                        <div class="pic fl">
+                                            <img src="img/idx_ad6.png">
+                                        </div>
+                                        <div class="txt black9">
+                                            <p class="overflow_clear black3">商家名称</p>
+                                            <div class="sale"><div class="starBg"><span class="star" style="width: 80%;"></span></div><span class="fontcl2 ml10 mr10">4.0分</span>月售1523单</div>
+                                            <p>￥0起送 / 配送费0元</p>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <span class="bg">平台专送<i></i></span>
+                                        <p class="time">30分钟</p>
+                                        <p class="black9">1.2km</p>
+                                    </div>
+                                </div>
+                                </a>
+                                <div class="activity">
+                                    <div class="black6 box">
+                                        <div class="pull_down fr">3个活动<i class="ico_xia"></i></div>
+                                        <div class="first">
+                                            <a href="#" class="black6">
+                                            <p><i class="ico_shou"></i><span>新用户首单优惠5元</span></p>
+                                            <p><i class="ico_jian"></i>满200减50，满500减150，满1000减300</p>
+                                            <p><i class="ico_quan"></i>10元优惠券一张（满60元可用），20元优惠券一张...</p>
+                                            <p><i class="ico_zhe"></i>折扣商品5折起</p>
+                                            <p><i class="ico_fan"></i>实际支付40元返5元商家代金券</p>
+                                            <p><i class="ico_fu"></i>商家支持在线支付</p>
+                                            </a>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            </ul>
+                        </div>
+                   </div>
+                </div>
+                <!-- 附近推荐商铺结束 -->
+    	</div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>	
+<script type="text/javascript">
+    $('.takeout-list-mask .left ul li').click(function(){
+        var tk_idx=$(this).index();
+        $(this).addClass('on').siblings().removeClass('on');
+        $(this).parents(".list").find('.right .right_list').eq(tk_idx).show().siblings().hide();
+        var value=$(this).text();
+        avalue=value.split('(');
+        value=avalue[0];
+        var ind=$(this).parents('.mask-list').index()
+        $('.takeout-list-title .list').eq(ind).text(value);
+    })
+    $('.takeout-list-mask .right .right_list li').click(function(){
+        $(this).addClass('on').siblings().removeClass('on');
+    })
+    if($('.takeout-list-title').length > 0){
+        $('.takeout-list-title a.list').width(100 / $('.takeout-list-title a.list').length + '%');  
+    }
+    $('.takeout-list-title a.list').click(function(){
+        $(this).toggleClass('on').siblings().removeClass('on'); 
+        $('.takeout-list-mask').show();
+         var ind=$(this).index();
+        $('.takeout-list-mask .mask-list').eq(ind/2).toggle().siblings().hide();
+		if($(this).hasClass("on")){
+			$('.takeout-list-mask').show();
+		}else{
+			$('.takeout-list-mask').hide();
+		}
+    })
+    $('.takeout-list-mask .choose a').click(function(){
+        $(this).addClass('on').siblings().removeClass('on');
+    })
+    $('.takeout-list-mask .choose_box .reset_btn').click(function(){
+         $('.takeout-list-mask .choose a').removeClass('on')
+    })
+    $('.takeout_mask-bg').click(function(){
+        $('.takeout-list-mask .mask-list').hide();
+        $('.takeout-list-title a').removeClass('on');
+    })
+    $('.mask-list li').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+    })
+    $(".activity .pull_down").click(function(){
+    var len=$(this).parents('.activity').find('.first p').length;
+    if($(this).find('i').hasClass('on')){
+         $(this).parents('.activity').find('.first').animate({height:"40px"},300);
+        $(this).find('i').removeClass('on');
+    }
+    else{
+         $(this).parents('.activity').find('.first').animate({height:20*len+'px'},300);
+        $(this).find('i').addClass('on');  
+    }
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>登录</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="loginTop">
+	<div class="smallpage">
+        <div class="logo fl"><img src="images/logo.png"><span>江湖骑手团调度中心</span></div>
+        <div class="tit fl">欢迎登录</div>
+    </div>
+</div>
+<div class="login_box">
+	<div class="smallpage">
+        <div class="img fl"><img src="images/login_img.png"></div>
+        <div class="fr">
+        	<div class="login_form_box">
+            	<div class="tab_box">
+                	<a href="javascript:;" class="on border_r">账户密码登录</a>
+                    <a href="javascript:;">手机验证码登录</a>
+                </div>
+                <div class="cont">
+                	<div class="change_box">
+                    	<form id="signupForm">
+                            <div class="int_box form-group mb20">
+                                <div class="ico ico1"></div>
+                                <div class="box"><input type="text" id="username" name="username" aria-required="true" aria-invalid="true" class="form-control error" placeholder="手机号"><a href="javascript:;" class="clear_ico"></a></div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="int_box form-group mb20">
+                                <div class="ico ico2"></div>
+                                <div class="box"><input type="password" id="password" name="password" aria-required="true" aria-invalid="true" class="form-control error" placeholder="密码"><a href="javascript:;" class="clear_ico"></a></div>
+                                <div class="clear"></div>
+                            </div>
+                            <input type="submit" value="登 录" class="long_btn">
+                        </form>
+                    </div>
+                    <div class="change_box none">
+                    	<form id="commentForm">
+                            <div class="int_box form-group getyzm_int_box mb20">
+                                <div class="ico ico1"></div>
+                                <div class="box"><input type="text" id="phone" name="phone" minlength="11" required aria-required="true" class="form-control" placeholder="手机号"><a href="javascript:;" class="clear_ico"></a></div>
+                                <div class="getyzm_box"><span>获取验证码</span></div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="int_box form-group mb20">
+                                <div class="ico ico3"></div>
+                                <div class="box"><input type="text" id="yzm" name="yzm" required aria-required="true" class="form-control" placeholder="验证码"><a href="javascript:;" class="clear_ico"></a></div>
+                                <div class="clear"></div>
+                            </div>
+                            <input type="submit" value="登 录" class="long_btn">
+                        </form>
+                    </div>
+                    <div class="caozuo_box">
+                    	<div class="fl"><input type="checkbox" checked>自动登录</div>
+                        <a href="忘记密码.html" class="fr black6">忘记密码</a>
+                    </div>
+                </div>
+                <div class="foot">
+                	<a href="#" class="fl"><img src="images/other_ico1.png"></a>
+                    <a href="#" class="fl"><img src="images/other_ico2.png"></a>
+                    <a href="入驻.html" class="fr"><i class="ico animated infinite"></i>立即入驻</a>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="footer_one">
+    <div class="smallpage">
+        <div class="footer_nav"><a href="#">网站首页</a> / <a href="#">加入我们</a> / <a href="#">关于我们</a> / <a href="#">下载APP</a> / <a href="#">帮助中心</a> / <a href="#">申请入驻</a></div>
+        <div class="footer_link"><a href="#">O2O解决方案</a> <a href="#">O2O网站系统</a> <a href="#">一团网</a> <a href="#">软件商城</a> <a href="#">江湖网站</a> <a href="#">baocms系统</a> <a href="#">江湖家居系统</a></div>
+        <div class="footer_copy">
+            <P>All Rights Reserved ICP备案：皖ICP备13010842号</P>
+            <P>合肥江湖信息科技有限公司</P>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+
+<script src="js/plugins/validate/jquery.validate.min.js"></script>
+<script src="js/plugins/validate/messages_zh.min.js"></script>
+<script src="js/demo/form-validate-demo.min.js"></script>
+<script>
+	$(document).ready(function() {
+		
+		var input = $(".login_form_box .int_box .box input");
+		
+		$(input).focus(function() {
+			$(".login_form_box .int_box .box .clear_ico").hide();
+			$(this).parent().find(".clear_ico").show();
+			
+			$(this).parents(".int_box").css("border-color","#00bd9e");
+			
+		}).blur(function() {
+			if (input.val() != "") {
+				$(this).parent().find(".clear_ico").show();
+			}else{
+				
+				$(this).parent().find(".clear_ico").hide();
+			}
+			$(this).parents(".int_box").css("border-color","");
+		});
+		
+		$(".login_form_box .int_box .box .clear_ico").click(function(){
+			$(this).parent().find("input").val("");
+		});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$(".login_form_box .tab_box a").each(function(i){
+			$(this).click(function(){
+				$(this).addClass("on").siblings("a").removeClass("on");
+				$(".login_form_box .cont .change_box").each(function(e){
+					if(i==e){
+						$(this).removeClass("none").siblings(".change_box").addClass("none");
+					}else{
+						$(this).addClass("none")
+					}
+				});
+			});
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>我的团迹-团详情3</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+
+<body>
+<div class="page-group">
+	 <div class="page page-current"> 
+            <!--头部-->
+            <header class="bar bar-nav header_Ico"> <a class="button button-link button-nav pull-left back"> <span class="Ico1"></span> </a><a class="button button-link button-nav pull-right"> <span class="Ico-share"></span> </a>
+                <h1 class="title">组团详情</h1>
+            </header>
+            <!--头部结束-->
+            <nav class="bar bar-tab space-button-box">
+                <a href="#" class="button tuan-more_button" style=""><i class="icon-wu"></i>更多拼团</a>
+                <a href="#" class="button cheng-bg-button" style="width:55%">我也要参团</a>
+            </nav>
+            <div class="content content-padding">
+                 <div class="list-block media-list tuan_goods">
+                        <ul>
+                              <li>
+                                <a href="#" class="item-content black3">
+                                      <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="100%"></div>
+                                      <div class="item-inner">
+                                        <div class="item-subtitle"><big>【水蜜桃果酱】</big></div>
+                                        <div class="item-text"><span class="black6">纯天然的水蜜桃果粒，香甜可口，把夏天的滋
+            味，装进你的心里！</span></div>
+                                        <div class="item-subtitle">5人团<span class="fontcl1"> <big>￥20</big>/份</span></div>
+            
+                                      </div>
+                                      <div class="zt_zhuangtai"><img src="images/suc.png"></div>
+                                </a>
+                              </li>
+                        </ul>
+                 </div>
+                 <div class="zutuan_detail">
+                        <div class="zutuan_detail-top">
+                            <img src="images/sanjiao.png" width="100%">
+                            <div class="imgs">
+                                <span><img src="" class="img-1"><img src="images/tuan-icon.png" class="img-2"></span><span><img src="" class="img-1"></span><span><img src="" class="img-1"></span><span></span><span></span>
+                            </div>
+                            <div class="font_line24 black3 font-size75">还差<span class="fontcl1">4</span>人，就可组团成功噢！</div>
+                            <div class="font_line24 shengyu-time black9 font-size75">剩余 <span id="daojishi_98"  rel="65256102" class="limtBuy_time"></span> 结束</div>
+                            <script>
+                                function daojishi(id) {
+                                    var t = Math.floor($("#" + id).attr('rel'));
+                                    t--;
+                                    var d = Math.floor(t / 60 / 60 / 24);
+                                    var h = Math.floor(t / 60 / 60 % 24);
+                                    var m = Math.floor(t / 60 % 60);
+                                    var s = Math.floor(t % 60);
+                                    $("#" + id).attr('rel', t);
+                                    $("#" + id).html('<span>' + h + '</span>' + '<i>'+':</i>' + '<span>' + m + '</span>' + '<i>'+':</i>' + '<span>' +s +'</span>');
+                                }
+                    
+                    </script>
+                    <script type="text/javascript" language="javascript">
+                                setInterval(function () {
+                                    daojishi("daojishi_98");
+                                }, 1000);
+                    </script>
+                            <div class="font_line24 font_size14 black9 dianji-xiangqing">收起全部参团详情 <i class="sanjiao-icon"></i></div>
+                            <script>
+                                $(function(){
+                                    $(".dianji-xiangqing").click(function(){
+                                        //$(".zutuan_detail-down").toggle();
+                                        if($(".zutuan_detail-down").css("display") == "block"){
+                                            $(".zutuan_detail-down").hide();
+                                            $(this).html("查看全部参团详情"+"<i class='sanjiao-icon2'></i>");
+                                            }
+                                        else{
+                                            $(".zutuan_detail-down").show();
+                                            $(this).html("收起全部参团详情"+"<i class='sanjiao-icon'></i>");
+                                            }
+                                        });
+                                    
+                                    });
+                            </script>
+                        </div>
+                        <div class="zutuan_detail-down">
+                            <img src="images/sanjiao2.png" width=" 100%">
+                            <div class="list-block cantuan-detail border_b">
+                                     <ul>
+                                          <li class="item-content">
+                                                <div class="item-media"><i><img src="" class="img-tuxiang"></i></div>
+                                                <div class="item-inner">
+                                                  <div class="item-title"><span class="black3 font-size75"><span class="fontcl1">团长</span> hihi</span></div>
+                                                  <div class="item-after">2016-06-02 17:22 开团</div>
+                                                </div>
+                                          </li>
+                                          <li class="item-content">
+                                                <div class="item-media"><i><img src="" class="img-tuxiang"></i></div>
+                                                <div class="item-inner">
+                                                  <div class="item-title"><span class="font-size75 black3">吃货一枚</span></div>
+                                                  <div class="item-after">2016-06-02 17:22参团</div>
+                                                </div>
+                                          </li>
+                                          <li class="item-content">
+                                                <div class="item-media"><i><img src="" class="img-tuxiang"></i></div>
+                                                <div class="item-inner">
+                                                  <div class="item-title"><span class="font-size75 black3">吃货一枚</span></div>
+                                                  <div class="item-after">2016-06-02 17:22参团</div>
+                                                </div>
+                                          </li>
+                                     </ul>
+                            </div>
+                        </div>
+                 </div>
+                 <div class="may-like mt10 border_b">
+                      <div class="tit font-size75 black3">你可能还喜欢</div>	
+                      <ul class="cont">
+                            <li class="list">
+                                <div class="list-cont">
+                                        <div class="img"><img src="pic/pic1.jpg"></div>
+                                        <div class="wz font_size14">
+                                            <p class="overflow_clear black3">【蔓越莓芝士蛋糕】</p>
+                                            <p class="black6">销售量:245</p>
+                                            <p class="fontcl1">￥28</p>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="list">
+                                <div class="list-cont">
+                                        <div class="img"><img src="pic/pic1.jpg"></div>
+                                        <div class="wz font_size14">
+                                            <p class="overflow_clear black3">【蔓越莓芝士蛋糕】</p>
+                                            <p class="black6">销售量:245</p>
+                                            <p class="fontcl1">￥28</p>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="list">
+                                <div class="list-cont">
+                                        <div class="img"><img src="pic/pic1.jpg"></div>
+                                        <div class="wz font_size14">
+                                            <p class="overflow_clear black3">【蔓越莓芝士蛋糕】</p>
+                                            <p class="black6">销售量:245</p>
+                                            <p class="fontcl1">￥28</p>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="list">
+                                <div class="list-cont">
+                                        <div class="img"><img src="pic/pic1.jpg"></div>
+                                        <div class="wz font_size14">
+                                            <p class="overflow_clear black3">【蔓越莓芝士蛋糕】</p>
+                                            <p class="black6">销售量:245</p>
+                                            <p class="fontcl1">￥28</p>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="list">
+                                <div class="list-cont">
+                                        <div class="img"><img src="pic/pic1.jpg"></div>
+                                        <div class="wz font_size14">
+                                            <p class="overflow_clear black3">【蔓越莓芝士蛋糕】</p>
+                                            <p class="black6">销售量:245</p>
+                                            <p class="fontcl1">￥28</p>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="list">
+                                <div class="list-cont">
+                                        <div class="img"><img src="pic/pic1.jpg"></div>
+                                        <div class="wz font_size14">
+                                            <p class="overflow_clear black3">【蔓越莓芝士蛋糕】</p>
+                                            <p class="black6">销售量:245</p>
+                                            <p class="fontcl1">￥28</p>
+                                        </div>
+                                </div>
+                            </li>
+                      </ul> 
+                      <div class="cl"></div>
+                 </div>
+                 <div class="pintuan-way mt10 border_b">
+                        <div class="list-block">
+                            <ul>
+                              <li class="item-content item-link">
+                                <div class="item-inner font_size14">
+                                  <div class="item-title black3">拼团玩法</div>
+                                  <div class="item-after"><span class="black6">查看详情</span></div>
+                                </div>
+                              </li>
+                            </ul>
+                        </div>
+                        <div class="row font_size14">
+                              <div class="col-25">
+                                    <div class="num fl">1</div>
+                                    <div class="fl"><span>选择</span><span>心仪商品</span></div>
+                              </div>
+                              <div class="col-25">
+                                    <div class="num fl">2</div>
+                                    <div class="fl"><span>支付开团</span><span>或参团</span></div>
+                              </div>
+                              <div class="col-25">
+                                    <div class="num fl">3</div>
+                                    <div class="fl"><span>等待好友</span><span>参团支付</span></div>
+                              </div>
+                              <div class="col-25">
+                                    <div class="num fl">4</div>
+                                    <div class="fl"><span>达到人数</span><span>拼团成功</span></div>
+                              </div>
+                        </div>
+                        <div class="cl">
+                 </div>
+            </div>
+            </div>
+	 </div>
+
+
+</div>
+
+
+
+
+
+
+
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>个人中心-我的红包-历史红包</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+                <div class="myHongbao-list-cont mt10">
+                    <div class="mb10 hongbao-one pub_list">
+                        <div class="img-bian"><img src="img/my/red_box@2x_hui1.png"></div>
+                        <div class="the-zuo hui">￥<big>10.0</big></div>
+                        <div class="pub_list_bd the-you">
+                            <p class="biaoti mb5 overflow_clear hui">普通红包</p>
+                            <p class="hui">使用限制：满30元可用</p>
+                            <p class="hui">有效期至：2016-12-31</p>
+                            <div class="have-used"></div> 
+                        </div>
+                    </div>
+                    <div class="mb10 hongbao-one pub_list">
+                        <div class="img-bian"><img src="img/my/red_box@2x_hui1.png"></div>
+                        <div class="the-zuo hui">￥<big>10.0</big></div>
+                        <div class="pub_list_bd the-you">
+                            <p class="biaoti mb5 overflow_clear hui">普通红包</p>
+                            <p class="hui">使用限制：满30元可用</p>
+                            <p class="hui">有效期至：2016-12-31</p>
+                            <div class="have-used have-past"></div>
+                        </div>  
+                    </div>
+                    <div class="mb10 hongbao-one pub_list">
+                        <div class="img-bian"><img src="img/my/red_box@2x_hui1.png"></div>
+                        <div class="the-zuo hui">￥<big>10.0</big></div>
+                        <div class="pub_list_bd the-you">
+                            <p class="biaoti mb5 overflow_clear hui">普通红包</p>
+                            <p class="hui">使用限制：满30元可用</p>
+                            <p class="hui">有效期至：2016-12-31</p>
+                            <div class="have-used have-past"></div>
+                        </div>  
+                    </div>
+                    <div class="mb10 hongbao-one pub_list">
+                        <div class="img-bian"><img src="img/my/red_box@2x_hui1.png"></div>
+                        <div class="the-zuo hui">￥<big>10.0</big></div>
+                        <div class="pub_list_bd the-you">
+                            <p class="biaoti mb5 overflow_clear hui">普通红包</p>
+                            <p class="hui">使用限制：满30元可用</p>
+                            <p class="hui">有效期至：2016-12-31</p>
+                            <div class="have-used"></div>
+                        </div>  
+                    </div>
+                </div>        
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+    
+        function yiyuan_time(id) {
+            var t = Math.floor($("#" + id).attr('rel'));
+            t--;
+            var d = Math.floor(t / 60 / 60 / 24);
+            var h = Math.floor(t / 60 / 60 % 24);
+            var m = Math.floor(t / 60 % 60);
+            var s = Math.floor(t % 60);
+            $("#" + id).attr('rel', t);
+            $("#" + id).html(m + '分' + s + '秒');
+        }
+        setInterval(function () {
+            for(i=1;i<100;i++){
+                yiyuan_time("daojishi" + i);
+            }
+        }, 1000);//倒计时js部分结束
+
+    });
+        
+</script> 
+
+</body>
+</html>

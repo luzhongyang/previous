@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>商品详情</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+        <!-- 工具栏 -->
+        <nav class="bar bar-tab dianpu_footer">
+            <div class="dianpu_fot_shop shopping-btn">
+                <div class="fl">
+                    <div class="spcart gouwucart_Ico"><!--<i>1</i>--></div>
+                </div>
+                <div class="fr">
+                    <div class="fl mr10 txt_center" style=" margin-top:0.2rem;">
+                        <div class="color1 f_size1">合计：<em class="maincl">￥0</em></div>
+                        <p class="font_size14" style=" color:#a8a8ae;">不含快递费</p>
+                    </div>
+                    <a href="#" class="fr pub_btn Btn">购买</a> </div>
+                <div class="cl"></div>
+            </div>
+        </nav>
+        <!-- 工具栏结束 --> 
+        <!--主要内容-->
+        <div class="content">
+            <div class="seller_caidelt_top sp_detail_top"> <img src="pic/img1.png" width="100%">
+                <div class="top"> <a href="#" class="fl"><i class="Ico1"></i></a> <a href="#" class="fr"><i class="Ico2 open-about"></i></a>
+                    <div class="cl"></div>
+                </div>
+                <div class="bottom">
+                    <p class="fl">草莓味慕斯蛋糕</p>
+                    <div class="fr"><i class="scIco1"></i></div>
+                    <div class="cl"></div>
+                </div>
+            </div>
+            <div class="sp_detail">
+                <div class="list-block">
+                    <ul>
+                        <li class="item-content border_b">
+                            <div class="item-inner f_size1">
+                                <div class="item-title maincl"><em class="f_size2">￥108</em>/份</div>
+                                <div class="item-after">销量：24</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mallord_delt_mask seller_caidelt_box border_b">
+                    <p class="wz">规格选择：</p>
+                    <div class="row selct_box chicun-box"> <a href="javascript:;" class="fl col-25 active">8寸</a> <a href="javascript:;" class="fl col-25">12寸</a> <a href="avascript:;" class="fl col-25">24寸</a> <a href="javascript:;" class="fl col-25">48寸</a> </div>
+                    <div class="clearfix mt10">
+                        <div class="fl f_size1">购买数量：</div>
+                        <div class="fr">
+                            <div class="num_operate sp_nums"> 
+                                <!--<span class="reduce" quantity="-">-</span>
+                                <input type="text" value="1" class="text_box">--> 
+                                <span class="add" quantity="+">+</span> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="seller_caidelt_box mb10 xinxi">
+                    <p>慕斯蛋糕是一种以慕斯粉为主材料的糕点。慕斯的英文是mousse，是一种奶冻式的甜点，可以直接吃或做蛋糕夹层，通常是加入cream与凝固剂来造成浓稠冻状的效果。慕斯是从法语音译过来的。慕斯蛋糕最早出现在美食之都法国巴黎，最初大师们在奶油中加入起稳定作用和改善结构，口感和风味的各种辅料，使之外型，色泽，结构，口味变化丰富，更加自然纯正，冷冻后食用其味无穷，成为蛋糕中的极品。慕斯与布丁一样属于甜点的一种，其性质较布丁更柔软，入口即化。</p>
+                </div>
+                <div class="sp_xinxi bgcolor_white">
+                    <div class="buttons-tab border_b"> <a href="#tab1" class="tab-link active button Btn">商品详情</a> <a href="#tab2" class="tab-link button Btn">商品评价(3)</a> </div>
+                    <div class="content-block">
+                        <div class="tabs">
+                            <div id="tab1" class="tab active" style=" line-height:0;"> <img src="pic/img1.png" width="100%" class="mb10"/> <img src="pic/img1.png" width="100%" class="mb10"/> </div>
+                            <!--<div id="tab2" class="tab">
+                               
+                            </div>--> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--主要内容结束--> 
+    </div>
+</div>
+<!--分享遮罩层-->
+<div class="popup popup-about share-yun_box">
+    <div class="share-yun close-popup"><img src="images/share-yun.png"></div>
+</div> 
+<script>
+$(document).on('click','.open-about', function () {
+	$.popup('.popup-about');
+});
+$(document).ready(function() {
+    $(".scIco1").click(function(){
+		if($(this).hasClass("scIco1")){
+			$(this).removeClass("scIco1");
+			$(this).addClass("scIco2");
+		}else{
+			$(this).addClass("scIco1");
+			$(this).removeClass("scIco2");
+		}
+	});
+});
+$(document).ready(function() {
+	$(".mallord_delt_mask .selct_box a").click(function(){
+		$(this).parent().find(".mallord_delt_mask .selct_box a").removeClass("active");
+		$(this).addClass("active");
+	}
+	);                
+});
+</script> 
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script> 
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script> 
+</body>
+</html>

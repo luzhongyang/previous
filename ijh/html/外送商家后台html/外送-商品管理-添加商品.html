@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>外送-商品管理-添加商品</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+   	<!--表单-->
+    <div class="tabnr_change show">
+        <table class="form_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        	<tr>
+                <td><p class="form_table_t"><em>·</em>商品分类：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                        <select class="form_table_int form_table_intw2 fl">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                        
+                        <select class="form_table_int form_table_intw2 fl ml10">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                        <a href="#" class="btn btn-primary btn-sm fl ml20">添加分类</a>
+                    </div>
+                </td>
+            </tr>
+        	<tr>
+                <td><p class="form_table_t"><em>·</em>系统分类：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                        <select class="form_table_int form_table_intw2 fl">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                        <select class="form_table_int form_table_intw2 fl ml10">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                        <select class="form_table_int form_table_intw2 fl ml10">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        	<tr>
+                <td width="120"><p class="form_table_t"><em>·</em>商品名称：</p></td>
+                <td><div class="form_table_nr"><input type="text" class="form_table_int form_table_intw1" /></div></td>
+            </tr>
+        	<tr>
+                <td><p class="form_table_t"><em>·</em>商品图片：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                        <div class="fl form_table_scimg">
+                        	<a class="btn btn-primary btn-sm upload_img_btn">图片上传 <input type="file" class="scimg_int" /></a>
+                            <p>建议尺寸300*200</p></div>
+                        <div class="fl">
+                            <div class="form_table_sjimg"><img src="../sjimages/scimg_03.jpg" /></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        	<tr>
+                <td><p class="form_table_t"><em>·</em>商品规格：</p></td>
+                <td>
+                    <div class="spec_mask spec_mask1">
+                        <div class="cont">
+                            <div class="table_box">
+                                <table border="0" cellspacing="0" cellpadding="0">
+                                    <tr class="tit">
+                                        <td><span class="pointcl">*</span>价格</td>
+                                        <td><span class="pointcl">*</span>打包费</td>
+                                        <td><span class="pointcl">*</span>库存</td>
+                                        <td class="cz">&nbsp;</td>
+                                    </tr>
+                                    <tr class="int_box">
+                                        <td><input type="text" class="int"></td>
+                                        <td><input type="text" class="int"></td>
+                                        <td><input type="text" class="int"></td>
+                                        <td class="cz"><span class="black9">(库存无限请填写-1)</span><a href="javascript:;" class="fa fa-times-circle clear_btn"></a></td>
+                                    </tr>
+                                </table>
+                                <a href="javascript:;" class="btn btn-primary btn-sm btn-outline add_btn">添加规格</a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="form_table_t">售卖状态：</p></td>
+                <td>
+                	<div class="form_table_nr"><label class="mr30"><input type="radio" name="mai" class="check_box" />上架</label><label class="mr30"><input type="radio" name="mai" class="check_box" />下架</label></div>
+                </td>
+            </tr>
+        </table>
+        <div class="form_table_btn_box text_c">
+        	<a class="btn btn-primary btn-w-m" href="#">保存并返回</a>
+            <a class="btn btn-primary btn-outline btn-w-m" href="#">保存并继续重建</a>
+            <a class="btn btn-default btn-w-m" href="#">取消</a>
+        </div>
+    </div>
+    <!--表单end-->
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<!--规格编辑-->
+<script>
+$(document).ready(function() {
+
+	$(".spec_mask1 .add_btn").click(function(){
+		$(this).parents(".spec_mask1").find(".table_box table").append('<tr class="int_box"><td><input type="text" class="int"></td><td><input type="text" class="int"></td><td><input type="text" class="int"></td><td class="cz"><span class="black9">(库存无限请填写-1)</span><a href="javascript:;" class="fa fa-times-circle clear_btn"></a></td></tr>');
+		
+		$(".spec_mask1 .cont table tr td .clear_btn").click(function(){
+			$(this).parents("tr.int_box").remove();
+		});
+	});
+	
+	$(".spec_mask1 .cont table tr td .clear_btn").click(function(){
+		$(this).parents("tr.int_box").remove();
+	});	
+});
+</script>
+<!--规格编辑end-->
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>首页</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src="js/swiper.min.js"></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+        <!-- 工具栏 -->
+        <nav class="bar bar-tab">
+            <a class="tab-item external active" href="#">
+                <span class="ico ico_1"></span>
+                <span class="tab-label">首页</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="ico ico_2"></span>
+                <span class="tab-label">活动</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="ico ico_3"></span>
+                <span class="tab-label">拼团</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="ico ico_4"></span>
+                <span class="tab-label">我的</span>
+            </a>
+        </nav>
+        <!-- 工具栏结束 -->
+        
+        <div class="content"> 
+        	<!--幻灯banner-->
+            <!-- Slider -->
+            <div class="swiper-container" data-space-between='10'>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="images/banner.png" style='width: 100%'></div>
+                    <div class="swiper-slide"><img src="images/banner.png" style='width: 100%'></div>
+                    <div class="swiper-slide"><img src="images/banner.png" style='width: 100%'></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <!--幻灯banner结束-->
+            <!--首页优惠券-->
+			<div>
+				<div class="locatLabel_switch2 swiper-container5 mt10">
+					<div class="swiper-wrapper idxCop">
+						<div class="box swiper-slide">
+							<div class="switch"> 
+								<div class="col-33 list">
+									<big>￥5</big>
+									<p>买满15元立减</p>
+									<i class="bg_l"></i>
+									<i class="bg_r"></i>
+								</div>
+							</div>
+						</div>
+						<div class="box swiper-slide">
+							<div class="switch"> 
+								<div class="col-33 list">
+									<big>￥10</big>
+									<p>买满15元立减</p>
+									<i class="bg_l"></i>
+									<i class="bg_r"></i>
+								</div>
+							</div>
+						</div>
+						<div class="box swiper-slide">
+							<div class="switch"> 
+								<div class="col-33 list">
+									<big>￥15</big>
+									<p>买满15元立减</p>
+									<i class="bg_l"></i>
+									<i class="bg_r"></i>
+								</div>
+							</div>
+						</div>
+						<div class="box swiper-slide">
+							<div class="switch"> 
+								<div class="col-33 list">
+									<big>￥5</big>
+									<p>买满15元立减</p>
+									<i class="bg_l"></i>
+									<i class="bg_r"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="border_t mb10"></div>
+			</div>
+            <!--首页优惠券end-->
+			<!--首页推荐-->
+            <div class="idxRecmd mb10">
+            	<div class="idxRecmd_tit"><h3 class="fl">店铺推荐</h3><a href="#" class="fr more">更多</a></div>
+                <div><a href="#"><img src="images/recmdImg.png" width="100%"></a></div>
+            </div>
+            <!--首页推荐end-->
+            <!--筛选-->
+            <div class="goods_shaixuan">
+                <div class="list_box"><a>全部商品</a>
+                    <ul class="pull_list" style="display:none;">
+                        <li><a href="#">全部商品</a></li>
+                        <li><a href="#">新鲜水果</a></li>
+                        <li><a href="#">全部商品</a></li>
+                        <li><a href="#">新鲜水果</a></li>
+                    </ul>
+                </div>
+                <div class="list_box"><a>上新<i class="ico up"></i></a></div>
+                <div class="list_box"><a>销量<i class="ico up"></i></a></div>
+                <div class="list_box"><a>价格<i class="ico down"></i></a></div>
+                <div class="cl"></div>
+            </div>
+            <script>
+            $(".goods_shaixuan .list_box>a").click(function(){
+                $(this).parent().find(".pull_list").toggle();
+            });
+            </script>
+            <!--筛选end-->
+            <!--商品列表-->
+            <div class="goods_list_box">
+                <ul>
+                    <li class="goods_list">
+                        <div class="box">
+                            <div class="img_box"><a href="#"><img src="pic/pic2.png"></a>
+                                <a href="javascript:;" class="cartAdd"></a>	
+                            </div>
+                            <div class="wz_box">
+                                <h3 class="overflow_clear"><a href="#">赣南脐橙</a></h3>
+                                <div class="price">￥20<small>/500克</small></div>
+                                <p>产自于赣州的脐橙，饱经雨水的洗礼，每个脐橙都通过精心......</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="goods_list">
+                        <div class="box">
+                            <div class="img_box"><a href="#"><img src="pic/pic2.png"></a>
+                                <a href="javascript:;" class="spec open-about"></a>	
+                            </div>
+                            <div class="wz_box">
+                                <h3 class="overflow_clear"><a href="#">赣南脐橙</a></h3>
+                                <div class="price">￥20<small>/500克</small></div>
+                                <p>产自于赣州的脐橙，饱经雨水的洗礼，每个脐橙都通过精心......</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="goods_list">
+                        <div class="box">
+                            <div class="img_box"><a href="#"><img src="pic/pic2.png"></a>
+                                <a href="javascript:;" class="cartAdd"></a>	
+                            </div>
+                            <div class="wz_box">
+                                <h3 class="overflow_clear"><a href="#">赣南脐橙</a></h3>
+                                <div class="price">￥20<small>/500克</small></div>
+                                <p>产自于赣州的脐橙，饱经雨水的洗礼，每个脐橙都通过精心......</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="goods_list">
+                        <div class="box">
+                            <div class="img_box"><a href="#"><img src="pic/pic2.png"></a>
+                                <a href="javascript:;" class="cartAdd"></a>	
+                            </div>
+                            <div class="wz_box">
+                                <h3 class="overflow_clear"><a href="#">赣南脐橙</a></h3>
+                                <div class="price">￥20<small>/500克</small></div>
+                                <p>产自于赣州的脐橙，饱经雨水的洗礼，每个脐橙都通过精心......</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="cl"></div>
+            </div>
+            <!--商品列表end-->
+            <div class="cart_fixed"><i>2</i></div>
+            
+        </div>        
+    </div>
+</div>
+<!--添加商品弹出层-->          
+<div class="popup popup-about goodsAdd_mask">
+    <div class="dingdan-details">
+        <div class="list-block media-list">
+            <ul>
+              <li>
+                <a href="#" class="item-content" style="padding:0.5rem;">
+                  <div class="item-media"><img src="pic/melon.png" width="100%"></div>
+                  <div class="item-inner">
+                   <div class="item-title black3 mb10"><big>【芒果嘟乐爽】</big></div>				
+                   <div class="item-title"><big class=" fontcl1">￥20</big><small class="fontcl1">/份</small></div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mallord_delt_mask seller_caidelt_box border_b">
+        <p class="wz">规格选择：</p>
+        <div class="row selct_box chicun-box"> <a href="javascript:;" class="fl col-25 active">8寸</a> <a href="javascript:;" class="fl col-25">12寸</a> <a href="avascript:;" class="fl col-25">24寸</a> <a href="javascript:;" class="fl col-25">48寸</a> </div>
+        <div class="clearfix mt10">
+            <div class="fl f_size1">购买数量：</div>
+            <div class="fr">
+                <div class="num_operate sp_nums"> <span class="reduce" quantity="-">-</span>
+                    <input type="text" value="1" class="text_box">
+                    <span class="add" quantity="+">+</span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn_box"><a href="#" class="btn btn2">加入购物车</a><a href="#" class="btn">立即购买</a></div>
+    <i class="sy_popup_delIco close-popup"></i>
+</div>
+<!--添加商品弹出层-->
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>
+$(document).on('click','.open-about', function () {
+  $.popup('.popup-about');
+});
+</script>
+<script>
+ $(function () {
+    var swiper = new Swiper('.swiper-container5', {
+		pagination: '.swiper-pagination5',
+		slidesPerView: 2.8,
+		paginationClickable: true,
+		spaceBetween: 10,
+		freeMode: true
+	});
+ });
+</script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

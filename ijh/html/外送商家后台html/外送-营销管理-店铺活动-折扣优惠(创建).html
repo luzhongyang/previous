@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>外送-营销管理-店铺活动-折扣优惠(创建)</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+   	<!--表单-->
+    <div class="">
+    	<a href="javascript:;" class="btn btn-primary btn-w-m add_discount mb10">添加折扣商品</a>
+        <table class="" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="180"><big class="form_table_t">每单限购折扣商品总数：</big></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<input type="text" class="form_table_int form_table_intw3" />
+                        <span>份</span>
+                        <small class="black9 ml10 mt5">数量不限时输入-1</small>
+                    </div>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    <!--表单end-->
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<!--规格编辑-->
+<div class="mask_cont spec_mask discount_mask">
+	<div class="mask_cont_tit">添加折扣商品 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<table class="form_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        	<tr>
+                <td class="bt" width="120"><p class="form_table_t">选择商品：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<select class="form_table_int form_table_intw2 fl">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                        <select class="form_table_int form_table_intw2 fl ml10">
+                            <option>请选择</option>
+                            <option>餐饮美食</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        	<tr>
+                <td class="bt" width="120"><p class="form_table_t">活动时间：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<input type="text" class="form_table_int" value="2016-12-26" /><span class="ml5 mr5">至</span><input type="text" class="form_table_int" value="2016-12-26" /> <span class="ml5 black9">（默认为开始日期0:00至结束日期23:59）</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="bt" width="120"><p class="form_table_t">面向人群：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<label class="mr30"><input type="radio" name="jd" checked class="check_box">新客户</label>
+                        <label class="mr30"><input type="radio" name="jd" checked="" class="check_box">新老客户通用</label>
+                    </div>
+                </td>
+            </tr>
+            
+        	<tr>
+                <td class="bt" width="120"><p class="form_table_t">活动信息：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<div class="dispchSet_list mt10 ml10 mr10 mb10">
+                            <div class="int_list clearfix">
+                                <span class="mr20">原价：<input type="text" class="text">元</span>
+                                <span class="mr20">折扣价：<input type="text" class="text">元</span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        	<tr>
+                <td class="bt" width="120"><p class="form_table_t">每单限购：</p></td>
+                <td>
+                    <div class="form_table_nr">
+                    	<input type="text" class="form_table_int form_table_intw3" />
+                        <span>份</span>
+                        <small class="black9 ml10 mt5">数量不限时输入-1</small>
+                    </div>
+                </td>
+            </tr>
+            
+        </table>
+        <div class="text_c mt20">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary comfirt">保存</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.discount_mask').height();
+	var evlt_w = $('.discount_mask').width();
+	$('.discount_mask').css("margin-top",-(evlt_h/2 + 60) + 'px');
+	$('.discount_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".add_discount").click(function(){
+		$('.discount_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".discount_mask .cancel,.discount_mask .close,.mask_bg").click(function(){
+		$('.discount_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<!--规格编辑end-->
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>外送-商品管理-商品分类</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+   	<!--表单-->
+    <div class="">
+        <table class="form_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+        	<tr>
+                <td width="120"><p class="form_table_t"><em>·</em>分类名称：</p></td>
+                <td>
+                	<div class="goodsCate">
+                    	<div class="cate_list">
+                        	<div class="cate_one">
+                            	<input type="text" class="int fl" placeholder="分类名称">
+                                <div class="sort_box fl ml20">
+                                    <a href="javascript:;" class="up"><i class="fa fa-angle-up"></i></a>
+                                    <a href="javascript:;" class="down"><i class="fa fa-angle-down"></i></a>
+                                    <a href="javascript:;" class="top"><i class="fa fa-angle-double-up"></i></a>
+                                    <a href="javascript:;" class="bottom"><i class="fa fa-angle-double-down"></i></a>
+                                 </div>
+                                 <a href="javascript:;" class="clear_btn fr"><i class="fa fa-trash"></i>移除</a>
+                            </div>
+                            <div class="cate_two">
+                            	<div class="skuitemPanel">
+                    
+                                    <ul class="labelList">
+                                        
+                                        <li><span><i>瓜果类</i><input type="text" value="瓜果类"></span><i class="fa fa-close gicon-remove"></i></li>
+                                        
+                                        <li><span><i>菌菇类</i><input type="text" value="菌菇类"></span><i class="fa fa-close gicon-remove"></i></li>
+                                        
+                                    </ul>
+                                    
+                                    <input type="text" id="_attr_add_btn" class="input" value="">
+                                    <a href="javascript:;" class="btn btn-primary btn-sm">添加</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="javascript:;" class="sku-add" title="添加规格">+</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="form_table_btn_box text_c">
+        	<a class="btn btn-default btn-w-m" href="#">取消</a>
+        	<a class="btn btn-primary btn-w-m" href="#">保存</a>
+        </div>
+    </div>
+    <!--表单end-->
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<script>
+$(document).ready(function() {
+    $('.sku-add').click(function(){
+		$(this).before("<div class='cate_list'><div class='cate_one'><input type='text' class='int fl' placeholder='分类名称'><div class='sort_box fl ml20'><a href='javascript:;' class='up'><i class='fa fa-angle-up'></i></a><a href='javascript:;' class='down'><i class='fa fa-angle-down'></i></a><a href='javascript:;' class='top'><i class='fa fa-angle-double-up'></i></a><a href='javascript:;' class='bottom'><i class='fa fa-angle-double-down'></i></a></div><a href='javascript:;' class='clear_btn fr'><i class='fa fa-trash'></i>移除</a></div><div class='cate_two'><div class='skuitemPanel'><ul class='labelList'></ul><input type='text' class='input'><a href='javascript:;' class='btn btn-primary btn-sm'>添加</a></div></div></div>");
+		
+		attr_click_delete();
+		attr_click_add();
+		
+	});
+	
+	function attr_click_delete()
+	{
+		$('.cate_one .clear_btn').click(function(){
+				$(this).parents('.cate_list').remove();
+		});
+	}
+	
+	function attr_click_add()
+	{
+		$('.skuitemPanel .btn-primary').click(function(){
+			attr_add_value = $(this).parent().find('.input').val();
+			if(attr_add_value.length==0){
+				
+			}else{
+
+				$(this).parent().find('.labelList').append("<li><span>"+attr_add_value+"<i></i><input type='text' value='"+attr_add_value+"'></span><i class='fa fa-close gicon-remove'></i></li>");
+				$(this).parent().find('.labelList li:last-child span i').val($(this).parent().find('.input').val());
+				$(this).parent().find('.input').val('');
+				attr_click_edit();
+			}
+			attr_area_remove()
+			
+		});
+		
+	}
+	
+	function attr_area_remove()
+	{
+		$('.labelList li .gicon-remove').click(function(){
+			$(this).parent('li').remove();
+		});
+	}
+	
+	function attr_click_edit()
+	{
+		$(".labelList li span input").focus(function () {
+				$(this).css('opacity','1');
+		
+		}).blur(function () {
+			$(this).css('opacity','0');
+			$(this).parent().find('i').text($(this).val());
+		});
+	}
+	
+	
+	//init
+	attr_click_delete();
+	attr_click_add();
+	attr_click_edit();
+	attr_area_remove();
+	attr_click_table_tr();
+	
+	
+});
+</script>
+</body>
+</html>

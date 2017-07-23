@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>商品详情</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/xia.css"/>
+<link rel="stylesheet" type="text/css" href="css/wang.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<section class="page_center_box">
+    <!--内容-->
+    <div class="shangpin_banner">
+        <div class="flexslider">  
+            <ul class="slides">  
+                <li><img src="pic/img__3@3x.png" /></li>
+                <li><img src="pic/home_img@2x.png" /></li>
+            </ul>  
+        </div>
+    </div>
+    <div class="shangpinInfor">
+    	<div class="wz">
+        	<p class="left">这里一句话描述商品，最多两行，设置左对齐</p>
+            <a href="#" class="shoucang_box">
+            	<i class="ico"></i>
+                <p>收藏</p>
+            </a>
+        </div>
+        <div class="price">
+        	<P class="big maincl">微信价：¥50.00</P>
+            <p class="black9">原价：<del>¥60.00</del></p>
+            <p class="black9 justify"><span>配送：5元</span> <span>销量：1000</span> <span>合肥</span></p>
+        </div>
+        <div class="ts"><i class="ico"></i>全场满100免配送费</div>
+    </div>
+    <div class="shangpinSelct mt10 mb10"><span class="mr10">请选择</span><span>数量</span><i class="ico linkIco fr"></i></div> 
+    <div class="shangpinDianpu">
+    	<div class="infor">
+        	<div class="img fl"></div>
+            <div class="wz_box">
+            	<h3>1111111</h3>
+                <p><i class="ico"></i>微信认证</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="state">
+        	<ul>
+            	<li class="list">
+                	<p>666</p>
+                    <p>全部商品</p>
+                </li>
+                <li class="list">
+                	<p>666</p>
+                    <p>上新宝贝</p>
+                </li>
+                <li class="list">
+                	<p>666</p>
+                    <p>全部销量</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="shangpinTab mt10 mb10">
+        <ul>
+            <li class="on"><a href="javascript:;">商品详情</a></li>
+            <li><a href="javascript:;">商品评价</a></li>
+        </ul>
+    </div>
+    <script>
+	$(document).ready(function() {
+		$('.shangpinTab ul li').each(function(e) {
+			$(this).click(function(){
+				$('.shangpinTab ul li').removeClass('on');
+				$(this).addClass('on');
+				$('.shangpinTab_list_box .list_box').each(function(i){
+					if(e==i){
+						$('.shangpinTab_list_box .list_box').hide();
+						$(this).show();
+					}else{
+						$(this).hide();
+					}
+				});
+			});
+		});
+	});
+	</script>
+    <div class="shangpinTab_list_box mb10">
+        <div class="shangpinDelt article list_box">
+            <h1>标题</h1>
+            <img src="pic/img__3@3x.png">
+            <p>内容内容</p>
+        </div>
+        <div class="shangpinEvalut list_box" style="display:none;">
+            <div class="shangpinEvalut_tab">
+                <ul>
+                    <li class="on">全部</li>
+                    <li>好评</li>
+                    <li>中评</li>
+                    <li>差评</li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <script>
+			$(document).ready(function() {
+                $('.shangpinEvalut_tab ul li').each(function(e) {
+                    $(this).click(function(){
+						$('.shangpinEvalut_tab ul li').removeClass('on');
+						$(this).addClass('on');
+						$('.shangpinEvalut_tab_cont').each(function(i){
+							if(e==i){
+								$('.shangpinEvalut_tab_cont').hide();
+								$(this).show();
+							}else{
+								$(this).hide();
+							}
+						});
+					});
+                });
+            });
+            </script>
+            <div class="shangpinEvalut_list_box">
+            	<div class="shangpinEvalut_tab_cont">
+                    <div class="shangpinEvalut_list">
+                        <div class="top">
+                            <div class="left fl black6"><span class="starBg"><span class="star" style="width:60%;"></span></span>2016-06-15</div>
+                            <div class="name fr black6">子＊＊c</div>
+                        </div>
+                        <div class="wz">好吃，以后还会再来！</div>
+                        <div class="img_list">
+                            <ul>
+                                <li><img src="pic/img__3@3x.png"></li>
+                            </ul>
+                        </div>
+                        <p class="sp_name">商品：抹茶蛋糕</p>
+                    </div>
+                    <div class="shangpinEvalut_list">
+                        <div class="top">
+                            <div class="left fl black6"><span></span>2016-06-15</div>
+                            <div class="name fr black6">子＊＊c</div>
+                        </div>
+                        <div class="wz">好吃，以后还会再来！</div>
+                        <p class="sp_name">商品：抹茶蛋糕</p>
+                    </div>
+                </div>
+            	<div class="shangpinEvalut_tab_cont" style="display:none;">
+                    <div class="shangpinEvalut_list">
+                        <div class="top">
+                            <div class="left fl black6"><span></span>2016-06-15</div>
+                            <div class="name fr black6">子＊＊c</div>
+                        </div>
+                        <div class="wz">好吃，以后还会再来！</div>
+                        <p class="sp_name">商品：抹茶蛋糕</p>
+                    </div>
+                </div>
+                <div class="shangpinEvalut_tab_cont" style="display:none;">
+                    <div class="shangpinEvalut_list">
+                        <div class="top">
+                            <div class="left fl black6"><span></span>2016-06-15</div>
+                            <div class="name fr black6">子＊＊c</div>
+                        </div>
+                        <div class="wz">好吃，以后还会再来！</div>
+                        <p class="sp_name">商品：抹茶蛋糕</p>
+                    </div>
+                </div>
+                <div class="shangpinEvalut_tab_cont" style="display:none;">
+                    <div class="shangpinEvalut_list">
+                        <div class="top">
+                            <div class="left fl black6"><span class="starBg"><span class="star" style="width:60%;"></span></span>2016-06-15</div>
+                            <div class="name fr black6">子＊＊c</div>
+                        </div>
+                        <div class="wz">好吃，以后还会再来！</div>
+                        <div class="img_list">
+                            <ul>
+                                <li><img src="pic/img__3@3x.png"></li>
+                            </ul>
+                        </div>
+                        <p class="sp_name">商品：抹茶蛋糕</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--内容结束-->
+</section>
+<footer class="shangpinFooter">
+	<a href="#" class="cart_btn"><i class="ico"></i><p>购物车</p></a>
+    <a href="#" class="btn add">加入购物车</a>
+    <a href="#" class="btn">立即购买</a>
+</footer>
+<!--回到顶部-->
+<div class="fixed_right">
+	<a class="backtop" href="javascript:backtop();" style="display:none;">
+    	<i class="ico ico1"></i>
+        <p>顶部</p>
+    </a>
+    <a href="#" class="kefu">
+    	<i class="ico ico2"></i>
+        <p>客服</p>
+    </a>
+</div>
+<!--回到顶部结束-->
+<!--商品选择弹层-->
+<div class="shangpinSelct_mask">
+	<div class="cont">
+    	<a href="javascript:;" class="ico close"></a>
+    	<div class="pad10">
+            <div class="top mb10">
+                <div class="img fl"><img src=""></div>
+                <div class="wz_box">
+                    <p class="maincl price">￥50</p>
+                    <p class="black6">已选择“抹茶口味”“微信价”</p>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="selct_box">
+                <p>口味</p>
+                <div class="list_box"><a href="javascript:;" class="on">抹茶口味</a> <a href="javascript:;">凤梨口味</a></div>
+            </div>
+            <div class="selct_box">
+                <p>尺寸</p>
+                <div class="list_box"><a href="javascript:;" class="on">抹茶口味</a> <a href="javascript:;">凤梨口味</a></div>
+            </div>
+            <div class="selct_box">
+                <p class="fl">数量</p>
+                <div class="fr">
+                    <div class="num_operate">
+                        <span class="min"></span>
+                        <input type="text" value="2">
+                        <span class="add"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="long_btn">确定</a>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function () {
+	
+	$('.shangpinSelct').click(function(){
+		$('.shangpinSelct_mask').addClass('on');
+		$('.mask_bg').show();
+	});
+	$('.shangpinSelct_mask .close').click(function(){
+		$('.shangpinSelct_mask').removeClass('on');
+		$('.mask_bg').hide();
+	});
+	
+	$('.shangpinSelct_mask .selct_box .list_box a').click(function(){
+		$(this).parent().find('a').removeClass('on');
+		$(this).addClass('on');
+	});
+});
+</script>
+<!--商品选择弹层结束-->
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//首页轮播js结束
+		
+    });
+</script>
+<script>
+$(document).ready(function(){
+	
+	function max_height()
+	{
+		var right_height = 0;
+		$(".shangpin_banner .slides li").each(function(a){
+			
+			var h = $(this).find('img').height();
+			if( h > right_height)
+			{
+				right_height = h;
+			}
+		});
+		return right_height;
+	}
+	max_height = max_height();
+	$(".shangpin_banner .slides li").css("height",max_height);
+	
+});
+</script>
+
+</body>
+</html>

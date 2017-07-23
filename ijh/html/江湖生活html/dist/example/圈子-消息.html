@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>圈子-消息</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <div class="container_mid">
+				<!--内容-->
+				<div class="cirNews_list_box">
+                	<ul>
+                    	<li>
+                        	<a href="#">
+                                <div class="img fl"><img src=""></div>
+                                <div class="right fr">
+                                    <span class="linkico"></span>
+                                </div>
+                                <div class="wz_box">
+                                    <p class="bt overflow_clear">评论/回复我的</p>
+                                    <P class="black9">新收到一条评论</P>
+                                </div>
+                                <div class="clear"></div>
+                            </a>
+                        </li>
+                        <li>
+                        	<a href="#">
+                                <div class="img fl"><img src=""></div>
+                                <div class="right fr">
+                                    <p class="time black9">昨天</p>
+                                </div>
+                                <div class="wz_box">
+                                    <p class="bt overflow_clear">评论/回复我的</p>
+                                    <P class="black9">新收到一条评论</P>
+                                </div>
+                                <div class="clear"></div>
+                            </a>
+                        </li>
+                        <li>
+                        	<a href="#">
+                                <div class="img fl"><img src=""></div>
+                                <div class="right fr">
+                                    <p class="time black9">2016-11-12</p>
+                                </div>
+                                <div class="wz_box">
+                                    <p class="bt overflow_clear">评论/回复我的</p>
+                                    <P class="black9">新收到一条评论</P>
+                                </div>
+                                <div class="clear"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--内容end-->
+            </div>
+            <!--底部导航-->
+            <div class="footer_nav">
+            	<a href="#" class="list">
+                	<i class="ico ico1_1"></i>
+                    <P>首页</P>
+                </a>
+                <a href="#" class="list on">
+                	<i class="ico ico2_2"></i>
+                    <P>消息</P>
+                </a>
+                <a href="#" class="list">
+                	<i class="ico ico3_3"></i>
+                    <P>我的</P>
+                </a>
+            </div>
+            <!--底部导航end-->
+        </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+</body>
+</html>

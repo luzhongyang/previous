@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>注册</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+        <!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a> <a class="button button-link button-nav pull-right">登录</a>
+            <h1 class="title">注册</h1>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+            <div class="login_tab_cont mt10">
+                <div class="list_box">
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="iconfont icon-shouji"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="手机号">
+                                        </div>
+                                        <a href="javascript:;" class="yzmget">获取验证码</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="iconfont icon-yanzhengma"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="验证码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="iconfont icon-mima"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" placeholder="密码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="iconfont icon-mima"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" placeholder="确认密码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mt10">
+                                <div class="item-content">
+                                    <div class="item-media"><i class="iconfont icon-shuruyaoqingma"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="请输入邀请码（可选）">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="txt_center font_size14 mt10">输入邀请码可获得<span class="pointcl1">10</span>元红包</div>
+                    <div class="content-block"> <a class="button button-big button-fill button-success">注册</a> </div>
+                    <div class="black9 regist_protocol"><span class="checkbox_xy"><input type="checkbox"></span>我已阅读并接受<a href="#" class="maincl"><江湖外卖用户协议></a></div>
+                </div>
+            </div>            
+        </div>        
+    <!--内容结束-->   
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    $(".checkbox_xy").click(function(){
+		if($(this).hasClass("on")){
+			$(this).removeClass("on");
+		}else{
+			$(this).addClass("on");
+		}
+	});
+});
+</script>
+<script>
+$(function(){
+	var mobile_timeout;
+        var mobile_count = 60;
+        var mobile_lock = 0;
+        $(function () {
+            $(".yzmget").click(function () {
+                if (mobile_lock == 0) {
+                    //$.ajax({
+//                        url: '<{:U("member/sendsms")}>',
+//                        data: 'mobile=' + $("#mobile").val(),
+//                        type: 'post'
+//                    });
+                    mobile_count = 60;
+					$(".yzmget").addClass("graybg");
+                    $('.yzmget').attr("disabled", "disabled");
+                    BtnCount();
+                    mobile_lock = 1;
+                }
+
+            });
+        });
+        BtnCount = function () {
+            if (mobile_count == 0) {
+				$(".yzmget").removeClass("graybg");
+                $('.yzmget').removeAttr("disabled");
+                $('.yzmget').text("重新获取");
+                mobile_lock = 0;
+                clearTimeout(mobile_timeout);
+				$('.yzmget').removeClass("on");
+            }
+            else {
+                mobile_count--;
+                $('.yzmget').text( + mobile_count.toString() + "s重新获取");
+                mobile_timeout = setTimeout(BtnCount, 1000);
+				$('.yzmget').addClass("on");
+            }
+        };
+		//注册页获取验证码部分结束
+});
+</script>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>个人中心-账户信息</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont mycenter-index-cont">
+            <div class="container_mid"> 
+                <div class="link-one mt10 mb10">
+                    <a href="javascript:;" class="pub_list link-tuxiang" id="tuxiang-show">                            
+                        <div class="pub_list_bd">头像</div>
+                        <div class="pic-yuan"><img src=""></div>
+                    </a>  
+                </div>  
+                <div class="link-one">
+                    <a href="#" class="pub_list link-a border_b">                            
+                        <div class="pub_list_bd">昵称</div>
+                        <div class="black6">周华</div>
+                    </a>  
+                </div>
+                <div class="link-one">
+                    <a href="javascript:;" class="pub_list link-a border_b" id="sex-show">                            
+                        <div class="pub_list_bd">性别</div>
+                        <div class="black6">男</div>
+                    </a>  
+                </div>
+                <div class="link-one mb10">
+                    <a href="#" class="pub_list link-a">                            
+                        <div class="pub_list_bd">地址</div>
+                        <div class="black6">安徽省 合肥市</div>
+                    </a>  
+                </div>   
+                <div class="link-one">
+                    <a href="#" class="pub_list link-a border_b">                            
+                        <div class="pub_list_bd">手机号</div>
+                        <div class="black6">135xxxx8638</div>
+                    </a>  
+                </div>  
+                <div class="link-one">
+                    <a href="#" class="pub_list link-a border_b">                            
+                        <div class="pub_list_bd">微信</div>
+                        <div class="black6">去绑定</div>
+                    </a>  
+                </div>
+                <div class="link-one mb10">
+                    <a href="#" class="pub_list link-a">                            
+                        <div class="pub_list_bd">密码</div>
+                        <div class="black6">修改</div>
+                    </a>  
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 选择图像弹出 -->
+<div class="tuxiang-tanchu" style="display:none">
+    <div class="myzhanghu-upload-cont">
+        <div class="cont-menu">
+            <div class="the-top">
+                <div class="menu-a border_b">从相册上传头像<input type="file" accept="image/*" multiple></div>
+                <div class="menu-a">拍照换头像</div>    
+            </div>
+            <div class="quxiao-btn mt10">取消</div>    
+        </div>
+    </div>
+    <div class="myzhanghu-mask"></div>    
+</div>   
+<!-- 选择图像弹出end -->
+<!-- 选择性别弹出 -->
+<div class="sex-tanchu" style="display:none">
+    <div class="mysex-upload-cont">
+        <div class="sex-menu">
+            <div class="menu1 border_b"><label class="pub_list"><span class="pub_list_bd">男</span><input type="checkbox" class="sex-input"></label></div> 
+            <div class="menu1 border_b"><label class="pub_list"><span class="pub_list_bd">女</span><input type="checkbox" class="sex-input"></label></div>              
+        </div>
+    </div>
+    <div class="mysex-mask"></div>    
+</div>   
+<!-- 选择性别弹出end -->
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+    
+        function yiyuan_time(id) {
+            var t = Math.floor($("#" + id).attr('rel'));
+            t--;
+            var d = Math.floor(t / 60 / 60 / 24);
+            var h = Math.floor(t / 60 / 60 % 24);
+            var m = Math.floor(t / 60 % 60);
+            var s = Math.floor(t % 60);
+            $("#" + id).attr('rel', t);
+            $("#" + id).html(m + '分' + s + '秒');
+        }
+        setInterval(function () {
+            for(i=1;i<100;i++){
+                yiyuan_time("daojishi" + i);
+            }
+        }, 1000);//倒计时js部分结束
+
+    });
+        
+</script> 
+<!-- 选择图像弹出 -->
+<script>
+    $('#tuxiang-show').on("click",function(){
+        $(".tuxiang-tanchu").fadeIn(300);
+        $('.myzhanghu-mask').on("click",function(){
+            $(".tuxiang-tanchu").fadeOut(300);   
+        });
+        $('.quxiao-btn').on("click",function(){
+            $(".tuxiang-tanchu").fadeOut(300);   
+        });
+    });   
+</script>
+<!-- 选择图像弹出end -->
+<!-- 选择性别弹出 -->
+<script>
+    $('#sex-show').on("click",function(){
+        $(".sex-tanchu").fadeIn(300);
+        $('.mysex-mask').on("click",function(){
+            $(".sex-tanchu").fadeOut(300);   
+        });
+    });   
+</script>
+<!-- 选择性别弹出end -->
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>微分销-店铺信息</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+<section class="page_center_box">
+	<div class="fx_dpInfor mt10">
+    	<div class="fx_dpInfor_list border_b">
+        	<p class="fl dp_name">店铺LOGO</p>
+            <div class="fr">
+            	<span class="img"><img></span>
+                <i class="ico linkIco"></i>
+            </div>
+        </div>
+        <div class="fx_dpInfor_list">
+        	<p class="fl">店铺名称</p>
+            <div class="fr open-about2">
+            	<span class="black9">Cyan的小店</span>
+                <i class="ico linkIco"></i>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<!-- 支付方式弹出层 -->
+<div class="shangpinSelct_mask">
+	<div class="cont" style=" background:#f3f4f3;">
+    	<a href="javascript:;" class="ico close"></a>
+    	<div class="fx_dpName mb10">
+			<div class="int_box mb10"><input type="text" placeholder="请输入店铺名称"></div>
+			<input type="button" class="long_btn" value="确定">
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<script>
+$(document).ready(function() {
+    $('.open-about2').click(function(){
+		$('.shangpinSelct_mask').addClass('on');
+		$('.mask_bg').show();
+	});
+	$('.shangpinSelct_mask .close,.mask_bg').click(function(){
+		$('.shangpinSelct_mask').removeClass('on');
+		$('.mask_bg').hide();
+	});
+});
+</script>
+<!-- 支付方式弹出层结束 -->
+</body>
+</html>

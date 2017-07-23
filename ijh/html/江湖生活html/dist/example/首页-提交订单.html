@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>首页</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container">
+    <div class="page js_show">
+      <div class="page_cont">
+        <!-- 弹出层 -->
+        <div class="order_tanchu">
+            <!-- 时间弹出层 -->
+            <div class="order-mask_bg order-time_bg"></div>
+            <div class="order-mask_bg order-payway_bg"></div>
+            <div class="order-mask_bg order-hongbao_bg"></div>
+            <div class="order-mask_bg order-youhuiquan_bg"></div>
+            <div class="order-mask_bg order-fukuan_bg"></div>
+            
+            <div class="ordertime_popup order-pop">
+                <div class="close"></div>
+                <div class="title">选择送达时间</div>
+                <div class="content">
+                    <ul class="day fl">
+                        <li class="on">今天(周一)</li>
+                        <li>12-01(周二)</li>
+                        <li>12-02(周三)</li>
+                        <li>12-03(周四)</li>
+                        <li>12-04(周五)</li>
+                        <li>12-05(周六)</li>
+                        <li>12-06(周日)</li>
+                        <li>12-04(周五)</li>
+                        <li>12-05(周六)</li>
+                        <li>12-06(周日)</li>
+                    </ul>
+                    <ul class="time fl">
+                       <li class="on">10:30<i></i></li> 
+                       <li>11:00 <i></i></li> 
+                       <li>11:30 <i></i></li> 
+                       <li>12:00 <i></i></li> 
+                       <li>12:30 <i></i></li> 
+                       <li>13:00 <i></i></li> 
+                       <li>13:30 <i></i></li> 
+                        <li>12:00 <i></i></li> 
+                       <li>12:30 <i></i></li> 
+                       <li>13:00 <i></i></li> 
+                       <li>13:30 <i></i></li> 
+                    </ul>
+                </div>
+            </div>
+            <!-- 时间弹出层结束 -->
+            <!-- 支付方式弹出层 -->
+            <div class="orderpay_way_popup order-pop">
+                <div class="close"></div>
+                <div class="title">选择支付方式</div>
+                <div class="content">
+                    <ul>
+                        <li><label class="on">在线支付<i></i></label></li>
+                        <li><label>货到付款<span class="black9">(商家不支持货到付款)</span><i></i></label></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 支付方式弹出层结束 -->
+            <!-- 红包弹出层 -->
+            <div class="orderhongbao_popup order-pop">
+                <div class="close"></div>
+                <div class="title">选择红包</div>
+                <div class="content">
+                    <ul>
+                        <li><label class="on">5元红包<i></i></label></li>
+                        <li><label>不使用红包<i></i></label></li>
+                    </ul>
+                </div>
+            </div>
+             <!-- 优惠券弹出层 -->
+            <div class="orderyouhuiquan_popup order-pop">
+                <div class="close"></div>
+                <div class="title">选择优惠券</div>
+                <div class="content">
+                    <ul>
+                        <li><label  class="on">5元优惠券<i></i></label></li>
+                        <li><label>不使用优惠券<i></i></label></li>
+                    </ul>
+                </div>
+            </div>  
+            <!-- 支付弹出 -->
+            <div class="orderfukuan_popup order-pop">
+                <div class="close"></div>
+                <div class="title">应支付金额<span>￥30</span></div>
+                <div class="content">
+                    <ul>
+                        <li><label class="on"><i class="ico"></i><i class="zhifu zhifubao"></i>支付宝支付<input type="radio" name="payway" value="payway"></label></li>
+                       <li> <label><i class="ico"></i><i class="zhifu weixin"></i>微信支付<input type="radio" name="payway" value="payway"></label></li>
+                       <li> <label><i class="ico"></i><i class="zhifu yue"></i>余额支付<input type="radio" name="payway" value="payway"></label></li>
+                    </ul>
+                </div>
+                <div class="btn">去支付<span id="daojishi" class="ml10"></span></div>
+            </div>
+        </div>
+        <div class="container_mid">
+            <div class="sysubmitZiti border_b">
+                 <div class="item-inner">
+                    <div class="item-row">
+                        <div class="item-title fl">是否自提</div>
+                        <div class="item-after"><i class="ico_switch"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sysubmit-order">
+                <a class="address" href="#">
+                    <i class="ico_address fl"></i>
+                    <i class="ico_right fr"></i>
+                    <p class="name">收货人：殷宇萌 18756270220</p>
+                    <p class="addr">收货地址：安徽省合肥市蜀山区莲花社区管理委员会莲花路819号莲花电子商务产业园E座四楼</p>
+                    <i class="clear"></i>
+                </a>
+                <a href="#" class="addressZi border_b">
+                    <div class="item-inner">
+                        <div class="item-row">
+                            <div class="item-title fl">自提地址</div>
+                            <div class="item-after"><p class="fr"><span class="black9">蜀山区芜湖路555号5栋101蜀山区芜湖路555号5栋101蜀山区芜湖路555号5栋101</span><i class="ico_right"></i></p></div>
+                        </div>
+                    </div>  
+                </a>
+                <div class="order_choose mt10">
+                    <label class="choose order-time">
+                        <div class="item-inner">
+                            <div class="item-row">
+                                <div class="item-title fl">送达时间</div>
+                                <div class="item-after"><p class="fr"><span>请选择</span><i class="ico_right"></i></p></div>
+                            </div>
+                        </div>  
+                    </label>
+                    <label class="choose order-payway">
+                        <div class="item-inner">
+                            <div class="item-row">
+                                <div class="item-title fl">支付方式</div>
+                                <div class="item-after"><p class="fr"><span></span><i class="ico_right"></i></p></div>
+                            </div>
+                        </div> 
+                    </label>
+                    <label class="choose order-hongbao">
+                        <div class="item-inner">
+                            <div class="item-row">
+                                <div class="item-title fl">红包</div>
+                                <div class="item-after"><p class="fr"><span>选择红包</span><i class="ico_right"></i></p></div>
+                            </div>
+                        </div> 
+                    </label>
+                    <label class="choose order-youhuiquan">
+                         <div class="item-inner">
+                            <div class="item-row">
+                                <div class="item-title fl">优惠券</div>
+                                <div class="item-after"><p class="fr"><span>使用优惠券</span><i class="ico_right"></i></p></div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="order_xiangqing">
+                    <div class="shop_name border_b">
+                        <i class="ico_shop mr10"></i>
+                        良记卷饼<i class="ico_right ml10"></i>
+                    </div>
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-inner caidan">
+                                <div class="item-row">
+                                    <div class="item-title">咖喱饭</div>
+                                    <div class="item-after">
+                                        <span class="mr_zdy">x1</span>￥15
+                                    </div>
+                                </div>
+                                <div class="item-row">
+                                    <div class="item-title">牛肉卷饼（大份）牛肉卷饼（大份）牛肉卷饼（大份）牛肉卷饼（大份）牛肉卷饼（大份）牛肉卷饼（大份）</div>
+                                    <div class="item-after">
+                                        <span class="mr_zdy">x1111111</span>￥15
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title">配送费</div>
+                                    <div class="item-after">￥5</div>
+                                </div>
+                            </div>  
+                        </li>
+                         <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title">餐盒打包费</div>
+                                    <div class="item-after">￥5</div>
+                                </div>
+                            </div>  
+                        </li>
+                        <li class="item-content manjian">
+                            <div class="item-inner">
+                                <div class="item-row">
+                                    <div class="item-title black6"><i class="ico_jian mr5"></i>满30减5</div>
+                                    <div class="item-after">-￥5</div>
+                                </div>
+                            </div>  
+                        </li>
+                       <li class="item-content">
+                           <div class="item-inner heji">
+                               <div class="item-after fr">
+                                  共2件商品<span class="ml20">合计：<span>￥35</span></span>
+                               </div>
+                           </div>
+                       </li>
+                    </ul>
+                </div>
+                <div class="order_liuyan mb10">
+                    <span>买家留言</span>
+                    <input type="text" name="" placeholder="点击输入（选填）" class="black9 ml10">
+                </div>
+            </div>
+        </div>
+        <div class="sy-submit_pay">
+           <a href="#" class="btn fr">去支付</a>
+           <p class="fr">待支付：<span>￥<big>35</big></span></p>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+
+<script type="text/javascript">
+//点击mask层隐藏
+    $(function(){
+         $('.order-mask_bg').click(function(){$('.order-mask_bg').hide();})
+         $('.order-pop .close').click(function(){$('.order-mask_bg').hide();})
+    })
+//class切换
+    function toggClass(object){
+        object.click(function(){$(this).addClass('on').parent().siblings().find('label').removeClass('on')})
+    }
+//时间弹出层
+    $(function(){
+        $('.ordertime_popup .day li').click(function(){
+            $(this).addClass('on').siblings().removeClass('on');
+        })
+        $('.ordertime_popup .time li').click(function(){
+            $(this).addClass('on').siblings().removeClass('on');
+        })
+         $('.order-time').click(function(){
+            $('.order-time_bg').show();
+            $('.ordertime_popup').addClass('orderTime');
+        })
+        $('.order-time_bg').click(function(){
+            $('.ordertime_popup').removeClass('orderTime');
+            var a=$('.ordertime_popup .day .on').text();
+            var b=$('.ordertime_popup .time .on').text();
+           $('.order_choose .order-time .fr span').text(a+b); 
+        })
+        $('.ordertime_popup .close').click(function(){$('.ordertime_popup').removeClass('orderTime');
+             var a=$('.ordertime_popup .day .on').text();
+            var b=$('.ordertime_popup .time .on').text();
+           $('.order_choose .order-time .fr span').text(a+b);})
+//支付方式弹出层
+        $('.order_choose .order-payway').click(function(){
+            $('.order-payway_bg').show();
+            $('.orderpay_way_popup').addClass('orderPay');
+        })
+        toggClass($('.orderpay_way_popup li label'));
+        $('.order-payway_bg').click(function(){
+             $('.orderpay_way_popup').removeClass('orderPay');
+            var value=$('.orderpay_way_popup .on').text();
+            $('.order_choose .order-payway .fr span').text(value);
+        })
+        $('.orderpay_way_popup .close').click(function(){$('.orderpay_way_popup').removeClass('orderPay');
+            var value=$('.orderpay_way_popup .on').text();
+            $('.order_choose .order-payway .fr span').text(value);})
+//支红包弹出层
+        $('.order_choose .order-hongbao').click(function(){
+            $('.order-hongbao_bg').show();
+            $('.orderhongbao_popup').addClass('orderHong');
+        })
+        toggClass($('.orderhongbao_popup li label'));
+        $('.order-hongbao_bg').click(function(){
+             $('.orderhongbao_popup').removeClass('orderHong');
+            var value=$('.orderhongbao_popup .on').text();
+            $('.order_choose .order-hongbao .fr span').text(value);
+        })
+        $('.orderhongbao_popup .close').click(function(){$('.orderhongbao_popup').removeClass('orderHong');
+             var value=$('.orderhongbao_popup .on').text();
+            $('.order_choose .order-hongbao .fr span').text(value);
+    })
+
+//优惠券弹出层
+        $('.order_choose .order-youhuiquan').click(function(){
+            $('.order-youhuiquan_bg').show();
+            $('.orderyouhuiquan_popup').addClass('orderYou');
+        })
+        toggClass($('.orderyouhuiquan_popup li label'));
+        $('.order-youhuiquan_bg').click(function(){
+             $('.orderyouhuiquan_popup').removeClass('orderYou');
+            var value=$('.orderyouhuiquan_popup .on').text();
+            $('.order_choose .order-youhuiquan .fr span').text(value);
+        })
+         $('.orderyouhuiquan_popup .close').click(function(){$('.orderyouhuiquan_popup').removeClass('orderYou');
+             var value=$('.orderyouhuiquan_popup .on').text();
+            $('.order_choose .order-youhuiquan .fr span').text(value);
+     })
+//支付
+        $('.sy-submit_pay .btn').click(function(){
+            $('.orderfukuan_popup').addClass('orderFukuan')
+            $('.order-fukuan_bg').show();
+        })
+        toggClass($('.orderfukuan_popup li label'));
+        $('.order-fukuan_bg').click(function(){
+             $('.orderfukuan_popup').removeClass('orderFukuan');
+            var value=$('.orderfukuan_popup .on').text();
+            $('.order_choose .order-youhuiquan .fr span').text(value);
+        })
+         $('.orderfukuan_popup .close').click(function(){$('.orderfukuan_popup').removeClass('orderFukuan');
+             var value=$('.orderfukuan_popup .on').text();
+            $('.order_choose .order-youhuiquan .fr span').text(value);
+     })
+    })
+
+</script>
+<script language="javascript" type="text/javascript"> 
+var interval = 1000; 
+function ShowCountDown(year,month,day,divname) 
+{ 
+var now = new Date(); 
+var endDate = new Date(year, month-1, day); 
+var leftTime=endDate.getTime()-now.getTime(); 
+var leftsecond = parseInt(leftTime/1000); 
+//var day1=parseInt(leftsecond/(24*60*60*6)); 
+var day1=Math.floor(leftsecond/(60*60*24)); 
+var hour=Math.floor((leftsecond-day1*24*60*60)/3600); 
+var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
+var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60); 
+var cc = document.getElementById(divname); 
+cc.innerHTML = "<span class='box'>" + minute+ "</span>" + ":" + "<span class='box'>" + second + "</span>"; 
+} 
+window.setInterval(function(){ShowCountDown(2016,8,13,'daojishi');}, interval); 
+</script>
+<script type="text/javascript">
+    $(function(){
+        $('.sysubmitZiti .item-after').click(function(){
+            $(this).toggleClass('item-afterOn');
+            if($('.sysubmitZiti .item-after').hasClass('item-afterOn')){
+                $('.sysubmit-order .address').hide();
+                $('.sysubmit-order .addressZi').show();
+                $('.order-time .item-title').text('自提时间')
+            }
+            else{
+                 $('.sysubmit-order .address').show();
+                $('.sysubmit-order .addressZi').hide();
+                 $('.order-time .item-title').text('送达时间')
+            }
+        })
+        
+    })
+</script>
+</body>
+</html>

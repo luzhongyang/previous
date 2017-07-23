@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>财务管理</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+
+	<div class="dispatch_table_tab_box mb20">
+        <ul class="dispatch_table_tab">
+            <li class="list on">可提取余额</li>
+            <li class="list">配送费余额</li>
+        </ul>
+    </div>
+	<div class="dispatch_table_tab_change">
+        <div class="finance_info row mb20">
+            <div class="col-md-4">
+                <div class="list">
+                    <div class="img fl"><img src="images/finance_ico1.png"></div>
+                    <div class="wz_box">
+                        <big><small>￥</small>1500</big>
+                        <P>可提现余额？ <a href="javascript:;" class="btn btn-primary btn-xs ml10 tixian_btn">提现</a></P>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="list">
+                    <div class="img fl"><img src="images/finance_ico2.png"></div>
+                    <div class="wz_box">
+                        <big><small>￥</small>1500</big>
+                        <P>配送费余额？</P>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="list">
+                    <div class="img fl"><img src="images/finance_ico3.png"></div>
+                    <div class="wz_box">
+                        <big><small>￥</small>1500</big>
+                        <P>总余额？</P>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dispatch_serch">
+            <div class="fl">
+                <span class="fl">查询日期：<input type="text" placeholder="2015-06-29" class="tuan_topser tuan_topserw3">至<input type="text" placeholder="2015-07-29" class="tuan_topser tuan_topserw3"></span><input type="button" class="btn btn-primary btn-sm fl" value="搜 索">
+            </div>
+            <span class="fl ml20"><select class="tuan_topser tuan_topserw1"><option>今天</option> <option>近7天</option> <option>最近30天</option></select></span>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="dispatch_tab">
+            <ul>
+                <li class="on"><a href="#">全部</a></li>
+                <li><a href="#">收入</li>
+                <li><a href="#">支出</a></li>
+            </ul>
+        </div>
+        
+        <table class="dispatch_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr class="tit">
+                <td>交易日期</td>
+                <td>收支类型备注</td>
+                <td>交易号</td>
+                <td>收入/支出</td>
+                <td>可提余额</td>
+                <td>状态</td>
+                <td>详情</td>
+            </tr>  
+            <tr>
+                <td>2016/11/17</td>
+                <td>余额转出</td>
+                <td>459456</td>
+                <td>
+                    <P class="fontcl1">-1000</P>
+                </td>
+                <td>
+                    <p>78</p>
+                </td>
+                <td>交易成功</td>
+                <td>
+                    <a href="#" class="maincl">详情</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2016/11/17</td>
+                <td>11/12-11/13账单</td>
+                <td>459456</td>
+                <td>
+                    <P class="maincl">+1000</P>
+                </td>
+                <td>
+                    <p>78</p>
+                </td>
+                <td>交易成功</td>
+                <td>
+                    <a href="#" class="maincl">详情</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="dispatch_table_tab_change none">
+        <div class="finance_info row mb20">
+            <div class="col-md-4">
+                <div class="list">
+                    <div class="img fl"><img src="images/finance_ico1.png"></div>
+                    <div class="wz_box">
+                        <big><small>￥</small>1500</big>
+                        <P>可提现余额？ <a href="javascript:;" class="btn btn-primary btn-xs tixian_btn ml10">提现</a> <a href="#" class="btn btn-warning btn-xs ml10">充值</a></P>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="list">
+                    <div class="img fl"><img src="images/finance_ico2.png"></div>
+                    <div class="wz_box">
+                        <big><small>￥</small>1500</big>
+                        <P>配送费余额？ <a href="#" class="btn btn-warning btn-xs ml10">充值</a></P>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="list">
+                    <div class="img fl"><img src="images/finance_ico3.png"></div>
+                    <div class="wz_box">
+                        <big><small>￥</small>1500</big>
+                        <P>总余额？</P>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dispatch_serch">
+            <div class="fl">
+                <span class="fl">查询日期：<input type="text" placeholder="2015-06-29" class="tuan_topser tuan_topserw3">至<input type="text" placeholder="2015-07-29" class="tuan_topser tuan_topserw3"></span><input type="button" class="btn btn-primary btn-sm fl" value="搜 索">
+            </div>
+            <span class="fl ml20"><select class="tuan_topser tuan_topserw1"><option>今天</option> <option>近7天</option> <option>最近30天</option></select></span>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="dispatch_tab">
+            <ul>
+                <li class="on"><a href="#">全部</a></li>
+                <li><a href="#">收入</li>
+                <li><a href="#">支出</a></li>
+            </ul>
+        </div>
+        
+        <table class="dispatch_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr class="tit">
+                <td>交易日期</td>
+                <td>收入/支出</td>
+                <td>余额</td>
+                <td>详情</td>
+            </tr>  
+            <tr>
+                <td>2016/11/17</td>
+                <td>
+                    <P class="fontcl1">-1000</P>
+                </td>
+                <td>
+                    <p>78</p>
+                </td>
+                <td>
+                    <a href="#" class="maincl">详情</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2016/11/17</td>
+                <td>
+                    <P class="fontcl1">-1000</P>
+                </td>
+                <td>
+                    <p>78</p>
+                </td>
+                <td>
+                    <a href="#" class="maincl">详情</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<!--提现-->
+<div class="mask_cont add_rider_mask tixian_mask">
+	<div class="mask_cont_tit">余额转出到银行卡 <a href="javascript:;" class="close fr">×</a></div>
+    <div class="cont">
+    	<div class="int_box mb20"><span class="fl">银行卡：</span><span class="fr">24小时内到账</span><div class="int"><input type="text" placeholder="招商银行  尾号：7890"></div></div>
+        <div class="int_box mb20"><span class="fl">提现金额：</span><span class="fr">元</span><div class="int"><input type="text" placeholder="最多可转出1000元"></div></div>
+        <div class="text_c mt30">
+        	<a href="javascript:;" class="btn btn-w-m btn-default cancel">取消</a>
+            <a href="" class="btn btn-w-m btn-primary">确定</a>
+        </div>
+    </div>
+</div>
+<div class="mask_bg"></div>
+<!--提现end-->
+<script>
+$(document).ready(function() {
+    var evlt_h = $('.add_rider_mask').height();
+	var evlt_w = $('.add_rider_mask').width();
+	$('.add_rider_mask').css("margin-top",-evlt_h/2 + 'px');
+	$('.add_rider_mask').css("margin-left",-evlt_w/2 + 'px');
+	
+	$(".tixian_btn").click(function(){
+		$('.add_rider_mask').fadeIn(100);
+		$('.mask_bg').fadeIn(100);
+	});
+	
+	$(".add_rider_mask .cancel,.add_rider_mask .close,.mask_bg").click(function(){
+		$('.add_rider_mask').fadeOut(100);
+		$('.mask_bg').fadeOut(100);
+	});
+});
+</script>
+<script>
+$(document).ready(function() {
+	
+	$(".dispatch_table_tab .list").each(function(a){
+        $(this).click(function(){
+            $(this).parent().find(".list").removeClass("on");
+            $(this).addClass("on");
+            $(".dispatch_table_tab_change").each(function(b){
+                if(a==b){
+                    $(".dispatch_table_tab_change").addClass("none");
+                    $(this).removeClass("none");
+                }
+                else{
+                    $(this).addClass("none");
+                }
+            });
+        });
+    });
+
+});
+</script>
+</body>
+</html>

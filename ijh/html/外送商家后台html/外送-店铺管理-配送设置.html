@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>外送-店铺管理-配送设置</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper wrapper-content">
+   	<!--表单-->
+    <div class="dispchSet_list mb30">
+    	<div class="check_box"><input type="radio" name="fs">自己送   
+            <div class="dispchSet_btn_box fr">
+                <a href="#" class="btn btn-primary btn-w-m">编辑</a>
+                <a href="#" class="btn btn-primary btn-outline btn-w-m">保存</a>
+                <a href="#" class="btn btn-default btn-w-m">取消</a>
+            </div>
+        </div>
+        <div class="int_list_box">
+            <div class="int_list clearfix">
+                <span class="mr20">公里数：<input type="text" class="text">km内</span>
+                <span class="mr20">起送价：<input type="text" class="text">元</span>
+                <span class="mr20">配送费：<input type="text" class="text">元</span>
+                <a href="javascript:;" class="fa fa-times-circle clear_btn"></a>
+            </div>
+            <div class="int_list clearfix">
+                <span class="mr20">公里数：<input type="text" class="text">km内</span>
+                <span class="mr20">起送价：<input type="text" class="text">元</span>
+                <span class="mr20">配送费：<input type="text" class="text">元</span>
+                <a href="javascript:;" class="fa fa-times-circle clear_btn"></a>
+            </div>
+        </div>
+        <a href="javascript:;" class="btn btn-primary btn-sm btn-outline add_btn">增加</a>
+    </div>
+    
+    <div class="dispchSet_list mb30">
+    	<div class="check_box"><input type="radio" name="fs">第三方配送</div>
+        <div class="int_list clearfix">
+        	<span class="mr20">公里数：<input type="text" class="text">km内</span>
+            <span class="mr20">起送价：<input type="text" class="text">元</span>
+            <span class="mr20">客户所需支付配送费：<input type="text" class="text">元</span>
+            <span class="mr20">配送团队收取：<input type="text" class="text">元</span>
+        </div>
+        <div class="int_list clearfix">
+        	<span class="mr20">公里数：<input type="text" class="text">km内</span>
+            <span class="mr20">起送价：<input type="text" class="text">元</span>
+            <span class="mr20">客户所需支付配送费：<input type="text" class="text">元</span>
+            <span class="mr20">配送团队收取：<input type="text" class="text">元</span>
+        </div>
+        <p class="black9 mt20"><b class="pointcl">*</b>如需更换配送团队、调整配送范围，起送价及配送价格，请联系业务经理：13888888888</p>
+    </div>
+    <!--表单end-->
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<script>
+$(document).ready(function() {
+    $(".dispchSet_list .int_list .clear_btn").click(function(){
+		$(this).parent(".int_list").remove();
+	});
+	
+	$(".dispchSet_list .add_btn").click(function(){
+		$(this).parent(".dispchSet_list").find(".int_list_box").append('<div class="int_list clearfix"> <span class="mr20">公里数：<input type="text" class="text">km内</span> <span class="mr20">起送价：<input type="text" class="text">元</span> <span class="mr20">配送费：<input type="text" class="text">元</span> <a href="javascript:;" class="fa fa-times-circle clear_btn"></a></div>');
+		
+		$(".dispchSet_list .int_list .clear_btn").click(function(){
+			$(this).parent(".int_list").remove();
+		});
+	});
+});
+</script>
+</body>
+</html>

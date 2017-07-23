@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>商家导航</title>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<link href="css/mine.css" rel="stylesheet">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper"> 
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i> </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                	<div class="img_ico"></div>
+                    <div class="wz"><a href="#">江湖外卖商家后台</a></div>
+                </li>
+                <li class="bt_li active"><a href="index.html" class="J_menuItem bt"><div class="ico_box"><i class="ico ico1"></i></div><span class="nav-label">外送首页</span></a></li>
+                <li class="bt_li"><a href="#" class="bt"><div class="ico_box"><i class="ico ico2"></i></div><span class="nav-label">订单管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li> <a class="J_menuItem" href="外送-订单管理-待处理订单.html">待处理订单</a> </li>
+                        <li> <a class="J_menuItem" href="外送-订单管理-历史订单.html">历史订单</a> </li>
+                    </ul>
+                </li>
+                <li class="bt_li"><a href="外送-评价管理.html"  class="J_menuItem bt"><div class="ico_box"><i class="ico ico3"></i></div><span class="nav-label">评价管理</span></a></li>
+                <li class="bt_li"><a href="#" class="bt"><div class="ico_box"><i class="ico ico4"></i></div><span class="nav-label">商品管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li> <a class="J_menuItem" href="外送-商品管理.html">商品管理</a> </li>
+                        <li> <a class="J_menuItem" href="外送-商品管理-添加商品.html">添加商品</a> </li>
+                        <li> <a class="J_menuItem" href="外送-商品管理-商品分类.html">商品分类管理</a> </li>
+                    </ul>
+                </li>              
+                <li class="bt_li"><a href="#" class="bt"><div class="ico_box"><i class="ico ico5"></i></div><span class="nav-label">店铺管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="外送-店铺管理-店铺设置.html">店铺设置</a> </li>
+                        <li><a class="J_menuItem" href="外送-店铺管理-配送设置.html">配送管理</a> </li>
+                        <li><a class="J_menuItem" href="外送-店铺管理-系统设置.html">系统设置</a> </li>
+                    </ul>
+                </li>
+                <li class="bt_li"><a href="#" class="bt"><div class="ico_box"><i class="ico ico6"></i></div><span class="nav-label">营销管理</span></a>
+                	<ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="外送-营销管理-店铺活动.html">店铺活动</a> </li>
+                        <li><a class="J_menuItem" href="外送-营销管理-平台活动.html">平台活动</a> </li>
+                    </ul>
+                </li>
+                <li class="bt_li"><a href="#" class="bt"><div class="ico_box"><i class="ico ico7"></i></div><span class="nav-label">经营分析</span></a>
+                	<ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="外送-经营分析-营业统计.html">营业统计</a> </li>
+                        <li><a class="J_menuItem" href="外送-经营分析-热门商品.html">热门商品</a> </li>
+                    </ul>
+                </li>
+                <li class="bt_li"><a href="#" class="bt"><div class="ico_box"><i class="ico ico8"></i></div><span class="nav-label">财务管理</span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="外送-财务管理-我的账户.html">我的账户</a> </li>
+                        <li><a class="J_menuItem" href="外送-财务管理-订单对账.html">订单对账</a> </li>
+                        <li><a class="J_menuItem" href="外送-财务管理-账户信息.html">账户信息</a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束--> 
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                	<a class="navbar-minimalize minimalize-styl-2" href="javascript:;"><i class="fa fa-bars"></i></a>
+                </div>
+                <div class="pull-left input-group search-section">
+                    <div class="input-group-btn selct_box">
+                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle selct_nr" type="button" aria-expanded="true">外卖订单 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>选项1</li>
+                            <li>选项2</li>
+                            <li>选项3</li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control" placeholder="请输入手机号/订单编号/商家名/配送员姓名" aria-describedby="basic-addon2">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-theme"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+                <div class="pull-right top_powerOff">
+                	<a href="#">
+                    	<i class="fa fa-power-off"></i>
+                    </a>
+                </div>
+                <div class="pull-right state_box">
+                	<a href="javascript:;" class="bt">营业中 <i class="glyphicon glyphicon-menu-down"></i></a>
+                    <div class="dropdown_state">
+                        <div class="list">
+                            <a href="#" class="btn btn-primary btn-sm">营业中</a>
+                            <p>当前餐厅处于设置的营业时间内，正常接受新订单</p>
+                        </div>
+                        <div class="list">
+                            <a href="#" class="btn btn-primary btn-outline btn-sm">停止营业</a>
+                            <p>适用于较长时间停止提供服务，不接受任何订单，手动恢复营业后可正常接受订单</p>
+                        </div>
+                        <P class="time">营业时间：09:30-20:00</P>
+                    </div>
+                </div>
+                <!--<div class="pull-right news_box">
+                	<a href="#">
+                    	<i class="fa fa-envelope"></i>
+                        消息提醒中心
+                        <span class="num">1</span>
+                    </a>
+                </div>-->
+                <div class="pull-right userInfo_box">
+                	<a href="#" class="userInfo">
+                    	<span class="img"><img src=""></span>
+                        <span>187****8745</span>
+                        <i class="glyphicon glyphicon-menu-right"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+        <div class="row breadcrumb_box">
+        	<ol class="breadcrumb">
+                <li><a href="#"><i class="glyphicon glyphicon-home mr10"></i>首页</a></li>
+                <li><a href="#">管理中心</a></li>
+                <li class="active">商家管理</li>
+            </ol>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index.html" frameborder="0" data-id="index.html" seamless></iframe>
+        </div>
+        <div class="footer">
+            <div class="pull-right">All Rights Reserved ICP备案：皖ICP备13010842号</div>
+        </div>
+        
+    </div>
+    <!--右侧部分结束--> 
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script> 
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script> 
+<script src="js/plugins/layer/layer.min.js"></script> 
+<script src="js/hplus.min.js?v=4.0.0"></script> 
+<script type="text/javascript" src="js/contabs.min.js"></script> 
+<script src="js/plugins/pace/pace.min.js"></script>
+<script>
+$(document).ready(function() {
+    $(".navbar-static-top .state_box").mousemove(function(){
+		$(".navbar-static-top .state_box .bt").addClass("on");
+		$(".navbar-static-top .state_box .dropdown_state").show();
+	});
+	$(".navbar-static-top .state_box").mouseleave(function(){
+		$(".navbar-static-top .state_box .bt").removeClass("on");
+		$(".navbar-static-top .state_box .dropdown_state").hide();
+	});
+});
+</script>
+</body>
+</html>

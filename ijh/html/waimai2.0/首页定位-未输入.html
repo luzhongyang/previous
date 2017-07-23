@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>首页定位-未输入</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/sm-extend.css">
+<link rel="stylesheet" href="css/style.css">
+<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current"> 
+    	<!--头部-->
+        <header class="bar bar-nav"> <a class="button button-link button-nav pull-left back"> <span class="iconfont icon-iconfontxiangyou"></span> </a> <a class="button button-link button-nav pull-right">搜索</a>
+            <div class="searchbar">
+                <a class="searchbar-cancel iconfont icon-x-copy"></a>
+                <div class="search-input">
+                  <label class="icon iconfont icon-sousuo" for="search"></label>
+                  <input type="search" id='search' placeholder='请输入地址'/>
+                </div>
+            </div>
+        </header>
+        <!--头部结束-->
+        <div class="content">
+           <div class="sy_serch_hot">
+           	<h3>当前地址</h3>
+            <div class="sy_posit"><a href="#" class="fr maincl"><i class="ico"></i>重新定位</a><p class="overflow_clear">安徽省合肥市蜀山区望江西路135号</p></div>
+            <h3>附近地址</h3>
+            <ul class="lishi">
+            	<li><a href="#">金环花园</a></li>
+                <li><a href="#">华润五彩国际</a></li>
+            </ul>
+           </div>
+        </div>        
+    <!--内容结束-->   
+    </div>
+</div>
+<script type='text/javascript' src='js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/sm-extend.js' charset='utf-8'></script>
+<script>   
+	$.init();
+</script>
+</body>
+</html>

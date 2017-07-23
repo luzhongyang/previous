@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>拼团详情-阶梯团</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/xia.css"/>
+<link rel="stylesheet" type="text/css" href="css/wang.css"/>
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<section class="page_center_box">
+    <!--内容-->
+    <div class="shangpin_banner">
+        <div class="flexslider">  
+            <ul class="slides">  
+                <li><img src="pic/img__3@3x.png" /></li>
+                <li><img src="pic/home_img@2x.png" /></li>
+            </ul>  
+        </div>
+    </div>
+    <div class="shangpinInfor">
+    	<div class="wz">
+        	<p class="left"><span class="tag">阶梯团</span>这里一句话描述商品，最多两行，设置左对齐</p>
+            <a href="#" class="shoucang_box on">
+            	<i class="ico"></i>
+                <p>收藏</p>
+            </a>
+        </div>
+    </div>
+    <div class="pintuanPrice">
+    	<p class="yuan">原   价:￥100<span class="fr">成团时间：3天</span></p>
+        <div class="pin">
+        	<p class="fl">拼团价：</p>
+            <div class="list_box">
+            	<ul>
+                	<li>10人以上<span class="ml10 fontcl1">￥60</span></li>
+                    <li>20人以上<span class="ml10 fontcl1">￥60</span></li>
+                    <li>30人以上<span class="ml10 fontcl1">￥60</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="pintuanTs mb10">支付开团并邀好友参加，人数越多越便宜，人数不足自动退款。详见下方拼团流程。</div>
+    <div class="shangpinDianpu mb10">
+    	<div class="infor">
+        	<div class="img fl"></div>
+            <div class="wz_box">
+            	<h3>1111111</h3>
+                <p><i class="ico"></i>微信认证</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="state">
+        	<ul>
+            	<li class="list">
+                	<p>666</p>
+                    <p>全部商品</p>
+                </li>
+                <li class="list">
+                	<p>666</p>
+                    <p>上新宝贝</p>
+                </li>
+                <li class="list">
+                	<p>666</p>
+                    <p>全部销量</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pintuanDelt_tit"><span class="tit">拼团流程</span><a href="#" class="ico linkIco fr"></a></div>
+    <div class="pintuanDelt_liucheng mb10">
+    	<div class="box"><img src="images/liuchengImg.png"></div>
+    </div>
+    <div class="pintuanDelt_tit mb10"><span class="tit">商品详情</span></div>
+    <div class="shangpinDelt article mb10">
+        <h1>标题</h1>
+        <img src="pic/img__3@3x.png">
+        <p>内容内容</p>
+    </div>
+    <!--内容结束-->
+</section>
+<footer class="shangpinFooter">
+	<a href="#" class="cart_btn"><i class="ico ico2"></i><p>首页</p></a>
+    <a href="#" class="btn add"><p class="mt10">单独购买</p><small>(￥100)</small></a>
+    <a href="#" class="btn"><p class="mt10">开团</p><small>(参团定金￥40)</small></a>
+</footer>
+<!--回到顶部-->
+<div class="fixed_right">
+	<a class="backtop" href="javascript:backtop();" style="display:none;">
+    	<i class="ico ico1"></i>
+        <p>顶部</p>
+    </a>
+    <a href="#" class="kefu">
+    	<i class="ico ico2"></i>
+        <p>客服</p>
+    </a>
+</div>
+<!--回到顶部结束-->
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//首页轮播js结束
+		
+    });
+</script>
+<script>
+$(document).ready(function(){
+	
+	function max_height()
+	{
+		var right_height = 0;
+		$(".shangpin_banner .slides li").each(function(a){
+			
+			var h = $(this).find('img').height();
+			if( h > right_height)
+			{
+				right_height = h;
+			}
+		});
+		return right_height;
+	}
+	max_height = max_height();
+	$(".shangpin_banner .slides li").css("height",max_height);
+	
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>我的-收货地址</title>
+<link rel="stylesheet" type="text/css" href="css/pub_app.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/xia.css"/>
+<link rel="stylesheet" type="text/css" href="css/wang.css"/>
+</head>
+
+<body>
+<div class="get-address-cont">
+     <div class="address-one mb10">
+          <div class="cont1 on">
+               <div class="dizhi1">江湖生活馆 <span class="ml10">18365068403</span><i class="ico ic-gou fr"></i></div><div class="clear"></div>
+               <div class="">安徽省 合肥市 蜀山区 华润五彩国际 904室（230061）</div>
+          </div>
+          <div class="caozuo">
+               <a class="caozuo-1" href="#"><i class="ico ic-edit"></i>编辑</a>
+               <a class="caozuo-1" href="#"><i class="ico ic-cancel"></i>删除</a>
+               <div class="clear"></div>
+          </div>
+     </div>
+     <div class="address-one mb10">
+          <div class="cont1">
+               <div class="dizhi1">江湖生活馆 <span class="ml10">18365068403</span><i class="ico ic-gou fr"></i></div><div class="clear"></div>
+               <div class="">安徽省 合肥市 蜀山区 华润五彩国际 904室（230061）</div>
+          </div>
+          <div class="caozuo">
+               <a class="caozuo-1" href="#"><i class="ico ic-edit"></i>编辑</a>
+               <a class="caozuo-1" href="#"><i class="ico ic-cancel"></i>删除</a>
+               <div class="clear"></div>
+          </div>
+     </div>
+     <div class="address-one mb10">
+          <div class="cont1">
+               <div class="dizhi1">江湖生活馆 <span class="ml10">18365068403</span><i class="ico ic-gou fr"></i></div><div class="clear"></div>
+               <div class="">安徽省 合肥市 蜀山区 华润五彩国际 904室（230061）</div>
+          </div>
+          <div class="caozuo">
+               <a class="caozuo-1" href="#"><i class="ico ic-edit"></i>编辑</a>
+               <a class="caozuo-1" href="#"><i class="ico ic-cancel"></i>删除</a>
+               <div class="clear"></div>
+          </div>
+     </div>
+
+
+</div>
+<div class="dizhi-add-new"><a href="#" class="">新增收货地址</a></div>
+
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pub.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            directionNav: true,
+            pauseOnAction: false,
+        });//首页轮播js结束
+    });
+</script>
+
+<!--收货地址选择-->
+<script>
+     $(document).ready(function(){
+         $(".address-one  .cont1").click(function(){
+              $(".address-one .cont1").removeClass("on");
+              if($(this).hasClass("on")){
+                   $(this).removeClass("on");
+              }else{
+                   $(this).addClass("on");
+              }
+         });
+     });
+</script>
+</body>
+</html>

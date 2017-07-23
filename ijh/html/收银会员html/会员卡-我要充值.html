@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会员卡-我要充值</title>
+<link rel="shortcut icon" href="favicon.ico">
+<!--<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">-->
+<!--<link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">-->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pub_container">
+	<div class="pub_page">
+    	<div class="pub_page_cont">
+        	<div class="pub_cont">
+            	<!--内容开始-->
+                <div class="membcard_recharge m-b15">
+                	<div class="pub_lists_title">充值金额</div>
+                    <div class="list_box clearfix">
+                    	<ul>
+                        	<li><a href="javascript:;" class="price_list on">30元</a></li>
+                            <li><a href="javascript:;" class="price_list">50元</a></li>
+                            <li><a href="javascript:;" class="price_list">100元</a></li>
+                            <li><a href="javascript:;" class="price_list">200元</a></li>
+                            <li><a href="javascript:;" class="price_list">300元</a></li>
+                            <li><a href="javascript:;" class="price_list">其他</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pub_lists">
+                    <div class="pub_list">
+                        <div class="pub_list_label">自定义金额</div>
+                        <div class="pub_list_bd"><input class="pub_list_input text-right" type="text" placeholder="输入金额（单位：元）" value=""></div>
+                    </div>
+                </div>
+                <!--内容结束-->
+            </div>
+            <!--底部工具栏-->
+        	<footer class="footer_btn-block">
+            	<button type="button" class="btn btn-primary btn-block btn-lg">确定</button>
+            </footer>
+            <!--底部工具栏结束-->
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script> 
+<script src="js/bootstrap.min.js?v=3.3.5"></script> 
+<script src="js/pub.js"></script> 
+<script>
+$(document).ready(function() {
+	$(".membcard_recharge .price_list").click(function(){
+		$(".membcard_recharge .price_list").removeClass("on");
+		$(this).addClass("on");
+	});
+    
+});
+</script>
+</body>
+</html>

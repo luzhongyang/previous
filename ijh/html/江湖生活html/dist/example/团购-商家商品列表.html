@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>团购-商家商品列表</title>
+<link rel="stylesheet" href="../style/weui.min.css"/>
+<link rel="stylesheet" href="css/example.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont">
+            <!--头部搜索-->
+            <div class="topSerch_box pub_list">
+            	<div class="pub_list_bd">
+                	<input type="search" class="int" placeholder="搜索商家、 商品">
+                </div>
+                <input type="submit" value="" class="btn">
+            </div>
+            <!--头部搜索end-->
+            <!--头部tab切换-->
+            <div class="topTab_box border_b">
+            	<div class="list on"><a href="#">商品</a></div>
+                <div class="list"><a href="#">商家</a></div>
+            </div>
+            <!--头部tab切换end-->
+            <!--头部下拉-->
+            <div class="takeout-list-title border_b mb10">
+               <a class="list" href="javascript:;">分类</a>
+               <span class="line"></span>
+               <a class="list" href="javascript:;">区域</a>
+               <span class="line"></span>
+               <a class="list" href="javascript:;">排序</a>
+               <span class="line"></span>
+               <a href="javascript:;" class="see_style"></a>
+            </div>
+            <div class="takeout-list-mask" style="padding-top:128px;">
+                    <div class="mask-list">
+                        <div class="list">
+                            <div class="left fl">
+                                <ul>
+                                    <li class="on"><a href="#">全部分类<span>(888)</span></a></li>
+                                    <li><a href="#">品牌馆<span>(7)</span></a></li>
+                                    <li><a href="javascript:;">拼团<span>(650)</span></a><i></i></li>
+                                    <li><a href="javascript:;">餐饮美食<span>(128)</span></a><i></i></li>
+                                    <li><a href="javascript:;">牛奶水果<span>(12)</span></a><i></i></li>
+                                    <li><a href="javascript:;">鲜花<span>(10)</span></a><i></i></li>
+                                    <li><a href="javascript:;">小吃<span>(18)</span></a><i></i></li>
+                                    <li><a href="javascript:;">异国风味<span>(128)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                    <li><a href="javascript:;">其他<span>(14)</span></a><i></i></li>
+                                </ul>
+                            </div>
+                            <div class="right fr">
+                                <ul>
+                                    <li class="right_list takeout_wu">当前为全部类目</li>
+                                    <li class="right_list takeout_wu">当前为品牌馆类目</li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                             <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="takeout_mask-bg"></div>
+                    </div>
+                    <div class="mask-list">
+                        <div class="list">
+                            <div class="left fl">
+                                <ul>
+                                    <li class="on"><a href="#">附近</a></li>
+                                    <li><a href="#">蜀山区</a><i></i></li>
+                                    <li><a href="javascript:;">庐阳区</a><i></i></li>
+                                    <li><a href="javascript:;">瑶海区</a><i></i></li>
+                                    <li><a href="javascript:;">包河区</a><i></i></li>
+                                    <li><a href="javascript:;">经开区</a><i></i></li>
+                                    <li><a href="javascript:;">政务区</a><i></i></li>
+                                    <li><a href="javascript:;">滨湖区</a><i></i></li>
+                                    <li><a href="javascript:;">新站区</a><i></i></li>
+                                </ul>
+                            </div>
+                            <div class="right fr">
+                                <ul>
+                                    <li class="right_list takeout_wu">当前为附近区域</li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                             <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">盖浇饭</a></li>
+                                            <li><a href="#">米粉</a></li>
+                                            <li><a href="#">麻辣烫</a></li>
+                                            <li><a href="#">冒菜</a></li>
+                                            <li><a href="#">饺子馄饨</a></li>
+                                            <li><a href="#">面馆</a></li>
+                                            <li><a href="#">黄焖鸡米饭</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="right_list">
+                                        <ul>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                            <li><a href="#">全部</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="takeout_mask-bg"></div>
+                    </div>
+                    <div class="mask-list">
+                        <div class="order">
+                            <ul>
+                                <li class="on"><a href="#">智能排序</a><i class="ico_on"></i></li>
+                                <li><a href="#">距离最近</a><i class="ico_on"></i></li>
+                                <li><a href="#">评分最高</a><i class="ico_on"></i></li>
+                                <li><a href="#">销售最高</a><i class="ico_on"></i></li>
+                                <li><a href="#">起送价最低</a><i class="ico_on"></i></li>
+                                <li><a href="#">最早送达</a><i class="ico_on"></i></li>
+                            </ul>
+                        </div>
+                        <div class="takeout_mask-bg"></div>
+                    </div> 
+                </div>
+            <!--头部下拉end-->
+            <div class="container_mid">
+				<div class="list_change_cont">
+                    <!--产品列表-->
+                    <div class="goods_list_box mb10">
+                        <ul>
+                            <li class="goods_list">
+                                <div class="box">
+                                    <div class="img"><a href="#"><img src=""></a></div>
+                                    <div class="wz_box">
+                                        <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                        <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                        <P class="black9">已售200</P>
+                                        <a href="javascript:;" class="btn"></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="goods_list">
+                                <div class="box">
+                                    <div class="img"><a href="#"><img src=""></a></div>
+                                    <div class="wz_box">
+                                        <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                        <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                        <P class="black9">已售200</P>
+                                        <a href="javascript:;" class="btn"></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="goods_list">
+                                <div class="box">
+                                    <div class="img"><a href="#"><img src=""></a></div>
+                                    <div class="wz_box">
+                                        <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                        <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                        <P class="black9">已售200</P>
+                                        <a href="javascript:;" class="btn"></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="goods_list">
+                                <div class="box">
+                                    <div class="img"><a href="#"><img src=""></a></div>
+                                    <div class="wz_box">
+                                        <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                        <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                        <P class="black9">已售200</P>
+                                        <a href="javascript:;" class="btn"></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <!--产品列表end-->
+                </div>
+                <div class="list_change_cont none">
+                	<div class="tuanShangjia_list_box">
+                    	<div class="tuanShangjia_list mb10">
+                        	<div class="info border_b">
+                            	<h4 class="overflow_clear"><a href="#">此处显示的是商家店铺名称...</a></h4>
+                                <div class="clear_both">
+                                	<div class="starBg fl"><span class="star" style="width: 80%;"></span></div>
+                                    <p class="overflow_clear range fr">天鹅湖万达2.3km</p>
+                                </div>
+                            </div>
+                            <ul>
+                            	<li class="goods_list">
+                                    <div class="box">
+                                        <div class="img"><a href="#"><img src=""></a></div>
+                                        <div class="wz_box">
+                                            <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                            <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                            <P class="black9">已售200</P>
+                                            <a href="javascript:;" class="btn"></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="goods_list">
+                                    <div class="box">
+                                        <div class="img"><a href="#"><img src=""></a></div>
+                                        <div class="wz_box">
+                                            <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                            <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                            <P class="black9">已售200</P>
+                                            <a href="javascript:;" class="btn"></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div></div>
+                            <a href="#" class="see_more">其他7个商品<i class="arrow_ico"></i></a>
+                        </div>
+                        <div class="tuanShangjia_list mb10">
+                        	<div class="info border_b">
+                            	<h4 class="overflow_clear"><a href="#">此处显示的是商家店铺名称...</a></h4>
+                                <div class="clear_both">
+                                	<div class="starBg fl"><span class="star" style="width: 80%;"></span></div>
+                                    <p class="overflow_clear range fr">天鹅湖万达2.3km</p>
+                                </div>
+                            </div>
+                            <ul>
+                            	<li class="goods_list">
+                                    <div class="box">
+                                        <div class="img"><a href="#"><img src=""></a></div>
+                                        <div class="wz_box">
+                                            <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                            <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                            <P class="black9">已售200</P>
+                                            <a href="javascript:;" class="btn"></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="goods_list">
+                                    <div class="box">
+                                        <div class="img"><a href="#"><img src=""></a></div>
+                                        <div class="wz_box">
+                                            <h4 class="overflow_clear"><a href="#">此处显示团购商品名称…</a></h4>
+                                            <p class="fontcl2"><small>￥</small>15.8 <del class="black9 ml10"><small>¥218</small></del></P>
+                                            <P class="black9">已售200</P>
+                                            <a href="javascript:;" class="btn"></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div></div>
+                            <a href="#" class="see_more">其他7个商品<i class="arrow_ico"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script type="text/javascript">
+	$('.takeout-list-mask .left ul li').click(function(){
+        var tk_idx=$(this).index();
+        $(this).addClass('on').siblings().removeClass('on');
+        $(this).parents(".list").find('.right .right_list').eq(tk_idx).show().siblings().hide();
+        var value=$(this).text();
+        avalue=value.split('(');
+        value=avalue[0];
+        var ind=$(this).parents('.mask-list').index()
+        $('.takeout-list-title .list').eq(ind).text(value);
+    })
+    $('.takeout-list-mask .right .right_list li').click(function(){
+        $(this).addClass('on').siblings().removeClass('on');
+    })
+    $('.takeout-list-title a.list').click(function(){
+        $(this).toggleClass('on').siblings().removeClass('on'); 
+        $('.takeout-list-mask').show();
+         var ind=$(this).index();
+        $('.takeout-list-mask .mask-list').eq(ind/2).toggle().siblings().hide();
+        if($(this).hasClass("on")){
+            $('.takeout-list-mask').show();
+        }else{
+            $('.takeout-list-mask').hide();
+        }
+    })
+    if($('.takeout-list-title').length > 0){
+        $('.takeout-list-title a.list').width(100 / $('.takeout-list-title a.list').length + '%');  
+    }
+    $('.takeout-list-mask .choose a').click(function(){
+        $(this).addClass('on').siblings().removeClass('on');
+    })
+
+    $('.takeout_mask-bg').click(function(){
+        $('.takeout-list-mask .mask-list').hide();
+        $('.takeout-list-title a').removeClass('on');
+    });
+    $('.mask-list li').click(function(){
+        $(this).addClass('on').siblings().removeClass('on')
+    })
+</script>
+<script>
+	$(".see_style").click(function(){		
+		if($(this).hasClass("singel")&&$(this).hasClass("see_style_none")){
+			$(this).addClass("singel");
+			$(".goods_list_box").addClass("goods_list_box_singel");
+		}else if($(this).hasClass("singel")){
+			$(this).removeClass("singel");
+			$(".goods_list_box").removeClass("goods_list_box_singel");
+		}else if($(this).hasClass("see_style_none")){
+			$(this).removeClass("singel");
+			$(".goods_list_box").removeClass("goods_list_box_singel");
+		}else{
+			$(this).addClass("singel");
+			$(".goods_list_box").addClass("goods_list_box_singel");
+		}
+	});
+</script>
+<script>
+	$(".topTab_box .list").each(function(e){
+		$(this).click(function(){
+			$(this).addClass("on").siblings(".list").removeClass("on");
+			$(".list_change_cont").each(function(i){
+				if(e==i){
+					$(this).removeClass("none").siblings(".list_change_cont").addClass("none");
+				}else{
+					$(this).addClass("none")
+				}
+				if(e==1){
+					$(".see_style").addClass("see_style_none");
+				}else{
+					$(".see_style").removeClass("see_style_none");
+				}
+			});
+		});
+	});
+</script>
+
+</body>
+</html>
