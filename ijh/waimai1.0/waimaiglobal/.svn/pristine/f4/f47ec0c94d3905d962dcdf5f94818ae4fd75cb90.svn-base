@@ -1,1 +1,0 @@
-<{foreach $data as $link}><a href="<{$link.link}>" target="_blank"><{$link.title}></a><{/foreach}>

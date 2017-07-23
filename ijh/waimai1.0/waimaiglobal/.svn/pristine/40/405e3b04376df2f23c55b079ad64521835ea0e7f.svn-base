@@ -1,4 +1,0 @@
-    public function so()
-    {
-        $this->tmpl = 'admin:#view#/so.html';
-    }
