@@ -1,0 +1,332 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+    <body>
+        <header>
+            <i class="left"><a href="<{link ctl='shop/detail' args=$detail.shop_id}>" class="gobackIco"></a><a href="<{link ctl='shop/detail' args=$detail.shop_id}>" class=""><{$detail.title}></a></i>
+            <div class="title">
+            </div>
+            <i class="right"><a class="" href="#"></a></i>
+        </header>
+        <form id="form_post" method="post">
+            <input type="hidden" name="params[products]" value="<{$products}>"/>
+            <input type="hidden" name="params[shop_id]" value="<{$detail.shop_id}>"/>
+            <section class="page_center_box">
+                <div class="order_confirm_infor mb10">
+                    <div class="ico fl"></div>
+                    <{if empty($maddr)}>
+                    <a href="<{link ctl='ucenter/addr/create'}>">
+                        <div class="wz">
+                            <p class="bt"><{L('您还没有设置地址')}></p>
+                            <p><{L('点击立即添加地址')}></p>
+                        </div>
+                    </a>
+                    <{else}>
+                    <a href="<{link ctl='ucenter/addr/index' order=1}>">
+
+                        <div class="wz" id="addr_info">
+                            <input type="hidden" id="addr" name="params[addr_id]" value="<{$maddr.addr_id}>"/>
+                            <p class="bt"><span class="contact"><{$maddr.contact}></span> <span class="mobile"><{$maddr.mobile}></span></p>
+                            <p class="house"><{$maddr.house}></p>
+                        </div>
+                    </a>
+                    <{/if}>
+                </div>
+                <div class="minePay">
+                    <ul class="form_list_box" id="pay_info">
+                        <input type="hidden" name="params[online_pay]" id="online_pay" value="1"/>
+                        <li class="recharge">
+                            <label class="radioLabel pay_1" rel="1">
+                                <div class="fl"><p><{L('在线支付')}></p><div class="order_confirm_tag"><{if $first_youhui >0}><span style="background:#46c3ff;"><{sprintf(L('首单优惠%s元'),$first_youhui)}></span><{/if}><{if $youhui}><span class="youhui_use" style="background:#46c3ff;">
+                                
+                                <{sprintf(L('满%s立减%u元'),$youhui['order_amount'],$youhui['youhui_amount'])}>
+                                
+                                </span><{/if}><{if $hongbao['count'] >0}><span class="hongbao_use" style="background:#ff3333;">
+                                
+                                <{sprintf(L('有%s个红包可用'),$hongbao['count'])}>
+                                
+                                </span><{/if}></div></div>
+                                <span class="fr radioInt on"><input name="" type="radio" checked></span>
+                            </label> 
+                        </li>
+                        <li class="recharge last">
+                            <label class="radioLabel pay_0" rel="0">
+                                <p class="fl"><{L('货到付款')}></p>
+                                <span class="fr radioInt"><input name="" type="radio"></span>
+                            </label> 
+                        </li>
+                        <li class="recharge last" id="use_money">
+                             <p class="" style="line-height:0.2rem;"><{L('使用余额')}>&nbsp;&nbsp;&nbsp;<{if $mymoney>0}><font size="2" color="#ff2121"><{L('我的余额')}>&nbsp;<{$mymoney}>&nbsp;<{L('可抵扣')}>&nbsp;<{if $mymoney<=$total_price}><{$mymoney}><{/if}><{if $mymoney>$total_price}><{$total_price}>.00<{/if}></font><{/if}></p>
+                            <div class="figure_password">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="40"><{L('密码')}></td>
+                                        <td><span><input type="password" name=params[passwd] id="figure_password_int" class="password_int" placeholder="<{L('请输入密码')}>" value=""></span></td>
+                                        <td width="40"><label style="margin-top:0.12rem;" class="tab_int" id='tb2'></label></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="order_details_nr">
+                    <ul class="form_list_box form_list_box_specil">
+                        <li class="list waimaiTime">
+                            <div class="fl"><p class="black6"><{L('送达时间')}></p></div>
+                            <input type="hidden" name="params[pei_time]" id="pei_time" value="0"/>
+                            <div class="fr"><p class="black9 black99"><span id="time"><{L('尽快送出')}></span><em class="linkIco"></em></p></div>
+                        </li>
+                        
+                        <li class="list">
+                            <a href="<{link ctl='order/remark'}>">
+                            <div class="fl"><p class="black6"><{L('订单备注')}></p></div>
+                            <input type="hidden" name="params[note]" id="note" value=""/> 
+                            <div class="fr" style="width:75%;"><p class="black99 black9"><span id="remark"><{L('添加备注')}></span><em class="linkIco"></em></p></div>
+                            </a>
+                        </li>
+                        
+                        <{foreach $product_list as $item}>
+                        <li class="list">
+                            <div class="fl"><p class="black6"><{$item.title}></p></div>
+                            <div class="fr"><p class="black9">x<{$item.cart_num}>&nbsp;&nbsp;￥<{$item['cart_num']*$item['price']}></p></div>
+                        </li>
+                        <{/foreach}>
+                        <li class="list">
+                            <div class="fl"><p class="black6"><{L('打包费')}></p></div>
+                            <div class="fr"><p class="black9">￥<{$package_price}></p></div>
+                        </li>
+                        <li class="list">
+                            <div class="fl"><p class="black6"><{L('配送费')}></p></div>
+                            <div class="fr"><p class="black9">￥<{$detail['freight']}></p></div>
+                        </li>
+                        <{if $youhui}>
+                        <li class="list" id="youhui">
+                            <div class="fl"><p class="pointcl1">
+                            <{sprintf(L('满%s立减%u元'),$youhui['order_amount'],$youhui['youhui_amount'])}>
+                            </p></div>
+                            <div class="fr"><p class="pointcl1">-￥<{$youhui['youhui_amount']}></p></div>
+                        </li>
+                        <{/if}>
+                        <{if $hongbao}>
+                        <a href="<{link ctl='ucenter/hongbao/lists' money=$yh_price}>">
+                            <li class="list" id="hongbao">
+                                <input type="hidden" name="params[hongbao_id]" id="hongbao_id" value="<{$hongbao['hongbao_id']}>"/>
+                                <div class="fl"><p class="pointcl1"><{L('红包抵扣')}></p></div>
+                                <div class="fr"><p class="pointcl1 ">-￥<span class="hongbao_amount"><{$hongbao['amount']}></span></p></div>
+                            </li>
+                        </a>
+                        <{else}>
+                        <li class="list" id="hongbao">
+                            <div class="fl"><p class="pointcl1"><{L('红包抵扣')}></p></div>
+                            <div class="fr"><p class="pointcl1"><{L('暂无可用红包')}></p></div>
+                        </li>
+                        <{/if}>
+                        <li class="list last">
+                            <div class="fl"></div>
+                            <div class="fr"><p class="pointcl1 total"><{L('合计')}>  ￥<span class="jq_total"><{$total_price}></span></p></div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </form>
+        <footer>
+            <div class="ord_tousu">
+                <p class="fl" style="margin-top:0.12rem;"><{L('合计')}>：<span class="pointcl1">￥<span class="jq_total"><{$total_price}></span></span>&nbsp;&nbsp;<span id="is_youhui" class="black9"><{L('已优惠')}>￥<span class="jq_youhui"><{$total_youhui}></span></span></p>
+                <a href="javascript:void(0);" class="fr pub_btn"><{L('确认下单')}></a></div>
+				<a href="javascript:void(0);" class="fr pub_btn1" style="display:nome;"><{L('下单中')}></a></div>
+        </footer>
+        <style>
+            .waimaiTime_mask ul li{ display:block; padding:0 0.1rem; line-height:0.34rem; font-size:0.14rem; color:#999;}
+        </style>
+        <div class="mask_box">
+            <div class="maskOne waimaiTime_mask">
+                <div class="title"><{L('选择送达时间')}></div>
+                <div class="cont">
+                    <ul id="time_select" style="height:2rem; overflow-y:scroll;">
+                        <li><{L('尽快送达')}></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mask_bg"></div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                //removeInfo();
+                saveInfo();
+                $('.radioLabel').click(function () {
+                    $('.radioInt').removeClass('on');
+                    $(this).find('.radioInt').addClass('on');
+                    localStorage.setItem('online_pay', $(this).attr('rel'));
+                    setStatus($(this).attr('rel'));
+                });
+                setOrderinfo();
+                var html = "<li><{L('尽快送达')}></li>";
+                html += time_select("<{$set_time['start']}>", "<{$set_time['start_quarter']}>", "<{$set_time['end']}>", "<{$set_time['end_quarter']}>");
+                $("#time_select").html(html);
+                $(".waimaiTime").click(function () {
+                    $(".waimaiTime_mask").show();
+                    $(".waimaiTime_mask").parent().find(".mask_bg").show();
+                });
+                $(".waimaiTime_mask").on('click', 'li', function () {
+                    var v = $(this).html();
+                    localStorage.setItem('pei_time', v);
+                    $("#time").html(v);
+                    if (v == "尽快送达") {
+                        $("#pei_time").val(0);
+                    } else {
+                        $("#pei_time").val(v);
+                    }
+                    $(".waimaiTime_mask").hide();
+                    $(".waimaiTime_mask").parent().find(".mask_bg").hide();
+                });
+                $("#tb2").click(function(){
+                        if($(this).hasClass("on")){
+                            $(this).removeClass("on");
+                            $("#figure_password_int").attr('type','password');
+                        }
+                        else{
+                            $(this).addClass("on");
+                            $("#figure_password_int").attr('type','text');
+                            
+                        }
+                });
+            });
+            function setStatus(res) {
+                $("#online_pay").val(res);
+                if (localStorage.getItem('hongbao_id') && localStorage.getItem('amount')) {
+                    var amount = Number(parseFloat(localStorage.getItem('amount')).toFixed(2));
+                    var total_price = Number(parseFloat("<{$total_price}>").toFixed(2)) + Number(parseFloat("<{$hongbao.amount}>").toFixed(2)) - amount;
+                    var total_youhui = Number(parseFloat("<{$total_youhui}>").toFixed(2)) - Number(parseFloat("<{$hongbao.amount}>").toFixed(2)) + amount;
+                } else {
+                    var total_price = Number(parseFloat("<{$total_price}>").toFixed(2));
+                    var total_youhui = Number(parseFloat("<{$total_youhui}>").toFixed(2));
+                }
+                var total = parseFloat("<{$total}>").toFixed(2);
+                var money = "<{$MEMBER.money}>";
+                if (res == 1) {
+                    $(".pay_0").find('.radioInt').removeClass('on');
+                    $(".pay_1").find('.radioInt').addClass('on');
+                    $("#youhui").show();
+                    $("#hongbao").show();
+                    $(".jq_total").html(parseFloat(total_price).toFixed(2));
+                    $("#is_youhui").show();
+                    $(".jq_youhui").html(parseFloat(total_youhui).toFixed(2));
+                    if (money > 0) {
+                        $("#use_money").show();
+                    } else {
+                        $("#use_money").hide();
+                    }
+                } else {
+                    $(".pay_1").find('.radioInt').removeClass('on');
+                    $(".pay_0").find('.radioInt').addClass('on');
+                    $("#youhui").hide();
+                    $("#hongbao").hide();
+                    $(".jq_total").html(parseFloat(total).toFixed(2));
+                    $("#is_youhui").hide();
+                    $("#use_money").hide();
+                }
+
+            }
+
+            function setOrderinfo() {
+                if (window.localStorage) {
+                    $("#addr").val(localStorage.getItem('addr_id'));
+                    $(".contact").html(localStorage.getItem('contact'));
+                    $(".mobile").html(localStorage.getItem('mobile'));
+                    $(".house").html(localStorage.getItem('house'));
+                    if(localStorage.getItem('hongbao_id')){
+                        $("#hongbao_id").html(localStorage.getItem('hongbao_id'));
+                    }else{
+                        $("#hongbao_id").html("<{$hongbao.hongbao_id}>");
+                    }
+                    if(localStorage.getItem('hongbao_id')){
+                        $(".hongbao_amount").html(localStorage.getItem('amount'));
+                    }else{
+                        $(".hongbao_amount").html("<{$hongbao.amount}>");
+                    }
+                    setStatus(localStorage.getItem('online_pay'));
+                    if (localStorage.getItem('note')) {
+                        $("#note").val(localStorage.getItem('note'));
+                        $('#remark').text(localStorage.getItem('note'));
+                    }
+                    if (!localStorage.getItem('pei_time') || localStorage.getItem('pei_time') == "<{L('尽快送达')}>") {
+                        $('#time').html("<{L('尽快送达')}>");
+                        $('#pei_time').val(0);
+                    } else {
+                        $('#time').html(localStorage.getItem('pei_time'));
+                        $('#pei_time').val(localStorage.getItem('pei_time'));
+                    }
+                }
+            }
+
+            function saveInfo() {
+                if (window.localStorage) {
+                    localStorage.setItem('shop_id', '<{$detail.shop_id}>');
+                    //localStorage['hongbao_id'] = localStorage.getItem('hongbao_id') || "<{$hongbao.hongbao_id}>";
+                    //localStorage['amount'] = localStorage.getItem('amount') || "<{$hongbao.amount}>";
+                    localStorage['addr_id'] = localStorage.getItem('addr_id') || "<{$maddr.addr_id}>";
+                    localStorage['contact'] = localStorage.getItem('contact') || "<{$maddr.contact}>";
+                    localStorage['mobile'] = localStorage.getItem('mobile') || "<{$maddr.mobile}>";
+                    localStorage['house'] = localStorage.getItem('house') || "<{$maddr.house}>";
+                    localStorage['online_pay'] = localStorage.getItem('online_pay') || 1;
+                }
+            }
+            function removeInfo() {
+                if (window.localStorage) {
+                    localStorage.removeItem('shop_id');
+                    localStorage.removeItem('hongbao_id');
+                    localStorage.removeItem('amount');
+                    localStorage.removeItem('addr_id');
+                    localStorage.removeItem('contact');
+                    localStorage.removeItem('mobile');
+                    localStorage.removeItem('house');
+                    localStorage.removeItem('note');
+                    localStorage.removeItem('online_pay');
+                    localStorage.removeItem('pei_time');
+                    localStorage.removeItem('content');
+                    localStorage.removeItem('remark');
+                }
+            }
+            window.ele.init();
+
+            $(".pub_btn").click(function () {
+			$(".pub_btn").hide();
+			$(".pub_btn1").show();
+		    var url = "<{link ctl='order/create'}>";
+                $.post(url, $("#form_post").serialize(), function (ret) {
+                    if (ret.error > 0) {
+                        layer.open({content: ret.message, time: 2});
+                        if (ret.error >= 221 && ret.error <= 224) {
+                            setTimeout(function () {
+                                window.location.href = "<{link ctl='index/index'}>";
+                            }, 1000);
+                        }
+                    } else {
+                        layer.open({content: ret.message});
+                        removeInfo();
+                        var order_id = ret.order_id;
+                        var pay_status = ret.pay_status;  
+                        var link = "<{link ctl='order/pay' args=oooo}>";
+                        var link2 = "<{link ctl='order/detail' args=oooo}>";
+                        window.ele.removeby("<{$detail.shop_id}>");
+                        setTimeout(function () {
+                            if(ret.online_pay == 0){
+                                window.location.href = link2.replace('oooo', order_id);
+                                return false;
+                            }
+                            if(pay_status == 1){
+                                window.location.href = link2.replace('oooo', order_id);
+                            }else{
+                                window.location.href = link.replace('oooo', order_id);
+                            }
+                        }, 1000);
+                    }
+                }, 'json')
+            })
+
+
+        </script>
+    </body>
+</html>

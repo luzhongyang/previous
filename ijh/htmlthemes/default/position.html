@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+</head>
+<body>
+<header>
+    <i class="left"><a href="<{link ctl='index'}>" link-load="" link-type="right" class="gobackIco"></a></i>
+    <div class="title"></div>
+    <i class="right"><a href="<{link ctl='city'}>" link-load="" link-type="right"><{L('切换城市')}></a></i> 
+</header>
+<section class="page_center_box" style="height:100%">
+    <div class="sy_search">
+        <div class="orderAddr">
+            <div class="orderAddr_list">
+                <div class="fl"><i class="ico_3"></i></div>
+                <div class="orderAddr_int">
+                    <input type="text" value="" placeholder="<{L('请输入您所在的位置')}>" id="suggestId">
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="long_btn_box">
+                <input type="button"  value="<{L('确定')}>" class="long_btn">
+            </div>
+         </div>
+            <div class="order_details_nr">                
+                <ul class="form_list_box" id="search_box">
+                </ul>                
+                <ul class="form_list_box">
+                    <!--<li class="list">
+                        <div class="fl"><p class="maincl">定位到当前位置</p></div>
+                        <div class="fr"><a class="sy_posit_btn" href="#"></a></div>
+                    </li>-->                    
+                    <{if $addr_list}>
+                    <li class="list bt">
+                        <p class="black9" style="color:#ff0000;"><{L('我的收货地址')}></p>
+                    </li>
+                    <{/if}>                
+                    <{foreach $addr_list as $v}>
+                    <li class="list addr" addr='{"lng":"<{$v.lng}>","lat":"<{$v.lat}>","addr":"<{$v.house}>"}'>
+                        <p class="addr_p" ><{$v.contact}> <{$v.mobile}></p>
+                        <p><{$v.addr}>,<{$v.house}></p>
+                    </li>
+                    <{/foreach}> 
+                </ul>
+            </div>
+        </div>
+    </section>        
+    <script type="text/javascript">
+    $(document).ready(function(){
+        getUxLocation(function(ret){
+            //在这里处理 ret{lnt, lat, addr}
+        });           
+        var now_city_name = localStorage["UxCity"] || "";
+        if(!now_city_name){
+            $('.title').text("<{L('还未选择城市')}>");
+            window.location.href='<{link ctl="city"}>';
+        }else{
+            $('.title').text(now_city_name);
+        }
+        $('.long_btn').click(function(){                
+            var addr_name = $('#suggestId').val();
+            placeapi(addr_name, now_city_name, function(ret){
+                if(ret.results.length>0){
+                    var html = '';
+                    $.each(ret.results,function(n,value){
+                        if(typeof(value.location) == 'object'){
+                            html += '<li class="list addr" addr=\'{"lng":"'+value.location.lng+'","lat":"'+value.location.lat+'","addr":"'+value.name+'"}\' >';
+                            if(value.address != undefined){
+                                html += '<p class="addr_p" >'+value.address+'</p>';
+                            }
+                            html += '<p>'+value.name+'</p></li>';
+                        }
+                    });
+                    $('#search_box').html(html);                        
+                }else{
+                    $('#search_box').html('<li class="list addr"><p class="addr_p"><{L("暂时没有找到您查询的信息")}></p></li>');
+                }
+            })                
+        })
+        $(".form_list_box").on('click', 'li[addr]', function (){
+            var addr = {};
+            try{
+                addr = JSON.parse($(this).attr("addr"));
+                setUxLocation(addr);
+                location.href = "<{link ctl='index'}>";
+            }catch(e){
+                alert(e);
+            }
+        });
+    });
+    </script>
+    </body>
+</html>

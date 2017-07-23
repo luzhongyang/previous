@@ -1,0 +1,175 @@
+<{include file="web/block/header.html"}>
+<!--共用头部end-->
+<!--内容开始-->
+<div class="pagewd prslCenter_box mt10 mb30">
+    <{include file="web/block/left.html"}>
+    <div class="prslCenter_right fl">
+        <h2 style="line-height:40px;">近三个月订单</h2>
+        <div class="prslCenter_order_top">
+            <span class="time">下单时间</span>
+            <span class="infor">订单内容</span>
+            <span class="price">支付金额（元）</span>
+            <span class="state">状态</span>
+            <span class="operate">操作</span>
+        </div>
+        <script>
+                function set_int(time,id){
+                    window.setInterval(function(){
+                        if (time < 1){
+                            window.clearInterval();
+                            window.location.reload(true);
+                            return;
+                        }
+                        time --;
+                        var time_str = "";
+                        var m = Math.floor(time / 60);
+                        var s = Math.floor(time % 60);
+                        if (m < 10) {
+                            time_str+='0'+m+':';
+                        } else {
+                            time_str+=m+':';
+                        }
+                        if (s < 10) {
+                            time_str+='0'+s;
+                        } else {
+                            time_str+=s;
+                        } 
+                        $("#djs_"+id).html(time_str);
+                    }, 1000);
+                }
+            </script>
+        <!--订单列表-->
+        <div class="prslCenter_order">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <{foreach $items as $item}>
+                    <tr class="prslCenter_order_list">
+                        <td class="time_box <{if $item.order_status == 8&&$item.comment_status == 0}>on<{/if}> ">
+                            <div>
+                                <p><{if $item.time_str}><{$item.time_str}><{else}><{$item.dateline|format:'m-d'}><{/if}></p>
+                                <small class="black9"><{$item.dateline|format:'H:i'}></small>
+                                <em class="ico"></em>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="infor_box">
+                                <div class="pub_img fl"><a href="<{link ctl='web/menu/index' args=$item.shop_id}>"><img src="<{$pager.img}>/<{$shops[$item['shop_id']]['logo']}>" width="70" height="70"></a></div>
+                                <div class="pub_wz">
+                                    <h3 class="overflow_clear"><a href="<{link ctl='web/menu/index' args=$item.shop_id}>"><{$shops[$item['shop_id']]['title']}></a></h3>
+                                    <p class="overflow_clear black9">
+                                        <{foreach $item['product'] as $val}>
+                                        <{if $val@index <=1}>
+                                            <{if $val@index == 1}>
+                                                /<{$val.product_name}><{$val.product_number}>份
+                                            <{else}>
+                                                <{$val.product_name}><{$val.product_number}>份
+                                            <{/if}>
+                                        <{/if}>
+                                    <{/foreach}> 
+                                    等<b class="pointcl"><{$item.product_number}></b>个菜品
+                                    </p>
+                                    <p class="black9">订单号：<{$item.order_id}></p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price_box">
+                                <p>￥<{$item.amount + $item.money}></p>
+                                <small class="black9"><{if $item.online_pay == 1}>在线支付<{else}>货到付款<{/if}></small>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="state_box">
+                                <p class="black9"><{$item.order_status_label}></p>
+                                <small class="pointcl" id="djs_<{$item.order_id}>">
+                                    <{if $item.last_second}>
+                                        <script>
+                                            set_int("<{$item.last_second}>","<{$item.order_id}>");
+                                        </script>
+                                    <{/if}>
+                                </small>
+                                
+                                
+                            </div>
+                        </td>
+                        
+                        <td>
+                            <div class="operate_box">
+                                <a href="<{link ctl='web/ucenter/order/detail' args=$item.order_id}>" class="more">订单详情</a>
+                                <div class="btn_box">
+                                    <{if $item.online_pay ==0}>
+                                        <{if $item.order_status == 0}>
+                                            <a href="javascript:void(0);" class="btn">等待接单</a>
+                                            <{elseif $item.order_status == 1}>
+                                            <a href="javascript:void(0);" class="btn">等待配送</a>
+                                            <{elseif $item.order_status == 3||$item.order_status ==4}>
+                                            <a href="<{link ctl='web/ucenter/order/complete' args=$item.order_id}>" class="btn">完成订单</a>
+                                            <{elseif $item.order_status == 8&&$item.comment_status == 0}>
+                                            <a href="<{link ctl='web/ucenter/order/comment' args=$item.order_id}>" class="btn">订单评价</a>
+                                            <{/if}>
+                                        
+                                    <{else}>
+                                        <{if $item.order_status == 0&&$item.pay_status == 0}>
+                                            <a href="<{link ctl='web/order/pay' args=$item.order_id}>" class="btn">立即支付</a>
+                                        <{elseif $item.order_status == 0&&$item.pay_status == 1}>
+                                            <a href="javascript:void(0);" class="btn">等待接单</a>
+                                            <{elseif $item.order_status == 1}>
+                                            <a href="javascript:void(0);" class="btn">等待配送</a>
+                                            <{elseif $item.order_status == 3||$item.order_status ==4}>
+                                            <a href="<{link ctl='web/ucenter/order/complete' args=$item.order_id}>" class="btn">完成订单</a>
+                                            <{elseif $item.order_status == 8&&$item.comment_status == 0}>
+                                            <a href="<{link ctl='web/ucenter/order/comment' args=$item.order_id}>" class="btn">订单评价</a>
+                                            <{/if}>
+                                    <{/if}>
+                                    <{if $item.order_status == 0}><em class="ico"></em><{/if}>
+                                    <ul>
+                                        <{if $item.order_status == 0}>
+                                        <li><a onclick="cancel(<{$item.order_id}>);" href="javascript:void(0);">取消订单</a></li>
+                                        <{/if}>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <{/foreach}>    
+            </table>
+            <script>
+                $(document).ready(function () {
+                    $(".prslCenter_order_list .operate_box .btn_box .ico").click(function () {
+                        if ($(this).parent().find("ul").css('display') == 'block') {
+                            $(this).parent().find("ul").hide();
+                        }
+                        else {
+                            $(this).parent().find("ul").show();
+                        }
+                    }); 
+                });
+                
+                function cancel(order_id){
+                    layer.confirm('<{L("您确定要取消订单吗")}>？', {
+                        btn: ['<{L("确认")}>', '<{L("取消")}>']
+                    }, function () {
+                        var url = "<{link ctl='web/ucenter/order/cancel' args=oooo}>";
+                        $.post(url.replace('oooo', order_id),{},function(ret){
+                            if(ret.error == 0){
+                                layer.msg(ret.message);
+                                setTimeout(function(){
+                                    window.location.reload(true);
+                                },'1000')
+                            }else{
+                                layer.msg(ret.message);
+                            }
+                        },'json')
+                    });
+                }
+                
+            </script>
+        </div>
+        <!--分页-->
+        <div class="page"><{$pager.pagebar}></div>
+        <!--分页end-->
+        <!--订单列表end-->
+    </div>
+    <div class="cl"></div>
+</div>
+<!--内容结束-->
+<{include file="web/block/footer.html"}>

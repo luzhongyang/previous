@@ -1,0 +1,958 @@
+<{if $order.order_status==0 && $order.pay_status==0}>
+<{assign var='tpl_title' value=L("订单进度")-L("等待支付")}>
+<{/if}>
+<{if $order.order_status==0 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L("订单进度")-L("等待接单")}>
+<{/if}>
+<{if $order.order_status==1 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L("订单进度")-L("已接单")}>
+<{/if}>
+<{if $order.order_status==3 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L("订单进度")-L("配送中")}>
+<{/if}>
+<{if $order.order_status==4 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L("订单进度")-L("已送达")}>
+<{/if}>
+<{if $order.order_status==8 && $order.pay_status==1}>
+<{assign var='tpl_title'  value=L("订单进度")-L("订单已完成")}>
+<{/if}>
+<{if $order.order_status==-1 && $order.pay_status==0}>
+<{assign var='tpl_title'  value=L("订单进度")-L("订单已取消")}>
+<{/if}>
+<{if $order.order_status==-1 && $order.pay_status==1}>
+<{assign var='tpl_title' value=L("订单进度")-L("订单已取消")}>
+<{/if}>
+<!DOCTYPE HTML>
+<html>
+<head>
+<{include file="block/sheader.html"}>
+</head>
+<body>
+<header>
+    <i class="left"><a href="" link-load="" link-type="right" class="gobackIco"></a></i>
+    <div class="title">
+        <{L("订单进度")}>
+    </div>
+    <i class="right"><a class="" href="#"></a></i>
+</header>
+<!--头部切换开始-->
+<ul id="shangjia_tab">
+    <li><a href="javascript:;" class="on"><{L('订单进度')}> </a></li>
+    <li><a href="<{link ctl='order:detail' args=<{$order.order_id}>}>" link-load="" ><{L('订单详情')}> </a></li>
+</ul>
+<!--头部切换结束-->
+<section class="page_center_box">
+    <div class="order_progress_infor mb10">
+        <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+            <div class="fl">
+                <p class="black9"><{if $order.online_pay == 1}><span class="pointcl1"><{L('等待支付')}> </span><{/if}>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}> )</p>
+                <p class="black9"><{if $order.online_pay == 1}><{L('订单逾期未支付半小时自动取消')}> <{/if}><{if $order.online_pay == 0}><{L('当前订单为货到付款')}> <{/if}></p>
+            </div>
+            <a href="javascript:chargeback();" class="btn fr"><{L('取消订单')}> </a>
+        <{/if}>
+        <{if $order.order_status==0 && $order.pay_status==1 && $order.online_pay==1}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('已支付')}> </span>(<{$order.pay_time|format:'Y-m-d H:i'}><{L('支付')}> )</p>
+                <p class="black9"><{L('等待商家接单')}> </p>
+            </div>
+            <a href="javascript:chargeback();" class="btn fr"><{L('取消订单')}> </a>
+        <{/if}>
+        <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==0}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('等待接单')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+                <p class="black9"><{L('等待商家接单')}></p>
+            </div>
+            <a href="javascript:chargeback();" class="btn fr"><{L('取消订单')}></a>
+        <{/if}>
+
+        <{if $order.order_status==1 && $order.pay_status==0 && $order.online_pay==0}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('商家已接单')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+                <p class="black9"><{L('预计送达')}>：<{L('尽快送达')}></p>
+            </div>
+        <{/if}>
+
+        <{if $order.order_status==1 && $order.pay_status==1}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('商家已接单')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+                <p class="black9"><{L('预计送达')}>：<{L('尽快送达')}></p>
+            </div>
+        <{/if}>
+
+        <{if $order.order_status==2 && $order.pay_status==0 && $order.online_pay==0}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('配送员已接单')}></span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}>)</p>
+                <p class="black9"><{L('预计送达')}>：<{L('尽快送达')}></p>
+            </div>
+        <{/if}>
+
+        <{if $order.order_status==2 && $order.pay_status==1}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('配送员已接单')}> </span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}> )</p>
+                <p class="black9"><{L('预计送达')}> ：<{L('尽快送达')}> </p>
+            </div>
+        <{/if}>
+
+        <{if $order.order_status==3 && $order.pay_status==1}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('订单配送中')}> </span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}> )</p>
+                <p class="black9"><{L('预计送达')}> ：<{L('尽快送达')}> </p>
+            </div>
+        <{/if}>
+
+        <{if $order.order_status==3 && $order.pay_status==0 && $order.online_pay==0}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('订单配送中')}> </span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}> )</p>
+                <p class="black9"><{L('预计送达')}> ：<{L('尽快送达')}> </p>
+            </div>
+        <{/if}>
+
+        <{if $order.order_status==4 && $order.pay_status==1}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('已送达')}> </span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}> )</p>
+                <p class="black9"><{L('订单超过')}> 3<{L('小时自动完成')}> </p>
+            </div>
+        <{/if}>
+
+        <{if $order.order_status==4 && $order.pay_status==0 && $order.online_pay==0}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('已送达')}> </span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}> )</p>
+                <p class="black9"><{L('订单超过')}> 3<{L('小时自动完成')}> </p>
+            </div>
+        <{/if}>
+
+        <{if $order.order_status==8 && $order.pay_status==1}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('订单已完成')}> </span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}> )</p>
+                <p class="black9"><{L('订单超过')}> 3<{L('小时自动完成')}> </p>
+            </div>
+        <{/if}>
+
+        <{if $order.order_status==8 && $order.pay_status==0 && $order.online_pay==0}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('订单已完成')}> </span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}> )</p>
+                <p class="black9"><{L('订单超过')}>3<{L('小时自动完成')}></p>
+            </div>
+        <{/if}>
+
+        <{if ($order.order_status==-1 && $order.pay_status==0) || ($order.order_status==-1 && $order.pay_status==1)}>
+            <div class="fl">
+                <p class="black9"><span class="pointcl1"><{L('订单已取消')}> </span>(<{$order.dateline|format:'Y-m-d H:i'}><{L('下单')}> )</p>
+                <p class="black9"><{L('订单逾期未支付半小时自动取消')}></p>
+            </div>
+        <{/if}>
+        <div class="clear"></div>
+
+    </div>
+    <div class="order_progress">
+        <ul>
+           <{if $order['pay_status'] == 0}>
+               <{if $log_type === 1}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}> </span>（<{L('商家电话')}>  <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+
+               <{if $log_type == array(1,2,3)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[0].log}></p>（<{L('配送员电话')}>  <span class="maincl"><{$staff.mobile}></span>）
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_2 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[1].log}></p>
+                            <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}> </span>（<{L('商家电话')}>  <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}>
+
+               <{if $log_type == array(1,3)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_2 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{L('商家已接单')}> </p>
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}> </span>（<{L('商家电话')}>  <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+
+               <{if $log_type == array(1,2,3,4)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[0].log}></p>（<{L('配送员电话')}>  <span class="maincl"><{$staff.mobile}></span>）
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[1].log}></p>（<{L('配送员电话')}>  <span class="maincl"><{$staff.mobile}></span>）
+                            <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_2 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[2].log}></p>
+                            <p class="black9"><{$logs[2].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}></span>（<{L('商家电话')}> <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+
+               <{if $log_type == array(1,2,3,4,5)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_1 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[0].log}></p>（<{L('配送员电话')}> <span class="maincl"><{$staff.mobile}></span>）
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[1].log}></p>（<{L('配送员电话')}> <span class="maincl"><{$staff.mobile}></span>）
+                            <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[2].log}></p>（<{L('配送员电话')}> <span class="maincl"><{$staff.mobile}></span>）
+                            <p class="black9"><{$logs[2].dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_2 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[3].log}></p>
+                            <p class="black9"><{$logs[3].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}> </span>（<{L('商家电话')}>  <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+
+               <{if $log_type == array(1,3,4)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{L('开始配送')}> </p>
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_2 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{L('商家已接单')}> </p>
+                            <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}> </span>（<{L('商家电话')}>  <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+
+               <{if $log_type == array(1,3,4,6)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_1 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{L('已送达')}></p>
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{L('开始配送')}></p>
+                            <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_2 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{L('商家已接单')}></p>
+                            <p class="black9"><{$logs[2].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}></span>（<{L('商家电话')}> <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+
+               <{if $log_type == array(-1,1)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_5 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[0].log}></p>
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}> </span>（<{L('商家电话')}>  <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+           <{/if}>
+
+           <{if $order['pay_status'] == 1}>
+               <{if $log_type == array(1,2)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_3 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[0].log}></p>
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}> </span>（<{L('商家电话')}>  <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+
+               <{if $log_type == array(1,2,3)}>
+                    <{if $order.order_status==1}>
+                        <li class="order_progress_list">
+                            <div class="ico ico_2 on fl"></div>
+                                <div class="wz">
+                                    <p class="maincl"><{$logs[0].log}></p>
+                                    <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_3 on fl"></div>
+                            <div class="wz">
+                                <p class="maincl"><{$logs[1].log}></p>
+                                <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                                <span class="long_xian"></span>
+                                <span class="xian"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_4 on fl"></div>
+                            <div class="wz">
+                                <p class=""><span class="maincl"><{L('订单已提交')}></span>（<{L('商家电话')}> <span class="maincl"><{$shop.phone}></span>）</p>
+                                <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                                <a href="tel:<{$shop.phone}>" class="tel"></a>
+                            </div>
+                            <div class="clear"></div>
+                         </li>
+                    <{/if}>
+
+                    <{if $order.order_status==2}>
+                        <li class="order_progress_list">
+                            <div class="ico ico_6 on fl"></div>
+                                <div class="wz">
+                                    <p class="maincl"><{$logs[0].log}></p>（<{L('配送员电话')}> <span class="maincl"><{$staff.mobile}></span>）
+                                    <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                                    <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_2 on fl"></div>
+                                <div class="wz">
+                                    <p class="maincl"><{$logs[1].log}></p>
+                                    <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                                    <span class="long_xian"></span>
+                                    <span class="xian"></span>
+                                </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_3 on fl"></div>
+                            <div class="wz">
+                                <p class="maincl"><{$logs[2].log}></p>
+                                <p class="black9"><{$logs[2].dateline|format:'Y-m-d H:i'}></p>
+                                <span class="long_xian"></span>
+                                <span class="xian"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_4 on fl"></div>
+                            <div class="wz">
+                                <p class=""><span class="maincl"><{L('订单已提交')}></span>（<{L('商家电话')}> <span class="maincl"><{$shop.phone}></span>）</p>
+                                <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                                <a href="tel:<{$shop.phone}>" class="tel"></a>
+                            </div>
+                            <div class="clear"></div>
+                         </li>
+                    <{/if}>
+                    
+               <{/if}> 
+
+               <{if $log_type == array(1,2,3,4)}>
+                    <{if $order.staff_id}>
+                        <li class="order_progress_list">
+                            <div class="ico ico_6 on fl"></div>
+                            <div class="wz">
+                                <p class="maincl"><{$logs[0].log}></p>（<{L('配送员电话')}> <span class="maincl"><{$staff.mobile}></span>）
+                                <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                                <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                                <span class="long_xian"></span>
+                                <span class="xian"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_6 on fl"></div>
+                            <div class="wz">
+                                <p class="maincl"><{$logs[1].log}></p>（<{L('配送员电话')}> <span class="maincl"><{$staff.mobile}></span>）
+                                <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                                <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                                <span class="long_xian"></span>
+                                <span class="xian"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_2 on fl"></div>
+                            <div class="wz">
+                                <p class="maincl"><{$logs[2].log}></p>
+                                <p class="black9"><{$logs[2].dateline|format:'Y-m-d H:i'}></p>
+                                <span class="long_xian"></span>
+                                <span class="xian"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_3 on fl"></div>
+                            <div class="wz">
+                                <p class="maincl"><{$logs[3].log}></p>
+                                <p class="black9"><{$logs[3].dateline|format:'Y-m-d H:i'}></p>
+                                <span class="long_xian"></span>
+                                <span class="xian"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_4 on fl"></div>
+                            <div class="wz">
+                                <p class=""><span class="maincl"><{L('订单已提交')}></span>（<{L('商家电话')}> <span class="maincl"><{$shop.phone}></span>）</p>
+                                <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                                <a href="tel:<{$shop.phone}>" class="tel"></a>
+                            </div>
+                            <div class="clear"></div>
+                         </li>
+                    <{else}>
+                        <li class="order_progress_list">
+                            <div class="ico ico_6 on fl"></div>
+                            <div class="wz">
+                                <p class="maincl"><{$logs[0].log}></p>
+                                <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                                <span class="long_xian"></span>
+                                <span class="xian"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_2 on fl"></div>
+                            <div class="wz">
+                                <p class="maincl"><{$logs[1].log}></p>
+                                <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                                <span class="long_xian"></span>
+                                <span class="xian"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_3 on fl"></div>
+                            <div class="wz">
+                                <p class="maincl"><{$logs[2].log}></p>
+                                <p class="black9"><{$logs[2].dateline|format:'Y-m-d H:i'}></p>
+                                <span class="long_xian"></span>
+                                <span class="xian"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="order_progress_list">
+                            <div class="ico ico_4 on fl"></div>
+                            <div class="wz">
+                                <p class=""><span class="maincl"><{L('订单已提交')}></span>（<{L('商家电话')}> <span class="maincl"><{$shop.phone}></span>）</p>
+                                <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                                <a href="tel:<{$shop.phone}>" class="tel"></a>
+                            </div>
+                            <div class="clear"></div>
+                         </li>
+                    <{/if}>
+                    
+               <{/if}> 
+
+               <{if $log_type == array(1,2,3,4,5)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_1 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[0].log}></p>（<{L('配送员电话')}> <span class="maincl"><{$staff.mobile}></span>）
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[1].log}></p>（<{L('配送员电话')}> <span class="maincl"><{$staff.mobile}></span>）
+                            <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[2].log}></p>（<{L('配送员电话')}> <span class="maincl"><{$staff.mobile}></span>）
+                            <p class="black9"><{$logs[2].dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$staff.mobile}>" class="tel"></a>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_2 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[3].log}></p>
+                            <p class="black9"><{$logs[3].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_3 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[4].log}></p>
+                            <p class="black9"><{$logs[4].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}></span>（<{L('商家电话')}> <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+
+               <{if $log_type == array(1,2,3,4,6)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_1 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[0].log}></p>
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_6 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[1].log}></p>
+                            <p class="black9"><{$logs[1].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_2 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[2].log}></p>
+                            <p class="black9"><{$logs[2].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_3 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[3].log}></p>
+                            <p class="black9"><{$logs[3].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}></span>（<{L('商家电话')}> <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+               <{/if}> 
+
+                <{if $log_type == array(-1,1)}>
+                    <li class="order_progress_list">
+                        <div class="ico ico_5 on fl"></div>
+                        <div class="wz">
+                            <p class="maincl"><{$logs[0].log}></p>
+                            <p class="black9"><{$logs[0].dateline|format:'Y-m-d H:i'}></p>
+                            <span class="long_xian"></span>
+                            <span class="xian"></span>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="order_progress_list">
+                        <div class="ico ico_4 on fl"></div>
+                        <div class="wz">
+                            <p class=""><span class="maincl"><{L('订单已提交')}></span>（<{L('商家电话')}> <span class="maincl"><{$shop.phone}></span>）</p>
+                            <p class="black9"><{$order.dateline|format:'Y-m-d H:i'}></p>
+                            <a href="tel:<{$shop.phone}>" class="tel"></a>
+                        </div>
+                        <div class="clear"></div>
+                     </li>
+                <{/if}> 
+
+           <{/if}>
+           
+        </ul>
+    </div>
+</section>
+<footer>
+    <{if $order.order_status==0 && $order.pay_status==0 && $order.online_pay==1}>
+        <div class="long_btn_box" style=" padding:0.1rem;"><a href="<{link ctl='order:pay' args=<{$order.order_id}>}>" class="long_btn" style="background:#ff5959;"></a></div>
+    <{/if}>
+
+    <{if $order.order_status==1 && $order.pay_status==1 && $order.online_pay==1}>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl" style="width:50%; padding:0; margin:0;"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <a href="javascript:remind();" class="fr cuidan" style="width:50%; padding:0; margin:0; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><img src="%THEME%/static/images/cuidan.png">
+        <p class="black9"><{L('催单')}></p>
+        </a>
+    <{/if}>
+
+    <{if $order.order_status==1 && $order.online_status==0}>
+        <div class="ord_tousu">
+        <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl" style="width:50%; padding:0; margin:0;"><img src="%THEME%/static/images/tousu.png">
+        <p class="black9"><{L('投诉')}></p>
+        </a>
+        <a href="javascript:remind();" class="fr cuidan" style="width:50%; padding:0; margin:0; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><img src="%THEME%/static/images/cuidan.png">
+        <p class="black9"><{L('催单')}></p>
+        </a>
+    <{/if}>
+
+    <{if $order.order_status==3 && $order.pay_status==1 && $order.online_pay==1|| $order.order_status==4 && $order.pay_status==1 && $order.online_pay==1}>
+        <div class="ord_tousu" >
+            <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png"><p class="black9" ><{L('投诉')}> </p></a>
+            <a href="javascript:remind();" class="fl cuidan"><img src="%THEME%/static/images/cuidan.png"><p class="black9" ><{L('催单')}> </p></a>
+            <a href="javascript:getwell();" class="fr pub_btn"><{L('确认送达')}> </a>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==3 && $order.online_pay==0|| $order.order_status==4 && $order.online_pay==0}>
+        <div class="ord_tousu" >
+            <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png"><p class="black9" ><{L('投诉')}> </p></a>
+            <a href="javascript:remind();" class="fl cuidan"><img src="%THEME%/static/images/cuidan.png"><p class="black9" ><{L('催单')}> </p></a>
+            <a href="javascript:getwell();" class="fr pub_btn"><{L('确认送达')}> </a>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==8 && $order.pay_status==1 && $order.online_pay==1}>
+        <div class="ord_tousu">
+            <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png"><p class="black9" ><{L('投诉')}> </p></a>
+            <{if $order.comment_status == 1}>
+            <a href="javascript:void(0);" class="fr pub_btn" style="background: #ccc;"><{L('已评价')}> </a>
+            <{else}>
+            <a href="<{link ctl='order:comment' args=<{$order.order_id}>}>" class="fr pub_btn"><{L('评价得积分')}> </a>
+            <{/if}>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==8 && $order.online_pay==0}>
+        <div class="ord_tousu">
+            <a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="fl"><img src="%THEME%/static/images/tousu.png"><p class="black9" ><{L('投诉')}> </p></a>
+            <{if $order.comment_status == 1}>
+            <a href="javascript:void(0);" class="fr pub_btn" style="background: #ccc;"><{L('已评价')}> </a>
+            <{else}>
+            <a href="<{link ctl='order:comment' args=<{$order.order_id}>}>" class="fr pub_btn"><{L('评价得积分')}> </a>
+            <{/if}>
+        </div>
+    <{/if}>
+
+    <{if $order.order_status==-1}>
+        <!--<div class="ord_tousu"><a href="<{link ctl='order:cpmplaint' args=<{$order.order_id}>}>" class="black9"><img src="%THEME%/static/images/tousu.png">&nbsp;&nbsp;<{L('投诉')}> </a></div>-->
+    <{/if}>
+
+</footer>
+</body>
+<script>
+$(document).ready(function() {
+    goback();   
+    getTimes();
+    interval_start();
+    localStorage['pinjiatips'] = "work";
+});
+
+var interval = null;
+var order_id = <{$order.order_id}>;
+var order_status = <{$order.order_status}>;
+var pay_status = <{$order.pay_status}>;
+
+function interval_start() {
+    var time1 = "<{$last_time}>";
+    var time2 = Date.parse(new Date())/1000;
+    if(time1>time2) {
+        interval = setInterval("getTimes()",1000);
+    }else {
+        interval_stop();
+    }
+}
+
+function interval_stop() { 
+    if(interval){
+        clearInterval(interval);
+        interval = null;
+        chargeback();
+        return false;
+    }   
+} 
+
+function chargeback() {
+    if(order_status == 0 && pay_status == 0) {
+        var link = "<{link ctl='order:chargeback' args=__order_id}>";
+        layer.open({
+            title: '<{L("提示")}>',
+            content: '<{L("您确定要取消订单吗")}>？',
+            btn: ['<{L("确定")}>', '<{L("不了")}>'],
+            yes: function(index){
+                jQuery.ajax({        
+                    url: link.replace("__order_id",order_id), 
+                    async: true,  
+                    dataType: 'json',
+                    type: 'POST',   
+                    success: function (ret) { 
+                        if(ret.error > 0){
+                            layer.open({content: ret.message,time: 2});
+                        }else{
+                            layer.open({content: ret.message,time: 2});
+                            setTimeout(function(){window.location.reload();},1000);
+                        }
+                    }, 
+                    error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                        alert(errorThrown); 
+                    },  
+
+                });
+            }
+        });
+    }  
+}
+
+function remind() {
+    jQuery.ajax({  
+        url: "<{link ctl='order:remind'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id": order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{
+                layer.open({content: ret.message,time: 2});
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+        
+    });
+}
+
+function getwell() {
+    jQuery.ajax({  
+        url: "<{link ctl='order:getwell'}>", 
+        async: true,  
+        dataType: 'json',  
+        data: {"order_id": order_id},
+        type: 'POST',   
+        success: function (ret) { 
+            if(ret.error > 0){
+                layer.open({content: ret.message,time: 2});
+            }else{
+                layer.open({content: ret.message,time: 2});
+                setTimeout(function(){window.location.reload();},1000);   
+            }
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+            alert(errorThrown); 
+        },  
+        
+    });
+}
+
+// 显示剩余支付时间
+function getTimes() {
+    var last_time = <{$last_time}>;
+    var now_time = Date.parse(new Date())/1000;
+    youtime = last_time - now_time;
+    var seconds = youtime;
+    var minutes = Math.floor(seconds/60);
+    var CMinute = minutes%60;
+    var CSecond = Math.floor(seconds%60);
+    if(last_time<=now_time) {
+        interval_stop();
+    }else {
+        left = '<{L("去支付")}>（<{L("还剩")}>'+ CMinute+':'+CSecond+'）';
+        $('.long_btn').text(left);
+    } 
+}
+
+function goback() {
+    if(localStorage['linktips'] == 'index') {
+        $(".gobackIco").attr("href","<{link ctl='order:index'}>");
+    }else if(localStorage['linktips'] == 'orderwell'){
+        $(".gobackIco").attr("href","<{link ctl='order:orderwell'}>");
+    }else if(localStorage['linktips'] == 'msg'){
+        $(".gobackIco").attr("href","<{link ctl='ucenter/msg:index'}>");
+    }
+}
+</script>
+</html>
+

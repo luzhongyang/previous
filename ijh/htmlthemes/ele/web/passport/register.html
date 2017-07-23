@@ -1,0 +1,165 @@
+<{include file="web/block/head.html"}>
+<script type="text/javascript" language="javascript">
+    function enterPress(e){ 
+        if(e.keyCode == 13) { 
+            $('#reg').click();
+        }
+    }
+</script>
+<!--内容开始-->
+<div class="register-box">
+		<header class="head">
+			<a href="#"><img src="/themes/ele/web/static/images/logo1.png"/></a>
+        </header>
+		<div class="register-cont">
+        	 	<div class="line"><h3>使用手机注册</h3></div>
+                <div class="register-aside">
+                     <h3 class="register-title">已经注册过 ？</h3>	
+                     <p class="register-info">请点击 <a href="<{link ctl='web/passport/login'}>">直接登录</a></p>
+                     <div class="register-auth">
+                     	  <h4 class="linktitle">可使用以下账号直接登录</h4>
+                          <a href="javascript:void(0);" class="auth-link qq"></a><a href="javascript:void(0);" class="auth-link weibo"></a>
+                     </div>
+                </div>	
+                <div class="register-form">
+                        <form>
+                                <div class="form-groups one int_box">
+                                        <label class="regi_lab">手机号码</label><input class="regi_inp" type="text" onKeyDown="javascript:enterPress(event);" id="mobile" placeholder="请输入你的手机号"/>
+                                </div>	
+                                <div class="form-groups int_box">
+                                        <label class="regi_lab">手机验证码</label><input class="regi_inp" type="text" onKeyDown="javascript:enterPress(event);" id="yzm"/><button class="regi_btn yzm-btn yzmget" login="sendsms">获取验证码</button>
+                                </div>
+                                <{if $reg_yzm == 'on'}>
+                                <div class="yzm_box"><input type="number" maxlength="6" onKeyDown="javascript:enterPress(event);" id="verifycode" placeholder="验证码"><img style="border-radius: 5px; margin-left: 10px;" verify="#pass-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>"  width="90" height="38"></a><a href="javascript:void(0);" id="pass-verify" class="change">看不清换一张</a>
+                                </div>
+                                <{/if}>
+                                <div class="form-groups int_box">
+                                        <label class="regi_lab">设置密码</label><input class="regi_inp" type="password" onKeyDown="javascript:enterPress(event);" id="passwd" placeholder="密码长度6-20字符"/>
+                                </div>
+                                <div class="form-groups int_box"><label class="regi_lab">再次输入密码</label><input class="regi_inp" type="password" onKeyDown="javascript:enterPress(event);" id="repasswd" placeholder="请再次输入密码"></div>
+                                <script>
+									function focusInput(focusClass, normalClass) {
+										var elements = document.getElementsByTagName("input");
+										for (var i = 0; i < elements.length; i++) {
+											if (elements[i].type != "button" && elements[i].type != "submit" && elements[i].type != "reset") {
+												//if(elements[i].type=="text"){
+												elements[i].onfocus = function () {
+													$(this).parent(".register-form .int_box").addClass("on")
+												};
+												elements[i].onblur = function () {
+													$(this).parent(".register-form .int_box").removeClass("on")
+												};
+											}
+										}
+									}
+									window.onload = function () {
+										focusInput('focusInput', 'normalInput');
+									}//input状态
+			
+									var minute = 60;
+									var mobile_timeout;
+									var mobile_count = minute;
+									var mobile_lock = 0;
+			
+			
+									BtnCount = function () {
+										if (mobile_count == 0) {
+											$(".yzmget").addClass("on");
+											$('.yzmget').removeAttr("disabled");
+											$('.yzmget').val("<{L('重新获取')}>");
+											mobile_lock = 0;
+											clearTimeout(mobile_timeout);
+											$('.yzmget').removeClass("on");
+										} else {
+											mobile_count--;
+											$('.yzmget').val("重新获取(" + mobile_count.toString() + ")" + "<{L('秒')}>");
+											mobile_timeout = setTimeout(BtnCount, 1000);
+										}
+									};
+			
+			
+									$("[login]").click(function () {
+										if (mobile_lock == 0) {
+											var mobile = $('#mobile').val();
+											var link = "<{link ctl='web/passport/sendsms'}>";
+											$(".yzmget").addClass("on");
+											//alert(mobile);return false;
+											$.post(link, {mobile: mobile}, function (ret) {
+			
+			
+												if (ret.error == 0) {
+			
+													BtnCount();
+													mobile_lock = 1;
+													$(".yzmget").addClass("on");
+													$('.yzmget').attr("disabled", "disabled");
+			
+												} else {
+													layer.msg(ret.message);
+													mobile_lock = 0;
+			
+												}
+											}, 'json');
+			
+			
+											mobile_count = minute;
+										}
+									});
+                    			</script>
+                                <div class="form-groups">
+                                        <button class="regi_btn submit" id="reg">同意协议并注册</button>
+                                </div>	
+                        </form>
+                                <div class="line-text"><a href="<{link ctl='web/help/agreement'}>" target="_blank">《使用条款和协议》</a></div>	
+                                
+                </div>
+                <div class="cl"></div>       
+        </div>
+</div>
+
+<script>
+    $('#reg').click(function () {
+        var mobile = $('#mobile').val();
+        var yzm = $('#yzm').val();
+        var yzm_val = $('#verifycode').val();
+        var passwd = $('#passwd').val();
+        var repasswd = $('#repasswd').val();
+        var link = "<{link ctl='web/passport/register'}>";
+        $.post(link, {mobile: mobile, yzm: yzm, yzm_val: yzm_val, passwd: passwd, repasswd: repasswd}, function (ret) {
+            if (ret.error == 0) {
+                layer.msg(ret.message);
+                setTimeout(function () {
+                    window.location.href = "<{link ctl='web/index'}>";
+                }, 2000)
+                BtnCount();
+            } else {
+                layer.msg(ret.message);
+                return;
+            }
+
+        }, 'json');
+    })
+
+
+
+    $('#long_btn').click(function () {
+        var mobile = $('#mobile').val();
+        var yzm = $('#yzm').val();
+        var yzm_val = $('#verifycode').val();
+        var link = "<{link ctl='web/passport/handle' }>";
+        $.post(link, {mobile: mobile, yzm: yzm, yzm_val: yzm_val}, function (ret) {
+            if (ret.error == 0) {
+                layer.msg(ret.message);
+                setTimeout(function () {
+                    window.location.href = '<{$backurl}>';
+                }, 1000)
+                BtnCount();
+            } else {
+                layer.msg(ret.message);
+            }
+
+        }, 'json');
+    })
+</script>
+<!--内容结束-->
+<{include file="web/block/foot.html"}>

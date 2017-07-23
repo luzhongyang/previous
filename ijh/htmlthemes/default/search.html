@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <{include file="block/sheader.html"}>
+    </head>
+    <body> 
+    <header>
+        <form action="<{link ctl='search/index'}>" method="post">
+        <i class="left"><a href="<{link ctl='index'}>" link-load="" link-type="right" class="gobackIco"></a></i>
+        <div class="title">
+            <div class="searchBox">
+                <input type='hidden' name='lat' id="lat">
+                <input type='hidden' name='lng' id="lng">
+                <input type="text" name='title' placeholder="<{L('搜索餐厅')}>" />
+            </div>
+        </div>
+        <i class="right"><input class="road_sub" type="submit" value="<{L('搜索')}>"/></i> 
+    </header>
+        
+        <section class="page_center_box">
+
+                <div class="waimaiList">
+
+                <{if $tips}>
+                    <div class="youhui_no">
+                        <div class="iconBg"><i class="ico7"></i> </div>
+                        <h2><{$tips}></h2>
+                    </div>
+                    
+                <{else}>    
+                <ul>
+                 <{foreach $shops as $k => $v}>  
+                 <li class="list">
+                     <div class="img fl"><a href="<{link ctl='shop/detail' args=$v.shop_id}>" link-load=""><img src="<{$pager.img}>/<{$v.logo}>" width="100" height="100" /></a></div>
+                    <div class="wz">
+                        <div class="nr1">
+                            <div class="fl">
+                                <a href="<{link ctl='shop/detail' args=$v.shop_id}>" link-load="">
+                                    <p class="bt overflow_clear"><{$v.title}></p>
+                                    <div><span class="starBg"><span class="star" style="width:<{$v.score*20}>%;"></span></span></div>
+                                    <p class="black6">
+                                    <{sprintf(L('已售%s份'),$orders)}>
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="fr">
+                                <p class="black3"><span class="fontcl1">￥<b><{$v.min_amount}></b></span><{L('起送')}></p>
+                                <p class="black3"><{if $v.pei_amount == 0}><{L('免配送费')}><{else}><span class="fontcl1">￥<{$v.pei_amount}></span><{L('配送费')}><{/if}></p>
+                                <p class="black6"><{$v.d}></p>
+                            </div>
+                        </div>
+                        <div class="nr2">
+                            <{if $v.first_amount > 0}>
+                            <p class="black9"><em style="background:#46c3ff;"><{L('首')}></em><{sprintf(L('新用户首次下单立减%s元'),$first_amount)}></p>
+                            <{/if}>
+                            <{if $v.youhui}>
+                            <p class="black9"><em style="background:#ff6900;"><{L('减')}></em><{$v.youhui}></p>
+                            <{/if}>
+                            <{if $v.online_pay == 1}>
+                            <p class="black9"><em style="background:#f57f8c;"><{L('付')}></em><{L('商家支持在线支付')}></p>
+                            <{/if}>
+                        </div>
+                    </div>
+                </li>
+                <{/foreach}>
+                <{/if}>
+                </ul>
+                
+            </div>
+        </section>
+
+        <script>
+            getUxLocation(function(ret){
+                if(ret.error){
+                    alert(ret.message);
+                    window.location.href = "<{link ctl='position'}>";
+                }else{
+                    var lat = ret.lat;
+                    var lng = ret.lng;
+                    $('#lat').val(lat);
+                    $('#lng').val(lng);
+                }
+            });
+        </script>
+    </body>
+</html>

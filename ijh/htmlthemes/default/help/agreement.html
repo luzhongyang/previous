@@ -1,0 +1,34 @@
+<{assign var='tpl_title' value=L("注册协议")}>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <{include file="block/sheader.html"}>
+</head>
+<body>
+<{if !$request.IN_APP_CLIENT}>
+<header>
+    <i class="left"><a href="<{link ctl='ucenter/index'}>" class="gobackIco"></a></i>
+    <div class="title">
+        <{$detail.title}>
+    </div>
+</header>
+<{else}>
+<style type="text/css">.page_center_box{top:0;}</style>
+<{/if}>
+<section class="page_center_box">
+    <div class="">
+        <{L('注册协议')}>
+    </div>
+</section>
+<{if !$request.IN_APP_CLIENT}>
+<{include file="block/sfooter.html"}>
+<{/if}>
+<script>
+    $(document).ready(function(){
+    
+        $('#l5').addClass('on');
+     
+    });
+</script>
+</body>
+</html>
