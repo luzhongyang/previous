@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0; padding:0;}
+body{color:#525252; font-size:12px; background:url(../images/bg.jpg) no-repeat center top; background-color:#005298;  font-family:Arial, Helvetica, sans-serif;}
+img, div, input, td, ul, li,table,a{ behavior:url("iepngfix.htc");}
+a{color:#5BC5B9;text-decoration:none;}
+a:hover{text-decoration:none; color:#333;}
+img{border:0;}
+li{list-style:none;}
+.clear {clear:both;}
+
+
+
+/* 头部 */
+.top{ width:auto; text-align:center; height:269px;}
+
+/* 中部 */
+.mid_box{ width:auto;height:334px;}
+.mid{ width:650px; margin:0 auto;}
+.mid_left{ width:360px; background:url(../images/img_09.png) no-repeat center left; height:88px; float:left; margin-top:50px;}
+.mid_cen{ width:10px; background:url(../images/xt.png) no-repeat center right; float:left; margin-right:10px; height:226px;}
+.mid_right{ width:270px; float:right;}
+.from_box{ width:254px; height:49px; background:url(../images/img_06.png) no-repeat center left; margin-bottom:15px;}
+.from_box2{ width:254px; height:47px; background:url(../images/img_12.png) no-repeat center left;  margin-bottom:15px;}
+.from{ width:186px; height:36px; border:none; background:none; font-size:12px; color:#ccc; line-height:36px; padding-left:10px;}
+
+
+.login_an{ width:254px; height:auto; margin-top:15px;}
+.wz{ width:244px;  font-size:14px; color:#fff; text-align:left; line-height:30px; font-family:"宋体"; padding-left:10px;}
+
+/*底部*/
